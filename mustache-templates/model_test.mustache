@@ -1,0 +1,73 @@
+# coding: utf-8
+
+{{>partial_header}}
+
+
+import unittest
+
+{{#models}}
+{{#model}}
+from {{modelPackage}}.{{classFilename}} import {{classname}}
+
+class Test{{classname}}(unittest.TestCase):
+    """{{classname}} unit test stubs"""
+
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+{{^isEnum}}
+
+    def make_instance(self, include_optional) -> {{classname}}:
+        """Test {{classname}}
+            include_optional is a boolean, when False only required
+            params are included, when True both required and
+            optional params are included """
+        # Create an instance of `{{{classname}}}`
+        model = {{classname}}()
+        if include_optional:
+            return {{classname}}(
+                {{#vars}}
+                {{#vendorExtensions.x-py-public-name}}{{.}}{{/vendorExtensions.x-py-public-name}}{{^vendorExtensions.x-py-public-name}}{{name}}{{/vendorExtensions.x-py-public-name}} = {{{example}}}{{^example}}None{{/example}}{{^-last}},{{/-last}}
+                {{/vars}}
+            )
+        else:
+            return {{classname}}(
+                {{#vars}}
+                {{#required}}
+                {{#vendorExtensions.x-py-public-name}}{{.}}{{/vendorExtensions.x-py-public-name}}{{^vendorExtensions.x-py-public-name}}{{name}}{{/vendorExtensions.x-py-public-name}} = {{{example}}}{{^example}}None{{/example}},
+                {{/required}}
+                {{/vars}}
+        )
+
+    def make_instance_dict(self, include_optional) -> Dict[str, Any]:
+        """Return model instance as Dict[str, Any] for use in API tests."""
+        model = self.make_instance(include_optional)
+        return model.model_dump() if hasattr(model, 'model_dump') else model.dict()
+{{/isEnum}}
+
+    def test{{classname}}(self):
+        """Test {{classname}}"""
+{{^isEnum}}
+        # Test with required params only
+        inst_req_only = self.make_instance(include_optional=False)
+        assert inst_req_only is not None
+
+        # Test with both required and optional params
+        inst_req_and_optional = self.make_instance(include_optional=True)
+        assert inst_req_and_optional is not None
+
+        # Test dict conversion
+        inst_dict = self.make_instance_dict(include_optional=True)
+        assert isinstance(inst_dict, dict)
+        assert len(inst_dict) > 0
+{{/isEnum}}
+{{#isEnum}}
+        # inst = {{{classname}}}()
+{{/isEnum}}
+{{/model}}
+{{/models}}
+
+if __name__ == '__main__':
+    unittest.main()

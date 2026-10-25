@@ -1,0 +1,46 @@
+# OpenAPI Generator Configuration for Canvas LMS Python Client
+#inputSpec: ../canvas-lms/public/doc/openapi/canvas.openapi.yaml
+outputDir: src
+generatorName: python
+library: asyncio
+packageName: canvas_lms_python_client
+projectName: canvas-lms-python-client
+packageVersion: "1.0.0"
+gitUserId: ivlo11
+gitRepoId: canvas-lms-python-client
+
+# Python-specific settings
+pythonVersion: "3.11"
+sortParamsByRequiredFlag: true
+ensureUniqueParams: true
+allowUnicodeIdentifiers: true
+modelPackage: models
+apiPackage: api
+
+# Async settings
+useOneOfDiscriminatorLookup: true
+useAsyncIO: true
+
+# Vendor extensions support
+validateSpec: true
+
+# Generate only source code
+# This single option prevents the generator from creating test/, docs/, examples/,
+# and all scaffolding files (.travis.yml, .gitlab-ci.yml, git_push.sh, tox.ini, etc.)
+generateSourceCodeOnly: true
+
+# Additional properties
+removeOperationIdPrefix: false
+sansRuntime: false
+
+# Package info
+packageTitle: Canvas LMS Python Client
+packageDescription: Async Python client for Canvas LMS API with Link header pagination support
+packageLicenseName: MIT
+packageAuthorName: Ivonne Roberts
+
+# Serialization
+serializationLibrary: json
+
+# String formats
+strictSpecBehavior: true
