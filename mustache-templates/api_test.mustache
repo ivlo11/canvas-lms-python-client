@@ -6,6 +6,7 @@
 import unittest
 from unittest.mock import AsyncMock, MagicMock, patch
 from typing import List, Any, Dict
+from pydantic import ValidationError
 
 from {{apiPackage}}.{{classFilename}} import {{classname}}
 {{#imports}}
@@ -62,7 +63,6 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
         - Invalid types raise ValidationError
         - Valid parameters are accepted
         """
-        from pydantic import ValidationError
 
         {{#allParams}}
         {{#required}}
@@ -77,8 +77,9 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
                 {{#required}}
                 {{#-first}}
                 {{/-first}}
+                {{^-first}}
+            {{paramName}}={{#isString}}"invalid"{{/isString}}{{#isInteger}}999{{/isInteger}}{{#isNumber}}999.9{{/isNumber}}{{#isBoolean}}False{{/isBoolean}}{{#isArray}}[]{{/isArray}}{{^isPrimitiveType}}{{^isArray}}None{{/isArray}}{{/isPrimitiveType}},
                 {{/-first}}
-                {{paramName}}={{#isString}}"invalid"{{/isString}}{{#isInteger}}999{{/isInteger}}{{#isNumber}}999.9{{/isNumber}}{{#isBoolean}}False{{/isBoolean}},
                 {{/required}}
                 {{/allParams}}
             )
@@ -121,16 +122,16 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
         mock_response = MagicMock()
         mock_response.headers = {}
         mock_response.data = {{#isArray}}[]{{/isArray}}{{^isArray}}None{{/isArray}}
+        mock_response.read = AsyncMock()
         {{/vendorExtensions.x-paginated}}
         {{^vendorExtensions.x-paginated}}
         # Mock response
         mock_response = MagicMock()
         mock_response.data = {{#returnType}}None{{/returnType}}{{^returnType}}None{{/returnType}}
+        mock_response.read = AsyncMock()
         {{/vendorExtensions.x-paginated}}
 
         # Create valid request object
-        from {{modelPackage}}.{{classname}} import {{dataType}}
-
         # Test with minimal valid data
         try:
             {{paramName}} = {{dataType}}()
@@ -148,7 +149,7 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
             {{paramName}}={{paramName}},
             {{#allParams}}
             {{^isBodyParam}}
-            {{paramName}}=None,
+            {{paramName}}={{#isString}}"invalid"{{/isString}}{{#isInteger}}999{{/isInteger}}{{#isNumber}}999.9{{/isNumber}}{{#isBoolean}}False{{/isBoolean}}{{#isArray}}[]{{/isArray}}{{^isPrimitiveType}}{{^isArray}}None{{/isArray}}{{/isPrimitiveType}},
             {{/isBodyParam}}
             {{/allParams}}
         )
@@ -258,7 +259,7 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
     {{^async}}
     def test_{{operationId}}_paginated_single_page(self) -> None:
     {{/async}}
-        """Test {{operationId}}_fetch_all_items with single page of results.
+        """Test {{operationId}}_paginated with single page of results.
 
         Verifies that:
         - Method exists and is callable
@@ -291,7 +292,11 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
 
         # Collect all pages
         pages = []
-        async for page in self.api.{{operationId}}_fetch_all_items():
+        async for page in self.api.{{operationId}}_all(
+            {{#allParams}}
+            {{paramName}}={{#isString}}"invalid"{{/isString}}{{#isInteger}}999{{/isInteger}}{{#isNumber}}999.9{{/isNumber}}{{#isBoolean}}False{{/isBoolean}}{{#isArray}}[]{{/isArray}}{{^isPrimitiveType}}{{^isArray}}None{{/isArray}}{{/isPrimitiveType}},
+            {{/allParams}}
+        ):
             pages.append(page)
 
         # Single page should yield expected items
@@ -362,7 +367,11 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
 
         # Collect all items
         items = []
-        async for item in self.api.{{operationId}}_fetch_all_items():
+        async for item in self.api.{{operationId}}_all(
+            {{#allParams}}
+            {{paramName}}={{#isString}}"invalid"{{/isString}}{{#isInteger}}999{{/isInteger}}{{#isNumber}}999.9{{/isNumber}}{{#isBoolean}}False{{/isBoolean}}{{#isArray}}[]{{/isArray}}{{^isPrimitiveType}}{{^isArray}}None{{/isArray}}{{/isPrimitiveType}},
+            {{/allParams}}
+        ):
             items.append(item)
 
         # Should have items from 3 pages
@@ -400,7 +409,11 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
 
         # Collect all items
         items = []
-        async for item in self.api.{{operationId}}_fetch_all_items():
+        async for item in self.api.{{operationId}}_all(
+            {{#allParams}}
+            {{paramName}}={{#isString}}"invalid"{{/isString}}{{#isInteger}}999{{/isInteger}}{{#isNumber}}999.9{{/isNumber}}{{#isBoolean}}False{{/isBoolean}}{{#isArray}}[]{{/isArray}}{{^isPrimitiveType}}{{^isArray}}None{{/isArray}}{{/isPrimitiveType}},
+            {{/allParams}}
+        ):
             items.append(item)
 
         # Should yield nothing

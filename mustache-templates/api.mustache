@@ -14,6 +14,7 @@ from typing_extensions import Annotated
 
 from {{packageName}}.api_client import ApiClient, RequestSerialized
 from {{packageName}}.api_response import ApiResponse
+from {{packageName}}.pagination import get_next_page_url
 from {{packageName}}.rest import RESTResponseType
 {{#supportHttpxSync}}
 from {{packageName}}.sync_helper import run_sync
@@ -148,44 +149,13 @@ https://github.com/OpenAPITools/openapi-generator/blob/c84b949df1a9ec04ba75989cb
         ).data
 {{/compatibleWithPythonLegacyApi}}
 {{#vendorExtensions.x-paginated}}
+{{^compatibleWithPythonLegacyApi}}
 
+
+    @validate_call
     {{#async}}async {{/async}}def {{operationId}}_paginated{{>partial_api_args}} -> AsyncIterator[{{{returnType}}}{{^returnType}}Any{{/returnType}}]:
-        """Paginated iterator for :meth:`{{operationId}}`.
+{{>partial_api}}
 
-        Yields each page as a {{{returnType}}} following the ``rel="next"``
-        Link header (RFC 8288). Use when you need pagination control.
-
-        Example:
-            {{#async}}async {{/async}}for page in api.{{operationId}}_paginated(per_page=100):
-                print(f"Fetched {len(page)} items")
-                for item in page:
-                    process(item)
-        """  # noqa: E501
-
-        from {{packageName}}.pagination import get_next_page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            {{#responses}}
-            {{^isWildcard}}
-            '{{code}}': {{#dataType}}"{{.}}"{{/dataType}}{{^dataType}}None{{/dataType}},
-            {{/isWildcard}}
-            {{#isWildcard}}
-            {{#dataType}}
-            'default': "{{dataType}}",
-            {{/dataType}}
-            {{/isWildcard}}
-            {{/responses}}
-        }
-
-        _param = self._{{operationId}}_serialize(
-            {{#allParams}}
-            {{paramName}}={{paramName}},
-            {{/allParams}}
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
         _method, _url, _header_params, _body, _post_params = _param
 
         while True:
@@ -197,16 +167,13 @@ https://github.com/OpenAPITools/openapi-generator/blob/c84b949df1a9ec04ba75989cb
                 _post_params,
                 _request_timeout=_request_timeout,
             )
+
             {{#async}}await {{/async}}response_data.read()
             _api_response = self.api_client.response_deserialize(
                 response_data=response_data,
                 response_types_map=_response_types_map,
             )
-            {{#async}}await {{/async}}response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
+
             _page_data = _api_response.data
             if _page_data is None:
                 return
@@ -221,33 +188,43 @@ https://github.com/OpenAPITools/openapi-generator/blob/c84b949df1a9ec04ba75989cb
             _url = _next_url
 
 
+    @validate_call
     {{#async}}async {{/async}}def {{operationId}}_all{{>partial_api_args}} -> AsyncIterator[{{#isArray}}{{returnProperty.items.dataType}}{{/isArray}}{{^isArray}}Any{{/isArray}}]:
-        """Iterate over all items from :meth:`{{operationId}}`.
+{{>partial_api}}
 
-        Automatically fetches all pages and yields individual items.
-        Use for simple iteration when you want all results without
-        pagination control.
+        _method, _url, _header_params, _body, _post_params = _param
+        while True:
+            response_data = {{#async}}await {{/async}}self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout
+            )
 
-        Example:
-            {{#async}}async {{/async}}for item in api.{{operationId}}_all():
-                print(item)
-        """  # noqa: E501
+            {{#async}}await {{/async}}response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
 
-        {{#async}}async {{/async}}for _page in self.{{operationId}}_paginated(
-            {{#allParams}}
-            {{paramName}}={{paramName}},
-            {{/allParams}}
-            _request_timeout=_request_timeout,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index,
-        ):
-            if not isinstance(_page, list):
-                _page = [_page]
-            for _item in _page:
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            if not isinstance(_page_data, list):
+                _page_data = [_page_data]
+            for _item in _page_data:
                 yield _item
 
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+{{/compatibleWithPythonLegacyApi}}
 {{/vendorExtensions.x-paginated}}
 
 {{#compatibleWithPythonLegacyApi}}

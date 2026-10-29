@@ -1,6 +1,5 @@
 # OpenAPI Generator Configuration for Canvas LMS Python Client
 #inputSpec: ../canvas-lms/public/doc/openapi/canvas.openapi.yaml
-outputDir: src
 generatorName: python
 library: asyncio
 packageName: canvas_lms_python_client
@@ -16,6 +15,7 @@ ensureUniqueParams: true
 allowUnicodeIdentifiers: true
 modelPackage: models
 apiPackage: api
+pythonSrcRoot: true
 
 # Async settings
 useOneOfDiscriminatorLookup: true

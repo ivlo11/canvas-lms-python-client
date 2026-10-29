@@ -17,7 +17,7 @@ Async Python client library for Canvas LMS API with automatic Link header pagina
 ## Installation
 
 ```bash
-pdm install
+pdm add "git+https://github.com/ivlo11/canvas-lms-python-client"
 ```
 
 ### Development Installation
