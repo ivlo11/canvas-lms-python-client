@@ -58,7 +58,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[Rubric]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -109,6 +109,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -140,7 +141,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[Rubric]]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -191,6 +192,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -244,7 +246,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[Rubric]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -295,6 +297,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -349,7 +352,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Rubric]]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -400,6 +403,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -482,6 +486,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -532,6 +537,13 @@ class RubricsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -576,7 +588,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[Rubric]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -627,6 +639,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -658,7 +671,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[Rubric]]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -709,6 +722,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -762,7 +776,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[Rubric]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -813,6 +827,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -867,7 +882,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Rubric]]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -918,6 +933,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1000,6 +1016,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1050,6 +1067,13 @@ class RubricsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

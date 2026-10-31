@@ -88,6 +88,40 @@ async def canvas_api_client(canvas_base_url, canvas_api_token):
         yield client
 
 
+@pytest.fixture(scope="session")
+def canvas_admin_api_token() -> str | None:
+    """
+    Canvas account admin API token from environment.
+
+    Set CANVAS_ADMIN_API_TOKEN environment variable for admin-scoped integration tests.
+    """
+    return os.getenv("CANVAS_ADMIN_API_TOKEN")
+
+
+@pytest.fixture
+async def canvas_admin_api_client(canvas_base_url, canvas_admin_api_token):
+    """
+    Authenticated async ApiClient for admin-scoped integration tests.
+
+    Skips the test when CANVAS_BASE_URL or CANVAS_ADMIN_API_TOKEN is unset.
+    The client session is closed when the test finishes.
+    """
+    missing = [
+        name
+        for name, value in (
+            ("CANVAS_BASE_URL", canvas_base_url),
+            ("CANVAS_ADMIN_API_TOKEN", canvas_admin_api_token),
+        )
+        if not value
+    ]
+    if missing:
+        pytest.skip(f"Integration tests require {', '.join(missing)} to be set")
+
+    config = Configuration(host=canvas_base_url, access_token=canvas_admin_api_token)
+    async with ApiClient(config) as client:
+        yield client
+
+
 @pytest.fixture
 def sample_link_header():
     """Sample Canvas Link header for testing."""

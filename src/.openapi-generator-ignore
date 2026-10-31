@@ -26,4 +26,6 @@
 test/conftest.py
 test/test_pagination.py
 test/test_integration_observees.py
+test/test_paginated_response_types.py
+test/test_integration_paginated_models.py
 pagination.py

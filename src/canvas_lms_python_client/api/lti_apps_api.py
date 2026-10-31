@@ -16,7 +16,7 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -60,7 +60,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[object]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -120,6 +120,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[object]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -154,7 +155,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[object]]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -214,6 +215,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[object]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -270,7 +272,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[object]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -330,6 +332,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[object]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -387,7 +390,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[object]]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -447,6 +450,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[object]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -541,6 +545,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[object]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -607,6 +612,13 @@ class LtiAppsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -654,7 +666,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[object]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -714,6 +726,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[object]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -748,7 +761,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[object]]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -808,6 +821,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[object]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -864,7 +878,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[object]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -924,6 +938,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[object]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -981,7 +996,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[object]]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -1041,6 +1056,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[object]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1135,6 +1151,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[object]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1201,6 +1218,13 @@ class LtiAppsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

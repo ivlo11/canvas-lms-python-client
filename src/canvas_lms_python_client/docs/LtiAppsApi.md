@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **lti_apps_launch_definitions**
-> lti_apps_launch_definitions(course_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
+> List[object] lti_apps_launch_definitions(course_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
 
 List LTI Launch Definitions
 
@@ -55,7 +55,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List LTI Launch Definitions
-        await api_instance.lti_apps_launch_definitions(course_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
+        api_response = await api_instance.lti_apps_launch_definitions(course_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
+        print("The response of LtiAppsApi->lti_apps_launch_definitions:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling LtiAppsApi->lti_apps_launch_definitions: %s\n" % e)
 ```
@@ -76,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**List[object]**
 
 ### Authorization
 
@@ -85,18 +87,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List LTI Launch Definitions |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **lti_apps_launch_definitions_for_accounts**
-> lti_apps_launch_definitions_for_accounts(account_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
+> List[object] lti_apps_launch_definitions_for_accounts(account_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
 
 List LTI Launch Definitions
 
@@ -142,7 +144,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List LTI Launch Definitions
-        await api_instance.lti_apps_launch_definitions_for_accounts(account_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
+        api_response = await api_instance.lti_apps_launch_definitions_for_accounts(account_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
+        print("The response of LtiAppsApi->lti_apps_launch_definitions_for_accounts:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling LtiAppsApi->lti_apps_launch_definitions_for_accounts: %s\n" % e)
 ```
@@ -163,7 +167,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**List[object]**
 
 ### Authorization
 
@@ -172,13 +176,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List LTI Launch Definitions |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

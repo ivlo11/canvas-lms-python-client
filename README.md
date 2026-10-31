@@ -228,6 +228,13 @@ seeded dockerized canvas-lms, so `CANVAS_API_TOKEN` must belong to a seeded **ob
 user (one linked to at least one observee with courses and assignments). If either
 variable is unset, the integration tests are skipped with a reason naming it.
 
+Some endpoints (account rubrics, account LTI launch definitions, manageable appointment
+groups) cannot be read by an observer. Those admin-scoped tests use `CANVAS_ADMIN_API_TOKEN`,
+a token for a seeded account admin, with the same `CANVAS_BASE_URL`. When it is unset, only
+the admin-scoped tests are skipped (with a reason naming it); the observer tests still run.
+Tests that need seeded data the instance does not have are skipped with a reason naming the
+missing data.
+
 ```bash
 # Start the seeded canvas-lms (from the canvas-lms repo)
 docker compose up -d
@@ -235,6 +242,7 @@ docker compose up -d
 # Run the integration tests as the observer
 export CANVAS_BASE_URL="http://canvas.docker"
 export CANVAS_API_TOKEN="observer-access-token"
+export CANVAS_ADMIN_API_TOKEN="admin-access-token"  # optional
 pdm run pytest --integration -m integration
 ```
 
@@ -246,6 +254,7 @@ pdm run pytest --integration -m integration
 |----------|-------------|----------|---------|
 | `CANVAS_BASE_URL` | Canvas instance URL | Yes | - |
 | `CANVAS_API_TOKEN` | Canvas API token | Yes | - |
+| `CANVAS_ADMIN_API_TOKEN` | Seeded account admin's API token, for admin-scoped integration tests (skipped when unset) | No | - |
 
 ## Development
 
@@ -266,6 +275,8 @@ pdm run pytest --integration -m integration
 - `src/canvas_lms_python_client/test/conftest.py`
 - `src/canvas_lms_python_client/test/test_pagination.py`
 - `src/canvas_lms_python_client/test/test_integration_observees.py`
+- `src/canvas_lms_python_client/test/test_paginated_response_types.py`
+- `src/canvas_lms_python_client/test/test_integration_paginated_models.py`
 - `src/canvas_lms_python_client/pagination.py`
 - `src/.openapi-generator-ignore`
 
