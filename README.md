@@ -222,12 +222,20 @@ pdm run pytest test/test_pagination.py -v
 
 ### Integration Tests
 
-Integration tests require a Canvas instance:
+Integration tests are marked `@pytest.mark.integration` and are skipped unless
+`--integration` is passed. They require a Canvas instance and are written against the
+seeded dockerized canvas-lms, so `CANVAS_API_TOKEN` must belong to a seeded **observer**
+user (one linked to at least one observee with courses and assignments). If either
+variable is unset, the integration tests are skipped with a reason naming it.
 
 ```bash
-export CANVAS_BASE_URL="https://canvas.instructure.com"
-export CANVAS_API_TOKEN="your-token"
-pdm run pytest --integration
+# Start the seeded canvas-lms (from the canvas-lms repo)
+docker compose up -d
+
+# Run the integration tests as the observer
+export CANVAS_BASE_URL="http://canvas.docker"
+export CANVAS_API_TOKEN="observer-access-token"
+pdm run pytest --integration -m integration
 ```
 
 ## Configuration
@@ -257,6 +265,7 @@ pdm run pytest --integration
 **Custom, never overwritten**:
 - `src/canvas_lms_python_client/test/conftest.py`
 - `src/canvas_lms_python_client/test/test_pagination.py`
+- `src/canvas_lms_python_client/test/test_integration_observees.py`
 - `src/canvas_lms_python_client/pagination.py`
 - `src/.openapi-generator-ignore`
 

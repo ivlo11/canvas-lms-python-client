@@ -725,7 +725,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_for_students**
-> submissions_api_for_students(course_id, student_ids=student_ids, assignment_ids=assignment_ids, grouped=grouped, post_to_sis=post_to_sis, submitted_since=submitted_since, graded_since=graded_since, grading_period_id=grading_period_id, workflow_state=workflow_state, enrollment_state=enrollment_state, state_based_on_date=state_based_on_date, order=order, order_direction=order_direction, include=include, page=page, per_page=per_page)
+> List[Submission] submissions_api_for_students(course_id, student_ids=student_ids, assignment_ids=assignment_ids, grouped=grouped, post_to_sis=post_to_sis, submitted_since=submitted_since, graded_since=graded_since, grading_period_id=grading_period_id, workflow_state=workflow_state, enrollment_state=enrollment_state, state_based_on_date=state_based_on_date, order=order, order_direction=order_direction, include=include, page=page, per_page=per_page)
 
 List submissions for multiple assignments
 
@@ -737,6 +737,7 @@ A paginated list of all existing submissions for a given set of students and ass
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -779,7 +780,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List submissions for multiple assignments
-        await api_instance.submissions_api_for_students(course_id, student_ids=student_ids, assignment_ids=assignment_ids, grouped=grouped, post_to_sis=post_to_sis, submitted_since=submitted_since, graded_since=graded_since, grading_period_id=grading_period_id, workflow_state=workflow_state, enrollment_state=enrollment_state, state_based_on_date=state_based_on_date, order=order, order_direction=order_direction, include=include, page=page, per_page=per_page)
+        api_response = await api_instance.submissions_api_for_students(course_id, student_ids=student_ids, assignment_ids=assignment_ids, grouped=grouped, post_to_sis=post_to_sis, submitted_since=submitted_since, graded_since=graded_since, grading_period_id=grading_period_id, workflow_state=workflow_state, enrollment_state=enrollment_state, state_based_on_date=state_based_on_date, order=order, order_direction=order_direction, include=include, page=page, per_page=per_page)
+        print("The response of SubmissionsApiApi->submissions_api_for_students:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_for_students: %s\n" % e)
 ```
@@ -810,7 +813,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Submission]**](Submission.md)
 
 ### Authorization
 
@@ -825,12 +828,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List submissions for multiple assignments |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_for_students_for_sections**
-> submissions_api_for_students_for_sections(section_id, student_ids=student_ids, assignment_ids=assignment_ids, grouped=grouped, post_to_sis=post_to_sis, submitted_since=submitted_since, graded_since=graded_since, grading_period_id=grading_period_id, workflow_state=workflow_state, enrollment_state=enrollment_state, state_based_on_date=state_based_on_date, order=order, order_direction=order_direction, include=include, page=page, per_page=per_page)
+> List[Submission] submissions_api_for_students_for_sections(section_id, student_ids=student_ids, assignment_ids=assignment_ids, grouped=grouped, post_to_sis=post_to_sis, submitted_since=submitted_since, graded_since=graded_since, grading_period_id=grading_period_id, workflow_state=workflow_state, enrollment_state=enrollment_state, state_based_on_date=state_based_on_date, order=order, order_direction=order_direction, include=include, page=page, per_page=per_page)
 
 List submissions for multiple assignments
 
@@ -842,6 +845,7 @@ A paginated list of all existing submissions for a given set of students and ass
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -884,7 +888,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List submissions for multiple assignments
-        await api_instance.submissions_api_for_students_for_sections(section_id, student_ids=student_ids, assignment_ids=assignment_ids, grouped=grouped, post_to_sis=post_to_sis, submitted_since=submitted_since, graded_since=graded_since, grading_period_id=grading_period_id, workflow_state=workflow_state, enrollment_state=enrollment_state, state_based_on_date=state_based_on_date, order=order, order_direction=order_direction, include=include, page=page, per_page=per_page)
+        api_response = await api_instance.submissions_api_for_students_for_sections(section_id, student_ids=student_ids, assignment_ids=assignment_ids, grouped=grouped, post_to_sis=post_to_sis, submitted_since=submitted_since, graded_since=graded_since, grading_period_id=grading_period_id, workflow_state=workflow_state, enrollment_state=enrollment_state, state_based_on_date=state_based_on_date, order=order, order_direction=order_direction, include=include, page=page, per_page=per_page)
+        print("The response of SubmissionsApiApi->submissions_api_for_students_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_for_students_for_sections: %s\n" % e)
 ```
@@ -915,7 +921,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Submission]**](Submission.md)
 
 ### Authorization
 
@@ -930,7 +936,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List submissions for multiple assignments |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2832,7 +2838,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_show_anonymous**
-> submissions_api_show_anonymous(anonymous_id, assignment_id, course_id, include=include)
+> Submission submissions_api_show_anonymous(anonymous_id, assignment_id, course_id, include=include)
 
 Get a single submission by anonymous id
 
@@ -2844,6 +2850,7 @@ Get a single submission, based on the submission's anonymous id.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2874,7 +2881,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single submission by anonymous id
-        await api_instance.submissions_api_show_anonymous(anonymous_id, assignment_id, course_id, include=include)
+        api_response = await api_instance.submissions_api_show_anonymous(anonymous_id, assignment_id, course_id, include=include)
+        print("The response of SubmissionsApiApi->submissions_api_show_anonymous:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_show_anonymous: %s\n" % e)
 ```
@@ -2893,7 +2902,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -2902,18 +2911,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a single submission by anonymous id |  -  |
+**0** | Submission |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_show_anonymous_for_sections**
-> submissions_api_show_anonymous_for_sections(anonymous_id, assignment_id, section_id, include=include)
+> Submission submissions_api_show_anonymous_for_sections(anonymous_id, assignment_id, section_id, include=include)
 
 Get a single submission by anonymous id
 
@@ -2925,6 +2934,7 @@ Get a single submission, based on the submission's anonymous id.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2955,7 +2965,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single submission by anonymous id
-        await api_instance.submissions_api_show_anonymous_for_sections(anonymous_id, assignment_id, section_id, include=include)
+        api_response = await api_instance.submissions_api_show_anonymous_for_sections(anonymous_id, assignment_id, section_id, include=include)
+        print("The response of SubmissionsApiApi->submissions_api_show_anonymous_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_show_anonymous_for_sections: %s\n" % e)
 ```
@@ -2974,7 +2986,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -2983,13 +2995,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a single submission by anonymous id |  -  |
+**0** | Submission |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

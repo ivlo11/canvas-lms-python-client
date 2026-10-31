@@ -2417,7 +2417,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[Submission]:
         """List submissions for multiple assignments
 
         A paginated list of all existing submissions for a given set of students and assignments.
@@ -2507,6 +2507,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2551,7 +2552,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[Submission]]:
         """List submissions for multiple assignments
 
         A paginated list of all existing submissions for a given set of students and assignments.
@@ -2641,6 +2642,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2707,7 +2709,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[Submission]:
         """List submissions for multiple assignments
 
         A paginated list of all existing submissions for a given set of students and assignments.
@@ -2797,6 +2799,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2864,7 +2867,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Submission]]:
         """List submissions for multiple assignments
 
         A paginated list of all existing submissions for a given set of students and assignments.
@@ -2954,6 +2957,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3088,6 +3092,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3270,7 +3275,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[Submission]:
         """List submissions for multiple assignments
 
         A paginated list of all existing submissions for a given set of students and assignments.
@@ -3360,6 +3365,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3404,7 +3410,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[Submission]]:
         """List submissions for multiple assignments
 
         A paginated list of all existing submissions for a given set of students and assignments.
@@ -3494,6 +3500,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3560,7 +3567,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[Submission]:
         """List submissions for multiple assignments
 
         A paginated list of all existing submissions for a given set of students and assignments.
@@ -3650,6 +3657,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3717,7 +3725,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Submission]]:
         """List submissions for multiple assignments
 
         A paginated list of all existing submissions for a given set of students and assignments.
@@ -3807,6 +3815,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3941,6 +3950,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11963,7 +11973,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Submission:
         """Get a single submission by anonymous id
 
         Get a single submission, based on the submission's anonymous id.
@@ -12011,6 +12021,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12041,7 +12052,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Submission]:
         """Get a single submission by anonymous id
 
         Get a single submission, based on the submission's anonymous id.
@@ -12089,6 +12100,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12168,6 +12180,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12220,6 +12233,13 @@ class SubmissionsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -12264,7 +12284,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Submission:
         """Get a single submission by anonymous id
 
         Get a single submission, based on the submission's anonymous id.
@@ -12312,6 +12332,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12342,7 +12363,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Submission]:
         """Get a single submission by anonymous id
 
         Get a single submission, based on the submission's anonymous id.
@@ -12390,6 +12411,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12469,6 +12491,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12521,6 +12544,13 @@ class SubmissionsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

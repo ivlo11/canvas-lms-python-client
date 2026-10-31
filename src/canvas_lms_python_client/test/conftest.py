@@ -6,6 +6,29 @@ import os
 
 import pytest
 
+from canvas_lms_python_client.api_client import ApiClient
+from canvas_lms_python_client.configuration import Configuration
+
+
+def pytest_addoption(parser):
+    """Register the --integration option."""
+    parser.addoption(
+        "--integration",
+        action="store_true",
+        default=False,
+        help="run integration tests against a live Canvas instance",
+    )
+
+
+def pytest_collection_modifyitems(config, items):
+    """Skip integration-marked tests unless --integration is passed."""
+    if config.getoption("--integration"):
+        return
+    skip_integration = pytest.mark.skip(reason="use --integration to run")
+    for item in items:
+        if "integration" in item.keywords:
+            item.add_marker(skip_integration)
+
 
 @pytest.fixture(scope="session")
 def canvas_base_url() -> str | None:
@@ -39,6 +62,30 @@ async def skip_integration_tests(canvas_base_url, canvas_api_token):
     """
     if not canvas_base_url or not canvas_api_token:
         pytest.skip("Integration tests require CANVAS_BASE_URL and CANVAS_API_TOKEN")
+
+
+@pytest.fixture
+async def canvas_api_client(canvas_base_url, canvas_api_token):
+    """
+    Authenticated async ApiClient for integration tests.
+
+    Skips the test when CANVAS_BASE_URL or CANVAS_API_TOKEN is unset.
+    The client session is closed when the test finishes.
+    """
+    missing = [
+        name
+        for name, value in (
+            ("CANVAS_BASE_URL", canvas_base_url),
+            ("CANVAS_API_TOKEN", canvas_api_token),
+        )
+        if not value
+    ]
+    if missing:
+        pytest.skip(f"Integration tests require {', '.join(missing)} to be set")
+
+    config = Configuration(host=canvas_base_url, access_token=canvas_api_token)
+    async with ApiClient(config) as client:
+        yield client
 
 
 @pytest.fixture

@@ -3407,7 +3407,7 @@ class AssignmentsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[Assignment]:
         """List assignments for user
 
         Returns the paginated list of assignments for the specified user if the current user has rights to view. See {api:AssignmentsApiController#index List assignments} for valid arguments.
@@ -3461,6 +3461,7 @@ class AssignmentsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Assignment]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3493,7 +3494,7 @@ class AssignmentsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[Assignment]]:
         """List assignments for user
 
         Returns the paginated list of assignments for the specified user if the current user has rights to view. See {api:AssignmentsApiController#index List assignments} for valid arguments.
@@ -3547,6 +3548,7 @@ class AssignmentsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Assignment]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3601,7 +3603,7 @@ class AssignmentsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[Assignment]:
         """List assignments for user
 
         Returns the paginated list of assignments for the specified user if the current user has rights to view. See {api:AssignmentsApiController#index List assignments} for valid arguments.
@@ -3655,6 +3657,7 @@ class AssignmentsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Assignment]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3710,7 +3713,7 @@ class AssignmentsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Assignment]]:
         """List assignments for user
 
         Returns the paginated list of assignments for the specified user if the current user has rights to view. See {api:AssignmentsApiController#index List assignments} for valid arguments.
@@ -3764,6 +3767,7 @@ class AssignmentsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Assignment]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3850,6 +3854,7 @@ class AssignmentsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Assignment]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3903,6 +3908,13 @@ class AssignmentsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

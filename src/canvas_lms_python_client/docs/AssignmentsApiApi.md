@@ -729,7 +729,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **assignments_api_user_index**
-> assignments_api_user_index(course_id, user_id, page=page, per_page=per_page)
+> List[Assignment] assignments_api_user_index(course_id, user_id, page=page, per_page=per_page)
 
 List assignments for user
 
@@ -742,6 +742,7 @@ See {api:AssignmentsApiController#index List assignments} for valid arguments.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.assignment import Assignment
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -772,7 +773,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List assignments for user
-        await api_instance.assignments_api_user_index(course_id, user_id, page=page, per_page=per_page)
+        api_response = await api_instance.assignments_api_user_index(course_id, user_id, page=page, per_page=per_page)
+        print("The response of AssignmentsApiApi->assignments_api_user_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AssignmentsApiApi->assignments_api_user_index: %s\n" % e)
 ```
@@ -791,7 +794,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Assignment]**](Assignment.md)
 
 ### Authorization
 
@@ -800,13 +803,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List assignments for user |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -25,4 +25,5 @@
 # Custom Files to support pagination
 test/conftest.py
 test/test_pagination.py
+test/test_integration_observees.py
 pagination.py
