@@ -218,3 +218,17 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Claude Code local settings & history
+.claude/agents/*.local.md
+.claude/commands/*.local.md
+.claude/skills/*.local/
+
+# Local personal settings (auto-ignored by Claude but good to explicitly block)
+settings.local.json
+
+# Claude local context overrides
+CLAUDE.local.md
+
+# Worktree directories (if using Claude worktrees)
+claude/worktrees/

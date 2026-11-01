@@ -1,0 +1,5 @@
+{
+  "env": {
+    "CANVAS_BASE_URL": "http://canvas.docker/"
+  }
+}
