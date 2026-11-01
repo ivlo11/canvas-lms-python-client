@@ -144,40 +144,12 @@ async for page in polls_api.polls_index_paginated(per_page=50):
 
 ### List Query Parameters
 
-List query parameters are sent in Canvas's bracket form, one `name[]=value` pair per value. Argument names are unchanged:
+List query parameters are sent in Canvas's bracket form, one `name[]=value` pair per value:
 
 ```python
 # GET /api/v1/accounts/1/courses?include[]=term&include[]=teachers
 await accounts_api.accounts_courses_api(account_id="1", include=["term", "teachers"])
 ```
-
-Earlier versions sent `include=term&include=teachers`, which Canvas ignored or rejected. List filters such as `include`, `enrollment_type`, `context_codes` and `placements` now take effect, so calls that pass them may return different results than before.
-
-### Breaking Changes
-
-`<operation>_all` is now generated only for operations whose response is a list. It was removed from every paginated operation whose response is a wrapper model (e.g. `polls_index`, `terms_api_index`, `registrations_list`), an untyped object (`rubrics_api_used_locations`), or undocumented. On those operations it yielded either nothing or one whole wrapper per page. Iterate `<operation>_paginated` instead and read the wrapper's list attribute, as shown above.
-
-Model field types now match what Canvas sends:
-- `Poll`, `PollChoice`, `PollSession` and `PollSubmission` ids (`id` and every `*_id`) are strings, because Canvas's polling endpoints always send ids as strings. `PollSession.poll_submissions` is a list, and `PollChoice.poll_id` is optional.
-- `QuizSubmission.score`, `kept_score`, `score_before_regrade`, `fudge_points` and `Quiz.points_possible` accept floats.
-- `LtiLaunchDefinition.definition_id` is an integer, and `LtiOverlayVersion.diff` is a list of change tuples (`["~", "title", "old", "new"]`).
-- `created_by` / `updated_by` on `LtiRegistration`, `LtiRegistrationAccountBinding` and `LtiOverlayVersion` are a `LtiRegistrationCreatedBy` wrapper. Its `actual_instance` is a `User`, or the string `"Instructure"` when Canvas hides a site admin.
-
-LTI operations whose Canvas docs name a namespaced model (`Lti::…`) now return that model instead of a dict. Use attributes (`deployment.context_id`) instead of keys (`deployment["context_id"]`):
-- Paginated lists (`_paginated` pages, and `_all` items):
-  - `deployments_list` and `context_controls_index` → `List[LtiDeployment]` (`context_controls_index` groups the controls by deployment, under `context_controls`)
-  - `deployments_list_controls` → `List[LtiContextControl]`
-  - `lti_apps_launch_definitions` and `lti_apps_launch_definitions_for_accounts` → `List[LtiLaunchDefinition]`
-  - `resource_links_index` → `List[LtiResourceLink]`
-- Context controls: `context_controls_create`, `context_controls_show`, `context_controls_update` and `context_controls_delete` → `LtiContextControl`; `context_controls_create_many` → `List[LtiContextControl]`
-- Deployments: `deployments_create`, `deployments_show` and `deployments_destroy` → `LtiDeployment`
-- Registrations:
-  - `registrations_create`, `registrations_show`, `registrations_update`, `registrations_destroy`, `registrations_show_by_client_id`, `registrations_show_by_utid`, `registrations_install_status`, `registrations_reset`, `registrations_install_from_template` and `registrations_apply_registration_update_request` → `LtiRegistration`
-  - `registrations_bind` and `registrations_unbind` → `LtiRegistrationAccountBinding`
-  - `registrations_overlay_history` → `List[LtiOverlayVersion]`
-- Resource links: `resource_links_create`, `resource_links_show`, `resource_links_update` and `resource_links_destroy` → `LtiResourceLink`; `resource_links_bulk_create` → `List[LtiResourceLink]`
-
-`registrations_history`, `registrations_show_registration_update_request` and `registrations_latest_registration_update_request` still return untyped objects, because Canvas documents no model for them.
 
 ### Link Header Relations
 
@@ -193,7 +165,6 @@ The `_paginated` methods use `rel="next"` automatically. If you need access to s
 
 ```python
 from canvas_lms_python_client.pagination import get_link_by_rel
-
 
 async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
