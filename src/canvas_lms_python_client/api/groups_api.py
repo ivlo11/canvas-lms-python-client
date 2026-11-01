@@ -774,7 +774,7 @@ class GroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'user_ids': 'multi',
+            'user_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -792,7 +792,7 @@ class GroupsApi:
         # process the query parameters
         if user_ids is not None:
             
-            _query_params.append(('user_ids', user_ids))
+            _query_params.append(('user_ids[]', user_ids))
             
         # process the header parameters
         # process the form parameters
@@ -1362,7 +1362,7 @@ class GroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1384,7 +1384,7 @@ class GroupsApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if collaboration_state is not None:
             
@@ -1966,7 +1966,7 @@ class GroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1988,7 +1988,7 @@ class GroupsApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if collaboration_state is not None:
             
@@ -3611,7 +3611,7 @@ class GroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3631,7 +3631,7 @@ class GroupsApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             
@@ -4180,7 +4180,7 @@ class GroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'permissions': 'multi',
+            'permissions[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4198,7 +4198,7 @@ class GroupsApi:
         # process the query parameters
         if permissions is not None:
             
-            _query_params.append(('permissions', permissions))
+            _query_params.append(('permissions[]', permissions))
             
         # process the header parameters
         # process the form parameters
@@ -4749,7 +4749,7 @@ class GroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4767,7 +4767,7 @@ class GroupsApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters
@@ -5628,7 +5628,7 @@ class GroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -5650,7 +5650,7 @@ class GroupsApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude_inactive is not None:
             

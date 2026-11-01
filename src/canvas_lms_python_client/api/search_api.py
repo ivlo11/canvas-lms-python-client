@@ -955,8 +955,8 @@ class SearchApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
-            'permissions': 'multi',
+            'exclude[]': 'multi',
+            'permissions[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -980,7 +980,7 @@ class SearchApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if type is not None:
             
@@ -996,7 +996,7 @@ class SearchApi:
             
         if permissions is not None:
             
-            _query_params.append(('permissions', permissions))
+            _query_params.append(('permissions[]', permissions))
             
         if page is not None:
             
@@ -1504,8 +1504,8 @@ class SearchApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
-            'permissions': 'multi',
+            'exclude[]': 'multi',
+            'permissions[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1529,7 +1529,7 @@ class SearchApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if type is not None:
             
@@ -1545,7 +1545,7 @@ class SearchApi:
             
         if permissions is not None:
             
-            _query_params.append(('permissions', permissions))
+            _query_params.append(('permissions[]', permissions))
             
         if page is not None:
             

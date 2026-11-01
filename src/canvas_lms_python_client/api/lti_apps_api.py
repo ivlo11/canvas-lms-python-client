@@ -570,7 +570,7 @@ class LtiAppsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'placements': 'multi',
+            'placements[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -588,7 +588,7 @@ class LtiAppsApi:
         # process the query parameters
         if placements is not None:
             
-            _query_params.append(('placements', placements))
+            _query_params.append(('placements[]', placements))
             
         if only_visible is not None:
             
@@ -1174,7 +1174,7 @@ class LtiAppsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'placements': 'multi',
+            'placements[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1192,7 +1192,7 @@ class LtiAppsApi:
         # process the query parameters
         if placements is not None:
             
-            _query_params.append(('placements', placements))
+            _query_params.append(('placements[]', placements))
             
         if only_visible is not None:
             

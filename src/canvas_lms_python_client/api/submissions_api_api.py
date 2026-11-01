@@ -3126,9 +3126,9 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'student_ids': 'multi',
-            'assignment_ids': 'multi',
-            'include': 'multi',
+            'student_ids[]': 'multi',
+            'assignment_ids[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3146,11 +3146,11 @@ class SubmissionsApiApi:
         # process the query parameters
         if student_ids is not None:
             
-            _query_params.append(('student_ids', student_ids))
+            _query_params.append(('student_ids[]', student_ids))
             
         if assignment_ids is not None:
             
-            _query_params.append(('assignment_ids', assignment_ids))
+            _query_params.append(('assignment_ids[]', assignment_ids))
             
         if grouped is not None:
             
@@ -3194,7 +3194,7 @@ class SubmissionsApiApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             
@@ -3982,9 +3982,9 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'student_ids': 'multi',
-            'assignment_ids': 'multi',
-            'include': 'multi',
+            'student_ids[]': 'multi',
+            'assignment_ids[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4002,11 +4002,11 @@ class SubmissionsApiApi:
         # process the query parameters
         if student_ids is not None:
             
-            _query_params.append(('student_ids', student_ids))
+            _query_params.append(('student_ids[]', student_ids))
             
         if assignment_ids is not None:
             
-            _query_params.append(('assignment_ids', assignment_ids))
+            _query_params.append(('assignment_ids[]', assignment_ids))
             
         if grouped is not None:
             
@@ -4050,7 +4050,7 @@ class SubmissionsApiApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             
@@ -5229,7 +5229,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -5249,7 +5249,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if grouped is not None:
             
@@ -5831,7 +5831,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -5851,7 +5851,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if grouped is not None:
             
@@ -10308,7 +10308,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'assignment_ids': 'multi',
+            'assignment_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -10326,7 +10326,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if assignment_ids is not None:
             
-            _query_params.append(('assignment_ids', assignment_ids))
+            _query_params.append(('assignment_ids[]', assignment_ids))
             
         if page is not None:
             
@@ -11780,7 +11780,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -11802,7 +11802,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters
@@ -12084,7 +12084,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -12106,7 +12106,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters
@@ -12395,7 +12395,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -12417,7 +12417,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters
@@ -12703,7 +12703,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -12725,7 +12725,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters

@@ -419,7 +419,7 @@ class QuizAssignmentOverridesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'quiz_assignment_overrides[][quiz_ids]': 'multi',
+            'quiz_assignment_overrides[][quiz_ids][]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -437,7 +437,7 @@ class QuizAssignmentOverridesApi:
         # process the query parameters
         if quiz_assignment_overrides_quiz_ids is not None:
             
-            _query_params.append(('quiz_assignment_overrides[][quiz_ids]', quiz_assignment_overrides_quiz_ids))
+            _query_params.append(('quiz_assignment_overrides[][quiz_ids][]', quiz_assignment_overrides_quiz_ids))
             
         if page is not None:
             
@@ -864,7 +864,7 @@ class QuizAssignmentOverridesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'quiz_assignment_overrides[][quiz_ids]': 'multi',
+            'quiz_assignment_overrides[][quiz_ids][]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -882,7 +882,7 @@ class QuizAssignmentOverridesApi:
         # process the query parameters
         if quiz_assignment_overrides_quiz_ids is not None:
             
-            _query_params.append(('quiz_assignment_overrides[][quiz_ids]', quiz_assignment_overrides_quiz_ids))
+            _query_params.append(('quiz_assignment_overrides[][quiz_ids][]', quiz_assignment_overrides_quiz_ids))
             
         if page is not None:
             

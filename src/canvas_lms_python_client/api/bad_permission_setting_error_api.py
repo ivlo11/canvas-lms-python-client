@@ -1148,7 +1148,7 @@ class BadPermissionSettingErrorApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'state': 'multi',
+            'state[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1166,7 +1166,7 @@ class BadPermissionSettingErrorApi:
         # process the query parameters
         if state is not None:
             
-            _query_params.append(('state', state))
+            _query_params.append(('state[]', state))
             
         if show_inherited is not None:
             

@@ -1345,7 +1345,7 @@ class RubricsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1365,7 +1365,7 @@ class RubricsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if style is not None:
             
@@ -1658,7 +1658,7 @@ class RubricsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1678,7 +1678,7 @@ class RubricsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if style is not None:
             

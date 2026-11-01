@@ -454,8 +454,8 @@ class TermsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'workflow_state': 'multi',
-            'include': 'multi',
+            'workflow_state[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -473,11 +473,11 @@ class TermsApiApi:
         # process the query parameters
         if workflow_state is not None:
             
-            _query_params.append(('workflow_state', workflow_state))
+            _query_params.append(('workflow_state[]', workflow_state))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if term_name is not None:
             

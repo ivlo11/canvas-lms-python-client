@@ -1397,7 +1397,7 @@ class ServiceCredentialsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'uuids': 'multi',
+            'uuids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1435,7 +1435,7 @@ class ServiceCredentialsApi:
             
         if uuids is not None:
             
-            _query_params.append(('uuids', uuids))
+            _query_params.append(('uuids[]', uuids))
             
         if page is not None:
             
@@ -2778,9 +2778,9 @@ class ServiceCredentialsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'filter': 'multi',
-            'course_ids': 'multi',
+            'include[]': 'multi',
+            'filter[]': 'multi',
+            'course_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2802,15 +2802,15 @@ class ServiceCredentialsApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if filter is not None:
             
-            _query_params.append(('filter', filter))
+            _query_params.append(('filter[]', filter))
             
         if course_ids is not None:
             
-            _query_params.append(('course_ids', course_ids))
+            _query_params.append(('course_ids[]', course_ids))
             
         if page is not None:
             
@@ -3065,7 +3065,7 @@ class ServiceCredentialsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3081,7 +3081,7 @@ class ServiceCredentialsApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters
@@ -3489,8 +3489,8 @@ class ServiceCredentialsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'course_ids': 'multi',
+            'include[]': 'multi',
+            'course_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3506,11 +3506,11 @@ class ServiceCredentialsApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if course_ids is not None:
             
-            _query_params.append(('course_ids', course_ids))
+            _query_params.append(('course_ids[]', course_ids))
             
         if page is not None:
             

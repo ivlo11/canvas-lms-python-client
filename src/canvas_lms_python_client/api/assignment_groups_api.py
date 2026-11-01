@@ -633,9 +633,9 @@ class AssignmentGroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'assignment_ids': 'multi',
-            'exclude_assignment_submission_types': 'multi',
+            'include[]': 'multi',
+            'assignment_ids[]': 'multi',
+            'exclude_assignment_submission_types[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -653,15 +653,15 @@ class AssignmentGroupsApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if assignment_ids is not None:
             
-            _query_params.append(('assignment_ids', assignment_ids))
+            _query_params.append(('assignment_ids[]', assignment_ids))
             
         if exclude_assignment_submission_types is not None:
             
-            _query_params.append(('exclude_assignment_submission_types', exclude_assignment_submission_types))
+            _query_params.append(('exclude_assignment_submission_types[]', exclude_assignment_submission_types))
             
         if override_assignment_dates is not None:
             

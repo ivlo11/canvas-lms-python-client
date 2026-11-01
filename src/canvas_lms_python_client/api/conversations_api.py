@@ -2397,8 +2397,8 @@ class ConversationsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'filter': 'multi',
-            'include': 'multi',
+            'filter[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2418,7 +2418,7 @@ class ConversationsApi:
             
         if filter is not None:
             
-            _query_params.append(('filter', filter))
+            _query_params.append(('filter[]', filter))
             
         if filter_mode_and_or is not None:
             
@@ -2434,7 +2434,7 @@ class ConversationsApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             
@@ -3280,7 +3280,7 @@ class ConversationsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'filter': 'multi',
+            'filter[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3306,7 +3306,7 @@ class ConversationsApi:
             
         if filter is not None:
             
-            _query_params.append(('filter', filter))
+            _query_params.append(('filter[]', filter))
             
         if filter_mode_and_or is not None:
             

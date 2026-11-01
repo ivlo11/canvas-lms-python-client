@@ -142,6 +142,17 @@ async for page in polls_api.polls_index_paginated(per_page=50):
         print(poll.question)
 ```
 
+### List Query Parameters
+
+List query parameters are sent in Canvas's bracket form, one `name[]=value` pair per value. Argument names are unchanged:
+
+```python
+# GET /api/v1/accounts/1/courses?include[]=term&include[]=teachers
+await accounts_api.accounts_courses_api(account_id="1", include=["term", "teachers"])
+```
+
+Earlier versions sent `include=term&include=teachers`, which Canvas ignored or rejected. List filters such as `include`, `enrollment_type`, `context_codes` and `placements` now take effect, so calls that pass them may return different results than before.
+
 ### Breaking Changes
 
 `<operation>_all` is now generated only for operations whose response is a list. It was removed from every paginated operation whose response is a wrapper model (e.g. `polls_index`, `terms_api_index`, `registrations_list`), an untyped object (`rubrics_api_used_locations`), or undocumented. On those operations it yielded either nothing or one whole wrapper per page. Iterate `<operation>_paginated` instead and read the wrapper's list attribute, as shown above.
@@ -323,6 +334,7 @@ pdm run pytest --integration -m integration
 - `src/canvas_lms_python_client/test/test_paginated_response_types.py`
 - `src/canvas_lms_python_client/test/test_integration_paginated_models.py`
 - `src/canvas_lms_python_client/test/test_lti_model_payloads.py`
+- `src/canvas_lms_python_client/test/test_list_query_params.py`
 - `src/canvas_lms_python_client/test/fixtures/` (captured Canvas responses for offline tests)
 - `src/canvas_lms_python_client/pagination.py`
 - `src/.openapi-generator-ignore`

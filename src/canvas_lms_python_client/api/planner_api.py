@@ -465,7 +465,7 @@ class PlannerApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'context_codes': 'multi',
+            'context_codes[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -489,7 +489,7 @@ class PlannerApi:
             
         if context_codes is not None:
             
-            _query_params.append(('context_codes', context_codes))
+            _query_params.append(('context_codes[]', context_codes))
             
         if observed_user_id is not None:
             
@@ -988,7 +988,7 @@ class PlannerApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'context_codes': 'multi',
+            'context_codes[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1014,7 +1014,7 @@ class PlannerApi:
             
         if context_codes is not None:
             
-            _query_params.append(('context_codes', context_codes))
+            _query_params.append(('context_codes[]', context_codes))
             
         if observed_user_id is not None:
             

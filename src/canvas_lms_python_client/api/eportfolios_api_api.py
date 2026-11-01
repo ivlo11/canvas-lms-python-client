@@ -794,7 +794,7 @@ class EportfoliosApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -812,7 +812,7 @@ class EportfoliosApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             

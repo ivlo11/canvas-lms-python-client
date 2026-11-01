@@ -218,6 +218,22 @@ async def test_account_launch_definitions_yield_items(canvas_admin_api_client):
     assert_launch_definitions(definitions)
 
 
+async def test_include_list_filter_applies(canvas_admin_api_client):
+    """include=["term"] is sent as include[]=term, so Canvas embeds each course's term."""
+    account = await root_account(canvas_admin_api_client)
+    api = AccountsApi(canvas_admin_api_client)
+    account_id = str(account.id)
+
+    plain = require(
+        await collect(api.accounts_courses_api_all(account_id=account_id)),
+        "course in the root account",
+    )
+    with_term = await collect(api.accounts_courses_api_all(account_id=account_id, include=["term"]))
+
+    assert all(course.term is None for course in plain)
+    assert with_term and all(course.term is not None for course in with_term)
+
+
 async def lti_registrations(api_client, account: Account) -> List[LtiRegistration]:
     pages = await collect(
         RegistrationsApi(api_client).registrations_list_paginated(account_id=str(account.id))

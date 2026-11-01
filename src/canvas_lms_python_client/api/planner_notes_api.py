@@ -817,7 +817,7 @@ class PlannerNotesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'context_codes': 'multi',
+            'context_codes[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -841,7 +841,7 @@ class PlannerNotesApi:
             
         if context_codes is not None:
             
-            _query_params.append(('context_codes', context_codes))
+            _query_params.append(('context_codes[]', context_codes))
             
         # process the header parameters
         # process the form parameters

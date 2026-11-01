@@ -549,7 +549,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -573,7 +573,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -1151,7 +1151,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1177,7 +1177,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -1755,7 +1755,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1781,7 +1781,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -2359,7 +2359,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2385,7 +2385,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -2963,7 +2963,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2989,7 +2989,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -3546,7 +3546,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3570,7 +3570,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             

@@ -3650,7 +3650,7 @@ class RegistrationsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3684,7 +3684,7 @@ class RegistrationsApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters
@@ -4533,7 +4533,7 @@ class RegistrationsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4553,7 +4553,7 @@ class RegistrationsApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters

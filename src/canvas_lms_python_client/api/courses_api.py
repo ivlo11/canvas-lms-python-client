@@ -3378,7 +3378,7 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'assignment_ids': 'multi',
+            'assignment_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3396,7 +3396,7 @@ class CoursesApi:
         # process the query parameters
         if assignment_ids is not None:
             
-            _query_params.append(('assignment_ids', assignment_ids))
+            _query_params.append(('assignment_ids[]', assignment_ids))
             
         # process the header parameters
         # process the form parameters
@@ -4029,8 +4029,8 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'state': 'multi',
+            'include[]': 'multi',
+            'state[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4066,11 +4066,11 @@ class CoursesApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if state is not None:
             
-            _query_params.append(('state', state))
+            _query_params.append(('state[]', state))
             
         if page is not None:
             
@@ -4338,7 +4338,7 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'permissions': 'multi',
+            'permissions[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4356,7 +4356,7 @@ class CoursesApi:
         # process the query parameters
         if permissions is not None:
             
-            _query_params.append(('permissions', permissions))
+            _query_params.append(('permissions[]', permissions))
             
         # process the header parameters
         # process the form parameters
@@ -5989,7 +5989,7 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -6007,7 +6007,7 @@ class CoursesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if teacher_limit is not None:
             
@@ -6300,7 +6300,7 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -6320,7 +6320,7 @@ class CoursesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if teacher_limit is not None:
             
@@ -8721,8 +8721,8 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'state': 'multi',
+            'include[]': 'multi',
+            'state[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -8740,11 +8740,11 @@ class CoursesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if state is not None:
             
-            _query_params.append(('state', state))
+            _query_params.append(('state[]', state))
             
         if enrollment_state is not None:
             
@@ -9759,11 +9759,11 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'enrollment_type': 'multi',
-            'section_ids': 'multi',
-            'include': 'multi',
-            'user_ids': 'multi',
-            'enrollment_state': 'multi',
+            'enrollment_type[]': 'multi',
+            'section_ids[]': 'multi',
+            'include[]': 'multi',
+            'user_ids[]': 'multi',
+            'enrollment_state[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -9789,7 +9789,7 @@ class CoursesApi:
             
         if enrollment_type is not None:
             
-            _query_params.append(('enrollment_type', enrollment_type))
+            _query_params.append(('enrollment_type[]', enrollment_type))
             
         if enrollment_role is not None:
             
@@ -9801,11 +9801,11 @@ class CoursesApi:
             
         if section_ids is not None:
             
-            _query_params.append(('section_ids', section_ids))
+            _query_params.append(('section_ids[]', section_ids))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if user_id is not None:
             
@@ -9813,11 +9813,11 @@ class CoursesApi:
             
         if user_ids is not None:
             
-            _query_params.append(('user_ids', user_ids))
+            _query_params.append(('user_ids[]', user_ids))
             
         if enrollment_state is not None:
             
-            _query_params.append(('enrollment_state', enrollment_state))
+            _query_params.append(('enrollment_state[]', enrollment_state))
             
         if page is not None:
             
@@ -10542,11 +10542,11 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'enrollment_type': 'multi',
-            'section_ids': 'multi',
-            'include': 'multi',
-            'user_ids': 'multi',
-            'enrollment_state': 'multi',
+            'enrollment_type[]': 'multi',
+            'section_ids[]': 'multi',
+            'include[]': 'multi',
+            'user_ids[]': 'multi',
+            'enrollment_state[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -10572,7 +10572,7 @@ class CoursesApi:
             
         if enrollment_type is not None:
             
-            _query_params.append(('enrollment_type', enrollment_type))
+            _query_params.append(('enrollment_type[]', enrollment_type))
             
         if enrollment_role is not None:
             
@@ -10584,11 +10584,11 @@ class CoursesApi:
             
         if section_ids is not None:
             
-            _query_params.append(('section_ids', section_ids))
+            _query_params.append(('section_ids[]', section_ids))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if user_id is not None:
             
@@ -10596,11 +10596,11 @@ class CoursesApi:
             
         if user_ids is not None:
             
-            _query_params.append(('user_ids', user_ids))
+            _query_params.append(('user_ids[]', user_ids))
             
         if enrollment_state is not None:
             
-            _query_params.append(('enrollment_state', enrollment_state))
+            _query_params.append(('enrollment_state[]', enrollment_state))
             
         if page is not None:
             

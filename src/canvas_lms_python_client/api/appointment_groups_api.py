@@ -1664,7 +1664,7 @@ class AppointmentGroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'context_codes': 'multi',
+            'context_codes[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1684,7 +1684,7 @@ class AppointmentGroupsApi:
             
         if context_codes is not None:
             
-            _query_params.append(('context_codes', context_codes))
+            _query_params.append(('context_codes[]', context_codes))
             
         if include_past_appointments is not None:
             
@@ -1950,7 +1950,7 @@ class AppointmentGroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'appointment_group_ids': 'multi',
+            'appointment_group_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1966,7 +1966,7 @@ class AppointmentGroupsApi:
         # process the query parameters
         if appointment_group_ids is not None:
             
-            _query_params.append(('appointment_group_ids', appointment_group_ids))
+            _query_params.append(('appointment_group_ids[]', appointment_group_ids))
             
         # process the header parameters
         # process the form parameters

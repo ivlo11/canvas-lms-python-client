@@ -1755,7 +1755,7 @@ class DiscussionTopicsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1773,7 +1773,7 @@ class DiscussionTopicsApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if order_by is not None:
             
@@ -2459,7 +2459,7 @@ class DiscussionTopicsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2477,7 +2477,7 @@ class DiscussionTopicsApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if order_by is not None:
             

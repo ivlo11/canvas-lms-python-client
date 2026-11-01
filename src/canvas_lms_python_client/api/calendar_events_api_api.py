@@ -1509,9 +1509,9 @@ class CalendarEventsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'context_codes': 'multi',
-            'excludes': 'multi',
-            'includes': 'multi',
+            'context_codes[]': 'multi',
+            'excludes[]': 'multi',
+            'includes[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1547,15 +1547,15 @@ class CalendarEventsApiApi:
             
         if context_codes is not None:
             
-            _query_params.append(('context_codes', context_codes))
+            _query_params.append(('context_codes[]', context_codes))
             
         if excludes is not None:
             
-            _query_params.append(('excludes', excludes))
+            _query_params.append(('excludes[]', excludes))
             
         if includes is not None:
             
-            _query_params.append(('includes', includes))
+            _query_params.append(('includes[]', includes))
             
         if important_dates is not None:
             
@@ -4279,11 +4279,11 @@ class CalendarEventsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'context_codes': 'multi',
-            'excludes': 'multi',
-            'submission_types': 'multi',
-            'exclude_submission_types': 'multi',
-            'includes': 'multi',
+            'context_codes[]': 'multi',
+            'excludes[]': 'multi',
+            'submission_types[]': 'multi',
+            'exclude_submission_types[]': 'multi',
+            'includes[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4321,23 +4321,23 @@ class CalendarEventsApiApi:
             
         if context_codes is not None:
             
-            _query_params.append(('context_codes', context_codes))
+            _query_params.append(('context_codes[]', context_codes))
             
         if excludes is not None:
             
-            _query_params.append(('excludes', excludes))
+            _query_params.append(('excludes[]', excludes))
             
         if submission_types is not None:
             
-            _query_params.append(('submission_types', submission_types))
+            _query_params.append(('submission_types[]', submission_types))
             
         if exclude_submission_types is not None:
             
-            _query_params.append(('exclude_submission_types', exclude_submission_types))
+            _query_params.append(('exclude_submission_types[]', exclude_submission_types))
             
         if includes is not None:
             
-            _query_params.append(('includes', includes))
+            _query_params.append(('includes[]', includes))
             
         if important_dates is not None:
             

@@ -454,8 +454,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -475,11 +475,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -940,8 +940,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -961,11 +961,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -1426,8 +1426,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1447,11 +1447,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -1912,8 +1912,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1933,11 +1933,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -2398,8 +2398,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2419,11 +2419,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -2884,8 +2884,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2905,11 +2905,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             

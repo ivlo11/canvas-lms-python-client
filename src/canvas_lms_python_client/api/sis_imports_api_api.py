@@ -1668,7 +1668,7 @@ class SisImportsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'workflow_state': 'multi',
+            'workflow_state[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1694,7 +1694,7 @@ class SisImportsApiApi:
             
         if workflow_state is not None:
             
-            _query_params.append(('workflow_state', workflow_state))
+            _query_params.append(('workflow_state[]', workflow_state))
             
         if page is not None:
             

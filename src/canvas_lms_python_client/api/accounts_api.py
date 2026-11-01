@@ -1965,12 +1965,12 @@ class AccountsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'enrollment_type': 'multi',
-            'enrollment_workflow_state': 'multi',
-            'by_teachers': 'multi',
-            'by_subaccounts': 'multi',
-            'enrollment_term_id': 'multi',
-            'include': 'multi',
+            'enrollment_type[]': 'multi',
+            'enrollment_workflow_state[]': 'multi',
+            'by_teachers[]': 'multi',
+            'by_subaccounts[]': 'multi',
+            'enrollment_term_id[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1992,11 +1992,11 @@ class AccountsApi:
             
         if enrollment_type is not None:
             
-            _query_params.append(('enrollment_type', enrollment_type))
+            _query_params.append(('enrollment_type[]', enrollment_type))
             
         if enrollment_workflow_state is not None:
             
-            _query_params.append(('enrollment_workflow_state', enrollment_workflow_state))
+            _query_params.append(('enrollment_workflow_state[]', enrollment_workflow_state))
             
         if published is not None:
             
@@ -2020,11 +2020,11 @@ class AccountsApi:
             
         if by_teachers is not None:
             
-            _query_params.append(('by_teachers', by_teachers))
+            _query_params.append(('by_teachers[]', by_teachers))
             
         if by_subaccounts is not None:
             
-            _query_params.append(('by_subaccounts', by_subaccounts))
+            _query_params.append(('by_subaccounts[]', by_subaccounts))
             
         if hide_enrollmentless_courses is not None:
             
@@ -2036,7 +2036,7 @@ class AccountsApi:
             
         if enrollment_term_id is not None:
             
-            _query_params.append(('enrollment_term_id', enrollment_term_id))
+            _query_params.append(('enrollment_term_id[]', enrollment_term_id))
             
         if search_term is not None:
             
@@ -2044,7 +2044,7 @@ class AccountsApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if sort is not None:
             
@@ -3091,7 +3091,7 @@ class AccountsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3107,7 +3107,7 @@ class AccountsApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             
@@ -3622,7 +3622,7 @@ class AccountsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3638,7 +3638,7 @@ class AccountsApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             
@@ -4659,7 +4659,7 @@ class AccountsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'permissions': 'multi',
+            'permissions[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4677,7 +4677,7 @@ class AccountsApi:
         # process the query parameters
         if permissions is not None:
             
-            _query_params.append(('permissions', permissions))
+            _query_params.append(('permissions[]', permissions))
             
         # process the header parameters
         # process the form parameters
@@ -6589,7 +6589,7 @@ class AccountsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -6615,7 +6615,7 @@ class AccountsApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             

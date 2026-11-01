@@ -824,7 +824,7 @@ class GroupMembershipsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'user_ids': 'multi',
+            'user_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -842,7 +842,7 @@ class GroupMembershipsApi:
         # process the query parameters
         if user_ids is not None:
             
-            _query_params.append(('user_ids', user_ids))
+            _query_params.append(('user_ids[]', user_ids))
             
         # process the header parameters
         # process the form parameters
@@ -1638,7 +1638,7 @@ class GroupMembershipsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'filter_states': 'multi',
+            'filter_states[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1656,7 +1656,7 @@ class GroupMembershipsApi:
         # process the query parameters
         if filter_states is not None:
             
-            _query_params.append(('filter_states', filter_states))
+            _query_params.append(('filter_states[]', filter_states))
             
         if page is not None:
             

@@ -315,8 +315,8 @@ class BlockEditorTemplatesApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'type': 'multi',
-            'include': 'multi',
+            'type[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -346,11 +346,11 @@ class BlockEditorTemplatesApiApi:
             
         if type is not None:
             
-            _query_params.append(('type', type))
+            _query_params.append(('type[]', type))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters

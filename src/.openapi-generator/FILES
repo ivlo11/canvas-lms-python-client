@@ -1491,5 +1491,4 @@ canvas_lms_python_client/models/wiki_pages_api_update_request.py
 canvas_lms_python_client/models/wiki_pages_api_update_request_wiki_page.py
 canvas_lms_python_client/rest.py
 canvas_lms_python_client/test/__init__.py
-canvas_lms_python_client/test/test_lti_registration_created_by.py
 canvas_lms_python_client_README.md

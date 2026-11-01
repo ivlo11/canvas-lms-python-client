@@ -1561,8 +1561,8 @@ class AssignmentsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'assignment_ids': 'multi',
+            'include[]': 'multi',
+            'assignment_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1580,7 +1580,7 @@ class AssignmentsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if search_term is not None:
             
@@ -1600,7 +1600,7 @@ class AssignmentsApiApi:
             
         if assignment_ids is not None:
             
-            _query_params.append(('assignment_ids', assignment_ids))
+            _query_params.append(('assignment_ids[]', assignment_ids))
             
         if order_by is not None:
             
@@ -2337,8 +2337,8 @@ class AssignmentsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'assignment_ids': 'multi',
+            'include[]': 'multi',
+            'assignment_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2358,7 +2358,7 @@ class AssignmentsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if search_term is not None:
             
@@ -2378,7 +2378,7 @@ class AssignmentsApiApi:
             
         if assignment_ids is not None:
             
-            _query_params.append(('assignment_ids', assignment_ids))
+            _query_params.append(('assignment_ids[]', assignment_ids))
             
         if order_by is not None:
             
@@ -2713,7 +2713,7 @@ class AssignmentsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2733,7 +2733,7 @@ class AssignmentsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if override_assignment_dates is not None:
             

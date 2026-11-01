@@ -482,7 +482,7 @@ class PaceContextsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'contexts': 'multi',
+            'contexts[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -516,7 +516,7 @@ class PaceContextsApiApi:
             
         if contexts is not None:
             
-            _query_params.append(('contexts', contexts))
+            _query_params.append(('contexts[]', contexts))
             
         if page is not None:
             

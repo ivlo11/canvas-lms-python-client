@@ -1194,7 +1194,7 @@ class ContextModuleItemsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1214,7 +1214,7 @@ class ContextModuleItemsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if search_term is not None:
             
@@ -2706,7 +2706,7 @@ class ContextModuleItemsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2728,7 +2728,7 @@ class ContextModuleItemsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if student_id is not None:
             

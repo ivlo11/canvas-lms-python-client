@@ -300,7 +300,7 @@ class OutcomeResultsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'user_ids': 'multi',
+            'user_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -320,7 +320,7 @@ class OutcomeResultsApi:
         # process the query parameters
         if user_ids is not None:
             
-            _query_params.append(('user_ids', user_ids))
+            _query_params.append(('user_ids[]', user_ids))
             
         if only_assignment_alignments is not None:
             
@@ -1071,9 +1071,9 @@ class OutcomeResultsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'user_ids': 'multi',
-            'outcome_ids': 'multi',
-            'include': 'multi',
+            'user_ids[]': 'multi',
+            'outcome_ids[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1091,15 +1091,15 @@ class OutcomeResultsApi:
         # process the query parameters
         if user_ids is not None:
             
-            _query_params.append(('user_ids', user_ids))
+            _query_params.append(('user_ids[]', user_ids))
             
         if outcome_ids is not None:
             
-            _query_params.append(('outcome_ids', outcome_ids))
+            _query_params.append(('outcome_ids[]', outcome_ids))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if include_hidden is not None:
             
@@ -1452,10 +1452,10 @@ class OutcomeResultsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
-            'outcome_ids': 'multi',
-            'student_ids': 'multi',
-            'include': 'multi',
+            'exclude[]': 'multi',
+            'outcome_ids[]': 'multi',
+            'student_ids[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1473,19 +1473,19 @@ class OutcomeResultsApi:
         # process the query parameters
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if outcome_ids is not None:
             
-            _query_params.append(('outcome_ids', outcome_ids))
+            _query_params.append(('outcome_ids[]', outcome_ids))
             
         if student_ids is not None:
             
-            _query_params.append(('student_ids', student_ids))
+            _query_params.append(('student_ids[]', student_ids))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if only_assignment_alignments is not None:
             
@@ -2140,10 +2140,10 @@ class OutcomeResultsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'user_ids': 'multi',
-            'outcome_ids': 'multi',
-            'include': 'multi',
-            'exclude': 'multi',
+            'user_ids[]': 'multi',
+            'outcome_ids[]': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2169,19 +2169,19 @@ class OutcomeResultsApi:
             
         if user_ids is not None:
             
-            _query_params.append(('user_ids', user_ids))
+            _query_params.append(('user_ids[]', user_ids))
             
         if outcome_ids is not None:
             
-            _query_params.append(('outcome_ids', outcome_ids))
+            _query_params.append(('outcome_ids[]', outcome_ids))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if sort_by is not None:
             
