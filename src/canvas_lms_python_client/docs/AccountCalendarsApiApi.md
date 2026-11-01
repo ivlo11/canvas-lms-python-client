@@ -185,7 +185,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **account_calendars_api_index**
-> List[object] account_calendars_api_index(search_term=search_term, page=page, per_page=per_page)
+> AccountCalendarsApiIndexResponse account_calendars_api_index(search_term=search_term, page=page, per_page=per_page)
 
 List available account calendars
 
@@ -198,6 +198,7 @@ Includes visible account calendars where the user has an account association.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.account_calendars_api_index_response import AccountCalendarsApiIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -247,7 +248,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**AccountCalendarsApiIndexResponse**](AccountCalendarsApiIndexResponse.md)
 
 ### Authorization
 
@@ -427,7 +428,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **account_calendars_api_visible_calendars_count**
-> List[object] account_calendars_api_visible_calendars_count(account_id)
+> AccountCalendarsApiVisibleCalendarsCountResponse account_calendars_api_visible_calendars_count(account_id)
 
 Count of all visible account calendars
 
@@ -439,6 +440,7 @@ Returns the number of visible account calendars.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.account_calendars_api_visible_calendars_count_response import AccountCalendarsApiVisibleCalendarsCountResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -484,7 +486,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**AccountCalendarsApiVisibleCalendarsCountResponse**](AccountCalendarsApiVisibleCalendarsCountResponse.md)
 
 ### Authorization
 

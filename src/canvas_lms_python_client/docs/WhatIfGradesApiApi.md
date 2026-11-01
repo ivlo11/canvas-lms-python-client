@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **what_if_grades_api_reset_for_student_course**
-> List[object] what_if_grades_api_reset_for_student_course(course_id)
+> WhatIfGradesApiResetForStudentCourseResponse what_if_grades_api_reset_for_student_course(course_id)
 
 Reset the what-if scores for the current user for an entire course and recalculate grades
 
@@ -21,6 +21,7 @@ Resets all what-if scores for a student in a course and recalculates grades.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.what_if_grades_api_reset_for_student_course_response import WhatIfGradesApiResetForStudentCourseResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -66,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**WhatIfGradesApiResetForStudentCourseResponse**](WhatIfGradesApiResetForStudentCourseResponse.md)
 
 ### Authorization
 
@@ -86,7 +87,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **what_if_grades_api_update**
-> List[object] what_if_grades_api_update(id, what_if_grades_api_update_request=what_if_grades_api_update_request)
+> WhatIfGradesApiUpdateResponse what_if_grades_api_update(id, what_if_grades_api_update_request=what_if_grades_api_update_request)
 
 Update a submission's what-if score and calculate grades
 
@@ -100,6 +101,7 @@ Grade calculation is a costly operation, so this API should be used sparingly
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.what_if_grades_api_update_request import WhatIfGradesApiUpdateRequest
+from canvas_lms_python_client.models.what_if_grades_api_update_response import WhatIfGradesApiUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -147,7 +149,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**WhatIfGradesApiUpdateResponse**](WhatIfGradesApiUpdateResponse.md)
 
 ### Authorization
 

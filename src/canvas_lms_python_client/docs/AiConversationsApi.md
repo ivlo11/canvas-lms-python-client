@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **ai_conversations_active_conversation**
-> List[object] ai_conversations_active_conversation(ai_experience_id, course_id)
+> object ai_conversations_active_conversation(ai_experience_id, course_id)
 
 Get active conversation
 
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_conversations_create**
-> List[object] ai_conversations_create(ai_experience_id, course_id)
+> object ai_conversations_create(ai_experience_id, course_id)
 
 Create AI conversation
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 
@@ -173,7 +173,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_conversations_create_feedback**
-> List[object] ai_conversations_create_feedback(ai_experience_id, course_id, id, message_id, ai_conversations_create_feedback_request=ai_conversations_create_feedback_request)
+> object ai_conversations_create_feedback(ai_experience_id, course_id, id, message_id, ai_conversations_create_feedback_request=ai_conversations_create_feedback_request)
 
 Create feedback on a conversation message
 
@@ -239,7 +239,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 
@@ -259,7 +259,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_conversations_delete_feedback**
-> List[object] ai_conversations_delete_feedback(ai_experience_id, course_id, feedback_id, id, message_id)
+> object ai_conversations_delete_feedback(ai_experience_id, course_id, feedback_id, id, message_id)
 
 Delete feedback on a conversation message
 
@@ -324,7 +324,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 
@@ -344,7 +344,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_conversations_destroy**
-> List[object] ai_conversations_destroy(ai_experience_id, course_id, id)
+> object ai_conversations_destroy(ai_experience_id, course_id, id)
 
 Delete AI conversation
 
@@ -405,7 +405,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 
@@ -425,7 +425,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_conversations_evaluation**
-> List[object] ai_conversations_evaluation(ai_experience_id, course_id, id)
+> object ai_conversations_evaluation(ai_experience_id, course_id, id)
 
 Get conversation evaluation
 
@@ -486,7 +486,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 
@@ -506,7 +506,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_conversations_post_message**
-> List[object] ai_conversations_post_message(ai_experience_id, course_id, id, ai_conversations_post_message_request=ai_conversations_post_message_request)
+> object ai_conversations_post_message(ai_experience_id, course_id, id, ai_conversations_post_message_request=ai_conversations_post_message_request)
 
 Post message to conversation
 
@@ -570,7 +570,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 
@@ -590,7 +590,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_conversations_show**
-> List[object] ai_conversations_show(ai_experience_id, course_id, id)
+> object ai_conversations_show(ai_experience_id, course_id, id)
 
 Show conversation
 
@@ -651,7 +651,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 

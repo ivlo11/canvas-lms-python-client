@@ -19,7 +19,7 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.outcome_results_enqueue_outcome_rollup_calculation_request import OutcomeResultsEnqueueOutcomeRollupCalculationRequest
-from canvas_lms_python_client.models.outcome_results_response import OutcomeResultsResponse
+from canvas_lms_python_client.models.outcome_results_index_response import OutcomeResultsIndexResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -663,7 +663,7 @@ class OutcomeResultsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> OutcomeResultsResponse:
+    ) -> OutcomeResultsIndexResponse:
         """Get outcome results
 
         Gets the outcome results for users and outcomes in the specified context.  used in sLMGB
@@ -726,7 +726,7 @@ class OutcomeResultsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "OutcomeResultsResponse",
+            'default': "OutcomeResultsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -762,7 +762,7 @@ class OutcomeResultsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[OutcomeResultsResponse]:
+    ) -> AsyncIterator[OutcomeResultsIndexResponse]:
         """Get outcome results
 
         Gets the outcome results for users and outcomes in the specified context.  used in sLMGB
@@ -825,7 +825,7 @@ class OutcomeResultsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "OutcomeResultsResponse",
+            'default': "OutcomeResultsIndexResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -882,7 +882,7 @@ class OutcomeResultsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[OutcomeResultsResponse]:
+    ) -> ApiResponse[OutcomeResultsIndexResponse]:
         """Get outcome results
 
         Gets the outcome results for users and outcomes in the specified context.  used in sLMGB
@@ -945,7 +945,7 @@ class OutcomeResultsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "OutcomeResultsResponse",
+            'default': "OutcomeResultsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1044,7 +1044,7 @@ class OutcomeResultsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "OutcomeResultsResponse",
+            'default': "OutcomeResultsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

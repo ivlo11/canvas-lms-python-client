@@ -153,47 +153,75 @@ def test_lti_list_pages_are_typed():
     assert item_types == LTI_LIST_ITEM_TYPES
 
 
-# Wrapper model -> (list key, item model, minimal valid item)
-WRAPPED_LIST_RESPONSES = {
-    "AssignmentExtensionsResponse": (
-        "assignment_extensions",
-        "AssignmentExtension",
-        {"assignment_id": 1, "user_id": 2},
-    ),
-    "GradingPeriodsResponse": (
-        "grading_periods",
+# List key -> (item model, minimal valid item)
+_WRAPPED_ITEMS = {
+    "account_calendars": ("AccountCalendar", {"id": 1, "name": "Chemistry"}),
+    "assignment_extensions": ("AssignmentExtension", {"assignment_id": 1, "user_id": 2}),
+    "grading_periods": (
         "GradingPeriod",
         {"id": 1, "start_date": "2026-01-01T00:00:00Z", "end_date": "2026-06-01T00:00:00Z"},
     ),
-    "OutcomeResultsResponse": ("outcome_results", "OutcomeResult", {"id": 1}),
-    "PollChoicesResponse": ("poll_choices", "PollChoice", {"id": "1", "text": "Yes"}),
-    "PollSessionsResponse": (
-        "poll_sessions",
-        "PollSession",
-        {"id": "1", "poll_id": "2", "course_id": "3"},
-    ),
-    "PollSubmissionsResponse": (
-        "poll_submissions",
-        "PollSubmission",
-        {"id": "1", "poll_choice_id": "2"},
-    ),
-    "PollsResponse": ("polls", "Poll", {"id": "1", "question": "Pizza?"}),
-    "QuizExtensionsResponse": ("quiz_extensions", "QuizExtension", {"quiz_id": 1, "user_id": 2}),
-    "QuizGroupsResponse": ("quiz_groups", "QuizGroup", {"id": 1, "quiz_id": 2}),
-    "QuizIpFiltersResponse": (
-        "quiz_ip_filters",
-        "QuizIPFilter",
-        {"name": "Lab", "account": "School", "filter": "10.0.0.0/8"},
-    ),
-    "QuizStatisticsResponse": ("quiz_statistics", "QuizStatistics", {"id": 1, "quiz_id": 2}),
-    "QuizSubmissionQuestionsResponse": (
-        "quiz_submission_questions",
-        "QuizSubmissionQuestion",
-        {"id": 1},
-    ),
-    "QuizSubmissionsResponse": ("quiz_submissions", "QuizSubmission", {"id": 1, "quiz_id": 2}),
-    "ResultsResponse": ("results", "Result", {"id": "1"}),
+    "outcome_results": ("OutcomeResult", {"id": 1}),
+    "poll_choices": ("PollChoice", {"id": "1", "text": "Yes"}),
+    "poll_sessions": ("PollSession", {"id": "1", "poll_id": "2", "course_id": "3"}),
+    "poll_submissions": ("PollSubmission", {"id": "1", "poll_choice_id": "2"}),
+    "polls": ("Poll", {"id": "1", "question": "Pizza?"}),
+    "quiz_extensions": ("QuizExtension", {"quiz_id": 1, "user_id": 2}),
+    "quiz_groups": ("QuizGroup", {"id": 1, "quiz_id": 2}),
+    "quiz_ip_filters": ("QuizIPFilter", {"name": "Lab", "account": "School", "filter": "10.0.0.0/8"}),
+    "quiz_statistics": ("QuizStatistics", {"id": 1, "quiz_id": 2}),
+    "quiz_submission_questions": ("QuizSubmissionQuestion", {"id": 1}),
+    "quiz_submissions": ("QuizSubmission", {"id": 1, "quiz_id": 2}),
+    "results": ("Result", {"id": "1"}),
 }
+
+# Wrapper model (named after its controller and action) -> its list key
+_WRAPPER_KEYS = {
+    "AccountCalendarsApiIndexResponse": "account_calendars",
+    "AssignmentExtensionsCreateResponse": "assignment_extensions",
+    "CourseQuizExtensionsCreateResponse": "quiz_extensions",
+    "GradingPeriodsBatchUpdateResponse": "grading_periods",
+    "GradingPeriodsIndexResponse": "grading_periods",
+    "GradingPeriodsShowResponse": "grading_periods",
+    "GradingPeriodsUpdateResponse": "grading_periods",
+    "OutcomeResultsIndexResponse": "outcome_results",
+    "PollChoicesCreateResponse": "poll_choices",
+    "PollChoicesIndexResponse": "poll_choices",
+    "PollChoicesShowResponse": "poll_choices",
+    "PollChoicesUpdateResponse": "poll_choices",
+    "PollSessionsCloseResponse": "poll_sessions",
+    "PollSessionsClosedResponse": "poll_sessions",
+    "PollSessionsCreateResponse": "poll_sessions",
+    "PollSessionsIndexResponse": "poll_sessions",
+    "PollSessionsOpenResponse": "poll_sessions",
+    "PollSessionsOpenedResponse": "poll_sessions",
+    "PollSessionsShowResponse": "poll_sessions",
+    "PollSessionsUpdateResponse": "poll_sessions",
+    "PollSubmissionsCreateResponse": "poll_submissions",
+    "PollSubmissionsShowResponse": "poll_submissions",
+    "PollsCreateResponse": "polls",
+    "PollsIndexResponse": "polls",
+    "PollsShowResponse": "polls",
+    "PollsUpdateResponse": "polls",
+    "QuizExtensionsCreateResponse": "quiz_extensions",
+    "QuizGroupsCreateResponse": "quiz_groups",
+    "QuizGroupsIndexResponse": "quiz_groups",
+    "QuizGroupsUpdateResponse": "quiz_groups",
+    "QuizIpFiltersIndexResponse": "quiz_ip_filters",
+    "QuizStatisticsIndexResponse": "quiz_statistics",
+    "QuizSubmissionQuestionsIndexResponse": "quiz_submission_questions",
+    "QuizSubmissionsApiCompleteResponse": "quiz_submissions",
+    "QuizSubmissionsApiCreateResponse": "quiz_submissions",
+    "QuizSubmissionsApiIndexResponse": "quiz_submissions",
+    "QuizSubmissionsApiShowResponse": "quiz_submissions",
+    "QuizSubmissionsApiSubmissionResponse": "quiz_submissions",
+    "QuizSubmissionsApiUpdateResponse": "quiz_submissions",
+    "ResultsCreateResponse": "results",
+    "ResultsIndexResponse": "results",
+}
+
+# Wrapper model -> (list key, item model, minimal valid item)
+WRAPPED_LIST_RESPONSES = {wrapper: (key, *_WRAPPED_ITEMS[key]) for wrapper, key in _WRAPPER_KEYS.items()}
 
 
 @pytest.mark.parametrize("wrapper_name", sorted(WRAPPED_LIST_RESPONSES))

@@ -19,9 +19,14 @@ from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.quiz_submissions_api_complete_request import QuizSubmissionsApiCompleteRequest
+from canvas_lms_python_client.models.quiz_submissions_api_complete_response import QuizSubmissionsApiCompleteResponse
 from canvas_lms_python_client.models.quiz_submissions_api_create_request import QuizSubmissionsApiCreateRequest
+from canvas_lms_python_client.models.quiz_submissions_api_create_response import QuizSubmissionsApiCreateResponse
+from canvas_lms_python_client.models.quiz_submissions_api_index_response import QuizSubmissionsApiIndexResponse
+from canvas_lms_python_client.models.quiz_submissions_api_show_response import QuizSubmissionsApiShowResponse
+from canvas_lms_python_client.models.quiz_submissions_api_submission_response import QuizSubmissionsApiSubmissionResponse
 from canvas_lms_python_client.models.quiz_submissions_api_update_request import QuizSubmissionsApiUpdateRequest
-from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
+from canvas_lms_python_client.models.quiz_submissions_api_update_response import QuizSubmissionsApiUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -61,7 +66,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuizSubmissionsResponse:
+    ) -> QuizSubmissionsApiCompleteResponse:
         """Complete the quiz submission (turn it in).
 
         Complete the quiz submission by marking it as complete and grading it. When the quiz submission has been marked as complete, no further modifications will be allowed.  <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>403 Forbidden</b> if an invalid access code is specified * <b>403 Forbidden</b> if the Quiz's IP filter restriction does not pass * <b>403 Forbidden</b> if an invalid token is specified * <b>400 Bad Request</b> if the QS is already complete * <b>400 Bad Request</b> if the attempt parameter is missing * <b>400 Bad Request</b> if the attempt parameter is not the latest attempt
@@ -109,7 +114,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiCompleteResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -140,7 +145,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuizSubmissionsResponse]:
+    ) -> ApiResponse[QuizSubmissionsApiCompleteResponse]:
         """Complete the quiz submission (turn it in).
 
         Complete the quiz submission by marking it as complete and grading it. When the quiz submission has been marked as complete, no further modifications will be allowed.  <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>403 Forbidden</b> if an invalid access code is specified * <b>403 Forbidden</b> if the Quiz's IP filter restriction does not pass * <b>403 Forbidden</b> if an invalid token is specified * <b>400 Bad Request</b> if the QS is already complete * <b>400 Bad Request</b> if the attempt parameter is missing * <b>400 Bad Request</b> if the attempt parameter is not the latest attempt
@@ -188,7 +193,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiCompleteResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -268,7 +273,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiCompleteResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -381,7 +386,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuizSubmissionsResponse:
+    ) -> QuizSubmissionsApiCreateResponse:
         """Create the quiz submission (start a quiz-taking session)
 
         Start taking a Quiz by creating a QuizSubmission which you can use to answer questions and submit your answers.  <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>400 Bad Request</b> if the quiz is locked * <b>403 Forbidden</b> if an invalid access code is specified * <b>403 Forbidden</b> if the Quiz's IP filter restriction does not pass * <b>409 Conflict</b> if a QuizSubmission already exists for this user and quiz
@@ -426,7 +431,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -456,7 +461,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuizSubmissionsResponse]:
+    ) -> ApiResponse[QuizSubmissionsApiCreateResponse]:
         """Create the quiz submission (start a quiz-taking session)
 
         Start taking a Quiz by creating a QuizSubmission which you can use to answer questions and submit your answers.  <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>400 Bad Request</b> if the quiz is locked * <b>403 Forbidden</b> if an invalid access code is specified * <b>403 Forbidden</b> if the Quiz's IP filter restriction does not pass * <b>409 Conflict</b> if a QuizSubmission already exists for this user and quiz
@@ -501,7 +506,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -577,7 +582,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -690,7 +695,7 @@ class QuizSubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> QuizSubmissionsResponse:
+    ) -> QuizSubmissionsApiIndexResponse:
         """Get all quiz submissions.
 
         Get a list of all submissions for this quiz. Users who can view or manage grades for a course will have submissions from multiple users returned. A user who can only submit will have only their own submissions returned. When a user has an in-progress submission, only that submission is returned. When there isn't an in-progress quiz_submission, all completed submissions, including previous attempts, are returned.  <b>200 OK</b> response code is returned if the request was successful.
@@ -747,7 +752,7 @@ class QuizSubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -781,7 +786,7 @@ class QuizSubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[QuizSubmissionsResponse]:
+    ) -> AsyncIterator[QuizSubmissionsApiIndexResponse]:
         """Get all quiz submissions.
 
         Get a list of all submissions for this quiz. Users who can view or manage grades for a course will have submissions from multiple users returned. A user who can only submit will have only their own submissions returned. When a user has an in-progress submission, only that submission is returned. When there isn't an in-progress quiz_submission, all completed submissions, including previous attempts, are returned.  <b>200 OK</b> response code is returned if the request was successful.
@@ -838,7 +843,7 @@ class QuizSubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiIndexResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -893,7 +898,7 @@ class QuizSubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[QuizSubmissionsResponse]:
+    ) -> ApiResponse[QuizSubmissionsApiIndexResponse]:
         """Get all quiz submissions.
 
         Get a list of all submissions for this quiz. Users who can view or manage grades for a course will have submissions from multiple users returned. A user who can only submit will have only their own submissions returned. When a user has an in-progress submission, only that submission is returned. When there isn't an in-progress quiz_submission, all completed submissions, including previous attempts, are returned.  <b>200 OK</b> response code is returned if the request was successful.
@@ -950,7 +955,7 @@ class QuizSubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1041,7 +1046,7 @@ class QuizSubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1152,7 +1157,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuizSubmissionsResponse:
+    ) -> QuizSubmissionsApiShowResponse:
         """Get a single quiz submission.
 
         Get a single quiz submission.  <b>200 OK</b> response code is returned if the request was successful.
@@ -1200,7 +1205,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1231,7 +1236,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuizSubmissionsResponse]:
+    ) -> ApiResponse[QuizSubmissionsApiShowResponse]:
         """Get a single quiz submission.
 
         Get a single quiz submission.  <b>200 OK</b> response code is returned if the request was successful.
@@ -1279,7 +1284,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1359,7 +1364,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1462,7 +1467,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuizSubmissionsResponse:
+    ) -> QuizSubmissionsApiSubmissionResponse:
         """Get the quiz submission.
 
         Get the submission for this quiz for the current user.  <b>200 OK</b> response code is returned if the request was successful.
@@ -1507,7 +1512,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiSubmissionResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1537,7 +1542,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuizSubmissionsResponse]:
+    ) -> ApiResponse[QuizSubmissionsApiSubmissionResponse]:
         """Get the quiz submission.
 
         Get the submission for this quiz for the current user.  <b>200 OK</b> response code is returned if the request was successful.
@@ -1582,7 +1587,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiSubmissionResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1658,7 +1663,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiSubmissionResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2049,7 +2054,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuizSubmissionsResponse:
+    ) -> QuizSubmissionsApiUpdateResponse:
         """Update student question scores and comments.
 
         Update the amount of points a student has scored for questions they've answered, provide comments for the student about their answer(s), or simply fudge the total score by a specific amount of points.  <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>403 Forbidden</b> if you are not a teacher in this course * <b>400 Bad Request</b> if the attempt parameter is missing or invalid * <b>400 Bad Request</b> if the specified QS attempt is not yet complete
@@ -2097,7 +2102,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2128,7 +2133,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuizSubmissionsResponse]:
+    ) -> ApiResponse[QuizSubmissionsApiUpdateResponse]:
         """Update student question scores and comments.
 
         Update the amount of points a student has scored for questions they've answered, provide comments for the student about their answer(s), or simply fudge the total score by a specific amount of points.  <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>403 Forbidden</b> if you are not a teacher in this course * <b>400 Bad Request</b> if the attempt parameter is missing or invalid * <b>400 Bad Request</b> if the specified QS attempt is not yet complete
@@ -2176,7 +2181,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2256,7 +2261,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsResponse",
+            'default': "QuizSubmissionsApiUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

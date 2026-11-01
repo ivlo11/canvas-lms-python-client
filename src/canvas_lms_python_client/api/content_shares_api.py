@@ -16,11 +16,12 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.content_share import ContentShare
 from canvas_lms_python_client.models.content_shares_add_users_request import ContentSharesAddUsersRequest
 from canvas_lms_python_client.models.content_shares_create_request import ContentSharesCreateRequest
+from canvas_lms_python_client.models.content_shares_unread_count_response import ContentSharesUnreadCountResponse
 from canvas_lms_python_client.models.content_shares_update_request import ContentSharesUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -2257,7 +2258,7 @@ class ContentSharesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> ContentSharesUnreadCountResponse:
         """Get unread shares count
 
         Return the number of content shares a user has received that have not yet been read. Use +self+ as the user_id to retrieve your own content shares. Only linked observers and administrators may view other users' content shares.
@@ -2296,7 +2297,7 @@ class ContentSharesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "ContentSharesUnreadCountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2324,7 +2325,7 @@ class ContentSharesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[ContentSharesUnreadCountResponse]:
         """Get unread shares count
 
         Return the number of content shares a user has received that have not yet been read. Use +self+ as the user_id to retrieve your own content shares. Only linked observers and administrators may view other users' content shares.
@@ -2363,7 +2364,7 @@ class ContentSharesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "ContentSharesUnreadCountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2431,7 +2432,7 @@ class ContentSharesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "ContentSharesUnreadCountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -21,7 +21,7 @@ from typing_extensions import Annotated
 from canvas_lms_python_client.models.quiz_submission_question import QuizSubmissionQuestion
 from canvas_lms_python_client.models.quiz_submission_questions_answer_request import QuizSubmissionQuestionsAnswerRequest
 from canvas_lms_python_client.models.quiz_submission_questions_flag_request import QuizSubmissionQuestionsFlagRequest
-from canvas_lms_python_client.models.quiz_submission_questions_response import QuizSubmissionQuestionsResponse
+from canvas_lms_python_client.models.quiz_submission_questions_index_response import QuizSubmissionQuestionsIndexResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -938,7 +938,7 @@ class QuizSubmissionQuestionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuizSubmissionQuestionsResponse:
+    ) -> QuizSubmissionQuestionsIndexResponse:
         """Get all quiz submission questions.
 
         Get a list of all the question records for this quiz submission.  <b>200 OK</b> response code is returned if the request was successful.
@@ -980,7 +980,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionQuestionsResponse",
+            'default': "QuizSubmissionQuestionsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1009,7 +1009,7 @@ class QuizSubmissionQuestionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuizSubmissionQuestionsResponse]:
+    ) -> ApiResponse[QuizSubmissionQuestionsIndexResponse]:
         """Get all quiz submission questions.
 
         Get a list of all the question records for this quiz submission.  <b>200 OK</b> response code is returned if the request was successful.
@@ -1051,7 +1051,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionQuestionsResponse",
+            'default': "QuizSubmissionQuestionsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1123,7 +1123,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionQuestionsResponse",
+            'default': "QuizSubmissionQuestionsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

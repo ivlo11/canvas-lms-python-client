@@ -505,7 +505,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **content_shares_unread_count**
-> List[object] content_shares_unread_count(user_id)
+> ContentSharesUnreadCountResponse content_shares_unread_count(user_id)
 
 Get unread shares count
 
@@ -519,6 +519,7 @@ content shares.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.content_shares_unread_count_response import ContentSharesUnreadCountResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -564,7 +565,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**ContentSharesUnreadCountResponse**](ContentSharesUnreadCountResponse.md)
 
 ### Authorization
 

@@ -22,7 +22,7 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.outcome_results_enqueue_outcome_rollup_calculation_request import OutcomeResultsEnqueueOutcomeRollupCalculationRequest
-from canvas_lms_python_client.models.outcome_results_response import OutcomeResultsResponse
+from canvas_lms_python_client.models.outcome_results_index_response import OutcomeResultsIndexResponse
 
 
 class TestOutcomeResultsApi(unittest.IsolatedAsyncioTestCase):

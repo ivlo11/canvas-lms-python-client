@@ -21,7 +21,7 @@ from canvas_lms_python_client.api.quiz_statistics_api import QuizStatisticsApi
 from pydantic import Field, StrictBool, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.quiz_statistics_response import QuizStatisticsResponse
+from canvas_lms_python_client.models.quiz_statistics_index_response import QuizStatisticsIndexResponse
 
 
 class TestQuizStatisticsApi(unittest.IsolatedAsyncioTestCase):

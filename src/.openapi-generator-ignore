@@ -31,5 +31,6 @@ test/test_integration_paginated_models.py
 test/test_lti_model_payloads.py
 test/test_list_query_params.py
 test/test_api_operation_coverage.py
+test/test_inline_object_responses.py
 pagination.py
 test/fixtures/

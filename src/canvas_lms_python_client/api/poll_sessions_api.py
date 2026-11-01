@@ -18,9 +18,16 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.poll_sessions_close_response import PollSessionsCloseResponse
+from canvas_lms_python_client.models.poll_sessions_closed_response import PollSessionsClosedResponse
 from canvas_lms_python_client.models.poll_sessions_create_request import PollSessionsCreateRequest
-from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
+from canvas_lms_python_client.models.poll_sessions_create_response import PollSessionsCreateResponse
+from canvas_lms_python_client.models.poll_sessions_index_response import PollSessionsIndexResponse
+from canvas_lms_python_client.models.poll_sessions_open_response import PollSessionsOpenResponse
+from canvas_lms_python_client.models.poll_sessions_opened_response import PollSessionsOpenedResponse
+from canvas_lms_python_client.models.poll_sessions_show_response import PollSessionsShowResponse
 from canvas_lms_python_client.models.poll_sessions_update_request import PollSessionsUpdateRequest
+from canvas_lms_python_client.models.poll_sessions_update_response import PollSessionsUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -58,7 +65,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PollSessionsResponse:
+    ) -> PollSessionsCloseResponse:
         """Close an opened poll session
 
 
@@ -99,7 +106,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsCloseResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +135,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PollSessionsResponse]:
+    ) -> ApiResponse[PollSessionsCloseResponse]:
         """Close an opened poll session
 
 
@@ -169,7 +176,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsCloseResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -240,7 +247,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsCloseResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -334,7 +341,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> PollSessionsResponse:
+    ) -> PollSessionsClosedResponse:
         """List closed poll sessions
 
         A paginated list of all closed poll sessions available to the current user.
@@ -382,7 +389,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsClosedResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -413,7 +420,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[PollSessionsResponse]:
+    ) -> AsyncIterator[PollSessionsClosedResponse]:
         """List closed poll sessions
 
         A paginated list of all closed poll sessions available to the current user.
@@ -461,7 +468,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsClosedResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -513,7 +520,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[PollSessionsResponse]:
+    ) -> ApiResponse[PollSessionsClosedResponse]:
         """List closed poll sessions
 
         A paginated list of all closed poll sessions available to the current user.
@@ -561,7 +568,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsClosedResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -640,7 +647,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsClosedResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -737,7 +744,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PollSessionsResponse:
+    ) -> PollSessionsCreateResponse:
         """Create a single poll session
 
         Create a new poll session for this poll
@@ -779,7 +786,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -808,7 +815,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PollSessionsResponse]:
+    ) -> ApiResponse[PollSessionsCreateResponse]:
         """Create a single poll session
 
         Create a new poll session for this poll
@@ -850,7 +857,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -922,7 +929,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1298,7 +1305,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> PollSessionsResponse:
+    ) -> PollSessionsIndexResponse:
         """List poll sessions for a poll
 
         Returns the paginated list of PollSessions in this poll.
@@ -1349,7 +1356,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1381,7 +1388,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[PollSessionsResponse]:
+    ) -> AsyncIterator[PollSessionsIndexResponse]:
         """List poll sessions for a poll
 
         Returns the paginated list of PollSessions in this poll.
@@ -1432,7 +1439,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsIndexResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1485,7 +1492,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[PollSessionsResponse]:
+    ) -> ApiResponse[PollSessionsIndexResponse]:
         """List poll sessions for a poll
 
         Returns the paginated list of PollSessions in this poll.
@@ -1536,7 +1543,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1619,7 +1626,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1719,7 +1726,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PollSessionsResponse:
+    ) -> PollSessionsOpenResponse:
         """Open a poll session
 
 
@@ -1760,7 +1767,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsOpenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1789,7 +1796,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PollSessionsResponse]:
+    ) -> ApiResponse[PollSessionsOpenResponse]:
         """Open a poll session
 
 
@@ -1830,7 +1837,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsOpenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1901,7 +1908,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsOpenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1995,7 +2002,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> PollSessionsResponse:
+    ) -> PollSessionsOpenedResponse:
         """List opened poll sessions
 
         A paginated list of all opened poll sessions available to the current user.
@@ -2043,7 +2050,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsOpenedResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2074,7 +2081,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[PollSessionsResponse]:
+    ) -> AsyncIterator[PollSessionsOpenedResponse]:
         """List opened poll sessions
 
         A paginated list of all opened poll sessions available to the current user.
@@ -2122,7 +2129,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsOpenedResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2174,7 +2181,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[PollSessionsResponse]:
+    ) -> ApiResponse[PollSessionsOpenedResponse]:
         """List opened poll sessions
 
         A paginated list of all opened poll sessions available to the current user.
@@ -2222,7 +2229,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsOpenedResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2301,7 +2308,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsOpenedResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2398,7 +2405,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PollSessionsResponse:
+    ) -> PollSessionsShowResponse:
         """Get the results for a single poll session
 
         Returns the poll session with the given id
@@ -2440,7 +2447,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2469,7 +2476,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PollSessionsResponse]:
+    ) -> ApiResponse[PollSessionsShowResponse]:
         """Get the results for a single poll session
 
         Returns the poll session with the given id
@@ -2511,7 +2518,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2583,7 +2590,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2677,7 +2684,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PollSessionsResponse:
+    ) -> PollSessionsUpdateResponse:
         """Update a single poll session
 
         Update an existing poll session for this poll
@@ -2722,7 +2729,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2752,7 +2759,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PollSessionsResponse]:
+    ) -> ApiResponse[PollSessionsUpdateResponse]:
         """Update a single poll session
 
         Update an existing poll session for this poll
@@ -2797,7 +2804,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2873,7 +2880,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollSessionsResponse",
+            'default': "PollSessionsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

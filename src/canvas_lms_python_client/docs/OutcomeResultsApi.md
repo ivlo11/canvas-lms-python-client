@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **outcome_results_index**
-> OutcomeResultsResponse outcome_results_index(course_id, user_ids=user_ids, outcome_ids=outcome_ids, include=include, include_hidden=include_hidden, page=page, per_page=per_page)
+> OutcomeResultsIndexResponse outcome_results_index(course_id, user_ids=user_ids, outcome_ids=outcome_ids, include=include, include_hidden=include_hidden, page=page, per_page=per_page)
 
 Get outcome results
 
@@ -190,7 +190,7 @@ used in sLMGB
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.outcome_results_response import OutcomeResultsResponse
+from canvas_lms_python_client.models.outcome_results_index_response import OutcomeResultsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -248,7 +248,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**OutcomeResultsResponse**](OutcomeResultsResponse.md)
+[**OutcomeResultsIndexResponse**](OutcomeResultsIndexResponse.md)
 
 ### Authorization
 

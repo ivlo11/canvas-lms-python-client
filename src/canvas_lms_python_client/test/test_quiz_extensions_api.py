@@ -22,7 +22,7 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.quiz_extensions_create_request import QuizExtensionsCreateRequest
-from canvas_lms_python_client.models.quiz_extensions_response import QuizExtensionsResponse
+from canvas_lms_python_client.models.quiz_extensions_create_response import QuizExtensionsCreateResponse
 
 
 class TestQuizExtensionsApi(unittest.IsolatedAsyncioTestCase):

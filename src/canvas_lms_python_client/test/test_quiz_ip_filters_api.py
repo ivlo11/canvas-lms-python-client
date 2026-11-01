@@ -21,7 +21,7 @@ from canvas_lms_python_client.api.quiz_ip_filters_api import QuizIpFiltersApi
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.quiz_ip_filters_response import QuizIpFiltersResponse
+from canvas_lms_python_client.models.quiz_ip_filters_index_response import QuizIpFiltersIndexResponse
 
 
 class TestQuizIpFiltersApi(unittest.IsolatedAsyncioTestCase):

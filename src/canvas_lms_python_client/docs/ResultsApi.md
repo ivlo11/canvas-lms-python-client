@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **results_create**
-> ResultsResponse results_create(assessment_id, course_id)
+> ResultsCreateResponse results_create(assessment_id, course_id)
 
 Create live assessment results
 
@@ -21,7 +21,7 @@ Creates live assessment results and adds them to a live assessment
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.results_response import ResultsResponse
+from canvas_lms_python_client.models.results_create_response import ResultsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResultsResponse**](ResultsResponse.md)
+[**ResultsCreateResponse**](ResultsCreateResponse.md)
 
 ### Authorization
 
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **results_index**
-> ResultsResponse results_index(assessment_id, course_id, user_id=user_id)
+> ResultsIndexResponse results_index(assessment_id, course_id, user_id=user_id)
 
 List live assessment results
 
@@ -101,7 +101,7 @@ Returns a paginated list of live assessment results
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.results_response import ResultsResponse
+from canvas_lms_python_client.models.results_index_response import ResultsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ResultsResponse**](ResultsResponse.md)
+[**ResultsIndexResponse**](ResultsIndexResponse.md)
 
 ### Authorization
 

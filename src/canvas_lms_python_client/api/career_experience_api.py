@@ -16,10 +16,13 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.career_experience_enabled_response import CareerExperienceEnabledResponse
 from canvas_lms_python_client.models.career_experience_switch_experience_request import CareerExperienceSwitchExperienceRequest
+from canvas_lms_python_client.models.career_experience_switch_experience_response import CareerExperienceSwitchExperienceResponse
 from canvas_lms_python_client.models.career_experience_switch_role_request import CareerExperienceSwitchRoleRequest
+from canvas_lms_python_client.models.career_experience_switch_role_response import CareerExperienceSwitchRoleResponse
 from canvas_lms_python_client.models.experience_summary import ExperienceSummary
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -56,7 +59,7 @@ class CareerExperienceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> CareerExperienceEnabledResponse:
         """Check if Canvas Career is enabled
 
         Returns whether the root account has Canvas Career (Horizon) enabled in at least one subaccount.
@@ -92,7 +95,7 @@ class CareerExperienceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CareerExperienceEnabledResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -119,7 +122,7 @@ class CareerExperienceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[CareerExperienceEnabledResponse]:
         """Check if Canvas Career is enabled
 
         Returns whether the root account has Canvas Career (Horizon) enabled in at least one subaccount.
@@ -155,7 +158,7 @@ class CareerExperienceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CareerExperienceEnabledResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -219,7 +222,7 @@ class CareerExperienceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CareerExperienceEnabledResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -553,7 +556,7 @@ class CareerExperienceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> CareerExperienceSwitchExperienceResponse:
         """Switch experience
 
         Switch the current user's active experience to the specified one.
@@ -592,7 +595,7 @@ class CareerExperienceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CareerExperienceSwitchExperienceResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -620,7 +623,7 @@ class CareerExperienceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[CareerExperienceSwitchExperienceResponse]:
         """Switch experience
 
         Switch the current user's active experience to the specified one.
@@ -659,7 +662,7 @@ class CareerExperienceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CareerExperienceSwitchExperienceResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -727,7 +730,7 @@ class CareerExperienceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CareerExperienceSwitchExperienceResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -829,7 +832,7 @@ class CareerExperienceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> CareerExperienceSwitchRoleResponse:
         """Switch role
 
         Switch the current user's role within the current experience.
@@ -868,7 +871,7 @@ class CareerExperienceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CareerExperienceSwitchRoleResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -896,7 +899,7 @@ class CareerExperienceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[CareerExperienceSwitchRoleResponse]:
         """Switch role
 
         Switch the current user's role within the current experience.
@@ -935,7 +938,7 @@ class CareerExperienceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CareerExperienceSwitchRoleResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1003,7 +1006,7 @@ class CareerExperienceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CareerExperienceSwitchRoleResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

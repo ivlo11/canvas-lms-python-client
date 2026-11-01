@@ -19,9 +19,11 @@ from pydantic import ValidationError
 
 from canvas_lms_python_client.api.what_if_grades_api_api import WhatIfGradesApiApi
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.what_if_grades_api_reset_for_student_course_response import WhatIfGradesApiResetForStudentCourseResponse
 from canvas_lms_python_client.models.what_if_grades_api_update_request import WhatIfGradesApiUpdateRequest
+from canvas_lms_python_client.models.what_if_grades_api_update_response import WhatIfGradesApiUpdateResponse
 
 
 class TestWhatIfGradesApiApi(unittest.IsolatedAsyncioTestCase):

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **assignment_extensions_create**
-> AssignmentExtensionsResponse assignment_extensions_create(assignment_id, course_id, assignment_extensions_create_request=assignment_extensions_create_request)
+> AssignmentExtensionsCreateResponse assignment_extensions_create(assignment_id, course_id, assignment_extensions_create_request=assignment_extensions_create_request)
 
 Set extensions for student assignment submissions
 
@@ -25,7 +25,7 @@ Set extensions for student assignment submissions
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.assignment_extensions_create_request import AssignmentExtensionsCreateRequest
-from canvas_lms_python_client.models.assignment_extensions_response import AssignmentExtensionsResponse
+from canvas_lms_python_client.models.assignment_extensions_create_response import AssignmentExtensionsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AssignmentExtensionsResponse**](AssignmentExtensionsResponse.md)
+[**AssignmentExtensionsCreateResponse**](AssignmentExtensionsCreateResponse.md)
 
 ### Authorization
 

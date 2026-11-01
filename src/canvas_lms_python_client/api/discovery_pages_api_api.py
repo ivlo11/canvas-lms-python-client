@@ -16,10 +16,11 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.discovery_page import DiscoveryPage
 from canvas_lms_python_client.models.discovery_pages_api_token_request import DiscoveryPagesApiTokenRequest
+from canvas_lms_python_client.models.discovery_pages_api_token_response import DiscoveryPagesApiTokenResponse
 from canvas_lms_python_client.models.discovery_pages_api_upsert_request import DiscoveryPagesApiUpsertRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -305,7 +306,7 @@ class DiscoveryPagesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> DiscoveryPagesApiTokenResponse:
         """Generate Discovery Page Preview Token
 
         Returns a short-lived RS256-signed JWT containing the discovery page button link configuration, suitable for sending to the identity service preview iframe via postMessage.  A discovery_page configuration must be provided in the request body. Omitting it returns a 400 Bad Request.
@@ -344,7 +345,7 @@ class DiscoveryPagesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "DiscoveryPagesApiTokenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -372,7 +373,7 @@ class DiscoveryPagesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[DiscoveryPagesApiTokenResponse]:
         """Generate Discovery Page Preview Token
 
         Returns a short-lived RS256-signed JWT containing the discovery page button link configuration, suitable for sending to the identity service preview iframe via postMessage.  A discovery_page configuration must be provided in the request body. Omitting it returns a 400 Bad Request.
@@ -411,7 +412,7 @@ class DiscoveryPagesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "DiscoveryPagesApiTokenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -479,7 +480,7 @@ class DiscoveryPagesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "DiscoveryPagesApiTokenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -16,7 +16,7 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.ai_conversations_create_feedback_request import AiConversationsCreateFeedbackRequest
 from canvas_lms_python_client.models.ai_conversations_post_message_request import AiConversationsPostMessageRequest
@@ -57,7 +57,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> object:
         """Get active conversation
 
         Get the active conversation for the current user and AI experience
@@ -99,7 +99,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +128,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[object]:
         """Get active conversation
 
         Get the active conversation for the current user and AI experience
@@ -170,7 +170,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -242,7 +242,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -335,7 +335,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> object:
         """Create AI conversation
 
         Initialize a new conversation with the AI experience
@@ -377,7 +377,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -406,7 +406,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[object]:
         """Create AI conversation
 
         Initialize a new conversation with the AI experience
@@ -448,7 +448,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -520,7 +520,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -616,7 +616,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> object:
         """Create feedback on a conversation message
 
         Submit a like or dislike vote on an AI-generated message.
@@ -667,7 +667,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -699,7 +699,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[object]:
         """Create feedback on a conversation message
 
         Submit a like or dislike vote on an AI-generated message.
@@ -750,7 +750,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -834,7 +834,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -952,7 +952,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> object:
         """Delete feedback on a conversation message
 
         Remove a previously submitted vote (toggling off like/dislike).
@@ -1003,7 +1003,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1035,7 +1035,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[object]:
         """Delete feedback on a conversation message
 
         Remove a previously submitted vote (toggling off like/dislike).
@@ -1086,7 +1086,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1170,7 +1170,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1273,7 +1273,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> object:
         """Delete AI conversation
 
         Mark a conversation as completed/deleted
@@ -1318,7 +1318,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1348,7 +1348,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[object]:
         """Delete AI conversation
 
         Mark a conversation as completed/deleted
@@ -1393,7 +1393,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1469,7 +1469,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1566,7 +1566,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> object:
         """Get conversation evaluation
 
         Fetch evaluation data for a conversation from the llm-conversation service
@@ -1611,7 +1611,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1641,7 +1641,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[object]:
         """Get conversation evaluation
 
         Fetch evaluation data for a conversation from the llm-conversation service
@@ -1686,7 +1686,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1762,7 +1762,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1860,7 +1860,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> object:
         """Post message to conversation
 
         Send a message to an existing conversation and get the AI response
@@ -1908,7 +1908,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1939,7 +1939,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[object]:
         """Post message to conversation
 
         Send a message to an existing conversation and get the AI response
@@ -1987,7 +1987,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2067,7 +2067,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2180,7 +2180,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> object:
         """Show conversation
 
         Get a specific conversation by ID (for teachers viewing student conversations)
@@ -2225,7 +2225,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2255,7 +2255,7 @@ class AiConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[object]:
         """Show conversation
 
         Get a specific conversation by ID (for teachers viewing student conversations)
@@ -2300,7 +2300,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2376,7 +2376,7 @@ class AiConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -19,7 +19,7 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.assignment_extensions_create_request import AssignmentExtensionsCreateRequest
-from canvas_lms_python_client.models.assignment_extensions_response import AssignmentExtensionsResponse
+from canvas_lms_python_client.models.assignment_extensions_create_response import AssignmentExtensionsCreateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -58,7 +58,7 @@ class AssignmentExtensionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AssignmentExtensionsResponse:
+    ) -> AssignmentExtensionsCreateResponse:
         """Set extensions for student assignment submissions
 
         <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>403 Forbidden</b> if you are not allowed to extend assignments for this course * <b>400 Bad Request</b> if any of the extensions are invalid
@@ -103,7 +103,7 @@ class AssignmentExtensionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "AssignmentExtensionsResponse",
+            'default': "AssignmentExtensionsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -133,7 +133,7 @@ class AssignmentExtensionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[AssignmentExtensionsResponse]:
+    ) -> ApiResponse[AssignmentExtensionsCreateResponse]:
         """Set extensions for student assignment submissions
 
         <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>403 Forbidden</b> if you are not allowed to extend assignments for this course * <b>400 Bad Request</b> if any of the extensions are invalid
@@ -178,7 +178,7 @@ class AssignmentExtensionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "AssignmentExtensionsResponse",
+            'default': "AssignmentExtensionsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -254,7 +254,7 @@ class AssignmentExtensionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "AssignmentExtensionsResponse",
+            'default': "AssignmentExtensionsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

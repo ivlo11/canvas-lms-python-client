@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **communication_channels_delete_push_token**
-> List[object] communication_channels_delete_push_token()
+> CommunicationChannelsDeletePushTokenResponse communication_channels_delete_push_token()
 
 Delete a push notification endpoint
 
@@ -103,6 +103,7 @@ Delete a push notification endpoint
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.communication_channels_delete_push_token_response import CommunicationChannelsDeletePushTokenResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -144,7 +145,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**List[object]**
+[**CommunicationChannelsDeletePushTokenResponse**](CommunicationChannelsDeletePushTokenResponse.md)
 
 ### Authorization
 

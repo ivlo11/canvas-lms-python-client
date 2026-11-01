@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **quiz_submissions_api_complete**
-> QuizSubmissionsResponse quiz_submissions_api_complete(course_id, id, quiz_id, quiz_submissions_api_complete_request=quiz_submissions_api_complete_request)
+> QuizSubmissionsApiCompleteResponse quiz_submissions_api_complete(course_id, id, quiz_id, quiz_submissions_api_complete_request=quiz_submissions_api_complete_request)
 
 Complete the quiz submission (turn it in).
 
@@ -39,7 +39,7 @@ will be allowed.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_submissions_api_complete_request import QuizSubmissionsApiCompleteRequest
-from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
+from canvas_lms_python_client.models.quiz_submissions_api_complete_response import QuizSubmissionsApiCompleteResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuizSubmissionsResponse**](QuizSubmissionsResponse.md)
+[**QuizSubmissionsApiCompleteResponse**](QuizSubmissionsApiCompleteResponse.md)
 
 ### Authorization
 
@@ -111,7 +111,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_create**
-> QuizSubmissionsResponse quiz_submissions_api_create(course_id, quiz_id, quiz_submissions_api_create_request=quiz_submissions_api_create_request)
+> QuizSubmissionsApiCreateResponse quiz_submissions_api_create(course_id, quiz_id, quiz_submissions_api_create_request=quiz_submissions_api_create_request)
 
 Create the quiz submission (start a quiz-taking session)
 
@@ -133,7 +133,7 @@ questions and submit your answers.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_submissions_api_create_request import QuizSubmissionsApiCreateRequest
-from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
+from canvas_lms_python_client.models.quiz_submissions_api_create_response import QuizSubmissionsApiCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -183,7 +183,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuizSubmissionsResponse**](QuizSubmissionsResponse.md)
+[**QuizSubmissionsApiCreateResponse**](QuizSubmissionsApiCreateResponse.md)
 
 ### Authorization
 
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_index**
-> QuizSubmissionsResponse quiz_submissions_api_index(course_id, quiz_id, include=include, page=page, per_page=per_page)
+> QuizSubmissionsApiIndexResponse quiz_submissions_api_index(course_id, quiz_id, include=include, page=page, per_page=per_page)
 
 Get all quiz submissions.
 
@@ -222,7 +222,7 @@ including previous attempts, are returned.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
+from canvas_lms_python_client.models.quiz_submissions_api_index_response import QuizSubmissionsApiIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -276,7 +276,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuizSubmissionsResponse**](QuizSubmissionsResponse.md)
+[**QuizSubmissionsApiIndexResponse**](QuizSubmissionsApiIndexResponse.md)
 
 ### Authorization
 
@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_show**
-> QuizSubmissionsResponse quiz_submissions_api_show(course_id, id, quiz_id, include=include)
+> QuizSubmissionsApiShowResponse quiz_submissions_api_show(course_id, id, quiz_id, include=include)
 
 Get a single quiz submission.
 
@@ -310,7 +310,7 @@ Get a single quiz submission.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
+from canvas_lms_python_client.models.quiz_submissions_api_show_response import QuizSubmissionsApiShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuizSubmissionsResponse**](QuizSubmissionsResponse.md)
+[**QuizSubmissionsApiShowResponse**](QuizSubmissionsApiShowResponse.md)
 
 ### Authorization
 
@@ -382,7 +382,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_submission**
-> QuizSubmissionsResponse quiz_submissions_api_submission(course_id, quiz_id, include=include)
+> QuizSubmissionsApiSubmissionResponse quiz_submissions_api_submission(course_id, quiz_id, include=include)
 
 Get the quiz submission.
 
@@ -396,7 +396,7 @@ Get the submission for this quiz for the current user.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
+from canvas_lms_python_client.models.quiz_submissions_api_submission_response import QuizSubmissionsApiSubmissionResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuizSubmissionsResponse**](QuizSubmissionsResponse.md)
+[**QuizSubmissionsApiSubmissionResponse**](QuizSubmissionsApiSubmissionResponse.md)
 
 ### Authorization
 
@@ -550,7 +550,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_update**
-> QuizSubmissionsResponse quiz_submissions_api_update(course_id, id, quiz_id, quiz_submissions_api_update_request=quiz_submissions_api_update_request)
+> QuizSubmissionsApiUpdateResponse quiz_submissions_api_update(course_id, id, quiz_id, quiz_submissions_api_update_request=quiz_submissions_api_update_request)
 
 Update student question scores and comments.
 
@@ -572,7 +572,7 @@ fudge the total score by a specific amount of points.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_submissions_api_update_request import QuizSubmissionsApiUpdateRequest
-from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
+from canvas_lms_python_client.models.quiz_submissions_api_update_response import QuizSubmissionsApiUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -624,7 +624,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuizSubmissionsResponse**](QuizSubmissionsResponse.md)
+[**QuizSubmissionsApiUpdateResponse**](QuizSubmissionsApiUpdateResponse.md)
 
 ### Authorization
 

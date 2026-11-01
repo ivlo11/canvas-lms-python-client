@@ -22,8 +22,11 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.poll_choices_create_request import PollChoicesCreateRequest
-from canvas_lms_python_client.models.poll_choices_response import PollChoicesResponse
+from canvas_lms_python_client.models.poll_choices_create_response import PollChoicesCreateResponse
+from canvas_lms_python_client.models.poll_choices_index_response import PollChoicesIndexResponse
+from canvas_lms_python_client.models.poll_choices_show_response import PollChoicesShowResponse
 from canvas_lms_python_client.models.poll_choices_update_request import PollChoicesUpdateRequest
+from canvas_lms_python_client.models.poll_choices_update_response import PollChoicesUpdateResponse
 
 
 class TestPollChoicesApi(unittest.IsolatedAsyncioTestCase):

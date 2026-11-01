@@ -19,10 +19,11 @@ from pydantic import ValidationError
 
 from canvas_lms_python_client.api.discovery_pages_api_api import DiscoveryPagesApiApi
 from pydantic import Field
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.discovery_page import DiscoveryPage
 from canvas_lms_python_client.models.discovery_pages_api_token_request import DiscoveryPagesApiTokenRequest
+from canvas_lms_python_client.models.discovery_pages_api_token_response import DiscoveryPagesApiTokenResponse
 from canvas_lms_python_client.models.discovery_pages_api_upsert_request import DiscoveryPagesApiUpsertRequest
 
 

@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **polls_create**
-> PollsResponse polls_create(polls_create_request=polls_create_request)
+> PollsCreateResponse polls_create(polls_create_request=polls_create_request)
 
 Create a single poll
 
@@ -25,7 +25,7 @@ Create a new poll for the current user
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.polls_create_request import PollsCreateRequest
-from canvas_lms_python_client.models.polls_response import PollsResponse
+from canvas_lms_python_client.models.polls_create_response import PollsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PollsResponse**](PollsResponse.md)
+[**PollsCreateResponse**](PollsCreateResponse.md)
 
 ### Authorization
 
@@ -166,7 +166,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **polls_index**
-> PollsResponse polls_index(page=page, per_page=per_page)
+> PollsIndexResponse polls_index(page=page, per_page=per_page)
 
 List polls
 
@@ -178,7 +178,7 @@ Returns the paginated list of polls for the current user.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.polls_response import PollsResponse
+from canvas_lms_python_client.models.polls_index_response import PollsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -226,7 +226,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PollsResponse**](PollsResponse.md)
+[**PollsIndexResponse**](PollsIndexResponse.md)
 
 ### Authorization
 
@@ -246,7 +246,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **polls_show**
-> PollsResponse polls_show(id)
+> PollsShowResponse polls_show(id)
 
 Get a single poll
 
@@ -258,7 +258,7 @@ Returns the poll with the given id
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.polls_response import PollsResponse
+from canvas_lms_python_client.models.polls_show_response import PollsShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -304,7 +304,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PollsResponse**](PollsResponse.md)
+[**PollsShowResponse**](PollsShowResponse.md)
 
 ### Authorization
 
@@ -324,7 +324,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **polls_update**
-> PollsResponse polls_update(id, polls_create_request=polls_create_request)
+> PollsUpdateResponse polls_update(id, polls_create_request=polls_create_request)
 
 Update a single poll
 
@@ -337,7 +337,7 @@ Update an existing poll belonging to the current user
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.polls_create_request import PollsCreateRequest
-from canvas_lms_python_client.models.polls_response import PollsResponse
+from canvas_lms_python_client.models.polls_update_response import PollsUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -385,7 +385,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PollsResponse**](PollsResponse.md)
+[**PollsUpdateResponse**](PollsUpdateResponse.md)
 
 ### Authorization
 

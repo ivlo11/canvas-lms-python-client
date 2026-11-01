@@ -134,7 +134,7 @@ async for account in api_instance.accounts_course_accounts_all(per_page=50):
 
 ### Wrapped List Responses
 
-Some Canvas endpoints wrap each page in an object, for example `{"polls": [...]}`. For these, `_paginated` yields one wrapper model per page (such as `PollsResponse`), and no `_all` method is generated. Read the list attribute from each page:
+Some Canvas endpoints wrap each page in an object, for example `{"polls": [...]}`. For these, `_paginated` yields one wrapper model per page, and no `_all` method is generated. Wrappers are named after the Canvas controller and action that return them, so `polls_index_paginated` yields `PollsIndexResponse` pages. Read the list attribute from each page:
 
 ```python
 async for page in polls_api.polls_index_paginated(per_page=50):
@@ -307,6 +307,7 @@ pdm run pytest --integration -m integration
 - `src/canvas_lms_python_client/test/test_lti_model_payloads.py`
 - `src/canvas_lms_python_client/test/test_list_query_params.py`
 - `src/canvas_lms_python_client/test/test_api_operation_coverage.py`
+- `src/canvas_lms_python_client/test/test_inline_object_responses.py`
 - `src/canvas_lms_python_client/test/fixtures/` (captured Canvas responses for offline tests)
 - `src/canvas_lms_python_client/pagination.py`
 - `src/.openapi-generator-ignore`

@@ -16,10 +16,11 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.communication_channel import CommunicationChannel
 from canvas_lms_python_client.models.communication_channels_create_request import CommunicationChannelsCreateRequest
+from canvas_lms_python_client.models.communication_channels_delete_push_token_response import CommunicationChannelsDeletePushTokenResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -346,7 +347,7 @@ class CommunicationChannelsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> CommunicationChannelsDeletePushTokenResponse:
         """Delete a push notification endpoint
 
 
@@ -381,7 +382,7 @@ class CommunicationChannelsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CommunicationChannelsDeletePushTokenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -408,7 +409,7 @@ class CommunicationChannelsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[CommunicationChannelsDeletePushTokenResponse]:
         """Delete a push notification endpoint
 
 
@@ -443,7 +444,7 @@ class CommunicationChannelsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CommunicationChannelsDeletePushTokenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -506,7 +507,7 @@ class CommunicationChannelsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "CommunicationChannelsDeletePushTokenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

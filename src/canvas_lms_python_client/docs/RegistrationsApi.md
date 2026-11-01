@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_check_domain_duplicates**
-> List[object] registrations_check_domain_duplicates(account_id, domain)
+> object registrations_check_domain_duplicates(account_id, domain)
 
 Check for Duplicate Domains
 
@@ -267,7 +267,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 
@@ -1625,7 +1625,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_validate_lti_configuration**
-> List[object] registrations_validate_lti_configuration(account_id, registrations_validate_lti_configuration_request=registrations_validate_lti_configuration_request)
+> object registrations_validate_lti_configuration(account_id, registrations_validate_lti_configuration_request=registrations_validate_lti_configuration_request)
 
 Validate LtiConfiguration
 
@@ -1691,7 +1691,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 

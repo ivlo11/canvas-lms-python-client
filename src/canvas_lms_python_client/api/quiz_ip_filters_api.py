@@ -18,7 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.quiz_ip_filters_response import QuizIpFiltersResponse
+from canvas_lms_python_client.models.quiz_ip_filters_index_response import QuizIpFiltersIndexResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -59,7 +59,7 @@ class QuizIpFiltersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> QuizIpFiltersResponse:
+    ) -> QuizIpFiltersIndexResponse:
         """Get available quiz IP filters.
 
         Get a list of available IP filters for this Quiz.  <b>200 OK</b> response code is returned if the request was successful.
@@ -113,7 +113,7 @@ class QuizIpFiltersApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizIpFiltersResponse",
+            'default': "QuizIpFiltersIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -146,7 +146,7 @@ class QuizIpFiltersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[QuizIpFiltersResponse]:
+    ) -> AsyncIterator[QuizIpFiltersIndexResponse]:
         """Get available quiz IP filters.
 
         Get a list of available IP filters for this Quiz.  <b>200 OK</b> response code is returned if the request was successful.
@@ -200,7 +200,7 @@ class QuizIpFiltersApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizIpFiltersResponse",
+            'default': "QuizIpFiltersIndexResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -254,7 +254,7 @@ class QuizIpFiltersApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[QuizIpFiltersResponse]:
+    ) -> ApiResponse[QuizIpFiltersIndexResponse]:
         """Get available quiz IP filters.
 
         Get a list of available IP filters for this Quiz.  <b>200 OK</b> response code is returned if the request was successful.
@@ -308,7 +308,7 @@ class QuizIpFiltersApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizIpFiltersResponse",
+            'default': "QuizIpFiltersIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -395,7 +395,7 @@ class QuizIpFiltersApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizIpFiltersResponse",
+            'default': "QuizIpFiltersIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

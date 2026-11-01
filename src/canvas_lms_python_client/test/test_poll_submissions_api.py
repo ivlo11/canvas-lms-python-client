@@ -22,7 +22,8 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.poll_submissions_create_request import PollSubmissionsCreateRequest
-from canvas_lms_python_client.models.poll_submissions_response import PollSubmissionsResponse
+from canvas_lms_python_client.models.poll_submissions_create_response import PollSubmissionsCreateResponse
+from canvas_lms_python_client.models.poll_submissions_show_response import PollSubmissionsShowResponse
 
 
 class TestPollSubmissionsApi(unittest.IsolatedAsyncioTestCase):

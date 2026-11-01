@@ -1,0 +1,30 @@
+# PollsIndexResponse
+
+Paginated `polls` list response (from the Canvas example response).
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**polls** | [**List[Poll]**](Poll.md) |  | [optional] 
+
+## Example
+
+```python
+from canvas_lms_python_client.models.polls_index_response import PollsIndexResponse
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PollsIndexResponse from a JSON string
+polls_index_response_instance = PollsIndexResponse.from_json(json)
+# print the JSON string representation of the object
+print(PollsIndexResponse.to_json())
+
+# convert the object into a dict
+polls_index_response_dict = polls_index_response_instance.to_dict()
+# create an instance of PollsIndexResponse from a dict
+polls_index_response_from_dict = PollsIndexResponse.from_dict(polls_index_response_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

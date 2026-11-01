@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **quiz_statistics_index**
-> QuizStatisticsResponse quiz_statistics_index(course_id, quiz_id, all_versions=all_versions)
+> QuizStatisticsIndexResponse quiz_statistics_index(course_id, quiz_id, all_versions=all_versions)
 
 Fetching the latest quiz statistics
 
@@ -24,7 +24,7 @@ _latest_ and most current version of the quiz.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.quiz_statistics_response import QuizStatisticsResponse
+from canvas_lms_python_client.models.quiz_statistics_index_response import QuizStatisticsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuizStatisticsResponse**](QuizStatisticsResponse.md)
+[**QuizStatisticsIndexResponse**](QuizStatisticsIndexResponse.md)
 
 ### Authorization
 

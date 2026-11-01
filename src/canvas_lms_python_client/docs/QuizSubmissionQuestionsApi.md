@@ -254,7 +254,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submission_questions_index**
-> QuizSubmissionQuestionsResponse quiz_submission_questions_index(quiz_submission_id, include=include)
+> QuizSubmissionQuestionsIndexResponse quiz_submission_questions_index(quiz_submission_id, include=include)
 
 Get all quiz submission questions.
 
@@ -268,7 +268,7 @@ Get a list of all the question records for this quiz submission.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.quiz_submission_questions_response import QuizSubmissionQuestionsResponse
+from canvas_lms_python_client.models.quiz_submission_questions_index_response import QuizSubmissionQuestionsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuizSubmissionQuestionsResponse**](QuizSubmissionQuestionsResponse.md)
+[**QuizSubmissionQuestionsIndexResponse**](QuizSubmissionQuestionsIndexResponse.md)
 
 ### Authorization
 

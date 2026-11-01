@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **quiz_ip_filters_index**
-> QuizIpFiltersResponse quiz_ip_filters_index(course_id, quiz_id, page=page, per_page=per_page)
+> QuizIpFiltersIndexResponse quiz_ip_filters_index(course_id, quiz_id, page=page, per_page=per_page)
 
 Get available quiz IP filters.
 
@@ -22,7 +22,7 @@ Get a list of available IP filters for this Quiz.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.quiz_ip_filters_response import QuizIpFiltersResponse
+from canvas_lms_python_client.models.quiz_ip_filters_index_response import QuizIpFiltersIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuizIpFiltersResponse**](QuizIpFiltersResponse.md)
+[**QuizIpFiltersIndexResponse**](QuizIpFiltersIndexResponse.md)
 
 ### Authorization
 

@@ -692,7 +692,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> object:
         """Check for Duplicate Domains
 
         Checks if any existing LTI registrations in the account have the same domain as the provided domain. This includes registrations owned by the account, Site Admin registrations forced on, and inherited registrations that are enabled. This is a utility endpoint for the LTI registration UI to warn administrators about potential conflicts.
@@ -734,7 +734,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -763,7 +763,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[object]:
         """Check for Duplicate Domains
 
         Checks if any existing LTI registrations in the account have the same domain as the provided domain. This includes registrations owned by the account, Site Admin registrations forced on, and inherited registrations that are enabled. This is a utility endpoint for the LTI registration UI to warn administrators about potential conflicts.
@@ -805,7 +805,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -877,7 +877,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6042,7 +6042,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> object:
         """Validate LtiConfiguration
 
         Validates the provided LTI 1.3 JSON config against the LtiConfiguration schema, and returns any errors found. Also transforms the JSON from LtiConfiguration to InternalLtiConfiguration format before returning. JSON config can be provided via url that points to an endpoint hosted by a tool, or directly in the request body. This is a utility endpoint for the LTI registration UI. Fetching tool config server-side prevents CORS issues for the tool.
@@ -6084,7 +6084,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6113,7 +6113,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[object]:
         """Validate LtiConfiguration
 
         Validates the provided LTI 1.3 JSON config against the LtiConfiguration schema, and returns any errors found. Also transforms the JSON from LtiConfiguration to InternalLtiConfiguration format before returning. JSON config can be provided via url that points to an endpoint hosted by a tool, or directly in the request body. This is a utility endpoint for the LTI registration UI. Fetching tool config server-side prevents CORS issues for the tool.
@@ -6155,7 +6155,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6227,7 +6227,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,

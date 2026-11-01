@@ -19,11 +19,12 @@ from pydantic import ValidationError
 
 from canvas_lms_python_client.api.content_shares_api import ContentSharesApi
 from pydantic import Field, StrictInt, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.content_share import ContentShare
 from canvas_lms_python_client.models.content_shares_add_users_request import ContentSharesAddUsersRequest
 from canvas_lms_python_client.models.content_shares_create_request import ContentSharesCreateRequest
+from canvas_lms_python_client.models.content_shares_unread_count_response import ContentSharesUnreadCountResponse
 from canvas_lms_python_client.models.content_shares_update_request import ContentSharesUpdateRequest
 
 

@@ -20,9 +20,11 @@ from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.quiz_group import QuizGroup
 from canvas_lms_python_client.models.quiz_groups_create_request import QuizGroupsCreateRequest
+from canvas_lms_python_client.models.quiz_groups_create_response import QuizGroupsCreateResponse
+from canvas_lms_python_client.models.quiz_groups_index_response import QuizGroupsIndexResponse
 from canvas_lms_python_client.models.quiz_groups_reorder_request import QuizGroupsReorderRequest
-from canvas_lms_python_client.models.quiz_groups_response import QuizGroupsResponse
 from canvas_lms_python_client.models.quiz_groups_update_request import QuizGroupsUpdateRequest
+from canvas_lms_python_client.models.quiz_groups_update_response import QuizGroupsUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -61,7 +63,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuizGroupsResponse:
+    ) -> QuizGroupsCreateResponse:
         """Create a question group
 
         Create a new question group for this quiz  <b>201 Created</b> response code is returned if the creation was successful.
@@ -106,7 +108,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizGroupsResponse",
+            'default': "QuizGroupsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -136,7 +138,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuizGroupsResponse]:
+    ) -> ApiResponse[QuizGroupsCreateResponse]:
         """Create a question group
 
         Create a new question group for this quiz  <b>201 Created</b> response code is returned if the creation was successful.
@@ -181,7 +183,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizGroupsResponse",
+            'default': "QuizGroupsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -257,7 +259,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizGroupsResponse",
+            'default': "QuizGroupsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -649,7 +651,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuizGroupsResponse:
+    ) -> QuizGroupsIndexResponse:
         """List question groups in a quiz
 
         Returns a list of question groups in a quiz.
@@ -691,7 +693,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizGroupsResponse",
+            'default': "QuizGroupsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -720,7 +722,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuizGroupsResponse]:
+    ) -> ApiResponse[QuizGroupsIndexResponse]:
         """List question groups in a quiz
 
         Returns a list of question groups in a quiz.
@@ -762,7 +764,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizGroupsResponse",
+            'default': "QuizGroupsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -834,7 +836,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizGroupsResponse",
+            'default': "QuizGroupsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1533,7 +1535,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuizGroupsResponse:
+    ) -> QuizGroupsUpdateResponse:
         """Update a question group
 
         Update a question group
@@ -1581,7 +1583,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizGroupsResponse",
+            'default': "QuizGroupsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1612,7 +1614,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuizGroupsResponse]:
+    ) -> ApiResponse[QuizGroupsUpdateResponse]:
         """Update a question group
 
         Update a question group
@@ -1660,7 +1662,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizGroupsResponse",
+            'default': "QuizGroupsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1740,7 +1742,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizGroupsResponse",
+            'default': "QuizGroupsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

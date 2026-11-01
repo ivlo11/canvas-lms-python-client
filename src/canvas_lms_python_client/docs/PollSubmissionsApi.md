@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **poll_submissions_create**
-> PollSubmissionsResponse poll_submissions_create(poll_id, poll_session_id, poll_submissions_create_request=poll_submissions_create_request)
+> PollSubmissionsCreateResponse poll_submissions_create(poll_id, poll_session_id, poll_submissions_create_request=poll_submissions_create_request)
 
 Create a single poll submission
 
@@ -22,7 +22,7 @@ Create a new poll submission for this poll session
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.poll_submissions_create_request import PollSubmissionsCreateRequest
-from canvas_lms_python_client.models.poll_submissions_response import PollSubmissionsResponse
+from canvas_lms_python_client.models.poll_submissions_create_response import PollSubmissionsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PollSubmissionsResponse**](PollSubmissionsResponse.md)
+[**PollSubmissionsCreateResponse**](PollSubmissionsCreateResponse.md)
 
 ### Authorization
 
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_submissions_show**
-> PollSubmissionsResponse poll_submissions_show(id, poll_id, poll_session_id)
+> PollSubmissionsShowResponse poll_submissions_show(id, poll_id, poll_session_id)
 
 Get a single poll submission
 
@@ -104,7 +104,7 @@ Returns the poll submission with the given id
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.poll_submissions_response import PollSubmissionsResponse
+from canvas_lms_python_client.models.poll_submissions_show_response import PollSubmissionsShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PollSubmissionsResponse**](PollSubmissionsResponse.md)
+[**PollSubmissionsShowResponse**](PollSubmissionsShowResponse.md)
 
 ### Authorization
 

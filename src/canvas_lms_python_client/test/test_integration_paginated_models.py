@@ -16,6 +16,7 @@ from typing import AsyncIterator, Awaitable, Callable, List, Optional, TypeVar
 
 import pytest
 
+from canvas_lms_python_client.api.account_calendars_api_api import AccountCalendarsApiApi
 from canvas_lms_python_client.api.accounts_api import AccountsApi
 from canvas_lms_python_client.api.appointment_groups_api import AppointmentGroupsApi
 from canvas_lms_python_client.api.context_controls_api import ContextControlsApi
@@ -32,6 +33,10 @@ from canvas_lms_python_client.api.role_overrides_api import RoleOverridesApi
 from canvas_lms_python_client.api.rubrics_api_api import RubricsApiApi
 from canvas_lms_python_client.api.users_api import UsersApi
 from canvas_lms_python_client.models.account import Account
+from canvas_lms_python_client.models.account_calendar import AccountCalendar
+from canvas_lms_python_client.models.account_calendars_api_index_response import (
+    AccountCalendarsApiIndexResponse,
+)
 from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.models.course import Course
 from canvas_lms_python_client.models.group import Group
@@ -45,13 +50,15 @@ from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink
 from canvas_lms_python_client.models.poll import Poll
 from canvas_lms_python_client.models.poll_choice import PollChoice
-from canvas_lms_python_client.models.poll_choices_response import PollChoicesResponse
+from canvas_lms_python_client.models.poll_choices_index_response import PollChoicesIndexResponse
 from canvas_lms_python_client.models.poll_session import PollSession
-from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
+from canvas_lms_python_client.models.poll_sessions_index_response import PollSessionsIndexResponse
 from canvas_lms_python_client.models.poll_submission import PollSubmission
-from canvas_lms_python_client.models.polls_response import PollsResponse
+from canvas_lms_python_client.models.polls_index_response import PollsIndexResponse
 from canvas_lms_python_client.models.quiz_submission import QuizSubmission
-from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
+from canvas_lms_python_client.models.quiz_submissions_api_index_response import (
+    QuizSubmissionsApiIndexResponse,
+)
 from canvas_lms_python_client.models.role import Role
 from canvas_lms_python_client.models.rubric import Rubric
 from canvas_lms_python_client.models.user import User
@@ -341,7 +348,7 @@ def wrapped_items(pages: List[object], wrapper: type, key: str) -> List[object]:
 async def admin_polls(api_client) -> List[Poll]:
     """Polls owned by the admin (Canvas only lists the caller's own polls)."""
     pages = await collect(PollsApi(api_client).polls_index_paginated())
-    return require(wrapped_items(pages, PollsResponse, "polls"), "poll owned by the admin")
+    return require(wrapped_items(pages, PollsIndexResponse, "polls"), "poll owned by the admin")
 
 
 async def test_polls_pages_typed(canvas_admin_api_client):
@@ -357,7 +364,7 @@ async def test_poll_choices_pages_typed(canvas_admin_api_client):
     choices: List[object] = []
     for poll in await admin_polls(canvas_admin_api_client):
         pages = await collect(api.poll_choices_index_paginated(poll_id=poll.id))
-        choices = wrapped_items(pages, PollChoicesResponse, "poll_choices")
+        choices = wrapped_items(pages, PollChoicesIndexResponse, "poll_choices")
         if choices:
             break
     require(choices, "poll choice in any admin poll")
@@ -371,7 +378,7 @@ async def test_poll_sessions_pages_typed(canvas_admin_api_client):
     sessions: List[PollSession] = []
     for poll in await admin_polls(canvas_admin_api_client):
         pages = await collect(api.poll_sessions_index_paginated(poll_id=poll.id))
-        sessions = wrapped_items(pages, PollSessionsResponse, "poll_sessions")
+        sessions = wrapped_items(pages, PollSessionsIndexResponse, "poll_sessions")
         if any(session.poll_submissions for session in sessions):
             break
     submissions = [s for session in sessions for s in session.poll_submissions or []]
@@ -395,7 +402,7 @@ async def test_quiz_submissions_pages_typed(canvas_admin_api_client):
                     course_id=course_id, quiz_id=str(quiz.id)
                 )
             )
-            submissions = wrapped_items(pages, QuizSubmissionsResponse, "quiz_submissions")
+            submissions = wrapped_items(pages, QuizSubmissionsApiIndexResponse, "quiz_submissions")
             if submissions:
                 break
         if submissions:
@@ -422,3 +429,16 @@ async def test_users_and_roles_pages_typed(canvas_admin_api_client):
 
     assert_typed(require(users, "user in the admin's account"), User)
     assert_typed(require(roles, "role in the admin's account"), Role)
+
+
+async def test_account_calendars_pages_typed(canvas_admin_api_client):
+    """Account calendar pages were lists of the wrapper's key names."""
+    pages = await collect(
+        AccountCalendarsApiApi(canvas_admin_api_client).account_calendars_api_index_paginated(per_page=1)
+    )
+
+    for page in pages:
+        assert isinstance(page.total_results, int)
+    calendars = wrapped_items(pages, AccountCalendarsApiIndexResponse, "account_calendars")
+    assert_typed(require(calendars, "account calendar visible to the admin"), AccountCalendar)
+    assert len(calendars) == pages[0].total_results

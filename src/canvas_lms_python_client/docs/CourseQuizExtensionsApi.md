@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **course_quiz_extensions_create**
-> QuizExtensionsResponse course_quiz_extensions_create(course_id, course_quiz_extensions_create_request=course_quiz_extensions_create_request)
+> CourseQuizExtensionsCreateResponse course_quiz_extensions_create(course_id, course_quiz_extensions_create_request=course_quiz_extensions_create_request)
 
 Set extensions for student quiz submissions
 
@@ -24,7 +24,7 @@ Set extensions for student quiz submissions
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.course_quiz_extensions_create_request import CourseQuizExtensionsCreateRequest
-from canvas_lms_python_client.models.quiz_extensions_response import QuizExtensionsResponse
+from canvas_lms_python_client.models.course_quiz_extensions_create_response import CourseQuizExtensionsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuizExtensionsResponse**](QuizExtensionsResponse.md)
+[**CourseQuizExtensionsCreateResponse**](CourseQuizExtensionsCreateResponse.md)
 
 ### Authorization
 

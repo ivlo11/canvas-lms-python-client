@@ -21,7 +21,8 @@ from canvas_lms_python_client.api.results_api import ResultsApi
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.results_response import ResultsResponse
+from canvas_lms_python_client.models.results_create_response import ResultsCreateResponse
+from canvas_lms_python_client.models.results_index_response import ResultsIndexResponse
 
 
 class TestResultsApi(unittest.IsolatedAsyncioTestCase):

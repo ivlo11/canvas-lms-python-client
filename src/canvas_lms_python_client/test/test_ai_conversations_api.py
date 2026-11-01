@@ -19,7 +19,7 @@ from pydantic import ValidationError
 
 from canvas_lms_python_client.api.ai_conversations_api import AiConversationsApi
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.ai_conversations_create_feedback_request import AiConversationsCreateFeedbackRequest
 from canvas_lms_python_client.models.ai_conversations_post_message_request import AiConversationsPostMessageRequest

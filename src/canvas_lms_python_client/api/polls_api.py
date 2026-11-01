@@ -19,7 +19,10 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.polls_create_request import PollsCreateRequest
-from canvas_lms_python_client.models.polls_response import PollsResponse
+from canvas_lms_python_client.models.polls_create_response import PollsCreateResponse
+from canvas_lms_python_client.models.polls_index_response import PollsIndexResponse
+from canvas_lms_python_client.models.polls_show_response import PollsShowResponse
+from canvas_lms_python_client.models.polls_update_response import PollsUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -56,7 +59,7 @@ class PollsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PollsResponse:
+    ) -> PollsCreateResponse:
         """Create a single poll
 
         Create a new poll for the current user
@@ -95,7 +98,7 @@ class PollsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -123,7 +126,7 @@ class PollsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PollsResponse]:
+    ) -> ApiResponse[PollsCreateResponse]:
         """Create a single poll
 
         Create a new poll for the current user
@@ -162,7 +165,7 @@ class PollsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -230,7 +233,7 @@ class PollsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -587,7 +590,7 @@ class PollsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> PollsResponse:
+    ) -> PollsIndexResponse:
         """List polls
 
         Returns the paginated list of polls for the current user.
@@ -635,7 +638,7 @@ class PollsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -666,7 +669,7 @@ class PollsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[PollsResponse]:
+    ) -> AsyncIterator[PollsIndexResponse]:
         """List polls
 
         Returns the paginated list of polls for the current user.
@@ -714,7 +717,7 @@ class PollsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsIndexResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -766,7 +769,7 @@ class PollsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[PollsResponse]:
+    ) -> ApiResponse[PollsIndexResponse]:
         """List polls
 
         Returns the paginated list of polls for the current user.
@@ -814,7 +817,7 @@ class PollsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -893,7 +896,7 @@ class PollsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -989,7 +992,7 @@ class PollsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PollsResponse:
+    ) -> PollsShowResponse:
         """Get a single poll
 
         Returns the poll with the given id
@@ -1028,7 +1031,7 @@ class PollsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1056,7 +1059,7 @@ class PollsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PollsResponse]:
+    ) -> ApiResponse[PollsShowResponse]:
         """Get a single poll
 
         Returns the poll with the given id
@@ -1095,7 +1098,7 @@ class PollsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1163,7 +1166,7 @@ class PollsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1253,7 +1256,7 @@ class PollsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PollsResponse:
+    ) -> PollsUpdateResponse:
         """Update a single poll
 
         Update an existing poll belonging to the current user
@@ -1295,7 +1298,7 @@ class PollsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1324,7 +1327,7 @@ class PollsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PollsResponse]:
+    ) -> ApiResponse[PollsUpdateResponse]:
         """Update a single poll
 
         Update an existing poll belonging to the current user
@@ -1366,7 +1369,7 @@ class PollsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1438,7 +1441,7 @@ class PollsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PollsResponse",
+            'default': "PollsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
