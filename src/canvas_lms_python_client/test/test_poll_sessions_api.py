@@ -22,6 +22,7 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.poll_sessions_create_request import PollSessionsCreateRequest
+from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
 from canvas_lms_python_client.models.poll_sessions_update_request import PollSessionsUpdateRequest
 
 
@@ -94,7 +95,7 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -107,14 +108,14 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.poll_sessions_closed_all(
+        async for page in self.api.poll_sessions_closed_paginated(
             page=999,
             per_page=999,
         ):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_poll_sessions_closed_paginated_multiple_pages(self) -> None:
         """Test poll_sessions_closed_fetch_all_items following pagination links.
@@ -166,14 +167,14 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.poll_sessions_closed_all(
+        async for item in self.api.poll_sessions_closed_paginated(
             page=999,
             per_page=999,
         ):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_poll_sessions_closed_paginated_empty_result(self) -> None:
@@ -197,7 +198,7 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.poll_sessions_closed_all(
+        async for item in self.api.poll_sessions_closed_paginated(
             page=999,
             per_page=999,
         ):
@@ -355,7 +356,7 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -368,7 +369,7 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.poll_sessions_index_all(
+        async for page in self.api.poll_sessions_index_paginated(
             poll_id="invalid",
             page=999,
             per_page=999,
@@ -376,7 +377,7 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_poll_sessions_index_paginated_multiple_pages(self) -> None:
         """Test poll_sessions_index_fetch_all_items following pagination links.
@@ -428,7 +429,7 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.poll_sessions_index_all(
+        async for item in self.api.poll_sessions_index_paginated(
             poll_id="invalid",
             page=999,
             per_page=999,
@@ -436,7 +437,7 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_poll_sessions_index_paginated_empty_result(self) -> None:
@@ -460,7 +461,7 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.poll_sessions_index_all(
+        async for item in self.api.poll_sessions_index_paginated(
             poll_id="invalid",
             page=999,
             per_page=999,
@@ -531,7 +532,7 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -544,14 +545,14 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.poll_sessions_opened_all(
+        async for page in self.api.poll_sessions_opened_paginated(
             page=999,
             per_page=999,
         ):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_poll_sessions_opened_paginated_multiple_pages(self) -> None:
         """Test poll_sessions_opened_fetch_all_items following pagination links.
@@ -603,14 +604,14 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.poll_sessions_opened_all(
+        async for item in self.api.poll_sessions_opened_paginated(
             page=999,
             per_page=999,
         ):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_poll_sessions_opened_paginated_empty_result(self) -> None:
@@ -634,7 +635,7 @@ class TestPollSessionsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.poll_sessions_opened_all(
+        async for item in self.api.poll_sessions_opened_paginated(
             page=999,
             per_page=999,
         ):

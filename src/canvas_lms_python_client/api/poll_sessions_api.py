@@ -19,6 +19,7 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.poll_sessions_create_request import PollSessionsCreateRequest
+from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
 from canvas_lms_python_client.models.poll_sessions_update_request import PollSessionsUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -57,7 +58,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> PollSessionsResponse:
         """Close an opened poll session
 
 
@@ -98,6 +99,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -126,7 +128,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PollSessionsResponse]:
         """Close an opened poll session
 
 
@@ -167,6 +169,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -237,6 +240,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -330,7 +334,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> PollSessionsResponse:
         """List closed poll sessions
 
         A paginated list of all closed poll sessions available to the current user.
@@ -378,6 +382,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -408,7 +413,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[PollSessionsResponse]:
         """List closed poll sessions
 
         A paginated list of all closed poll sessions available to the current user.
@@ -456,6 +461,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -489,108 +495,6 @@ class PollSessionsApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def poll_sessions_closed_all(
-        self,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
-        """List closed poll sessions
-
-        A paginated list of all closed poll sessions available to the current user.
-
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._poll_sessions_closed_serialize(
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def poll_sessions_closed_with_http_info(
         self,
@@ -609,7 +513,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PollSessionsResponse]:
         """List closed poll sessions
 
         A paginated list of all closed poll sessions available to the current user.
@@ -657,6 +561,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -735,6 +640,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -831,7 +737,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> PollSessionsResponse:
         """Create a single poll session
 
         Create a new poll session for this poll
@@ -873,6 +779,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -901,7 +808,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PollSessionsResponse]:
         """Create a single poll session
 
         Create a new poll session for this poll
@@ -943,6 +850,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1014,6 +922,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1389,7 +1298,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> PollSessionsResponse:
         """List poll sessions for a poll
 
         Returns the paginated list of PollSessions in this poll.
@@ -1440,6 +1349,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1471,7 +1381,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[PollSessionsResponse]:
         """List poll sessions for a poll
 
         Returns the paginated list of PollSessions in this poll.
@@ -1522,6 +1432,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1555,112 +1466,6 @@ class PollSessionsApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def poll_sessions_index_all(
-        self,
-        poll_id: Annotated[StrictStr, Field(description="Scope response to poll_id")],
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
-        """List poll sessions for a poll
-
-        Returns the paginated list of PollSessions in this poll.
-
-        :param poll_id: Scope response to poll_id (required)
-        :type poll_id: str
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._poll_sessions_index_serialize(
-            poll_id=poll_id,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def poll_sessions_index_with_http_info(
         self,
@@ -1680,7 +1485,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PollSessionsResponse]:
         """List poll sessions for a poll
 
         Returns the paginated list of PollSessions in this poll.
@@ -1731,6 +1536,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1813,6 +1619,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1912,7 +1719,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> PollSessionsResponse:
         """Open a poll session
 
 
@@ -1953,6 +1760,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1981,7 +1789,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PollSessionsResponse]:
         """Open a poll session
 
 
@@ -2022,6 +1830,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2092,6 +1901,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2185,7 +1995,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> PollSessionsResponse:
         """List opened poll sessions
 
         A paginated list of all opened poll sessions available to the current user.
@@ -2233,6 +2043,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2263,7 +2074,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[PollSessionsResponse]:
         """List opened poll sessions
 
         A paginated list of all opened poll sessions available to the current user.
@@ -2311,6 +2122,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2344,108 +2156,6 @@ class PollSessionsApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def poll_sessions_opened_all(
-        self,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
-        """List opened poll sessions
-
-        A paginated list of all opened poll sessions available to the current user.
-
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._poll_sessions_opened_serialize(
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def poll_sessions_opened_with_http_info(
         self,
@@ -2464,7 +2174,7 @@ class PollSessionsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PollSessionsResponse]:
         """List opened poll sessions
 
         A paginated list of all opened poll sessions available to the current user.
@@ -2512,6 +2222,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2590,6 +2301,7 @@ class PollSessionsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2686,7 +2398,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> PollSessionsResponse:
         """Get the results for a single poll session
 
         Returns the poll session with the given id
@@ -2728,6 +2440,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2756,7 +2469,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PollSessionsResponse]:
         """Get the results for a single poll session
 
         Returns the poll session with the given id
@@ -2798,6 +2511,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2869,6 +2583,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2962,7 +2677,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> PollSessionsResponse:
         """Update a single poll session
 
         Update an existing poll session for this poll
@@ -3007,6 +2722,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3036,7 +2752,7 @@ class PollSessionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PollSessionsResponse]:
         """Update a single poll session
 
         Update an existing poll session for this poll
@@ -3081,6 +2797,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3156,6 +2873,7 @@ class PollSessionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

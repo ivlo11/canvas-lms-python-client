@@ -5,16 +5,25 @@ A ``*_paginated`` method whose ``_response_types_map`` is empty deserializes
 every page to ``None`` and stops without yielding anything. Every such
 operation must be listed in ``UNDOCUMENTED_PAGINATED_OPERATIONS``; the list
 should only shrink as ``@returns`` annotations are added in canvas-lms.
+
+A ``*_all`` item iterator is only generated when a page is a list; wrapper,
+object and undocumented responses get ``*_paginated`` only.
 """
 
 import importlib
 import inspect
+import json
 import pkgutil
 import re
+import typing
+
+import pytest
 
 import canvas_lms_python_client.api
+import canvas_lms_python_client.models
 
 PAGINATED_SUFFIX = "_paginated"
+ALL_SUFFIX = "_all"
 MIN_PAGINATED_METHODS = 150
 
 _EMPTY_TYPES_MAP = re.compile(
@@ -36,20 +45,12 @@ UNDOCUMENTED_PAGINATED_OPERATIONS = frozenset(
         "discussion_topics_api_replies",
         "discussion_topics_api_replies_for_groups",
         "grading_period_sets_index",
-        "outcome_results_index",
         "pace_contexts_api_index",
         "planner_index",
         "planner_index_for_users",
-        "poll_choices_index",
-        "poll_sessions_closed",
-        "poll_sessions_index",
-        "poll_sessions_opened",
-        "polls_index",
         "pseudonyms_index",
         "pseudonyms_index_for_users",
-        "quiz_ip_filters_index",
         "quiz_submission_events_api_index",
-        "quiz_submissions_api_index",
         "search_all_courses",
         "search_recipients",
         "search_recipients_for_other",
@@ -60,7 +61,7 @@ UNDOCUMENTED_PAGINATED_OPERATIONS = frozenset(
 
 
 def _paginated_methods():
-    """Yield (operation name, function) for every generated ``*_paginated`` method."""
+    """Yield (API class, operation name, function) for every ``*_paginated`` method."""
     package = canvas_lms_python_client.api
     for module_info in pkgutil.iter_modules(package.__path__):
         module = importlib.import_module(f"{package.__name__}.{module_info.name}")
@@ -69,13 +70,13 @@ def _paginated_methods():
                 continue
             for name, func in inspect.getmembers(cls, inspect.isfunction):
                 if name.endswith(PAGINATED_SUFFIX):
-                    yield name[: -len(PAGINATED_SUFFIX)], func
+                    yield cls, name[: -len(PAGINATED_SUFFIX)], func
 
 
 def _undocumented_operations():
     found = 0
     undocumented = set()
-    for operation, func in _paginated_methods():
+    for _, operation, func in _paginated_methods():
         found += 1
         if _EMPTY_TYPES_MAP.search(inspect.getsource(func)):
             undocumented.add(operation)
@@ -101,3 +102,90 @@ def test_paginated_operations_have_response_types():
         "Allowlisted operations now have a response type; remove them from "
         f"UNDOCUMENTED_PAGINATED_OPERATIONS: {stale}"
     )
+
+
+def _pages_are_lists(func):
+    """True when ``func`` is annotated ``AsyncIterator[List[...]]``."""
+    (page_type,) = typing.get_args(func.__annotations__["return"])
+    return typing.get_origin(page_type) is list
+
+
+def test_all_iterator_only_for_list_responses():
+    """``<op>_all`` exists if and only if ``<op>_paginated`` yields list pages."""
+    missing = []
+    unexpected = []
+    for cls, operation, func in _paginated_methods():
+        has_all = hasattr(cls, operation + ALL_SUFFIX)
+        if _pages_are_lists(func) and not has_all:
+            missing.append(operation)
+        elif not _pages_are_lists(func) and has_all:
+            unexpected.append(operation)
+
+    assert not missing, f"List-response operations missing {ALL_SUFFIX}: {sorted(missing)}"
+    assert not unexpected, f"Non-list-response operations with {ALL_SUFFIX}: {sorted(unexpected)}"
+
+
+# Wrapper model -> (list key, item model, minimal valid item)
+WRAPPED_LIST_RESPONSES = {
+    "AssignmentExtensionsResponse": (
+        "assignment_extensions",
+        "AssignmentExtension",
+        {"assignment_id": 1, "user_id": 2},
+    ),
+    "GradingPeriodsResponse": (
+        "grading_periods",
+        "GradingPeriod",
+        {"id": 1, "start_date": "2026-01-01T00:00:00Z", "end_date": "2026-06-01T00:00:00Z"},
+    ),
+    "OutcomeResultsResponse": ("outcome_results", "OutcomeResult", {"id": 1}),
+    "PollChoicesResponse": ("poll_choices", "PollChoice", {"id": 1, "poll_id": 2, "text": "Yes"}),
+    "PollSessionsResponse": (
+        "poll_sessions",
+        "PollSession",
+        {"id": 1, "poll_id": 2, "course_id": 3},
+    ),
+    "PollSubmissionsResponse": ("poll_submissions", "PollSubmission", {"id": 1}),
+    "PollsResponse": ("polls", "Poll", {"id": 1, "question": "Pizza?"}),
+    "QuizExtensionsResponse": ("quiz_extensions", "QuizExtension", {"quiz_id": 1, "user_id": 2}),
+    "QuizGroupsResponse": ("quiz_groups", "QuizGroup", {"id": 1, "quiz_id": 2}),
+    "QuizIpFiltersResponse": (
+        "quiz_ip_filters",
+        "QuizIPFilter",
+        {"name": "Lab", "account": "School", "filter": "10.0.0.0/8"},
+    ),
+    "QuizStatisticsResponse": ("quiz_statistics", "QuizStatistics", {"id": 1, "quiz_id": 2}),
+    "QuizSubmissionQuestionsResponse": (
+        "quiz_submission_questions",
+        "QuizSubmissionQuestion",
+        {"id": 1},
+    ),
+    "QuizSubmissionsResponse": ("quiz_submissions", "QuizSubmission", {"id": 1, "quiz_id": 2}),
+    "ResultsResponse": ("results", "Result", {"id": "1"}),
+}
+
+
+@pytest.mark.parametrize("wrapper_name", sorted(WRAPPED_LIST_RESPONSES))
+def test_wrapper_page_deserializes_items(wrapper_name):
+    """A wrapped page deserializes its list key into item models."""
+    key, item_name, item = WRAPPED_LIST_RESPONSES[wrapper_name]
+    wrapper_cls = getattr(canvas_lms_python_client.models, wrapper_name)
+    item_cls = getattr(canvas_lms_python_client.models, item_name)
+
+    page = wrapper_cls.from_json(json.dumps({key: [item]}))
+
+    assert isinstance(page, wrapper_cls)
+    items = getattr(page, key)
+    assert isinstance(items, list) and len(items) == 1
+    assert isinstance(items[0], item_cls)
+
+
+@pytest.mark.parametrize("wrapper_name", sorted(WRAPPED_LIST_RESPONSES))
+def test_wrapper_page_without_key(wrapper_name):
+    """A page that omits the wrapper key deserializes with the attribute unset."""
+    key, _, _ = WRAPPED_LIST_RESPONSES[wrapper_name]
+    wrapper_cls = getattr(canvas_lms_python_client.models, wrapper_name)
+
+    page = wrapper_cls.from_json("{}")
+
+    assert isinstance(page, wrapper_cls)
+    assert getattr(page, key) is None

@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from canvas_lms_python_client.models.quiz_submissions_api_complete_request import QuizSubmissionsApiCompleteRequest
 from canvas_lms_python_client.models.quiz_submissions_api_create_request import QuizSubmissionsApiCreateRequest
 from canvas_lms_python_client.models.quiz_submissions_api_update_request import QuizSubmissionsApiUpdateRequest
+from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
 
 
 class TestQuizSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
@@ -249,7 +250,7 @@ class TestQuizSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -262,7 +263,7 @@ class TestQuizSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.quiz_submissions_api_index_all(
+        async for page in self.api.quiz_submissions_api_index_paginated(
             course_id="invalid",
             quiz_id="invalid",
             include=[],
@@ -272,7 +273,7 @@ class TestQuizSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_quiz_submissions_api_index_paginated_multiple_pages(self) -> None:
         """Test quiz_submissions_api_index_fetch_all_items following pagination links.
@@ -324,7 +325,7 @@ class TestQuizSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.quiz_submissions_api_index_all(
+        async for item in self.api.quiz_submissions_api_index_paginated(
             course_id="invalid",
             quiz_id="invalid",
             include=[],
@@ -334,7 +335,7 @@ class TestQuizSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_quiz_submissions_api_index_paginated_empty_result(self) -> None:
@@ -358,7 +359,7 @@ class TestQuizSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.quiz_submissions_api_index_all(
+        async for item in self.api.quiz_submissions_api_index_paginated(
             course_id="invalid",
             quiz_id="invalid",
             include=[],

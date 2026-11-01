@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **poll_sessions_close**
-> poll_sessions_close(id, poll_id)
+> PollSessionsResponse poll_sessions_close(id, poll_id)
 
 Close an opened poll session
 
@@ -26,6 +26,7 @@ Close an opened poll session
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -54,7 +55,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Close an opened poll session
-        await api_instance.poll_sessions_close(id, poll_id)
+        api_response = await api_instance.poll_sessions_close(id, poll_id)
+        print("The response of PollSessionsApi->poll_sessions_close:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollSessionsApi->poll_sessions_close: %s\n" % e)
 ```
@@ -71,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollSessionsResponse**](PollSessionsResponse.md)
 
 ### Authorization
 
@@ -91,7 +94,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_sessions_closed**
-> poll_sessions_closed(page=page, per_page=per_page)
+> PollSessionsResponse poll_sessions_closed(page=page, per_page=per_page)
 
 List closed poll sessions
 
@@ -103,6 +106,7 @@ A paginated list of all closed poll sessions available to the current user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -131,7 +135,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List closed poll sessions
-        await api_instance.poll_sessions_closed(page=page, per_page=per_page)
+        api_response = await api_instance.poll_sessions_closed(page=page, per_page=per_page)
+        print("The response of PollSessionsApi->poll_sessions_closed:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollSessionsApi->poll_sessions_closed: %s\n" % e)
 ```
@@ -148,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollSessionsResponse**](PollSessionsResponse.md)
 
 ### Authorization
 
@@ -168,7 +174,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_sessions_create**
-> poll_sessions_create(poll_id, poll_sessions_create_request=poll_sessions_create_request)
+> PollSessionsResponse poll_sessions_create(poll_id, poll_sessions_create_request=poll_sessions_create_request)
 
 Create a single poll session
 
@@ -181,6 +187,7 @@ Create a new poll session for this poll
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.poll_sessions_create_request import PollSessionsCreateRequest
+from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -209,7 +216,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a single poll session
-        await api_instance.poll_sessions_create(poll_id, poll_sessions_create_request=poll_sessions_create_request)
+        api_response = await api_instance.poll_sessions_create(poll_id, poll_sessions_create_request=poll_sessions_create_request)
+        print("The response of PollSessionsApi->poll_sessions_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollSessionsApi->poll_sessions_create: %s\n" % e)
 ```
@@ -226,7 +235,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollSessionsResponse**](PollSessionsResponse.md)
 
 ### Authorization
 
@@ -323,7 +332,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_sessions_index**
-> poll_sessions_index(poll_id, page=page, per_page=per_page)
+> PollSessionsResponse poll_sessions_index(poll_id, page=page, per_page=per_page)
 
 List poll sessions for a poll
 
@@ -335,6 +344,7 @@ Returns the paginated list of PollSessions in this poll.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -364,7 +374,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List poll sessions for a poll
-        await api_instance.poll_sessions_index(poll_id, page=page, per_page=per_page)
+        api_response = await api_instance.poll_sessions_index(poll_id, page=page, per_page=per_page)
+        print("The response of PollSessionsApi->poll_sessions_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollSessionsApi->poll_sessions_index: %s\n" % e)
 ```
@@ -382,7 +394,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollSessionsResponse**](PollSessionsResponse.md)
 
 ### Authorization
 
@@ -402,7 +414,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_sessions_open**
-> poll_sessions_open(id, poll_id)
+> PollSessionsResponse poll_sessions_open(id, poll_id)
 
 Open a poll session
 
@@ -412,6 +424,7 @@ Open a poll session
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -440,7 +453,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Open a poll session
-        await api_instance.poll_sessions_open(id, poll_id)
+        api_response = await api_instance.poll_sessions_open(id, poll_id)
+        print("The response of PollSessionsApi->poll_sessions_open:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollSessionsApi->poll_sessions_open: %s\n" % e)
 ```
@@ -457,7 +472,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollSessionsResponse**](PollSessionsResponse.md)
 
 ### Authorization
 
@@ -477,7 +492,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_sessions_opened**
-> poll_sessions_opened(page=page, per_page=per_page)
+> PollSessionsResponse poll_sessions_opened(page=page, per_page=per_page)
 
 List opened poll sessions
 
@@ -489,6 +504,7 @@ A paginated list of all opened poll sessions available to the current user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -517,7 +533,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List opened poll sessions
-        await api_instance.poll_sessions_opened(page=page, per_page=per_page)
+        api_response = await api_instance.poll_sessions_opened(page=page, per_page=per_page)
+        print("The response of PollSessionsApi->poll_sessions_opened:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollSessionsApi->poll_sessions_opened: %s\n" % e)
 ```
@@ -534,7 +552,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollSessionsResponse**](PollSessionsResponse.md)
 
 ### Authorization
 
@@ -554,7 +572,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_sessions_show**
-> poll_sessions_show(id, poll_id)
+> PollSessionsResponse poll_sessions_show(id, poll_id)
 
 Get the results for a single poll session
 
@@ -566,6 +584,7 @@ Returns the poll session with the given id
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -594,7 +613,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get the results for a single poll session
-        await api_instance.poll_sessions_show(id, poll_id)
+        api_response = await api_instance.poll_sessions_show(id, poll_id)
+        print("The response of PollSessionsApi->poll_sessions_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollSessionsApi->poll_sessions_show: %s\n" % e)
 ```
@@ -611,7 +632,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollSessionsResponse**](PollSessionsResponse.md)
 
 ### Authorization
 
@@ -631,7 +652,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_sessions_update**
-> poll_sessions_update(id, poll_id, poll_sessions_update_request=poll_sessions_update_request)
+> PollSessionsResponse poll_sessions_update(id, poll_id, poll_sessions_update_request=poll_sessions_update_request)
 
 Update a single poll session
 
@@ -643,6 +664,7 @@ Update an existing poll session for this poll
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
 from canvas_lms_python_client.models.poll_sessions_update_request import PollSessionsUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -673,7 +695,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a single poll session
-        await api_instance.poll_sessions_update(id, poll_id, poll_sessions_update_request=poll_sessions_update_request)
+        api_response = await api_instance.poll_sessions_update(id, poll_id, poll_sessions_update_request=poll_sessions_update_request)
+        print("The response of PollSessionsApi->poll_sessions_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollSessionsApi->poll_sessions_update: %s\n" % e)
 ```
@@ -691,7 +715,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollSessionsResponse**](PollSessionsResponse.md)
 
 ### Authorization
 

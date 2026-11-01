@@ -22,6 +22,7 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.assignment_extensions_create_request import AssignmentExtensionsCreateRequest
+from canvas_lms_python_client.models.assignment_extensions_response import AssignmentExtensionsResponse
 
 
 class TestAssignmentExtensionsApi(unittest.IsolatedAsyncioTestCase):

@@ -92,7 +92,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -105,7 +105,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.learning_object_dates_show_all(
+        async for page in self.api.learning_object_dates_show_paginated(
             context_module_id="invalid",
             course_id="invalid",
             include=[],
@@ -116,7 +116,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_learning_object_dates_show_paginated_multiple_pages(self) -> None:
         """Test learning_object_dates_show_fetch_all_items following pagination links.
@@ -168,7 +168,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_all(
+        async for item in self.api.learning_object_dates_show_paginated(
             context_module_id="invalid",
             course_id="invalid",
             include=[],
@@ -179,7 +179,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_learning_object_dates_show_paginated_empty_result(self) -> None:
@@ -203,7 +203,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_all(
+        async for item in self.api.learning_object_dates_show_paginated(
             context_module_id="invalid",
             course_id="invalid",
             include=[],
@@ -275,7 +275,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -288,7 +288,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.learning_object_dates_show_by_attachment_id_for_courses_all(
+        async for page in self.api.learning_object_dates_show_by_attachment_id_for_courses_paginated(
             attachment_id="invalid",
             course_id="invalid",
             include=[],
@@ -299,7 +299,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_learning_object_dates_show_by_attachment_id_for_courses_paginated_multiple_pages(self) -> None:
         """Test learning_object_dates_show_by_attachment_id_for_courses_fetch_all_items following pagination links.
@@ -351,7 +351,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_by_attachment_id_for_courses_all(
+        async for item in self.api.learning_object_dates_show_by_attachment_id_for_courses_paginated(
             attachment_id="invalid",
             course_id="invalid",
             include=[],
@@ -362,7 +362,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_learning_object_dates_show_by_attachment_id_for_courses_paginated_empty_result(self) -> None:
@@ -386,7 +386,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_by_attachment_id_for_courses_all(
+        async for item in self.api.learning_object_dates_show_by_attachment_id_for_courses_paginated(
             attachment_id="invalid",
             course_id="invalid",
             include=[],
@@ -458,7 +458,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -471,7 +471,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.learning_object_dates_show_by_discussion_topic_id_for_courses_all(
+        async for page in self.api.learning_object_dates_show_by_discussion_topic_id_for_courses_paginated(
             course_id="invalid",
             discussion_topic_id="invalid",
             include=[],
@@ -482,7 +482,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_learning_object_dates_show_by_discussion_topic_id_for_courses_paginated_multiple_pages(self) -> None:
         """Test learning_object_dates_show_by_discussion_topic_id_for_courses_fetch_all_items following pagination links.
@@ -534,7 +534,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_by_discussion_topic_id_for_courses_all(
+        async for item in self.api.learning_object_dates_show_by_discussion_topic_id_for_courses_paginated(
             course_id="invalid",
             discussion_topic_id="invalid",
             include=[],
@@ -545,7 +545,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_learning_object_dates_show_by_discussion_topic_id_for_courses_paginated_empty_result(self) -> None:
@@ -569,7 +569,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_by_discussion_topic_id_for_courses_all(
+        async for item in self.api.learning_object_dates_show_by_discussion_topic_id_for_courses_paginated(
             course_id="invalid",
             discussion_topic_id="invalid",
             include=[],
@@ -641,7 +641,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -654,7 +654,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.learning_object_dates_show_by_quiz_id_for_courses_all(
+        async for page in self.api.learning_object_dates_show_by_quiz_id_for_courses_paginated(
             course_id="invalid",
             quiz_id="invalid",
             include=[],
@@ -665,7 +665,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_learning_object_dates_show_by_quiz_id_for_courses_paginated_multiple_pages(self) -> None:
         """Test learning_object_dates_show_by_quiz_id_for_courses_fetch_all_items following pagination links.
@@ -717,7 +717,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_by_quiz_id_for_courses_all(
+        async for item in self.api.learning_object_dates_show_by_quiz_id_for_courses_paginated(
             course_id="invalid",
             quiz_id="invalid",
             include=[],
@@ -728,7 +728,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_learning_object_dates_show_by_quiz_id_for_courses_paginated_empty_result(self) -> None:
@@ -752,7 +752,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_by_quiz_id_for_courses_all(
+        async for item in self.api.learning_object_dates_show_by_quiz_id_for_courses_paginated(
             course_id="invalid",
             quiz_id="invalid",
             include=[],
@@ -824,7 +824,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -837,7 +837,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.learning_object_dates_show_by_url_or_id_for_courses_all(
+        async for page in self.api.learning_object_dates_show_by_url_or_id_for_courses_paginated(
             course_id="invalid",
             url_or_id="invalid",
             include=[],
@@ -848,7 +848,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_learning_object_dates_show_by_url_or_id_for_courses_paginated_multiple_pages(self) -> None:
         """Test learning_object_dates_show_by_url_or_id_for_courses_fetch_all_items following pagination links.
@@ -900,7 +900,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_by_url_or_id_for_courses_all(
+        async for item in self.api.learning_object_dates_show_by_url_or_id_for_courses_paginated(
             course_id="invalid",
             url_or_id="invalid",
             include=[],
@@ -911,7 +911,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_learning_object_dates_show_by_url_or_id_for_courses_paginated_empty_result(self) -> None:
@@ -935,7 +935,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_by_url_or_id_for_courses_all(
+        async for item in self.api.learning_object_dates_show_by_url_or_id_for_courses_paginated(
             course_id="invalid",
             url_or_id="invalid",
             include=[],
@@ -1007,7 +1007,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -1020,7 +1020,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.learning_object_dates_show_for_courses_all(
+        async for page in self.api.learning_object_dates_show_for_courses_paginated(
             assignment_id="invalid",
             course_id="invalid",
             include=[],
@@ -1031,7 +1031,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_learning_object_dates_show_for_courses_paginated_multiple_pages(self) -> None:
         """Test learning_object_dates_show_for_courses_fetch_all_items following pagination links.
@@ -1083,7 +1083,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_for_courses_all(
+        async for item in self.api.learning_object_dates_show_for_courses_paginated(
             assignment_id="invalid",
             course_id="invalid",
             include=[],
@@ -1094,7 +1094,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_learning_object_dates_show_for_courses_paginated_empty_result(self) -> None:
@@ -1118,7 +1118,7 @@ class TestLearningObjectDatesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.learning_object_dates_show_for_courses_all(
+        async for item in self.api.learning_object_dates_show_for_courses_paginated(
             assignment_id="invalid",
             course_id="invalid",
             include=[],

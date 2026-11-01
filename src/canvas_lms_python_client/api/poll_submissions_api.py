@@ -19,6 +19,7 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.poll_submissions_create_request import PollSubmissionsCreateRequest
+from canvas_lms_python_client.models.poll_submissions_response import PollSubmissionsResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -57,7 +58,7 @@ class PollSubmissionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> PollSubmissionsResponse:
         """Create a single poll submission
 
         Create a new poll submission for this poll session
@@ -102,6 +103,7 @@ class PollSubmissionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSubmissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -131,7 +133,7 @@ class PollSubmissionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PollSubmissionsResponse]:
         """Create a single poll submission
 
         Create a new poll submission for this poll session
@@ -176,6 +178,7 @@ class PollSubmissionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSubmissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -251,6 +254,7 @@ class PollSubmissionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSubmissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -360,7 +364,7 @@ class PollSubmissionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> PollSubmissionsResponse:
         """Get a single poll submission
 
         Returns the poll submission with the given id
@@ -405,6 +409,7 @@ class PollSubmissionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSubmissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -434,7 +439,7 @@ class PollSubmissionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PollSubmissionsResponse]:
         """Get a single poll submission
 
         Returns the poll submission with the given id
@@ -479,6 +484,7 @@ class PollSubmissionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSubmissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -554,6 +560,7 @@ class PollSubmissionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PollSubmissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

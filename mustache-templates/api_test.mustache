@@ -278,7 +278,7 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
         mock_data = [MagicMock(), MagicMock()]
         {{/isArray}}
         {{^isArray}}
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
         {{/isArray}}
 
@@ -292,7 +292,7 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
 
         # Collect all pages
         pages = []
-        async for page in self.api.{{operationId}}_all(
+        async for page in self.api.{{operationId}}{{#isArray}}_all{{/isArray}}{{^isArray}}_paginated{{/isArray}}(
             {{#allParams}}
             {{paramName}}={{#isString}}"invalid"{{/isString}}{{#isInteger}}999{{/isInteger}}{{#isNumber}}999.9{{/isNumber}}{{#isBoolean}}False{{/isBoolean}}{{#isArray}}[]{{/isArray}}{{^isPrimitiveType}}{{^isArray}}None{{/isArray}}{{/isPrimitiveType}},
             {{/allParams}}
@@ -304,7 +304,7 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
         assert len(pages) == len(mock_data)
         {{/isArray}}
         {{^isArray}}
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
         {{/isArray}}
 
     {{#async}}
@@ -367,7 +367,7 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
 
         # Collect all items
         items = []
-        async for item in self.api.{{operationId}}_all(
+        async for item in self.api.{{operationId}}{{#isArray}}_all{{/isArray}}{{^isArray}}_paginated{{/isArray}}(
             {{#allParams}}
             {{paramName}}={{#isString}}"invalid"{{/isString}}{{#isInteger}}999{{/isInteger}}{{#isNumber}}999.9{{/isNumber}}{{#isBoolean}}False{{/isBoolean}}{{#isArray}}[]{{/isArray}}{{^isPrimitiveType}}{{^isArray}}None{{/isArray}}{{/isPrimitiveType}},
             {{/allParams}}
@@ -379,7 +379,7 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
         assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
         {{/isArray}}
         {{^isArray}}
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         {{/isArray}}
         assert call_count[0] == 3
 
@@ -409,7 +409,7 @@ class {{#operations}}Test{{classname}}(unittest.{{#async}}IsolatedAsyncio{{/asyn
 
         # Collect all items
         items = []
-        async for item in self.api.{{operationId}}_all(
+        async for item in self.api.{{operationId}}{{#isArray}}_all{{/isArray}}{{^isArray}}_paginated{{/isArray}}(
             {{#allParams}}
             {{paramName}}={{#isString}}"invalid"{{/isString}}{{#isInteger}}999{{/isInteger}}{{#isNumber}}999.9{{/isNumber}}{{#isBoolean}}False{{/isBoolean}}{{#isArray}}[]{{/isArray}}{{^isPrimitiveType}}{{^isArray}}None{{/isArray}}{{/isPrimitiveType}},
             {{/allParams}}

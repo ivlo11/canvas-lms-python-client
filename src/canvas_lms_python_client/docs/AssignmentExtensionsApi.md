@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **assignment_extensions_create**
-> assignment_extensions_create(assignment_id, course_id, assignment_extensions_create_request=assignment_extensions_create_request)
+> AssignmentExtensionsResponse assignment_extensions_create(assignment_id, course_id, assignment_extensions_create_request=assignment_extensions_create_request)
 
 Set extensions for student assignment submissions
 
@@ -25,6 +25,7 @@ Set extensions for student assignment submissions
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.assignment_extensions_create_request import AssignmentExtensionsCreateRequest
+from canvas_lms_python_client.models.assignment_extensions_response import AssignmentExtensionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -54,7 +55,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Set extensions for student assignment submissions
-        await api_instance.assignment_extensions_create(assignment_id, course_id, assignment_extensions_create_request=assignment_extensions_create_request)
+        api_response = await api_instance.assignment_extensions_create(assignment_id, course_id, assignment_extensions_create_request=assignment_extensions_create_request)
+        print("The response of AssignmentExtensionsApi->assignment_extensions_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AssignmentExtensionsApi->assignment_extensions_create: %s\n" % e)
 ```
@@ -72,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AssignmentExtensionsResponse**](AssignmentExtensionsResponse.md)
 
 ### Authorization
 

@@ -24,6 +24,7 @@ from typing_extensions import Annotated
 from canvas_lms_python_client.models.quiz_group import QuizGroup
 from canvas_lms_python_client.models.quiz_groups_create_request import QuizGroupsCreateRequest
 from canvas_lms_python_client.models.quiz_groups_reorder_request import QuizGroupsReorderRequest
+from canvas_lms_python_client.models.quiz_groups_response import QuizGroupsResponse
 from canvas_lms_python_client.models.quiz_groups_update_request import QuizGroupsUpdateRequest
 
 

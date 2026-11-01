@@ -123,6 +123,29 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
 ```
 
+### All Items
+
+Operations whose pages are lists also generate `<operation>_all`, which yields each item across all pages:
+
+```python
+async for account in api_instance.accounts_course_accounts_all(per_page=50):
+    print(account.name)
+```
+
+### Wrapped List Responses
+
+Some Canvas endpoints wrap each page in an object, for example `{"polls": [...]}`. For these, `_paginated` yields one wrapper model per page (such as `PollsResponse`), and no `_all` method is generated. Read the list attribute from each page:
+
+```python
+async for page in polls_api.polls_index_paginated(per_page=50):
+    for poll in page.polls or []:
+        print(poll.question)
+```
+
+### Breaking Changes
+
+`<operation>_all` is now generated only for operations whose response is a list. It was removed from every paginated operation whose response is a wrapper model (e.g. `polls_index`, `terms_api_index`, `registrations_list`), an untyped object (`rubrics_api_used_locations`), or undocumented. On those operations it yielded either nothing or one whole wrapper per page. Iterate `<operation>_paginated` instead and read the wrapper's list attribute, as shown above.
+
 ### Link Header Relations
 
 Canvas returns five link relations in the Link header:

@@ -18,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.quiz_statistics_response import QuizStatisticsResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -56,7 +57,7 @@ class QuizStatisticsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> QuizStatisticsResponse:
         """Fetching the latest quiz statistics
 
         This endpoint provides statistics for all quiz versions, or for a specific quiz version, in which case the output is guaranteed to represent the _latest_ and most current version of the quiz.  <b>200 OK</b> response code is returned if the request was successful.
@@ -101,6 +102,7 @@ class QuizStatisticsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizStatisticsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -130,7 +132,7 @@ class QuizStatisticsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizStatisticsResponse]:
         """Fetching the latest quiz statistics
 
         This endpoint provides statistics for all quiz versions, or for a specific quiz version, in which case the output is guaranteed to represent the _latest_ and most current version of the quiz.  <b>200 OK</b> response code is returned if the request was successful.
@@ -175,6 +177,7 @@ class QuizStatisticsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizStatisticsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -250,6 +253,7 @@ class QuizStatisticsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizStatisticsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

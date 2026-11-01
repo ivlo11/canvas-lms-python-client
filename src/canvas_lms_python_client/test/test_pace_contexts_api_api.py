@@ -83,7 +83,7 @@ class TestPaceContextsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -96,7 +96,7 @@ class TestPaceContextsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.pace_contexts_api_index_all(
+        async for page in self.api.pace_contexts_api_index_paginated(
             course_id="invalid",
             type="invalid",
             sort="invalid",
@@ -109,7 +109,7 @@ class TestPaceContextsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_pace_contexts_api_index_paginated_multiple_pages(self) -> None:
         """Test pace_contexts_api_index_fetch_all_items following pagination links.
@@ -161,7 +161,7 @@ class TestPaceContextsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.pace_contexts_api_index_all(
+        async for item in self.api.pace_contexts_api_index_paginated(
             course_id="invalid",
             type="invalid",
             sort="invalid",
@@ -174,7 +174,7 @@ class TestPaceContextsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_pace_contexts_api_index_paginated_empty_result(self) -> None:
@@ -198,7 +198,7 @@ class TestPaceContextsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.pace_contexts_api_index_all(
+        async for item in self.api.pace_contexts_api_index_paginated(
             course_id="invalid",
             type="invalid",
             sort="invalid",

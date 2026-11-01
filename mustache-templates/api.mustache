@@ -186,10 +186,11 @@ https://github.com/OpenAPITools/openapi-generator/blob/c84b949df1a9ec04ba75989cb
             if not _next_url:
                 return
             _url = _next_url
+{{#isArray}}
 
 
     @validate_call
-    {{#async}}async {{/async}}def {{operationId}}_all{{>partial_api_args}} -> AsyncIterator[{{#isArray}}{{returnProperty.items.dataType}}{{/isArray}}{{^isArray}}Any{{/isArray}}]:
+    {{#async}}async {{/async}}def {{operationId}}_all{{>partial_api_args}} -> AsyncIterator[{{returnProperty.items.dataType}}]:
 {{>partial_api}}
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -212,8 +213,6 @@ https://github.com/OpenAPITools/openapi-generator/blob/c84b949df1a9ec04ba75989cb
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -224,6 +223,7 @@ https://github.com/OpenAPITools/openapi-generator/blob/c84b949df1a9ec04ba75989cb
             if not _next_url:
                 return
             _url = _next_url
+{{/isArray}}
 {{/compatibleWithPythonLegacyApi}}
 {{/vendorExtensions.x-paginated}}
 

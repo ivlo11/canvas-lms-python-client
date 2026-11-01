@@ -20,6 +20,7 @@ from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.grading_periods_batch_update_for_other_request import GradingPeriodsBatchUpdateForOtherRequest
 from canvas_lms_python_client.models.grading_periods_batch_update_request import GradingPeriodsBatchUpdateRequest
+from canvas_lms_python_client.models.grading_periods_response import GradingPeriodsResponse
 from canvas_lms_python_client.models.grading_periods_update_request import GradingPeriodsUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -58,7 +59,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> GradingPeriodsResponse:
         """Batch update grading periods
 
         Update multiple grading periods
@@ -100,6 +101,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +130,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[GradingPeriodsResponse]:
         """Batch update grading periods
 
         Update multiple grading periods
@@ -170,6 +172,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -241,6 +244,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -346,7 +350,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> GradingPeriodsResponse:
         """Batch update grading periods
 
         Update multiple grading periods
@@ -388,6 +392,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -416,7 +421,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[GradingPeriodsResponse]:
         """Batch update grading periods
 
         Update multiple grading periods
@@ -458,6 +463,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -529,6 +535,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1169,7 +1176,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> GradingPeriodsResponse:
         """List grading periods
 
         Returns the paginated list of grading periods for the current course.
@@ -1208,6 +1215,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1235,7 +1243,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[GradingPeriodsResponse]:
         """List grading periods
 
         Returns the paginated list of grading periods for the current course.
@@ -1274,6 +1282,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1341,6 +1350,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1429,7 +1439,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> GradingPeriodsResponse:
         """List grading periods
 
         Returns the paginated list of grading periods for the current course.
@@ -1468,6 +1478,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1495,7 +1506,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[GradingPeriodsResponse]:
         """List grading periods
 
         Returns the paginated list of grading periods for the current course.
@@ -1534,6 +1545,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1601,6 +1613,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1690,7 +1703,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> GradingPeriodsResponse:
         """Get a single grading period
 
         Returns the grading period with the given id
@@ -1732,6 +1745,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1760,7 +1774,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[GradingPeriodsResponse]:
         """Get a single grading period
 
         Returns the grading period with the given id
@@ -1802,6 +1816,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1873,6 +1888,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1966,7 +1982,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> GradingPeriodsResponse:
         """Update a single grading period
 
         Update an existing grading period.
@@ -2011,6 +2027,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2040,7 +2057,7 @@ class GradingPeriodsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[GradingPeriodsResponse]:
         """Update a single grading period
 
         Update an existing grading period.
@@ -2085,6 +2102,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2160,6 +2178,7 @@ class GradingPeriodsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

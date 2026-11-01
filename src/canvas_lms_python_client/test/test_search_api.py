@@ -56,7 +56,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -69,7 +69,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.search_all_courses_all(
+        async for page in self.api.search_all_courses_paginated(
             search="invalid",
             public_only=False,
             open_enrollment_only=False,
@@ -79,7 +79,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_search_all_courses_paginated_multiple_pages(self) -> None:
         """Test search_all_courses_fetch_all_items following pagination links.
@@ -131,7 +131,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.search_all_courses_all(
+        async for item in self.api.search_all_courses_paginated(
             search="invalid",
             public_only=False,
             open_enrollment_only=False,
@@ -141,7 +141,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_search_all_courses_paginated_empty_result(self) -> None:
@@ -165,7 +165,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.search_all_courses_all(
+        async for item in self.api.search_all_courses_paginated(
             search="invalid",
             public_only=False,
             open_enrollment_only=False,
@@ -202,7 +202,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -215,7 +215,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.search_recipients_all(
+        async for page in self.api.search_recipients_paginated(
             search="invalid",
             context="invalid",
             exclude=[],
@@ -229,7 +229,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_search_recipients_paginated_multiple_pages(self) -> None:
         """Test search_recipients_fetch_all_items following pagination links.
@@ -281,7 +281,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.search_recipients_all(
+        async for item in self.api.search_recipients_paginated(
             search="invalid",
             context="invalid",
             exclude=[],
@@ -295,7 +295,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_search_recipients_paginated_empty_result(self) -> None:
@@ -319,7 +319,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.search_recipients_all(
+        async for item in self.api.search_recipients_paginated(
             search="invalid",
             context="invalid",
             exclude=[],
@@ -360,7 +360,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -373,7 +373,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.search_recipients_for_other_all(
+        async for page in self.api.search_recipients_for_other_paginated(
             search="invalid",
             context="invalid",
             exclude=[],
@@ -387,7 +387,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_search_recipients_for_other_paginated_multiple_pages(self) -> None:
         """Test search_recipients_for_other_fetch_all_items following pagination links.
@@ -439,7 +439,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.search_recipients_for_other_all(
+        async for item in self.api.search_recipients_for_other_paginated(
             search="invalid",
             context="invalid",
             exclude=[],
@@ -453,7 +453,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_search_recipients_for_other_paginated_empty_result(self) -> None:
@@ -477,7 +477,7 @@ class TestSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.search_recipients_for_other_all(
+        async for item in self.api.search_recipients_for_other_paginated(
             search="invalid",
             context="invalid",
             exclude=[],

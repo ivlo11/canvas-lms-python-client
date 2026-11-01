@@ -7,6 +7,9 @@ CANVAS_ADMIN_API_TOKEN against a seeded Canvas instance:
     pdm run pytest --integration -m integration
 
 Tests skip, naming the missing data, when the instance has nothing to list.
+
+Wrapped list endpoints (e.g. polls) have no `_all`; their tests iterate
+`_paginated` and check each page is the wrapper model.
 """
 
 from typing import AsyncIterator, Awaitable, Callable, List, Optional, TypeVar
@@ -16,11 +19,18 @@ import pytest
 from canvas_lms_python_client.api.accounts_api import AccountsApi
 from canvas_lms_python_client.api.appointment_groups_api import AppointmentGroupsApi
 from canvas_lms_python_client.api.lti_apps_api import LtiAppsApi
+from canvas_lms_python_client.api.polls_api import PollsApi
+from canvas_lms_python_client.api.quiz_submissions_api_api import QuizSubmissionsApiApi
+from canvas_lms_python_client.api.quizzes_api_api import QuizzesApiApi
 from canvas_lms_python_client.api.rubrics_api_api import RubricsApiApi
 from canvas_lms_python_client.models.account import Account
 from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.models.course import Course
 from canvas_lms_python_client.models.group import Group
+from canvas_lms_python_client.models.poll import Poll
+from canvas_lms_python_client.models.polls_response import PollsResponse
+from canvas_lms_python_client.models.quiz_submission import QuizSubmission
+from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
 from canvas_lms_python_client.models.rubric import Rubric
 from canvas_lms_python_client.models.user import User
 
@@ -187,3 +197,43 @@ async def test_account_launch_definitions_yield_items(canvas_admin_api_client):
     require(definitions, "LTI tool with a launch placement in the root account")
 
     assert_launch_definitions(definitions)
+
+
+def wrapped_items(pages: List[object], wrapper: type, key: str) -> List[object]:
+    """Assert each page is ``wrapper`` and return the items under ``key``."""
+    items: List[object] = []
+    for page in pages:
+        assert isinstance(page, wrapper)
+        items.extend(getattr(page, key) or [])
+    return items
+
+
+async def test_polls_pages_typed(canvas_admin_api_client):
+    pages = await collect(PollsApi(canvas_admin_api_client).polls_index_paginated())
+
+    polls = require(wrapped_items(pages, PollsResponse, "polls"), "poll visible to the admin")
+    assert_typed(polls, Poll)
+
+
+async def test_quiz_submissions_pages_typed(canvas_admin_api_client):
+    account = await root_account(canvas_admin_api_client)
+    quizzes_api = QuizzesApiApi(canvas_admin_api_client)
+    submissions_api = QuizSubmissionsApiApi(canvas_admin_api_client)
+
+    submissions: List[object] = []
+    for course in await account_courses(canvas_admin_api_client, account):
+        course_id = str(course.id)
+        for quiz in await collect(quizzes_api.quizzes_api_index_all(course_id=course_id)):
+            pages = await collect(
+                submissions_api.quiz_submissions_api_index_paginated(
+                    course_id=course_id, quiz_id=str(quiz.id)
+                )
+            )
+            submissions = wrapped_items(pages, QuizSubmissionsResponse, "quiz_submissions")
+            if submissions:
+                break
+        if submissions:
+            break
+    require(submissions, "quiz submission in any root account course")
+
+    assert_typed(submissions, QuizSubmission)

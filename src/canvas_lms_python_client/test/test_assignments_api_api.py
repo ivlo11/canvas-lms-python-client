@@ -840,8 +840,8 @@ class TestAssignmentsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
-        mock_data = MagicMock()
+        # Array response
+        mock_data = [MagicMock(), MagicMock()]
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -862,7 +862,7 @@ class TestAssignmentsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == len(mock_data)
 
     async def test_assignments_api_user_index_paginated_multiple_pages(self) -> None:
         """Test assignments_api_user_index_fetch_all_items following pagination links.
@@ -874,7 +874,7 @@ class TestAssignmentsApiApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = MagicMock()
+        mock_page_data = [MagicMock(), MagicMock()]
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -923,7 +923,7 @@ class TestAssignmentsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
         assert call_count[0] == 3
 
     async def test_assignments_api_user_index_paginated_empty_result(self) -> None:

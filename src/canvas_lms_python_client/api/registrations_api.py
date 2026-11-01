@@ -2141,8 +2141,6 @@ class RegistrationsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -3437,125 +3435,6 @@ class RegistrationsApi:
             if _page_data is None:
                 return
             yield _page_data
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
-
-    @validate_call
-    async def registrations_list_all(
-        self,
-        account_id: Annotated[StrictStr, Field(description="Scope response to account_id")],
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of registrations to return per page. Defaults to 15.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        sort: Annotated[Optional[StrictStr], Field(description="The field to sort by. Choices are: name, nickname, lti_version, installed, installed_by, updated_by, updated, and on. Defaults to installed.")] = None,
-        dir: Annotated[Optional[StrictStr], Field(description="The order to sort the given column by. Defaults to desc.")] = None,
-        include: Annotated[Optional[List[StrictStr]], Field(description="Array of additional data to include. Always includes [account_binding].  \"account_binding\":: the registration's binding to the given account \"configuration\":: the registration's Canvas-style tool configuration, without any overlays applied. \"overlaid_configuration\":: the registration's Canvas-style tool configuration, with all overlays applied. \"overlay\":: the registration's admin-defined configuration overlay")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
-        """List LTI Registrations in an account
-
-        Returns all LTI registrations in the specified account. Includes registrations created in this account, those set to 'allow' from a parent root account (like Site Admin) and 'on' for this account, and those enabled 'on' at the parent root account level.
-
-        :param account_id: Scope response to account_id (required)
-        :type account_id: str
-        :param per_page: The number of registrations to return per page. Defaults to 15.
-        :type per_page: int
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param sort: The field to sort by. Choices are: name, nickname, lti_version, installed, installed_by, updated_by, updated, and on. Defaults to installed.
-        :type sort: str
-        :param dir: The order to sort the given column by. Defaults to desc.
-        :type dir: str
-        :param include: Array of additional data to include. Always includes [account_binding].  \"account_binding\":: the registration's binding to the given account \"configuration\":: the registration's Canvas-style tool configuration, without any overlays applied. \"overlaid_configuration\":: the registration's Canvas-style tool configuration, with all overlays applied. \"overlay\":: the registration's admin-defined configuration overlay
-        :type include: List[str]
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._registrations_list_serialize(
-            account_id=account_id,
-            per_page=per_page,
-            page=page,
-            sort=sort,
-            dir=dir,
-            include=include,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "ListLtiRegistrationsResponse",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
 
             _next_url = get_next_page_url(
                 response_data.headers.get("Link"),

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **quiz_extensions_create**
-> quiz_extensions_create(course_id, quiz_id, quiz_extensions_create_request=quiz_extensions_create_request)
+> QuizExtensionsResponse quiz_extensions_create(course_id, quiz_id, quiz_extensions_create_request=quiz_extensions_create_request)
 
 Set extensions for student quiz submissions
 
@@ -24,6 +24,7 @@ Set extensions for student quiz submissions
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_extensions_create_request import QuizExtensionsCreateRequest
+from canvas_lms_python_client.models.quiz_extensions_response import QuizExtensionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -53,7 +54,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Set extensions for student quiz submissions
-        await api_instance.quiz_extensions_create(course_id, quiz_id, quiz_extensions_create_request=quiz_extensions_create_request)
+        api_response = await api_instance.quiz_extensions_create(course_id, quiz_id, quiz_extensions_create_request=quiz_extensions_create_request)
+        print("The response of QuizExtensionsApi->quiz_extensions_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizExtensionsApi->quiz_extensions_create: %s\n" % e)
 ```
@@ -71,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizExtensionsResponse**](QuizExtensionsResponse.md)
 
 ### Authorization
 

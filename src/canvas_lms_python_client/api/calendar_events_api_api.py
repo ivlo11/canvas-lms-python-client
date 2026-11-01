@@ -1241,8 +1241,6 @@ class CalendarEventsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -3986,8 +3984,6 @@ class CalendarEventsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 

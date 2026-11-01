@@ -21,9 +21,12 @@ from canvas_lms_python_client.api.appointment_groups_api import AppointmentGroup
 from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.models.appointment_groups_create_request import AppointmentGroupsCreateRequest
 from canvas_lms_python_client.models.appointment_groups_update_request import AppointmentGroupsUpdateRequest
 from canvas_lms_python_client.models.calendar_event import CalendarEvent
+from canvas_lms_python_client.models.group import Group
+from canvas_lms_python_client.models.user import User
 
 
 class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
@@ -157,8 +160,8 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
-        mock_data = MagicMock()
+        # Array response
+        mock_data = [MagicMock(), MagicMock()]
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -179,7 +182,7 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == len(mock_data)
 
     async def test_appointment_groups_groups_paginated_multiple_pages(self) -> None:
         """Test appointment_groups_groups_fetch_all_items following pagination links.
@@ -191,7 +194,7 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = MagicMock()
+        mock_page_data = [MagicMock(), MagicMock()]
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -240,7 +243,7 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
         assert call_count[0] == 3
 
     async def test_appointment_groups_groups_paginated_empty_result(self) -> None:
@@ -300,8 +303,8 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
-        mock_data = MagicMock()
+        # Array response
+        mock_data = [MagicMock(), MagicMock()]
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -324,7 +327,7 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == len(mock_data)
 
     async def test_appointment_groups_index_paginated_multiple_pages(self) -> None:
         """Test appointment_groups_index_fetch_all_items following pagination links.
@@ -336,7 +339,7 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = MagicMock()
+        mock_page_data = [MagicMock(), MagicMock()]
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -387,7 +390,7 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
         assert call_count[0] == 3
 
     async def test_appointment_groups_index_paginated_empty_result(self) -> None:
@@ -579,8 +582,8 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
-        mock_data = MagicMock()
+        # Array response
+        mock_data = [MagicMock(), MagicMock()]
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -601,7 +604,7 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == len(mock_data)
 
     async def test_appointment_groups_users_paginated_multiple_pages(self) -> None:
         """Test appointment_groups_users_fetch_all_items following pagination links.
@@ -613,7 +616,7 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = MagicMock()
+        mock_page_data = [MagicMock(), MagicMock()]
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -662,7 +665,7 @@ class TestAppointmentGroupsApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
         assert call_count[0] == 3
 
     async def test_appointment_groups_users_paginated_empty_result(self) -> None:

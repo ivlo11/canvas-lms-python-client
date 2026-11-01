@@ -21,6 +21,7 @@ from typing_extensions import Annotated
 from canvas_lms_python_client.models.quiz_group import QuizGroup
 from canvas_lms_python_client.models.quiz_groups_create_request import QuizGroupsCreateRequest
 from canvas_lms_python_client.models.quiz_groups_reorder_request import QuizGroupsReorderRequest
+from canvas_lms_python_client.models.quiz_groups_response import QuizGroupsResponse
 from canvas_lms_python_client.models.quiz_groups_update_request import QuizGroupsUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -60,7 +61,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> QuizGroupsResponse:
         """Create a question group
 
         Create a new question group for this quiz  <b>201 Created</b> response code is returned if the creation was successful.
@@ -105,6 +106,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -134,7 +136,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizGroupsResponse]:
         """Create a question group
 
         Create a new question group for this quiz  <b>201 Created</b> response code is returned if the creation was successful.
@@ -179,6 +181,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -254,6 +257,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -645,7 +649,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> QuizGroupsResponse:
         """List question groups in a quiz
 
         Returns a list of question groups in a quiz.
@@ -687,6 +691,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -715,7 +720,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizGroupsResponse]:
         """List question groups in a quiz
 
         Returns a list of question groups in a quiz.
@@ -757,6 +762,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -828,6 +834,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1526,7 +1533,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> QuizGroupsResponse:
         """Update a question group
 
         Update a question group
@@ -1574,6 +1581,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1604,7 +1612,7 @@ class QuizGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizGroupsResponse]:
         """Update a question group
 
         Update a question group
@@ -1652,6 +1660,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1731,6 +1740,7 @@ class QuizGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

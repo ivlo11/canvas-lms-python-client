@@ -19,6 +19,7 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.course_quiz_extensions_create_request import CourseQuizExtensionsCreateRequest
+from canvas_lms_python_client.models.quiz_extensions_response import QuizExtensionsResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -56,7 +57,7 @@ class CourseQuizExtensionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> QuizExtensionsResponse:
         """Set extensions for student quiz submissions
 
         <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>403 Forbidden</b> if you are not allowed to extend quizzes for this course
@@ -98,6 +99,7 @@ class CourseQuizExtensionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizExtensionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -126,7 +128,7 @@ class CourseQuizExtensionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizExtensionsResponse]:
         """Set extensions for student quiz submissions
 
         <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>403 Forbidden</b> if you are not allowed to extend quizzes for this course
@@ -168,6 +170,7 @@ class CourseQuizExtensionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizExtensionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -239,6 +242,7 @@ class CourseQuizExtensionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizExtensionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

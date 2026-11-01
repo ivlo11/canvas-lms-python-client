@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **grading_periods_batch_update**
-> grading_periods_batch_update(course_id, grading_periods_batch_update_request=grading_periods_batch_update_request)
+> GradingPeriodsResponse grading_periods_batch_update(course_id, grading_periods_batch_update_request=grading_periods_batch_update_request)
 
 Batch update grading periods
 
@@ -28,6 +28,7 @@ Update multiple grading periods
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.grading_periods_batch_update_request import GradingPeriodsBatchUpdateRequest
+from canvas_lms_python_client.models.grading_periods_response import GradingPeriodsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -56,7 +57,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Batch update grading periods
-        await api_instance.grading_periods_batch_update(course_id, grading_periods_batch_update_request=grading_periods_batch_update_request)
+        api_response = await api_instance.grading_periods_batch_update(course_id, grading_periods_batch_update_request=grading_periods_batch_update_request)
+        print("The response of GradingPeriodsApi->grading_periods_batch_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GradingPeriodsApi->grading_periods_batch_update: %s\n" % e)
 ```
@@ -73,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GradingPeriodsResponse**](GradingPeriodsResponse.md)
 
 ### Authorization
 
@@ -93,7 +96,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **grading_periods_batch_update_for_other**
-> grading_periods_batch_update_for_other(set_id, grading_periods_batch_update_for_other_request=grading_periods_batch_update_for_other_request)
+> GradingPeriodsResponse grading_periods_batch_update_for_other(set_id, grading_periods_batch_update_for_other_request=grading_periods_batch_update_for_other_request)
 
 Batch update grading periods
 
@@ -106,6 +109,7 @@ Update multiple grading periods
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.grading_periods_batch_update_for_other_request import GradingPeriodsBatchUpdateForOtherRequest
+from canvas_lms_python_client.models.grading_periods_response import GradingPeriodsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -134,7 +138,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Batch update grading periods
-        await api_instance.grading_periods_batch_update_for_other(set_id, grading_periods_batch_update_for_other_request=grading_periods_batch_update_for_other_request)
+        api_response = await api_instance.grading_periods_batch_update_for_other(set_id, grading_periods_batch_update_for_other_request=grading_periods_batch_update_for_other_request)
+        print("The response of GradingPeriodsApi->grading_periods_batch_update_for_other:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GradingPeriodsApi->grading_periods_batch_update_for_other: %s\n" % e)
 ```
@@ -151,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GradingPeriodsResponse**](GradingPeriodsResponse.md)
 
 ### Authorization
 
@@ -327,7 +333,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **grading_periods_index**
-> grading_periods_index(account_id)
+> GradingPeriodsResponse grading_periods_index(account_id)
 
 List grading periods
 
@@ -339,6 +345,7 @@ Returns the paginated list of grading periods for the current course.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.grading_periods_response import GradingPeriodsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -366,7 +373,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List grading periods
-        await api_instance.grading_periods_index(account_id)
+        api_response = await api_instance.grading_periods_index(account_id)
+        print("The response of GradingPeriodsApi->grading_periods_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GradingPeriodsApi->grading_periods_index: %s\n" % e)
 ```
@@ -382,7 +391,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GradingPeriodsResponse**](GradingPeriodsResponse.md)
 
 ### Authorization
 
@@ -402,7 +411,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **grading_periods_index_for_courses**
-> grading_periods_index_for_courses(course_id)
+> GradingPeriodsResponse grading_periods_index_for_courses(course_id)
 
 List grading periods
 
@@ -414,6 +423,7 @@ Returns the paginated list of grading periods for the current course.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.grading_periods_response import GradingPeriodsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -441,7 +451,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List grading periods
-        await api_instance.grading_periods_index_for_courses(course_id)
+        api_response = await api_instance.grading_periods_index_for_courses(course_id)
+        print("The response of GradingPeriodsApi->grading_periods_index_for_courses:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GradingPeriodsApi->grading_periods_index_for_courses: %s\n" % e)
 ```
@@ -457,7 +469,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GradingPeriodsResponse**](GradingPeriodsResponse.md)
 
 ### Authorization
 
@@ -477,7 +489,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **grading_periods_show**
-> grading_periods_show(course_id, id)
+> GradingPeriodsResponse grading_periods_show(course_id, id)
 
 Get a single grading period
 
@@ -489,6 +501,7 @@ Returns the grading period with the given id
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.grading_periods_response import GradingPeriodsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -517,7 +530,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single grading period
-        await api_instance.grading_periods_show(course_id, id)
+        api_response = await api_instance.grading_periods_show(course_id, id)
+        print("The response of GradingPeriodsApi->grading_periods_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GradingPeriodsApi->grading_periods_show: %s\n" % e)
 ```
@@ -534,7 +549,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GradingPeriodsResponse**](GradingPeriodsResponse.md)
 
 ### Authorization
 
@@ -554,7 +569,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **grading_periods_update**
-> grading_periods_update(course_id, id, grading_periods_update_request=grading_periods_update_request)
+> GradingPeriodsResponse grading_periods_update(course_id, id, grading_periods_update_request=grading_periods_update_request)
 
 Update a single grading period
 
@@ -566,6 +581,7 @@ Update an existing grading period.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.grading_periods_response import GradingPeriodsResponse
 from canvas_lms_python_client.models.grading_periods_update_request import GradingPeriodsUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -596,7 +612,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a single grading period
-        await api_instance.grading_periods_update(course_id, id, grading_periods_update_request=grading_periods_update_request)
+        api_response = await api_instance.grading_periods_update(course_id, id, grading_periods_update_request=grading_periods_update_request)
+        print("The response of GradingPeriodsApi->grading_periods_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GradingPeriodsApi->grading_periods_update: %s\n" % e)
 ```
@@ -614,7 +632,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GradingPeriodsResponse**](GradingPeriodsResponse.md)
 
 ### Authorization
 
