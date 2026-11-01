@@ -16,8 +16,9 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink
 from canvas_lms_python_client.models.resource_links_bulk_create_request import ResourceLinksBulkCreateRequest
 from canvas_lms_python_client.models.resource_links_create_request import ResourceLinksCreateRequest
 from canvas_lms_python_client.models.resource_links_update_request import ResourceLinksUpdateRequest
@@ -58,7 +59,7 @@ class ResourceLinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> List[LtiResourceLink]:
         """Bulk Create LTI Resource Links
 
         Create up to 100 new LTI Resource Links in the specified course with the provided parameters.  <b>Caution!</b> Resource Links are usually created by the tool via LTI Deep Linking. The tool has no knowledge of links created via this API, and may not be able to handle or launch them.  Links created using this API cannot be associated with a specific piece of Canvas content, like an Assignment, Module Item, or Collaboration. Links created using this API are only suitable for embedding in rich content using the `canvas_launch_url` provided in the API response.  Each link will be associated with the ContextExternalTool available in this context that matches the provided url. If a matching tool is not found, or any parameters are invalid, no links will be created and this will return an error.
@@ -100,7 +101,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[LtiResourceLink]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -129,7 +130,7 @@ class ResourceLinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[List[LtiResourceLink]]:
         """Bulk Create LTI Resource Links
 
         Create up to 100 new LTI Resource Links in the specified course with the provided parameters.  <b>Caution!</b> Resource Links are usually created by the tool via LTI Deep Linking. The tool has no knowledge of links created via this API, and may not be able to handle or launch them.  Links created using this API cannot be associated with a specific piece of Canvas content, like an Assignment, Module Item, or Collaboration. Links created using this API are only suitable for embedding in rich content using the `canvas_launch_url` provided in the API response.  Each link will be associated with the ContextExternalTool available in this context that matches the provided url. If a matching tool is not found, or any parameters are invalid, no links will be created and this will return an error.
@@ -171,7 +172,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[LtiResourceLink]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -243,7 +244,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[LtiResourceLink]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -349,7 +350,7 @@ class ResourceLinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiResourceLink:
         """Create an LTI Resource Link
 
         Create a new LTI Resource Link in the specified course with the provided parameters.  <b>Caution!</b> Resource Links are usually created by the tool via LTI Deep Linking. The tool has no knowledge of links created via this API, and may not be able to handle or launch them.  Links created using this API cannot be associated with a specific piece of Canvas content, like an Assignment, Module Item, or Collaboration. Links created using this API are only suitable for embedding in rich content using the `canvas_launch_url` provided in the API response.  This link will be associated with the ContextExternalTool available in this context that matches the provided url. If a matching tool is not found, the link will not be created and this will return an error.
@@ -391,7 +392,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -420,7 +421,7 @@ class ResourceLinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiResourceLink]:
         """Create an LTI Resource Link
 
         Create a new LTI Resource Link in the specified course with the provided parameters.  <b>Caution!</b> Resource Links are usually created by the tool via LTI Deep Linking. The tool has no knowledge of links created via this API, and may not be able to handle or launch them.  Links created using this API cannot be associated with a specific piece of Canvas content, like an Assignment, Module Item, or Collaboration. Links created using this API are only suitable for embedding in rich content using the `canvas_launch_url` provided in the API response.  This link will be associated with the ContextExternalTool available in this context that matches the provided url. If a matching tool is not found, the link will not be created and this will return an error.
@@ -462,7 +463,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -534,7 +535,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -640,7 +641,7 @@ class ResourceLinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiResourceLink:
         """Delete an LTI Resource Link
 
         Delete the specified resource link. The ID can be in the standard Canvas format (\"1\"), or in these special formats:  - resource_link_uuid:<uuid> - Find the resource link by its resource_link_uuid - lookup_uuid:<uuid> - Find the resource link by its lookup_uuid  Only links that are not associated with Assignments, Module Items, or Collaborations can be deleted.
@@ -682,7 +683,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -711,7 +712,7 @@ class ResourceLinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiResourceLink]:
         """Delete an LTI Resource Link
 
         Delete the specified resource link. The ID can be in the standard Canvas format (\"1\"), or in these special formats:  - resource_link_uuid:<uuid> - Find the resource link by its resource_link_uuid - lookup_uuid:<uuid> - Find the resource link by its lookup_uuid  Only links that are not associated with Assignments, Module Items, or Collaborations can be deleted.
@@ -753,7 +754,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -825,7 +826,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -921,7 +922,7 @@ class ResourceLinksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[object]:
+    ) -> List[LtiResourceLink]:
         """List LTI Resource Links
 
         Returns all Resource Links in the specified course. This includes links that are associated with Assignments, Module Items, Collaborations, and that are embedded in rich content. This endpoint is paginated, and will return 50 links per page by default. Links are sorted by the order in which they were created.
@@ -975,7 +976,7 @@ class ResourceLinksApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiResourceLink]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1008,7 +1009,7 @@ class ResourceLinksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[object]]:
+    ) -> AsyncIterator[List[LtiResourceLink]]:
         """List LTI Resource Links
 
         Returns all Resource Links in the specified course. This includes links that are associated with Assignments, Module Items, Collaborations, and that are embedded in rich content. This endpoint is paginated, and will return 50 links per page by default. Links are sorted by the order in which they were created.
@@ -1062,7 +1063,7 @@ class ResourceLinksApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiResourceLink]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1117,7 +1118,7 @@ class ResourceLinksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[LtiResourceLink]:
         """List LTI Resource Links
 
         Returns all Resource Links in the specified course. This includes links that are associated with Assignments, Module Items, Collaborations, and that are embedded in rich content. This endpoint is paginated, and will return 50 links per page by default. Links are sorted by the order in which they were created.
@@ -1171,7 +1172,7 @@ class ResourceLinksApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiResourceLink]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1225,7 +1226,7 @@ class ResourceLinksApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[LtiResourceLink]]:
         """List LTI Resource Links
 
         Returns all Resource Links in the specified course. This includes links that are associated with Assignments, Module Items, Collaborations, and that are embedded in rich content. This endpoint is paginated, and will return 50 links per page by default. Links are sorted by the order in which they were created.
@@ -1279,7 +1280,7 @@ class ResourceLinksApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiResourceLink]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1366,7 +1367,7 @@ class ResourceLinksApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiResourceLink]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1472,7 +1473,7 @@ class ResourceLinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiResourceLink:
         """Show an LTI Resource Link
 
         Return details about the specified resource link. The ID can be in the standard Canvas format (\"1\"), or in these special formats:  - resource_link_uuid:<uuid> - Find the resource link by its resource_link_uuid - lookup_uuid:<uuid> - Find the resource link by its lookup_uuid
@@ -1517,7 +1518,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1547,7 +1548,7 @@ class ResourceLinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiResourceLink]:
         """Show an LTI Resource Link
 
         Return details about the specified resource link. The ID can be in the standard Canvas format (\"1\"), or in these special formats:  - resource_link_uuid:<uuid> - Find the resource link by its resource_link_uuid - lookup_uuid:<uuid> - Find the resource link by its lookup_uuid
@@ -1592,7 +1593,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1668,7 +1669,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1767,7 +1768,7 @@ class ResourceLinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiResourceLink:
         """Update an LTI Resource Link
 
         Update the specified resource link with the provided parameters.  <b>Caution!</b> Changing existing links may result in launch errors.
@@ -1812,7 +1813,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1842,7 +1843,7 @@ class ResourceLinksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiResourceLink]:
         """Update an LTI Resource Link
 
         Update the specified resource link with the provided parameters.  <b>Caution!</b> Changing existing links may result in launch errors.
@@ -1887,7 +1888,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1963,7 +1964,7 @@ class ResourceLinksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiResourceLink",
         }
         response_data = await self.api_client.call_api(
             *_param,

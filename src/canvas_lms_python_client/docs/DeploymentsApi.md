@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **deployments_create**
-> object deployments_create(account_id, registration_id, deployments_create_request=deployments_create_request)
+> LtiDeployment deployments_create(account_id, registration_id, deployments_create_request=deployments_create_request)
 
 Create LTI Deployment
 
@@ -26,6 +26,7 @@ If no context is specified, the deployment will be created in the root account.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.deployments_create_request import DeploymentsCreateRequest
+from canvas_lms_python_client.models.lti_deployment import LtiDeployment
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -75,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiDeployment**](LtiDeployment.md)
 
 ### Authorization
 
@@ -95,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deployments_destroy**
-> object deployments_destroy(account_id, id, registration_id)
+> LtiDeployment deployments_destroy(account_id, id, registration_id)
 
 Delete LTI Deployment
 
@@ -107,6 +108,7 @@ Delete the specified deployment for the specified LTI tool in this context.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_deployment import LtiDeployment
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -156,7 +158,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiDeployment**](LtiDeployment.md)
 
 ### Authorization
 
@@ -176,7 +178,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deployments_list**
-> List[object] deployments_list(account_id, registration_id, page=page, per_page=per_page)
+> List[LtiDeployment] deployments_list(account_id, registration_id, page=page, per_page=per_page)
 
 List LTI Deployments
 
@@ -188,6 +190,7 @@ List all deployments available for the specified LTI registration.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_deployment import LtiDeployment
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -239,7 +242,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[LtiDeployment]**](LtiDeployment.md)
 
 ### Authorization
 
@@ -259,7 +262,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deployments_list_controls**
-> List[object] deployments_list_controls(account_id, id, registration_id, page=page, per_page=per_page)
+> List[LtiContextControl] deployments_list_controls(account_id, id, registration_id, page=page, per_page=per_page)
 
 List LTI Context Controls
 
@@ -272,6 +275,7 @@ LTI tool availability in contexts across Canvas.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_context_control import LtiContextControl
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -325,7 +329,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[LtiContextControl]**](LtiContextControl.md)
 
 ### Authorization
 
@@ -345,7 +349,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **deployments_show**
-> object deployments_show(account_id, id, registration_id)
+> LtiDeployment deployments_show(account_id, id, registration_id)
 
 Show LTI Deployment
 
@@ -357,6 +361,7 @@ Display details of the specified deployment for the specified LTI registration i
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_deployment import LtiDeployment
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -406,7 +411,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiDeployment**](LtiDeployment.md)
 
 ### Authorization
 

@@ -19,7 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from canvas_lms_python_client.models.user import User
+from canvas_lms_python_client.models.lti_registration_created_by import LtiRegistrationCreatedBy
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -32,8 +32,8 @@ class LtiOverlayVersion(BaseModel):
     created_at: Optional[StrictStr] = Field(default=None, description="Timestamp of the version's creation", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
     updated_at: Optional[StrictStr] = Field(default=None, description="Timestamp of the version's last update", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
     caused_by_reset: Optional[StrictBool] = Field(default=None, description="Whether or not this change was caused by a reset of the tool's configuration")
-    created_by: Optional[User] = None
-    diff: Optional[List[List[Dict[str, Any]]]] = Field(default=None, description="A list of changes made in this version compared to the previous version", json_schema_extra={"examples": [[["+", "disabled_placements[0]", "top_navigation"]]]})
+    created_by: Optional[LtiRegistrationCreatedBy] = None
+    diff: Optional[List[List[Any]]] = Field(default=None, description="A list of changes made in this version compared to the previous version", json_schema_extra={"examples": [[["+", "disabled_placements[0]", "top_navigation"]]]})
     lti_overlay_id: Optional[StrictInt] = Field(default=None, description="The id of the overlay this version is for", json_schema_extra={"examples": [1]})
     account_id: Optional[StrictInt] = Field(default=None, description="The id of the account this version is for", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["root_account_id", "created_at", "updated_at", "caused_by_reset", "created_by", "diff", "lti_overlay_id", "account_id"]
@@ -96,7 +96,7 @@ class LtiOverlayVersion(BaseModel):
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
             "caused_by_reset": obj.get("caused_by_reset"),
-            "created_by": User.from_dict(obj["created_by"]) if obj.get("created_by") is not None else None,
+            "created_by": LtiRegistrationCreatedBy.from_dict(obj["created_by"]) if obj.get("created_by") is not None else None,
             "diff": obj.get("diff"),
             "lti_overlay_id": obj.get("lti_overlay_id"),
             "account_id": obj.get("account_id")

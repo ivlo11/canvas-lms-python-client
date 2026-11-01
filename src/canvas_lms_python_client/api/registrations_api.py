@@ -20,6 +20,9 @@ from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.context_search_response import ContextSearchResponse
 from canvas_lms_python_client.models.list_lti_registrations_response import ListLtiRegistrationsResponse
+from canvas_lms_python_client.models.lti_overlay_version import LtiOverlayVersion
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
+from canvas_lms_python_client.models.lti_registration_account_binding import LtiRegistrationAccountBinding
 from canvas_lms_python_client.models.registrations_apply_registration_update_request_request import RegistrationsApplyRegistrationUpdateRequestRequest
 from canvas_lms_python_client.models.registrations_bind_request import RegistrationsBindRequest
 from canvas_lms_python_client.models.registrations_create_request import RegistrationsCreateRequest
@@ -64,7 +67,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistration:
         """Apply LTI Registration Update Requst
 
         Applies a registration update request to an existing registration, replacing the existing configuration and overlay with the new values. If the request is rejected, marks it as rejected without applying changes.
@@ -112,7 +115,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -143,7 +146,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistration]:
         """Apply LTI Registration Update Requst
 
         Applies a registration update request to an existing registration, replacing the existing configuration and overlay with the new values. If the request is rejected, marks it as rejected without applying changes.
@@ -191,7 +194,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -271,7 +274,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -384,7 +387,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistrationAccountBinding:
         """Bind an LTI Registration to a Root Account
 
         Enable or disable the specified LTI registration for the specified root account. To enable an inherited registration (eg from Site Admin), pass the registration's global ID.  Only allowed for root accounts.  <b>Specifics for centrally-managed/federated consortia:</b> Child root accounts may not bind inherited registrations. For parent root account, binding also applies to all child root accounts.
@@ -429,7 +432,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationAccountBinding",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -459,7 +462,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistrationAccountBinding]:
         """Bind an LTI Registration to a Root Account
 
         Enable or disable the specified LTI registration for the specified root account. To enable an inherited registration (eg from Site Admin), pass the registration's global ID.  Only allowed for root accounts.  <b>Specifics for centrally-managed/federated consortia:</b> Child root accounts may not bind inherited registrations. For parent root account, binding also applies to all child root accounts.
@@ -504,7 +507,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationAccountBinding",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -580,7 +583,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationAccountBinding",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1296,7 +1299,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistration:
         """Create an LTI Registration
 
         Create a new LTI Registration, as well as an associated Tool Configuration, Developer Key, and Registration Account binding. To install/create using Dynamic Registration, please use the {file:file.registration.html Dynamic Registration API}.
@@ -1338,7 +1341,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1367,7 +1370,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistration]:
         """Create an LTI Registration
 
         Create a new LTI Registration, as well as an associated Tool Configuration, Developer Key, and Registration Account binding. To install/create using Dynamic Registration, please use the {file:file.registration.html Dynamic Registration API}.
@@ -1409,7 +1412,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1481,7 +1484,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1587,7 +1590,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistration:
         """Delete an LTI Registration
 
         Remove the specified LTI registration
@@ -1629,7 +1632,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1658,7 +1661,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistration]:
         """Delete an LTI Registration
 
         Remove the specified LTI registration
@@ -1700,7 +1703,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1772,7 +1775,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2416,7 +2419,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistration:
         """Install an LTI Registration from a Template
 
         This endpoint installs a local copy of a \"template\" LTI registration from Site Admin into the specified account. The local copy can then be customized for the account without affecting the template registration.  Only allowed for root accounts and for registrations from Site Admin marked as templates.
@@ -2458,7 +2461,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2487,7 +2490,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistration]:
         """Install an LTI Registration from a Template
 
         This endpoint installs a local copy of a \"template\" LTI registration from Site Admin into the specified account. The local copy can then be customized for the account without affecting the template registration.  Only allowed for root accounts and for registrations from Site Admin marked as templates.
@@ -2529,7 +2532,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2601,7 +2604,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2694,7 +2697,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistration:
         """Check LTI Registration Install Status
 
         Returns the local installation status for a Site Admin LTI registration. If the developer key's registration is in Site Admin, returns the local copy in the current account (if installed). If the registration is already in the current account, returns it directly.
@@ -2736,7 +2739,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2765,7 +2768,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistration]:
         """Check LTI Registration Install Status
 
         Returns the local installation status for a Site Admin LTI registration. If the developer key's registration is in Site Admin, returns the local copy in the current account (if installed). If the registration is already in the current account, returns it directly.
@@ -2807,7 +2810,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2879,7 +2882,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3738,7 +3741,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> List[LtiOverlayVersion]:
         """Get LTI Registration Overlay History
 
         Returns the overlay history items for the specified LTI registration.
@@ -3783,7 +3786,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiOverlayVersion]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3813,7 +3816,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[LtiOverlayVersion]]:
         """Get LTI Registration Overlay History
 
         Returns the overlay history items for the specified LTI registration.
@@ -3858,7 +3861,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiOverlayVersion]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3934,7 +3937,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiOverlayVersion]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4032,7 +4035,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistration:
         """Reset an LTI Registration to Defaults
 
         Reset the specified LTI registration to its default settings in this context. This removes all customizations that were present in the overlay associated with this context.
@@ -4074,7 +4077,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4103,7 +4106,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistration]:
         """Reset an LTI Registration to Defaults
 
         Reset the specified LTI registration to its default settings in this context. This removes all customizations that were present in the overlay associated with this context.
@@ -4145,7 +4148,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4217,7 +4220,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4311,7 +4314,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistration:
         """Show an LTI Registration
 
         Return details about the specified LTI registration, including the configuration and account binding.
@@ -4356,7 +4359,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4386,7 +4389,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistration]:
         """Show an LTI Registration
 
         Return details about the specified LTI registration, including the configuration and account binding.
@@ -4431,7 +4434,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4507,7 +4510,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4606,7 +4609,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistration:
         """Show an LTI Registration (via the client_id)
 
         Returns details about the specified LTI registration, including the configuration and account binding.
@@ -4648,7 +4651,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4677,7 +4680,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistration]:
         """Show an LTI Registration (via the client_id)
 
         Returns details about the specified LTI registration, including the configuration and account binding.
@@ -4719,7 +4722,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4791,7 +4794,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4884,7 +4887,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistration:
         """Get LTI Registration by Unified Tool ID
 
         Returns an LTI registration by looking up its unified_tool_id. Searches both manual configurations and IMS registrations. Only returns registrations that are active and accessible from the current account (owned by account, Site Admin, or has binding).
@@ -4926,7 +4929,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4955,7 +4958,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistration]:
         """Get LTI Registration by Unified Tool ID
 
         Returns an LTI registration by looking up its unified_tool_id. Searches both manual configurations and IMS registrations. Only returns registrations that are active and accessible from the current account (owned by account, Site Admin, or has binding).
@@ -4997,7 +5000,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5069,7 +5072,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5455,7 +5458,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistrationAccountBinding:
         """Remove an Inherited LTI Registration
 
         Deletes the account binding for this registration, effectively removing it from the account.  Only available when the lti_deactivate_registrations feature flag is enabled. Only valid for inherited (Site Admin) registrations — use destroy for registrations owned by this account.
@@ -5497,7 +5500,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationAccountBinding",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5526,7 +5529,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistrationAccountBinding]:
         """Remove an Inherited LTI Registration
 
         Deletes the account binding for this registration, effectively removing it from the account.  Only available when the lti_deactivate_registrations feature flag is enabled. Only valid for inherited (Site Admin) registrations — use destroy for registrations owned by this account.
@@ -5568,7 +5571,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationAccountBinding",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5640,7 +5643,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationAccountBinding",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5734,7 +5737,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistration:
         """Update an LTI Registration
 
         Update the specified LTI registration with the provided parameters. Note that updating the base tool configuration of a registration that is associated with a Dynamic Registration will return a 422. All other fields can be updated freely.
@@ -5779,7 +5782,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5809,7 +5812,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistration]:
         """Update an LTI Registration
 
         Update the specified LTI registration with the provided parameters. Note that updating the base tool configuration of a registration that is associated with a Dynamic Registration will return a 422. All other fields can be updated freely.
@@ -5854,7 +5857,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5930,7 +5933,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistration",
         }
         response_data = await self.api_client.call_api(
             *_param,

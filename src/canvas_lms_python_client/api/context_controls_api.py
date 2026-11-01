@@ -16,11 +16,13 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.context_controls_create_many_request import ContextControlsCreateManyRequest
 from canvas_lms_python_client.models.context_controls_create_request import ContextControlsCreateRequest
 from canvas_lms_python_client.models.context_controls_update_request import ContextControlsUpdateRequest
+from canvas_lms_python_client.models.lti_context_control import LtiContextControl
+from canvas_lms_python_client.models.lti_deployment import LtiDeployment
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -59,7 +61,7 @@ class ContextControlsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiContextControl:
         """Create LTI Context Control
 
         Create a new LTI ContextControl for the specified LTI registration in this context.
@@ -104,7 +106,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -134,7 +136,7 @@ class ContextControlsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiContextControl]:
         """Create LTI Context Control
 
         Create a new LTI ContextControl for the specified LTI registration in this context.
@@ -179,7 +181,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -255,7 +257,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -365,7 +367,7 @@ class ContextControlsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> List[LtiContextControl]:
         """Bulk Create LTI Context Controls
 
         Create up to 100 new LTI ContextControls for the specified LTI registration in this context. Control parameters are sent as a JSON array of objects, each with the same parameters as the Create LTI Context Control endpoint. Note that if a control already exists for the specified context and deployment, it will be updated instead of created.
@@ -410,7 +412,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[LtiContextControl]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -440,7 +442,7 @@ class ContextControlsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[List[LtiContextControl]]:
         """Bulk Create LTI Context Controls
 
         Create up to 100 new LTI ContextControls for the specified LTI registration in this context. Control parameters are sent as a JSON array of objects, each with the same parameters as the Create LTI Context Control endpoint. Note that if a control already exists for the specified context and deployment, it will be updated instead of created.
@@ -485,7 +487,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[LtiContextControl]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -561,7 +563,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[LtiContextControl]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -671,7 +673,7 @@ class ContextControlsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiContextControl:
         """Delete a Context Control
 
         Deletes a context control. Returns the control that is now deleted.  Note: Deleting the \"primary\" control for a deployment (the control associated with the context where the deployment is installed) is not allowed and will return an error. This prevents situations where a deployment cannot be managed from the Apps page.
@@ -716,7 +718,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -746,7 +748,7 @@ class ContextControlsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiContextControl]:
         """Delete a Context Control
 
         Deletes a context control. Returns the control that is now deleted.  Note: Deleting the \"primary\" control for a deployment (the control associated with the context where the deployment is installed) is not allowed and will return an error. This prevents situations where a deployment cannot be managed from the Apps page.
@@ -791,7 +793,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -867,7 +869,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -966,7 +968,7 @@ class ContextControlsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[object]:
+    ) -> List[LtiDeployment]:
         """List All Context Controls
 
         List all LTI ContextControls for the given LTI Registration. These controls are partitioned by LTI Deployment, and have added calculated fields for display in the Canvas UI.  This endpoint is used to populate the Availability page for an LTI Registration and may not be useful for general API Usage. For listing all ContextControls for a given Deployment, see the LTI Deployments - List Controls for Deployment endpoint.
@@ -1020,7 +1022,7 @@ class ContextControlsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiDeployment]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1053,7 +1055,7 @@ class ContextControlsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[object]]:
+    ) -> AsyncIterator[List[LtiDeployment]]:
         """List All Context Controls
 
         List all LTI ContextControls for the given LTI Registration. These controls are partitioned by LTI Deployment, and have added calculated fields for display in the Canvas UI.  This endpoint is used to populate the Availability page for an LTI Registration and may not be useful for general API Usage. For listing all ContextControls for a given Deployment, see the LTI Deployments - List Controls for Deployment endpoint.
@@ -1107,7 +1109,7 @@ class ContextControlsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiDeployment]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1162,7 +1164,7 @@ class ContextControlsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[LtiDeployment]:
         """List All Context Controls
 
         List all LTI ContextControls for the given LTI Registration. These controls are partitioned by LTI Deployment, and have added calculated fields for display in the Canvas UI.  This endpoint is used to populate the Availability page for an LTI Registration and may not be useful for general API Usage. For listing all ContextControls for a given Deployment, see the LTI Deployments - List Controls for Deployment endpoint.
@@ -1216,7 +1218,7 @@ class ContextControlsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiDeployment]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1270,7 +1272,7 @@ class ContextControlsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[LtiDeployment]]:
         """List All Context Controls
 
         List all LTI ContextControls for the given LTI Registration. These controls are partitioned by LTI Deployment, and have added calculated fields for display in the Canvas UI.  This endpoint is used to populate the Availability page for an LTI Registration and may not be useful for general API Usage. For listing all ContextControls for a given Deployment, see the LTI Deployments - List Controls for Deployment endpoint.
@@ -1324,7 +1326,7 @@ class ContextControlsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiDeployment]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1411,7 +1413,7 @@ class ContextControlsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiDeployment]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1515,7 +1517,7 @@ class ContextControlsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiContextControl:
         """Show LTI Context Control
 
         Display details of the specified LTI ContextControl for the specified LTI registration in this context.
@@ -1560,7 +1562,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1590,7 +1592,7 @@ class ContextControlsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiContextControl]:
         """Show LTI Context Control
 
         Display details of the specified LTI ContextControl for the specified LTI registration in this context.
@@ -1635,7 +1637,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1711,7 +1713,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1809,7 +1811,7 @@ class ContextControlsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiContextControl:
         """Modify a Context Control
 
         Changes the availability of a context control. This endpoint can only be used to change the availability of a context control; no other attributes about the control (such as which course or account it belongs to) can be changed here. To change those values, the control should be deleted and a new one created instead.  Returns the context control with its new availability value applied.
@@ -1857,7 +1859,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1888,7 +1890,7 @@ class ContextControlsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiContextControl]:
         """Modify a Context Control
 
         Changes the availability of a context control. This endpoint can only be used to change the availability of a context control; no other attributes about the control (such as which course or account it belongs to) can be changed here. To change those values, the control should be deleted and a new one created instead.  Returns the context control with its new availability value applied.
@@ -1936,7 +1938,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2016,7 +2018,7 @@ class ContextControlsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiContextControl",
         }
         response_data = await self.api_client.call_api(
             *_param,

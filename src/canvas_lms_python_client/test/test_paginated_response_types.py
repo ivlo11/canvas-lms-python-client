@@ -125,6 +125,34 @@ def test_all_iterator_only_for_list_responses():
     assert not unexpected, f"Non-list-response operations with {ALL_SUFFIX}: {sorted(unexpected)}"
 
 
+# Paginated operation -> page item type (namespaced Lti::X models resolve)
+LTI_LIST_ITEM_TYPES = {
+    "deployments_list": "LtiDeployment",
+    "deployments_list_controls": "LtiContextControl",
+    "context_controls_index": "LtiDeployment",
+    "lti_apps_launch_definitions": "LtiLaunchDefinition",
+    "lti_apps_launch_definitions_for_accounts": "LtiLaunchDefinition",
+    "resource_links_index": "LtiResourceLink",
+    # Lti::RegistrationHistoryEntry has no @model, so items stay untyped
+    "registrations_history": "object",
+}
+
+
+def _page_item_type(func):
+    (page_type,) = typing.get_args(func.__annotations__["return"])
+    assert typing.get_origin(page_type) is list
+    (item_type,) = typing.get_args(page_type)
+    return item_type.__name__
+
+
+def test_lti_list_pages_are_typed():
+    paginated = {operation: func for _, operation, func in _paginated_methods()}
+
+    item_types = {operation: _page_item_type(paginated[operation]) for operation in LTI_LIST_ITEM_TYPES}
+
+    assert item_types == LTI_LIST_ITEM_TYPES
+
+
 # Wrapper model -> (list key, item model, minimal valid item)
 WRAPPED_LIST_RESPONSES = {
     "AssignmentExtensionsResponse": (

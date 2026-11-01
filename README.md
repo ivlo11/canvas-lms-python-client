@@ -149,6 +149,24 @@ async for page in polls_api.polls_index_paginated(per_page=50):
 Model field types now match what Canvas sends:
 - `Poll`, `PollChoice`, `PollSession` and `PollSubmission` ids (`id` and every `*_id`) are strings, because Canvas's polling endpoints always send ids as strings. `PollSession.poll_submissions` is a list, and `PollChoice.poll_id` is optional.
 - `QuizSubmission.score`, `kept_score`, `score_before_regrade`, `fudge_points` and `Quiz.points_possible` accept floats.
+- `LtiLaunchDefinition.definition_id` is an integer, and `LtiOverlayVersion.diff` is a list of change tuples (`["~", "title", "old", "new"]`).
+- `created_by` / `updated_by` on `LtiRegistration`, `LtiRegistrationAccountBinding` and `LtiOverlayVersion` are a `LtiRegistrationCreatedBy` wrapper. Its `actual_instance` is a `User`, or the string `"Instructure"` when Canvas hides a site admin.
+
+LTI operations whose Canvas docs name a namespaced model (`Lti::…`) now return that model instead of a dict. Use attributes (`deployment.context_id`) instead of keys (`deployment["context_id"]`):
+- Paginated lists (`_paginated` pages, and `_all` items):
+  - `deployments_list` and `context_controls_index` → `List[LtiDeployment]` (`context_controls_index` groups the controls by deployment, under `context_controls`)
+  - `deployments_list_controls` → `List[LtiContextControl]`
+  - `lti_apps_launch_definitions` and `lti_apps_launch_definitions_for_accounts` → `List[LtiLaunchDefinition]`
+  - `resource_links_index` → `List[LtiResourceLink]`
+- Context controls: `context_controls_create`, `context_controls_show`, `context_controls_update` and `context_controls_delete` → `LtiContextControl`; `context_controls_create_many` → `List[LtiContextControl]`
+- Deployments: `deployments_create`, `deployments_show` and `deployments_destroy` → `LtiDeployment`
+- Registrations:
+  - `registrations_create`, `registrations_show`, `registrations_update`, `registrations_destroy`, `registrations_show_by_client_id`, `registrations_show_by_utid`, `registrations_install_status`, `registrations_reset`, `registrations_install_from_template` and `registrations_apply_registration_update_request` → `LtiRegistration`
+  - `registrations_bind` and `registrations_unbind` → `LtiRegistrationAccountBinding`
+  - `registrations_overlay_history` → `List[LtiOverlayVersion]`
+- Resource links: `resource_links_create`, `resource_links_show`, `resource_links_update` and `resource_links_destroy` → `LtiResourceLink`; `resource_links_bulk_create` → `List[LtiResourceLink]`
+
+`registrations_history`, `registrations_show_registration_update_request` and `registrations_latest_registration_update_request` still return untyped objects, because Canvas documents no model for them.
 
 ### Link Header Relations
 
@@ -304,6 +322,8 @@ pdm run pytest --integration -m integration
 - `src/canvas_lms_python_client/test/test_integration_observees.py`
 - `src/canvas_lms_python_client/test/test_paginated_response_types.py`
 - `src/canvas_lms_python_client/test/test_integration_paginated_models.py`
+- `src/canvas_lms_python_client/test/test_lti_model_payloads.py`
+- `src/canvas_lms_python_client/test/fixtures/` (captured Canvas responses for offline tests)
 - `src/canvas_lms_python_client/pagination.py`
 - `src/.openapi-generator-ignore`
 

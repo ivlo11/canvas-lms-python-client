@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +28,7 @@ class LtiLaunchDefinition(BaseModel):
     A bare-bones representation of an LTI tool used by Canvas to launch the tool
     """ # noqa: E501
     definition_type: Optional[StrictStr] = Field(default=None, description="The type of the launch definition. Always 'ContextExternalTool'", json_schema_extra={"examples": ["ContextExternalTool"]})
-    definition_id: Optional[StrictStr] = Field(default=None, description="The Canvas ID of the tool", json_schema_extra={"examples": ["123"]})
+    definition_id: Optional[StrictInt] = Field(default=None, description="The Canvas ID of the tool", json_schema_extra={"examples": [123]})
     name: Optional[StrictStr] = Field(default=None, description="The display name of the tool for the given placement", json_schema_extra={"examples": ["My Tool"]})
     description: Optional[StrictStr] = Field(default=None, description="The description of the tool for the given placement.", json_schema_extra={"examples": ["This is a tool that does things."]})
     url: Optional[StrictStr] = Field(default=None, description="The launch URL for the tool", json_schema_extra={"examples": ["https://www.example.com/launch"]})

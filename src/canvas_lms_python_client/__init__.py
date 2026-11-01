@@ -500,6 +500,7 @@ __all__ = [
     "LtiPlacementOverlay",
     "LtiRegistration",
     "LtiRegistrationAccountBinding",
+    "LtiRegistrationCreatedBy",
     "LtiResourceLink",
     "LtiToolConfiguration",
     "MasterTemplatesQueueMigrationRequest",
@@ -1257,6 +1258,7 @@ from canvas_lms_python_client.models.lti_placement_launch_definition import LtiP
 from canvas_lms_python_client.models.lti_placement_overlay import LtiPlacementOverlay as LtiPlacementOverlay
 from canvas_lms_python_client.models.lti_registration import LtiRegistration as LtiRegistration
 from canvas_lms_python_client.models.lti_registration_account_binding import LtiRegistrationAccountBinding as LtiRegistrationAccountBinding
+from canvas_lms_python_client.models.lti_registration_created_by import LtiRegistrationCreatedBy as LtiRegistrationCreatedBy
 from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink as LtiResourceLink
 from canvas_lms_python_client.models.lti_tool_configuration import LtiToolConfiguration as LtiToolConfiguration
 from canvas_lms_python_client.models.master_templates_queue_migration_request import MasterTemplatesQueueMigrationRequest as MasterTemplatesQueueMigrationRequest

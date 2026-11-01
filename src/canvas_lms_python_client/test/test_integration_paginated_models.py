@@ -18,17 +18,29 @@ import pytest
 
 from canvas_lms_python_client.api.accounts_api import AccountsApi
 from canvas_lms_python_client.api.appointment_groups_api import AppointmentGroupsApi
+from canvas_lms_python_client.api.context_controls_api import ContextControlsApi
+from canvas_lms_python_client.api.deployments_api import DeploymentsApi
 from canvas_lms_python_client.api.lti_apps_api import LtiAppsApi
 from canvas_lms_python_client.api.poll_choices_api import PollChoicesApi
 from canvas_lms_python_client.api.poll_sessions_api import PollSessionsApi
 from canvas_lms_python_client.api.polls_api import PollsApi
 from canvas_lms_python_client.api.quiz_submissions_api_api import QuizSubmissionsApiApi
 from canvas_lms_python_client.api.quizzes_api_api import QuizzesApiApi
+from canvas_lms_python_client.api.registrations_api import RegistrationsApi
+from canvas_lms_python_client.api.resource_links_api import ResourceLinksApi
 from canvas_lms_python_client.api.rubrics_api_api import RubricsApiApi
 from canvas_lms_python_client.models.account import Account
 from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.models.course import Course
 from canvas_lms_python_client.models.group import Group
+from canvas_lms_python_client.models.list_lti_registrations_response import (
+    ListLtiRegistrationsResponse,
+)
+from canvas_lms_python_client.models.lti_context_control import LtiContextControl
+from canvas_lms_python_client.models.lti_deployment import LtiDeployment
+from canvas_lms_python_client.models.lti_launch_definition import LtiLaunchDefinition
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
+from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink
 from canvas_lms_python_client.models.poll import Poll
 from canvas_lms_python_client.models.poll_choice import PollChoice
 from canvas_lms_python_client.models.poll_choices_response import PollChoicesResponse
@@ -170,16 +182,16 @@ async def test_appointment_group_participants_typed(canvas_admin_api_client):
 
 def assert_launch_definitions(definitions: List[object]) -> None:
     for definition in definitions:
-        assert isinstance(definition, dict)
-        assert "definition_type" in definition
-        assert "definition_id" in definition
+        assert isinstance(definition, LtiLaunchDefinition)
+        assert definition.definition_type
+        assert isinstance(definition.definition_id, int)
 
 
 async def test_course_launch_definitions_yield_items(canvas_admin_api_client):
     api = LtiAppsApi(canvas_admin_api_client)
     account = await root_account(canvas_admin_api_client)
 
-    definitions: List[object] = []
+    definitions: List[LtiLaunchDefinition] = []
     for course in await account_courses(canvas_admin_api_client, account):
         definitions = await collect(
             api.lti_apps_launch_definitions_all(
@@ -204,6 +216,98 @@ async def test_account_launch_definitions_yield_items(canvas_admin_api_client):
     require(definitions, "LTI tool with a launch placement in the root account")
 
     assert_launch_definitions(definitions)
+
+
+async def lti_registrations(api_client, account: Account) -> List[LtiRegistration]:
+    pages = await collect(
+        RegistrationsApi(api_client).registrations_list_paginated(account_id=str(account.id))
+    )
+    return wrapped_items(pages, ListLtiRegistrationsResponse, "data")
+
+
+async def lti_deployments(api_client) -> List[tuple]:
+    """(account id, registration id, deployment) for every visible deployment."""
+    account = await root_account(api_client)
+    account_id = str(account.id)
+    api = DeploymentsApi(api_client)
+
+    found = []
+    for registration in await lti_registrations(api_client, account):
+        registration_id = str(registration.id)
+        deployments = await collect(
+            api.deployments_list_all(account_id=account_id, registration_id=registration_id)
+        )
+        found.extend((account_id, registration_id, deployment) for deployment in deployments)
+    return require(found, "LTI deployment in the root account")
+
+
+async def test_lti_deployments_typed(canvas_admin_api_client):
+    deployments = [d for _, _, d in await lti_deployments(canvas_admin_api_client)]
+
+    assert_typed(deployments, LtiDeployment)
+
+
+async def test_lti_deployment_show_typed(canvas_admin_api_client):
+    account_id, registration_id, listed = (await lti_deployments(canvas_admin_api_client))[0]
+
+    deployment = await DeploymentsApi(canvas_admin_api_client).deployments_show(
+        account_id=account_id, registration_id=registration_id, id=str(listed.id)
+    )
+
+    assert isinstance(deployment, LtiDeployment)
+    assert deployment.id == listed.id
+
+
+async def test_lti_deployment_controls_typed(canvas_admin_api_client):
+    api = DeploymentsApi(canvas_admin_api_client)
+
+    controls: List[LtiContextControl] = []
+    for account_id, registration_id, deployment in await lti_deployments(canvas_admin_api_client):
+        controls = await collect(
+            api.deployments_list_controls_all(
+                account_id=account_id, registration_id=registration_id, id=str(deployment.id)
+            )
+        )
+        if controls:
+            break
+    require(controls, "context control on any LTI deployment")
+
+    assert_typed(controls, LtiContextControl)
+
+
+async def test_lti_account_context_controls_typed(canvas_admin_api_client):
+    """The account's context controls are listed grouped by deployment."""
+    api = ContextControlsApi(canvas_admin_api_client)
+    account = await root_account(canvas_admin_api_client)
+
+    deployments: List[LtiDeployment] = []
+    for registration in await lti_registrations(canvas_admin_api_client, account):
+        deployments = await collect(
+            api.context_controls_index_all(
+                account_id=str(account.id), registration_id=str(registration.id)
+            )
+        )
+        if deployments:
+            break
+    controls = [c for deployment in deployments for c in deployment.context_controls or []]
+    require(controls, "context control for any LTI registration")
+
+    assert_typed(deployments, LtiDeployment)
+    assert_typed(controls, LtiContextControl)
+
+
+async def test_lti_resource_links_typed(canvas_admin_api_client):
+    api = ResourceLinksApi(canvas_admin_api_client)
+    account = await root_account(canvas_admin_api_client)
+
+    links: List[LtiResourceLink] = []
+    for course in await account_courses(canvas_admin_api_client, account):
+        links = await collect(api.resource_links_index_all(course_id=str(course.id)))
+        if links:
+            break
+    require(links, "LTI resource link in any root account course")
+
+    assert_typed(links, LtiResourceLink)
 
 
 def wrapped_items(pages: List[object], wrapper: type, key: str) -> List[object]:

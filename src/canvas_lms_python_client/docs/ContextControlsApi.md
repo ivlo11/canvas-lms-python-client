@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **context_controls_create**
-> object context_controls_create(account_id, registration_id, context_controls_create_request=context_controls_create_request)
+> LtiContextControl context_controls_create(account_id, registration_id, context_controls_create_request=context_controls_create_request)
 
 Create LTI Context Control
 
@@ -26,6 +26,7 @@ Create a new LTI ContextControl for the specified LTI registration in this conte
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.context_controls_create_request import ContextControlsCreateRequest
+from canvas_lms_python_client.models.lti_context_control import LtiContextControl
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -75,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiContextControl**](LtiContextControl.md)
 
 ### Authorization
 
@@ -95,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **context_controls_create_many**
-> object context_controls_create_many(account_id, registration_id, context_controls_create_many_request=context_controls_create_many_request)
+> List[LtiContextControl] context_controls_create_many(account_id, registration_id, context_controls_create_many_request=context_controls_create_many_request)
 
 Bulk Create LTI Context Controls
 
@@ -110,6 +111,7 @@ Note that if a control already exists for the specified context and deployment, 
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.context_controls_create_many_request import ContextControlsCreateManyRequest
+from canvas_lms_python_client.models.lti_context_control import LtiContextControl
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -159,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**List[LtiContextControl]**](LtiContextControl.md)
 
 ### Authorization
 
@@ -174,12 +176,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Lti::ContextControl |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **context_controls_delete**
-> object context_controls_delete(account_id, id, registration_id)
+> LtiContextControl context_controls_delete(account_id, id, registration_id)
 
 Delete a Context Control
 
@@ -195,6 +197,7 @@ situations where a deployment cannot be managed from the Apps page.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_context_control import LtiContextControl
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -244,7 +247,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiContextControl**](LtiContextControl.md)
 
 ### Authorization
 
@@ -264,7 +267,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **context_controls_index**
-> List[object] context_controls_index(account_id, registration_id, page=page, per_page=per_page)
+> List[LtiDeployment] context_controls_index(account_id, registration_id, page=page, per_page=per_page)
 
 List All Context Controls
 
@@ -282,6 +285,7 @@ for a given Deployment, see the LTI Deployments - List Controls for Deployment e
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_deployment import LtiDeployment
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -333,7 +337,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[LtiDeployment]**](LtiDeployment.md)
 
 ### Authorization
 
@@ -353,7 +357,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **context_controls_show**
-> object context_controls_show(account_id, id, registration_id)
+> LtiContextControl context_controls_show(account_id, id, registration_id)
 
 Show LTI Context Control
 
@@ -365,6 +369,7 @@ Display details of the specified LTI ContextControl for the specified LTI regist
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_context_control import LtiContextControl
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -414,7 +419,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiContextControl**](LtiContextControl.md)
 
 ### Authorization
 
@@ -434,7 +439,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **context_controls_update**
-> object context_controls_update(account_id, id, registration_id, context_controls_update_request=context_controls_update_request)
+> LtiContextControl context_controls_update(account_id, id, registration_id, context_controls_update_request=context_controls_update_request)
 
 Modify a Context Control
 
@@ -453,6 +458,7 @@ Returns the context control with its new availability value applied.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.context_controls_update_request import ContextControlsUpdateRequest
+from canvas_lms_python_client.models.lti_context_control import LtiContextControl
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -504,7 +510,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiContextControl**](LtiContextControl.md)
 
 ### Authorization
 

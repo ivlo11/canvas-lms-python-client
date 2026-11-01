@@ -20,8 +20,8 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.lti_registration_account_binding import LtiRegistrationAccountBinding
+from canvas_lms_python_client.models.lti_registration_created_by import LtiRegistrationCreatedBy
 from canvas_lms_python_client.models.lti_tool_configuration import LtiToolConfiguration
-from canvas_lms_python_client.models.user import User
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -45,8 +45,8 @@ class LtiRegistration(BaseModel):
     workflow_state: Optional[StrictStr] = Field(default=None, description="The state of the registration", json_schema_extra={"examples": ["active"]})
     created_at: Optional[StrictStr] = Field(default=None, description="Timestamp of the registration's creation", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
     updated_at: Optional[StrictStr] = Field(default=None, description="Timestamp of the registration's last update", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
-    created_by: Optional[User] = None
-    updated_by: Optional[User] = None
+    created_by: Optional[LtiRegistrationCreatedBy] = None
+    updated_by: Optional[LtiRegistrationCreatedBy] = None
     root_account_id: Optional[StrictInt] = Field(default=None, description="The Canvas id of the root account", json_schema_extra={"examples": [1]})
     account_binding: Optional[LtiRegistrationAccountBinding] = None
     configuration: Optional[LtiToolConfiguration] = None
@@ -130,8 +130,8 @@ class LtiRegistration(BaseModel):
             "workflow_state": obj.get("workflow_state"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
-            "created_by": User.from_dict(obj["created_by"]) if obj.get("created_by") is not None else None,
-            "updated_by": User.from_dict(obj["updated_by"]) if obj.get("updated_by") is not None else None,
+            "created_by": LtiRegistrationCreatedBy.from_dict(obj["created_by"]) if obj.get("created_by") is not None else None,
+            "updated_by": LtiRegistrationCreatedBy.from_dict(obj["updated_by"]) if obj.get("updated_by") is not None else None,
             "root_account_id": obj.get("root_account_id"),
             "account_binding": LtiRegistrationAccountBinding.from_dict(obj["account_binding"]) if obj.get("account_binding") is not None else None,
             "configuration": LtiToolConfiguration.from_dict(obj["configuration"]) if obj.get("configuration") is not None else None

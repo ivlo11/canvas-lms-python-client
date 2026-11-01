@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **resource_links_bulk_create**
-> object resource_links_bulk_create(course_id, resource_links_bulk_create_request=resource_links_bulk_create_request)
+> List[LtiResourceLink] resource_links_bulk_create(course_id, resource_links_bulk_create_request=resource_links_bulk_create_request)
 
 Bulk Create LTI Resource Links
 
@@ -35,6 +35,7 @@ If a matching tool is not found, or any parameters are invalid, no links will be
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink
 from canvas_lms_python_client.models.resource_links_bulk_create_request import ResourceLinksBulkCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -83,7 +84,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**List[LtiResourceLink]**](LtiResourceLink.md)
 
 ### Authorization
 
@@ -98,12 +99,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Lti::ResourceLink |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **resource_links_create**
-> object resource_links_create(course_id, resource_links_create_request=resource_links_create_request)
+> LtiResourceLink resource_links_create(course_id, resource_links_create_request=resource_links_create_request)
 
 Create an LTI Resource Link
 
@@ -125,6 +126,7 @@ If a matching tool is not found, the link will not be created and this will retu
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink
 from canvas_lms_python_client.models.resource_links_create_request import ResourceLinksCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -173,7 +175,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiResourceLink**](LtiResourceLink.md)
 
 ### Authorization
 
@@ -193,7 +195,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **resource_links_destroy**
-> object resource_links_destroy(course_id, id)
+> LtiResourceLink resource_links_destroy(course_id, id)
 
 Delete an LTI Resource Link
 
@@ -211,6 +213,7 @@ Only links that are not associated with Assignments, Module Items, or Collaborat
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -258,7 +261,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiResourceLink**](LtiResourceLink.md)
 
 ### Authorization
 
@@ -278,7 +281,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **resource_links_index**
-> List[object] resource_links_index(course_id, include_deleted=include_deleted, per_page=per_page, page=page)
+> List[LtiResourceLink] resource_links_index(course_id, include_deleted=include_deleted, per_page=per_page, page=page)
 
 List LTI Resource Links
 
@@ -294,6 +297,7 @@ Links are sorted by the order in which they were created.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -345,7 +349,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[LtiResourceLink]**](LtiResourceLink.md)
 
 ### Authorization
 
@@ -365,7 +369,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **resource_links_show**
-> object resource_links_show(course_id, id, include_deleted=include_deleted)
+> LtiResourceLink resource_links_show(course_id, id, include_deleted=include_deleted)
 
 Show an LTI Resource Link
 
@@ -381,6 +385,7 @@ Canvas format ("1"), or in these special formats:
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -430,7 +435,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiResourceLink**](LtiResourceLink.md)
 
 ### Authorization
 
@@ -450,7 +455,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **resource_links_update**
-> object resource_links_update(course_id, id, resource_links_update_request=resource_links_update_request)
+> LtiResourceLink resource_links_update(course_id, id, resource_links_update_request=resource_links_update_request)
 
 Update an LTI Resource Link
 
@@ -464,6 +469,7 @@ Update the specified resource link with the provided parameters.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink
 from canvas_lms_python_client.models.resource_links_update_request import ResourceLinksUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -514,7 +520,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiResourceLink**](LtiResourceLink.md)
 
 ### Authorization
 

@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **lti_apps_launch_definitions**
-> List[object] lti_apps_launch_definitions(course_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
+> List[LtiLaunchDefinition] lti_apps_launch_definitions(course_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
 
 List LTI Launch Definitions
 
@@ -23,6 +23,7 @@ This endpoint is cached for 10 minutes!
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_launch_definition import LtiLaunchDefinition
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -78,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[LtiLaunchDefinition]**](LtiLaunchDefinition.md)
 
 ### Authorization
 
@@ -98,7 +99,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **lti_apps_launch_definitions_for_accounts**
-> List[object] lti_apps_launch_definitions_for_accounts(account_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
+> List[LtiLaunchDefinition] lti_apps_launch_definitions_for_accounts(account_id, placements=placements, only_visible=only_visible, include_context_name=include_context_name, page=page, per_page=per_page)
 
 List LTI Launch Definitions
 
@@ -112,6 +113,7 @@ This endpoint is cached for 10 minutes!
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_launch_definition import LtiLaunchDefinition
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -167,7 +169,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[LtiLaunchDefinition]**](LtiLaunchDefinition.md)
 
 ### Authorization
 
