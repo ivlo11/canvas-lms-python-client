@@ -67,17 +67,23 @@ Every paginated operation in the generated client SHALL have a response type for
 - **WHEN** the offline test suite runs against the regenerated client
 - **THEN** none of the appointment group, rubric, or LTI launch definition list operations is on the allowlist, and the suite passes
 
-### Requirement: Wrapped list responses yield typed wrapper pages
-For each paginated operation whose Canvas documentation describes the response as an object wrapping a list of an existing model under one key, the page iterator SHALL yield one wrapper model per page, with that key's items deserialized as the item model, across all result pages. A wrapper key SHALL be required only if Canvas documents it as required.
+### Requirement: Wrapped list responses yield per-action wrapper pages
+For each paginated operation whose Canvas documentation describes the response as an object wrapping a list of an existing model, in its example response or inline in its documented response, the page iterator SHALL yield one wrapper model per page, named after the operation's controller and action, with the list deserialized as the item model, across all result pages. A wrapper key SHALL be required only if Canvas documents it as required.
 
 #### Scenario: Polls are returned in typed wrapper pages
 - **GIVEN** the caller can see at least one poll
 - **WHEN** polls are listed with the page iterator
-- **THEN** each yielded page is a wrapper model whose `polls` attribute is a list of poll models
+- **THEN** each yielded page is a `PollsIndexResponse` wrapper model whose `polls` attribute is a list of poll models
 
-#### Scenario: Shared wrapper across related operations
+#### Scenario: Related operations have their own wrappers
 - **WHEN** poll sessions are listed for a poll, as opened sessions, or as closed sessions with the page iterator
-- **THEN** each yielded page is the same poll-sessions wrapper model type, whose `poll_sessions` attribute is a list of poll session models
+- **THEN** each operation yields its own wrapper model type (`PollSessionsIndexResponse`, `PollSessionsOpenedResponse`, `PollSessionsClosedResponse`), and each has a `poll_sessions` attribute that is a list of poll session models
+
+#### Scenario: Account calendars are returned in typed wrapper pages
+- **GIVEN** the caller can see at least one account calendar
+- **WHEN** account calendars are listed with the page iterator
+- **THEN** each yielded page is a wrapper model whose `account_calendars` attribute is a list of account calendar models and whose `total_results` is an integer
+- **AND** no all-items iterator is provided for the operation
 
 #### Scenario: Wrapper key absent from a page
 - **GIVEN** a page response for a wrapped operation that omits the wrapper key
@@ -90,7 +96,7 @@ For each paginated operation whose Canvas documentation describes the response a
 - **THEN** one wrapper is yielded per page, following the `Link` next relation until there is none
 
 #### Scenario: Undocumentable wrappers stay untyped
-- **GIVEN** a wrapped operation whose example names a model that does not exist, or whose example is not a single key mapped to a list of a model
+- **GIVEN** a wrapped operation that documents no response of its own, and whose example names a model that does not exist or is not a single key mapped to a list of a model
 - **WHEN** the client is generated
 - **THEN** that operation has no response type and remains on the undocumented allowlist
 
