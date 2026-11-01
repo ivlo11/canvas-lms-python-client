@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 **allowed_attempts** | **int** | how many times a student can take the quiz -1 &#x3D; unlimited attempts | [optional] 
 **one_question_at_a_time** | **bool** | show one question at a time? | [optional] 
 **question_count** | **int** | the number of questions in the quiz | [optional] 
-**points_possible** | **int** | The total point value given to the quiz | [optional] 
+**points_possible** | **float** | The total point value given to the quiz | [optional] 
 **cant_go_back** | **bool** | lock questions after answering? only valid if one_question_at_a_time&#x3D;true | [optional] 
 **access_code** | **str** | access code to restrict quiz access | [optional] 
 **ip_filter** | **str** | IP address or range that quiz access is limited to | [optional] 

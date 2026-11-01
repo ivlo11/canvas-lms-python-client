@@ -5,15 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | The unique identifier for the poll session. | 
-**poll_id** | **int** | The id of the Poll this poll session is associated with | 
-**course_id** | **int** | The id of the Course this poll session is associated with | 
-**course_section_id** | **int** | The id of the Course Section this poll session is associated with | [optional] 
+**id** | **str** | The unique identifier for the poll session. | 
+**poll_id** | **str** | The id of the Poll this poll session is associated with | 
+**course_id** | **str** | The id of the Course this poll session is associated with | 
+**course_section_id** | **str** | The id of the Course Section this poll session is associated with | [optional] 
 **is_published** | **bool** | Specifies whether or not this poll session has been published for students to participate in. | [optional] 
 **has_public_results** | **bool** | Specifies whether the results are viewable by students. | [optional] 
 **created_at** | **datetime** | The time at which the poll session was created. | [optional] 
 **results** | **object** | The results of the submissions of the poll. Each key is the poll choice id, and the value is the count of submissions. | [optional] 
-**poll_submissions** | [**PollSubmission**](PollSubmission.md) |  | [optional] 
+**poll_submissions** | [**List[PollSubmission]**](PollSubmission.md) | If the poll session has public results, this will return an array of all submissions, viewable by both students and teachers. If the results are not public, for students it will return their submission only. | [optional] 
 
 ## Example
 

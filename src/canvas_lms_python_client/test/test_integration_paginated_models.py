@@ -19,6 +19,8 @@ import pytest
 from canvas_lms_python_client.api.accounts_api import AccountsApi
 from canvas_lms_python_client.api.appointment_groups_api import AppointmentGroupsApi
 from canvas_lms_python_client.api.lti_apps_api import LtiAppsApi
+from canvas_lms_python_client.api.poll_choices_api import PollChoicesApi
+from canvas_lms_python_client.api.poll_sessions_api import PollSessionsApi
 from canvas_lms_python_client.api.polls_api import PollsApi
 from canvas_lms_python_client.api.quiz_submissions_api_api import QuizSubmissionsApiApi
 from canvas_lms_python_client.api.quizzes_api_api import QuizzesApiApi
@@ -28,6 +30,11 @@ from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.models.course import Course
 from canvas_lms_python_client.models.group import Group
 from canvas_lms_python_client.models.poll import Poll
+from canvas_lms_python_client.models.poll_choice import PollChoice
+from canvas_lms_python_client.models.poll_choices_response import PollChoicesResponse
+from canvas_lms_python_client.models.poll_session import PollSession
+from canvas_lms_python_client.models.poll_sessions_response import PollSessionsResponse
+from canvas_lms_python_client.models.poll_submission import PollSubmission
 from canvas_lms_python_client.models.polls_response import PollsResponse
 from canvas_lms_python_client.models.quiz_submission import QuizSubmission
 from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
@@ -60,10 +67,10 @@ def require(items: List[T], missing: str) -> List[T]:
     return items
 
 
-def assert_typed(items: List[object], model: type) -> None:
+def assert_typed(items: List[object], model: type, id_type: type = int) -> None:
     for item in items:
         assert isinstance(item, model)
-        assert isinstance(item.id, int)
+        assert isinstance(item.id, id_type)
 
 
 async def assert_pages_match(
@@ -208,11 +215,47 @@ def wrapped_items(pages: List[object], wrapper: type, key: str) -> List[object]:
     return items
 
 
-async def test_polls_pages_typed(canvas_admin_api_client):
-    pages = await collect(PollsApi(canvas_admin_api_client).polls_index_paginated())
+async def admin_polls(api_client) -> List[Poll]:
+    """Polls owned by the admin (Canvas only lists the caller's own polls)."""
+    pages = await collect(PollsApi(api_client).polls_index_paginated())
+    return require(wrapped_items(pages, PollsResponse, "polls"), "poll owned by the admin")
 
-    polls = require(wrapped_items(pages, PollsResponse, "polls"), "poll visible to the admin")
-    assert_typed(polls, Poll)
+
+async def test_polls_pages_typed(canvas_admin_api_client):
+    polls = await admin_polls(canvas_admin_api_client)
+
+    # Polling endpoints send every id as a string
+    assert_typed(polls, Poll, id_type=str)
+
+
+async def test_poll_choices_pages_typed(canvas_admin_api_client):
+    api = PollChoicesApi(canvas_admin_api_client)
+
+    choices: List[object] = []
+    for poll in await admin_polls(canvas_admin_api_client):
+        pages = await collect(api.poll_choices_index_paginated(poll_id=poll.id))
+        choices = wrapped_items(pages, PollChoicesResponse, "poll_choices")
+        if choices:
+            break
+    require(choices, "poll choice in any admin poll")
+
+    assert_typed(choices, PollChoice, id_type=str)
+
+
+async def test_poll_sessions_pages_typed(canvas_admin_api_client):
+    api = PollSessionsApi(canvas_admin_api_client)
+
+    sessions: List[PollSession] = []
+    for poll in await admin_polls(canvas_admin_api_client):
+        pages = await collect(api.poll_sessions_index_paginated(poll_id=poll.id))
+        sessions = wrapped_items(pages, PollSessionsResponse, "poll_sessions")
+        if any(session.poll_submissions for session in sessions):
+            break
+    submissions = [s for session in sessions for s in session.poll_submissions or []]
+    require(submissions, "poll session with submissions in any admin poll")
+
+    assert_typed(sessions, PollSession, id_type=str)
+    assert_typed(submissions, PollSubmission, id_type=str)
 
 
 async def test_quiz_submissions_pages_typed(canvas_admin_api_client):

@@ -146,6 +146,10 @@ async for page in polls_api.polls_index_paginated(per_page=50):
 
 `<operation>_all` is now generated only for operations whose response is a list. It was removed from every paginated operation whose response is a wrapper model (e.g. `polls_index`, `terms_api_index`, `registrations_list`), an untyped object (`rubrics_api_used_locations`), or undocumented. On those operations it yielded either nothing or one whole wrapper per page. Iterate `<operation>_paginated` instead and read the wrapper's list attribute, as shown above.
 
+Model field types now match what Canvas sends:
+- `Poll`, `PollChoice`, `PollSession` and `PollSubmission` ids (`id` and every `*_id`) are strings, because Canvas's polling endpoints always send ids as strings. `PollSession.poll_submissions` is a list, and `PollChoice.poll_id` is optional.
+- `QuizSubmission.score`, `kept_score`, `score_before_regrade`, `fudge_points` and `Quiz.points_possible` accept floats.
+
 ### Link Header Relations
 
 Canvas returns five link relations in the Link header:

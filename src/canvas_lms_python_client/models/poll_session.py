@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.poll_submission import PollSubmission
 from typing import Optional, Set
@@ -29,15 +29,15 @@ class PollSession(BaseModel):
     """
     PollSession
     """ # noqa: E501
-    id: StrictInt = Field(description="The unique identifier for the poll session.", json_schema_extra={"examples": [1023]})
-    poll_id: StrictInt = Field(description="The id of the Poll this poll session is associated with", json_schema_extra={"examples": [55]})
-    course_id: StrictInt = Field(description="The id of the Course this poll session is associated with", json_schema_extra={"examples": [1111]})
-    course_section_id: Optional[StrictInt] = Field(default=None, description="The id of the Course Section this poll session is associated with", json_schema_extra={"examples": [444]})
+    id: StrictStr = Field(description="The unique identifier for the poll session.", json_schema_extra={"examples": ["1023"]})
+    poll_id: StrictStr = Field(description="The id of the Poll this poll session is associated with", json_schema_extra={"examples": ["55"]})
+    course_id: StrictStr = Field(description="The id of the Course this poll session is associated with", json_schema_extra={"examples": ["1111"]})
+    course_section_id: Optional[StrictStr] = Field(default=None, description="The id of the Course Section this poll session is associated with", json_schema_extra={"examples": ["444"]})
     is_published: Optional[StrictBool] = Field(default=None, description="Specifies whether or not this poll session has been published for students to participate in.", json_schema_extra={"examples": [True]})
     has_public_results: Optional[StrictBool] = Field(default=None, description="Specifies whether the results are viewable by students.", json_schema_extra={"examples": [True]})
     created_at: Optional[datetime] = Field(default=None, description="The time at which the poll session was created.", json_schema_extra={"examples": ["2014-01-07T15:16:18Z"]})
     results: Optional[Dict[str, Any]] = Field(default=None, description="The results of the submissions of the poll. Each key is the poll choice id, and the value is the count of submissions.", json_schema_extra={"examples": [{"144": 10, "145": 3, "146": 27, "147": 8}]})
-    poll_submissions: Optional[PollSubmission] = None
+    poll_submissions: Optional[List[PollSubmission]] = Field(default=None, description="If the poll session has public results, this will return an array of all submissions, viewable by both students and teachers. If the results are not public, for students it will return their submission only.")
     __properties: ClassVar[List[str]] = ["id", "poll_id", "course_id", "course_section_id", "is_published", "has_public_results", "created_at", "results", "poll_submissions"]
 
     model_config = ConfigDict(
@@ -79,9 +79,12 @@ class PollSession(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of poll_submissions
+        # override the default output from pydantic by calling `to_dict()` of each item in poll_submissions (list)
+        _items = []
         if self.poll_submissions:
-            _dict['poll_submissions'] = self.poll_submissions.to_dict()
+            for _item_poll_submissions in self.poll_submissions:
+                _items.append(_item_poll_submissions.to_dict() if _item_poll_submissions is not None else None)
+            _dict['poll_submissions'] = _items
         return _dict
 
     @classmethod
@@ -102,7 +105,7 @@ class PollSession(BaseModel):
             "has_public_results": obj.get("has_public_results"),
             "created_at": obj.get("created_at"),
             "results": obj.get("results"),
-            "poll_submissions": PollSubmission.from_dict(obj["poll_submissions"]) if obj.get("poll_submissions") is not None else None
+            "poll_submissions": [PollSubmission.from_dict(_item) for _item in obj["poll_submissions"]] if obj.get("poll_submissions") is not None else None
         })
         return _obj
 

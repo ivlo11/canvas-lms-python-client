@@ -138,14 +138,18 @@ WRAPPED_LIST_RESPONSES = {
         {"id": 1, "start_date": "2026-01-01T00:00:00Z", "end_date": "2026-06-01T00:00:00Z"},
     ),
     "OutcomeResultsResponse": ("outcome_results", "OutcomeResult", {"id": 1}),
-    "PollChoicesResponse": ("poll_choices", "PollChoice", {"id": 1, "poll_id": 2, "text": "Yes"}),
+    "PollChoicesResponse": ("poll_choices", "PollChoice", {"id": "1", "text": "Yes"}),
     "PollSessionsResponse": (
         "poll_sessions",
         "PollSession",
-        {"id": 1, "poll_id": 2, "course_id": 3},
+        {"id": "1", "poll_id": "2", "course_id": "3"},
     ),
-    "PollSubmissionsResponse": ("poll_submissions", "PollSubmission", {"id": 1}),
-    "PollsResponse": ("polls", "Poll", {"id": 1, "question": "Pizza?"}),
+    "PollSubmissionsResponse": (
+        "poll_submissions",
+        "PollSubmission",
+        {"id": "1", "poll_choice_id": "2"},
+    ),
+    "PollsResponse": ("polls", "Poll", {"id": "1", "question": "Pizza?"}),
     "QuizExtensionsResponse": ("quiz_extensions", "QuizExtension", {"quiz_id": 1, "user_id": 2}),
     "QuizGroupsResponse": ("quiz_groups", "QuizGroup", {"id": 1, "quiz_id": 2}),
     "QuizIpFiltersResponse": (
@@ -189,3 +193,114 @@ def test_wrapper_page_without_key(wrapper_name):
 
     assert isinstance(page, wrapper_cls)
     assert getattr(page, key) is None
+
+
+# Items as Canvas sends them (captured from the seeded instance). Polling
+# endpoints stringify every id; quiz scores and points are floats.
+_POLL_SUBMISSION = {
+    "id": "1",
+    "poll_session_id": "2",
+    "poll_choice_id": "4",
+    "user_id": "281",
+    "created_at": "2026-10-31T22:53:34-06:00",
+}
+_POLL_SESSION = {
+    "id": "2",
+    "is_published": True,
+    "course_id": "7",
+    "course_section_id": "7",
+    "created_at": "2026-11-01T04:53:34Z",
+    "poll_id": "2",
+    "has_submitted": False,
+    "poll_submissions": [_POLL_SUBMISSION],
+    "has_public_results": False,
+    "results": {"6": 1, "5": 1, "4": 1},
+}
+LIVE_ITEMS = {
+    "poll": (
+        "Poll",
+        {
+            "id": "2",
+            "question": "Which topic should we review next?",
+            "description": None,
+            "created_at": "2026-11-01T04:53:34Z",
+            "total_results": {"6": 1, "5": 1, "4": 1},
+            "user_id": "1",
+        },
+    ),
+    "poll_choice": (
+        "PollChoice",
+        {"id": "4", "text": "Review the readings", "position": 0, "is_correct": True},
+    ),
+    "poll_session": ("PollSession", _POLL_SESSION),
+    "poll_session_no_submissions": ("PollSession", {**_POLL_SESSION, "poll_submissions": []}),
+    "poll_submission": ("PollSubmission", _POLL_SUBMISSION),
+    "quiz_submission": (
+        "QuizSubmission",
+        {
+            "id": 6,
+            "user_id": 281,
+            "submission_id": 10152,
+            "quiz_id": 2,
+            "quiz_points_possible": 10.0,
+            "quiz_version": 2,
+            "attempt": 1,
+            "extra_attempts": None,
+            "extra_time": None,
+            "manually_unlocked": None,
+            "started_at": "2026-11-01T04:53:36Z",
+            "finished_at": "2026-11-01T04:53:36Z",
+            "end_at": None,
+            "fudge_points": None,
+            "kept_score": 0.0,
+            "score": 0.0,
+            "score_before_regrade": None,
+            "has_seen_results": False,
+            "workflow_state": "complete",
+            "time_spent": 0,
+            "attempts_left": 0,
+            "overdue_and_needs_submission": False,
+        },
+    ),
+    "quiz_submission_fractional": (
+        "QuizSubmission",
+        {"id": 7, "quiz_id": 2, "score": 7.5, "kept_score": 7.5, "fudge_points": 0.5},
+    ),
+    "quiz": (
+        "Quiz",
+        {
+            "id": 2,
+            "title": "Checkpoint Quiz",
+            "quiz_type": "assignment",
+            "assignment_group_id": 5,
+            "time_limit": None,
+            "shuffle_answers": False,
+            "scoring_policy": "keep_highest",
+            "allowed_attempts": 1,
+            "question_count": 1,
+            "points_possible": 10.0,
+            "published": True,
+            "due_at": None,
+        },
+    ),
+}
+
+
+@pytest.mark.parametrize("case", sorted(LIVE_ITEMS))
+def test_live_item_deserializes(case):
+    """Items shaped like Canvas's real responses deserialize without error."""
+    model_name, item = LIVE_ITEMS[case]
+    model_cls = getattr(canvas_lms_python_client.models, model_name)
+
+    model = model_cls.from_json(json.dumps(item))
+
+    assert isinstance(model, model_cls)
+    assert model.id == item["id"]
+
+
+def test_live_poll_session_submissions_are_typed():
+    """A poll session's submissions deserialize as a list of PollSubmission."""
+    session = canvas_lms_python_client.models.PollSession.from_json(json.dumps(_POLL_SESSION))
+
+    assert [type(s).__name__ for s in session.poll_submissions] == ["PollSubmission"]
+    assert session.poll_submissions[0].poll_choice_id == "4"

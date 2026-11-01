@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | The unique identifier for the poll. | 
+**id** | **str** | The unique identifier for the poll. | 
 **question** | **str** | The question/title of the poll. | 
 **description** | **str** | A short description of the poll. | [optional] 
 **created_at** | **datetime** | The time at which the poll was created. | [optional] 
-**user_id** | **int** | The unique identifier for the user that created the poll. | [optional] 
+**user_id** | **str** | The unique identifier for the user that created the poll. | [optional] 
 **total_results** | **object** | An aggregate of the results of all associated poll sessions, with the poll choice id as the key, and the aggregated submission count as the value. | [optional] 
 
 ## Example
