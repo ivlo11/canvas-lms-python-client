@@ -54,8 +54,8 @@ UNDOCUMENTED_PAGINATED_OPERATIONS = frozenset(
         "search_all_courses",
         "search_recipients",
         "search_recipients_for_other",
-        "service_credentials_todo_items",
         "submissions_api_multiple_gradeable_students",
+        "users_todo_items",
     }
 )
 

@@ -335,6 +335,7 @@ pdm run pytest --integration -m integration
 - `src/canvas_lms_python_client/test/test_integration_paginated_models.py`
 - `src/canvas_lms_python_client/test/test_lti_model_payloads.py`
 - `src/canvas_lms_python_client/test/test_list_query_params.py`
+- `src/canvas_lms_python_client/test/test_api_operation_coverage.py`
 - `src/canvas_lms_python_client/test/fixtures/` (captured Canvas responses for offline tests)
 - `src/canvas_lms_python_client/pagination.py`
 - `src/.openapi-generator-ignore`

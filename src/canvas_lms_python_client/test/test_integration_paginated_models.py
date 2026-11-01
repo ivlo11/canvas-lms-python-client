@@ -28,7 +28,9 @@ from canvas_lms_python_client.api.quiz_submissions_api_api import QuizSubmission
 from canvas_lms_python_client.api.quizzes_api_api import QuizzesApiApi
 from canvas_lms_python_client.api.registrations_api import RegistrationsApi
 from canvas_lms_python_client.api.resource_links_api import ResourceLinksApi
+from canvas_lms_python_client.api.role_overrides_api import RoleOverridesApi
 from canvas_lms_python_client.api.rubrics_api_api import RubricsApiApi
+from canvas_lms_python_client.api.users_api import UsersApi
 from canvas_lms_python_client.models.account import Account
 from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.models.course import Course
@@ -50,6 +52,7 @@ from canvas_lms_python_client.models.poll_submission import PollSubmission
 from canvas_lms_python_client.models.polls_response import PollsResponse
 from canvas_lms_python_client.models.quiz_submission import QuizSubmission
 from canvas_lms_python_client.models.quiz_submissions_response import QuizSubmissionsResponse
+from canvas_lms_python_client.models.role import Role
 from canvas_lms_python_client.models.rubric import Rubric
 from canvas_lms_python_client.models.user import User
 
@@ -400,3 +403,22 @@ async def test_quiz_submissions_pages_typed(canvas_admin_api_client):
     require(submissions, "quiz submission in any root account course")
 
     assert_typed(submissions, QuizSubmission)
+
+
+async def test_users_and_roles_pages_typed(canvas_admin_api_client):
+    """Users and roles were misnamed under a controller helper class and untyped."""
+    users = [
+        user
+        async for page in UsersApi(canvas_admin_api_client).users_api_index_paginated(account_id="self")
+        for user in page
+    ]
+    roles = [
+        role
+        async for page in RoleOverridesApi(canvas_admin_api_client).role_overrides_api_index_paginated(
+            account_id="self"
+        )
+        for role in page
+    ]
+
+    assert_typed(require(users, "user in the admin's account"), User)
+    assert_typed(require(roles, "role in the admin's account"), Role)
