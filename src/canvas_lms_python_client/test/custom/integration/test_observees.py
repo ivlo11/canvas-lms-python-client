@@ -1,23 +1,29 @@
 """
-Integration tests for the observer -> observees -> courses -> assignments flow.
+Integration tests for the observer -> observees -> courses -> assignments and
+submissions flow.
 
 Run against a seeded Canvas instance with a token belonging to an observer user:
 
     pdm run pytest --integration -m integration
 """
 
+from collections import Counter
 from typing import AsyncIterator, List, TypeVar
 
 import pytest
 
 from canvas_lms_python_client.api.assignments_api_api import AssignmentsApiApi
 from canvas_lms_python_client.api.courses_api import CoursesApi
+from canvas_lms_python_client.api.submissions_api_api import SubmissionsApiApi
 from canvas_lms_python_client.api.user_observees_api import UserObserveesApi
 from canvas_lms_python_client.models.assignment import Assignment
 from canvas_lms_python_client.models.course import Course
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.models.user import User
 
 pytestmark = pytest.mark.integration
+
+WORKFLOW_STATES = {"graded", "submitted", "unsubmitted", "pending_review"}
 
 T = TypeVar("T")
 
@@ -99,3 +105,35 @@ async def test_observee_course_assignments(canvas_api_client):
 
     assert total_courses > 0, "observer has observees but none have courses"
     assert total_assignments > 0, "observees have courses but none have assignments"
+
+
+async def test_observee_submission_workflow_states(canvas_api_client):
+    observees = await list_observees(canvas_api_client)
+    assert observees, "observer has no observees"
+
+    submissions_api = SubmissionsApiApi(canvas_api_client)
+    counts = {}
+    for observee in observees:
+        submissions = []
+        for course in await list_courses(canvas_api_client, observee):
+            # A small page size spreads each course's submissions over several pages
+            submissions += await collect(
+                submissions_api.submissions_api_for_students_all(
+                    course_id=str(course.id), student_ids=[str(observee.id)], per_page=10
+                )
+            )
+        for submission in submissions:
+            assert isinstance(submission, Submission)
+            assert isinstance(submission.id, int)
+            assert submission.user_id == observee.id
+        ids = [s.id for s in submissions]
+        assert len(ids) == len(set(ids)), f"duplicate submissions for observee {observee.id}"
+
+        counts[observee.id] = Counter(s.workflow_state for s in submissions)
+        assert sum(counts[observee.id].values()) == len(submissions)
+        assert set(counts[observee.id]) <= WORKFLOW_STATES
+
+    for observee_id, state_counts in counts.items():
+        print(f"observee {observee_id}: {dict(state_counts)}")
+    if not any(len(state_counts) >= 2 for state_counts in counts.values()):
+        pytest.skip("no observee has submissions in more than one state")

@@ -516,6 +516,7 @@ __all__ = [
     "LtiRegistrationAccountBinding",
     "LtiRegistrationCreatedBy",
     "LtiResourceLink",
+    "LtiSubmission",
     "LtiToolConfiguration",
     "MasterTemplatesQueueMigrationRequest",
     "MasterTemplatesRestrictItemRequest",
@@ -822,6 +823,7 @@ __all__ = [
     "WhatIfGradesApiResetForStudentCourseResponse",
     "WhatIfGradesApiUpdateRequest",
     "WhatIfGradesApiUpdateResponse",
+    "WhatIfSubmission",
     "WikiPagesApiCreateRequest",
     "WikiPagesApiCreateRequestWikiPage",
     "WikiPagesApiUpdateFrontPageRequest",
@@ -1333,6 +1335,7 @@ from canvas_lms_python_client.models.lti_registration import LtiRegistration as 
 from canvas_lms_python_client.models.lti_registration_account_binding import LtiRegistrationAccountBinding as LtiRegistrationAccountBinding
 from canvas_lms_python_client.models.lti_registration_created_by import LtiRegistrationCreatedBy as LtiRegistrationCreatedBy
 from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink as LtiResourceLink
+from canvas_lms_python_client.models.lti_submission import LtiSubmission as LtiSubmission
 from canvas_lms_python_client.models.lti_tool_configuration import LtiToolConfiguration as LtiToolConfiguration
 from canvas_lms_python_client.models.master_templates_queue_migration_request import MasterTemplatesQueueMigrationRequest as MasterTemplatesQueueMigrationRequest
 from canvas_lms_python_client.models.master_templates_restrict_item_request import MasterTemplatesRestrictItemRequest as MasterTemplatesRestrictItemRequest
@@ -1639,6 +1642,7 @@ from canvas_lms_python_client.models.web_zip_export import WebZipExport as WebZi
 from canvas_lms_python_client.models.what_if_grades_api_reset_for_student_course_response import WhatIfGradesApiResetForStudentCourseResponse as WhatIfGradesApiResetForStudentCourseResponse
 from canvas_lms_python_client.models.what_if_grades_api_update_request import WhatIfGradesApiUpdateRequest as WhatIfGradesApiUpdateRequest
 from canvas_lms_python_client.models.what_if_grades_api_update_response import WhatIfGradesApiUpdateResponse as WhatIfGradesApiUpdateResponse
+from canvas_lms_python_client.models.what_if_submission import WhatIfSubmission as WhatIfSubmission
 from canvas_lms_python_client.models.wiki_pages_api_create_request import WikiPagesApiCreateRequest as WikiPagesApiCreateRequest
 from canvas_lms_python_client.models.wiki_pages_api_create_request_wiki_page import WikiPagesApiCreateRequestWikiPage as WikiPagesApiCreateRequestWikiPage
 from canvas_lms_python_client.models.wiki_pages_api_update_front_page_request import WikiPagesApiUpdateFrontPageRequest as WikiPagesApiUpdateFrontPageRequest

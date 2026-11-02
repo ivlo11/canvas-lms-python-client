@@ -135,7 +135,7 @@ def test_what_if_grades_are_typed():
     result = _deserialize(WRAPPER_PAYLOADS["WhatIfGradesApiUpdateResponse"], "WhatIfGradesApiUpdateResponse")
 
     assert all(isinstance(item, models.Grades) for item in result.grades)
-    assert isinstance(result.submission, models.Submission)
+    assert isinstance(result.submission, models.WhatIfSubmission)
 
 
 @pytest.mark.parametrize(

@@ -579,6 +579,7 @@ canvas_lms_python_client/docs/LtiRegistration.md
 canvas_lms_python_client/docs/LtiRegistrationAccountBinding.md
 canvas_lms_python_client/docs/LtiRegistrationCreatedBy.md
 canvas_lms_python_client/docs/LtiResourceLink.md
+canvas_lms_python_client/docs/LtiSubmission.md
 canvas_lms_python_client/docs/LtiToolConfiguration.md
 canvas_lms_python_client/docs/MasterTemplatesApi.md
 canvas_lms_python_client/docs/MasterTemplatesQueueMigrationRequest.md
@@ -960,6 +961,7 @@ canvas_lms_python_client/docs/WhatIfGradesApiApi.md
 canvas_lms_python_client/docs/WhatIfGradesApiResetForStudentCourseResponse.md
 canvas_lms_python_client/docs/WhatIfGradesApiUpdateRequest.md
 canvas_lms_python_client/docs/WhatIfGradesApiUpdateResponse.md
+canvas_lms_python_client/docs/WhatIfSubmission.md
 canvas_lms_python_client/docs/WikiPagesApiApi.md
 canvas_lms_python_client/docs/WikiPagesApiCreateRequest.md
 canvas_lms_python_client/docs/WikiPagesApiCreateRequestWikiPage.md
@@ -1295,6 +1297,7 @@ canvas_lms_python_client/models/lti_registration.py
 canvas_lms_python_client/models/lti_registration_account_binding.py
 canvas_lms_python_client/models/lti_registration_created_by.py
 canvas_lms_python_client/models/lti_resource_link.py
+canvas_lms_python_client/models/lti_submission.py
 canvas_lms_python_client/models/lti_tool_configuration.py
 canvas_lms_python_client/models/master_templates_queue_migration_request.py
 canvas_lms_python_client/models/master_templates_restrict_item_request.py
@@ -1601,6 +1604,7 @@ canvas_lms_python_client/models/web_zip_export.py
 canvas_lms_python_client/models/what_if_grades_api_reset_for_student_course_response.py
 canvas_lms_python_client/models/what_if_grades_api_update_request.py
 canvas_lms_python_client/models/what_if_grades_api_update_response.py
+canvas_lms_python_client/models/what_if_submission.py
 canvas_lms_python_client/models/wiki_pages_api_create_request.py
 canvas_lms_python_client/models/wiki_pages_api_create_request_wiki_page.py
 canvas_lms_python_client/models/wiki_pages_api_update_front_page_request.py
@@ -1618,6 +1622,7 @@ canvas_lms_python_client/test/test_content_shares_api.py
 canvas_lms_python_client/test/test_course_quiz_extensions_api.py
 canvas_lms_python_client/test/test_discovery_pages_api_api.py
 canvas_lms_python_client/test/test_grading_periods_api.py
+canvas_lms_python_client/test/test_lti_submission.py
 canvas_lms_python_client/test/test_outcome_results_api.py
 canvas_lms_python_client/test/test_poll_choices_api.py
 canvas_lms_python_client/test/test_poll_sessions_api.py
@@ -1632,4 +1637,5 @@ canvas_lms_python_client/test/test_quiz_submissions_api_api.py
 canvas_lms_python_client/test/test_registrations_api.py
 canvas_lms_python_client/test/test_results_api.py
 canvas_lms_python_client/test/test_what_if_grades_api_api.py
+canvas_lms_python_client/test/test_what_if_submission.py
 canvas_lms_python_client_README.md

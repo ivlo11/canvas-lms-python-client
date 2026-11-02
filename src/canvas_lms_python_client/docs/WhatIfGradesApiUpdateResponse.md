@@ -7,7 +7,7 @@ Object response with `grades`, `submission` (from the Canvas `@returns`).
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **grades** | [**List[Grades]**](Grades.md) |  | [optional] 
-**submission** | [**Submission**](Submission.md) |  | [optional] 
+**submission** | [**WhatIfSubmission**](WhatIfSubmission.md) |  | [optional] 
 
 ## Example
 

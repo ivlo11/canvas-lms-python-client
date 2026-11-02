@@ -20,7 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.grades import Grades
-from canvas_lms_python_client.models.submission import Submission
+from canvas_lms_python_client.models.what_if_submission import WhatIfSubmission
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -30,7 +30,7 @@ class WhatIfGradesApiUpdateResponse(BaseModel):
     Object response with `grades`, `submission` (from the Canvas `@returns`).
     """ # noqa: E501
     grades: Optional[List[Grades]] = None
-    submission: Optional[Submission] = None
+    submission: Optional[WhatIfSubmission] = None
     __properties: ClassVar[List[str]] = ["grades", "submission"]
 
     model_config = ConfigDict(
@@ -94,7 +94,7 @@ class WhatIfGradesApiUpdateResponse(BaseModel):
 
         _obj = cls.model_validate({
             "grades": [Grades.from_dict(_item) for _item in obj["grades"]] if obj.get("grades") is not None else None,
-            "submission": Submission.from_dict(obj["submission"]) if obj.get("submission") is not None else None
+            "submission": WhatIfSubmission.from_dict(obj["submission"]) if obj.get("submission") is not None else None
         })
         return _obj
 
