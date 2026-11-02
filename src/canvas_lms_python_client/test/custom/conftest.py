@@ -3,6 +3,7 @@ Pytest configuration and fixtures for canvas-python-client tests.
 """
 
 import os
+import pathlib
 
 import pytest
 
@@ -20,8 +21,17 @@ def pytest_addoption(parser):
     )
 
 
+INTEGRATION_DIR = pathlib.Path(__file__).parent / "integration"
+
+
 def pytest_collection_modifyitems(config, items):
-    """Skip integration-marked tests unless --integration is passed."""
+    """
+    Mark every test under custom/integration as an integration test, then
+    skip integration-marked tests unless --integration is passed.
+    """
+    for item in items:
+        if item.path.is_relative_to(INTEGRATION_DIR):
+            item.add_marker(pytest.mark.integration)
     if config.getoption("--integration"):
         return
     skip_integration = pytest.mark.skip(reason="use --integration to run")

@@ -243,17 +243,21 @@ pdm run pytest -v
 # Run with coverage
 pdm run pytest --cov=canvas_python_client --cov-report=html
 
+# Run only the custom (hand-written) tests
+pdm run pytest src/canvas_lms_python_client/test/custom -v
+
 # Run specific test
-pdm run pytest test/test_pagination.py -v
+pdm run pytest src/canvas_lms_python_client/test/custom/unit/test_pagination.py -v
 ```
 
 ### Integration Tests
 
-Integration tests are marked `@pytest.mark.integration` and are skipped unless
-`--integration` is passed. They require a Canvas instance and are written against the
-seeded dockerized canvas-lms, so `CANVAS_API_TOKEN` must belong to a seeded **observer**
-user (one linked to at least one observee with courses and assignments). If either
-variable is unset, the integration tests are skipped with a reason naming it.
+Integration tests live in `src/canvas_lms_python_client/test/custom/integration/`. Every
+test there is treated as `@pytest.mark.integration`, with or without its own marker, and is
+skipped unless `--integration` is passed. They require a Canvas instance and are written
+against the seeded dockerized canvas-lms, so `CANVAS_API_TOKEN` must belong to a seeded
+**observer** user (one linked to at least one observee with courses and assignments). If
+either variable is unset, the integration tests are skipped with a reason naming it.
 
 Some endpoints (account rubrics, account LTI launch definitions, manageable appointment
 groups) cannot be read by an observer. Those admin-scoped tests use `CANVAS_ADMIN_API_TOKEN`,
@@ -291,7 +295,7 @@ pdm run pytest --integration -m integration
 - `src/canvas_lms_python_client/api/*.py`
 - `src/canvas_lms_python_client/docs/*.py`
 - `src/canvas_lms_python_client/models/*.py`
-- `src/canvas_lms_python_client/test/*.py`
+- `src/canvas_lms_python_client/test/*.py` (everything at the `test/` root)
 - `src/canvas_lms_python_client/api_client.py`
 - `src/canvas_lms_python_client/api_response.py`
 - `src/canvas_lms_python_client/configuration.py`
@@ -299,16 +303,8 @@ pdm run pytest --integration -m integration
 - `src/canvas_lms_python_client/rest.py`
 
 **Custom, never overwritten**:
-- `src/canvas_lms_python_client/test/conftest.py`
-- `src/canvas_lms_python_client/test/test_pagination.py`
-- `src/canvas_lms_python_client/test/test_integration_observees.py`
-- `src/canvas_lms_python_client/test/test_paginated_response_types.py`
-- `src/canvas_lms_python_client/test/test_integration_paginated_models.py`
-- `src/canvas_lms_python_client/test/test_lti_model_payloads.py`
-- `src/canvas_lms_python_client/test/test_list_query_params.py`
-- `src/canvas_lms_python_client/test/test_api_operation_coverage.py`
-- `src/canvas_lms_python_client/test/test_inline_object_responses.py`
-- `src/canvas_lms_python_client/test/fixtures/` (captured Canvas responses for offline tests)
+- `src/canvas_lms_python_client/test/custom/` (hand-written tests: `conftest.py`, offline
+  tests and captured Canvas response fixtures in `unit/`, live-Canvas tests in `integration/`)
 - `src/canvas_lms_python_client/pagination.py`
 - `src/.openapi-generator-ignore`
 

@@ -22,15 +22,5 @@
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
 
-# Custom Files to support pagination
-test/conftest.py
-test/test_pagination.py
-test/test_integration_observees.py
-test/test_paginated_response_types.py
-test/test_integration_paginated_models.py
-test/test_lti_model_payloads.py
-test/test_list_query_params.py
-test/test_api_operation_coverage.py
-test/test_inline_object_responses.py
+# Custom files (custom tests live in test/custom/, which the generator never writes)
 pagination.py
-test/fixtures/
