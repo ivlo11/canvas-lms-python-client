@@ -35,10 +35,17 @@ class TestGrade(unittest.TestCase):
         model = Grade()
         if include_optional:
             return Grade(
-                grade = 120.0,
-                total = 24.0,
-                possible = 20.0,
-                dropped = []
+                html_url = '',
+                current_grade = '',
+                final_grade = '',
+                current_score = 95.8,
+                final_score = 95.8,
+                current_points = 150,
+                unposted_current_grade = '',
+                unposted_final_grade = '',
+                unposted_current_score = 95.8,
+                unposted_final_score = 95.8,
+                unposted_current_points = 150
             )
         else:
             return Grade(

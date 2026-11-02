@@ -957,6 +957,7 @@ canvas_lms_python_client/docs/UsersUpdateRequest.md
 canvas_lms_python_client/docs/UsersUpdateRequestUser.md
 canvas_lms_python_client/docs/WebZipExport.md
 canvas_lms_python_client/docs/WebZipExportsApi.md
+canvas_lms_python_client/docs/WhatIfGrade.md
 canvas_lms_python_client/docs/WhatIfGradesApiApi.md
 canvas_lms_python_client/docs/WhatIfGradesApiResetForStudentCourseResponse.md
 canvas_lms_python_client/docs/WhatIfGradesApiUpdateRequest.md
@@ -1601,6 +1602,7 @@ canvas_lms_python_client/models/users_settings_for_users_request.py
 canvas_lms_python_client/models/users_update_request.py
 canvas_lms_python_client/models/users_update_request_user.py
 canvas_lms_python_client/models/web_zip_export.py
+canvas_lms_python_client/models/what_if_grade.py
 canvas_lms_python_client/models/what_if_grades_api_reset_for_student_course_response.py
 canvas_lms_python_client/models/what_if_grades_api_update_request.py
 canvas_lms_python_client/models/what_if_grades_api_update_response.py
@@ -1621,6 +1623,8 @@ canvas_lms_python_client/test/test_communication_channels_api.py
 canvas_lms_python_client/test/test_content_shares_api.py
 canvas_lms_python_client/test/test_course_quiz_extensions_api.py
 canvas_lms_python_client/test/test_discovery_pages_api_api.py
+canvas_lms_python_client/test/test_grade.py
+canvas_lms_python_client/test/test_grades.py
 canvas_lms_python_client/test/test_grading_periods_api.py
 canvas_lms_python_client/test/test_lti_submission.py
 canvas_lms_python_client/test/test_outcome_results_api.py

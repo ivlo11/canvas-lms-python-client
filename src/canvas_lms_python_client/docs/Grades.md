@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**current** | [**Grade**](Grade.md) |  | [optional] 
+**current** | [**WhatIfGrade**](WhatIfGrade.md) |  | [optional] 
 **current_groups** | [**GradeGroup**](GradeGroup.md) |  | [optional] 
-**final** | [**Grade**](Grade.md) |  | [optional] 
+**final** | [**WhatIfGrade**](WhatIfGrade.md) |  | [optional] 
 **final_groups** | [**GradeGroup**](GradeGroup.md) |  | [optional] 
 
 ## Example

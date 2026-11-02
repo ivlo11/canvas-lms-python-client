@@ -820,6 +820,7 @@ __all__ = [
     "UsersUpdateRequest",
     "UsersUpdateRequestUser",
     "WebZipExport",
+    "WhatIfGrade",
     "WhatIfGradesApiResetForStudentCourseResponse",
     "WhatIfGradesApiUpdateRequest",
     "WhatIfGradesApiUpdateResponse",
@@ -1639,6 +1640,7 @@ from canvas_lms_python_client.models.users_settings_for_users_request import Use
 from canvas_lms_python_client.models.users_update_request import UsersUpdateRequest as UsersUpdateRequest
 from canvas_lms_python_client.models.users_update_request_user import UsersUpdateRequestUser as UsersUpdateRequestUser
 from canvas_lms_python_client.models.web_zip_export import WebZipExport as WebZipExport
+from canvas_lms_python_client.models.what_if_grade import WhatIfGrade as WhatIfGrade
 from canvas_lms_python_client.models.what_if_grades_api_reset_for_student_course_response import WhatIfGradesApiResetForStudentCourseResponse as WhatIfGradesApiResetForStudentCourseResponse
 from canvas_lms_python_client.models.what_if_grades_api_update_request import WhatIfGradesApiUpdateRequest as WhatIfGradesApiUpdateRequest
 from canvas_lms_python_client.models.what_if_grades_api_update_response import WhatIfGradesApiUpdateResponse as WhatIfGradesApiUpdateResponse

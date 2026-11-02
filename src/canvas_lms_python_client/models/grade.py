@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -25,13 +25,20 @@ from pydantic_core import to_jsonable_python
 
 class Grade(BaseModel):
     """
-    Grade
+    
     """ # noqa: E501
-    grade: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The grade for the course", json_schema_extra={"examples": [120.0]})
-    total: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total points earned in the course", json_schema_extra={"examples": [24.0]})
-    possible: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total points possible for the course", json_schema_extra={"examples": [20.0]})
-    dropped: Optional[List[Dict[str, Any]]] = Field(default=None, description="The dropped grades for the course", json_schema_extra={"examples": [[]]})
-    __properties: ClassVar[List[str]] = ["grade", "total", "possible", "dropped"]
+    html_url: Optional[StrictStr] = Field(default=None, description="The URL to the Canvas web UI page for the user's grades, if this is a student enrollment.", json_schema_extra={"examples": [""]})
+    current_grade: Optional[StrictStr] = Field(default=None, description="The user's current grade in the class. Only included if user has permissions to view this grade.", json_schema_extra={"examples": [""]})
+    final_grade: Optional[StrictStr] = Field(default=None, description="The user's final grade for the class. Only included if user has permissions to view this grade.", json_schema_extra={"examples": [""]})
+    current_score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The user's current score in the class. Only included if user has permissions to view this score.", json_schema_extra={"examples": [95.8]})
+    final_score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The user's final score for the class. Only included if user has permissions to view this score.", json_schema_extra={"examples": [95.8]})
+    current_points: Optional[StrictInt] = Field(default=None, description="The total points the user has earned in the class. Only included if user has permissions to view this score and 'current_points' is passed in the request's 'include' parameter.", json_schema_extra={"examples": [150]})
+    unposted_current_grade: Optional[StrictStr] = Field(default=None, description="The user's current grade in the class including muted/unposted assignments. Only included if user has permissions to view this grade, typically teachers, TAs, and admins.", json_schema_extra={"examples": [""]})
+    unposted_final_grade: Optional[StrictStr] = Field(default=None, description="The user's final grade for the class including muted/unposted assignments. Only included if user has permissions to view this grade, typically teachers, TAs, and admins..", json_schema_extra={"examples": [""]})
+    unposted_current_score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The user's current score in the class including muted/unposted assignments. Only included if user has permissions to view this score, typically teachers, TAs, and admins..", json_schema_extra={"examples": [95.8]})
+    unposted_final_score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The user's final score for the class including muted/unposted assignments. Only included if user has permissions to view this score, typically teachers, TAs, and admins..", json_schema_extra={"examples": [95.8]})
+    unposted_current_points: Optional[StrictInt] = Field(default=None, description="The total points the user has earned in the class, including muted/unposted assignments. Only included if user has permissions to view this score (typically teachers, TAs, and admins) and 'current_points' is passed in the request's 'include' parameter.", json_schema_extra={"examples": [150]})
+    __properties: ClassVar[List[str]] = ["html_url", "current_grade", "final_grade", "current_score", "final_score", "current_points", "unposted_current_grade", "unposted_final_grade", "unposted_current_score", "unposted_final_score", "unposted_current_points"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -84,10 +91,17 @@ class Grade(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "grade": obj.get("grade"),
-            "total": obj.get("total"),
-            "possible": obj.get("possible"),
-            "dropped": obj.get("dropped")
+            "html_url": obj.get("html_url"),
+            "current_grade": obj.get("current_grade"),
+            "final_grade": obj.get("final_grade"),
+            "current_score": obj.get("current_score"),
+            "final_score": obj.get("final_score"),
+            "current_points": obj.get("current_points"),
+            "unposted_current_grade": obj.get("unposted_current_grade"),
+            "unposted_final_grade": obj.get("unposted_final_grade"),
+            "unposted_current_score": obj.get("unposted_current_score"),
+            "unposted_final_score": obj.get("unposted_final_score"),
+            "unposted_current_points": obj.get("unposted_current_points")
         })
         return _obj
 
