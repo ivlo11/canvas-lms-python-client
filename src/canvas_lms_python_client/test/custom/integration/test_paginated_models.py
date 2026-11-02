@@ -431,6 +431,15 @@ async def test_users_and_roles_pages_typed(canvas_admin_api_client):
     assert_typed(require(roles, "role in the admin's account"), Role)
 
 
+async def test_users_api_show_self_is_typed(canvas_api_client):
+    """Show user details documented @returns Schemas::Docs::User and was untyped."""
+    observer = await UsersApi(canvas_api_client).users_api_show(id="self")
+
+    assert isinstance(observer, User)
+    assert isinstance(observer.id, int)
+    assert observer.name
+
+
 async def test_account_calendars_pages_typed(canvas_admin_api_client):
     """Account calendar pages were lists of the wrapper's key names."""
     pages = await collect(

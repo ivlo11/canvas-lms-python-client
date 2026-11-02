@@ -559,7 +559,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_api_show**
-> object users_api_show(id, include=include)
+> User users_api_show(id, include=include)
 
 Show user details
 
@@ -580,6 +580,7 @@ Example:
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.user import User
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -627,7 +628,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**User**](User.md)
 
 ### Authorization
 

@@ -1,0 +1,87 @@
+[
+  {
+    "id": 218,
+    "name": "Parent of Lizalfos 2",
+    "created_at": "2026-09-19T00:49:40Z",
+    "sortable_name": "2, Parent of Lizalfos",
+    "short_name": "Parent of Lizalfos 2",
+    "last_name": "2",
+    "first_name": "Parent of Lizalfos",
+    "locale": null,
+    "effective_locale": "en",
+    "last_login": null,
+    "permissions": {
+      "can_update_name": true,
+      "can_update_avatar": false,
+      "limit_parent_app_web_access": false
+    },
+    "uuid": "inLgqmIOqjeW3ojZrndESY1KmyEhRrGUku3FuALr",
+    "account_uuid": "RNdKUDYcCFX3mkzCaeP4ikqJHyGi2obLiN4iOh5A"
+  },
+  {
+    "id": 8,
+    "name": "Jessie 2",
+    "created_at": "2026-09-18T14:19:37Z",
+    "sortable_name": "2, Jessie",
+    "short_name": "Jessie 2",
+    "last_name": "2",
+    "first_name": "Jessie",
+    "locale": null,
+    "effective_locale": "en",
+    "last_login": null,
+    "permissions": {
+      "can_update_name": true,
+      "can_update_avatar": false,
+      "limit_parent_app_web_access": false
+    },
+    "uuid": "RPfp2HtyBr25EqOOL4K3lpBr6DcYiCsllmyqOqLw",
+    "account_uuid": "RNdKUDYcCFX3mkzCaeP4ikqJHyGi2obLiN4iOh5A"
+  },
+  {
+    "id": 392,
+    "name": "Seeded Admin 2",
+    "created_at": "2026-11-02T06:12:30Z",
+    "sortable_name": "2, Seeded Admin",
+    "short_name": "Seeded Admin 2",
+    "sis_user_id": null,
+    "integration_id": null,
+    "sis_import_id": null,
+    "login_id": "seeded_admin_2",
+    "last_name": "2",
+    "first_name": "Seeded Admin",
+    "email": null,
+    "locale": null,
+    "effective_locale": "en",
+    "last_login": null,
+    "permissions": {
+      "can_update_name": true,
+      "can_update_avatar": false,
+      "limit_parent_app_web_access": false
+    },
+    "uuid": "UBksSTkCb9e71gKP3MCuvrN5QUeAt5WaiZcRFxLo",
+    "account_uuid": "RNdKUDYcCFX3mkzCaeP4ikqJHyGi2obLiN4iOh5A"
+  },
+  {
+    "id": 8,
+    "name": "Jessie 2",
+    "created_at": "2026-09-18T14:19:37Z",
+    "sortable_name": "2, Jessie",
+    "short_name": "Jessie 2",
+    "sis_user_id": null,
+    "integration_id": null,
+    "sis_import_id": null,
+    "login_id": "9553414123",
+    "last_name": "2",
+    "first_name": "Jessie",
+    "email": null,
+    "locale": null,
+    "last_login": null,
+    "permissions": {
+      "can_update_name": true,
+      "can_update_avatar": false,
+      "limit_parent_app_web_access": false
+    },
+    "uuid": "RPfp2HtyBr25EqOOL4K3lpBr6DcYiCsllmyqOqLw",
+    "account_uuid": "RNdKUDYcCFX3mkzCaeP4ikqJHyGi2obLiN4iOh5A"
+  }
+]

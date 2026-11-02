@@ -16,7 +16,7 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.assignment import Assignment
 from canvas_lms_python_client.models.submission import Submission
@@ -1517,7 +1517,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> User:
         """Show user details
 
         Shows details for user.  Also includes an attribute \"permissions\", a non-comprehensive list of permissions for the user. Example:   !!!javascript   \"permissions\": {    \"can_update_name\": true, // Whether the user can update their name.    \"can_update_avatar\": false, // Whether the user can update their avatar.    \"limit_parent_app_web_access\": false // Whether the user can interact with Canvas web from the Canvas Parent app.   }
@@ -1559,7 +1559,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "User",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1588,7 +1588,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[User]:
         """Show user details
 
         Shows details for user.  Also includes an attribute \"permissions\", a non-comprehensive list of permissions for the user. Example:   !!!javascript   \"permissions\": {    \"can_update_name\": true, // Whether the user can update their name.    \"can_update_avatar\": false, // Whether the user can update their avatar.    \"limit_parent_app_web_access\": false // Whether the user can interact with Canvas web from the Canvas Parent app.   }
@@ -1630,7 +1630,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "User",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1702,7 +1702,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "User",
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -20,9 +20,7 @@ DEFAULT_SCHEME_LETTERS = {"A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D"
 
 
 async def test_student_courses_computed_grades(canvas_student_api_client):
-    # users_api_show is untyped (@returns Schemas::Docs::User), so it's a dict
     student = await UsersApi(canvas_student_api_client).users_api_show(id="self")
-    student_id = student["id"]
     courses = [
         course
         async for course in CoursesApi(canvas_student_api_client).courses_index_all(
@@ -38,7 +36,7 @@ async def test_student_courses_computed_grades(canvas_student_api_client):
         enrollments = [
             enrollment
             for enrollment in course.enrollments or []
-            if enrollment.type == "student" and enrollment.user_id == student_id
+            if enrollment.type == "student" and enrollment.user_id == student.id
         ]
         for enrollment in enrollments:
             score, grade = enrollment.computed_current_score, enrollment.computed_current_grade

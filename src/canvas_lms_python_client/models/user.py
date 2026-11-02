@@ -47,7 +47,10 @@ class User(BaseModel):
     time_zone: Optional[StrictStr] = Field(default=None, description="Optional: This field is only returned in certain API calls, and will return the IANA time zone name of the user's preferred timezone.", json_schema_extra={"examples": ["America/Denver"]})
     bio: Optional[StrictStr] = Field(default=None, description="Optional: The user's bio.", json_schema_extra={"examples": ["I like the Muppets."]})
     pronouns: Optional[StrictStr] = Field(default=None, description="Optional: This field is only returned if pronouns are enabled, and will return the pronouns of the user.", json_schema_extra={"examples": ["he/him"]})
-    __properties: ClassVar[List[str]] = ["id", "name", "sortable_name", "last_name", "first_name", "short_name", "sis_user_id", "sis_import_id", "integration_id", "login_id", "avatar_url", "avatar_state", "enrollments", "email", "locale", "last_login", "time_zone", "bio", "pronouns"]
+    effective_locale: Optional[StrictStr] = Field(default=None, description="Optional: This field is only returned in certain API calls, and only for the current user. It will return the locale the user sees Canvas in, in RFC 5646 format.", json_schema_extra={"examples": ["en"]})
+    uuid: Optional[StrictStr] = Field(default=None, description="Optional: This field is only returned in certain API calls (for example with include[]=uuid), and will return the user's Canvas UUID.", json_schema_extra={"examples": ["WvAHhY5FINzq5IyRIJybGeiXyFkG3SqHUPb7jZY5"]})
+    permissions: Optional[Dict[str, Any]] = Field(default=None, description="Optional: This field is only returned in certain API calls, and will return a non-comprehensive list of permissions for the user.", json_schema_extra={"examples": [{"can_update_name": True, "can_update_avatar": False, "limit_parent_app_web_access": False}]})
+    __properties: ClassVar[List[str]] = ["id", "name", "sortable_name", "last_name", "first_name", "short_name", "sis_user_id", "sis_import_id", "integration_id", "login_id", "avatar_url", "avatar_state", "enrollments", "email", "locale", "last_login", "time_zone", "bio", "pronouns", "effective_locale", "uuid", "permissions"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -124,7 +127,10 @@ class User(BaseModel):
             "last_login": obj.get("last_login"),
             "time_zone": obj.get("time_zone"),
             "bio": obj.get("bio"),
-            "pronouns": obj.get("pronouns")
+            "pronouns": obj.get("pronouns"),
+            "effective_locale": obj.get("effective_locale"),
+            "uuid": obj.get("uuid"),
+            "permissions": obj.get("permissions")
         })
         return _obj
 
