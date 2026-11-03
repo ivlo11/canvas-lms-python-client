@@ -196,3 +196,67 @@ The media object list operations (for the caller, a course, a group, and their m
 - **GIVEN** a rubric associated with an assignment in a course
 - **WHEN** the rubric's used locations are listed with the all-items iterator
 - **THEN** each yielded item is a used-location model for one course, with that course's `id` and `name`, and a list of assignments each having an `id` and `title`
+
+### Requirement: Audit log queries yield compound pages with typed events
+Every course audit, grade change audit and authentication audit query SHALL return, and its page iterator SHALL yield, a page model with three parts:
+- `events`: a list of the matching event model
+- `links`: an untyped mapping of link templates
+- `linked`: an untyped mapping of the related records
+
+A page SHALL deserialize without a validation error whatever ids, grades and link values Canvas sends.
+
+#### Scenario: Grade change audit pages are typed
+- **GIVEN** a course with at least one grade change
+- **WHEN** its grade change log is listed with the page iterator
+- **THEN** each page is a page model whose `events` are grade change event models
+- **AND** each event's `version_number`, `points_possible_after` and link ids equal what Canvas sent, and no validation error is raised
+
+#### Scenario: Course audit pages are typed
+- **GIVEN** a course with at least one recorded course event
+- **WHEN** its course audit log is listed with the page iterator
+- **THEN** each page's `events` are course event models whose `event_type` is set and whose link values are strings
+
+#### Scenario: Authentication audit pages are typed
+- **GIVEN** a user who has logged in
+- **WHEN** that user's authentication log is listed with the page iterator
+- **THEN** each page's `events` are authentication event models with an `id`, `created_at`, `event_type` and `links` whose `login`, `account` and `user` are integers
+
+#### Scenario: Empty audit page
+- **GIVEN** a course with no recorded course events
+- **WHEN** its course audit log is listed
+- **THEN** one page is yielded whose `events` is an empty list, and no validation error is raised
+
+### Requirement: Logins, batches, progress, gradeable students and pace contexts yield typed items
+These paginated operations SHALL yield typed items from the page iterator and, for list responses, from the all-items iterator, across all result pages:
+- listing a user's logins
+- listing the caller's running conversation batches
+- getting bulk user progress for a course
+- listing gradeable students for multiple assignments
+
+Listing pace contexts SHALL yield page models whose `pace_contexts` are typed and whose `total_entries` is an integer.
+
+#### Scenario: User logins are typed
+- **GIVEN** a user with at least one login
+- **WHEN** that user's logins are listed with the all-items iterator
+- **THEN** each item is a login model whose `id`, `user_id`, `account_id`, `unique_id` and `workflow_state` equal what Canvas sent
+
+#### Scenario: Bulk user progress is typed
+- **GIVEN** a module-based course with an enrolled student
+- **WHEN** bulk user progress is listed with the all-items iterator
+- **THEN** each item is a user progress model with the user's `id` and `display_name`, and a course progress whose `requirement_count` is an integer
+
+#### Scenario: Gradeable students carry their assignment ids
+- **GIVEN** a course with assignments and students
+- **WHEN** gradeable students are listed for two of its assignments
+- **THEN** each item is a gradeable student model with an `id`, a `display_name`, and a list of integer `assignment_ids`
+
+#### Scenario: Conversation batches are typed
+- **GIVEN** the caller has a conversation batch in progress
+- **WHEN** running batches are listed
+- **THEN** each item is a conversation batch model whose `id`, `workflow_state` and `completion` equal what Canvas sent
+
+#### Scenario: Pace contexts are typed
+- **GIVEN** a course with course pacing enabled and a published course pace
+- **WHEN** its course pace contexts are listed with the page iterator
+- **THEN** each page's `pace_contexts` are pace context models with `name`, `type` and `item_id` set
+- **AND** an applied pace, when present, is a typed model with `name` and `type`
