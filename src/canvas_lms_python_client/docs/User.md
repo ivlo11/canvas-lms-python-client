@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **pronouns** | **str** | Optional: This field is only returned if pronouns are enabled, and will return the pronouns of the user. | [optional] 
 **effective_locale** | **str** | Optional: This field is only returned in certain API calls, and only for the current user. It will return the locale the user sees Canvas in, in RFC 5646 format. | [optional] 
 **uuid** | **str** | Optional: This field is only returned in certain API calls (for example with include[]&#x3D;uuid), and will return the user&#39;s Canvas UUID. | [optional] 
-**permissions** | **object** | Optional: This field is only returned in certain API calls, and will return a non-comprehensive list of permissions for the user. | [optional] 
+**permissions** | [**UserPermissions**](UserPermissions.md) |  | [optional] 
 
 ## Example
 

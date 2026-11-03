@@ -493,6 +493,7 @@ __all__ = [
     "LatePolicyCreateRequest",
     "LatePolicyCreateRequestLatePolicy",
     "LearningObjectDates",
+    "LearningObjectDatesPeerReviewSubAssignment",
     "LearningObjectDatesUpdateRequest",
     "LearningObjectDatesUpdateRequestPeerReview",
     "License",
@@ -802,6 +803,7 @@ __all__ = [
     "UserObserveesCreateRequest",
     "UserObserveesCreateRequestObservee",
     "UserObserveesUpdateRequest",
+    "UserPermissions",
     "UsersCreateRequest",
     "UsersCreateRequestCommunicationChannel",
     "UsersCreateRequestDestination",
@@ -1313,6 +1315,7 @@ from canvas_lms_python_client.models.late_policy import LatePolicy as LatePolicy
 from canvas_lms_python_client.models.late_policy_create_request import LatePolicyCreateRequest as LatePolicyCreateRequest
 from canvas_lms_python_client.models.late_policy_create_request_late_policy import LatePolicyCreateRequestLatePolicy as LatePolicyCreateRequestLatePolicy
 from canvas_lms_python_client.models.learning_object_dates import LearningObjectDates as LearningObjectDates
+from canvas_lms_python_client.models.learning_object_dates_peer_review_sub_assignment import LearningObjectDatesPeerReviewSubAssignment as LearningObjectDatesPeerReviewSubAssignment
 from canvas_lms_python_client.models.learning_object_dates_update_request import LearningObjectDatesUpdateRequest as LearningObjectDatesUpdateRequest
 from canvas_lms_python_client.models.learning_object_dates_update_request_peer_review import LearningObjectDatesUpdateRequestPeerReview as LearningObjectDatesUpdateRequestPeerReview
 from canvas_lms_python_client.models.license import License as License
@@ -1622,6 +1625,7 @@ from canvas_lms_python_client.models.user_display import UserDisplay as UserDisp
 from canvas_lms_python_client.models.user_observees_create_request import UserObserveesCreateRequest as UserObserveesCreateRequest
 from canvas_lms_python_client.models.user_observees_create_request_observee import UserObserveesCreateRequestObservee as UserObserveesCreateRequestObservee
 from canvas_lms_python_client.models.user_observees_update_request import UserObserveesUpdateRequest as UserObserveesUpdateRequest
+from canvas_lms_python_client.models.user_permissions import UserPermissions as UserPermissions
 from canvas_lms_python_client.models.users_create_request import UsersCreateRequest as UsersCreateRequest
 from canvas_lms_python_client.models.users_create_request_communication_channel import UsersCreateRequestCommunicationChannel as UsersCreateRequestCommunicationChannel
 from canvas_lms_python_client.models.users_create_request_destination import UsersCreateRequestDestination as UsersCreateRequestDestination

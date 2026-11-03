@@ -1,0 +1,30 @@
+{
+  "id": 4,
+  "due_at": "2012-07-01T23:59:00-06:00",
+  "unlock_at": "2012-06-01T00:00:00-06:00",
+  "lock_at": "2012-07-08T23:59:00-06:00",
+  "only_visible_to_overrides": false,
+  "graded": true,
+  "visible_to_everyone": true,
+  "overrides": [],
+  "peer_review_sub_assignment": {
+    "id": 5,
+    "due_at": "2012-07-08T23:59:00-06:00",
+    "unlock_at": "2012-07-02T00:00:00-06:00",
+    "lock_at": "2012-07-15T23:59:00-06:00",
+    "only_visible_to_overrides": false,
+    "visible_to_everyone": true,
+    "overrides": [
+      {
+        "id": 7,
+        "assignment_id": 5,
+        "student_ids": [1, 2, 3],
+        "title": "a peer review override",
+        "due_at": "2012-07-10T23:59:00-06:00",
+        "all_day": false,
+        "unlock_at": "2012-07-02T00:00:00-06:00",
+        "lock_at": "2012-07-15T23:59:00-06:00"
+      }
+    ]
+  }
+}
