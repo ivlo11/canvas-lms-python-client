@@ -19,8 +19,10 @@ import pytest
 from canvas_lms_python_client.api.account_calendars_api_api import AccountCalendarsApiApi
 from canvas_lms_python_client.api.accounts_api import AccountsApi
 from canvas_lms_python_client.api.appointment_groups_api import AppointmentGroupsApi
+from canvas_lms_python_client.api.assignments_api_api import AssignmentsApiApi
 from canvas_lms_python_client.api.authentication_audit_api_api import AuthenticationAuditApiApi
 from canvas_lms_python_client.api.context_controls_api import ContextControlsApi
+from canvas_lms_python_client.api.conversations_api import ConversationsApi
 from canvas_lms_python_client.api.course_audit_api_api import CourseAuditApiApi
 from canvas_lms_python_client.api.courses_api import CoursesApi
 from canvas_lms_python_client.api.deployments_api import DeploymentsApi
@@ -29,9 +31,11 @@ from canvas_lms_python_client.api.grading_period_sets_api import GradingPeriodSe
 from canvas_lms_python_client.api.grading_periods_api import GradingPeriodsApi
 from canvas_lms_python_client.api.lti_apps_api import LtiAppsApi
 from canvas_lms_python_client.api.media_objects_api import MediaObjectsApi
+from canvas_lms_python_client.api.pace_contexts_api_api import PaceContextsApiApi
 from canvas_lms_python_client.api.poll_choices_api import PollChoicesApi
 from canvas_lms_python_client.api.poll_sessions_api import PollSessionsApi
 from canvas_lms_python_client.api.polls_api import PollsApi
+from canvas_lms_python_client.api.pseudonyms_api import PseudonymsApi
 from canvas_lms_python_client.api.quiz_submission_events_api_api import QuizSubmissionEventsApiApi
 from canvas_lms_python_client.api.quiz_submissions_api_api import QuizSubmissionsApiApi
 from canvas_lms_python_client.api.quizzes_api_api import QuizzesApiApi
@@ -39,6 +43,7 @@ from canvas_lms_python_client.api.registrations_api import RegistrationsApi
 from canvas_lms_python_client.api.resource_links_api import ResourceLinksApi
 from canvas_lms_python_client.api.role_overrides_api import RoleOverridesApi
 from canvas_lms_python_client.api.rubrics_api_api import RubricsApiApi
+from canvas_lms_python_client.api.submissions_api_api import SubmissionsApiApi
 from canvas_lms_python_client.api.users_api import UsersApi
 from canvas_lms_python_client.exceptions import ApiException
 from canvas_lms_python_client.models.account import Account
@@ -46,12 +51,14 @@ from canvas_lms_python_client.models.account_calendar import AccountCalendar
 from canvas_lms_python_client.models.account_calendars_api_index_response import (
     AccountCalendarsApiIndexResponse,
 )
+from canvas_lms_python_client.models.applied_pace import AppliedPace
 from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.models.authentication_audit_api_for_account_response import (
     AuthenticationAuditApiForAccountResponse,
 )
 from canvas_lms_python_client.models.authentication_event import AuthenticationEvent
 from canvas_lms_python_client.models.authentication_event_links import AuthenticationEventLinks
+from canvas_lms_python_client.models.conversation_batch import ConversationBatch
 from canvas_lms_python_client.models.course import Course
 from canvas_lms_python_client.models.course_audit_api_for_account_response import (
     CourseAuditApiForAccountResponse,
@@ -59,6 +66,7 @@ from canvas_lms_python_client.models.course_audit_api_for_account_response impor
 from canvas_lms_python_client.models.course_event import CourseEvent
 from canvas_lms_python_client.models.course_event_link import CourseEventLink
 from canvas_lms_python_client.models.course_grading_period import CourseGradingPeriod
+from canvas_lms_python_client.models.course_progress import CourseProgress
 from canvas_lms_python_client.models.grade_change_audit_api_for_course_response import (
     GradeChangeAuditApiForCourseResponse,
 )
@@ -73,6 +81,7 @@ from canvas_lms_python_client.models.group import Group
 from canvas_lms_python_client.models.list_lti_registrations_response import (
     ListLtiRegistrationsResponse,
 )
+from canvas_lms_python_client.models.login import Login
 from canvas_lms_python_client.models.lti_context_control import LtiContextControl
 from canvas_lms_python_client.models.lti_deployment import LtiDeployment
 from canvas_lms_python_client.models.lti_launch_definition import LtiLaunchDefinition
@@ -84,6 +93,11 @@ from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink
 from canvas_lms_python_client.models.media_object import MediaObject
 from canvas_lms_python_client.models.media_object_media_tracks_inner import (
     MediaObjectMediaTracksInner,
+)
+from canvas_lms_python_client.models.multiple_gradeable_student import MultipleGradeableStudent
+from canvas_lms_python_client.models.pace_context import PaceContext
+from canvas_lms_python_client.models.pace_contexts_api_index_response import (
+    PaceContextsApiIndexResponse,
 )
 from canvas_lms_python_client.models.poll import Poll
 from canvas_lms_python_client.models.poll_choice import PollChoice
@@ -107,6 +121,7 @@ from canvas_lms_python_client.models.rubric_used_location_assignments_inner impo
     RubricUsedLocationAssignmentsInner,
 )
 from canvas_lms_python_client.models.user import User
+from canvas_lms_python_client.models.user_progress import UserProgress
 
 pytestmark = pytest.mark.integration
 
@@ -719,3 +734,131 @@ async def test_authentication_audit_pages_typed(canvas_admin_api_client):
         assert event.event_type in ("login", "logout")
         assert isinstance(event.links, AuthenticationEventLinks)
         assert isinstance(event.links.user, int)
+
+
+async def test_logins_typed(canvas_admin_api_client):
+    """List user logins had no @returns, so login pages were untyped."""
+    api = PseudonymsApi(canvas_admin_api_client)
+
+    # The account listing has only the caller's logins in that account
+    account_logins: List[Login] = []
+    for account in await collect(AccountsApi(canvas_admin_api_client).accounts_index_all()):
+        account_logins += await collect(api.pseudonyms_index_all(account_id=str(account.id)))
+    user_logins = await collect(api.pseudonyms_index_for_users_all(user_id="self"))
+
+    require(account_logins, "login for the admin in any of its accounts")
+    require(user_logins, "login for the admin")
+
+    for login in account_logins + user_logins:
+        assert isinstance(login, Login)
+        assert isinstance(login.id, int)
+        assert isinstance(login.user_id, int)
+        assert isinstance(login.account_id, int)
+        assert login.unique_id
+
+
+async def test_conversation_batches_typed(canvas_admin_api_client):
+    """Get running batches had no @returns, so batch pages were untyped.
+
+    Canvas lists only the caller's batches. ``--conversation-batch`` seeds one
+    for Seeded Admin 2, so run this with that admin's token to exercise it.
+    """
+    batches = await collect(ConversationsApi(canvas_admin_api_client).conversations_batches_all())
+    require_seeded(batches, "running conversation batch for the caller", "--conversation-batch")
+
+    for batch in batches:
+        assert isinstance(batch, ConversationBatch)
+        assert isinstance(batch.id, int)
+        assert batch.workflow_state
+        assert isinstance(batch.completion, float)
+        assert isinstance(batch.recipient_count, int)
+        assert isinstance(batch.message, dict)
+
+
+async def test_bulk_user_progress_typed(canvas_admin_api_client):
+    """Bulk user progress had no @returns, so progress pages were untyped."""
+    api = CoursesApi(canvas_admin_api_client)
+    account = await root_account(canvas_admin_api_client)
+
+    progress: List[UserProgress] = []
+    for course in await account_courses(canvas_admin_api_client, account):
+        try:
+            progress = await collect(api.courses_bulk_user_progress_all(course_id=str(course.id)))
+        except ApiException as error:
+            if error.status == 400:  # the course isn't module based
+                continue
+            raise
+        if progress:
+            break
+    require_seeded(progress, "module progress", "--module-progress")
+
+    for item in progress:
+        assert isinstance(item, UserProgress)
+        assert isinstance(item.id, int)
+        assert item.display_name
+        assert isinstance(item.progress, CourseProgress)
+
+
+async def test_multiple_gradeable_students_typed(canvas_admin_api_client):
+    """List multiple assignments gradeable students had no @returns."""
+    api = SubmissionsApiApi(canvas_admin_api_client)
+    account = await root_account(canvas_admin_api_client)
+
+    students: List[MultipleGradeableStudent] = []
+    for course in await account_courses(canvas_admin_api_client, account):
+        course_id = str(course.id)
+        assignments = await collect(
+            AssignmentsApiApi(canvas_admin_api_client).assignments_api_index_all(
+                course_id=course_id
+            )
+        )
+        if len(assignments) < 2:
+            continue
+        students = await collect(
+            api.submissions_api_multiple_gradeable_students_all(
+                course_id=course_id,
+                assignment_ids=[str(assignment.id) for assignment in assignments[:2]],
+            )
+        )
+        if students:
+            break
+    require(students, "gradeable student in a course with two assignments")
+
+    for student in students:
+        assert isinstance(student, MultipleGradeableStudent)
+        assert isinstance(student.id, int)
+        assert student.display_name
+        assert all(isinstance(assignment_id, int) for assignment_id in student.assignment_ids)
+
+
+@pytest.mark.parametrize("context_type", ["course", "student_enrollment"])
+async def test_pace_contexts_pages_typed(canvas_admin_api_client, context_type):
+    """List all pace contexts had no @returns, so pace context pages were untyped."""
+    api = PaceContextsApiApi(canvas_admin_api_client)
+    account = await root_account(canvas_admin_api_client)
+
+    pages: List[PaceContextsApiIndexResponse] = []
+    contexts: List[PaceContext] = []
+    for course in await account_courses(canvas_admin_api_client, account):
+        try:
+            pages = await collect(
+                api.pace_contexts_api_index_paginated(course_id=str(course.id), type=context_type)
+            )
+        except ApiException as error:
+            if error.status == 404:  # course pacing is off for this course
+                continue
+            raise
+        contexts = wrapped_items(pages, PaceContextsApiIndexResponse, "pace_contexts")
+        if contexts:
+            break
+    require_seeded(contexts, f"{context_type} pace context", "--course-pacing")
+
+    for page in pages:
+        assert isinstance(page.total_entries, int)
+    for context in contexts:
+        assert isinstance(context, PaceContext)
+        assert isinstance(context.item_id, int)
+        assert context.name and context.type
+        if context.applied_pace is not None:
+            assert isinstance(context.applied_pace, AppliedPace)
+            assert isinstance(context.applied_pace.duration, int)

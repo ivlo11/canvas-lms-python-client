@@ -33,8 +33,6 @@ _EMPTY_TYPES_MAP = re.compile(
 
 UNDOCUMENTED_PAGINATED_OPERATIONS = frozenset(
     {
-        "conversations_batches",
-        "courses_bulk_user_progress",
         "courses_todo_items",
         "discussion_topics_api_entries",
         "discussion_topics_api_entries_for_groups",
@@ -42,15 +40,11 @@ UNDOCUMENTED_PAGINATED_OPERATIONS = frozenset(
         "discussion_topics_api_entry_list_for_groups",
         "discussion_topics_api_replies",
         "discussion_topics_api_replies_for_groups",
-        "pace_contexts_api_index",
         "planner_index",
         "planner_index_for_users",
-        "pseudonyms_index",
-        "pseudonyms_index_for_users",
         "search_all_courses",
         "search_recipients",
         "search_recipients_for_other",
-        "submissions_api_multiple_gradeable_students",
         "users_todo_items",
     }
 )
@@ -146,6 +140,17 @@ RETURN_MODEL_LIST_ITEM_TYPES = {
 }
 
 
+# Paginated operation -> page item type, for lists that had no @returns in
+# canvas-lms
+SIMPLE_LIST_ITEM_TYPES = {
+    "pseudonyms_index": "Login",
+    "pseudonyms_index_for_users": "Login",
+    "conversations_batches": "ConversationBatch",
+    "courses_bulk_user_progress": "UserProgress",
+    "submissions_api_multiple_gradeable_students": "MultipleGradeableStudent",
+}
+
+
 def _page_item_type(func):
     (page_type,) = typing.get_args(func.__annotations__["return"])
     assert typing.get_origin(page_type) is list
@@ -171,6 +176,14 @@ def test_return_model_list_pages_are_typed():
     assert item_types == RETURN_MODEL_LIST_ITEM_TYPES
 
 
+def test_simple_list_pages_are_typed():
+    paginated = {operation: func for _, operation, func in _paginated_methods()}
+
+    item_types = {operation: _page_item_type(paginated[operation]) for operation in SIMPLE_LIST_ITEM_TYPES}
+
+    assert item_types == SIMPLE_LIST_ITEM_TYPES
+
+
 # List key -> (item model, minimal valid item)
 _WRAPPED_ITEMS = {
     "account_calendars": ("AccountCalendar", {"id": 1, "name": "Chemistry"}),
@@ -181,6 +194,7 @@ _WRAPPED_ITEMS = {
         {"id": "1", "start_date": "2026-01-01T00:00:00Z", "end_date": "2026-06-01T00:00:00Z"},
     ),
     "outcome_results": ("OutcomeResult", {"id": 1}),
+    "pace_contexts": ("PaceContext", {"name": "Biology 101", "type": "Course", "item_id": 1}),
     "poll_choices": ("PollChoice", {"id": "1", "text": "Yes"}),
     "poll_sessions": ("PollSession", {"id": "1", "poll_id": "2", "course_id": "3"}),
     "poll_submissions": ("PollSubmission", {"id": "1", "poll_choice_id": "2"}),
@@ -206,6 +220,7 @@ _WRAPPER_KEYS = {
     "GradingPeriodsShowResponse": "grading_periods",
     "GradingPeriodsUpdateResponse": "grading_periods",
     "OutcomeResultsIndexResponse": "outcome_results",
+    "PaceContextsApiIndexResponse": "pace_contexts",
     "PollChoicesCreateResponse": "poll_choices",
     "PollChoicesIndexResponse": "poll_choices",
     "PollChoicesShowResponse": "poll_choices",

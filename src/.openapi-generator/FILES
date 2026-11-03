@@ -202,6 +202,7 @@ canvas_lms_python_client/docs/AnnouncementsApiApi.md
 canvas_lms_python_client/docs/AnonymousProvisionalGradesApi.md
 canvas_lms_python_client/docs/AnonymousUserDisplay.md
 canvas_lms_python_client/docs/Answer.md
+canvas_lms_python_client/docs/AppliedPace.md
 canvas_lms_python_client/docs/Appointment.md
 canvas_lms_python_client/docs/AppointmentGroup.md
 canvas_lms_python_client/docs/AppointmentGroupsApi.md
@@ -351,6 +352,7 @@ canvas_lms_python_client/docs/ContextModulesApiUpdateRequest.md
 canvas_lms_python_client/docs/ContextModulesApiUpdateRequestModule.md
 canvas_lms_python_client/docs/ContextSearchResponse.md
 canvas_lms_python_client/docs/Conversation.md
+canvas_lms_python_client/docs/ConversationBatch.md
 canvas_lms_python_client/docs/ConversationParticipant.md
 canvas_lms_python_client/docs/ConversationsAddMessageRequest.md
 canvas_lms_python_client/docs/ConversationsAddRecipientsRequest.md
@@ -576,6 +578,7 @@ canvas_lms_python_client/docs/LineItem.md
 canvas_lms_python_client/docs/ListLtiRegistrationsResponse.md
 canvas_lms_python_client/docs/LmgbUserDetailsApi.md
 canvas_lms_python_client/docs/LockInfo.md
+canvas_lms_python_client/docs/Login.md
 canvas_lms_python_client/docs/LtiAppsApi.md
 canvas_lms_python_client/docs/LtiAssignment.md
 canvas_lms_python_client/docs/LtiContextControl.md
@@ -625,6 +628,7 @@ canvas_lms_python_client/docs/ModuleAssignmentOverridesBulkUpdateRequest.md
 canvas_lms_python_client/docs/ModuleItem.md
 canvas_lms_python_client/docs/ModuleItemSequence.md
 canvas_lms_python_client/docs/ModuleItemSequenceNode.md
+canvas_lms_python_client/docs/MultipleGradeableStudent.md
 canvas_lms_python_client/docs/NamesAndRoleContext.md
 canvas_lms_python_client/docs/NamesAndRoleMembership.md
 canvas_lms_python_client/docs/NamesAndRoleMemberships.md
@@ -671,7 +675,9 @@ canvas_lms_python_client/docs/OutcomeRollupScoreLinks.md
 canvas_lms_python_client/docs/OutcomesApiApi.md
 canvas_lms_python_client/docs/OutcomesApiUpdateRequest.md
 canvas_lms_python_client/docs/OverrideTarget.md
+canvas_lms_python_client/docs/PaceContext.md
 canvas_lms_python_client/docs/PaceContextsApiApi.md
+canvas_lms_python_client/docs/PaceContextsApiIndexResponse.md
 canvas_lms_python_client/docs/Page.md
 canvas_lms_python_client/docs/PageRevision.md
 canvas_lms_python_client/docs/PageView.md
@@ -961,6 +967,7 @@ canvas_lms_python_client/docs/UserObserveesCreateRequest.md
 canvas_lms_python_client/docs/UserObserveesCreateRequestObservee.md
 canvas_lms_python_client/docs/UserObserveesUpdateRequest.md
 canvas_lms_python_client/docs/UserPermissions.md
+canvas_lms_python_client/docs/UserProgress.md
 canvas_lms_python_client/docs/UsersApi.md
 canvas_lms_python_client/docs/UsersCreateRequest.md
 canvas_lms_python_client/docs/UsersCreateRequestCommunicationChannel.md
@@ -1021,6 +1028,7 @@ canvas_lms_python_client/models/ai_experiences_create_request.py
 canvas_lms_python_client/models/ai_experiences_update_request.py
 canvas_lms_python_client/models/anonymous_user_display.py
 canvas_lms_python_client/models/answer.py
+canvas_lms_python_client/models/applied_pace.py
 canvas_lms_python_client/models/appointment.py
 canvas_lms_python_client/models/appointment_group.py
 canvas_lms_python_client/models/appointment_groups_create_request.py
@@ -1140,6 +1148,7 @@ canvas_lms_python_client/models/context_modules_api_update_request.py
 canvas_lms_python_client/models/context_modules_api_update_request_module.py
 canvas_lms_python_client/models/context_search_response.py
 canvas_lms_python_client/models/conversation.py
+canvas_lms_python_client/models/conversation_batch.py
 canvas_lms_python_client/models/conversation_participant.py
 canvas_lms_python_client/models/conversations_add_message_request.py
 canvas_lms_python_client/models/conversations_add_recipients_request.py
@@ -1320,6 +1329,7 @@ canvas_lms_python_client/models/license.py
 canvas_lms_python_client/models/line_item.py
 canvas_lms_python_client/models/list_lti_registrations_response.py
 canvas_lms_python_client/models/lock_info.py
+canvas_lms_python_client/models/login.py
 canvas_lms_python_client/models/lti_assignment.py
 canvas_lms_python_client/models/lti_context_control.py
 canvas_lms_python_client/models/lti_deployment.py
@@ -1362,6 +1372,7 @@ canvas_lms_python_client/models/module_assignment_overrides_bulk_update_request.
 canvas_lms_python_client/models/module_item.py
 canvas_lms_python_client/models/module_item_sequence.py
 canvas_lms_python_client/models/module_item_sequence_node.py
+canvas_lms_python_client/models/multiple_gradeable_student.py
 canvas_lms_python_client/models/names_and_role_context.py
 canvas_lms_python_client/models/names_and_role_membership.py
 canvas_lms_python_client/models/names_and_role_memberships.py
@@ -1401,6 +1412,8 @@ canvas_lms_python_client/models/outcome_rollup_score.py
 canvas_lms_python_client/models/outcome_rollup_score_links.py
 canvas_lms_python_client/models/outcomes_api_update_request.py
 canvas_lms_python_client/models/override_target.py
+canvas_lms_python_client/models/pace_context.py
+canvas_lms_python_client/models/pace_contexts_api_index_response.py
 canvas_lms_python_client/models/page.py
 canvas_lms_python_client/models/page_revision.py
 canvas_lms_python_client/models/page_view.py
@@ -1632,6 +1645,7 @@ canvas_lms_python_client/models/user_observees_create_request.py
 canvas_lms_python_client/models/user_observees_create_request_observee.py
 canvas_lms_python_client/models/user_observees_update_request.py
 canvas_lms_python_client/models/user_permissions.py
+canvas_lms_python_client/models/user_progress.py
 canvas_lms_python_client/models/users_create_request.py
 canvas_lms_python_client/models/users_create_request_communication_channel.py
 canvas_lms_python_client/models/users_create_request_destination.py
@@ -1665,6 +1679,7 @@ canvas_lms_python_client/rest.py
 canvas_lms_python_client/test/__init__.py
 canvas_lms_python_client/test/test_account_calendars_api_api.py
 canvas_lms_python_client/test/test_ai_conversations_api.py
+canvas_lms_python_client/test/test_applied_pace.py
 canvas_lms_python_client/test/test_assignment_extensions_api.py
 canvas_lms_python_client/test/test_authentication_audit_api_api.py
 canvas_lms_python_client/test/test_authentication_audit_api_for_account_response.py
@@ -1675,6 +1690,7 @@ canvas_lms_python_client/test/test_authentication_event_links.py
 canvas_lms_python_client/test/test_career_experience_api.py
 canvas_lms_python_client/test/test_communication_channels_api.py
 canvas_lms_python_client/test/test_content_shares_api.py
+canvas_lms_python_client/test/test_conversation_batch.py
 canvas_lms_python_client/test/test_course.py
 canvas_lms_python_client/test/test_course_audit_api_api.py
 canvas_lms_python_client/test/test_course_audit_api_for_account_response.py
@@ -1697,13 +1713,17 @@ canvas_lms_python_client/test/test_grading_period.py
 canvas_lms_python_client/test/test_grading_period_sets.py
 canvas_lms_python_client/test/test_grading_periods_api.py
 canvas_lms_python_client/test/test_learning_object_dates_peer_review_sub_assignment.py
+canvas_lms_python_client/test/test_login.py
 canvas_lms_python_client/test/test_lti_registration_history_entry.py
 canvas_lms_python_client/test/test_lti_submission.py
 canvas_lms_python_client/test/test_media_object.py
 canvas_lms_python_client/test/test_media_object_media_sources_inner.py
 canvas_lms_python_client/test/test_media_object_media_tracks_inner.py
 canvas_lms_python_client/test/test_media_track.py
+canvas_lms_python_client/test/test_multiple_gradeable_student.py
 canvas_lms_python_client/test/test_outcome_results_api.py
+canvas_lms_python_client/test/test_pace_context.py
+canvas_lms_python_client/test/test_pace_contexts_api_index_response.py
 canvas_lms_python_client/test/test_poll_choices_api.py
 canvas_lms_python_client/test/test_poll_sessions_api.py
 canvas_lms_python_client/test/test_poll_submissions_api.py
@@ -1720,6 +1740,7 @@ canvas_lms_python_client/test/test_results_api.py
 canvas_lms_python_client/test/test_rubric_used_location.py
 canvas_lms_python_client/test/test_rubric_used_location_assignments_inner.py
 canvas_lms_python_client/test/test_user_permissions.py
+canvas_lms_python_client/test/test_user_progress.py
 canvas_lms_python_client/test/test_what_if_grades_api_api.py
 canvas_lms_python_client/test/test_what_if_submission.py
 canvas_lms_python_client_README.md

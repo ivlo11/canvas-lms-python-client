@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **pace_contexts_api_index**
-> pace_contexts_api_index(course_id, type=type, sort=sort, order=order, search_term=search_term, contexts=contexts, page=page, per_page=per_page)
+> PaceContextsApiIndexResponse pace_contexts_api_index(course_id, type=type, sort=sort, order=order, search_term=search_term, contexts=contexts, page=page, per_page=per_page)
 
 List all pace contexts
 
@@ -20,6 +20,7 @@ Returns a paginated list of pace contexts for the given course and context type.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.pace_contexts_api_index_response import PaceContextsApiIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -54,7 +55,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List all pace contexts
-        await api_instance.pace_contexts_api_index(course_id, type=type, sort=sort, order=order, search_term=search_term, contexts=contexts, page=page, per_page=per_page)
+        api_response = await api_instance.pace_contexts_api_index(course_id, type=type, sort=sort, order=order, search_term=search_term, contexts=contexts, page=page, per_page=per_page)
+        print("The response of PaceContextsApiApi->pace_contexts_api_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PaceContextsApiApi->pace_contexts_api_index: %s\n" % e)
 ```
@@ -77,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PaceContextsApiIndexResponse**](PaceContextsApiIndexResponse.md)
 
 ### Authorization
 
@@ -86,13 +89,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List all pace contexts |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -215,6 +215,7 @@ __all__ = [
     "AiExperiencesUpdateRequest",
     "AnonymousUserDisplay",
     "Answer",
+    "AppliedPace",
     "Appointment",
     "AppointmentGroup",
     "AppointmentGroupsCreateRequest",
@@ -334,6 +335,7 @@ __all__ = [
     "ContextModulesApiUpdateRequestModule",
     "ContextSearchResponse",
     "Conversation",
+    "ConversationBatch",
     "ConversationParticipant",
     "ConversationsAddMessageRequest",
     "ConversationsAddRecipientsRequest",
@@ -514,6 +516,7 @@ __all__ = [
     "LineItem",
     "ListLtiRegistrationsResponse",
     "LockInfo",
+    "Login",
     "LtiAssignment",
     "LtiContextControl",
     "LtiDeployment",
@@ -556,6 +559,7 @@ __all__ = [
     "ModuleItem",
     "ModuleItemSequence",
     "ModuleItemSequenceNode",
+    "MultipleGradeableStudent",
     "NamesAndRoleContext",
     "NamesAndRoleMembership",
     "NamesAndRoleMemberships",
@@ -595,6 +599,8 @@ __all__ = [
     "OutcomeRollupScoreLinks",
     "OutcomesApiUpdateRequest",
     "OverrideTarget",
+    "PaceContext",
+    "PaceContextsApiIndexResponse",
     "Page",
     "PageRevision",
     "PageView",
@@ -826,6 +832,7 @@ __all__ = [
     "UserObserveesCreateRequestObservee",
     "UserObserveesUpdateRequest",
     "UserPermissions",
+    "UserProgress",
     "UsersCreateRequest",
     "UsersCreateRequestCommunicationChannel",
     "UsersCreateRequestDestination",
@@ -1059,6 +1066,7 @@ from canvas_lms_python_client.models.ai_experiences_create_request import AiExpe
 from canvas_lms_python_client.models.ai_experiences_update_request import AiExperiencesUpdateRequest as AiExperiencesUpdateRequest
 from canvas_lms_python_client.models.anonymous_user_display import AnonymousUserDisplay as AnonymousUserDisplay
 from canvas_lms_python_client.models.answer import Answer as Answer
+from canvas_lms_python_client.models.applied_pace import AppliedPace as AppliedPace
 from canvas_lms_python_client.models.appointment import Appointment as Appointment
 from canvas_lms_python_client.models.appointment_group import AppointmentGroup as AppointmentGroup
 from canvas_lms_python_client.models.appointment_groups_create_request import AppointmentGroupsCreateRequest as AppointmentGroupsCreateRequest
@@ -1178,6 +1186,7 @@ from canvas_lms_python_client.models.context_modules_api_update_request import C
 from canvas_lms_python_client.models.context_modules_api_update_request_module import ContextModulesApiUpdateRequestModule as ContextModulesApiUpdateRequestModule
 from canvas_lms_python_client.models.context_search_response import ContextSearchResponse as ContextSearchResponse
 from canvas_lms_python_client.models.conversation import Conversation as Conversation
+from canvas_lms_python_client.models.conversation_batch import ConversationBatch as ConversationBatch
 from canvas_lms_python_client.models.conversation_participant import ConversationParticipant as ConversationParticipant
 from canvas_lms_python_client.models.conversations_add_message_request import ConversationsAddMessageRequest as ConversationsAddMessageRequest
 from canvas_lms_python_client.models.conversations_add_recipients_request import ConversationsAddRecipientsRequest as ConversationsAddRecipientsRequest
@@ -1358,6 +1367,7 @@ from canvas_lms_python_client.models.license import License as License
 from canvas_lms_python_client.models.line_item import LineItem as LineItem
 from canvas_lms_python_client.models.list_lti_registrations_response import ListLtiRegistrationsResponse as ListLtiRegistrationsResponse
 from canvas_lms_python_client.models.lock_info import LockInfo as LockInfo
+from canvas_lms_python_client.models.login import Login as Login
 from canvas_lms_python_client.models.lti_assignment import LtiAssignment as LtiAssignment
 from canvas_lms_python_client.models.lti_context_control import LtiContextControl as LtiContextControl
 from canvas_lms_python_client.models.lti_deployment import LtiDeployment as LtiDeployment
@@ -1400,6 +1410,7 @@ from canvas_lms_python_client.models.module_assignment_overrides_bulk_update_req
 from canvas_lms_python_client.models.module_item import ModuleItem as ModuleItem
 from canvas_lms_python_client.models.module_item_sequence import ModuleItemSequence as ModuleItemSequence
 from canvas_lms_python_client.models.module_item_sequence_node import ModuleItemSequenceNode as ModuleItemSequenceNode
+from canvas_lms_python_client.models.multiple_gradeable_student import MultipleGradeableStudent as MultipleGradeableStudent
 from canvas_lms_python_client.models.names_and_role_context import NamesAndRoleContext as NamesAndRoleContext
 from canvas_lms_python_client.models.names_and_role_membership import NamesAndRoleMembership as NamesAndRoleMembership
 from canvas_lms_python_client.models.names_and_role_memberships import NamesAndRoleMemberships as NamesAndRoleMemberships
@@ -1439,6 +1450,8 @@ from canvas_lms_python_client.models.outcome_rollup_score import OutcomeRollupSc
 from canvas_lms_python_client.models.outcome_rollup_score_links import OutcomeRollupScoreLinks as OutcomeRollupScoreLinks
 from canvas_lms_python_client.models.outcomes_api_update_request import OutcomesApiUpdateRequest as OutcomesApiUpdateRequest
 from canvas_lms_python_client.models.override_target import OverrideTarget as OverrideTarget
+from canvas_lms_python_client.models.pace_context import PaceContext as PaceContext
+from canvas_lms_python_client.models.pace_contexts_api_index_response import PaceContextsApiIndexResponse as PaceContextsApiIndexResponse
 from canvas_lms_python_client.models.page import Page as Page
 from canvas_lms_python_client.models.page_revision import PageRevision as PageRevision
 from canvas_lms_python_client.models.page_view import PageView as PageView
@@ -1670,6 +1683,7 @@ from canvas_lms_python_client.models.user_observees_create_request import UserOb
 from canvas_lms_python_client.models.user_observees_create_request_observee import UserObserveesCreateRequestObservee as UserObserveesCreateRequestObservee
 from canvas_lms_python_client.models.user_observees_update_request import UserObserveesUpdateRequest as UserObserveesUpdateRequest
 from canvas_lms_python_client.models.user_permissions import UserPermissions as UserPermissions
+from canvas_lms_python_client.models.user_progress import UserProgress as UserProgress
 from canvas_lms_python_client.models.users_create_request import UsersCreateRequest as UsersCreateRequest
 from canvas_lms_python_client.models.users_create_request_communication_channel import UsersCreateRequestCommunicationChannel as UsersCreateRequestCommunicationChannel
 from canvas_lms_python_client.models.users_create_request_destination import UsersCreateRequestDestination as UsersCreateRequestDestination

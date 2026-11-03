@@ -349,7 +349,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **courses_bulk_user_progress**
-> courses_bulk_user_progress(course_id, page=page, per_page=per_page)
+> List[UserProgress] courses_bulk_user_progress(course_id, page=page, per_page=per_page)
 
 Get bulk user progress
 
@@ -363,6 +363,7 @@ You must be a user who has permission to view all grades in the course (such as 
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.user_progress import UserProgress
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -392,7 +393,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get bulk user progress
-        await api_instance.courses_bulk_user_progress(course_id, page=page, per_page=per_page)
+        api_response = await api_instance.courses_bulk_user_progress(course_id, page=page, per_page=per_page)
+        print("The response of CoursesApi->courses_bulk_user_progress:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_bulk_user_progress: %s\n" % e)
 ```
@@ -410,7 +413,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[UserProgress]**](UserProgress.md)
 
 ### Authorization
 
@@ -425,7 +428,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get bulk user progress |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -267,7 +267,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **conversations_batches**
-> conversations_batches(page=page, per_page=per_page)
+> List[ConversationBatch] conversations_batches(page=page, per_page=per_page)
 
 Get running batches
 
@@ -281,6 +281,7 @@ asynchronously (see the mode argument to the {api:ConversationsController#create
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.conversation_batch import ConversationBatch
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -309,7 +310,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get running batches
-        await api_instance.conversations_batches(page=page, per_page=per_page)
+        api_response = await api_instance.conversations_batches(page=page, per_page=per_page)
+        print("The response of ConversationsApi->conversations_batches:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ConversationsApi->conversations_batches: %s\n" % e)
 ```
@@ -326,7 +329,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[ConversationBatch]**](ConversationBatch.md)
 
 ### Authorization
 
@@ -341,7 +344,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get running batches |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

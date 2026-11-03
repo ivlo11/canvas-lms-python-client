@@ -18,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.pace_contexts_api_index_response import PaceContextsApiIndexResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -62,7 +63,7 @@ class PaceContextsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> PaceContextsApiIndexResponse:
         """List all pace contexts
 
         Returns a paginated list of pace contexts for the given course and context type.
@@ -128,6 +129,7 @@ class PaceContextsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PaceContextsApiIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -164,7 +166,7 @@ class PaceContextsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[PaceContextsApiIndexResponse]:
         """List all pace contexts
 
         Returns a paginated list of pace contexts for the given course and context type.
@@ -230,6 +232,7 @@ class PaceContextsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PaceContextsApiIndexResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -287,7 +290,7 @@ class PaceContextsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PaceContextsApiIndexResponse]:
         """List all pace contexts
 
         Returns a paginated list of pace contexts for the given course and context type.
@@ -353,6 +356,7 @@ class PaceContextsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PaceContextsApiIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -455,6 +459,7 @@ class PaceContextsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PaceContextsApiIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -531,6 +536,13 @@ class PaceContextsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

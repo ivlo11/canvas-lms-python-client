@@ -2357,7 +2357,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_multiple_gradeable_students**
-> submissions_api_multiple_gradeable_students(course_id, assignment_ids=assignment_ids, page=page, per_page=per_page)
+> List[MultipleGradeableStudent] submissions_api_multiple_gradeable_students(course_id, assignment_ids=assignment_ids, page=page, per_page=per_page)
 
 List multiple assignments gradeable students
 
@@ -2372,6 +2372,7 @@ Section-limited instructors will only see students in their own sections.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.multiple_gradeable_student import MultipleGradeableStudent
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2402,7 +2403,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List multiple assignments gradeable students
-        await api_instance.submissions_api_multiple_gradeable_students(course_id, assignment_ids=assignment_ids, page=page, per_page=per_page)
+        api_response = await api_instance.submissions_api_multiple_gradeable_students(course_id, assignment_ids=assignment_ids, page=page, per_page=per_page)
+        print("The response of SubmissionsApiApi->submissions_api_multiple_gradeable_students:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_multiple_gradeable_students: %s\n" % e)
 ```
@@ -2421,7 +2424,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[MultipleGradeableStudent]**](MultipleGradeableStudent.md)
 
 ### Authorization
 
@@ -2436,7 +2439,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List multiple assignments gradeable students |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
