@@ -41,15 +41,6 @@ For each paginated operation whose response is documented as a list of an existi
 - **WHEN** it is listed with a page size smaller than the total
 - **THEN** items from every page are yielded, with no duplicates
 
-### Requirement: Paginated operations whose documented model is undefined yield raw items
-For each paginated operation whose response is documented as a list of a model that Canvas does not define, the client SHALL still yield each page's items as untyped objects instead of yielding nothing.
-
-#### Scenario: LTI registration history yields raw items
-- **GIVEN** an LTI registration with at least one history entry
-- **WHEN** its history is listed with the all-items iterator
-- **THEN** at least one item is yielded
-- **AND** each item is a mapping, because `Lti::RegistrationHistoryEntry` has no documented model
-
 ### Requirement: Undocumented paginated responses are tracked
 Every paginated operation in the generated client SHALL have a response type for its successful response, except operations named on an explicit allowlist of known-undocumented operations. The allowlist SHALL NOT contain any operation that has a response type.
 
@@ -185,3 +176,23 @@ A quiz submission event model SHALL hold its `event_data` exactly as Canvas send
 - **GIVEN** a quiz submission with a `question_answered` event (list data), a `question_flagged` event (object data) and a `page_blurred` event (null data)
 - **WHEN** its events are listed with the page iterator
 - **THEN** every event deserializes, and each `event_data` equals the JSON Canvas sent for it
+
+### Requirement: Media, LTI history and rubric location lists yield typed items
+The media object list operations (for the caller, a course, a group, and their media attachment variants), the LTI registration history operation, and the rubric used-locations operations SHALL yield typed item models from both the page iterator and the all-items iterator, across all result pages. The used-locations response SHALL be a list of courses, each carrying its id, name, concluded flag and the assignments that use the rubric.
+
+#### Scenario: Course media objects are typed
+- **GIVEN** a course with a media object that has a caption track
+- **WHEN** the course's media objects are listed with the all-items iterator
+- **THEN** at least one item is yielded
+- **AND** each item is a media object model whose `media_id` and `media_type` are set, and whose media tracks are typed items with a `locale`
+
+#### Scenario: LTI registration history is typed
+- **GIVEN** an LTI registration with at least one history entry
+- **WHEN** its history is listed with the all-items iterator
+- **THEN** each yielded item is a registration history entry model whose `id`, `lti_registration_id` and `update_type` are set
+- **AND** its `created_by` holds what Canvas sent, either a user object or the string `"Instructure"`, and no validation error is raised
+
+#### Scenario: Rubric used locations are typed courses
+- **GIVEN** a rubric associated with an assignment in a course
+- **WHEN** the rubric's used locations are listed with the all-items iterator
+- **THEN** each yielded item is a used-location model for one course, with that course's `id` and `name`, and a list of assignments each having an `id` and `title`
