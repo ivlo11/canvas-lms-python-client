@@ -400,6 +400,7 @@ __all__ = [
     "DiscoveryPagesApiUpsertRequest",
     "DiscoveryPagesApiUpsertRequestDiscoveryPage",
     "DiscussionEntriesUpdateRequest",
+    "DiscussionEntry",
     "DiscussionTopic",
     "DiscussionTopicsApiAddEntryRequest",
     "DiscussionTopicsApiFindOrCreateSummaryRequest",
@@ -712,6 +713,7 @@ __all__ = [
     "QuizzesApiUpdateRequest",
     "QuizzesApiUpdateRequestQuiz",
     "QuizzesApiValidateAccessCodeRequest",
+    "Recipient",
     "RegistrationsApplyRegistrationUpdateRequestRequest",
     "RegistrationsApplyRegistrationUpdateRequestRequestOverlay",
     "RegistrationsBindRequest",
@@ -1251,6 +1253,7 @@ from canvas_lms_python_client.models.discovery_pages_api_token_response import D
 from canvas_lms_python_client.models.discovery_pages_api_upsert_request import DiscoveryPagesApiUpsertRequest as DiscoveryPagesApiUpsertRequest
 from canvas_lms_python_client.models.discovery_pages_api_upsert_request_discovery_page import DiscoveryPagesApiUpsertRequestDiscoveryPage as DiscoveryPagesApiUpsertRequestDiscoveryPage
 from canvas_lms_python_client.models.discussion_entries_update_request import DiscussionEntriesUpdateRequest as DiscussionEntriesUpdateRequest
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry as DiscussionEntry
 from canvas_lms_python_client.models.discussion_topic import DiscussionTopic as DiscussionTopic
 from canvas_lms_python_client.models.discussion_topics_api_add_entry_request import DiscussionTopicsApiAddEntryRequest as DiscussionTopicsApiAddEntryRequest
 from canvas_lms_python_client.models.discussion_topics_api_find_or_create_summary_request import DiscussionTopicsApiFindOrCreateSummaryRequest as DiscussionTopicsApiFindOrCreateSummaryRequest
@@ -1563,6 +1566,7 @@ from canvas_lms_python_client.models.quizzes_api_reorder_request import QuizzesA
 from canvas_lms_python_client.models.quizzes_api_update_request import QuizzesApiUpdateRequest as QuizzesApiUpdateRequest
 from canvas_lms_python_client.models.quizzes_api_update_request_quiz import QuizzesApiUpdateRequestQuiz as QuizzesApiUpdateRequestQuiz
 from canvas_lms_python_client.models.quizzes_api_validate_access_code_request import QuizzesApiValidateAccessCodeRequest as QuizzesApiValidateAccessCodeRequest
+from canvas_lms_python_client.models.recipient import Recipient as Recipient
 from canvas_lms_python_client.models.registrations_apply_registration_update_request_request import RegistrationsApplyRegistrationUpdateRequestRequest as RegistrationsApplyRegistrationUpdateRequestRequest
 from canvas_lms_python_client.models.registrations_apply_registration_update_request_request_overlay import RegistrationsApplyRegistrationUpdateRequestRequestOverlay as RegistrationsApplyRegistrationUpdateRequestRequestOverlay
 from canvas_lms_python_client.models.registrations_bind_request import RegistrationsBindRequest as RegistrationsBindRequest

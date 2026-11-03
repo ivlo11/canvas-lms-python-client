@@ -34,17 +34,9 @@ _EMPTY_TYPES_MAP = re.compile(
 UNDOCUMENTED_PAGINATED_OPERATIONS = frozenset(
     {
         "courses_todo_items",
-        "discussion_topics_api_entries",
-        "discussion_topics_api_entries_for_groups",
-        "discussion_topics_api_entry_list",
-        "discussion_topics_api_entry_list_for_groups",
-        "discussion_topics_api_replies",
-        "discussion_topics_api_replies_for_groups",
         "planner_index",
         "planner_index_for_users",
         "search_all_courses",
-        "search_recipients",
-        "search_recipients_for_other",
         "users_todo_items",
     }
 )

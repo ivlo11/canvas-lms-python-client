@@ -6,6 +6,9 @@ CANVAS_ADMIN_API_TOKEN against a seeded Canvas instance:
 
     pdm run pytest --integration -m integration
 
+Context recipients need an enrolled user, so that test runs with
+CANVAS_STUDENT_API_TOKEN.
+
 Tests skip, naming the missing data, when the instance has nothing to list.
 
 Wrapped list endpoints (e.g. polls) have no `_all`; their tests iterate
@@ -26,6 +29,8 @@ from canvas_lms_python_client.api.conversations_api import ConversationsApi
 from canvas_lms_python_client.api.course_audit_api_api import CourseAuditApiApi
 from canvas_lms_python_client.api.courses_api import CoursesApi
 from canvas_lms_python_client.api.deployments_api import DeploymentsApi
+from canvas_lms_python_client.api.discussion_topics_api import DiscussionTopicsApi
+from canvas_lms_python_client.api.discussion_topics_api_api import DiscussionTopicsApiApi
 from canvas_lms_python_client.api.grade_change_audit_api_api import GradeChangeAuditApiApi
 from canvas_lms_python_client.api.grading_period_sets_api import GradingPeriodSetsApi
 from canvas_lms_python_client.api.grading_periods_api import GradingPeriodsApi
@@ -43,6 +48,7 @@ from canvas_lms_python_client.api.registrations_api import RegistrationsApi
 from canvas_lms_python_client.api.resource_links_api import ResourceLinksApi
 from canvas_lms_python_client.api.role_overrides_api import RoleOverridesApi
 from canvas_lms_python_client.api.rubrics_api_api import RubricsApiApi
+from canvas_lms_python_client.api.search_api import SearchApi
 from canvas_lms_python_client.api.submissions_api_api import SubmissionsApiApi
 from canvas_lms_python_client.api.users_api import UsersApi
 from canvas_lms_python_client.exceptions import ApiException
@@ -67,6 +73,7 @@ from canvas_lms_python_client.models.course_event import CourseEvent
 from canvas_lms_python_client.models.course_event_link import CourseEventLink
 from canvas_lms_python_client.models.course_grading_period import CourseGradingPeriod
 from canvas_lms_python_client.models.course_progress import CourseProgress
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.models.grade_change_audit_api_for_course_response import (
     GradeChangeAuditApiForCourseResponse,
 )
@@ -114,6 +121,7 @@ from canvas_lms_python_client.models.quiz_submission_events_api_index_response i
 from canvas_lms_python_client.models.quiz_submissions_api_index_response import (
     QuizSubmissionsApiIndexResponse,
 )
+from canvas_lms_python_client.models.recipient import Recipient
 from canvas_lms_python_client.models.role import Role
 from canvas_lms_python_client.models.rubric import Rubric
 from canvas_lms_python_client.models.rubric_used_location import RubricUsedLocation
@@ -862,3 +870,103 @@ async def test_pace_contexts_pages_typed(canvas_admin_api_client, context_type):
         if context.applied_pace is not None:
             assert isinstance(context.applied_pace, AppliedPace)
             assert isinstance(context.applied_pace.duration, int)
+
+
+SEEDED_TOPIC_TITLE = "Seeded entries topic"
+
+
+async def seeded_topic_entries(api_client):
+    """(course id, topic id, root entries) of the --discussion-entries topic."""
+    account = await root_account(api_client)
+    for course in await account_courses(api_client, account):
+        course_id = str(course.id)
+        topics = await collect(
+            DiscussionTopicsApi(api_client).discussion_topics_index_all(
+                course_id=course_id, search_term=SEEDED_TOPIC_TITLE
+            )
+        )
+        for topic in topics:
+            if topic.title == SEEDED_TOPIC_TITLE:
+                topic_id = str(topic.id)
+                entries = await collect(
+                    DiscussionTopicsApiApi(api_client).discussion_topics_api_entries_all(
+                        course_id=course_id, topic_id=topic_id
+                    )
+                )
+                return course_id, topic_id, entries
+    pytest.skip(
+        "no seeded discussion topic found in the seeded Canvas instance "
+        "(run the seed script with --discussion-entries)"
+    )
+
+
+def replied_root(entries: List[DiscussionEntry]) -> DiscussionEntry:
+    roots = [entry for entry in entries if entry.recent_replies]
+    return require_seeded(roots, "root entry with replies", "--discussion-entries")[0]
+
+
+async def test_discussion_topic_entries_typed(canvas_admin_api_client):
+    """List topic entries had no @returns, so entries were untyped."""
+    _, _, entries = await seeded_topic_entries(canvas_admin_api_client)
+
+    assert_typed(entries, DiscussionEntry)
+    root = replied_root(entries)
+    assert root.user_id and root.message
+    assert root.attachment and root.attachment["id"] and root.attachment["display_name"]
+    for reply in root.recent_replies:
+        assert isinstance(reply, DiscussionEntry)
+        assert reply.parent_id == root.id
+
+
+async def test_discussion_entry_replies_typed(canvas_admin_api_client):
+    course_id, topic_id, entries = await seeded_topic_entries(canvas_admin_api_client)
+    root = replied_root(entries)
+
+    replies = await collect(
+        DiscussionTopicsApiApi(canvas_admin_api_client).discussion_topics_api_replies_all(
+            course_id=course_id, topic_id=topic_id, entry_id=str(root.id)
+        )
+    )
+
+    assert_typed(require(replies, f"reply to entry {root.id}"), DiscussionEntry)
+    assert {reply.parent_id for reply in replies} == {root.id}
+
+
+async def test_discussion_entry_list_typed(canvas_admin_api_client):
+    course_id, topic_id, entries = await seeded_topic_entries(canvas_admin_api_client)
+    root = replied_root(entries)
+    ids = sorted({root.id, *(reply.id for reply in root.recent_replies)})
+
+    listed = await collect(
+        DiscussionTopicsApiApi(canvas_admin_api_client).discussion_topics_api_entry_list_all(
+            course_id=course_id, topic_id=topic_id, ids=[str(entry_id) for entry_id in ids]
+        )
+    )
+
+    assert_typed(listed, DiscussionEntry)
+    assert [entry.id for entry in listed] == ids
+
+
+async def test_user_recipients_typed(canvas_admin_api_client):
+    """Find recipients had no @returns; user recipients keep integer ids."""
+    recipients = await collect(
+        SearchApi(canvas_admin_api_client).search_recipients_all(search="a", type="user")
+    )
+
+    assert_typed(require(recipients, "user recipient visible to the admin"), Recipient)
+    for recipient in recipients:
+        assert recipient.full_name and recipient.type is None
+
+
+async def test_context_recipients_typed(canvas_student_api_client):
+    """Context recipients keep string ids such as course_2."""
+    recipients = await collect(
+        # Canvas returns no contexts unless search is sent, even empty
+        SearchApi(canvas_student_api_client).search_recipients_all(search="", type="context")
+    )
+
+    assert_typed(require(recipients, "context recipient visible to the student"), Recipient, str)
+    for recipient in recipients:
+        assert recipient.type == "context"
+        assert recipient.id.split("_")[0] in {"course", "section", "group"}
+        assert isinstance(recipient.user_count or recipient.item_count, int)

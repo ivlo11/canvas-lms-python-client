@@ -18,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.models.discussion_topic import DiscussionTopic
 from canvas_lms_python_client.models.discussion_topics_api_add_entry_request import DiscussionTopicsApiAddEntryRequest
 from canvas_lms_python_client.models.discussion_topics_api_find_or_create_summary_request import DiscussionTopicsApiFindOrCreateSummaryRequest
@@ -2385,7 +2386,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[DiscussionEntry]:
         """List topic entries
 
         Retrieve the (paginated) top-level entries in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Will include the 10 most recent replies, if any, for each entry returned.  If the topic is a root topic with children corresponding to groups of a group assignment, entries from those subtopics for which the user belongs to the corresponding group will be returned.  Ordering of returned entries is newest-first by posting timestamp (reply activity is ignored).
@@ -2439,6 +2440,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2471,7 +2473,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[DiscussionEntry]]:
         """List topic entries
 
         Retrieve the (paginated) top-level entries in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Will include the 10 most recent replies, if any, for each entry returned.  If the topic is a root topic with children corresponding to groups of a group assignment, entries from those subtopics for which the user belongs to the corresponding group will be returned.  Ordering of returned entries is newest-first by posting timestamp (reply activity is ignored).
@@ -2525,6 +2527,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2558,8 +2561,9 @@ class DiscussionTopicsApiApi:
                 return
             _url = _next_url
 
+
     @validate_call
-    async def discussion_topics_api_entries_with_http_info(
+    async def discussion_topics_api_entries_all(
         self,
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
         topic_id: Annotated[StrictStr, Field(description="Scope response to topic_id")],
@@ -2578,7 +2582,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> AsyncIterator[DiscussionEntry]:
         """List topic entries
 
         Retrieve the (paginated) top-level entries in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Will include the 10 most recent replies, if any, for each entry returned.  If the topic is a root topic with children corresponding to groups of a group assignment, entries from those subtopics for which the user belongs to the corresponding group will be returned.  Ordering of returned entries is newest-first by posting timestamp (reply activity is ignored).
@@ -2632,6 +2636,115 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            for _item in _page_data:
+                yield _item
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def discussion_topics_api_entries_with_http_info(
+        self,
+        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        topic_id: Annotated[StrictStr, Field(description="Scope response to topic_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[List[DiscussionEntry]]:
+        """List topic entries
+
+        Retrieve the (paginated) top-level entries in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Will include the 10 most recent replies, if any, for each entry returned.  If the topic is a root topic with children corresponding to groups of a group assignment, entries from those subtopics for which the user belongs to the corresponding group will be returned.  Ordering of returned entries is newest-first by posting timestamp (reply activity is ignored).
+
+        :param course_id: Scope response to course_id (required)
+        :type course_id: str
+        :param topic_id: Scope response to topic_id (required)
+        :type topic_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._discussion_topics_api_entries_serialize(
+            course_id=course_id,
+            topic_id=topic_id,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2718,6 +2831,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2823,7 +2937,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[DiscussionEntry]:
         """List topic entries
 
         Retrieve the (paginated) top-level entries in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Will include the 10 most recent replies, if any, for each entry returned.  If the topic is a root topic with children corresponding to groups of a group assignment, entries from those subtopics for which the user belongs to the corresponding group will be returned.  Ordering of returned entries is newest-first by posting timestamp (reply activity is ignored).
@@ -2877,6 +2991,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2909,7 +3024,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[DiscussionEntry]]:
         """List topic entries
 
         Retrieve the (paginated) top-level entries in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Will include the 10 most recent replies, if any, for each entry returned.  If the topic is a root topic with children corresponding to groups of a group assignment, entries from those subtopics for which the user belongs to the corresponding group will be returned.  Ordering of returned entries is newest-first by posting timestamp (reply activity is ignored).
@@ -2963,6 +3078,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2996,8 +3112,9 @@ class DiscussionTopicsApiApi:
                 return
             _url = _next_url
 
+
     @validate_call
-    async def discussion_topics_api_entries_for_groups_with_http_info(
+    async def discussion_topics_api_entries_for_groups_all(
         self,
         group_id: Annotated[StrictStr, Field(description="Scope response to group_id")],
         topic_id: Annotated[StrictStr, Field(description="Scope response to topic_id")],
@@ -3016,7 +3133,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> AsyncIterator[DiscussionEntry]:
         """List topic entries
 
         Retrieve the (paginated) top-level entries in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Will include the 10 most recent replies, if any, for each entry returned.  If the topic is a root topic with children corresponding to groups of a group assignment, entries from those subtopics for which the user belongs to the corresponding group will be returned.  Ordering of returned entries is newest-first by posting timestamp (reply activity is ignored).
@@ -3070,6 +3187,115 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            for _item in _page_data:
+                yield _item
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def discussion_topics_api_entries_for_groups_with_http_info(
+        self,
+        group_id: Annotated[StrictStr, Field(description="Scope response to group_id")],
+        topic_id: Annotated[StrictStr, Field(description="Scope response to topic_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[List[DiscussionEntry]]:
+        """List topic entries
+
+        Retrieve the (paginated) top-level entries in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Will include the 10 most recent replies, if any, for each entry returned.  If the topic is a root topic with children corresponding to groups of a group assignment, entries from those subtopics for which the user belongs to the corresponding group will be returned.  Ordering of returned entries is newest-first by posting timestamp (reply activity is ignored).
+
+        :param group_id: Scope response to group_id (required)
+        :type group_id: str
+        :param topic_id: Scope response to topic_id (required)
+        :type topic_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._discussion_topics_api_entries_for_groups_serialize(
+            group_id=group_id,
+            topic_id=topic_id,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3156,6 +3382,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3262,7 +3489,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[DiscussionEntry]:
         """List entries
 
         Retrieve a paginated list of discussion entries, given a list of ids.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
@@ -3319,6 +3546,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3352,7 +3580,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[DiscussionEntry]]:
         """List entries
 
         Retrieve a paginated list of discussion entries, given a list of ids.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
@@ -3409,6 +3637,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3442,8 +3671,9 @@ class DiscussionTopicsApiApi:
                 return
             _url = _next_url
 
+
     @validate_call
-    async def discussion_topics_api_entry_list_with_http_info(
+    async def discussion_topics_api_entry_list_all(
         self,
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
         topic_id: Annotated[StrictStr, Field(description="Scope response to topic_id")],
@@ -3463,7 +3693,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> AsyncIterator[DiscussionEntry]:
         """List entries
 
         Retrieve a paginated list of discussion entries, given a list of ids.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
@@ -3520,6 +3750,119 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            for _item in _page_data:
+                yield _item
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def discussion_topics_api_entry_list_with_http_info(
+        self,
+        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        topic_id: Annotated[StrictStr, Field(description="Scope response to topic_id")],
+        ids: Annotated[Optional[List[StrictStr]], Field(description="A list of entry ids to retrieve. Entries will be returned in id order, smallest id first.")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[List[DiscussionEntry]]:
+        """List entries
+
+        Retrieve a paginated list of discussion entries, given a list of ids.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
+
+        :param course_id: Scope response to course_id (required)
+        :type course_id: str
+        :param topic_id: Scope response to topic_id (required)
+        :type topic_id: str
+        :param ids: A list of entry ids to retrieve. Entries will be returned in id order, smallest id first.
+        :type ids: List[str]
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._discussion_topics_api_entry_list_serialize(
+            course_id=course_id,
+            topic_id=topic_id,
+            ids=ids,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3610,6 +3953,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3722,7 +4066,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[DiscussionEntry]:
         """List entries
 
         Retrieve a paginated list of discussion entries, given a list of ids.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
@@ -3779,6 +4123,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3812,7 +4157,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[DiscussionEntry]]:
         """List entries
 
         Retrieve a paginated list of discussion entries, given a list of ids.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
@@ -3869,6 +4214,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3902,8 +4248,9 @@ class DiscussionTopicsApiApi:
                 return
             _url = _next_url
 
+
     @validate_call
-    async def discussion_topics_api_entry_list_for_groups_with_http_info(
+    async def discussion_topics_api_entry_list_for_groups_all(
         self,
         group_id: Annotated[StrictStr, Field(description="Scope response to group_id")],
         topic_id: Annotated[StrictStr, Field(description="Scope response to topic_id")],
@@ -3923,7 +4270,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> AsyncIterator[DiscussionEntry]:
         """List entries
 
         Retrieve a paginated list of discussion entries, given a list of ids.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
@@ -3980,6 +4327,119 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            for _item in _page_data:
+                yield _item
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def discussion_topics_api_entry_list_for_groups_with_http_info(
+        self,
+        group_id: Annotated[StrictStr, Field(description="Scope response to group_id")],
+        topic_id: Annotated[StrictStr, Field(description="Scope response to topic_id")],
+        ids: Annotated[Optional[List[StrictStr]], Field(description="A list of entry ids to retrieve. Entries will be returned in id order, smallest id first.")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[List[DiscussionEntry]]:
+        """List entries
+
+        Retrieve a paginated list of discussion entries, given a list of ids.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
+
+        :param group_id: Scope response to group_id (required)
+        :type group_id: str
+        :param topic_id: Scope response to topic_id (required)
+        :type topic_id: str
+        :param ids: A list of entry ids to retrieve. Entries will be returned in id order, smallest id first.
+        :type ids: List[str]
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._discussion_topics_api_entry_list_for_groups_serialize(
+            group_id=group_id,
+            topic_id=topic_id,
+            ids=ids,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4070,6 +4530,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -9922,7 +10383,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[DiscussionEntry]:
         """List entry replies
 
         Retrieve the (paginated) replies to a top-level entry in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Ordering of returned entries is newest-first by creation timestamp.
@@ -9979,6 +10440,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10012,7 +10474,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[DiscussionEntry]]:
         """List entry replies
 
         Retrieve the (paginated) replies to a top-level entry in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Ordering of returned entries is newest-first by creation timestamp.
@@ -10069,6 +10531,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -10102,8 +10565,9 @@ class DiscussionTopicsApiApi:
                 return
             _url = _next_url
 
+
     @validate_call
-    async def discussion_topics_api_replies_with_http_info(
+    async def discussion_topics_api_replies_all(
         self,
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
         entry_id: Annotated[StrictStr, Field(description="Scope response to entry_id")],
@@ -10123,7 +10587,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> AsyncIterator[DiscussionEntry]:
         """List entry replies
 
         Retrieve the (paginated) replies to a top-level entry in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Ordering of returned entries is newest-first by creation timestamp.
@@ -10180,6 +10644,119 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            for _item in _page_data:
+                yield _item
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def discussion_topics_api_replies_with_http_info(
+        self,
+        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        entry_id: Annotated[StrictStr, Field(description="Scope response to entry_id")],
+        topic_id: Annotated[StrictStr, Field(description="Scope response to topic_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[List[DiscussionEntry]]:
+        """List entry replies
+
+        Retrieve the (paginated) replies to a top-level entry in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Ordering of returned entries is newest-first by creation timestamp.
+
+        :param course_id: Scope response to course_id (required)
+        :type course_id: str
+        :param entry_id: Scope response to entry_id (required)
+        :type entry_id: str
+        :param topic_id: Scope response to topic_id (required)
+        :type topic_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._discussion_topics_api_replies_serialize(
+            course_id=course_id,
+            entry_id=entry_id,
+            topic_id=topic_id,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10270,6 +10847,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10379,7 +10957,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[DiscussionEntry]:
         """List entry replies
 
         Retrieve the (paginated) replies to a top-level entry in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Ordering of returned entries is newest-first by creation timestamp.
@@ -10436,6 +11014,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10469,7 +11048,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[DiscussionEntry]]:
         """List entry replies
 
         Retrieve the (paginated) replies to a top-level entry in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Ordering of returned entries is newest-first by creation timestamp.
@@ -10526,6 +11105,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -10559,8 +11139,9 @@ class DiscussionTopicsApiApi:
                 return
             _url = _next_url
 
+
     @validate_call
-    async def discussion_topics_api_replies_for_groups_with_http_info(
+    async def discussion_topics_api_replies_for_groups_all(
         self,
         entry_id: Annotated[StrictStr, Field(description="Scope response to entry_id")],
         group_id: Annotated[StrictStr, Field(description="Scope response to group_id")],
@@ -10580,7 +11161,7 @@ class DiscussionTopicsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> AsyncIterator[DiscussionEntry]:
         """List entry replies
 
         Retrieve the (paginated) replies to a top-level entry in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Ordering of returned entries is newest-first by creation timestamp.
@@ -10637,6 +11218,119 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            for _item in _page_data:
+                yield _item
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def discussion_topics_api_replies_for_groups_with_http_info(
+        self,
+        entry_id: Annotated[StrictStr, Field(description="Scope response to entry_id")],
+        group_id: Annotated[StrictStr, Field(description="Scope response to group_id")],
+        topic_id: Annotated[StrictStr, Field(description="Scope response to topic_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[List[DiscussionEntry]]:
+        """List entry replies
+
+        Retrieve the (paginated) replies to a top-level entry in a discussion topic.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  Ordering of returned entries is newest-first by creation timestamp.
+
+        :param entry_id: Scope response to entry_id (required)
+        :type entry_id: str
+        :param group_id: Scope response to group_id (required)
+        :type group_id: str
+        :param topic_id: Scope response to topic_id (required)
+        :type topic_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._discussion_topics_api_replies_for_groups_serialize(
+            entry_id=entry_id,
+            group_id=group_id,
+            topic_id=topic_id,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10727,6 +11421,7 @@ class DiscussionTopicsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[DiscussionEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
