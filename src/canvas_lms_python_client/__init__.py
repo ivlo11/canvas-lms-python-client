@@ -613,6 +613,7 @@ __all__ = [
     "PeerReviewsApiCreateRequest",
     "Permission",
     "PermissionHelpText",
+    "PlannerItem",
     "PlannerNote",
     "PlannerNotesCreateRequest",
     "PlannerNotesUpdateRequest",
@@ -815,6 +816,7 @@ __all__ = [
     "TermsCreateRequestEnrollmentTerm",
     "TermsOfService",
     "TermsUpdateRequest",
+    "TodoItem",
     "Token",
     "TokensCreateRequest",
     "TokensCreateRequestToken",
@@ -1466,6 +1468,7 @@ from canvas_lms_python_client.models.peer_review import PeerReview as PeerReview
 from canvas_lms_python_client.models.peer_reviews_api_create_request import PeerReviewsApiCreateRequest as PeerReviewsApiCreateRequest
 from canvas_lms_python_client.models.permission import Permission as Permission
 from canvas_lms_python_client.models.permission_help_text import PermissionHelpText as PermissionHelpText
+from canvas_lms_python_client.models.planner_item import PlannerItem as PlannerItem
 from canvas_lms_python_client.models.planner_note import PlannerNote as PlannerNote
 from canvas_lms_python_client.models.planner_notes_create_request import PlannerNotesCreateRequest as PlannerNotesCreateRequest
 from canvas_lms_python_client.models.planner_notes_update_request import PlannerNotesUpdateRequest as PlannerNotesUpdateRequest
@@ -1668,6 +1671,7 @@ from canvas_lms_python_client.models.terms_create_request import TermsCreateRequ
 from canvas_lms_python_client.models.terms_create_request_enrollment_term import TermsCreateRequestEnrollmentTerm as TermsCreateRequestEnrollmentTerm
 from canvas_lms_python_client.models.terms_of_service import TermsOfService as TermsOfService
 from canvas_lms_python_client.models.terms_update_request import TermsUpdateRequest as TermsUpdateRequest
+from canvas_lms_python_client.models.todo_item import TodoItem as TodoItem
 from canvas_lms_python_client.models.token import Token as Token
 from canvas_lms_python_client.models.tokens_create_request import TokensCreateRequest as TokensCreateRequest
 from canvas_lms_python_client.models.tokens_create_request_token import TokensCreateRequestToken as TokensCreateRequestToken

@@ -1,0 +1,63 @@
+[
+  {
+    "plannable_id": 1,
+    "planner_override": {
+      "id": 1,
+      "plannable_type": "planner_note",
+      "plannable_id": 1,
+      "user_id": 8,
+      "workflow_state": "active",
+      "marked_complete": false,
+      "deleted_at": null,
+      "created_at": "2026-11-03T03:46:36Z",
+      "updated_at": "2026-11-03T03:46:36Z",
+      "dismissed": false,
+      "assignment_id": null
+    },
+    "plannable_type": "planner_note",
+    "new_activity": false,
+    "submissions": false,
+    "plannable_date": "2026-11-05T03:45:06Z",
+    "plannable": {
+      "id": 1,
+      "title": "Seeded planner note",
+      "course_id": null,
+      "todo_date": "2026-11-05T03:45:06Z",
+      "details": "Seeded",
+      "created_at": "2026-11-03T03:45:06Z",
+      "updated_at": "2026-11-03T03:45:06Z",
+      "user_id": 8
+    }
+  },
+  {
+    "context_type": "Course",
+    "course_id": 2,
+    "plannable_id": 260,
+    "planner_override": null,
+    "plannable_type": "assignment",
+    "new_activity": false,
+    "submissions": {
+      "submitted": false,
+      "excused": false,
+      "graded": false,
+      "posted_at": null,
+      "late": false,
+      "missing": false,
+      "needs_grading": false,
+      "has_feedback": false,
+      "redo_request": false
+    },
+    "plannable_date": "2026-11-06T03:45:01Z",
+    "plannable": {
+      "id": 260,
+      "title": "Seeded todo assignment",
+      "created_at": "2026-11-03T03:45:02Z",
+      "updated_at": "2026-11-03T03:45:05Z",
+      "points_possible": 10.0,
+      "due_at": "2026-11-06T03:45:01Z"
+    },
+    "html_url": "/courses/2/assignments/260",
+    "context_name": "Advanced Pokeball Mechanics",
+    "context_image": null
+  }
+]

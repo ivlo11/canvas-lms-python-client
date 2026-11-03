@@ -33,11 +33,7 @@ _EMPTY_TYPES_MAP = re.compile(
 
 UNDOCUMENTED_PAGINATED_OPERATIONS = frozenset(
     {
-        "courses_todo_items",
-        "planner_index",
-        "planner_index_for_users",
         "search_all_courses",
-        "users_todo_items",
     }
 )
 

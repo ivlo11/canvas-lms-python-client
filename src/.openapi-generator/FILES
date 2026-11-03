@@ -695,6 +695,7 @@ canvas_lms_python_client/docs/PermissionHelpText.md
 canvas_lms_python_client/docs/PermissionsHelpApi.md
 canvas_lms_python_client/docs/PlagiarismPlatformApi.md
 canvas_lms_python_client/docs/PlannerApi.md
+canvas_lms_python_client/docs/PlannerItem.md
 canvas_lms_python_client/docs/PlannerNote.md
 canvas_lms_python_client/docs/PlannerNotesApi.md
 canvas_lms_python_client/docs/PlannerNotesCreateRequest.md
@@ -947,6 +948,7 @@ canvas_lms_python_client/docs/TermsCreateRequest.md
 canvas_lms_python_client/docs/TermsCreateRequestEnrollmentTerm.md
 canvas_lms_python_client/docs/TermsOfService.md
 canvas_lms_python_client/docs/TermsUpdateRequest.md
+canvas_lms_python_client/docs/TodoItem.md
 canvas_lms_python_client/docs/Token.md
 canvas_lms_python_client/docs/TokensApi.md
 canvas_lms_python_client/docs/TokensCreateRequest.md
@@ -1428,6 +1430,7 @@ canvas_lms_python_client/models/peer_review.py
 canvas_lms_python_client/models/peer_reviews_api_create_request.py
 canvas_lms_python_client/models/permission.py
 canvas_lms_python_client/models/permission_help_text.py
+canvas_lms_python_client/models/planner_item.py
 canvas_lms_python_client/models/planner_note.py
 canvas_lms_python_client/models/planner_notes_create_request.py
 canvas_lms_python_client/models/planner_notes_update_request.py
@@ -1630,6 +1633,7 @@ canvas_lms_python_client/models/terms_create_request.py
 canvas_lms_python_client/models/terms_create_request_enrollment_term.py
 canvas_lms_python_client/models/terms_of_service.py
 canvas_lms_python_client/models/terms_update_request.py
+canvas_lms_python_client/models/todo_item.py
 canvas_lms_python_client/models/token.py
 canvas_lms_python_client/models/tokens_create_request.py
 canvas_lms_python_client/models/tokens_create_request_token.py
@@ -1729,6 +1733,7 @@ canvas_lms_python_client/test/test_multiple_gradeable_student.py
 canvas_lms_python_client/test/test_outcome_results_api.py
 canvas_lms_python_client/test/test_pace_context.py
 canvas_lms_python_client/test/test_pace_contexts_api_index_response.py
+canvas_lms_python_client/test/test_planner_item.py
 canvas_lms_python_client/test/test_poll_choices_api.py
 canvas_lms_python_client/test/test_poll_sessions_api.py
 canvas_lms_python_client/test/test_poll_submissions_api.py
@@ -1745,6 +1750,7 @@ canvas_lms_python_client/test/test_registrations_api.py
 canvas_lms_python_client/test/test_results_api.py
 canvas_lms_python_client/test/test_rubric_used_location.py
 canvas_lms_python_client/test/test_rubric_used_location_assignments_inner.py
+canvas_lms_python_client/test/test_todo_item.py
 canvas_lms_python_client/test/test_user_permissions.py
 canvas_lms_python_client/test/test_user_progress.py
 canvas_lms_python_client/test/test_what_if_grades_api_api.py

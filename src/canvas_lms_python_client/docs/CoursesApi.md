@@ -1747,7 +1747,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **courses_todo_items**
-> courses_todo_items(course_id, page=page, per_page=per_page)
+> List[TodoItem] courses_todo_items(course_id, page=page, per_page=per_page)
 
 Course TODO items
 
@@ -1761,6 +1761,7 @@ For full documentation, see the API documentation for the user todo items, in th
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.todo_item import TodoItem
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1790,7 +1791,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Course TODO items
-        await api_instance.courses_todo_items(course_id, page=page, per_page=per_page)
+        api_response = await api_instance.courses_todo_items(course_id, page=page, per_page=per_page)
+        print("The response of CoursesApi->courses_todo_items:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_todo_items: %s\n" % e)
 ```
@@ -1808,7 +1811,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[TodoItem]**](TodoItem.md)
 
 ### Authorization
 
@@ -1817,13 +1820,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Course TODO items |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

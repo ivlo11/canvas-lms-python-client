@@ -15,6 +15,7 @@ Wrapped list endpoints (e.g. polls) have no `_all`; their tests iterate
 `_paginated` and check each page is the wrapper model.
 """
 
+from datetime import date, timedelta
 from typing import AsyncIterator, Awaitable, Callable, List, Optional, TypeVar
 
 import pytest
@@ -37,6 +38,7 @@ from canvas_lms_python_client.api.grading_periods_api import GradingPeriodsApi
 from canvas_lms_python_client.api.lti_apps_api import LtiAppsApi
 from canvas_lms_python_client.api.media_objects_api import MediaObjectsApi
 from canvas_lms_python_client.api.pace_contexts_api_api import PaceContextsApiApi
+from canvas_lms_python_client.api.planner_api import PlannerApi
 from canvas_lms_python_client.api.poll_choices_api import PollChoicesApi
 from canvas_lms_python_client.api.poll_sessions_api import PollSessionsApi
 from canvas_lms_python_client.api.polls_api import PollsApi
@@ -50,6 +52,7 @@ from canvas_lms_python_client.api.role_overrides_api import RoleOverridesApi
 from canvas_lms_python_client.api.rubrics_api_api import RubricsApiApi
 from canvas_lms_python_client.api.search_api import SearchApi
 from canvas_lms_python_client.api.submissions_api_api import SubmissionsApiApi
+from canvas_lms_python_client.api.user_observees_api import UserObserveesApi
 from canvas_lms_python_client.api.users_api import UsersApi
 from canvas_lms_python_client.exceptions import ApiException
 from canvas_lms_python_client.models.account import Account
@@ -59,6 +62,7 @@ from canvas_lms_python_client.models.account_calendars_api_index_response import
 )
 from canvas_lms_python_client.models.applied_pace import AppliedPace
 from canvas_lms_python_client.models.appointment_group import AppointmentGroup
+from canvas_lms_python_client.models.assignment import Assignment
 from canvas_lms_python_client.models.authentication_audit_api_for_account_response import (
     AuthenticationAuditApiForAccountResponse,
 )
@@ -106,6 +110,7 @@ from canvas_lms_python_client.models.pace_context import PaceContext
 from canvas_lms_python_client.models.pace_contexts_api_index_response import (
     PaceContextsApiIndexResponse,
 )
+from canvas_lms_python_client.models.planner_item import PlannerItem
 from canvas_lms_python_client.models.poll import Poll
 from canvas_lms_python_client.models.poll_choice import PollChoice
 from canvas_lms_python_client.models.poll_choices_index_response import PollChoicesIndexResponse
@@ -128,6 +133,7 @@ from canvas_lms_python_client.models.rubric_used_location import RubricUsedLocat
 from canvas_lms_python_client.models.rubric_used_location_assignments_inner import (
     RubricUsedLocationAssignmentsInner,
 )
+from canvas_lms_python_client.models.todo_item import TodoItem
 from canvas_lms_python_client.models.user import User
 from canvas_lms_python_client.models.user_progress import UserProgress
 
@@ -970,3 +976,56 @@ async def test_context_recipients_typed(canvas_student_api_client):
         assert recipient.type == "context"
         assert recipient.id.split("_")[0] in {"course", "section", "group"}
         assert isinstance(recipient.user_count or recipient.item_count, int)
+
+
+def planner_range() -> dict:
+    """Today through the week the --todo-items seed dates fall in."""
+    today = date.today()
+    return {"start_date": today.isoformat(), "end_date": (today + timedelta(days=7)).isoformat()}
+
+
+def assert_planner_items(items: List[object]) -> None:
+    for item in items:
+        assert isinstance(item, PlannerItem)
+        assert isinstance(item.plannable_id, int)
+        assert item.plannable_type
+        assert isinstance(item.plannable, dict)
+        assert item.submissions is False or isinstance(item.submissions, dict)
+
+
+async def test_student_planner_items_typed(canvas_student_api_client):
+    """List planner items had no @returns, so items were untyped."""
+    items = await collect(PlannerApi(canvas_student_api_client).planner_index_all(**planner_range()))
+
+    assert_planner_items(items)
+    by_type = {item.plannable_type: item for item in items}
+    if not {"assignment", "planner_note"} <= by_type.keys():
+        require_seeded([], "due-soon assignment and planner note for the student", "--todo-items")
+    assert by_type["assignment"].plannable["id"] == by_type["assignment"].plannable_id
+
+
+async def test_student_todo_items_typed(canvas_student_api_client):
+    """List the TODO items had no @returns, so items were untyped."""
+    items = await collect(UsersApi(canvas_student_api_client).users_todo_items_all())
+
+    require_seeded(items, "todo item for the student", "--todo-items")
+    for item in items:
+        assert isinstance(item, TodoItem)
+        assert item.type == "submitting"
+        assert isinstance(item.assignment, Assignment) or item.quiz is not None
+        if item.assignment:
+            assert isinstance(item.assignment.id, int)
+
+
+async def test_observer_planner_items_typed(canvas_api_client):
+    """An observer lists an observee's planner items through planner_index_for_users."""
+    observees = require(
+        await collect(UserObserveesApi(canvas_api_client).user_observees_index_all(user_id="self")),
+        "observee for the observer",
+    )
+
+    items = await collect(
+        PlannerApi(canvas_api_client).planner_index_for_users_all(user_id=str(observees[0].id))
+    )
+
+    assert_planner_items(require(items, f"planner item for observee {observees[0].id}"))

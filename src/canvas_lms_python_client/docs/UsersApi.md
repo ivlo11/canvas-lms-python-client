@@ -2672,7 +2672,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_todo_items**
-> users_todo_items(include=include, course_ids=course_ids, page=page, per_page=per_page)
+> List[TodoItem] users_todo_items(include=include, course_ids=course_ids, page=page, per_page=per_page)
 
 List the TODO items
 
@@ -2693,6 +2693,7 @@ that item forever.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.todo_item import TodoItem
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2723,7 +2724,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List the TODO items
-        await api_instance.users_todo_items(include=include, course_ids=course_ids, page=page, per_page=per_page)
+        api_response = await api_instance.users_todo_items(include=include, course_ids=course_ids, page=page, per_page=per_page)
+        print("The response of UsersApi->users_todo_items:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_todo_items: %s\n" % e)
 ```
@@ -2742,7 +2745,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[TodoItem]**](TodoItem.md)
 
 ### Authorization
 
@@ -2757,7 +2760,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List the TODO items |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
