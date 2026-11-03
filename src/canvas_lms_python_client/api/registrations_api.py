@@ -23,6 +23,7 @@ from canvas_lms_python_client.models.list_lti_registrations_response import List
 from canvas_lms_python_client.models.lti_overlay_version import LtiOverlayVersion
 from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.models.lti_registration_account_binding import LtiRegistrationAccountBinding
+from canvas_lms_python_client.models.lti_registration_history_entry import LtiRegistrationHistoryEntry
 from canvas_lms_python_client.models.registrations_apply_registration_update_request_request import RegistrationsApplyRegistrationUpdateRequestRequest
 from canvas_lms_python_client.models.registrations_bind_request import RegistrationsBindRequest
 from canvas_lms_python_client.models.registrations_create_request import RegistrationsCreateRequest
@@ -1871,7 +1872,7 @@ class RegistrationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[object]:
+    ) -> List[LtiRegistrationHistoryEntry]:
         """Get LTI Registration History
 
         Returns the history entries for the specified LTI registration. This endpoint provides comprehensive change tracking for all fields associated with the registration, including registration fields, developer key changes, internal configuration changes, and overlay changes. Supports pagination using the `page` and `per_page` parameters. The default page size is 10.
@@ -1925,7 +1926,7 @@ class RegistrationsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiRegistrationHistoryEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1958,7 +1959,7 @@ class RegistrationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[object]]:
+    ) -> AsyncIterator[List[LtiRegistrationHistoryEntry]]:
         """Get LTI Registration History
 
         Returns the history entries for the specified LTI registration. This endpoint provides comprehensive change tracking for all fields associated with the registration, including registration fields, developer key changes, internal configuration changes, and overlay changes. Supports pagination using the `page` and `per_page` parameters. The default page size is 10.
@@ -2012,7 +2013,7 @@ class RegistrationsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiRegistrationHistoryEntry]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2067,7 +2068,7 @@ class RegistrationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[LtiRegistrationHistoryEntry]:
         """Get LTI Registration History
 
         Returns the history entries for the specified LTI registration. This endpoint provides comprehensive change tracking for all fields associated with the registration, including registration fields, developer key changes, internal configuration changes, and overlay changes. Supports pagination using the `page` and `per_page` parameters. The default page size is 10.
@@ -2121,7 +2122,7 @@ class RegistrationsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiRegistrationHistoryEntry]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2175,7 +2176,7 @@ class RegistrationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[LtiRegistrationHistoryEntry]]:
         """Get LTI Registration History
 
         Returns the history entries for the specified LTI registration. This endpoint provides comprehensive change tracking for all fields associated with the registration, including registration fields, developer key changes, internal configuration changes, and overlay changes. Supports pagination using the `page` and `per_page` parameters. The default page size is 10.
@@ -2229,7 +2230,7 @@ class RegistrationsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiRegistrationHistoryEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2316,7 +2317,7 @@ class RegistrationsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiRegistrationHistoryEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,

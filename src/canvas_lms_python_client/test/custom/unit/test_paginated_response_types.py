@@ -132,8 +132,20 @@ LTI_LIST_ITEM_TYPES = {
     "lti_apps_launch_definitions": "LtiLaunchDefinition",
     "lti_apps_launch_definitions_for_accounts": "LtiLaunchDefinition",
     "resource_links_index": "LtiResourceLink",
-    # Lti::RegistrationHistoryEntry has no @model, so items stay untyped
-    "registrations_history": "object",
+    "registrations_history": "LtiRegistrationHistoryEntry",
+}
+
+# Paginated operation -> page item type, for models that were @object examples
+# or named but undefined in canvas-lms
+RETURN_MODEL_LIST_ITEM_TYPES = {
+    "media_objects_index": "MediaObject",
+    "media_objects_index_for_other": "MediaObject",
+    "media_objects_index_for_courses": "MediaObject",
+    "media_objects_index_for_groups": "MediaObject",
+    "media_objects_index_by_media_attachments_for_courses": "MediaObject",
+    "media_objects_index_by_media_attachments_for_groups": "MediaObject",
+    "rubrics_api_used_locations": "RubricUsedLocation",
+    "rubrics_api_used_locations_for_accounts": "RubricUsedLocation",
 }
 
 
@@ -150,6 +162,16 @@ def test_lti_list_pages_are_typed():
     item_types = {operation: _page_item_type(paginated[operation]) for operation in LTI_LIST_ITEM_TYPES}
 
     assert item_types == LTI_LIST_ITEM_TYPES
+
+
+def test_return_model_list_pages_are_typed():
+    paginated = {operation: func for _, operation, func in _paginated_methods()}
+
+    item_types = {
+        operation: _page_item_type(paginated[operation]) for operation in RETURN_MODEL_LIST_ITEM_TYPES
+    }
+
+    assert item_types == RETURN_MODEL_LIST_ITEM_TYPES
 
 
 # List key -> (item model, minimal valid item)

@@ -1,0 +1,24 @@
+[
+  {
+    "media_id": "m-seeded-media-1",
+    "created_at": "2026-11-03T03:00:48Z",
+    "media_type": "video",
+    "title": "Seeded Media",
+    "can_add_captions": true,
+    "embedded_iframe_url": "http://canvas.docker/media_objects_iframe/m-seeded-media-1",
+    "auto_caption_status": null,
+    "viewer_restrictions": {},
+    "media_tracks": [
+      {
+        "kind": "subtitles",
+        "created_at": "2026-11-03T03:00:48Z",
+        "updated_at": "2026-11-03T03:00:48Z",
+        "id": 1,
+        "locale": "es",
+        "workflow_state": "ready",
+        "asr": false,
+        "url": "http://canvas.docker/media_objects/m-seeded-media-1/media_tracks/1"
+      }
+    ]
+  }
+]

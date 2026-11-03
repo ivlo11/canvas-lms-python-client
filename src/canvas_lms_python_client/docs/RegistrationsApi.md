@@ -542,7 +542,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_history**
-> List[object] registrations_history(account_id, id, page=page, per_page=per_page)
+> List[LtiRegistrationHistoryEntry] registrations_history(account_id, id, page=page, per_page=per_page)
 
 Get LTI Registration History
 
@@ -558,6 +558,7 @@ The default page size is 10.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration_history_entry import LtiRegistrationHistoryEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -609,7 +610,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[LtiRegistrationHistoryEntry]**](LtiRegistrationHistoryEntry.md)
 
 ### Authorization
 

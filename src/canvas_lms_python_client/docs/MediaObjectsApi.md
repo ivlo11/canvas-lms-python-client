@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **media_objects_index**
-> List[object] media_objects_index(sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
+> List[MediaObject] media_objects_index(sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
 
 List Media Objects
 
@@ -29,6 +29,7 @@ the given course.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_object import MediaObject
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -82,7 +83,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[MediaObject]**](MediaObject.md)
 
 ### Authorization
 
@@ -102,7 +103,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **media_objects_index_by_media_attachments_for_courses**
-> List[object] media_objects_index_by_media_attachments_for_courses(course_id, sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
+> List[MediaObject] media_objects_index_by_media_attachments_for_courses(course_id, sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
 
 List Media Objects
 
@@ -116,6 +117,7 @@ the given course.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_object import MediaObject
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -171,7 +173,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[MediaObject]**](MediaObject.md)
 
 ### Authorization
 
@@ -191,7 +193,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **media_objects_index_by_media_attachments_for_groups**
-> List[object] media_objects_index_by_media_attachments_for_groups(group_id, sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
+> List[MediaObject] media_objects_index_by_media_attachments_for_groups(group_id, sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
 
 List Media Objects
 
@@ -205,6 +207,7 @@ the given course.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_object import MediaObject
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -260,7 +263,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[MediaObject]**](MediaObject.md)
 
 ### Authorization
 
@@ -280,7 +283,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **media_objects_index_for_courses**
-> List[object] media_objects_index_for_courses(course_id, sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
+> List[MediaObject] media_objects_index_for_courses(course_id, sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
 
 List Media Objects
 
@@ -294,6 +297,7 @@ the given course.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_object import MediaObject
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -349,7 +353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[MediaObject]**](MediaObject.md)
 
 ### Authorization
 
@@ -369,7 +373,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **media_objects_index_for_groups**
-> List[object] media_objects_index_for_groups(group_id, sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
+> List[MediaObject] media_objects_index_for_groups(group_id, sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
 
 List Media Objects
 
@@ -383,6 +387,7 @@ the given course.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_object import MediaObject
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -438,7 +443,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[MediaObject]**](MediaObject.md)
 
 ### Authorization
 
@@ -458,7 +463,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **media_objects_index_for_other**
-> List[object] media_objects_index_for_other(sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
+> List[MediaObject] media_objects_index_for_other(sort=sort, order=order, exclude=exclude, page=page, per_page=per_page)
 
 List Media Objects
 
@@ -472,6 +477,7 @@ the given course.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_object import MediaObject
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -525,7 +531,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[MediaObject]**](MediaObject.md)
 
 ### Authorization
 
@@ -545,7 +551,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **media_objects_update_media_object**
-> media_objects_update_media_object(media_object_id, media_objects_update_media_object_request=media_objects_update_media_object_request)
+> MediaObject media_objects_update_media_object(media_object_id, media_objects_update_media_object_request=media_objects_update_media_object_request)
 
 Update Media Object
 
@@ -557,6 +563,7 @@ Updates the title of a media object.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_object import MediaObject
 from canvas_lms_python_client.models.media_objects_update_media_object_request import MediaObjectsUpdateMediaObjectRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -586,7 +593,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update Media Object
-        await api_instance.media_objects_update_media_object(media_object_id, media_objects_update_media_object_request=media_objects_update_media_object_request)
+        api_response = await api_instance.media_objects_update_media_object(media_object_id, media_objects_update_media_object_request=media_objects_update_media_object_request)
+        print("The response of MediaObjectsApi->media_objects_update_media_object:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling MediaObjectsApi->media_objects_update_media_object: %s\n" % e)
 ```
@@ -603,7 +612,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**MediaObject**](MediaObject.md)
 
 ### Authorization
 
@@ -612,18 +621,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update Media Object |  -  |
+**0** | MediaObject |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **media_objects_update_media_object_for_other**
-> media_objects_update_media_object_for_other(attachment_id, media_objects_update_media_object_request=media_objects_update_media_object_request)
+> MediaObject media_objects_update_media_object_for_other(attachment_id, media_objects_update_media_object_request=media_objects_update_media_object_request)
 
 Update Media Object
 
@@ -635,6 +644,7 @@ Updates the title of a media object.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_object import MediaObject
 from canvas_lms_python_client.models.media_objects_update_media_object_request import MediaObjectsUpdateMediaObjectRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -664,7 +674,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update Media Object
-        await api_instance.media_objects_update_media_object_for_other(attachment_id, media_objects_update_media_object_request=media_objects_update_media_object_request)
+        api_response = await api_instance.media_objects_update_media_object_for_other(attachment_id, media_objects_update_media_object_request=media_objects_update_media_object_request)
+        print("The response of MediaObjectsApi->media_objects_update_media_object_for_other:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling MediaObjectsApi->media_objects_update_media_object_for_other: %s\n" % e)
 ```
@@ -681,7 +693,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**MediaObject**](MediaObject.md)
 
 ### Authorization
 
@@ -690,13 +702,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update Media Object |  -  |
+**0** | MediaObject |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

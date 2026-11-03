@@ -25,6 +25,7 @@ from canvas_lms_python_client.api.deployments_api import DeploymentsApi
 from canvas_lms_python_client.api.grading_period_sets_api import GradingPeriodSetsApi
 from canvas_lms_python_client.api.grading_periods_api import GradingPeriodsApi
 from canvas_lms_python_client.api.lti_apps_api import LtiAppsApi
+from canvas_lms_python_client.api.media_objects_api import MediaObjectsApi
 from canvas_lms_python_client.api.poll_choices_api import PollChoicesApi
 from canvas_lms_python_client.api.poll_sessions_api import PollSessionsApi
 from canvas_lms_python_client.api.polls_api import PollsApi
@@ -58,7 +59,14 @@ from canvas_lms_python_client.models.lti_context_control import LtiContextContro
 from canvas_lms_python_client.models.lti_deployment import LtiDeployment
 from canvas_lms_python_client.models.lti_launch_definition import LtiLaunchDefinition
 from canvas_lms_python_client.models.lti_registration import LtiRegistration
+from canvas_lms_python_client.models.lti_registration_history_entry import (
+    LtiRegistrationHistoryEntry,
+)
 from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink
+from canvas_lms_python_client.models.media_object import MediaObject
+from canvas_lms_python_client.models.media_object_media_tracks_inner import (
+    MediaObjectMediaTracksInner,
+)
 from canvas_lms_python_client.models.poll import Poll
 from canvas_lms_python_client.models.poll_choice import PollChoice
 from canvas_lms_python_client.models.poll_choices_index_response import PollChoicesIndexResponse
@@ -76,6 +84,10 @@ from canvas_lms_python_client.models.quiz_submissions_api_index_response import 
 )
 from canvas_lms_python_client.models.role import Role
 from canvas_lms_python_client.models.rubric import Rubric
+from canvas_lms_python_client.models.rubric_used_location import RubricUsedLocation
+from canvas_lms_python_client.models.rubric_used_location_assignments_inner import (
+    RubricUsedLocationAssignmentsInner,
+)
 from canvas_lms_python_client.models.user import User
 
 pytestmark = pytest.mark.integration
@@ -101,6 +113,15 @@ def require(items: List[T], missing: str) -> List[T]:
     """Skip the test, naming the missing data, when a listing is empty."""
     if not items:
         pytest.skip(f"no {missing} found in the seeded Canvas instance")
+    return items
+
+
+def require_seeded(items: List[T], missing: str, seed_option: str) -> List[T]:
+    """Skip, naming the missing data and the seed option that creates it."""
+    if not items:
+        pytest.skip(
+            f"no {missing} found in the seeded Canvas instance (run the seed script with {seed_option})"
+        )
     return items
 
 
@@ -544,3 +565,76 @@ async def test_account_calendars_pages_typed(canvas_admin_api_client):
     calendars = wrapped_items(pages, AccountCalendarsApiIndexResponse, "account_calendars")
     assert_typed(require(calendars, "account calendar visible to the admin"), AccountCalendar)
     assert len(calendars) == pages[0].total_results
+
+
+async def test_course_media_objects_typed(canvas_admin_api_client):
+    """Media objects were an @object example, so course listings were untyped."""
+    api = MediaObjectsApi(canvas_admin_api_client)
+    account = await root_account(canvas_admin_api_client)
+
+    media_objects: List[MediaObject] = []
+    for course in await account_courses(canvas_admin_api_client, account):
+        # Listing media sources needs Kaltura, which the dev instance doesn't have
+        media_objects = await collect(
+            api.media_objects_index_for_courses_all(course_id=str(course.id), exclude=["sources"])
+        )
+        if media_objects:
+            break
+    require_seeded(media_objects, "course media object", "--media-objects")
+
+    for media_object in media_objects:
+        assert isinstance(media_object, MediaObject)
+        assert media_object.media_id and media_object.media_type
+        for track in media_object.media_tracks or []:
+            assert isinstance(track, MediaObjectMediaTracksInner)
+            assert track.locale
+
+
+async def test_lti_registration_history_typed(canvas_admin_api_client):
+    """Lti::RegistrationHistoryEntry had no @model, so history items were untyped."""
+    account = await root_account(canvas_admin_api_client)
+    api = RegistrationsApi(canvas_admin_api_client)
+
+    entries: List[LtiRegistrationHistoryEntry] = []
+    for registration in await lti_registrations(canvas_admin_api_client, account):
+        entries += await collect(
+            api.registrations_history_all(account_id=str(account.id), id=str(registration.id))
+        )
+    require(entries, "LTI registration history entry")
+
+    for entry in entries:
+        assert isinstance(entry, LtiRegistrationHistoryEntry)
+        assert isinstance(entry.id, int)
+        assert isinstance(entry.lti_registration_id, int)
+        assert entry.update_type
+        created_by = entry.created_by.actual_instance
+        assert created_by == "Instructure" or isinstance(created_by, User)
+
+
+async def test_rubric_used_locations_typed(canvas_admin_api_client):
+    """Used locations named an undefined model and returned one object per page."""
+    api = RubricsApiApi(canvas_admin_api_client)
+    account = await root_account(canvas_admin_api_client)
+
+    locations: List[RubricUsedLocation] = []
+    for course in await account_courses(canvas_admin_api_client, account):
+        course_id = str(course.id)
+        for rubric in await collect(api.rubrics_api_index_for_courses_all(course_id=course_id)):
+            locations = await collect(
+                api.rubrics_api_used_locations_all(course_id=course_id, id=str(rubric.id))
+            )
+            if locations:
+                break
+        if locations:
+            break
+    require_seeded(locations, "rubric used in a course", "--rubric-locations")
+
+    for location in locations:
+        assert isinstance(location, RubricUsedLocation)
+        assert isinstance(location.id, int)
+        assert location.name
+        assert isinstance(location.concluded, bool)
+        for assignment in location.assignments:
+            assert isinstance(assignment, RubricUsedLocationAssignmentsInner)
+            assert isinstance(assignment.id, int)
+            assert assignment.title

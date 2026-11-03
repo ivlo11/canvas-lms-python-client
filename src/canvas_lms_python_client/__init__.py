@@ -519,6 +519,7 @@ __all__ = [
     "LtiRegistration",
     "LtiRegistrationAccountBinding",
     "LtiRegistrationCreatedBy",
+    "LtiRegistrationHistoryEntry",
     "LtiResourceLink",
     "LtiSubmission",
     "LtiToolConfiguration",
@@ -527,7 +528,11 @@ __all__ = [
     "MasterTemplatesRestrictItemRequestRestrictions",
     "MasterTemplatesUpdateAssociationsRequest",
     "MediaComment",
+    "MediaObject",
+    "MediaObjectMediaSourcesInner",
+    "MediaObjectMediaTracksInner",
     "MediaObjectsUpdateMediaObjectRequest",
+    "MediaTrack",
     "MediaTracksUpdateRequest",
     "MicrosoftSyncGroup",
     "MigrationIssue",
@@ -724,6 +729,8 @@ __all__ = [
     "RubricCriteria",
     "RubricCriterion",
     "RubricRating",
+    "RubricUsedLocation",
+    "RubricUsedLocationAssignmentsInner",
     "RubricsCreateRequest",
     "RubricsCreateRequestRubric",
     "RubricsCreateRequestRubricAssociation",
@@ -1345,6 +1352,7 @@ from canvas_lms_python_client.models.lti_placement_overlay import LtiPlacementOv
 from canvas_lms_python_client.models.lti_registration import LtiRegistration as LtiRegistration
 from canvas_lms_python_client.models.lti_registration_account_binding import LtiRegistrationAccountBinding as LtiRegistrationAccountBinding
 from canvas_lms_python_client.models.lti_registration_created_by import LtiRegistrationCreatedBy as LtiRegistrationCreatedBy
+from canvas_lms_python_client.models.lti_registration_history_entry import LtiRegistrationHistoryEntry as LtiRegistrationHistoryEntry
 from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink as LtiResourceLink
 from canvas_lms_python_client.models.lti_submission import LtiSubmission as LtiSubmission
 from canvas_lms_python_client.models.lti_tool_configuration import LtiToolConfiguration as LtiToolConfiguration
@@ -1353,7 +1361,11 @@ from canvas_lms_python_client.models.master_templates_restrict_item_request impo
 from canvas_lms_python_client.models.master_templates_restrict_item_request_restrictions import MasterTemplatesRestrictItemRequestRestrictions as MasterTemplatesRestrictItemRequestRestrictions
 from canvas_lms_python_client.models.master_templates_update_associations_request import MasterTemplatesUpdateAssociationsRequest as MasterTemplatesUpdateAssociationsRequest
 from canvas_lms_python_client.models.media_comment import MediaComment as MediaComment
+from canvas_lms_python_client.models.media_object import MediaObject as MediaObject
+from canvas_lms_python_client.models.media_object_media_sources_inner import MediaObjectMediaSourcesInner as MediaObjectMediaSourcesInner
+from canvas_lms_python_client.models.media_object_media_tracks_inner import MediaObjectMediaTracksInner as MediaObjectMediaTracksInner
 from canvas_lms_python_client.models.media_objects_update_media_object_request import MediaObjectsUpdateMediaObjectRequest as MediaObjectsUpdateMediaObjectRequest
+from canvas_lms_python_client.models.media_track import MediaTrack as MediaTrack
 from canvas_lms_python_client.models.media_tracks_update_request import MediaTracksUpdateRequest as MediaTracksUpdateRequest
 from canvas_lms_python_client.models.microsoft_sync_group import MicrosoftSyncGroup as MicrosoftSyncGroup
 from canvas_lms_python_client.models.migration_issue import MigrationIssue as MigrationIssue
@@ -1550,6 +1562,8 @@ from canvas_lms_python_client.models.rubric_associations_create_request_rubric_a
 from canvas_lms_python_client.models.rubric_criteria import RubricCriteria as RubricCriteria
 from canvas_lms_python_client.models.rubric_criterion import RubricCriterion as RubricCriterion
 from canvas_lms_python_client.models.rubric_rating import RubricRating as RubricRating
+from canvas_lms_python_client.models.rubric_used_location import RubricUsedLocation as RubricUsedLocation
+from canvas_lms_python_client.models.rubric_used_location_assignments_inner import RubricUsedLocationAssignmentsInner as RubricUsedLocationAssignmentsInner
 from canvas_lms_python_client.models.rubrics_create_request import RubricsCreateRequest as RubricsCreateRequest
 from canvas_lms_python_client.models.rubrics_create_request_rubric import RubricsCreateRequestRubric as RubricsCreateRequestRubric
 from canvas_lms_python_client.models.rubrics_create_request_rubric_association import RubricsCreateRequestRubricAssociation as RubricsCreateRequestRubricAssociation
