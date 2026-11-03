@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.authentication_event_links import AuthenticationEventLinks
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,12 +29,11 @@ class AuthenticationEvent(BaseModel):
     """
     
     """ # noqa: E501
+    id: Optional[StrictStr] = Field(default=None, description="ID of the event.", json_schema_extra={"examples": ["e2b76430-27a5-0131-3ca1-48e0eb13f29b"]})
     created_at: Optional[datetime] = Field(default=None, description="timestamp of the event", json_schema_extra={"examples": ["2012-07-19T15:00:00-06:00"]})
     event_type: Optional[StrictStr] = Field(default=None, description="authentication event type ('login' or 'logout')", json_schema_extra={"examples": ["login"]})
-    pseudonym_id: Optional[StrictInt] = Field(default=None, description="ID of the pseudonym (login) associated with the event", json_schema_extra={"examples": [9478]})
-    account_id: Optional[StrictInt] = Field(default=None, description="ID of the account associated with the event. will match the account_id in the associated pseudonym.", json_schema_extra={"examples": [2319]})
-    user_id: Optional[StrictInt] = Field(default=None, description="ID of the user associated with the event will match the user_id in the associated pseudonym.", json_schema_extra={"examples": [362]})
-    __properties: ClassVar[List[str]] = ["created_at", "event_type", "pseudonym_id", "account_id", "user_id"]
+    links: Optional[AuthenticationEventLinks] = None
+    __properties: ClassVar[List[str]] = ["id", "created_at", "event_type", "links"]
 
     @field_validator('event_type')
     def event_type_validate_enum(cls, value):
@@ -84,6 +84,9 @@ class AuthenticationEvent(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of links
+        if self.links:
+            _dict['links'] = self.links.to_dict()
         return _dict
 
     @classmethod
@@ -96,11 +99,10 @@ class AuthenticationEvent(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "created_at": obj.get("created_at"),
             "event_type": obj.get("event_type"),
-            "pseudonym_id": obj.get("pseudonym_id"),
-            "account_id": obj.get("account_id"),
-            "user_id": obj.get("user_id")
+            "links": AuthenticationEventLinks.from_dict(obj["links"]) if obj.get("links") is not None else None
         })
         return _obj
 

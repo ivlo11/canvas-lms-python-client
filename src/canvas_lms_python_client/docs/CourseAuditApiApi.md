@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **course_audit_api_for_account**
-> List[CourseEvent] course_audit_api_for_account(account_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+> CourseAuditApiForAccountResponse course_audit_api_for_account(account_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
 
 Query by account.
 
@@ -21,7 +21,7 @@ List course change events for a given account.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.course_event import CourseEvent
+from canvas_lms_python_client.models.course_audit_api_for_account_response import CourseAuditApiForAccountResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[CourseEvent]**](CourseEvent.md)
+[**CourseAuditApiForAccountResponse**](CourseAuditApiForAccountResponse.md)
 
 ### Authorization
 
@@ -95,7 +95,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **course_audit_api_for_course**
-> List[CourseEvent] course_audit_api_for_course(course_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+> CourseAuditApiForCourseResponse course_audit_api_for_course(course_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
 
 Query by course.
 
@@ -107,7 +107,7 @@ List course change events for a given course.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.course_event import CourseEvent
+from canvas_lms_python_client.models.course_audit_api_for_course_response import CourseAuditApiForCourseResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[CourseEvent]**](CourseEvent.md)
+[**CourseAuditApiForCourseResponse**](CourseAuditApiForCourseResponse.md)
 
 ### Authorization
 

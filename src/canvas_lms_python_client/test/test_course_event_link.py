@@ -35,12 +35,14 @@ class TestCourseEventLink(unittest.TestCase):
         model = CourseEventLink()
         if include_optional:
             return CourseEventLink(
-                course = 12345,
-                user = 12345,
+                course = '12345',
+                user = '12345',
                 page_view = 'e2b76430-27a5-0131-3ca1-48e0eb13f29b',
                 copied_from = 12345,
                 copied_to = 12345,
-                sis_batch = 12345
+                reset_from = 12345,
+                reset_to = 12345,
+                sis_batch = '12345'
             )
         else:
             return CourseEventLink(

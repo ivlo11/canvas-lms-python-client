@@ -29,8 +29,8 @@ class GradeChangeEventLinks(BaseModel):
     """ # noqa: E501
     assignment: Optional[StrictInt] = Field(default=None, description="ID of the assignment associated with the event", json_schema_extra={"examples": [2319]})
     course: Optional[StrictInt] = Field(default=None, description="ID of the course associated with the event. will match the context_id in the associated assignment if the context type for the assignment is a course", json_schema_extra={"examples": [2319]})
-    student: Optional[StrictInt] = Field(default=None, description="ID of the student associated with the event. will match the user_id in the associated submission.", json_schema_extra={"examples": [2319]})
-    grader: Optional[StrictInt] = Field(default=None, description="ID of the grader associated with the event. will match the grader_id in the associated submission.", json_schema_extra={"examples": [2319]})
+    student: Optional[StrictStr] = Field(default=None, description="ID of the student associated with the event. will match the user_id in the associated submission.", json_schema_extra={"examples": ["2319"]})
+    grader: Optional[StrictStr] = Field(default=None, description="ID of the grader associated with the event. will match the grader_id in the associated submission.", json_schema_extra={"examples": ["2319"]})
     page_view: Optional[StrictStr] = Field(default=None, description="ID of the page view during the event if it exists.", json_schema_extra={"examples": ["e2b76430-27a5-0131-3ca1-48e0eb13f29b"]})
     __properties: ClassVar[List[str]] = ["assignment", "course", "student", "grader", "page_view"]
 

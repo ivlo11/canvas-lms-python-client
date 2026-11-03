@@ -6,11 +6,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **str** | ID of the event. | [optional] 
 **created_at** | **datetime** | timestamp of the event | [optional] 
 **event_type** | **str** | authentication event type (&#39;login&#39; or &#39;logout&#39;) | [optional] 
-**pseudonym_id** | **int** | ID of the pseudonym (login) associated with the event | [optional] 
-**account_id** | **int** | ID of the account associated with the event. will match the account_id in the associated pseudonym. | [optional] 
-**user_id** | **int** | ID of the user associated with the event will match the user_id in the associated pseudonym. | [optional] 
+**links** | [**AuthenticationEventLinks**](AuthenticationEventLinks.md) |  | [optional] 
 
 ## Example
 

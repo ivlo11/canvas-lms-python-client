@@ -1,0 +1,83 @@
+{
+  "links": {
+    "events.course": "http://canvas.docker/api/v1/courses/{events.course}",
+    "events.user": null,
+    "events.sis_batch": null
+  },
+  "events": [
+    {
+      "id": "341ca258-2bdb-40ef-991c-026e933786a0",
+      "created_at": "2026-11-03T03:44:39Z",
+      "event_type": "updated",
+      "event_source": "api",
+      "event_data": {
+        "name": [
+          "Ocarina of Time Studies",
+          "Ocarina of Time Studies (renamed)"
+        ]
+      },
+      "links": {
+        "course": "5",
+        "page_view": "",
+        "user": "392",
+        "sis_batch": ""
+      }
+    }
+  ],
+  "linked": {
+    "page_views": [],
+    "courses": [
+      {
+        "id": "5",
+        "name": "Ocarina of Time Studies",
+        "course_code": "Ocarina",
+        "account_id": "1",
+        "created_at": "2026-09-19T00:49:36Z",
+        "start_at": null,
+        "default_view": "modules",
+        "enrollment_term_id": "1",
+        "is_public": null,
+        "grading_standard_id": null,
+        "root_account_id": "1",
+        "uuid": "VtdlpB7XeDhtyY1Gt6Wq8p0oLH6y41g7oszTJoUv",
+        "license": null,
+        "grade_passback_setting": null,
+        "end_at": null,
+        "public_syllabus": false,
+        "public_syllabus_to_auth": false,
+        "storage_quota_mb": 500,
+        "is_public_to_auth_users": false,
+        "homeroom_course": false,
+        "course_color": null,
+        "friendly_name": null,
+        "apply_assignment_group_weights": false,
+        "calendar": {
+          "ics": "http://canvas.docker/feeds/calendars/course_VtdlpB7XeDhtyY1Gt6Wq8p0oLH6y41g7oszTJoUv.ics"
+        },
+        "time_zone": "America/Denver",
+        "blueprint": false,
+        "template": false,
+        "sis_course_id": null,
+        "sis_import_id": null,
+        "integration_id": null,
+        "enrollments": [],
+        "hide_final_grades": false,
+        "workflow_state": "available",
+        "restrict_enrollments_to_course_dates": false
+      }
+    ],
+    "users": [
+      {
+        "id": "392",
+        "name": "Seeded Admin 2",
+        "created_at": "2026-11-02T06:12:30Z",
+        "sortable_name": "2, Seeded Admin",
+        "short_name": "Seeded Admin 2",
+        "sis_user_id": null,
+        "integration_id": null,
+        "sis_import_id": null,
+        "login_id": "seeded_admin_2"
+      }
+    ]
+  }
+}

@@ -35,11 +35,14 @@ class TestAuthenticationEvent(unittest.TestCase):
         model = AuthenticationEvent()
         if include_optional:
             return AuthenticationEvent(
+                id = 'e2b76430-27a5-0131-3ca1-48e0eb13f29b',
                 created_at = '2012-07-19T15:00-06:00',
                 event_type = 'login',
-                pseudonym_id = 9478,
-                account_id = 2319,
-                user_id = 362
+                links = canvas_lms_python_client.models.authentication_event_links.AuthenticationEventLinks(
+                    login = 9478, 
+                    account = 2319, 
+                    user = 362, 
+                    page_view = 'e2b76430-27a5-0131-3ca1-48e0eb13f29b', )
             )
         else:
             return AuthenticationEvent(

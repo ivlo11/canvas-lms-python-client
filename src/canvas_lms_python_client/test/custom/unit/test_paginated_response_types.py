@@ -33,9 +33,6 @@ _EMPTY_TYPES_MAP = re.compile(
 
 UNDOCUMENTED_PAGINATED_OPERATIONS = frozenset(
     {
-        "authentication_audit_api_for_account",
-        "authentication_audit_api_for_login",
-        "authentication_audit_api_for_user",
         "conversations_batches",
         "courses_bulk_user_progress",
         "courses_todo_items",

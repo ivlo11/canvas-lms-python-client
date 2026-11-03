@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **grade_change_audit_api_for_assignment**
-> List[GradeChangeEvent] grade_change_audit_api_for_assignment(assignment_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+> GradeChangeAuditApiForAssignmentResponse grade_change_audit_api_for_assignment(assignment_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
 
 Query by assignment
 
@@ -24,7 +24,7 @@ List grade change events for a given assignment.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent
+from canvas_lms_python_client.models.grade_change_audit_api_for_assignment_response import GradeChangeAuditApiForAssignmentResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[GradeChangeEvent]**](GradeChangeEvent.md)
+[**GradeChangeAuditApiForAssignmentResponse**](GradeChangeAuditApiForAssignmentResponse.md)
 
 ### Authorization
 
@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **grade_change_audit_api_for_course**
-> List[GradeChangeEvent] grade_change_audit_api_for_course(course_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+> GradeChangeAuditApiForCourseResponse grade_change_audit_api_for_course(course_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
 
 Query by course
 
@@ -110,7 +110,7 @@ List grade change events for a given course.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent
+from canvas_lms_python_client.models.grade_change_audit_api_for_course_response import GradeChangeAuditApiForCourseResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -164,7 +164,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[GradeChangeEvent]**](GradeChangeEvent.md)
+[**GradeChangeAuditApiForCourseResponse**](GradeChangeAuditApiForCourseResponse.md)
 
 ### Authorization
 
@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **grade_change_audit_api_for_grader**
-> List[GradeChangeEvent] grade_change_audit_api_for_grader(grader_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+> GradeChangeAuditApiForGraderResponse grade_change_audit_api_for_grader(grader_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
 
 Query by grader
 
@@ -196,7 +196,7 @@ List grade change events for a given grader.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent
+from canvas_lms_python_client.models.grade_change_audit_api_for_grader_response import GradeChangeAuditApiForGraderResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -250,7 +250,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[GradeChangeEvent]**](GradeChangeEvent.md)
+[**GradeChangeAuditApiForGraderResponse**](GradeChangeAuditApiForGraderResponse.md)
 
 ### Authorization
 
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **grade_change_audit_api_for_student**
-> List[GradeChangeEvent] grade_change_audit_api_for_student(student_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+> GradeChangeAuditApiForStudentResponse grade_change_audit_api_for_student(student_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
 
 Query by student
 
@@ -282,7 +282,7 @@ List grade change events for a given student.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent
+from canvas_lms_python_client.models.grade_change_audit_api_for_student_response import GradeChangeAuditApiForStudentResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -336,7 +336,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[GradeChangeEvent]**](GradeChangeEvent.md)
+[**GradeChangeAuditApiForStudentResponse**](GradeChangeAuditApiForStudentResponse.md)
 
 ### Authorization
 
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **grade_change_audit_api_query**
-> List[GradeChangeEvent] grade_change_audit_api_query(course_id=course_id, assignment_id=assignment_id, student_id=student_id, grader_id=grader_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+> GradeChangeAuditApiQueryResponse grade_change_audit_api_query(course_id=course_id, assignment_id=assignment_id, student_id=student_id, grader_id=grader_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
 
 Advanced query
 
@@ -371,7 +371,7 @@ At least one of +course_id+, +assignment_id+, +student_id+, or +grader_id+ must 
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent
+from canvas_lms_python_client.models.grade_change_audit_api_query_response import GradeChangeAuditApiQueryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -431,7 +431,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[GradeChangeEvent]**](GradeChangeEvent.md)
+[**GradeChangeAuditApiQueryResponse**](GradeChangeAuditApiQueryResponse.md)
 
 ### Authorization
 

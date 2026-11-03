@@ -18,6 +18,9 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.authentication_audit_api_for_account_response import AuthenticationAuditApiForAccountResponse
+from canvas_lms_python_client.models.authentication_audit_api_for_login_response import AuthenticationAuditApiForLoginResponse
+from canvas_lms_python_client.models.authentication_audit_api_for_user_response import AuthenticationAuditApiForUserResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -59,7 +62,7 @@ class AuthenticationAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> AuthenticationAuditApiForAccountResponse:
         """Query by account.
 
         List authentication events for a given account.
@@ -116,6 +119,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForAccountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -149,7 +153,7 @@ class AuthenticationAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[AuthenticationAuditApiForAccountResponse]:
         """Query by account.
 
         List authentication events for a given account.
@@ -206,6 +210,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForAccountResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -260,7 +265,7 @@ class AuthenticationAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AuthenticationAuditApiForAccountResponse]:
         """Query by account.
 
         List authentication events for a given account.
@@ -317,6 +322,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForAccountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -407,6 +413,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForAccountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -467,6 +474,13 @@ class AuthenticationAuditApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -513,7 +527,7 @@ class AuthenticationAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> AuthenticationAuditApiForLoginResponse:
         """Query by login.
 
         List authentication events for a given login.
@@ -570,6 +584,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForLoginResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -603,7 +618,7 @@ class AuthenticationAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[AuthenticationAuditApiForLoginResponse]:
         """Query by login.
 
         List authentication events for a given login.
@@ -660,6 +675,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForLoginResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -714,7 +730,7 @@ class AuthenticationAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AuthenticationAuditApiForLoginResponse]:
         """Query by login.
 
         List authentication events for a given login.
@@ -771,6 +787,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForLoginResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -861,6 +878,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForLoginResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -921,6 +939,13 @@ class AuthenticationAuditApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -967,7 +992,7 @@ class AuthenticationAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> AuthenticationAuditApiForUserResponse:
         """Query by user.
 
         List authentication events for a given user.
@@ -1024,6 +1049,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForUserResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1057,7 +1083,7 @@ class AuthenticationAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[AuthenticationAuditApiForUserResponse]:
         """Query by user.
 
         List authentication events for a given user.
@@ -1114,6 +1140,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForUserResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1168,7 +1195,7 @@ class AuthenticationAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AuthenticationAuditApiForUserResponse]:
         """Query by user.
 
         List authentication events for a given user.
@@ -1225,6 +1252,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForUserResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1315,6 +1343,7 @@ class AuthenticationAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationAuditApiForUserResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1375,6 +1404,13 @@ class AuthenticationAuditApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

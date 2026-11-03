@@ -21,6 +21,9 @@ from canvas_lms_python_client.api.authentication_audit_api_api import Authentica
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.authentication_audit_api_for_account_response import AuthenticationAuditApiForAccountResponse
+from canvas_lms_python_client.models.authentication_audit_api_for_login_response import AuthenticationAuditApiForLoginResponse
+from canvas_lms_python_client.models.authentication_audit_api_for_user_response import AuthenticationAuditApiForUserResponse
 
 
 class TestAuthenticationAuditApiApi(unittest.IsolatedAsyncioTestCase):

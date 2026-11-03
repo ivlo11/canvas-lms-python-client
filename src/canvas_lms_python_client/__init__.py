@@ -254,7 +254,11 @@ __all__ = [
     "AsyncQueryResponse",
     "AsyncQueryResultsResponse",
     "AsyncQueryStatusResponse",
+    "AuthenticationAuditApiForAccountResponse",
+    "AuthenticationAuditApiForLoginResponse",
+    "AuthenticationAuditApiForUserResponse",
     "AuthenticationEvent",
+    "AuthenticationEventLinks",
     "AuthenticationProvider",
     "AuthorizationJWT",
     "Avatar",
@@ -341,6 +345,8 @@ __all__ = [
     "ConversationsUpdateRequestConversation",
     "Course",
     "CourseAttributes",
+    "CourseAuditApiForAccountResponse",
+    "CourseAuditApiForCourseResponse",
     "CourseEpubExport",
     "CourseEvent",
     "CourseEventLink",
@@ -443,6 +449,11 @@ __all__ = [
     "FoldersCreateRequest",
     "FoldersUpdateRequest",
     "Grade",
+    "GradeChangeAuditApiForAssignmentResponse",
+    "GradeChangeAuditApiForCourseResponse",
+    "GradeChangeAuditApiForGraderResponse",
+    "GradeChangeAuditApiForStudentResponse",
+    "GradeChangeAuditApiQueryResponse",
     "GradeChangeEvent",
     "GradeChangeEventLinks",
     "GradeGroup",
@@ -1087,7 +1098,11 @@ from canvas_lms_python_client.models.async_api_error_response import AsyncApiErr
 from canvas_lms_python_client.models.async_query_response import AsyncQueryResponse as AsyncQueryResponse
 from canvas_lms_python_client.models.async_query_results_response import AsyncQueryResultsResponse as AsyncQueryResultsResponse
 from canvas_lms_python_client.models.async_query_status_response import AsyncQueryStatusResponse as AsyncQueryStatusResponse
+from canvas_lms_python_client.models.authentication_audit_api_for_account_response import AuthenticationAuditApiForAccountResponse as AuthenticationAuditApiForAccountResponse
+from canvas_lms_python_client.models.authentication_audit_api_for_login_response import AuthenticationAuditApiForLoginResponse as AuthenticationAuditApiForLoginResponse
+from canvas_lms_python_client.models.authentication_audit_api_for_user_response import AuthenticationAuditApiForUserResponse as AuthenticationAuditApiForUserResponse
 from canvas_lms_python_client.models.authentication_event import AuthenticationEvent as AuthenticationEvent
+from canvas_lms_python_client.models.authentication_event_links import AuthenticationEventLinks as AuthenticationEventLinks
 from canvas_lms_python_client.models.authentication_provider import AuthenticationProvider as AuthenticationProvider
 from canvas_lms_python_client.models.authorization_jwt import AuthorizationJWT as AuthorizationJWT
 from canvas_lms_python_client.models.avatar import Avatar as Avatar
@@ -1174,6 +1189,8 @@ from canvas_lms_python_client.models.conversations_update_request import Convers
 from canvas_lms_python_client.models.conversations_update_request_conversation import ConversationsUpdateRequestConversation as ConversationsUpdateRequestConversation
 from canvas_lms_python_client.models.course import Course as Course
 from canvas_lms_python_client.models.course_attributes import CourseAttributes as CourseAttributes
+from canvas_lms_python_client.models.course_audit_api_for_account_response import CourseAuditApiForAccountResponse as CourseAuditApiForAccountResponse
+from canvas_lms_python_client.models.course_audit_api_for_course_response import CourseAuditApiForCourseResponse as CourseAuditApiForCourseResponse
 from canvas_lms_python_client.models.course_epub_export import CourseEpubExport as CourseEpubExport
 from canvas_lms_python_client.models.course_event import CourseEvent as CourseEvent
 from canvas_lms_python_client.models.course_event_link import CourseEventLink as CourseEventLink
@@ -1276,6 +1293,11 @@ from canvas_lms_python_client.models.folders_copy_folder_request import FoldersC
 from canvas_lms_python_client.models.folders_create_request import FoldersCreateRequest as FoldersCreateRequest
 from canvas_lms_python_client.models.folders_update_request import FoldersUpdateRequest as FoldersUpdateRequest
 from canvas_lms_python_client.models.grade import Grade as Grade
+from canvas_lms_python_client.models.grade_change_audit_api_for_assignment_response import GradeChangeAuditApiForAssignmentResponse as GradeChangeAuditApiForAssignmentResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_course_response import GradeChangeAuditApiForCourseResponse as GradeChangeAuditApiForCourseResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_grader_response import GradeChangeAuditApiForGraderResponse as GradeChangeAuditApiForGraderResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_student_response import GradeChangeAuditApiForStudentResponse as GradeChangeAuditApiForStudentResponse
+from canvas_lms_python_client.models.grade_change_audit_api_query_response import GradeChangeAuditApiQueryResponse as GradeChangeAuditApiQueryResponse
 from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent as GradeChangeEvent
 from canvas_lms_python_client.models.grade_change_event_links import GradeChangeEventLinks as GradeChangeEventLinks
 from canvas_lms_python_client.models.grade_group import GradeGroup as GradeGroup

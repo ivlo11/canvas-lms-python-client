@@ -19,9 +19,12 @@ import pytest
 from canvas_lms_python_client.api.account_calendars_api_api import AccountCalendarsApiApi
 from canvas_lms_python_client.api.accounts_api import AccountsApi
 from canvas_lms_python_client.api.appointment_groups_api import AppointmentGroupsApi
+from canvas_lms_python_client.api.authentication_audit_api_api import AuthenticationAuditApiApi
 from canvas_lms_python_client.api.context_controls_api import ContextControlsApi
+from canvas_lms_python_client.api.course_audit_api_api import CourseAuditApiApi
 from canvas_lms_python_client.api.courses_api import CoursesApi
 from canvas_lms_python_client.api.deployments_api import DeploymentsApi
+from canvas_lms_python_client.api.grade_change_audit_api_api import GradeChangeAuditApiApi
 from canvas_lms_python_client.api.grading_period_sets_api import GradingPeriodSetsApi
 from canvas_lms_python_client.api.grading_periods_api import GradingPeriodsApi
 from canvas_lms_python_client.api.lti_apps_api import LtiAppsApi
@@ -44,8 +47,23 @@ from canvas_lms_python_client.models.account_calendars_api_index_response import
     AccountCalendarsApiIndexResponse,
 )
 from canvas_lms_python_client.models.appointment_group import AppointmentGroup
+from canvas_lms_python_client.models.authentication_audit_api_for_account_response import (
+    AuthenticationAuditApiForAccountResponse,
+)
+from canvas_lms_python_client.models.authentication_event import AuthenticationEvent
+from canvas_lms_python_client.models.authentication_event_links import AuthenticationEventLinks
 from canvas_lms_python_client.models.course import Course
+from canvas_lms_python_client.models.course_audit_api_for_account_response import (
+    CourseAuditApiForAccountResponse,
+)
+from canvas_lms_python_client.models.course_event import CourseEvent
+from canvas_lms_python_client.models.course_event_link import CourseEventLink
 from canvas_lms_python_client.models.course_grading_period import CourseGradingPeriod
+from canvas_lms_python_client.models.grade_change_audit_api_for_course_response import (
+    GradeChangeAuditApiForCourseResponse,
+)
+from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent
+from canvas_lms_python_client.models.grade_change_event_links import GradeChangeEventLinks
 from canvas_lms_python_client.models.grading_period import GradingPeriod
 from canvas_lms_python_client.models.grading_period_sets import GradingPeriodSets
 from canvas_lms_python_client.models.grading_period_sets_index_response import (
@@ -638,3 +656,66 @@ async def test_rubric_used_locations_typed(canvas_admin_api_client):
             assert isinstance(assignment, RubricUsedLocationAssignmentsInner)
             assert isinstance(assignment.id, int)
             assert assignment.title
+
+
+async def first_page(iterator: AsyncIterator[T]) -> T:
+    """The first page of a `_paginated` iterator."""
+    async for page in iterator:
+        return page
+    raise AssertionError("no page returned")
+
+
+async def test_course_audit_pages_typed(canvas_admin_api_client):
+    """Course audit pages were deserialized as event lists and always failed."""
+    account = await root_account(canvas_admin_api_client)
+    page = await first_page(
+        CourseAuditApiApi(canvas_admin_api_client).course_audit_api_for_account_paginated(account_id=str(account.id))
+    )
+
+    assert isinstance(page, CourseAuditApiForAccountResponse)
+    events = require_seeded(page.events, "course audit event", "--audit-events")
+    assert_typed(events, CourseEvent, id_type=str)
+    for event in events:
+        assert isinstance(event.links, CourseEventLink)
+        assert isinstance(event.links.course, str) and event.links.course
+        assert isinstance(event.event_data, dict)
+
+
+async def test_grade_change_audit_pages_typed(canvas_admin_api_client):
+    """Grade change audit pages were deserialized as event lists and always failed."""
+    api = GradeChangeAuditApiApi(canvas_admin_api_client)
+    account = await root_account(canvas_admin_api_client)
+
+    events: List[GradeChangeEvent] = []
+    for course in await account_courses(canvas_admin_api_client, account):
+        page = await first_page(api.grade_change_audit_api_for_course_paginated(course_id=str(course.id)))
+        assert isinstance(page, GradeChangeAuditApiForCourseResponse)
+        events = page.events or []
+        if events:
+            break
+    require(events, "grade change event in any root account course")
+
+    assert_typed(events, GradeChangeEvent, id_type=str)
+    for event in events:
+        assert isinstance(event.version_number, int)
+        assert isinstance(event.links, GradeChangeEventLinks)
+        assert isinstance(event.links.student, str)
+        assert event.links.grader is None or isinstance(event.links.grader, str)
+
+
+async def test_authentication_audit_pages_typed(canvas_admin_api_client):
+    """Authentication audit operations had no response type and returned nothing."""
+    account = await root_account(canvas_admin_api_client)
+    page = await first_page(
+        AuthenticationAuditApiApi(canvas_admin_api_client).authentication_audit_api_for_account_paginated(
+            account_id=str(account.id)
+        )
+    )
+
+    assert isinstance(page, AuthenticationAuditApiForAccountResponse)
+    events = require_seeded(page.events, "authentication event", "--audit-events")
+    assert_typed(events, AuthenticationEvent, id_type=str)
+    for event in events:
+        assert event.event_type in ("login", "logout")
+        assert isinstance(event.links, AuthenticationEventLinks)
+        assert isinstance(event.links.user, int)
