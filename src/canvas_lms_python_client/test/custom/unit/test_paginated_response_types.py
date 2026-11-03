@@ -13,6 +13,7 @@ object and undocumented responses get ``*_paginated`` only.
 import importlib
 import inspect
 import json
+import pathlib
 import pkgutil
 import re
 import typing
@@ -44,13 +45,11 @@ UNDOCUMENTED_PAGINATED_OPERATIONS = frozenset(
         "discussion_topics_api_entry_list_for_groups",
         "discussion_topics_api_replies",
         "discussion_topics_api_replies_for_groups",
-        "grading_period_sets_index",
         "pace_contexts_api_index",
         "planner_index",
         "planner_index_for_users",
         "pseudonyms_index",
         "pseudonyms_index_for_users",
-        "quiz_submission_events_api_index",
         "search_all_courses",
         "search_recipients",
         "search_recipients_for_other",
@@ -157,9 +156,10 @@ def test_lti_list_pages_are_typed():
 _WRAPPED_ITEMS = {
     "account_calendars": ("AccountCalendar", {"id": 1, "name": "Chemistry"}),
     "assignment_extensions": ("AssignmentExtension", {"assignment_id": 1, "user_id": 2}),
+    "grading_period_sets": ("GradingPeriodSets", {"id": "1", "title": "Fall"}),
     "grading_periods": (
         "GradingPeriod",
-        {"id": 1, "start_date": "2026-01-01T00:00:00Z", "end_date": "2026-06-01T00:00:00Z"},
+        {"id": "1", "start_date": "2026-01-01T00:00:00Z", "end_date": "2026-06-01T00:00:00Z"},
     ),
     "outcome_results": ("OutcomeResult", {"id": 1}),
     "poll_choices": ("PollChoice", {"id": "1", "text": "Yes"}),
@@ -171,6 +171,7 @@ _WRAPPED_ITEMS = {
     "quiz_ip_filters": ("QuizIPFilter", {"name": "Lab", "account": "School", "filter": "10.0.0.0/8"}),
     "quiz_statistics": ("QuizStatistics", {"id": 1, "quiz_id": 2}),
     "quiz_submission_questions": ("QuizSubmissionQuestion", {"id": 1}),
+    "quiz_submission_events": ("QuizSubmissionEvent", {"id": "1", "event_type": "page_blurred"}),
     "quiz_submissions": ("QuizSubmission", {"id": 1, "quiz_id": 2}),
     "results": ("Result", {"id": "1"}),
 }
@@ -180,6 +181,7 @@ _WRAPPER_KEYS = {
     "AccountCalendarsApiIndexResponse": "account_calendars",
     "AssignmentExtensionsCreateResponse": "assignment_extensions",
     "CourseQuizExtensionsCreateResponse": "quiz_extensions",
+    "GradingPeriodSetsIndexResponse": "grading_period_sets",
     "GradingPeriodsBatchUpdateResponse": "grading_periods",
     "GradingPeriodsIndexResponse": "grading_periods",
     "GradingPeriodsShowResponse": "grading_periods",
@@ -209,6 +211,7 @@ _WRAPPER_KEYS = {
     "QuizGroupsUpdateResponse": "quiz_groups",
     "QuizIpFiltersIndexResponse": "quiz_ip_filters",
     "QuizStatisticsIndexResponse": "quiz_statistics",
+    "QuizSubmissionEventsApiIndexResponse": "quiz_submission_events",
     "QuizSubmissionQuestionsIndexResponse": "quiz_submission_questions",
     "QuizSubmissionsApiCompleteResponse": "quiz_submissions",
     "QuizSubmissionsApiCreateResponse": "quiz_submissions",
@@ -360,3 +363,74 @@ def test_live_poll_session_submissions_are_typed():
 
     assert [type(s).__name__ for s in session.poll_submissions] == ["PollSubmission"]
     assert session.poll_submissions[0].poll_choice_id == "4"
+
+
+# Pages captured from the seeded instance as an account admin: a weighted
+# grading period set (fractional weights, string ids), its account's grading
+# periods, a course with include[]=grading_periods (integer ids), and an
+# audited quiz submission's events
+_FIXTURES = pathlib.Path(__file__).parent / "fixtures" / "grading_periods"
+
+
+def _fixture(name):
+    return json.loads((_FIXTURES / f"{name}.json").read_text())
+
+
+def test_grading_period_sets_page_keeps_canvas_types():
+    payload = _fixture("grading_period_sets")
+    page = canvas_lms_python_client.models.GradingPeriodSetsIndexResponse.from_dict(payload)
+
+    assert len(page.grading_period_sets) == len(payload["grading_period_sets"])
+    for grading_period_set, item in zip(page.grading_period_sets, payload["grading_period_sets"]):
+        assert isinstance(grading_period_set, canvas_lms_python_client.models.GradingPeriodSets)
+        assert grading_period_set.id == item["id"]
+        assert grading_period_set.account_id == item["account_id"]
+        assert grading_period_set.permissions == item["permissions"]
+        assert [p.id for p in grading_period_set.grading_periods] == [p["id"] for p in item["grading_periods"]]
+        assert [p.weight for p in grading_period_set.grading_periods] == [p["weight"] for p in item["grading_periods"]]
+
+
+def test_grading_period_set_create_returns_one_set():
+    item = _fixture("grading_period_sets")["grading_period_sets"][0]
+    response = canvas_lms_python_client.models.GradingPeriodSetsCreateResponse.from_dict(
+        {"grading_period_set": item}
+    )
+
+    assert isinstance(response.grading_period_set, canvas_lms_python_client.models.GradingPeriodSets)
+    assert response.grading_period_set.title == item["title"]
+
+
+def test_grading_periods_page_keeps_canvas_types():
+    payload = _fixture("grading_periods")
+    page = canvas_lms_python_client.models.GradingPeriodsIndexResponse.from_dict(payload)
+
+    for grading_period, item in zip(page.grading_periods, payload["grading_periods"], strict=True):
+        assert grading_period.id == item["id"]
+        assert grading_period.grading_period_group_id == item["grading_period_group_id"]
+        assert isinstance(grading_period.weight, float)
+        assert grading_period.weight == item["weight"]
+        assert grading_period.is_closed == item["is_closed"]
+
+
+def test_course_include_grading_periods_are_typed():
+    payload = _fixture("course_include_grading_periods")
+    course = canvas_lms_python_client.models.Course.from_dict(payload)
+
+    assert [type(p).__name__ for p in course.grading_periods] == ["CourseGradingPeriod"] * len(
+        payload["grading_periods"]
+    )
+    for grading_period, item in zip(course.grading_periods, payload["grading_periods"], strict=True):
+        assert grading_period.id == item["id"]
+        assert isinstance(grading_period.id, int)
+        assert grading_period.workflow_state == item["workflow_state"]
+
+
+def test_quiz_submission_events_keep_every_event_data_shape():
+    payload = _fixture("quiz_submission_events")
+    page = canvas_lms_python_client.models.QuizSubmissionEventsApiIndexResponse.from_dict(payload)
+
+    events = page.quiz_submission_events
+    assert [e.id for e in events] == [e["id"] for e in payload["quiz_submission_events"]]
+    assert [e.event_data for e in events] == [e["event_data"] for e in payload["quiz_submission_events"]]
+    shapes = {type(e.event_data).__name__ for e in events}
+    assert {"list", "dict", "NoneType"} <= shapes

@@ -20,11 +20,15 @@ from canvas_lms_python_client.api.account_calendars_api_api import AccountCalend
 from canvas_lms_python_client.api.accounts_api import AccountsApi
 from canvas_lms_python_client.api.appointment_groups_api import AppointmentGroupsApi
 from canvas_lms_python_client.api.context_controls_api import ContextControlsApi
+from canvas_lms_python_client.api.courses_api import CoursesApi
 from canvas_lms_python_client.api.deployments_api import DeploymentsApi
+from canvas_lms_python_client.api.grading_period_sets_api import GradingPeriodSetsApi
+from canvas_lms_python_client.api.grading_periods_api import GradingPeriodsApi
 from canvas_lms_python_client.api.lti_apps_api import LtiAppsApi
 from canvas_lms_python_client.api.poll_choices_api import PollChoicesApi
 from canvas_lms_python_client.api.poll_sessions_api import PollSessionsApi
 from canvas_lms_python_client.api.polls_api import PollsApi
+from canvas_lms_python_client.api.quiz_submission_events_api_api import QuizSubmissionEventsApiApi
 from canvas_lms_python_client.api.quiz_submissions_api_api import QuizSubmissionsApiApi
 from canvas_lms_python_client.api.quizzes_api_api import QuizzesApiApi
 from canvas_lms_python_client.api.registrations_api import RegistrationsApi
@@ -32,6 +36,7 @@ from canvas_lms_python_client.api.resource_links_api import ResourceLinksApi
 from canvas_lms_python_client.api.role_overrides_api import RoleOverridesApi
 from canvas_lms_python_client.api.rubrics_api_api import RubricsApiApi
 from canvas_lms_python_client.api.users_api import UsersApi
+from canvas_lms_python_client.exceptions import ApiException
 from canvas_lms_python_client.models.account import Account
 from canvas_lms_python_client.models.account_calendar import AccountCalendar
 from canvas_lms_python_client.models.account_calendars_api_index_response import (
@@ -39,6 +44,12 @@ from canvas_lms_python_client.models.account_calendars_api_index_response import
 )
 from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.models.course import Course
+from canvas_lms_python_client.models.course_grading_period import CourseGradingPeriod
+from canvas_lms_python_client.models.grading_period import GradingPeriod
+from canvas_lms_python_client.models.grading_period_sets import GradingPeriodSets
+from canvas_lms_python_client.models.grading_period_sets_index_response import (
+    GradingPeriodSetsIndexResponse,
+)
 from canvas_lms_python_client.models.group import Group
 from canvas_lms_python_client.models.list_lti_registrations_response import (
     ListLtiRegistrationsResponse,
@@ -56,6 +67,10 @@ from canvas_lms_python_client.models.poll_sessions_index_response import PollSes
 from canvas_lms_python_client.models.poll_submission import PollSubmission
 from canvas_lms_python_client.models.polls_index_response import PollsIndexResponse
 from canvas_lms_python_client.models.quiz_submission import QuizSubmission
+from canvas_lms_python_client.models.quiz_submission_event import QuizSubmissionEvent
+from canvas_lms_python_client.models.quiz_submission_events_api_index_response import (
+    QuizSubmissionEventsApiIndexResponse,
+)
 from canvas_lms_python_client.models.quiz_submissions_api_index_response import (
     QuizSubmissionsApiIndexResponse,
 )
@@ -410,6 +425,84 @@ async def test_quiz_submissions_pages_typed(canvas_admin_api_client):
     require(submissions, "quiz submission in any root account course")
 
     assert_typed(submissions, QuizSubmission)
+
+
+async def test_quiz_submission_events_pages_typed(canvas_admin_api_client):
+    """Events were untyped, and their event_data is a list, an object or null."""
+    account = await root_account(canvas_admin_api_client)
+    quizzes_api = QuizzesApiApi(canvas_admin_api_client)
+    submissions_api = QuizSubmissionsApiApi(canvas_admin_api_client)
+    events_api = QuizSubmissionEventsApiApi(canvas_admin_api_client)
+
+    events: List[object] = []
+    for course in await account_courses(canvas_admin_api_client, account):
+        course_id = str(course.id)
+        for quiz in await collect(quizzes_api.quizzes_api_index_all(course_id=course_id)):
+            pages = await collect(
+                submissions_api.quiz_submissions_api_index_paginated(course_id=course_id, quiz_id=str(quiz.id))
+            )
+            for submission in wrapped_items(pages, QuizSubmissionsApiIndexResponse, "quiz_submissions"):
+                try:
+                    event_pages = await collect(
+                        events_api.quiz_submission_events_api_index_paginated(
+                            course_id=course_id, quiz_id=str(quiz.id), id=str(submission.id)
+                        )
+                    )
+                except ApiException as error:
+                    if error.status == 400:  # quiz log auditing is off for this course
+                        break
+                    raise
+                events = wrapped_items(event_pages, QuizSubmissionEventsApiIndexResponse, "quiz_submission_events")
+                if {type(e.event_data) for e in events} >= {list, dict, type(None)}:
+                    break
+            if events:
+                break
+        if events:
+            break
+    require(events, "audited quiz submission with events in any root account course (run the seed script with --audit-data)")
+
+    assert_typed(events, QuizSubmissionEvent, id_type=str)
+    assert {type(e.event_data) for e in events} >= {list, dict, type(None)}
+
+
+async def test_grading_period_sets_pages_typed(canvas_admin_api_client):
+    """Grading period set pages were untyped."""
+    account = await root_account(canvas_admin_api_client)
+    pages = await collect(
+        GradingPeriodSetsApi(canvas_admin_api_client).grading_period_sets_index_paginated(account_id=str(account.id))
+    )
+
+    sets = wrapped_items(pages, GradingPeriodSetsIndexResponse, "grading_period_sets")
+    assert_typed(require(sets, "grading period set (run the seed script with --audit-data)"), GradingPeriodSets, str)
+    periods = [p for s in sets for p in s.grading_periods or []]
+    assert_typed(require(periods, "grading period in a set"), GradingPeriod, str)
+
+
+async def test_grading_periods_index_typed(canvas_admin_api_client):
+    """Grading period ids are strings and weights can be fractional."""
+    account = await root_account(canvas_admin_api_client)
+    page = await GradingPeriodsApi(canvas_admin_api_client).grading_periods_index(account_id=str(account.id))
+
+    periods = require(page.grading_periods or [], "grading period in the root account")
+    assert_typed(periods, GradingPeriod, str)
+    assert all(p.weight is None or isinstance(p.weight, (int, float)) for p in periods)
+
+
+async def test_course_include_grading_periods_typed(canvas_admin_api_client):
+    """A course's included grading periods have integer ids, unlike GradingPeriod."""
+    account = await root_account(canvas_admin_api_client)
+    courses_api = CoursesApi(canvas_admin_api_client)
+
+    periods: List[object] = []
+    for listed in await account_courses(canvas_admin_api_client, account):
+        course = await courses_api.courses_show(id=str(listed.id), include=["grading_periods"])
+        assert isinstance(course, Course)
+        periods = course.grading_periods or []
+        if periods:
+            break
+    require(periods, "course whose term has grading periods")
+
+    assert_typed(periods, CourseGradingPeriod)
 
 
 async def test_users_and_roles_pages_typed(canvas_admin_api_client):

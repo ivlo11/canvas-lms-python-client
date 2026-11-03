@@ -19,6 +19,8 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.grading_period_sets_create_request import GradingPeriodSetsCreateRequest
+from canvas_lms_python_client.models.grading_period_sets_create_response import GradingPeriodSetsCreateResponse
+from canvas_lms_python_client.models.grading_period_sets_index_response import GradingPeriodSetsIndexResponse
 from canvas_lms_python_client.models.grading_period_sets_update_request import GradingPeriodSetsUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -57,7 +59,7 @@ class GradingPeriodSetsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> GradingPeriodSetsCreateResponse:
         """Create a grading period set
 
         Create and return a new grading period set
@@ -99,6 +101,7 @@ class GradingPeriodSetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodSetsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -127,7 +130,7 @@ class GradingPeriodSetsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[GradingPeriodSetsCreateResponse]:
         """Create a grading period set
 
         Create and return a new grading period set
@@ -169,6 +172,7 @@ class GradingPeriodSetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodSetsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -240,6 +244,7 @@ class GradingPeriodSetsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodSetsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -615,7 +620,7 @@ class GradingPeriodSetsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> GradingPeriodSetsIndexResponse:
         """List grading period sets
 
         Returns the paginated list of grading period sets
@@ -666,6 +671,7 @@ class GradingPeriodSetsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodSetsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -697,7 +703,7 @@ class GradingPeriodSetsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[GradingPeriodSetsIndexResponse]:
         """List grading period sets
 
         Returns the paginated list of grading period sets
@@ -748,6 +754,7 @@ class GradingPeriodSetsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodSetsIndexResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -800,7 +807,7 @@ class GradingPeriodSetsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[GradingPeriodSetsIndexResponse]:
         """List grading period sets
 
         Returns the paginated list of grading period sets
@@ -851,6 +858,7 @@ class GradingPeriodSetsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodSetsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -933,6 +941,7 @@ class GradingPeriodSetsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GradingPeriodSetsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

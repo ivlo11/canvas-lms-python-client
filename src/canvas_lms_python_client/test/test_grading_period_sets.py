@@ -37,7 +37,24 @@ class TestGradingPeriodSets(unittest.TestCase):
             return GradingPeriodSets(
                 title = 'Hello World',
                 weighted = True,
-                display_totals_for_all_grading_periods = True
+                display_totals_for_all_grading_periods = True,
+                id = '1',
+                account_id = '1',
+                course_id = '',
+                grading_periods = [
+                    canvas_lms_python_client.models.grading_period.GradingPeriod(
+                        id = '1023', 
+                        grading_period_group_id = '1', 
+                        title = 'First Block', 
+                        start_date = '2014-01-07T15:04Z', 
+                        end_date = '2014-05-07T17:07Z', 
+                        close_date = '2014-06-07T17:07Z', 
+                        weight = 33.33, 
+                        is_closed = True, 
+                        permissions = {"read":true,"create":true,"update":true,"delete":true}, )
+                    ],
+                permissions = {"read":true,"create":true,"update":true,"delete":true},
+                created_at = '2016-01-15T19:00Z'
             )
         else:
             return GradingPeriodSets(

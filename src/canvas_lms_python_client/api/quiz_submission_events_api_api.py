@@ -19,6 +19,7 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.quiz_submission_events_api_create_request import QuizSubmissionEventsApiCreateRequest
+from canvas_lms_python_client.models.quiz_submission_events_api_index_response import QuizSubmissionEventsApiIndexResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -372,7 +373,7 @@ class QuizSubmissionEventsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> QuizSubmissionEventsApiIndexResponse:
         """Retrieve captured events
 
         Retrieve the set of events captured during a specific submission attempt.
@@ -432,6 +433,7 @@ class QuizSubmissionEventsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizSubmissionEventsApiIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -466,7 +468,7 @@ class QuizSubmissionEventsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[QuizSubmissionEventsApiIndexResponse]:
         """Retrieve captured events
 
         Retrieve the set of events captured during a specific submission attempt.
@@ -526,6 +528,7 @@ class QuizSubmissionEventsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizSubmissionEventsApiIndexResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -581,7 +584,7 @@ class QuizSubmissionEventsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizSubmissionEventsApiIndexResponse]:
         """Retrieve captured events
 
         Retrieve the set of events captured during a specific submission attempt.
@@ -641,6 +644,7 @@ class QuizSubmissionEventsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizSubmissionEventsApiIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -735,6 +739,7 @@ class QuizSubmissionEventsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizSubmissionEventsApiIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

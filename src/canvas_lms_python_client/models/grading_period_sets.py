@@ -17,8 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.grading_period import GradingPeriod
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -30,7 +32,13 @@ class GradingPeriodSets(BaseModel):
     title: StrictStr = Field(description="The title of the grading period set.", json_schema_extra={"examples": ["Hello World"]})
     weighted: Optional[StrictBool] = Field(default=None, description="If true, the grading periods in the set are weighted.", json_schema_extra={"examples": [True]})
     display_totals_for_all_grading_periods: Optional[StrictBool] = Field(default=None, description="If true, the totals for all grading periods in the set are displayed.", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["title", "weighted", "display_totals_for_all_grading_periods"]
+    id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the grading period set.", json_schema_extra={"examples": ["1"]})
+    account_id: Optional[StrictStr] = Field(default=None, description="The id of the account the set belongs to, or null if it belongs to a course.", json_schema_extra={"examples": ["1"]})
+    course_id: Optional[StrictStr] = Field(default=None, description="The id of the course the set belongs to, or null if it belongs to an account.")
+    grading_periods: Optional[List[GradingPeriod]] = Field(default=None, description="The active grading periods in the set.")
+    permissions: Optional[Dict[str, Any]] = Field(default=None, description="The current user's permissions on the set (read, create, update, delete).", json_schema_extra={"examples": [{"read": True, "create": True, "update": True, "delete": True}]})
+    created_at: Optional[datetime] = Field(default=None, description="When the set was created.", json_schema_extra={"examples": ["2016-01-15T19:00:00Z"]})
+    __properties: ClassVar[List[str]] = ["title", "weighted", "display_totals_for_all_grading_periods", "id", "account_id", "course_id", "grading_periods", "permissions", "created_at"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -71,6 +79,12 @@ class GradingPeriodSets(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in grading_periods (list)
+        _items = []
+        if self.grading_periods:
+            for _item_grading_periods in self.grading_periods:
+                _items.append(_item_grading_periods.to_dict() if _item_grading_periods is not None else None)
+            _dict['grading_periods'] = _items
         return _dict
 
     @classmethod
@@ -85,7 +99,13 @@ class GradingPeriodSets(BaseModel):
         _obj = cls.model_validate({
             "title": obj.get("title"),
             "weighted": obj.get("weighted"),
-            "display_totals_for_all_grading_periods": obj.get("display_totals_for_all_grading_periods")
+            "display_totals_for_all_grading_periods": obj.get("display_totals_for_all_grading_periods"),
+            "id": obj.get("id"),
+            "account_id": obj.get("account_id"),
+            "course_id": obj.get("course_id"),
+            "grading_periods": [GradingPeriod.from_dict(_item) for _item in obj["grading_periods"]] if obj.get("grading_periods") is not None else None,
+            "permissions": obj.get("permissions"),
+            "created_at": obj.get("created_at")
         })
         return _obj
 

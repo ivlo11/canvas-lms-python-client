@@ -344,6 +344,7 @@ __all__ = [
     "CourseEpubExport",
     "CourseEvent",
     "CourseEventLink",
+    "CourseGradingPeriod",
     "CourseNickname",
     "CourseNicknamesUpdateRequest",
     "CoursePace",
@@ -454,6 +455,8 @@ __all__ = [
     "GradingPeriodSets",
     "GradingPeriodSetsCreateRequest",
     "GradingPeriodSetsCreateRequestGradingPeriodSet",
+    "GradingPeriodSetsCreateResponse",
+    "GradingPeriodSetsIndexResponse",
     "GradingPeriodSetsUpdateRequest",
     "GradingPeriodsBatchUpdateForOtherRequest",
     "GradingPeriodsBatchUpdateRequest",
@@ -664,6 +667,7 @@ __all__ = [
     "QuizSubmission",
     "QuizSubmissionEvent",
     "QuizSubmissionEventsApiCreateRequest",
+    "QuizSubmissionEventsApiIndexResponse",
     "QuizSubmissionFilesCreateRequest",
     "QuizSubmissionQuestion",
     "QuizSubmissionQuestionsAnswerRequest",
@@ -1166,6 +1170,7 @@ from canvas_lms_python_client.models.course_attributes import CourseAttributes a
 from canvas_lms_python_client.models.course_epub_export import CourseEpubExport as CourseEpubExport
 from canvas_lms_python_client.models.course_event import CourseEvent as CourseEvent
 from canvas_lms_python_client.models.course_event_link import CourseEventLink as CourseEventLink
+from canvas_lms_python_client.models.course_grading_period import CourseGradingPeriod as CourseGradingPeriod
 from canvas_lms_python_client.models.course_nickname import CourseNickname as CourseNickname
 from canvas_lms_python_client.models.course_nicknames_update_request import CourseNicknamesUpdateRequest as CourseNicknamesUpdateRequest
 from canvas_lms_python_client.models.course_pace import CoursePace as CoursePace
@@ -1276,6 +1281,8 @@ from canvas_lms_python_client.models.grading_period import GradingPeriod as Grad
 from canvas_lms_python_client.models.grading_period_sets import GradingPeriodSets as GradingPeriodSets
 from canvas_lms_python_client.models.grading_period_sets_create_request import GradingPeriodSetsCreateRequest as GradingPeriodSetsCreateRequest
 from canvas_lms_python_client.models.grading_period_sets_create_request_grading_period_set import GradingPeriodSetsCreateRequestGradingPeriodSet as GradingPeriodSetsCreateRequestGradingPeriodSet
+from canvas_lms_python_client.models.grading_period_sets_create_response import GradingPeriodSetsCreateResponse as GradingPeriodSetsCreateResponse
+from canvas_lms_python_client.models.grading_period_sets_index_response import GradingPeriodSetsIndexResponse as GradingPeriodSetsIndexResponse
 from canvas_lms_python_client.models.grading_period_sets_update_request import GradingPeriodSetsUpdateRequest as GradingPeriodSetsUpdateRequest
 from canvas_lms_python_client.models.grading_periods_batch_update_for_other_request import GradingPeriodsBatchUpdateForOtherRequest as GradingPeriodsBatchUpdateForOtherRequest
 from canvas_lms_python_client.models.grading_periods_batch_update_request import GradingPeriodsBatchUpdateRequest as GradingPeriodsBatchUpdateRequest
@@ -1486,6 +1493,7 @@ from canvas_lms_python_client.models.quiz_statistics_submission_statistics impor
 from canvas_lms_python_client.models.quiz_submission import QuizSubmission as QuizSubmission
 from canvas_lms_python_client.models.quiz_submission_event import QuizSubmissionEvent as QuizSubmissionEvent
 from canvas_lms_python_client.models.quiz_submission_events_api_create_request import QuizSubmissionEventsApiCreateRequest as QuizSubmissionEventsApiCreateRequest
+from canvas_lms_python_client.models.quiz_submission_events_api_index_response import QuizSubmissionEventsApiIndexResponse as QuizSubmissionEventsApiIndexResponse
 from canvas_lms_python_client.models.quiz_submission_files_create_request import QuizSubmissionFilesCreateRequest as QuizSubmissionFilesCreateRequest
 from canvas_lms_python_client.models.quiz_submission_question import QuizSubmissionQuestion as QuizSubmissionQuestion
 from canvas_lms_python_client.models.quiz_submission_questions_answer_request import QuizSubmissionQuestionsAnswerRequest as QuizSubmissionQuestionsAnswerRequest
