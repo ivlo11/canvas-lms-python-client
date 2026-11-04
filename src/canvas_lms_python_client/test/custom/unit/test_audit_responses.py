@@ -14,6 +14,10 @@ seeded Canvas (``--audit-events``):
 - ``authentication.json``: ``GET /api/v1/audit/authentication/users/392``
   (the seeded second admin)
 
+Grade change and authentication pages type ``linked``. Course audit ``linked``
+stays a mapping, because ``CourseEvent#linked_json`` stringifies its record ids,
+which ``Course`` and ``User`` reject.
+
 If an operation goes back to a list or untyped response, or an event model
 loses a field or its Canvas type, these assertions fail.
 """
@@ -29,12 +33,21 @@ import pytest
 from canvas_lms_python_client import api
 from canvas_lms_python_client.api_client import ApiClient
 from canvas_lms_python_client.models import (
+    Account,
+    Assignment,
     AuthenticationEvent,
     AuthenticationEventLinks,
+    AuthenticationLinkedRecords,
+    Course,
     CourseEvent,
     CourseEventLink,
     GradeChangeEvent,
     GradeChangeEventLinks,
+    GradeChangeLinkedRecords,
+    Login,
+    PageView,
+    PageViewLinks,
+    User,
 )
 
 FIXTURES = pathlib.Path(__file__).parent / "fixtures" / "audit"
@@ -104,6 +117,47 @@ AUDIT_OPERATIONS = {
     ),
 }
 
+# Event model -> (linked records model, linked list -> item model)
+LINKED_RECORDS = {
+    GradeChangeEvent: (
+        GradeChangeLinkedRecords,
+        {"page_views": PageView, "assignments": Assignment, "courses": Course, "users": User},
+    ),
+    AuthenticationEvent: (
+        AuthenticationLinkedRecords,
+        {"logins": Login, "accounts": Account, "users": User, "page_views": PageView},
+    ),
+}
+
+TYPED_LINKED_OPERATIONS = sorted(op for op, spec in AUDIT_OPERATIONS.items() if spec[2] in LINKED_RECORDS)
+UNTYPED_LINKED_OPERATIONS = sorted(op for op, spec in AUDIT_OPERATIONS.items() if spec[2] not in LINKED_RECORDS)
+
+# What page_view_json sends; dev Canvas records no page views to capture
+PAGE_VIEW = {
+    "id": "3e246700-e305-0130-51de-02e33aa501ef",
+    "session_id": "0ca9e5e58964bc58d4c1a0a8df509805",
+    "url": "http://canvas.docker/courses/5/gradebook",
+    "context_type": "Course",
+    "asset_type": "Assignment",
+    "controller": "gradebooks",
+    "action": "update_submission",
+    "interaction_seconds": 5.0,
+    "created_at": "2026-11-03T03:44:39Z",
+    "updated_at": "2026-11-03T03:44:39Z",
+    "developer_key_id": None,
+    "user_request": True,
+    "render_time": 0.369,
+    "user_agent": "Mozilla/5.0",
+    "asset_user_access_id": None,
+    "participated": True,
+    "summarized": False,
+    "http_method": "post",
+    "remote_ip": "127.0.0.1",
+    "contributed": False,
+    "links": {"user": 167, "context": 5, "asset": 52, "real_user": None, "account": 1},
+    "app_name": None,
+}
+
 
 def _response_type(api_class, operation):
     source = inspect.getsource(getattr(getattr(api, api_class), operation))
@@ -136,7 +190,6 @@ def test_page_deserializes_to_its_wrapper(operation):
 
     assert type(response).__name__ == wrapper
     assert response.links == page["links"]
-    assert response.linked == page["linked"]
     assert len(response.events) == len(page["events"])
     assert all(isinstance(event, event_model) for event in response.events)
 
@@ -158,6 +211,77 @@ def test_empty_page(operation):
     response = _deserialize({"links": {}, "events": [], "linked": {}}, wrapper)
 
     assert response.events == []
+
+
+@pytest.mark.parametrize("operation", TYPED_LINKED_OPERATIONS)
+def test_empty_linked_has_unset_lists(operation):
+    _, wrapper, event_model, _ = AUDIT_OPERATIONS[operation]
+    linked_model, lists = LINKED_RECORDS[event_model]
+
+    response = _deserialize({"links": {}, "events": [], "linked": {}}, wrapper)
+
+    assert isinstance(response.linked, linked_model)
+    assert all(getattr(response.linked, key) is None for key in lists)
+
+
+@pytest.mark.parametrize("operation", TYPED_LINKED_OPERATIONS)
+def test_linked_records_are_typed(operation):
+    _, wrapper, event_model, page = AUDIT_OPERATIONS[operation]
+    linked_model, lists = LINKED_RECORDS[event_model]
+
+    linked = _deserialize(page, wrapper).linked
+
+    assert isinstance(linked, linked_model)
+    assert set(lists) == set(page["linked"])
+    for key, item_model in lists.items():
+        items = getattr(linked, key)
+        assert all(isinstance(item, item_model) for item in items)
+        assert [item.id for item in items] == [raw["id"] for raw in page["linked"][key]]
+
+
+@pytest.mark.parametrize("operation", UNTYPED_LINKED_OPERATIONS)
+def test_course_audit_linked_stays_a_mapping(operation):
+    _, wrapper, _, page = AUDIT_OPERATIONS[operation]
+
+    linked = _deserialize(page, wrapper).linked
+
+    assert linked == page["linked"]
+    assert isinstance(linked["users"][0]["id"], str)
+
+
+def test_grade_change_event_links_resolve_in_linked():
+    response = _deserialize(GRADE_CHANGE_PAGE, "GradeChangeAuditApiForCourseResponse")
+    linked = response.linked
+    user_ids = {user.id for user in linked.users}
+
+    for event in response.events:
+        assert event.links.assignment in {assignment.id for assignment in linked.assignments}
+        assert event.links.course in {course.id for course in linked.courses}
+        assert int(event.links.student) in user_ids
+        assert event.links.grader is None or int(event.links.grader) in user_ids
+
+
+def test_authentication_event_links_resolve_in_linked():
+    response = _deserialize(AUTHENTICATION_PAGE, "AuthenticationAuditApiForUserResponse")
+    linked = response.linked
+
+    for event in response.events:
+        assert event.links.login in {login.id for login in linked.logins}
+        assert event.links.account in {account.id for account in linked.accounts}
+        assert event.links.user in {user.id for user in linked.users}
+
+
+@pytest.mark.parametrize("linked_model", [GradeChangeLinkedRecords, AuthenticationLinkedRecords])
+def test_linked_page_view_is_typed(linked_model):
+    page_view = linked_model.from_dict({"page_views": [PAGE_VIEW]}).page_views[0]
+
+    assert isinstance(page_view, PageView)
+    assert str(page_view.id) == PAGE_VIEW["id"]
+    assert page_view.url == PAGE_VIEW["url"]
+    assert page_view.session_id == PAGE_VIEW["session_id"]
+    assert isinstance(page_view.links, PageViewLinks)
+    assert page_view.links.user == PAGE_VIEW["links"]["user"]
+    assert page_view.links.real_user is None
 
 
 @pytest.mark.parametrize("item", COURSE_PAGE["events"], ids=lambda item: item["id"])

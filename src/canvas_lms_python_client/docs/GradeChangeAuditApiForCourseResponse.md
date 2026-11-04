@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **links** | **object** |  | [optional] 
 **events** | [**List[GradeChangeEvent]**](GradeChangeEvent.md) |  | [optional] 
-**linked** | **object** |  | [optional] 
+**linked** | [**GradeChangeLinkedRecords**](GradeChangeLinkedRecords.md) |  | [optional] 
 
 ## Example
 

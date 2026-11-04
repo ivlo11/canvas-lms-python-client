@@ -13,7 +13,8 @@ Method | HTTP request | Description
 
 Query by account.
 
-List course change events for a given account.
+List course change events for a given account. The related records in
+linked have string ids.
 
 ### Example
 
@@ -99,7 +100,8 @@ Name | Type | Description  | Notes
 
 Query by course.
 
-List course change events for a given course.
+List course change events for a given course. The related records in
+linked have string ids.
 
 ### Example
 

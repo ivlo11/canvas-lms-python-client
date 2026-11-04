@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **links** | **object** |  | [optional] 
 **events** | [**List[AuthenticationEvent]**](AuthenticationEvent.md) |  | [optional] 
-**linked** | **object** |  | [optional] 
+**linked** | [**AuthenticationLinkedRecords**](AuthenticationLinkedRecords.md) |  | [optional] 
 
 ## Example
 

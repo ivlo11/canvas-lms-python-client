@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **participated** | **bool** | True if the request counted as participating, such as submitting homework | [optional] 
 **http_method** | **str** | The HTTP method such as GET or POST | [optional] 
 **remote_ip** | **str** | The origin IP address of the request | [optional] 
-**session_id** | **UUID** | The session identifier for the user session that made the request | [optional] 
+**session_id** | **str** | The session identifier for the user session that made the request | [optional] 
 **developer_key_id** | **float** | The ID of the developer key that authorized the API request, if applicable | [optional] 
 **asset_user_access_id** | **float** | The ID of the asset (e.g. an assignment) associated with this page view, if applicable | [optional] 
 **links** | [**PageViewLinks**](PageViewLinks.md) |  | [optional] 

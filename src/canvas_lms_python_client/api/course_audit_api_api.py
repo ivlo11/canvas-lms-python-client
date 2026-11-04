@@ -64,7 +64,7 @@ class CourseAuditApiApi:
     ) -> CourseAuditApiForAccountResponse:
         """Query by account.
 
-        List course change events for a given account.
+        List course change events for a given account. The related records in linked have string ids.
 
         :param account_id: Scope response to account_id (required)
         :type account_id: str
@@ -155,7 +155,7 @@ class CourseAuditApiApi:
     ) -> AsyncIterator[CourseAuditApiForAccountResponse]:
         """Query by account.
 
-        List course change events for a given account.
+        List course change events for a given account. The related records in linked have string ids.
 
         :param account_id: Scope response to account_id (required)
         :type account_id: str
@@ -267,7 +267,7 @@ class CourseAuditApiApi:
     ) -> ApiResponse[CourseAuditApiForAccountResponse]:
         """Query by account.
 
-        List course change events for a given account.
+        List course change events for a given account. The related records in linked have string ids.
 
         :param account_id: Scope response to account_id (required)
         :type account_id: str
@@ -358,7 +358,7 @@ class CourseAuditApiApi:
     ) -> RESTResponseType:
         """Query by account.
 
-        List course change events for a given account.
+        List course change events for a given account. The related records in linked have string ids.
 
         :param account_id: Scope response to account_id (required)
         :type account_id: str
@@ -529,7 +529,7 @@ class CourseAuditApiApi:
     ) -> CourseAuditApiForCourseResponse:
         """Query by course.
 
-        List course change events for a given course.
+        List course change events for a given course. The related records in linked have string ids.
 
         :param course_id: Scope response to course_id (required)
         :type course_id: str
@@ -620,7 +620,7 @@ class CourseAuditApiApi:
     ) -> AsyncIterator[CourseAuditApiForCourseResponse]:
         """Query by course.
 
-        List course change events for a given course.
+        List course change events for a given course. The related records in linked have string ids.
 
         :param course_id: Scope response to course_id (required)
         :type course_id: str
@@ -732,7 +732,7 @@ class CourseAuditApiApi:
     ) -> ApiResponse[CourseAuditApiForCourseResponse]:
         """Query by course.
 
-        List course change events for a given course.
+        List course change events for a given course. The related records in linked have string ids.
 
         :param course_id: Scope response to course_id (required)
         :type course_id: str
@@ -823,7 +823,7 @@ class CourseAuditApiApi:
     ) -> RESTResponseType:
         """Query by course.
 
-        List course change events for a given course.
+        List course change events for a given course. The related records in linked have string ids.
 
         :param course_id: Scope response to course_id (required)
         :type course_id: str

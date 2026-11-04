@@ -20,6 +20,7 @@ import json
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.authentication_event import AuthenticationEvent
+from canvas_lms_python_client.models.authentication_linked_records import AuthenticationLinkedRecords
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -30,7 +31,7 @@ class AuthenticationAuditApiForUserResponse(BaseModel):
     """ # noqa: E501
     links: Optional[Dict[str, Any]] = None
     events: Optional[List[AuthenticationEvent]] = None
-    linked: Optional[Dict[str, Any]] = None
+    linked: Optional[AuthenticationLinkedRecords] = None
     __properties: ClassVar[List[str]] = ["links", "events", "linked"]
 
     model_config = ConfigDict(
@@ -78,6 +79,9 @@ class AuthenticationAuditApiForUserResponse(BaseModel):
             for _item_events in self.events:
                 _items.append(_item_events.to_dict() if _item_events is not None else None)
             _dict['events'] = _items
+        # override the default output from pydantic by calling `to_dict()` of linked
+        if self.linked:
+            _dict['linked'] = self.linked.to_dict()
         return _dict
 
     @classmethod
@@ -92,7 +96,7 @@ class AuthenticationAuditApiForUserResponse(BaseModel):
         _obj = cls.model_validate({
             "links": obj.get("links"),
             "events": [AuthenticationEvent.from_dict(_item) for _item in obj["events"]] if obj.get("events") is not None else None,
-            "linked": obj.get("linked")
+            "linked": AuthenticationLinkedRecords.from_dict(obj["linked"]) if obj.get("linked") is not None else None
         })
         return _obj
 

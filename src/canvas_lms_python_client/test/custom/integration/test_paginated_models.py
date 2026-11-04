@@ -68,6 +68,9 @@ from canvas_lms_python_client.models.authentication_audit_api_for_account_respon
 )
 from canvas_lms_python_client.models.authentication_event import AuthenticationEvent
 from canvas_lms_python_client.models.authentication_event_links import AuthenticationEventLinks
+from canvas_lms_python_client.models.authentication_linked_records import (
+    AuthenticationLinkedRecords,
+)
 from canvas_lms_python_client.models.conversation_batch import ConversationBatch
 from canvas_lms_python_client.models.course import Course
 from canvas_lms_python_client.models.course_audit_api_for_account_response import (
@@ -83,6 +86,7 @@ from canvas_lms_python_client.models.grade_change_audit_api_for_course_response 
 )
 from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent
 from canvas_lms_python_client.models.grade_change_event_links import GradeChangeEventLinks
+from canvas_lms_python_client.models.grade_change_linked_records import GradeChangeLinkedRecords
 from canvas_lms_python_client.models.grading_period import GradingPeriod
 from canvas_lms_python_client.models.grading_period_sets import GradingPeriodSets
 from canvas_lms_python_client.models.grading_period_sets_index_response import (
@@ -708,6 +712,9 @@ async def test_course_audit_pages_typed(canvas_admin_api_client):
         assert isinstance(event.links, CourseEventLink)
         assert isinstance(event.links.course, str) and event.links.course
         assert isinstance(event.event_data, dict)
+    # Canvas stringifies these record ids, so linked stays a mapping
+    assert isinstance(page.linked, dict)
+    assert all(isinstance(course["id"], str) for course in page.linked["courses"])
 
 
 async def test_grade_change_audit_pages_typed(canvas_admin_api_client):
@@ -731,6 +738,18 @@ async def test_grade_change_audit_pages_typed(canvas_admin_api_client):
         assert isinstance(event.links.student, str)
         assert event.links.grader is None or isinstance(event.links.grader, str)
 
+    linked = page.linked
+    assert isinstance(linked, GradeChangeLinkedRecords)
+    assert_typed(linked.assignments, Assignment)
+    assert_typed(linked.courses, Course)
+    assert_typed(linked.users, User)
+    user_ids = {user.id for user in linked.users}
+    for event in events:
+        assert event.links.assignment in {assignment.id for assignment in linked.assignments}
+        assert event.links.course in {linked_course.id for linked_course in linked.courses}
+        assert int(event.links.student) in user_ids
+        assert event.links.grader is None or int(event.links.grader) in user_ids
+
 
 async def test_authentication_audit_pages_typed(canvas_admin_api_client):
     """Authentication audit operations had no response type and returned nothing."""
@@ -748,6 +767,16 @@ async def test_authentication_audit_pages_typed(canvas_admin_api_client):
         assert event.event_type in ("login", "logout")
         assert isinstance(event.links, AuthenticationEventLinks)
         assert isinstance(event.links.user, int)
+
+    linked = page.linked
+    assert isinstance(linked, AuthenticationLinkedRecords)
+    assert_typed(linked.logins, Login)
+    assert_typed(linked.accounts, Account)
+    assert_typed(linked.users, User)
+    for event in events:
+        assert event.links.login in {login.id for login in linked.logins}
+        assert event.links.account in {linked_account.id for linked_account in linked.accounts}
+        assert event.links.user in {user.id for user in linked.users}
 
 
 async def test_logins_typed(canvas_admin_api_client):

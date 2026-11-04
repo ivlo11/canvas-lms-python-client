@@ -260,6 +260,7 @@ __all__ = [
     "AuthenticationAuditApiForUserResponse",
     "AuthenticationEvent",
     "AuthenticationEventLinks",
+    "AuthenticationLinkedRecords",
     "AuthenticationProvider",
     "AuthorizationJWT",
     "Avatar",
@@ -459,6 +460,7 @@ __all__ = [
     "GradeChangeAuditApiQueryResponse",
     "GradeChangeEvent",
     "GradeChangeEventLinks",
+    "GradeChangeLinkedRecords",
     "GradeGroup",
     "GradebooksApplyScoreToUngradedSubmissionsRequest",
     "GradebooksUpdateFinalGradeOverridesRequest",
@@ -1115,6 +1117,7 @@ from canvas_lms_python_client.models.authentication_audit_api_for_login_response
 from canvas_lms_python_client.models.authentication_audit_api_for_user_response import AuthenticationAuditApiForUserResponse as AuthenticationAuditApiForUserResponse
 from canvas_lms_python_client.models.authentication_event import AuthenticationEvent as AuthenticationEvent
 from canvas_lms_python_client.models.authentication_event_links import AuthenticationEventLinks as AuthenticationEventLinks
+from canvas_lms_python_client.models.authentication_linked_records import AuthenticationLinkedRecords as AuthenticationLinkedRecords
 from canvas_lms_python_client.models.authentication_provider import AuthenticationProvider as AuthenticationProvider
 from canvas_lms_python_client.models.authorization_jwt import AuthorizationJWT as AuthorizationJWT
 from canvas_lms_python_client.models.avatar import Avatar as Avatar
@@ -1314,6 +1317,7 @@ from canvas_lms_python_client.models.grade_change_audit_api_for_student_response
 from canvas_lms_python_client.models.grade_change_audit_api_query_response import GradeChangeAuditApiQueryResponse as GradeChangeAuditApiQueryResponse
 from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent as GradeChangeEvent
 from canvas_lms_python_client.models.grade_change_event_links import GradeChangeEventLinks as GradeChangeEventLinks
+from canvas_lms_python_client.models.grade_change_linked_records import GradeChangeLinkedRecords as GradeChangeLinkedRecords
 from canvas_lms_python_client.models.grade_group import GradeGroup as GradeGroup
 from canvas_lms_python_client.models.gradebooks_apply_score_to_ungraded_submissions_request import GradebooksApplyScoreToUngradedSubmissionsRequest as GradebooksApplyScoreToUngradedSubmissionsRequest
 from canvas_lms_python_client.models.gradebooks_update_final_grade_overrides_request import GradebooksUpdateFinalGradeOverridesRequest as GradebooksUpdateFinalGradeOverridesRequest
