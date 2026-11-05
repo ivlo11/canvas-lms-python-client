@@ -280,6 +280,12 @@ export CANVAS_STUDENT_API_TOKEN="student-access-token"  # optional
 pdm run pytest --integration -m integration
 ```
 
+`test_get_contract.py` calls every GET through the generated client as admin, teacher,
+observer and student, and fails on any response the client can't parse. For each role it
+writes `contract-<role>.json`, with every operation's outcome and the reason for any skip,
+and `probes-<role>.jsonl`, the key names and types canvas-lms's `script/api_docs_audit` reads
+as evidence. Neither holds response values or tokens.
+
 ## Configuration
 
 ### Environment Variables
@@ -290,6 +296,8 @@ pdm run pytest --integration -m integration
 | `CANVAS_API_TOKEN` | Canvas API token | Yes | - |
 | `CANVAS_ADMIN_API_TOKEN` | Seeded account admin's API token, for admin-scoped integration tests (skipped when unset) | No | - |
 | `CANVAS_STUDENT_API_TOKEN` | Seeded student's API token, for student-scoped integration tests (skipped when unset) | No | - |
+| `CANVAS_TEACHER_API_TOKEN` | Seeded teacher's API token, for the teacher pass of the GET contract test (skipped when unset) | No | - |
+| `CANVAS_CONTRACT_OUTPUT` | Where the GET contract test writes its reports and audit evidence | No | `build/contract` |
 
 ## Development
 
