@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get all quiz submissions. |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -377,7 +377,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a single quiz submission. |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -461,12 +461,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get the quiz submission. |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_time**
-> quiz_submissions_api_time(course_id, id, quiz_id)
+> QuizzesQuizSubmissionsTimeResponse quiz_submissions_api_time(course_id, id, quiz_id)
 
 Get current quiz submission times.
 
@@ -483,6 +483,7 @@ and the time_left parameter.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.quizzes_quiz_submissions_time_response import QuizzesQuizSubmissionsTimeResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -512,7 +513,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get current quiz submission times.
-        await api_instance.quiz_submissions_api_time(course_id, id, quiz_id)
+        api_response = await api_instance.quiz_submissions_api_time(course_id, id, quiz_id)
+        print("The response of QuizSubmissionsApiApi->quiz_submissions_api_time:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizSubmissionsApiApi->quiz_submissions_api_time: %s\n" % e)
 ```
@@ -530,7 +533,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizzesQuizSubmissionsTimeResponse**](QuizzesQuizSubmissionsTimeResponse.md)
 
 ### Authorization
 
@@ -545,12 +548,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get current quiz submission times. |  -  |
+**0** | QuizzesQuizSubmissionsTimeResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_update**
-> QuizSubmissionsApiUpdateResponse quiz_submissions_api_update(course_id, id, quiz_id, quiz_submissions_api_update_request=quiz_submissions_api_update_request)
+> QuizzesQuizSubmissionsUpdateResponse quiz_submissions_api_update(course_id, id, quiz_id, quiz_submissions_api_update_request=quiz_submissions_api_update_request)
 
 Update student question scores and comments.
 
@@ -572,7 +575,7 @@ fudge the total score by a specific amount of points.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_submissions_api_update_request import QuizSubmissionsApiUpdateRequest
-from canvas_lms_python_client.models.quiz_submissions_api_update_response import QuizSubmissionsApiUpdateResponse
+from canvas_lms_python_client.models.quizzes_quiz_submissions_update_response import QuizzesQuizSubmissionsUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -624,7 +627,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**QuizSubmissionsApiUpdateResponse**](QuizSubmissionsApiUpdateResponse.md)
+[**QuizzesQuizSubmissionsUpdateResponse**](QuizzesQuizSubmissionsUpdateResponse.md)
 
 ### Authorization
 
@@ -639,7 +642,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update student question scores and comments. |  -  |
+**0** | QuizzesQuizSubmissionsUpdateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -12,6 +12,11 @@ Name | Type | Description | Notes
 **due_at** | **datetime** | The due date for the assignment. Must be between the unlock date and the lock date if there are lock dates | [optional] 
 **unlock_at** | **datetime** | The unlock date for the assignment. Must be before the due date if there is a due date. | [optional] 
 **lock_at** | **datetime** | The lock date for the assignment. Must be after the due date if there is a due date. | [optional] 
+**availability_status** | **object** |  | [optional] 
+**can_edit** | **bool** |  | [optional] 
+**in_closed_grading_period** | **bool** |  | [optional] 
+**set_id** | **int** |  | [optional] 
+**set_type** | **str** |  | [optional] 
 
 ## Example
 

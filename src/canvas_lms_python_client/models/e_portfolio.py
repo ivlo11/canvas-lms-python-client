@@ -36,7 +36,7 @@ class EPortfolio(BaseModel):
     updated_at: Optional[datetime] = Field(default=None, description="The timestamp of the last time any of the ePortfolio attributes changed", json_schema_extra={"examples": ["2021-09-20T18:59:37Z"]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="The state of the ePortfolio. Either 'active' or 'deleted'", json_schema_extra={"examples": ["active"]})
     deleted_at: Optional[datetime] = Field(default=None, description="The timestamp when the ePortfolio was deleted, or else null", json_schema_extra={"examples": ["2021-09-20T18:59:37Z"]})
-    spam_status: Optional[StrictStr] = Field(default=None, description="A flag indicating whether the ePortfolio has been       flagged or moderated as spam. One of 'flagged_as_possible_spam',       'marked_as_safe', 'marked_as_spam', or null")
+    spam_status: Optional[StrictStr] = Field(default=None, description="A flag indicating whether the ePortfolio has been flagged or moderated as spam. One of 'flagged_as_possible_spam', 'marked_as_safe', 'marked_as_spam', or null")
     __properties: ClassVar[List[str]] = ["id", "user_id", "name", "public", "created_at", "updated_at", "workflow_state", "deleted_at", "spam_status"]
 
     model_config = ConfigDict(
@@ -78,6 +78,21 @@ class EPortfolio(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if name (nullable) is None
+        # and model_fields_set contains the field
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
+
+        # set to None if deleted_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.deleted_at is None and "deleted_at" in self.model_fields_set:
+            _dict['deleted_at'] = None
+
+        # set to None if spam_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.spam_status is None and "spam_status" in self.model_fields_set:
+            _dict['spam_status'] = None
+
         return _dict
 
     @classmethod

@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **url** | **str** | The URL of the help link | [optional] 
 **type** | **str** | The type of the help link | [optional] 
 **available_to** | **List[str]** | The roles that have access to this help link | [optional] 
+**feature_headline** | **str** |  | [optional] 
+**is_featured** | **bool** |  | [optional] 
+**is_new** | **bool** |  | [optional] 
 
 ## Example
 

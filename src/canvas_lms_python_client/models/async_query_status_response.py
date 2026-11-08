@@ -30,10 +30,11 @@ class AsyncQueryStatusResponse(BaseModel):
     """ # noqa: E501
     query_id: UUID = Field(description="The UUID of the query being polled", json_schema_extra={"examples": ["550e8400-e29b-41d4-a716-446655440000"]})
     status: StrictStr = Field(description="Current processing status of the query", json_schema_extra={"examples": ["finished"]})
-    format: StrictStr = Field(description="The format that results will be returned in", json_schema_extra={"examples": ["csv"]})
+    format: Optional[StrictStr] = Field(description="The format that results will be returned in", json_schema_extra={"examples": ["csv"]})
     results_url: Optional[StrictStr] = Field(default=None, description="URL to retrieve query results. Only present when status is 'finished'", json_schema_extra={"examples": ["/api/v1/users/123/page_views/query/550e8400-e29b-41d4-a716-446655440000/results"]})
     error_code: Optional[StrictStr] = Field(default=None, description="Error code indicating the reason for query failure, if applicable", json_schema_extra={"examples": ["RESULT_SIZE_LIMIT_EXCEEDED"]})
-    __properties: ClassVar[List[str]] = ["query_id", "status", "format", "results_url", "error_code"]
+    warnings: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["query_id", "status", "format", "results_url", "error_code", "warnings"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -74,6 +75,21 @@ class AsyncQueryStatusResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if format (nullable) is None
+        # and model_fields_set contains the field
+        if self.format is None and "format" in self.model_fields_set:
+            _dict['format'] = None
+
+        # set to None if results_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.results_url is None and "results_url" in self.model_fields_set:
+            _dict['results_url'] = None
+
+        # set to None if error_code (nullable) is None
+        # and model_fields_set contains the field
+        if self.error_code is None and "error_code" in self.model_fields_set:
+            _dict['error_code'] = None
+
         return _dict
 
     @classmethod
@@ -90,7 +106,8 @@ class AsyncQueryStatusResponse(BaseModel):
             "status": obj.get("status"),
             "format": obj.get("format"),
             "results_url": obj.get("results_url"),
-            "error_code": obj.get("error_code")
+            "error_code": obj.get("error_code"),
+            "warnings": obj.get("warnings")
         })
         return _obj
 

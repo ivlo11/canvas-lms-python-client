@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **id** | **int** |  | [optional] 
 **name** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
-**points_possible** | **int** |  | [optional] 
+**points_possible** | **float** |  | [optional] 
 **due_at** | **datetime** | The due date for the assignment. If a user id is supplied and an assignment override is in place this field will reflect the due date as it applies to the user. | [optional] 
 **lti_id** | **str** |  | [optional] 
 **course_id** | **int** |  | [optional] 

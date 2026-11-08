@@ -6,9 +6,9 @@ Set of assignment-overridden dates for a quiz.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quiz_id** | **str** | ID of the quiz those dates are for. | [optional] 
-**due_dates** | [**QuizAssignmentOverride**](QuizAssignmentOverride.md) |  | [optional] 
-**all_dates** | [**QuizAssignmentOverride**](QuizAssignmentOverride.md) |  | [optional] 
+**quiz_id** | [**QuizAssignmentOverrideSetQuizId**](QuizAssignmentOverrideSetQuizId.md) |  | [optional] 
+**due_dates** | [**List[QuizAssignmentOverride]**](QuizAssignmentOverride.md) | An array of quiz assignment overrides. For students, this array will always contain a single item which is the set of dates that apply to that student. For teachers and staff, it may contain more. | [optional] 
+**all_dates** | [**List[QuizAssignmentOverride]**](QuizAssignmentOverride.md) | An array of all assignment overrides active for the quiz. This is visible only to teachers and staff. | [optional] 
 
 ## Example
 

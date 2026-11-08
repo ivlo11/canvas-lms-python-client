@@ -17,6 +17,12 @@ Name | Type | Description | Notes
 **assessor_id** | **int** | user id of the person who made the assessment | [optional] 
 **data** | **List[object]** | (Optional) If &#39;full&#39; is included in the &#39;style&#39; parameter, returned assessments will have their full details contained in their data hash. If the user does not request a style, this key will be absent. | [optional] 
 **comments** | **List[str]** | (Optional) If &#39;comments_only&#39; is included in the &#39;style&#39; parameter, returned assessments will include only the comments portion of their data hash. If the user does not request a style, this key will be absent. | [optional] 
+**created_at** | **str** |  | [optional] 
+**hide_points** | **bool** |  | [optional] 
+**root_account_id** | **int** |  | [optional] 
+**rubric_assessment_imports_id** | **int** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
+**user_id** | **int** |  | [optional] 
 
 ## Example
 

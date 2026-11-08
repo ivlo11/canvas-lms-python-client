@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **smart_search_search**
-> List[SearchResult] smart_search_search(course_id, q, filter=filter, include=include, page=page, per_page=per_page)
+> SmartSearchSearchResponse smart_search_search(course_id, q, filter=filter, include=include, page=page, per_page=per_page)
 
 Search course content
 
@@ -20,7 +20,7 @@ Find course content using a meaning-based search
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.search_result import SearchResult
+from canvas_lms_python_client.models.smart_search_search_response import SmartSearchSearchResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[SearchResult]**](SearchResult.md)
+[**SmartSearchSearchResponse**](SmartSearchSearchResponse.md)
 
 ### Authorization
 

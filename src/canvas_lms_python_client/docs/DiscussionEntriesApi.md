@@ -179,7 +179,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_entries_update**
-> discussion_entries_update(course_id, id, topic_id, discussion_entries_update_request=discussion_entries_update_request)
+> DiscussionEntry discussion_entries_update(course_id, id, topic_id, discussion_entries_update_request=discussion_entries_update_request)
 
 Update an entry
 
@@ -195,6 +195,7 @@ must have admin rights to the discussion. If the edit is not allowed, a 401 will
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.discussion_entries_update_request import DiscussionEntriesUpdateRequest
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -225,7 +226,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update an entry
-        await api_instance.discussion_entries_update(course_id, id, topic_id, discussion_entries_update_request=discussion_entries_update_request)
+        api_response = await api_instance.discussion_entries_update(course_id, id, topic_id, discussion_entries_update_request=discussion_entries_update_request)
+        print("The response of DiscussionEntriesApi->discussion_entries_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionEntriesApi->discussion_entries_update: %s\n" % e)
 ```
@@ -244,7 +247,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionEntry**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -253,18 +256,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update an entry |  -  |
+**0** | DiscussionEntry |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_entries_update_for_groups**
-> discussion_entries_update_for_groups(group_id, id, topic_id, discussion_entries_update_request=discussion_entries_update_request)
+> DiscussionEntry discussion_entries_update_for_groups(group_id, id, topic_id, discussion_entries_update_request=discussion_entries_update_request)
 
 Update an entry
 
@@ -280,6 +283,7 @@ must have admin rights to the discussion. If the edit is not allowed, a 401 will
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.discussion_entries_update_request import DiscussionEntriesUpdateRequest
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -310,7 +314,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update an entry
-        await api_instance.discussion_entries_update_for_groups(group_id, id, topic_id, discussion_entries_update_request=discussion_entries_update_request)
+        api_response = await api_instance.discussion_entries_update_for_groups(group_id, id, topic_id, discussion_entries_update_request=discussion_entries_update_request)
+        print("The response of DiscussionEntriesApi->discussion_entries_update_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionEntriesApi->discussion_entries_update_for_groups: %s\n" % e)
 ```
@@ -329,7 +335,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionEntry**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -338,13 +344,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update an entry |  -  |
+**0** | DiscussionEntry |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

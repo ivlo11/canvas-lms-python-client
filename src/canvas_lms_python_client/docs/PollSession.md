@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** | The time at which the poll session was created. | [optional] 
 **results** | **object** | The results of the submissions of the poll. Each key is the poll choice id, and the value is the count of submissions. | [optional] 
 **poll_submissions** | [**List[PollSubmission]**](PollSubmission.md) | If the poll session has public results, this will return an array of all submissions, viewable by both students and teachers. If the results are not public, for students it will return their submission only. | [optional] 
+**has_submitted** | **bool** |  | [optional] 
 
 ## Example
 

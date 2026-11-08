@@ -34,7 +34,12 @@ class AssignmentDate(BaseModel):
     due_at: Optional[datetime] = Field(default=None, description="The due date for the assignment. Must be between the unlock date and the lock date if there are lock dates", json_schema_extra={"examples": ["2013-08-28T23:59:00-06:00"]})
     unlock_at: Optional[datetime] = Field(default=None, description="The unlock date for the assignment. Must be before the due date if there is a due date.", json_schema_extra={"examples": ["2013-08-01T00:00:00-06:00"]})
     lock_at: Optional[datetime] = Field(default=None, description="The lock date for the assignment. Must be after the due date if there is a due date.", json_schema_extra={"examples": ["2013-08-31T23:59:00-06:00"]})
-    __properties: ClassVar[List[str]] = ["id", "base", "title", "due_at", "unlock_at", "lock_at"]
+    availability_status: Optional[Dict[str, Any]] = None
+    can_edit: Optional[StrictBool] = None
+    in_closed_grading_period: Optional[StrictBool] = None
+    set_id: Optional[StrictInt] = None
+    set_type: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "base", "title", "due_at", "unlock_at", "lock_at", "availability_status", "can_edit", "in_closed_grading_period", "set_id", "set_type"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -75,6 +80,26 @@ class AssignmentDate(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if due_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.due_at is None and "due_at" in self.model_fields_set:
+            _dict['due_at'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
+        # set to None if set_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.set_id is None and "set_id" in self.model_fields_set:
+            _dict['set_id'] = None
+
         return _dict
 
     @classmethod
@@ -92,7 +117,12 @@ class AssignmentDate(BaseModel):
             "title": obj.get("title"),
             "due_at": obj.get("due_at"),
             "unlock_at": obj.get("unlock_at"),
-            "lock_at": obj.get("lock_at")
+            "lock_at": obj.get("lock_at"),
+            "availability_status": obj.get("availability_status"),
+            "can_edit": obj.get("can_edit"),
+            "in_closed_grading_period": obj.get("in_closed_grading_period"),
+            "set_id": obj.get("set_id"),
+            "set_type": obj.get("set_type")
         })
         return _obj
 

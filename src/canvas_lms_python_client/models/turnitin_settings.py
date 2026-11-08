@@ -35,7 +35,8 @@ class TurnitinSettings(BaseModel):
     exclude_quoted: Optional[StrictBool] = None
     exclude_small_matches_type: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["percent"]})
     exclude_small_matches_value: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [50]})
-    __properties: ClassVar[List[str]] = ["originality_report_visibility", "s_paper_check", "internet_check", "journal_check", "exclude_biblio", "exclude_quoted", "exclude_small_matches_type", "exclude_small_matches_value"]
+    submit_papers_to: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["originality_report_visibility", "s_paper_check", "internet_check", "journal_check", "exclude_biblio", "exclude_quoted", "exclude_small_matches_type", "exclude_small_matches_value", "submit_papers_to"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -76,6 +77,16 @@ class TurnitinSettings(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if exclude_small_matches_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.exclude_small_matches_type is None and "exclude_small_matches_type" in self.model_fields_set:
+            _dict['exclude_small_matches_type'] = None
+
+        # set to None if exclude_small_matches_value (nullable) is None
+        # and model_fields_set contains the field
+        if self.exclude_small_matches_value is None and "exclude_small_matches_value" in self.model_fields_set:
+            _dict['exclude_small_matches_value'] = None
+
         return _dict
 
     @classmethod
@@ -95,7 +106,8 @@ class TurnitinSettings(BaseModel):
             "exclude_biblio": obj.get("exclude_biblio"),
             "exclude_quoted": obj.get("exclude_quoted"),
             "exclude_small_matches_type": obj.get("exclude_small_matches_type"),
-            "exclude_small_matches_value": obj.get("exclude_small_matches_value")
+            "exclude_small_matches_value": obj.get("exclude_small_matches_value"),
+            "submit_papers_to": obj.get("submit_papers_to")
         })
         return _obj
 

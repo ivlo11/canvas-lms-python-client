@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **sis_api_sis_assignments**
-> sis_api_sis_assignments(account_id, course_id=course_id, starts_before=starts_before, ends_after=ends_after, include=include)
+> List[SisAssignment] sis_api_sis_assignments(account_id, course_id=course_id, starts_before=starts_before, ends_after=ends_after, include=include, page=page, per_page=per_page)
 
 Retrieve assignments enabled for grade export to SIS
 
@@ -44,6 +44,7 @@ information to include.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.sis_assignment import SisAssignment
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -72,10 +73,14 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     starts_before = 'starts_before_example' # str | When searching on an account, (optional)
     ends_after = 'ends_after_example' # str | When searching on an account, (optional)
     include = 'include_example' # str | Array of additional (optional)
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # Retrieve assignments enabled for grade export to SIS
-        await api_instance.sis_api_sis_assignments(account_id, course_id=course_id, starts_before=starts_before, ends_after=ends_after, include=include)
+        api_response = await api_instance.sis_api_sis_assignments(account_id, course_id=course_id, starts_before=starts_before, ends_after=ends_after, include=include, page=page, per_page=per_page)
+        print("The response of SisApiApi->sis_api_sis_assignments:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SisApiApi->sis_api_sis_assignments: %s\n" % e)
 ```
@@ -92,10 +97,12 @@ Name | Type | Description  | Notes
  **starts_before** | **str**| When searching on an account, | [optional] 
  **ends_after** | **str**| When searching on an account, | [optional] 
  **include** | **str**| Array of additional | [optional] 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 
-void (empty response body)
+[**List[SisAssignment]**](SisAssignment.md)
 
 ### Authorization
 
@@ -104,18 +111,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Retrieve assignments enabled for grade export to SIS |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **sis_api_sis_assignments_for_courses**
-> sis_api_sis_assignments_for_courses(course_id, account_id=account_id, starts_before=starts_before, ends_after=ends_after, include=include)
+> List[SisAssignment] sis_api_sis_assignments_for_courses(course_id, account_id=account_id, starts_before=starts_before, ends_after=ends_after, include=include, page=page, per_page=per_page)
 
 Retrieve assignments enabled for grade export to SIS
 
@@ -150,6 +157,7 @@ information to include.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.sis_assignment import SisAssignment
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -178,10 +186,14 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     starts_before = 'starts_before_example' # str | When searching on an account, (optional)
     ends_after = 'ends_after_example' # str | When searching on an account, (optional)
     include = 'include_example' # str | Array of additional (optional)
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # Retrieve assignments enabled for grade export to SIS
-        await api_instance.sis_api_sis_assignments_for_courses(course_id, account_id=account_id, starts_before=starts_before, ends_after=ends_after, include=include)
+        api_response = await api_instance.sis_api_sis_assignments_for_courses(course_id, account_id=account_id, starts_before=starts_before, ends_after=ends_after, include=include, page=page, per_page=per_page)
+        print("The response of SisApiApi->sis_api_sis_assignments_for_courses:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SisApiApi->sis_api_sis_assignments_for_courses: %s\n" % e)
 ```
@@ -198,10 +210,12 @@ Name | Type | Description  | Notes
  **starts_before** | **str**| When searching on an account, | [optional] 
  **ends_after** | **str**| When searching on an account, | [optional] 
  **include** | **str**| Array of additional | [optional] 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 
-void (empty response body)
+[**List[SisAssignment]**](SisAssignment.md)
 
 ### Authorization
 
@@ -210,13 +224,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Retrieve assignments enabled for grade export to SIS |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -33,7 +33,7 @@ Method | HTTP request | Description
 
 
 # **folders_api_destroy**
-> folders_api_destroy(id, force=force)
+> Folder folders_api_destroy(id, force=force)
 
 Delete folder
 
@@ -46,6 +46,7 @@ set the 'force' flag
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.folder import Folder
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -74,7 +75,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete folder
-        await api_instance.folders_api_destroy(id, force=force)
+        api_response = await api_instance.folders_api_destroy(id, force=force)
+        print("The response of FoldersApi->folders_api_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FoldersApi->folders_api_destroy: %s\n" % e)
 ```
@@ -91,7 +94,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Folder**](Folder.md)
 
 ### Authorization
 
@@ -100,13 +103,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete folder |  -  |
+**0** | Folder |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -446,7 +449,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **folders_create_file**
-> folders_create_file(folder_id)
+> FoldersCreateFileResponse folders_create_file(folder_id)
 
 Upload a file
 
@@ -465,6 +468,7 @@ upload files to a folder in that course or group.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.folders_create_file_response import FoldersCreateFileResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -492,7 +496,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Upload a file
-        await api_instance.folders_create_file(folder_id)
+        api_response = await api_instance.folders_create_file(folder_id)
+        print("The response of FoldersApi->folders_create_file:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FoldersApi->folders_create_file: %s\n" % e)
 ```
@@ -508,7 +514,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**FoldersCreateFileResponse**](FoldersCreateFileResponse.md)
 
 ### Authorization
 
@@ -517,13 +523,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Upload a file |  -  |
+**0** | FoldersCreateFileResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

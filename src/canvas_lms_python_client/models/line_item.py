@@ -35,7 +35,9 @@ class LineItem(BaseModel):
     resource_link_id: Optional[StrictStr] = Field(default=None, description="The resource link id the Line Item is attached to", alias="resourceLinkId", json_schema_extra={"examples": ["50"]})
     https___canvas_instructure_com_lti_submission_type: Optional[StrictStr] = Field(default=None, description="The extension that defines the submission_type of the line_item. Only returns if set through the line_item create endpoint.", alias="https://canvas.instructure.com/lti/submission_type", json_schema_extra={"examples": ["{\n\t\"type\":\"external_tool\",\n\t\"external_tool_url\":\"https://my.launch.url\",\n}"]})
     https___canvas_instructure_com_lti_launch_url: Optional[StrictStr] = Field(default=None, description="The launch url of the Line Item. Only returned if `include=launch_url` query parameter is passed, and only for Show and List actions.", alias="https://canvas.instructure.com/lti/launch_url", json_schema_extra={"examples": ["https://my.tool.url/launch"]})
-    __properties: ClassVar[List[str]] = ["id", "scoreMaximum", "label", "tag", "resourceId", "resourceLinkId", "https://canvas.instructure.com/lti/submission_type", "https://canvas.instructure.com/lti/launch_url"]
+    end_date_time: Optional[StrictStr] = Field(default=None, alias="endDateTime")
+    start_date_time: Optional[StrictStr] = Field(default=None, alias="startDateTime")
+    __properties: ClassVar[List[str]] = ["id", "scoreMaximum", "label", "tag", "resourceId", "resourceLinkId", "https://canvas.instructure.com/lti/submission_type", "https://canvas.instructure.com/lti/launch_url", "endDateTime", "startDateTime"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -95,7 +97,9 @@ class LineItem(BaseModel):
             "resourceId": obj.get("resourceId"),
             "resourceLinkId": obj.get("resourceLinkId"),
             "https://canvas.instructure.com/lti/submission_type": obj.get("https://canvas.instructure.com/lti/submission_type"),
-            "https://canvas.instructure.com/lti/launch_url": obj.get("https://canvas.instructure.com/lti/launch_url")
+            "https://canvas.instructure.com/lti/launch_url": obj.get("https://canvas.instructure.com/lti/launch_url"),
+            "endDateTime": obj.get("endDateTime"),
+            "startDateTime": obj.get("startDateTime")
         })
         return _obj
 

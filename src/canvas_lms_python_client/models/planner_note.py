@@ -39,7 +39,10 @@ class PlannerNote(BaseModel):
     linked_object_id: Optional[StrictInt] = Field(default=None, description="the id of the linked learning object", json_schema_extra={"examples": [131072]})
     linked_object_html_url: Optional[StrictStr] = Field(default=None, description="the Canvas web URL of the linked learning object", json_schema_extra={"examples": ["https://canvas.example.com/courses/1578941/assignments/131072"]})
     linked_object_url: Optional[StrictStr] = Field(default=None, description="the API URL of the linked learning object", json_schema_extra={"examples": ["https://canvas.example.com/api/v1/courses/1578941/assignments/131072"]})
-    __properties: ClassVar[List[str]] = ["id", "title", "description", "user_id", "workflow_state", "course_id", "todo_date", "linked_object_type", "linked_object_id", "linked_object_html_url", "linked_object_url"]
+    created_at: Optional[StrictStr] = None
+    details: Optional[StrictStr] = None
+    updated_at: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "title", "description", "user_id", "workflow_state", "course_id", "todo_date", "linked_object_type", "linked_object_id", "linked_object_html_url", "linked_object_url", "created_at", "details", "updated_at"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -80,6 +83,16 @@ class PlannerNote(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if course_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.course_id is None and "course_id" in self.model_fields_set:
+            _dict['course_id'] = None
+
+        # set to None if details (nullable) is None
+        # and model_fields_set contains the field
+        if self.details is None and "details" in self.model_fields_set:
+            _dict['details'] = None
+
         return _dict
 
     @classmethod
@@ -102,7 +115,10 @@ class PlannerNote(BaseModel):
             "linked_object_type": obj.get("linked_object_type"),
             "linked_object_id": obj.get("linked_object_id"),
             "linked_object_html_url": obj.get("linked_object_html_url"),
-            "linked_object_url": obj.get("linked_object_url")
+            "linked_object_url": obj.get("linked_object_url"),
+            "created_at": obj.get("created_at"),
+            "details": obj.get("details"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

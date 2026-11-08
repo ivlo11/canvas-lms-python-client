@@ -23,6 +23,11 @@ Name | Type | Description | Notes
 **lock_explanation** | **str** | (Optional) An explanation of why this is locked for the user. Present when locked_for_user is true. | [optional] 
 **editor** | **str** | The editor used to create and edit this page. May be one of &#39;rce&#39; or &#39;block_editor&#39;. | [optional] 
 **block_editor_attributes** | **object** | The block editor attributes for this page. (optionally included, and only if this is a block editor created page) | [optional] 
+**html_url** | **str** |  | [optional] 
+**todo_date** | **str** |  | [optional] 
+**assignment** | **object** |  | [optional] 
+**estimated_duration** | **object** |  | [optional] 
+**block_editor_data** | **object** |  | [optional] 
 
 ## Example
 

@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **quiz_submission_questions_answer**
-> List[QuizSubmissionQuestion] quiz_submission_questions_answer(quiz_submission_id, quiz_submission_questions_answer_request=quiz_submission_questions_answer_request)
+> QuizSubmissionQuestionsAnswerResponse quiz_submission_questions_answer(quiz_submission_id, quiz_submission_questions_answer_request=quiz_submission_questions_answer_request)
 
 Answering questions
 
@@ -24,8 +24,8 @@ Provide or update an answer to one or more QuizQuestions.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.quiz_submission_question import QuizSubmissionQuestion
 from canvas_lms_python_client.models.quiz_submission_questions_answer_request import QuizSubmissionQuestionsAnswerRequest
+from canvas_lms_python_client.models.quiz_submission_questions_answer_response import QuizSubmissionQuestionsAnswerResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[QuizSubmissionQuestion]**](QuizSubmissionQuestion.md)
+[**QuizSubmissionQuestionsAnswerResponse**](QuizSubmissionQuestionsAnswerResponse.md)
 
 ### Authorization
 
@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submission_questions_flag**
-> quiz_submission_questions_flag(id, quiz_submission_id, quiz_submission_questions_flag_request=quiz_submission_questions_flag_request)
+> QuizzesQuizSubmissionQuestionsFlagResponse quiz_submission_questions_flag(id, quiz_submission_id, quiz_submission_questions_flag_request=quiz_submission_questions_flag_request)
 
 Flagging a question.
 
@@ -107,6 +107,7 @@ later.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_submission_questions_flag_request import QuizSubmissionQuestionsFlagRequest
+from canvas_lms_python_client.models.quizzes_quiz_submission_questions_flag_response import QuizzesQuizSubmissionQuestionsFlagResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -136,7 +137,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Flagging a question.
-        await api_instance.quiz_submission_questions_flag(id, quiz_submission_id, quiz_submission_questions_flag_request=quiz_submission_questions_flag_request)
+        api_response = await api_instance.quiz_submission_questions_flag(id, quiz_submission_id, quiz_submission_questions_flag_request=quiz_submission_questions_flag_request)
+        print("The response of QuizSubmissionQuestionsApi->quiz_submission_questions_flag:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizSubmissionQuestionsApi->quiz_submission_questions_flag: %s\n" % e)
 ```
@@ -154,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizzesQuizSubmissionQuestionsFlagResponse**](QuizzesQuizSubmissionQuestionsFlagResponse.md)
 
 ### Authorization
 
@@ -163,18 +166,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Flagging a question. |  -  |
+**0** | QuizzesQuizSubmissionQuestionsFlagResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submission_questions_formatted_answer**
-> quiz_submission_questions_formatted_answer(id, quiz_submission_id, answer)
+> QuizzesQuizSubmissionQuestionsFormattedAnswerResponse quiz_submission_questions_formatted_answer(id, quiz_submission_id, answer)
 
 Get a formatted student numerical answer.
 
@@ -187,6 +190,7 @@ and returns the resulting formatted number
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.quizzes_quiz_submission_questions_formatted_answer_response import QuizzesQuizSubmissionQuestionsFormattedAnswerResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -216,7 +220,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a formatted student numerical answer.
-        await api_instance.quiz_submission_questions_formatted_answer(id, quiz_submission_id, answer)
+        api_response = await api_instance.quiz_submission_questions_formatted_answer(id, quiz_submission_id, answer)
+        print("The response of QuizSubmissionQuestionsApi->quiz_submission_questions_formatted_answer:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizSubmissionQuestionsApi->quiz_submission_questions_formatted_answer: %s\n" % e)
 ```
@@ -234,7 +240,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizzesQuizSubmissionQuestionsFormattedAnswerResponse**](QuizzesQuizSubmissionQuestionsFormattedAnswerResponse.md)
 
 ### Authorization
 
@@ -249,7 +255,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a formatted student numerical answer. |  -  |
+**0** | QuizzesQuizSubmissionQuestionsFormattedAnswerResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -336,7 +342,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submission_questions_unflag**
-> quiz_submission_questions_unflag(id, quiz_submission_id, quiz_submission_questions_flag_request=quiz_submission_questions_flag_request)
+> QuizzesQuizSubmissionQuestionsFlagResponse quiz_submission_questions_unflag(id, quiz_submission_id, quiz_submission_questions_flag_request=quiz_submission_questions_flag_request)
 
 Unflagging a question.
 
@@ -350,6 +356,7 @@ returned to it.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_submission_questions_flag_request import QuizSubmissionQuestionsFlagRequest
+from canvas_lms_python_client.models.quizzes_quiz_submission_questions_flag_response import QuizzesQuizSubmissionQuestionsFlagResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -379,7 +386,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Unflagging a question.
-        await api_instance.quiz_submission_questions_unflag(id, quiz_submission_id, quiz_submission_questions_flag_request=quiz_submission_questions_flag_request)
+        api_response = await api_instance.quiz_submission_questions_unflag(id, quiz_submission_id, quiz_submission_questions_flag_request=quiz_submission_questions_flag_request)
+        print("The response of QuizSubmissionQuestionsApi->quiz_submission_questions_unflag:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizSubmissionQuestionsApi->quiz_submission_questions_unflag: %s\n" % e)
 ```
@@ -397,7 +406,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizzesQuizSubmissionQuestionsFlagResponse**](QuizzesQuizSubmissionQuestionsFlagResponse.md)
 
 ### Authorization
 
@@ -406,13 +415,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Unflagging a question. |  -  |
+**0** | QuizzesQuizSubmissionQuestionsFlagResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

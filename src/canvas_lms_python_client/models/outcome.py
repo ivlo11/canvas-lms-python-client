@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from canvas_lms_python_client.models.rubric_rating import RubricRating
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,8 +36,8 @@ class Outcome(BaseModel):
     display_name: Optional[StrictStr] = Field(default=None, description="Optional friendly name for reporting", json_schema_extra={"examples": ["My Favorite Outcome"]})
     description: Optional[StrictStr] = Field(default=None, description="description of the outcome. omitted in the abbreviated form.", json_schema_extra={"examples": ["Outcome description"]})
     vendor_guid: Optional[StrictStr] = Field(default=None, description="A custom GUID for the learning standard.", json_schema_extra={"examples": ["customid9000"]})
-    points_possible: Optional[StrictInt] = Field(default=None, description="maximum points possible. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form.", json_schema_extra={"examples": [5]})
-    mastery_points: Optional[StrictInt] = Field(default=None, description="points necessary to demonstrate mastery outcomes. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form.", json_schema_extra={"examples": [3]})
+    points_possible: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="maximum points possible. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form.", json_schema_extra={"examples": [5]})
+    mastery_points: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="points necessary to demonstrate mastery outcomes. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form.", json_schema_extra={"examples": [3]})
     calculation_method: Optional[StrictStr] = Field(default=None, description="the method used to calculate a students score", json_schema_extra={"examples": ["decaying_average"]})
     calculation_int: Optional[StrictInt] = Field(default=None, description="this defines the variable value used by the calculation_method. included only if calculation_method uses it", json_schema_extra={"examples": [65]})
     ratings: Optional[List[RubricRating]] = Field(default=None, description="possible ratings for this outcome. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form.")
@@ -45,7 +45,10 @@ class Outcome(BaseModel):
     can_unlink: Optional[StrictBool] = Field(default=None, description="whether the outcome can be unlinked", json_schema_extra={"examples": [True]})
     assessed: Optional[StrictBool] = Field(default=None, description="whether this outcome has been used to assess a student", json_schema_extra={"examples": [True]})
     has_updateable_rubrics: Optional[StrictBool] = Field(default=None, description="whether updates to this outcome will propagate to unassessed rubrics that have imported it", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["id", "url", "context_id", "context_type", "title", "display_name", "description", "vendor_guid", "points_possible", "mastery_points", "calculation_method", "calculation_int", "ratings", "can_edit", "can_unlink", "assessed", "has_updateable_rubrics"]
+    friendly_description: Optional[StrictStr] = None
+    proficiency_context_id: Optional[StrictStr] = None
+    proficiency_context_type: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "url", "context_id", "context_type", "title", "display_name", "description", "vendor_guid", "points_possible", "mastery_points", "calculation_method", "calculation_int", "ratings", "can_edit", "can_unlink", "assessed", "has_updateable_rubrics", "friendly_description", "proficiency_context_id", "proficiency_context_type"]
 
     @field_validator('calculation_method')
     def calculation_method_validate_enum(cls, value):
@@ -102,6 +105,41 @@ class Outcome(BaseModel):
             for _item_ratings in self.ratings:
                 _items.append(_item_ratings.to_dict() if _item_ratings is not None else None)
             _dict['ratings'] = _items
+        # set to None if context_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_id is None and "context_id" in self.model_fields_set:
+            _dict['context_id'] = None
+
+        # set to None if context_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_type is None and "context_type" in self.model_fields_set:
+            _dict['context_type'] = None
+
+        # set to None if display_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.display_name is None and "display_name" in self.model_fields_set:
+            _dict['display_name'] = None
+
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if vendor_guid (nullable) is None
+        # and model_fields_set contains the field
+        if self.vendor_guid is None and "vendor_guid" in self.model_fields_set:
+            _dict['vendor_guid'] = None
+
+        # set to None if calculation_int (nullable) is None
+        # and model_fields_set contains the field
+        if self.calculation_int is None and "calculation_int" in self.model_fields_set:
+            _dict['calculation_int'] = None
+
+        # set to None if friendly_description (nullable) is None
+        # and model_fields_set contains the field
+        if self.friendly_description is None and "friendly_description" in self.model_fields_set:
+            _dict['friendly_description'] = None
+
         return _dict
 
     @classmethod
@@ -130,7 +168,10 @@ class Outcome(BaseModel):
             "can_edit": obj.get("can_edit"),
             "can_unlink": obj.get("can_unlink"),
             "assessed": obj.get("assessed"),
-            "has_updateable_rubrics": obj.get("has_updateable_rubrics")
+            "has_updateable_rubrics": obj.get("has_updateable_rubrics"),
+            "friendly_description": obj.get("friendly_description"),
+            "proficiency_context_id": obj.get("proficiency_context_id"),
+            "proficiency_context_type": obj.get("proficiency_context_type")
         })
         return _obj
 

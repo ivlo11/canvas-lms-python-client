@@ -21,6 +21,8 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.file import File
+from canvas_lms_python_client.models.lti_submission_eula_agreement_timestamp import LtiSubmissionEulaAgreementTimestamp
+from canvas_lms_python_client.models.lti_submission_user_id import LtiSubmissionUserId
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -37,11 +39,12 @@ class LtiSubmission(BaseModel):
     submission_type: Optional[StrictStr] = Field(default=None, description="The types of submission ex: ('online_text_entry'|'online_url'|'online_upload'|'media_recording'|'student_annotation')", json_schema_extra={"examples": ["online_text_entry"]})
     submitted_at: Optional[datetime] = Field(default=None, description="The timestamp when the assignment was submitted", json_schema_extra={"examples": ["2012-01-01T01:00:00Z"]})
     url: Optional[StrictStr] = Field(default=None, description="The URL of the submission (for 'online_url' submissions).")
-    user_id: Optional[StrictInt] = Field(default=None, description="The id of the user who created the submission", json_schema_extra={"examples": [134]})
-    eula_agreement_timestamp: Optional[StrictStr] = Field(default=None, description="UTC timestamp showing when the user agreed to the EULA (if given by the tool provider)", json_schema_extra={"examples": ["1508250487578"]})
+    user_id: Optional[LtiSubmissionUserId] = None
+    eula_agreement_timestamp: Optional[LtiSubmissionEulaAgreementTimestamp] = None
     workflow_state: Optional[StrictStr] = Field(default=None, description="The current state of the submission", json_schema_extra={"examples": ["submitted"]})
-    attachments: Optional[File] = None
-    __properties: ClassVar[List[str]] = ["lti_course_id", "course_id", "assignment_id", "attempt", "body", "submission_type", "submitted_at", "url", "user_id", "eula_agreement_timestamp", "workflow_state", "attachments"]
+    attachments: Optional[List[File]] = Field(default=None, description="Files that are attached to the submission")
+    id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["lti_course_id", "course_id", "assignment_id", "attempt", "body", "submission_type", "submitted_at", "url", "user_id", "eula_agreement_timestamp", "workflow_state", "attachments", "id"]
 
     @field_validator('submission_type')
     def submission_type_validate_enum(cls, value):
@@ -102,9 +105,28 @@ class LtiSubmission(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of attachments
+        # override the default output from pydantic by calling `to_dict()` of user_id
+        if self.user_id:
+            _dict['user_id'] = self.user_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of eula_agreement_timestamp
+        if self.eula_agreement_timestamp:
+            _dict['eula_agreement_timestamp'] = self.eula_agreement_timestamp.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in attachments (list)
+        _items = []
         if self.attachments:
-            _dict['attachments'] = self.attachments.to_dict()
+            for _item_attachments in self.attachments:
+                _items.append(_item_attachments.to_dict() if _item_attachments is not None else None)
+            _dict['attachments'] = _items
+        # set to None if body (nullable) is None
+        # and model_fields_set contains the field
+        if self.body is None and "body" in self.model_fields_set:
+            _dict['body'] = None
+
+        # set to None if url (nullable) is None
+        # and model_fields_set contains the field
+        if self.url is None and "url" in self.model_fields_set:
+            _dict['url'] = None
+
         return _dict
 
     @classmethod
@@ -125,10 +147,11 @@ class LtiSubmission(BaseModel):
             "submission_type": obj.get("submission_type"),
             "submitted_at": obj.get("submitted_at"),
             "url": obj.get("url"),
-            "user_id": obj.get("user_id"),
-            "eula_agreement_timestamp": obj.get("eula_agreement_timestamp"),
+            "user_id": LtiSubmissionUserId.from_dict(obj["user_id"]) if obj.get("user_id") is not None else None,
+            "eula_agreement_timestamp": LtiSubmissionEulaAgreementTimestamp.from_dict(obj["eula_agreement_timestamp"]) if obj.get("eula_agreement_timestamp") is not None else None,
             "workflow_state": obj.get("workflow_state"),
-            "attachments": File.from_dict(obj["attachments"]) if obj.get("attachments") is not None else None
+            "attachments": [File.from_dict(_item) for _item in obj["attachments"]] if obj.get("attachments") is not None else None,
+            "id": obj.get("id")
         })
         return _obj
 

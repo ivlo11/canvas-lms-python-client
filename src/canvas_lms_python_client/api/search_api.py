@@ -19,6 +19,7 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.recipient import Recipient
+from canvas_lms_python_client.models.search_all_courses_response import SearchAllCoursesResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -60,7 +61,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[SearchAllCoursesResponse]:
         """List all courses
 
         A paginated list of all courses visible in the public index
@@ -117,6 +118,7 @@ class SearchApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[SearchAllCoursesResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -150,7 +152,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[SearchAllCoursesResponse]]:
         """List all courses
 
         A paginated list of all courses visible in the public index
@@ -207,6 +209,7 @@ class SearchApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[SearchAllCoursesResponse]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -240,8 +243,9 @@ class SearchApi:
                 return
             _url = _next_url
 
+
     @validate_call
-    async def search_all_courses_with_http_info(
+    async def search_all_courses_all(
         self,
         search: Annotated[Optional[StrictStr], Field(description="Search terms used for matching users/courses/groups (e.g. \"bob smith\"). If multiple terms are given (separated via whitespace), only results matching all terms will be returned.")] = None,
         public_only: Annotated[Optional[StrictBool], Field(description="Only return courses with public content. Defaults to false.")] = None,
@@ -261,7 +265,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> AsyncIterator[SearchAllCoursesResponse]:
         """List all courses
 
         A paginated list of all courses visible in the public index
@@ -318,6 +322,119 @@ class SearchApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[SearchAllCoursesResponse]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            for _item in _page_data:
+                yield _item
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def search_all_courses_with_http_info(
+        self,
+        search: Annotated[Optional[StrictStr], Field(description="Search terms used for matching users/courses/groups (e.g. \"bob smith\"). If multiple terms are given (separated via whitespace), only results matching all terms will be returned.")] = None,
+        public_only: Annotated[Optional[StrictBool], Field(description="Only return courses with public content. Defaults to false.")] = None,
+        open_enrollment_only: Annotated[Optional[StrictBool], Field(description="Only return courses that allow self enrollment. Defaults to false.")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[List[SearchAllCoursesResponse]]:
+        """List all courses
+
+        A paginated list of all courses visible in the public index
+
+        :param search: Search terms used for matching users/courses/groups (e.g. \"bob smith\"). If multiple terms are given (separated via whitespace), only results matching all terms will be returned.
+        :type search: str
+        :param public_only: Only return courses with public content. Defaults to false.
+        :type public_only: bool
+        :param open_enrollment_only: Only return courses that allow self enrollment. Defaults to false.
+        :type open_enrollment_only: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._search_all_courses_serialize(
+            search=search,
+            public_only=public_only,
+            open_enrollment_only=open_enrollment_only,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[SearchAllCoursesResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -408,6 +525,7 @@ class SearchApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[SearchAllCoursesResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -470,6 +588,13 @@ class SearchApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

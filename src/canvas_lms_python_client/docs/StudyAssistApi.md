@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **study_assist_create**
-> object study_assist_create(course_id, study_assist_create_request=study_assist_create_request)
+> AssistResponse study_assist_create(course_id, study_assist_create_request=study_assist_create_request)
 
 Request a study assist response
 
@@ -18,6 +18,7 @@ Request a study assist response
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.assist_response import AssistResponse
 from canvas_lms_python_client.models.study_assist_create_request import StudyAssistCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -66,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**AssistResponse**](AssistResponse.md)
 
 ### Authorization
 

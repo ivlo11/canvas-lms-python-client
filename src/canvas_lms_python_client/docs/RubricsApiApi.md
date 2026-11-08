@@ -350,7 +350,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubrics_api_upload**
-> object rubrics_api_upload(course_id)
+> RubricImport rubrics_api_upload(course_id)
 
 Creates a rubric using a CSV file
 
@@ -362,6 +362,7 @@ Returns the rubric import object that was created
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.rubric_import import RubricImport
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -407,7 +408,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**RubricImport**](RubricImport.md)
 
 ### Authorization
 
@@ -427,7 +428,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubrics_api_upload_for_accounts**
-> object rubrics_api_upload_for_accounts(account_id)
+> RubricImport rubrics_api_upload_for_accounts(account_id)
 
 Creates a rubric using a CSV file
 
@@ -439,6 +440,7 @@ Returns the rubric import object that was created
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.rubric_import import RubricImport
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -484,7 +486,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**RubricImport**](RubricImport.md)
 
 ### Authorization
 
@@ -504,7 +506,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubrics_api_upload_status**
-> object rubrics_api_upload_status(course_id, id)
+> RubricImport rubrics_api_upload_status(course_id, id)
 
 Get the status of a rubric import
 
@@ -516,6 +518,7 @@ Can return the latest rubric import for an account or course, or a specific impo
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.rubric_import import RubricImport
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -563,7 +566,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**RubricImport**](RubricImport.md)
 
 ### Authorization
 
@@ -583,7 +586,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubrics_api_upload_status_for_accounts**
-> object rubrics_api_upload_status_for_accounts(account_id, id)
+> RubricImport rubrics_api_upload_status_for_accounts(account_id, id)
 
 Get the status of a rubric import
 
@@ -595,6 +598,7 @@ Can return the latest rubric import for an account or course, or a specific impo
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.rubric_import import RubricImport
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -642,7 +646,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**RubricImport**](RubricImport.md)
 
 ### Authorization
 

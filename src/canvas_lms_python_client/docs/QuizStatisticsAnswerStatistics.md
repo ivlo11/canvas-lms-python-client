@@ -6,10 +6,15 @@ Statistics for a specific pre-defined answer in a Multiple-Choice or True/False 
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | ID of the answer. | [optional] 
+**id** | [**QuizStatisticsAnswerStatisticsId**](QuizStatisticsAnswerStatisticsId.md) |  | [optional] 
 **text** | **str** | The text attached to the answer. | [optional] 
 **weight** | **int** | An integer to determine correctness of the answer. Incorrect answers should be 0, correct answers should 100 | [optional] 
 **responses** | **int** | Number of students who have chosen this answer. | [optional] 
+**correct** | **bool** |  | [optional] 
+**full_credit** | **bool** |  | [optional] 
+**score** | **float** |  | [optional] 
+**user_ids** | **List[int]** |  | [optional] 
+**user_names** | **List[str]** |  | [optional] 
 
 ## Example
 

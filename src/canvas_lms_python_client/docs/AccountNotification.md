@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **roles** | **List[str]** | (Deprecated) The roles to send the notification to.  If roles is not passed it defaults to all roles | [optional] 
 **role_ids** | **List[int]** | The roles to send the notification to.  If roles is not passed it defaults to all roles | [optional] 
 **author** | **object** | The author of the notification. Available only to admins using include_all. | [optional] 
+**closed** | **bool** |  | [optional] 
+**id** | **int** |  | [optional] 
 
 ## Example
 

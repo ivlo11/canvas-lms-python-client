@@ -38,7 +38,26 @@ class ModuleItem(BaseModel):
     position: Optional[StrictInt] = Field(default=None, description="the current position of the module item", json_schema_extra={"examples": [5]})
     module_item_type: Optional[StrictStr] = Field(default=None, description="The module item type of the item assignment", json_schema_extra={"examples": ["Assignment"]})
     published: Optional[StrictBool] = Field(default=None, description="published boolean value for course pace", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["id", "duration", "course_pace_id", "root_account_id", "module_item_id", "assignment_title", "points_possible", "assignment_link", "position", "module_item_type", "published"]
+    completion_requirement: Optional[Dict[str, Any]] = None
+    content_details: Optional[Dict[str, Any]] = None
+    content_id: Optional[StrictInt] = None
+    estimated_duration: Optional[StrictStr] = None
+    external_url: Optional[StrictStr] = None
+    html_url: Optional[StrictStr] = None
+    indent: Optional[StrictInt] = None
+    mastery_paths: Optional[Dict[str, Any]] = None
+    module_id: Optional[StrictInt] = None
+    new_tab: Optional[StrictBool] = None
+    page_url: Optional[StrictStr] = None
+    publish_at: Optional[Any] = None
+    quiz_lti: Optional[StrictBool] = None
+    title: Optional[StrictStr] = None
+    type: Optional[StrictStr] = None
+    unpublishable: Optional[StrictBool] = None
+    url: Optional[StrictStr] = None
+    created: Optional[List[Dict[str, Any]]] = None
+    errors: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["id", "duration", "course_pace_id", "root_account_id", "module_item_id", "assignment_title", "points_possible", "assignment_link", "position", "module_item_type", "published", "completion_requirement", "content_details", "content_id", "estimated_duration", "external_url", "html_url", "indent", "mastery_paths", "module_id", "new_tab", "page_url", "publish_at", "quiz_lti", "title", "type", "unpublishable", "url", "created", "errors"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -79,6 +98,36 @@ class ModuleItem(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if position (nullable) is None
+        # and model_fields_set contains the field
+        if self.position is None and "position" in self.model_fields_set:
+            _dict['position'] = None
+
+        # set to None if estimated_duration (nullable) is None
+        # and model_fields_set contains the field
+        if self.estimated_duration is None and "estimated_duration" in self.model_fields_set:
+            _dict['estimated_duration'] = None
+
+        # set to None if external_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.external_url is None and "external_url" in self.model_fields_set:
+            _dict['external_url'] = None
+
+        # set to None if mastery_paths (nullable) is None
+        # and model_fields_set contains the field
+        if self.mastery_paths is None and "mastery_paths" in self.model_fields_set:
+            _dict['mastery_paths'] = None
+
+        # set to None if new_tab (nullable) is None
+        # and model_fields_set contains the field
+        if self.new_tab is None and "new_tab" in self.model_fields_set:
+            _dict['new_tab'] = None
+
+        # set to None if publish_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.publish_at is None and "publish_at" in self.model_fields_set:
+            _dict['publish_at'] = None
+
         return _dict
 
     @classmethod
@@ -101,7 +150,26 @@ class ModuleItem(BaseModel):
             "assignment_link": obj.get("assignment_link"),
             "position": obj.get("position"),
             "module_item_type": obj.get("module_item_type"),
-            "published": obj.get("published")
+            "published": obj.get("published"),
+            "completion_requirement": obj.get("completion_requirement"),
+            "content_details": obj.get("content_details"),
+            "content_id": obj.get("content_id"),
+            "estimated_duration": obj.get("estimated_duration"),
+            "external_url": obj.get("external_url"),
+            "html_url": obj.get("html_url"),
+            "indent": obj.get("indent"),
+            "mastery_paths": obj.get("mastery_paths"),
+            "module_id": obj.get("module_id"),
+            "new_tab": obj.get("new_tab"),
+            "page_url": obj.get("page_url"),
+            "publish_at": obj.get("publish_at"),
+            "quiz_lti": obj.get("quiz_lti"),
+            "title": obj.get("title"),
+            "type": obj.get("type"),
+            "unpublishable": obj.get("unpublishable"),
+            "url": obj.get("url"),
+            "created": obj.get("created"),
+            "errors": obj.get("errors")
         })
         return _obj
 

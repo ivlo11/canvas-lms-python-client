@@ -31,11 +31,7 @@ _EMPTY_TYPES_MAP = re.compile(
     r"_response_types_map\s*:\s*Dict\[str,\s*Optional\[str\]\]\s*=\s*\{\s*\}"
 )
 
-UNDOCUMENTED_PAGINATED_OPERATIONS = frozenset(
-    {
-        "search_all_courses",
-    }
-)
+UNDOCUMENTED_PAGINATED_OPERATIONS: frozenset[str] = frozenset()
 
 
 def _paginated_methods():
@@ -240,7 +236,7 @@ _WRAPPER_KEYS = {
     "QuizSubmissionsApiIndexResponse": "quiz_submissions",
     "QuizSubmissionsApiShowResponse": "quiz_submissions",
     "QuizSubmissionsApiSubmissionResponse": "quiz_submissions",
-    "QuizSubmissionsApiUpdateResponse": "quiz_submissions",
+    "QuizzesQuizSubmissionsUpdateResponse": "quiz_submissions",
     "ResultsCreateResponse": "results",
     "ResultsIndexResponse": "results",
 }

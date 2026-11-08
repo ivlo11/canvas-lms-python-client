@@ -19,6 +19,8 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.late_policy_create_request import LatePolicyCreateRequest
+from canvas_lms_python_client.models.late_policy_create_response import LatePolicyCreateResponse
+from canvas_lms_python_client.models.late_policy_show_response import LatePolicyShowResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -56,7 +58,7 @@ class LatePolicyApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> LatePolicyCreateResponse:
         """Create a late policy
 
         Create a late policy. If the course already has a late policy, a bad_request is returned since there can only be one late policy per course.
@@ -98,6 +100,7 @@ class LatePolicyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LatePolicyCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -126,7 +129,7 @@ class LatePolicyApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[LatePolicyCreateResponse]:
         """Create a late policy
 
         Create a late policy. If the course already has a late policy, a bad_request is returned since there can only be one late policy per course.
@@ -168,6 +171,7 @@ class LatePolicyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LatePolicyCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -239,6 +243,7 @@ class LatePolicyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LatePolicyCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -343,7 +348,7 @@ class LatePolicyApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> LatePolicyShowResponse:
         """Get a late policy
 
         Returns the late policy for a course.
@@ -382,6 +387,7 @@ class LatePolicyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LatePolicyShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -409,7 +415,7 @@ class LatePolicyApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[LatePolicyShowResponse]:
         """Get a late policy
 
         Returns the late policy for a course.
@@ -448,6 +454,7 @@ class LatePolicyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LatePolicyShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -515,6 +522,7 @@ class LatePolicyApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LatePolicyShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

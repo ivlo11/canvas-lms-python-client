@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **id** | **int** | The id of the Peer Review | [optional] 
 **user_id** | **int** | The user id for the owner of the asset | [optional] 
 **workflow_state** | **str** | The state of the Peer Review, either &#39;assigned&#39; or &#39;completed&#39; | [optional] 
-**user** | **str** | the User object for the owner of the asset if the user include parameter is provided (see user API) (optional) | [optional] 
-**assessor** | **str** | The User object for the assessor if the user include parameter is provided (see user API) (optional) | [optional] 
-**submission_comments** | **str** | The submission comments associated with this Peer Review if the submission_comment include parameter is provided (see submissions API) (optional) | [optional] 
+**user** | [**PeerReviewUser**](PeerReviewUser.md) |  | [optional] 
+**assessor** | [**PeerReviewAssessor**](PeerReviewAssessor.md) |  | [optional] 
+**submission_comments** | [**PeerReviewSubmissionComments**](PeerReviewSubmissionComments.md) |  | [optional] 
 
 ## Example
 

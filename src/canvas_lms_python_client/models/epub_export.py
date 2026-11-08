@@ -35,7 +35,13 @@ class EpubExport(BaseModel):
     progress_url: Optional[StrictStr] = Field(default=None, description="The api endpoint for polling the current progress", json_schema_extra={"examples": ["https://example.com/api/v1/progress/4"]})
     user_id: Optional[StrictInt] = Field(default=None, description="The ID of the user who started the export", json_schema_extra={"examples": [4]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="Current state of the ePub export: created exporting exported generating generated failed", json_schema_extra={"examples": ["exported"]})
-    __properties: ClassVar[List[str]] = ["id", "created_at", "attachment", "progress_url", "user_id", "workflow_state"]
+    name: Optional[StrictStr] = None
+    content_export_id: Optional[StrictInt] = None
+    course_id: Optional[StrictInt] = None
+    permissions: Optional[Dict[str, Any]] = None
+    progress_id: Optional[StrictInt] = None
+    updated_at: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "created_at", "attachment", "progress_url", "user_id", "workflow_state", "name", "content_export_id", "course_id", "permissions", "progress_id", "updated_at"]
 
     @field_validator('workflow_state')
     def workflow_state_validate_enum(cls, value):
@@ -89,6 +95,11 @@ class EpubExport(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of attachment
         if self.attachment:
             _dict['attachment'] = self.attachment.to_dict()
+        # set to None if content_export_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.content_export_id is None and "content_export_id" in self.model_fields_set:
+            _dict['content_export_id'] = None
+
         return _dict
 
     @classmethod
@@ -106,7 +117,13 @@ class EpubExport(BaseModel):
             "attachment": File.from_dict(obj["attachment"]) if obj.get("attachment") is not None else None,
             "progress_url": obj.get("progress_url"),
             "user_id": obj.get("user_id"),
-            "workflow_state": obj.get("workflow_state")
+            "workflow_state": obj.get("workflow_state"),
+            "name": obj.get("name"),
+            "content_export_id": obj.get("content_export_id"),
+            "course_id": obj.get("course_id"),
+            "permissions": obj.get("permissions"),
+            "progress_id": obj.get("progress_id"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

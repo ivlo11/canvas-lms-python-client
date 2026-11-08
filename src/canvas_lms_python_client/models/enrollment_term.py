@@ -37,7 +37,9 @@ class EnrollmentTerm(BaseModel):
     workflow_state: Optional[StrictStr] = Field(default=None, description="The state of the term. Can be 'active' or 'deleted'.", json_schema_extra={"examples": ["active"]})
     overrides: Optional[Dict[str, Any]] = Field(default=None, description="Term date overrides for specific enrollment types", json_schema_extra={"examples": [{"StudentEnrollment": {"start_at": "2014-01-07T08:00:00-05:00", "end_at": "2014-05-14T05:00:00-04:0"}}]})
     course_count: Optional[StrictInt] = Field(default=None, description="The number of courses in the term (available via include)", json_schema_extra={"examples": [80]})
-    __properties: ClassVar[List[str]] = ["id", "sis_term_id", "sis_import_id", "name", "start_at", "end_at", "workflow_state", "overrides", "course_count"]
+    created_at: Optional[StrictStr] = None
+    grading_period_group_id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id", "sis_term_id", "sis_import_id", "name", "start_at", "end_at", "workflow_state", "overrides", "course_count", "created_at", "grading_period_group_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -78,6 +80,31 @@ class EnrollmentTerm(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if sis_term_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_term_id is None and "sis_term_id" in self.model_fields_set:
+            _dict['sis_term_id'] = None
+
+        # set to None if sis_import_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_import_id is None and "sis_import_id" in self.model_fields_set:
+            _dict['sis_import_id'] = None
+
+        # set to None if start_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_at is None and "start_at" in self.model_fields_set:
+            _dict['start_at'] = None
+
+        # set to None if end_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_at is None and "end_at" in self.model_fields_set:
+            _dict['end_at'] = None
+
+        # set to None if grading_period_group_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.grading_period_group_id is None and "grading_period_group_id" in self.model_fields_set:
+            _dict['grading_period_group_id'] = None
+
         return _dict
 
     @classmethod
@@ -98,7 +125,9 @@ class EnrollmentTerm(BaseModel):
             "end_at": obj.get("end_at"),
             "workflow_state": obj.get("workflow_state"),
             "overrides": obj.get("overrides"),
-            "course_count": obj.get("course_count")
+            "course_count": obj.get("course_count"),
+            "created_at": obj.get("created_at"),
+            "grading_period_group_id": obj.get("grading_period_group_id")
         })
         return _obj
 

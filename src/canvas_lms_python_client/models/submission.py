@@ -63,7 +63,61 @@ class Submission(BaseModel):
     posted_at: Optional[datetime] = Field(default=None, description="The date this submission was posted to the student, or nil if it has not been posted.", json_schema_extra={"examples": ["2020-01-02T11:10:30Z"]})
     read_status: Optional[StrictStr] = Field(default=None, description="The read status of this submission for the given user (optional). Including read_status will mark submission(s) as read.", json_schema_extra={"examples": ["read"]})
     redo_request: Optional[StrictBool] = Field(default=None, description="This indicates whether the submission has been reassigned by the instructor.", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["id", "assignment_id", "assignment", "course", "attempt", "body", "grade", "grade_matches_current_submission", "html_url", "preview_url", "score", "submission_comments", "submission_type", "submitted_at", "url", "user_id", "grader_id", "graded_at", "user", "late", "assignment_visible", "excused", "missing", "late_policy_status", "points_deducted", "seconds_late", "workflow_state", "extra_attempts", "anonymous_id", "posted_at", "read_status", "redo_request"]
+    cached_due_date: Optional[StrictStr] = None
+    custom_grade_status_id: Optional[StrictInt] = None
+    entered_grade: Optional[StrictStr] = None
+    entered_score: Optional[Union[StrictFloat, StrictInt]] = None
+    grading_period_id: Optional[StrictInt] = None
+    sticker: Optional[StrictStr] = None
+    attachments: Optional[List[Dict[str, Any]]] = None
+    external_tool_url: Optional[StrictStr] = None
+    grading_status: Optional[StrictStr] = None
+    group: Optional[Dict[str, Any]] = None
+    media_comment: Optional[Dict[str, Any]] = None
+    provisional_grades: Optional[List[Dict[str, Any]]] = None
+    rubric_assessment: Optional[Dict[str, Any]] = None
+    student_entered_score: Optional[Union[StrictFloat, StrictInt]] = None
+    submission_history: Optional[List[Dict[str, Any]]] = None
+    submission_status: Optional[StrictStr] = None
+    computed_current_score: Optional[Union[StrictFloat, StrictInt]] = None
+    computed_final_score: Optional[Union[StrictFloat, StrictInt]] = None
+    discussion_entries: Optional[List[Dict[str, Any]]] = None
+    has_originality_report: Optional[StrictBool] = None
+    has_peer_review_submission: Optional[StrictBool] = None
+    integration_id: Optional[StrictStr] = None
+    peer_review_submission: Optional[Dict[str, Any]] = None
+    section_id: Optional[StrictInt] = None
+    sis_user_id: Optional[StrictStr] = None
+    submissions: Optional[List[Dict[str, Any]]] = None
+    turnitin_data: Optional[Dict[str, Any]] = None
+    unposted_current_score: Optional[Union[StrictFloat, StrictInt]] = None
+    unposted_final_score: Optional[Union[StrictFloat, StrictInt]] = None
+    context_type: Optional[StrictStr] = None
+    conversation_id: Optional[StrictInt] = None
+    course_id: Optional[StrictInt] = None
+    created_at: Optional[StrictStr] = None
+    discussion_topic_id: Optional[StrictInt] = None
+    latest_messages: Optional[List[Dict[str, Any]]] = None
+    message: Optional[StrictStr] = None
+    message_id: Optional[Any] = None
+    notification_category: Optional[StrictStr] = None
+    participant_count: Optional[StrictInt] = None
+    private: Optional[StrictBool] = None
+    read_state: Optional[StrictBool] = None
+    require_initial_post: Optional[StrictBool] = None
+    root_discussion_entries: Optional[List[Dict[str, Any]]] = None
+    submission_id: Optional[StrictInt] = None
+    title: Optional[StrictStr] = None
+    total_root_discussion_entries: Optional[StrictInt] = None
+    type: Optional[StrictStr] = None
+    updated_at: Optional[StrictStr] = None
+    user_has_posted: Optional[Any] = None
+    full_rubric_assessment: Optional[Dict[str, Any]] = None
+    has_sub_assignment_submissions: Optional[StrictBool] = None
+    sub_assignment_submissions: Optional[List[Dict[str, Any]]] = None
+    vericite_data: Optional[Dict[str, Any]] = None
+    all_submissions: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["id", "assignment_id", "assignment", "course", "attempt", "body", "grade", "grade_matches_current_submission", "html_url", "preview_url", "score", "submission_comments", "submission_type", "submitted_at", "url", "user_id", "grader_id", "graded_at", "user", "late", "assignment_visible", "excused", "missing", "late_policy_status", "points_deducted", "seconds_late", "workflow_state", "extra_attempts", "anonymous_id", "posted_at", "read_status", "redo_request", "cached_due_date", "custom_grade_status_id", "entered_grade", "entered_score", "grading_period_id", "sticker", "attachments", "external_tool_url", "grading_status", "group", "media_comment", "provisional_grades", "rubric_assessment", "student_entered_score", "submission_history", "submission_status", "computed_current_score", "computed_final_score", "discussion_entries", "has_originality_report", "has_peer_review_submission", "integration_id", "peer_review_submission", "section_id", "sis_user_id", "submissions", "turnitin_data", "unposted_current_score", "unposted_final_score", "context_type", "conversation_id", "course_id", "created_at", "discussion_topic_id", "latest_messages", "message", "message_id", "notification_category", "participant_count", "private", "read_state", "require_initial_post", "root_discussion_entries", "submission_id", "title", "total_root_discussion_entries", "type", "updated_at", "user_has_posted", "full_rubric_assessment", "has_sub_assignment_submissions", "sub_assignment_submissions", "vericite_data", "all_submissions"]
 
     @field_validator('submission_type')
     def submission_type_validate_enum(cls, value):
@@ -149,6 +203,136 @@ class Submission(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of user
         if self.user:
             _dict['user'] = self.user.to_dict()
+        # set to None if attempt (nullable) is None
+        # and model_fields_set contains the field
+        if self.attempt is None and "attempt" in self.model_fields_set:
+            _dict['attempt'] = None
+
+        # set to None if body (nullable) is None
+        # and model_fields_set contains the field
+        if self.body is None and "body" in self.model_fields_set:
+            _dict['body'] = None
+
+        # set to None if grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.grade is None and "grade" in self.model_fields_set:
+            _dict['grade'] = None
+
+        # set to None if score (nullable) is None
+        # and model_fields_set contains the field
+        if self.score is None and "score" in self.model_fields_set:
+            _dict['score'] = None
+
+        # set to None if submission_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.submission_type is None and "submission_type" in self.model_fields_set:
+            _dict['submission_type'] = None
+
+        # set to None if submitted_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.submitted_at is None and "submitted_at" in self.model_fields_set:
+            _dict['submitted_at'] = None
+
+        # set to None if url (nullable) is None
+        # and model_fields_set contains the field
+        if self.url is None and "url" in self.model_fields_set:
+            _dict['url'] = None
+
+        # set to None if grader_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.grader_id is None and "grader_id" in self.model_fields_set:
+            _dict['grader_id'] = None
+
+        # set to None if graded_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.graded_at is None and "graded_at" in self.model_fields_set:
+            _dict['graded_at'] = None
+
+        # set to None if excused (nullable) is None
+        # and model_fields_set contains the field
+        if self.excused is None and "excused" in self.model_fields_set:
+            _dict['excused'] = None
+
+        # set to None if late_policy_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.late_policy_status is None and "late_policy_status" in self.model_fields_set:
+            _dict['late_policy_status'] = None
+
+        # set to None if points_deducted (nullable) is None
+        # and model_fields_set contains the field
+        if self.points_deducted is None and "points_deducted" in self.model_fields_set:
+            _dict['points_deducted'] = None
+
+        # set to None if extra_attempts (nullable) is None
+        # and model_fields_set contains the field
+        if self.extra_attempts is None and "extra_attempts" in self.model_fields_set:
+            _dict['extra_attempts'] = None
+
+        # set to None if posted_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.posted_at is None and "posted_at" in self.model_fields_set:
+            _dict['posted_at'] = None
+
+        # set to None if cached_due_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.cached_due_date is None and "cached_due_date" in self.model_fields_set:
+            _dict['cached_due_date'] = None
+
+        # set to None if custom_grade_status_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.custom_grade_status_id is None and "custom_grade_status_id" in self.model_fields_set:
+            _dict['custom_grade_status_id'] = None
+
+        # set to None if entered_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.entered_grade is None and "entered_grade" in self.model_fields_set:
+            _dict['entered_grade'] = None
+
+        # set to None if entered_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.entered_score is None and "entered_score" in self.model_fields_set:
+            _dict['entered_score'] = None
+
+        # set to None if grading_period_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.grading_period_id is None and "grading_period_id" in self.model_fields_set:
+            _dict['grading_period_id'] = None
+
+        # set to None if sticker (nullable) is None
+        # and model_fields_set contains the field
+        if self.sticker is None and "sticker" in self.model_fields_set:
+            _dict['sticker'] = None
+
+        # set to None if student_entered_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.student_entered_score is None and "student_entered_score" in self.model_fields_set:
+            _dict['student_entered_score'] = None
+
+        # set to None if integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.integration_id is None and "integration_id" in self.model_fields_set:
+            _dict['integration_id'] = None
+
+        # set to None if peer_review_submission (nullable) is None
+        # and model_fields_set contains the field
+        if self.peer_review_submission is None and "peer_review_submission" in self.model_fields_set:
+            _dict['peer_review_submission'] = None
+
+        # set to None if message (nullable) is None
+        # and model_fields_set contains the field
+        if self.message is None and "message" in self.model_fields_set:
+            _dict['message'] = None
+
+        # set to None if message_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.message_id is None and "message_id" in self.model_fields_set:
+            _dict['message_id'] = None
+
+        # set to None if user_has_posted (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_has_posted is None and "user_has_posted" in self.model_fields_set:
+            _dict['user_has_posted'] = None
+
         return _dict
 
     @classmethod
@@ -192,7 +376,61 @@ class Submission(BaseModel):
             "anonymous_id": obj.get("anonymous_id"),
             "posted_at": obj.get("posted_at"),
             "read_status": obj.get("read_status"),
-            "redo_request": obj.get("redo_request")
+            "redo_request": obj.get("redo_request"),
+            "cached_due_date": obj.get("cached_due_date"),
+            "custom_grade_status_id": obj.get("custom_grade_status_id"),
+            "entered_grade": obj.get("entered_grade"),
+            "entered_score": obj.get("entered_score"),
+            "grading_period_id": obj.get("grading_period_id"),
+            "sticker": obj.get("sticker"),
+            "attachments": obj.get("attachments"),
+            "external_tool_url": obj.get("external_tool_url"),
+            "grading_status": obj.get("grading_status"),
+            "group": obj.get("group"),
+            "media_comment": obj.get("media_comment"),
+            "provisional_grades": obj.get("provisional_grades"),
+            "rubric_assessment": obj.get("rubric_assessment"),
+            "student_entered_score": obj.get("student_entered_score"),
+            "submission_history": obj.get("submission_history"),
+            "submission_status": obj.get("submission_status"),
+            "computed_current_score": obj.get("computed_current_score"),
+            "computed_final_score": obj.get("computed_final_score"),
+            "discussion_entries": obj.get("discussion_entries"),
+            "has_originality_report": obj.get("has_originality_report"),
+            "has_peer_review_submission": obj.get("has_peer_review_submission"),
+            "integration_id": obj.get("integration_id"),
+            "peer_review_submission": obj.get("peer_review_submission"),
+            "section_id": obj.get("section_id"),
+            "sis_user_id": obj.get("sis_user_id"),
+            "submissions": obj.get("submissions"),
+            "turnitin_data": obj.get("turnitin_data"),
+            "unposted_current_score": obj.get("unposted_current_score"),
+            "unposted_final_score": obj.get("unposted_final_score"),
+            "context_type": obj.get("context_type"),
+            "conversation_id": obj.get("conversation_id"),
+            "course_id": obj.get("course_id"),
+            "created_at": obj.get("created_at"),
+            "discussion_topic_id": obj.get("discussion_topic_id"),
+            "latest_messages": obj.get("latest_messages"),
+            "message": obj.get("message"),
+            "message_id": obj.get("message_id"),
+            "notification_category": obj.get("notification_category"),
+            "participant_count": obj.get("participant_count"),
+            "private": obj.get("private"),
+            "read_state": obj.get("read_state"),
+            "require_initial_post": obj.get("require_initial_post"),
+            "root_discussion_entries": obj.get("root_discussion_entries"),
+            "submission_id": obj.get("submission_id"),
+            "title": obj.get("title"),
+            "total_root_discussion_entries": obj.get("total_root_discussion_entries"),
+            "type": obj.get("type"),
+            "updated_at": obj.get("updated_at"),
+            "user_has_posted": obj.get("user_has_posted"),
+            "full_rubric_assessment": obj.get("full_rubric_assessment"),
+            "has_sub_assignment_submissions": obj.get("has_sub_assignment_submissions"),
+            "sub_assignment_submissions": obj.get("sub_assignment_submissions"),
+            "vericite_data": obj.get("vericite_data"),
+            "all_submissions": obj.get("all_submissions")
         })
         return _obj
 

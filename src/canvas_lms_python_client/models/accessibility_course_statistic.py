@@ -80,6 +80,16 @@ class AccessibilityCourseStatistic(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if resolved_issue_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.resolved_issue_count is None and "resolved_issue_count" in self.model_fields_set:
+            _dict['resolved_issue_count'] = None
+
+        # set to None if closed_issue_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.closed_issue_count is None and "closed_issue_count" in self.model_fields_set:
+            _dict['closed_issue_count'] = None
+
         return _dict
 
     @classmethod

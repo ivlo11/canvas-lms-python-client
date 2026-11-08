@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,11 +29,15 @@ class OutcomeResult(BaseModel):
     A student's result for an outcome
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="A unique identifier for this result", json_schema_extra={"examples": [42]})
-    score: Optional[StrictInt] = Field(default=None, description="The student's score", json_schema_extra={"examples": [6]})
+    score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The student's score", json_schema_extra={"examples": [6]})
     submitted_or_assessed_at: Optional[datetime] = Field(default=None, description="The datetime the resulting OutcomeResult was submitted at, or absent that, when it was assessed.", json_schema_extra={"examples": ["2013-02-01T00:00:00-06:00"]})
     links: Optional[Dict[str, Any]] = Field(default=None, description="Unique identifiers of objects associated with this result", json_schema_extra={"examples": [{"user": "3", "learning_outcome": "97", "alignment": "53"}]})
     percent: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="score's percent of maximum points possible for outcome, scaled to reflect any custom mastery levels that differ from the learning outcome", json_schema_extra={"examples": [0.65]})
-    __properties: ClassVar[List[str]] = ["id", "score", "submitted_or_assessed_at", "links", "percent"]
+    hidden: Optional[StrictBool] = None
+    hide_points: Optional[StrictBool] = None
+    mastery: Optional[StrictBool] = None
+    possible: Optional[Union[StrictFloat, StrictInt]] = None
+    __properties: ClassVar[List[str]] = ["id", "score", "submitted_or_assessed_at", "links", "percent", "hidden", "hide_points", "mastery", "possible"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -74,6 +78,31 @@ class OutcomeResult(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if id (nullable) is None
+        # and model_fields_set contains the field
+        if self.id is None and "id" in self.model_fields_set:
+            _dict['id'] = None
+
+        # set to None if submitted_or_assessed_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.submitted_or_assessed_at is None and "submitted_or_assessed_at" in self.model_fields_set:
+            _dict['submitted_or_assessed_at'] = None
+
+        # set to None if percent (nullable) is None
+        # and model_fields_set contains the field
+        if self.percent is None and "percent" in self.model_fields_set:
+            _dict['percent'] = None
+
+        # set to None if mastery (nullable) is None
+        # and model_fields_set contains the field
+        if self.mastery is None and "mastery" in self.model_fields_set:
+            _dict['mastery'] = None
+
+        # set to None if possible (nullable) is None
+        # and model_fields_set contains the field
+        if self.possible is None and "possible" in self.model_fields_set:
+            _dict['possible'] = None
+
         return _dict
 
     @classmethod
@@ -90,7 +119,11 @@ class OutcomeResult(BaseModel):
             "score": obj.get("score"),
             "submitted_or_assessed_at": obj.get("submitted_or_assessed_at"),
             "links": obj.get("links"),
-            "percent": obj.get("percent")
+            "percent": obj.get("percent"),
+            "hidden": obj.get("hidden"),
+            "hide_points": obj.get("hide_points"),
+            "mastery": obj.get("mastery"),
+            "possible": obj.get("possible")
         })
         return _obj
 

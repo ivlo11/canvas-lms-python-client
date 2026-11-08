@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -45,13 +45,33 @@ class SubmissionVersion(BaseModel):
     previous_grade: Optional[StrictStr] = Field(default=None, description="the grade for the submission version immediately preceding this one", json_schema_extra={"examples": ["90"]})
     previous_graded_at: Optional[datetime] = Field(default=None, description="the timestamp for the grading of the submission version immediately preceding this one", json_schema_extra={"examples": ["2013-01-29T12:12:12Z"]})
     previous_grader: Optional[StrictStr] = Field(default=None, description="the name of the grader who graded the version of this submission immediately preceding this one", json_schema_extra={"examples": ["Graded on submission"]})
-    score: Optional[StrictInt] = Field(default=None, description="the score for this version of the submission", json_schema_extra={"examples": [100]})
+    score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="the score for this version of the submission", json_schema_extra={"examples": [100]})
     user_name: Optional[StrictStr] = Field(default=None, description="the name of the student who created this submission", json_schema_extra={"examples": ["student@example.com"]})
     submission_type: Optional[StrictStr] = Field(default=None, description="the type of submission", json_schema_extra={"examples": ["online"]})
     url: Optional[StrictStr] = Field(default=None, description="the url of the submission, if there is one")
     user_id: Optional[StrictInt] = Field(default=None, description="the user ID of the student who created this submission", json_schema_extra={"examples": [67376]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="the state of the submission at this version", json_schema_extra={"examples": ["unsubmitted"]})
-    __properties: ClassVar[List[str]] = ["assignment_id", "assignment_name", "body", "current_grade", "current_graded_at", "current_grader", "grade_matches_current_submission", "graded_at", "grader", "grader_id", "id", "new_grade", "new_graded_at", "new_grader", "previous_grade", "previous_graded_at", "previous_grader", "score", "user_name", "submission_type", "url", "user_id", "workflow_state"]
+    attempt: Optional[StrictInt] = None
+    cached_due_date: Optional[StrictStr] = None
+    custom_grade_status_id: Optional[Any] = None
+    entered_grade: Optional[StrictStr] = None
+    entered_score: Optional[Union[StrictFloat, StrictInt]] = None
+    excused: Optional[StrictBool] = None
+    extra_attempts: Optional[Any] = None
+    grade: Optional[StrictStr] = None
+    grading_period_id: Optional[StrictInt] = None
+    late: Optional[StrictBool] = None
+    late_policy_status: Optional[Any] = None
+    missing: Optional[StrictBool] = None
+    new_score: Optional[Union[StrictFloat, StrictInt]] = None
+    points_deducted: Optional[Union[StrictFloat, StrictInt]] = None
+    posted_at: Optional[StrictStr] = None
+    preview_url: Optional[StrictStr] = None
+    redo_request: Optional[StrictBool] = None
+    seconds_late: Optional[StrictInt] = None
+    sticker: Optional[Any] = None
+    submitted_at: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["assignment_id", "assignment_name", "body", "current_grade", "current_graded_at", "current_grader", "grade_matches_current_submission", "graded_at", "grader", "grader_id", "id", "new_grade", "new_graded_at", "new_grader", "previous_grade", "previous_graded_at", "previous_grader", "score", "user_name", "submission_type", "url", "user_id", "workflow_state", "attempt", "cached_due_date", "custom_grade_status_id", "entered_grade", "entered_score", "excused", "extra_attempts", "grade", "grading_period_id", "late", "late_policy_status", "missing", "new_score", "points_deducted", "posted_at", "preview_url", "redo_request", "seconds_late", "sticker", "submitted_at"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -92,6 +112,131 @@ class SubmissionVersion(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if body (nullable) is None
+        # and model_fields_set contains the field
+        if self.body is None and "body" in self.model_fields_set:
+            _dict['body'] = None
+
+        # set to None if current_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_grade is None and "current_grade" in self.model_fields_set:
+            _dict['current_grade'] = None
+
+        # set to None if current_graded_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_graded_at is None and "current_graded_at" in self.model_fields_set:
+            _dict['current_graded_at'] = None
+
+        # set to None if graded_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.graded_at is None and "graded_at" in self.model_fields_set:
+            _dict['graded_at'] = None
+
+        # set to None if grader_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.grader_id is None and "grader_id" in self.model_fields_set:
+            _dict['grader_id'] = None
+
+        # set to None if previous_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.previous_grade is None and "previous_grade" in self.model_fields_set:
+            _dict['previous_grade'] = None
+
+        # set to None if previous_graded_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.previous_graded_at is None and "previous_graded_at" in self.model_fields_set:
+            _dict['previous_graded_at'] = None
+
+        # set to None if previous_grader (nullable) is None
+        # and model_fields_set contains the field
+        if self.previous_grader is None and "previous_grader" in self.model_fields_set:
+            _dict['previous_grader'] = None
+
+        # set to None if score (nullable) is None
+        # and model_fields_set contains the field
+        if self.score is None and "score" in self.model_fields_set:
+            _dict['score'] = None
+
+        # set to None if submission_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.submission_type is None and "submission_type" in self.model_fields_set:
+            _dict['submission_type'] = None
+
+        # set to None if url (nullable) is None
+        # and model_fields_set contains the field
+        if self.url is None and "url" in self.model_fields_set:
+            _dict['url'] = None
+
+        # set to None if attempt (nullable) is None
+        # and model_fields_set contains the field
+        if self.attempt is None and "attempt" in self.model_fields_set:
+            _dict['attempt'] = None
+
+        # set to None if cached_due_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.cached_due_date is None and "cached_due_date" in self.model_fields_set:
+            _dict['cached_due_date'] = None
+
+        # set to None if custom_grade_status_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.custom_grade_status_id is None and "custom_grade_status_id" in self.model_fields_set:
+            _dict['custom_grade_status_id'] = None
+
+        # set to None if entered_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.entered_grade is None and "entered_grade" in self.model_fields_set:
+            _dict['entered_grade'] = None
+
+        # set to None if entered_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.entered_score is None and "entered_score" in self.model_fields_set:
+            _dict['entered_score'] = None
+
+        # set to None if excused (nullable) is None
+        # and model_fields_set contains the field
+        if self.excused is None and "excused" in self.model_fields_set:
+            _dict['excused'] = None
+
+        # set to None if extra_attempts (nullable) is None
+        # and model_fields_set contains the field
+        if self.extra_attempts is None and "extra_attempts" in self.model_fields_set:
+            _dict['extra_attempts'] = None
+
+        # set to None if grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.grade is None and "grade" in self.model_fields_set:
+            _dict['grade'] = None
+
+        # set to None if grading_period_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.grading_period_id is None and "grading_period_id" in self.model_fields_set:
+            _dict['grading_period_id'] = None
+
+        # set to None if late_policy_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.late_policy_status is None and "late_policy_status" in self.model_fields_set:
+            _dict['late_policy_status'] = None
+
+        # set to None if points_deducted (nullable) is None
+        # and model_fields_set contains the field
+        if self.points_deducted is None and "points_deducted" in self.model_fields_set:
+            _dict['points_deducted'] = None
+
+        # set to None if posted_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.posted_at is None and "posted_at" in self.model_fields_set:
+            _dict['posted_at'] = None
+
+        # set to None if sticker (nullable) is None
+        # and model_fields_set contains the field
+        if self.sticker is None and "sticker" in self.model_fields_set:
+            _dict['sticker'] = None
+
+        # set to None if submitted_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.submitted_at is None and "submitted_at" in self.model_fields_set:
+            _dict['submitted_at'] = None
+
         return _dict
 
     @classmethod
@@ -126,7 +271,27 @@ class SubmissionVersion(BaseModel):
             "submission_type": obj.get("submission_type"),
             "url": obj.get("url"),
             "user_id": obj.get("user_id"),
-            "workflow_state": obj.get("workflow_state")
+            "workflow_state": obj.get("workflow_state"),
+            "attempt": obj.get("attempt"),
+            "cached_due_date": obj.get("cached_due_date"),
+            "custom_grade_status_id": obj.get("custom_grade_status_id"),
+            "entered_grade": obj.get("entered_grade"),
+            "entered_score": obj.get("entered_score"),
+            "excused": obj.get("excused"),
+            "extra_attempts": obj.get("extra_attempts"),
+            "grade": obj.get("grade"),
+            "grading_period_id": obj.get("grading_period_id"),
+            "late": obj.get("late"),
+            "late_policy_status": obj.get("late_policy_status"),
+            "missing": obj.get("missing"),
+            "new_score": obj.get("new_score"),
+            "points_deducted": obj.get("points_deducted"),
+            "posted_at": obj.get("posted_at"),
+            "preview_url": obj.get("preview_url"),
+            "redo_request": obj.get("redo_request"),
+            "seconds_late": obj.get("seconds_late"),
+            "sticker": obj.get("sticker"),
+            "submitted_at": obj.get("submitted_at")
         })
         return _obj
 

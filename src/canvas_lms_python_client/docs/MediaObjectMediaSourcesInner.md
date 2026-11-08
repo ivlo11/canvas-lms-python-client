@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **content_type** | **str** | The flavor&#39;s content type | [optional] 
 **container_format** | **str** | The flavor&#39;s container format | [optional] 
 **url** | **str** | The URL to download the flavor | [optional] 
-**bitrate** | **str** | The flavor&#39;s bitrate | [optional] 
+**bitrate** | [**MediaObjectMediaSourcesInnerBitrate**](MediaObjectMediaSourcesInnerBitrate.md) |  | [optional] 
 **size** | **str** | The flavor&#39;s size | [optional] 
 **is_original** | **str** | Whether the flavor is the original upload (\&quot;1\&quot;) or not (\&quot;0\&quot;) | [optional] 
 **file_ext** | **str** | The flavor&#39;s file extension | [optional] 

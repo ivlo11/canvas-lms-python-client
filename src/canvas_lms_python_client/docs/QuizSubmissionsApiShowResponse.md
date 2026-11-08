@@ -1,12 +1,16 @@
 # QuizSubmissionsApiShowResponse
 
-Paginated `quiz_submissions` list response (from the Canvas example response).
+Object response with `quiz_submissions`, `quizzes`, `submissions`, `users`, `meta` (from the Canvas `@returns`).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **quiz_submissions** | [**List[QuizSubmission]**](QuizSubmission.md) |  | [optional] 
+**quizzes** | [**List[Quiz]**](Quiz.md) |  | [optional] 
+**submissions** | [**List[Submission]**](Submission.md) |  | [optional] 
+**users** | [**List[User]**](User.md) |  | [optional] 
+**meta** | **object** |  | [optional] 
 
 ## Example
 

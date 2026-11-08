@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **learning_mastery_gradebook_settings_api_show**
-> List[object] learning_mastery_gradebook_settings_api_show(course_id)
+> LearningMasteryGradebookSettingsApiShowResponse learning_mastery_gradebook_settings_api_show(course_id)
 
 Get Learning Mastery Gradebook Settings
 
@@ -21,6 +21,7 @@ Get the current user's Learning Mastery Gradebook settings for the current conte
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.learning_mastery_gradebook_settings_api_show_response import LearningMasteryGradebookSettingsApiShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -66,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**LearningMasteryGradebookSettingsApiShowResponse**](LearningMasteryGradebookSettingsApiShowResponse.md)
 
 ### Authorization
 
@@ -86,7 +87,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **learning_mastery_gradebook_settings_api_update**
-> List[object] learning_mastery_gradebook_settings_api_update(course_id)
+> LearningMasteryGradebookSettingsApiUpdateResponse learning_mastery_gradebook_settings_api_update(course_id)
 
 Update Learning Mastery Gradebook Settings
 
@@ -98,6 +99,7 @@ Update the current user's Learning Mastery Gradebook settings for the current co
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.learning_mastery_gradebook_settings_api_update_response import LearningMasteryGradebookSettingsApiUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -143,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**LearningMasteryGradebookSettingsApiUpdateResponse**](LearningMasteryGradebookSettingsApiUpdateResponse.md)
 
 ### Authorization
 

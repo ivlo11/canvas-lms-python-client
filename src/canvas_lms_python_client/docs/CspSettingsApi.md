@@ -173,7 +173,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **csp_settings_get_csp_settings**
-> csp_settings_get_csp_settings(course_id)
+> CspSettingsGetCspSettingsResponse csp_settings_get_csp_settings(course_id)
 
 Get current settings for account or course
 
@@ -185,6 +185,7 @@ Update multiple modules in an account.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.csp_settings_get_csp_settings_response import CspSettingsGetCspSettingsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -212,7 +213,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get current settings for account or course
-        await api_instance.csp_settings_get_csp_settings(course_id)
+        api_response = await api_instance.csp_settings_get_csp_settings(course_id)
+        print("The response of CspSettingsApi->csp_settings_get_csp_settings:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CspSettingsApi->csp_settings_get_csp_settings: %s\n" % e)
 ```
@@ -228,7 +231,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CspSettingsGetCspSettingsResponse**](CspSettingsGetCspSettingsResponse.md)
 
 ### Authorization
 
@@ -237,18 +240,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get current settings for account or course |  -  |
+**0** | CspSettingsGetCspSettingsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **csp_settings_get_csp_settings_for_accounts**
-> csp_settings_get_csp_settings_for_accounts(account_id)
+> CspSettingsGetCspSettingsResponse csp_settings_get_csp_settings_for_accounts(account_id)
 
 Get current settings for account or course
 
@@ -260,6 +263,7 @@ Update multiple modules in an account.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.csp_settings_get_csp_settings_response import CspSettingsGetCspSettingsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -287,7 +291,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get current settings for account or course
-        await api_instance.csp_settings_get_csp_settings_for_accounts(account_id)
+        api_response = await api_instance.csp_settings_get_csp_settings_for_accounts(account_id)
+        print("The response of CspSettingsApi->csp_settings_get_csp_settings_for_accounts:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CspSettingsApi->csp_settings_get_csp_settings_for_accounts: %s\n" % e)
 ```
@@ -303,7 +309,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CspSettingsGetCspSettingsResponse**](CspSettingsGetCspSettingsResponse.md)
 
 ### Authorization
 
@@ -312,13 +318,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get current settings for account or course |  -  |
+**0** | CspSettingsGetCspSettingsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

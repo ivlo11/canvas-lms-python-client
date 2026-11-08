@@ -83,6 +83,16 @@ class LearningObjectDatesPeerReviewSubAssignment(BaseModel):
             for _item_overrides in self.overrides:
                 _items.append(_item_overrides.to_dict() if _item_overrides is not None else None)
             _dict['overrides'] = _items
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
         return _dict
 
     @classmethod

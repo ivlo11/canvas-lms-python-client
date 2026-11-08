@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **rubric_associations_create**
-> RubricAssociation rubric_associations_create(course_id, rubric_associations_create_request=rubric_associations_create_request)
+> RubricAssociationsCreateResponse rubric_associations_create(course_id, rubric_associations_create_request=rubric_associations_create_request)
 
 Create a RubricAssociation
 
@@ -22,8 +22,8 @@ Returns the rubric with the given id.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.rubric_association import RubricAssociation
 from canvas_lms_python_client.models.rubric_associations_create_request import RubricAssociationsCreateRequest
+from canvas_lms_python_client.models.rubric_associations_create_response import RubricAssociationsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RubricAssociation**](RubricAssociation.md)
+[**RubricAssociationsCreateResponse**](RubricAssociationsCreateResponse.md)
 
 ### Authorization
 
@@ -86,12 +86,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | RubricAssociation |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubric_associations_destroy**
-> RubricAssociation rubric_associations_destroy(course_id, id)
+> RubricAssociationsDestroyResponse rubric_associations_destroy(course_id, id)
 
 Delete a RubricAssociation
 
@@ -103,7 +103,7 @@ Delete the RubricAssociation with the given ID
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.rubric_association import RubricAssociation
+from canvas_lms_python_client.models.rubric_associations_destroy_response import RubricAssociationsDestroyResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -151,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RubricAssociation**](RubricAssociation.md)
+[**RubricAssociationsDestroyResponse**](RubricAssociationsDestroyResponse.md)
 
 ### Authorization
 
@@ -166,12 +166,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | RubricAssociation |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubric_associations_update**
-> RubricAssociation rubric_associations_update(course_id, id, rubric_associations_create_request=rubric_associations_create_request)
+> RubricAssociationsUpdateResponse rubric_associations_update(course_id, id, rubric_associations_create_request=rubric_associations_create_request)
 
 Update a RubricAssociation
 
@@ -183,8 +183,8 @@ Returns the rubric with the given id.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.rubric_association import RubricAssociation
 from canvas_lms_python_client.models.rubric_associations_create_request import RubricAssociationsCreateRequest
+from canvas_lms_python_client.models.rubric_associations_update_response import RubricAssociationsUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -234,7 +234,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RubricAssociation**](RubricAssociation.md)
+[**RubricAssociationsUpdateResponse**](RubricAssociationsUpdateResponse.md)
 
 ### Authorization
 
@@ -249,7 +249,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | RubricAssociation |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

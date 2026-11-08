@@ -1228,7 +1228,7 @@ class GroupCategoriesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> GroupCategory:
         """Delete a Group Category
 
         Deletes a group category and all groups under it. Protected group categories can not be deleted, i.e. \"communities\" and \"student_organized\".
@@ -1267,6 +1267,7 @@ class GroupCategoriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GroupCategory",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1294,7 +1295,7 @@ class GroupCategoriesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[GroupCategory]:
         """Delete a Group Category
 
         Deletes a group category and all groups under it. Protected group categories can not be deleted, i.e. \"communities\" and \"student_organized\".
@@ -1333,6 +1334,7 @@ class GroupCategoriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GroupCategory",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1400,6 +1402,7 @@ class GroupCategoriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GroupCategory",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1440,6 +1443,13 @@ class GroupCategoriesApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

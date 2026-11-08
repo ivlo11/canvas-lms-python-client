@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **peer_reviews_api_allocate**
-> PeerReview peer_reviews_api_allocate(assignment_id, course_id)
+> List[PeerReview] peer_reviews_api_allocate(assignment_id, course_id)
 
 Allocate Peer Review
 
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PeerReview**](PeerReview.md)
+[**List[PeerReview]**](PeerReview.md)
 
 ### Authorization
 
@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | PeerReview |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

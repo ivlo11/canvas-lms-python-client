@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **provisional_grades_bulk_select**
-> provisional_grades_bulk_select(assignment_id, course_id)
+> List[ProvisionalGradesBulkSelectResponse] provisional_grades_bulk_select(assignment_id, course_id)
 
 Bulk select provisional grades
 
@@ -24,6 +24,7 @@ The caller must be the final grader for the assignment or an admin with :select_
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.provisional_grades_bulk_select_response import ProvisionalGradesBulkSelectResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -52,7 +53,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Bulk select provisional grades
-        await api_instance.provisional_grades_bulk_select(assignment_id, course_id)
+        api_response = await api_instance.provisional_grades_bulk_select(assignment_id, course_id)
+        print("The response of ProvisionalGradesApi->provisional_grades_bulk_select:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ProvisionalGradesApi->provisional_grades_bulk_select: %s\n" % e)
 ```
@@ -69,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[ProvisionalGradesBulkSelectResponse]**](ProvisionalGradesBulkSelectResponse.md)
 
 ### Authorization
 
@@ -84,12 +87,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Bulk select provisional grades |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **provisional_grades_publish**
-> provisional_grades_publish(assignment_id, course_id)
+> ProvisionalGradesPublishResponse provisional_grades_publish(assignment_id, course_id)
 
 Publish provisional grades for an assignment
 
@@ -107,6 +110,7 @@ WARNING: This is irreversible. This will overwrite existing grades in the gradeb
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.provisional_grades_publish_response import ProvisionalGradesPublishResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -135,7 +139,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Publish provisional grades for an assignment
-        await api_instance.provisional_grades_publish(assignment_id, course_id)
+        api_response = await api_instance.provisional_grades_publish(assignment_id, course_id)
+        print("The response of ProvisionalGradesApi->provisional_grades_publish:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ProvisionalGradesApi->provisional_grades_publish: %s\n" % e)
 ```
@@ -152,7 +158,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ProvisionalGradesPublishResponse**](ProvisionalGradesPublishResponse.md)
 
 ### Authorization
 
@@ -161,18 +167,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Publish provisional grades for an assignment |  -  |
+**0** | ProvisionalGradesPublishResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **provisional_grades_select**
-> provisional_grades_select(assignment_id, course_id, provisional_grade_id)
+> ProvisionalGradesBulkSelectResponse provisional_grades_select(assignment_id, course_id, provisional_grade_id)
 
 Select provisional grade
 
@@ -185,6 +191,7 @@ The caller must be the final grader for the assignment or an admin with :select_
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.provisional_grades_bulk_select_response import ProvisionalGradesBulkSelectResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -214,7 +221,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Select provisional grade
-        await api_instance.provisional_grades_select(assignment_id, course_id, provisional_grade_id)
+        api_response = await api_instance.provisional_grades_select(assignment_id, course_id, provisional_grade_id)
+        print("The response of ProvisionalGradesApi->provisional_grades_select:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ProvisionalGradesApi->provisional_grades_select: %s\n" % e)
 ```
@@ -232,7 +241,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ProvisionalGradesBulkSelectResponse**](ProvisionalGradesBulkSelectResponse.md)
 
 ### Authorization
 
@@ -247,12 +256,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Select provisional grade |  -  |
+**0** | ProvisionalGradesBulkSelectResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **provisional_grades_status**
-> provisional_grades_status(assignment_id, course_id, student_id=student_id)
+> ProvisionalGradesStatusResponse provisional_grades_status(assignment_id, course_id, student_id=student_id)
 
 Show provisional grade status for a student
 
@@ -264,6 +273,7 @@ Tell whether the student's submission needs one or more provisional grades.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.provisional_grades_status_response import ProvisionalGradesStatusResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -293,7 +303,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Show provisional grade status for a student
-        await api_instance.provisional_grades_status(assignment_id, course_id, student_id=student_id)
+        api_response = await api_instance.provisional_grades_status(assignment_id, course_id, student_id=student_id)
+        print("The response of ProvisionalGradesApi->provisional_grades_status:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ProvisionalGradesApi->provisional_grades_status: %s\n" % e)
 ```
@@ -311,7 +323,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ProvisionalGradesStatusResponse**](ProvisionalGradesStatusResponse.md)
 
 ### Authorization
 
@@ -326,7 +338,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Show provisional grade status for a student |  -  |
+**0** | ProvisionalGradesStatusResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

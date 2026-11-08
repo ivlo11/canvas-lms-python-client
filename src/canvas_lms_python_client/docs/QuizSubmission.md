@@ -24,6 +24,12 @@ Name | Type | Description | Notes
 **has_seen_results** | **bool** | Whether the student has viewed their results to the quiz. | [optional] 
 **workflow_state** | **str** | The current state of the quiz submission. Possible values: [&#39;untaken&#39;|&#39;pending_review&#39;|&#39;complete&#39;|&#39;settings_only&#39;|&#39;preview&#39;]. | [optional] 
 **overdue_and_needs_submission** | **bool** | Indicates whether the quiz submission is overdue and needs submission | [optional] 
+**attempts_left** | **int** |  | [optional] 
+**html_url** | **str** |  | [optional] 
+**quiz_points_possible** | **float** |  | [optional] 
+**quiz_version** | **int** |  | [optional] 
+**result_url** | **str** |  | [optional] 
+**validation_token** | **str** |  | [optional] 
 
 ## Example
 

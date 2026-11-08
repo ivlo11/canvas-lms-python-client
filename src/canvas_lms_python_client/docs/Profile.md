@@ -23,6 +23,10 @@ Name | Type | Description | Notes
 **locale** | **str** | The users locale. | [optional] 
 **k5_user** | **bool** | Optional: Whether or not the user is a K5 user. This field is nil if the user settings are not for the user making the request. | [optional] 
 **use_classic_font_in_k5** | **bool** | Optional: Whether or not the user should see the classic font on the dashboard. Only applies if k5_user is true. This field is nil if the user settings are not for the user making the request. | [optional] 
+**effective_locale** | **str** |  | [optional] 
+**integration_id** | **str** |  | [optional] 
+**links** | **List[object]** |  | [optional] 
+**user_services** | **List[object]** |  | [optional] 
 
 ## Example
 

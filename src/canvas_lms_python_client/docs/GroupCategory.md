@@ -18,6 +18,20 @@ Name | Type | Description | Notes
 **sis_import_id** | **int** | The unique identifier for the SIS import. This field is only included if the user has permission to manage SIS information. | [optional] 
 **progress** | [**Progress**](Progress.md) |  | [optional] 
 **non_collaborative** | **bool** | Indicates whether this group category is non-collaborative. A value of true means these group categories rely on the manage_tags permissions and do not have collaborative features | [optional] 
+**allows_multiple_memberships** | **bool** |  | [optional] 
+**course_id** | **int** |  | [optional] 
+**created_at** | **str** |  | [optional] 
+**is_member** | **bool** |  | [optional] 
+**protected** | **bool** |  | [optional] 
+**self_signup_end_at** | **object** |  | [optional] 
+**groups_count** | **int** |  | [optional] 
+**unassigned_users_count** | **int** |  | [optional] 
+**context_id** | **int** |  | [optional] 
+**deleted_at** | **str** |  | [optional] 
+**root_account_id** | **int** |  | [optional] 
+**sis_batch_id** | **int** |  | [optional] 
+**sis_source_id** | **str** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
 
 ## Example
 

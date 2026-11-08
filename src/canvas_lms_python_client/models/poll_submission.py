@@ -32,7 +32,8 @@ class PollSubmission(BaseModel):
     poll_choice_id: StrictStr = Field(description="The unique identifier of the poll choice chosen for this submission.", json_schema_extra={"examples": ["155"]})
     user_id: Optional[StrictStr] = Field(default=None, description="the unique identifier of the user who submitted this poll submission.", json_schema_extra={"examples": ["4555"]})
     created_at: Optional[datetime] = Field(default=None, description="The date and time the poll submission was submitted.", json_schema_extra={"examples": ["2013-11-07T13:16:18Z"]})
-    __properties: ClassVar[List[str]] = ["id", "poll_choice_id", "user_id", "created_at"]
+    poll_session_id: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "poll_choice_id", "user_id", "created_at", "poll_session_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,7 +89,8 @@ class PollSubmission(BaseModel):
             "id": obj.get("id"),
             "poll_choice_id": obj.get("poll_choice_id"),
             "user_id": obj.get("user_id"),
-            "created_at": obj.get("created_at")
+            "created_at": obj.get("created_at"),
+            "poll_session_id": obj.get("poll_session_id")
         })
         return _obj
 

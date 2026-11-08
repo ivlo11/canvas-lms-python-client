@@ -19,6 +19,10 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.account import Account
+from canvas_lms_python_client.models.accounts_environment_response import AccountsEnvironmentResponse
+from canvas_lms_python_client.models.accounts_permissions_response import AccountsPermissionsResponse
+from canvas_lms_python_client.models.accounts_remove_user_response import AccountsRemoveUserResponse
+from canvas_lms_python_client.models.accounts_show_settings_response import AccountsShowSettingsResponse
 from canvas_lms_python_client.models.accounts_update_request import AccountsUpdateRequest
 from canvas_lms_python_client.models.accounts_update_users_request import AccountsUpdateUsersRequest
 from canvas_lms_python_client.models.course import Course
@@ -2130,7 +2134,7 @@ class AccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AccountsEnvironmentResponse:
         """List environment settings
 
         Return a hash of global settings for the root account This is the same information supplied to the web interface as +ENV.SETTINGS+.
@@ -2166,6 +2170,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountsEnvironmentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2192,7 +2197,7 @@ class AccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AccountsEnvironmentResponse]:
         """List environment settings
 
         Return a hash of global settings for the root account This is the same information supplied to the web interface as +ENV.SETTINGS+.
@@ -2228,6 +2233,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountsEnvironmentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2291,6 +2297,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountsEnvironmentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4455,7 +4462,7 @@ class AccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AccountsPermissionsResponse:
         """Permissions
 
         Returns permission information for the calling user and the given account. You may use `self` as the account id to check permissions against the domain root account. The caller must have an account role or admin (teacher/TA/designer) enrollment in a course in the account.  See also the {api:CoursesController#permissions Course} and {api:GroupsController#permissions Group} counterparts.
@@ -4497,6 +4504,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountsPermissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4525,7 +4533,7 @@ class AccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AccountsPermissionsResponse]:
         """Permissions
 
         Returns permission information for the calling user and the given account. You may use `self` as the account id to check permissions against the domain root account. The caller must have an account role or admin (teacher/TA/designer) enrollment in a course in the account.  See also the {api:CoursesController#permissions Course} and {api:GroupsController#permissions Group} counterparts.
@@ -4567,6 +4575,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountsPermissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4638,6 +4647,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountsPermissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4733,7 +4743,7 @@ class AccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> User:
+    ) -> AccountsRemoveUserResponse:
         """Delete a user from the root account
 
         Delete a user record from a Canvas root account. If a user is associated with multiple root accounts (in a multi-tenant instance of Canvas), this action will NOT remove them from the other accounts.  WARNING: This API will allow a user to remove themselves from the account. If they do this, they won't be able to make API calls or log into Canvas at that account.
@@ -4775,7 +4785,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "User",
+            'default': "AccountsRemoveUserResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4804,7 +4814,7 @@ class AccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[User]:
+    ) -> ApiResponse[AccountsRemoveUserResponse]:
         """Delete a user from the root account
 
         Delete a user record from a Canvas root account. If a user is associated with multiple root accounts (in a multi-tenant instance of Canvas), this action will NOT remove them from the other accounts.  WARNING: This API will allow a user to remove themselves from the account. If they do this, they won't be able to make API calls or log into Canvas at that account.
@@ -4846,7 +4856,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "User",
+            'default': "AccountsRemoveUserResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4918,7 +4928,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "User",
+            'default': "AccountsRemoveUserResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5814,7 +5824,7 @@ class AccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AccountsShowSettingsResponse:
         """Settings
 
         Returns a JSON object containing a subset of settings for the specified account. It's possible an empty set will be returned if no settings are applicable. The caller must be an Account admin with the manage_account_settings permission.
@@ -5853,6 +5863,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountsShowSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5880,7 +5891,7 @@ class AccountsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AccountsShowSettingsResponse]:
         """Settings
 
         Returns a JSON object containing a subset of settings for the specified account. It's possible an empty set will be returned if no settings are applicable. The caller must be an Account admin with the manage_account_settings permission.
@@ -5919,6 +5930,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountsShowSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5986,6 +5998,7 @@ class AccountsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountsShowSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

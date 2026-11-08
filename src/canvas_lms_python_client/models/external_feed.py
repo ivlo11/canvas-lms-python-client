@@ -34,7 +34,8 @@ class ExternalFeed(BaseModel):
     header_match: Optional[StrictStr] = Field(default=None, description="If not null, only feed entries whose title contains this string will trigger new posts in Canvas", json_schema_extra={"examples": ["pattern"]})
     created_at: Optional[datetime] = Field(default=None, description="When this external feed was added to Canvas", json_schema_extra={"examples": ["2012-06-01T00:00:00-06:00"]})
     verbosity: Optional[StrictStr] = Field(default=None, description="The verbosity setting determines how much of the feed's content is imported into Canvas as part of the posting. 'link_only' means that only the title and a link to the item. 'truncate' means that a summary of the first portion of the item body will be used. 'full' means that the full item body will be used.", json_schema_extra={"examples": ["truncate"]})
-    __properties: ClassVar[List[str]] = ["id", "display_name", "url", "header_match", "created_at", "verbosity"]
+    external_feed_entries_count: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id", "display_name", "url", "header_match", "created_at", "verbosity", "external_feed_entries_count"]
 
     @field_validator('verbosity')
     def verbosity_validate_enum(cls, value):
@@ -85,6 +86,11 @@ class ExternalFeed(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if header_match (nullable) is None
+        # and model_fields_set contains the field
+        if self.header_match is None and "header_match" in self.model_fields_set:
+            _dict['header_match'] = None
+
         return _dict
 
     @classmethod
@@ -102,7 +108,8 @@ class ExternalFeed(BaseModel):
             "url": obj.get("url"),
             "header_match": obj.get("header_match"),
             "created_at": obj.get("created_at"),
-            "verbosity": obj.get("verbosity")
+            "verbosity": obj.get("verbosity"),
+            "external_feed_entries_count": obj.get("external_feed_entries_count")
         })
         return _obj
 

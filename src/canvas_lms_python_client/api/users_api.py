@@ -19,16 +19,28 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.assignment import Assignment
+from canvas_lms_python_client.models.calendar_event import CalendarEvent
 from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.models.todo_item import TodoItem
 from canvas_lms_python_client.models.user import User
+from canvas_lms_python_client.models.users_activity_stream_response import UsersActivityStreamResponse
+from canvas_lms_python_client.models.users_activity_stream_summary_response import UsersActivityStreamSummaryResponse
+from canvas_lms_python_client.models.users_create_file_response import UsersCreateFileResponse
 from canvas_lms_python_client.models.users_create_request import UsersCreateRequest
 from canvas_lms_python_client.models.users_create_self_registered_user_request import UsersCreateSelfRegisteredUserRequest
+from canvas_lms_python_client.models.users_get_custom_color_response import UsersGetCustomColorResponse
+from canvas_lms_python_client.models.users_get_custom_colors_response import UsersGetCustomColorsResponse
+from canvas_lms_python_client.models.users_get_dashboard_positions_response import UsersGetDashboardPositionsResponse
+from canvas_lms_python_client.models.users_ignore_stream_item_response import UsersIgnoreStreamItemResponse
 from canvas_lms_python_client.models.users_pandata_events_token_request import UsersPandataEventsTokenRequest
+from canvas_lms_python_client.models.users_pandata_events_token_response import UsersPandataEventsTokenResponse
 from canvas_lms_python_client.models.users_set_custom_color_request import UsersSetCustomColorRequest
 from canvas_lms_python_client.models.users_set_files_ui_version_preference_request import UsersSetFilesUiVersionPreferenceRequest
 from canvas_lms_python_client.models.users_set_text_editor_preference_request import UsersSetTextEditorPreferenceRequest
 from canvas_lms_python_client.models.users_settings_for_users_request import UsersSettingsForUsersRequest
+from canvas_lms_python_client.models.users_settings_response import UsersSettingsResponse
+from canvas_lms_python_client.models.users_terminate_sessions_response import UsersTerminateSessionsResponse
+from canvas_lms_python_client.models.users_todo_item_count_response import UsersTodoItemCountResponse
 from canvas_lms_python_client.models.users_update_request import UsersUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -54,6 +66,8 @@ class UsersApi:
     async def users_activity_stream(
         self,
         only_active_courses: Annotated[Optional[StrictBool], Field(description="If true, will only return objects for courses the user is actively participating in")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -66,13 +80,18 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+        _page_url: Optional[StrictStr] = None,
+    ) -> List[UsersActivityStreamResponse]:
         """List the activity stream
 
         Returns the current user's global activity stream, paginated.  There are many types of objects that can be returned in the activity stream. All object types have the same basic set of shared attributes:   !!!javascript   {     'created_at': '2011-07-13T09:12:00Z',     'updated_at': '2011-07-25T08:52:41Z',     'id': 1234,     'title': 'Stream Item Subject',     'message': 'This is the body text of the activity stream item. It is plain-text, and can be multiple paragraphs.',     'type': 'DiscussionTopic|Conversation|Message|Submission|Conference|Collaboration|AssessmentRequest...',     'read_state': false,     'context_type': 'course', // course|group     'course_id': 1,     'group_id': null,     'html_url': \"http://...\" // URL to the Canvas web UI for this stream item   }  In addition, each item type has its own set of attributes available.  DiscussionTopic:    !!!javascript   {     'type': 'DiscussionTopic',     'discussion_topic_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': true,     'root_discussion_entries': {       ...     }   }  For DiscussionTopic, the message is truncated at 4kb.  Announcement:    !!!javascript   {     'type': 'Announcement',     'announcement_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': null,     'root_discussion_entries': {       ...     }   }  For Announcement, the message is truncated at 4kb.  Conversation:    !!!javascript   {     'type': 'Conversation',     'conversation_id': 1234,     'private': false,     'participant_count': 3,   }  Message:    !!!javascript   {     'type': 'Message',     'message_id': 1234,     'notification_category': 'Assignment Graded'   }  Submission:  Returns an {api:Submissions:Submission Submission} with its Course and Assignment data.  Conference:    !!!javascript   {     'type': 'Conference',     'web_conference_id': 1234   }  Collaboration:    !!!javascript   {     'type': 'Collaboration',     'collaboration_id': 1234   }  AssessmentRequest:    !!!javascript   {     'type': 'AssessmentRequest',     'assessment_request_id': 1234   }
 
         :param only_active_courses: If true, will only return objects for courses the user is actively participating in
         :type only_active_courses: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -92,19 +111,28 @@ class UsersApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._users_activity_stream_serialize(
             only_active_courses=only_active_courses,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -116,10 +144,13 @@ class UsersApi:
             response_types_map=_response_types_map,
         ).data
 
+
     @validate_call
-    async def users_activity_stream_with_http_info(
+    async def users_activity_stream_paginated(
         self,
         only_active_courses: Annotated[Optional[StrictBool], Field(description="If true, will only return objects for courses the user is actively participating in")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -132,13 +163,18 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+        _page_url: Optional[StrictStr] = None,
+    ) -> AsyncIterator[List[UsersActivityStreamResponse]]:
         """List the activity stream
 
         Returns the current user's global activity stream, paginated.  There are many types of objects that can be returned in the activity stream. All object types have the same basic set of shared attributes:   !!!javascript   {     'created_at': '2011-07-13T09:12:00Z',     'updated_at': '2011-07-25T08:52:41Z',     'id': 1234,     'title': 'Stream Item Subject',     'message': 'This is the body text of the activity stream item. It is plain-text, and can be multiple paragraphs.',     'type': 'DiscussionTopic|Conversation|Message|Submission|Conference|Collaboration|AssessmentRequest...',     'read_state': false,     'context_type': 'course', // course|group     'course_id': 1,     'group_id': null,     'html_url': \"http://...\" // URL to the Canvas web UI for this stream item   }  In addition, each item type has its own set of attributes available.  DiscussionTopic:    !!!javascript   {     'type': 'DiscussionTopic',     'discussion_topic_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': true,     'root_discussion_entries': {       ...     }   }  For DiscussionTopic, the message is truncated at 4kb.  Announcement:    !!!javascript   {     'type': 'Announcement',     'announcement_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': null,     'root_discussion_entries': {       ...     }   }  For Announcement, the message is truncated at 4kb.  Conversation:    !!!javascript   {     'type': 'Conversation',     'conversation_id': 1234,     'private': false,     'participant_count': 3,   }  Message:    !!!javascript   {     'type': 'Message',     'message_id': 1234,     'notification_category': 'Assignment Graded'   }  Submission:  Returns an {api:Submissions:Submission Submission} with its Course and Assignment data.  Conference:    !!!javascript   {     'type': 'Conference',     'web_conference_id': 1234   }  Collaboration:    !!!javascript   {     'type': 'Collaboration',     'collaboration_id': 1234   }  AssessmentRequest:    !!!javascript   {     'type': 'AssessmentRequest',     'assessment_request_id': 1234   }
 
         :param only_active_courses: If true, will only return objects for courses the user is actively participating in
         :type only_active_courses: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -158,19 +194,237 @@ class UsersApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._users_activity_stream_serialize(
             only_active_courses=only_active_courses,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamResponse]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout,
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            yield _page_data
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+
+    @validate_call
+    async def users_activity_stream_all(
+        self,
+        only_active_courses: Annotated[Optional[StrictBool], Field(description="If true, will only return objects for courses the user is actively participating in")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> AsyncIterator[UsersActivityStreamResponse]:
+        """List the activity stream
+
+        Returns the current user's global activity stream, paginated.  There are many types of objects that can be returned in the activity stream. All object types have the same basic set of shared attributes:   !!!javascript   {     'created_at': '2011-07-13T09:12:00Z',     'updated_at': '2011-07-25T08:52:41Z',     'id': 1234,     'title': 'Stream Item Subject',     'message': 'This is the body text of the activity stream item. It is plain-text, and can be multiple paragraphs.',     'type': 'DiscussionTopic|Conversation|Message|Submission|Conference|Collaboration|AssessmentRequest...',     'read_state': false,     'context_type': 'course', // course|group     'course_id': 1,     'group_id': null,     'html_url': \"http://...\" // URL to the Canvas web UI for this stream item   }  In addition, each item type has its own set of attributes available.  DiscussionTopic:    !!!javascript   {     'type': 'DiscussionTopic',     'discussion_topic_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': true,     'root_discussion_entries': {       ...     }   }  For DiscussionTopic, the message is truncated at 4kb.  Announcement:    !!!javascript   {     'type': 'Announcement',     'announcement_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': null,     'root_discussion_entries': {       ...     }   }  For Announcement, the message is truncated at 4kb.  Conversation:    !!!javascript   {     'type': 'Conversation',     'conversation_id': 1234,     'private': false,     'participant_count': 3,   }  Message:    !!!javascript   {     'type': 'Message',     'message_id': 1234,     'notification_category': 'Assignment Graded'   }  Submission:  Returns an {api:Submissions:Submission Submission} with its Course and Assignment data.  Conference:    !!!javascript   {     'type': 'Conference',     'web_conference_id': 1234   }  Collaboration:    !!!javascript   {     'type': 'Collaboration',     'collaboration_id': 1234   }  AssessmentRequest:    !!!javascript   {     'type': 'AssessmentRequest',     'assessment_request_id': 1234   }
+
+        :param only_active_courses: If true, will only return objects for courses the user is actively participating in
+        :type only_active_courses: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._users_activity_stream_serialize(
+            only_active_courses=only_active_courses,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamResponse]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            for _item in _page_data:
+                yield _item
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def users_activity_stream_with_http_info(
+        self,
+        only_active_courses: Annotated[Optional[StrictBool], Field(description="If true, will only return objects for courses the user is actively participating in")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[List[UsersActivityStreamResponse]]:
+        """List the activity stream
+
+        Returns the current user's global activity stream, paginated.  There are many types of objects that can be returned in the activity stream. All object types have the same basic set of shared attributes:   !!!javascript   {     'created_at': '2011-07-13T09:12:00Z',     'updated_at': '2011-07-25T08:52:41Z',     'id': 1234,     'title': 'Stream Item Subject',     'message': 'This is the body text of the activity stream item. It is plain-text, and can be multiple paragraphs.',     'type': 'DiscussionTopic|Conversation|Message|Submission|Conference|Collaboration|AssessmentRequest...',     'read_state': false,     'context_type': 'course', // course|group     'course_id': 1,     'group_id': null,     'html_url': \"http://...\" // URL to the Canvas web UI for this stream item   }  In addition, each item type has its own set of attributes available.  DiscussionTopic:    !!!javascript   {     'type': 'DiscussionTopic',     'discussion_topic_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': true,     'root_discussion_entries': {       ...     }   }  For DiscussionTopic, the message is truncated at 4kb.  Announcement:    !!!javascript   {     'type': 'Announcement',     'announcement_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': null,     'root_discussion_entries': {       ...     }   }  For Announcement, the message is truncated at 4kb.  Conversation:    !!!javascript   {     'type': 'Conversation',     'conversation_id': 1234,     'private': false,     'participant_count': 3,   }  Message:    !!!javascript   {     'type': 'Message',     'message_id': 1234,     'notification_category': 'Assignment Graded'   }  Submission:  Returns an {api:Submissions:Submission Submission} with its Course and Assignment data.  Conference:    !!!javascript   {     'type': 'Conference',     'web_conference_id': 1234   }  Collaboration:    !!!javascript   {     'type': 'Collaboration',     'collaboration_id': 1234   }  AssessmentRequest:    !!!javascript   {     'type': 'AssessmentRequest',     'assessment_request_id': 1234   }
+
+        :param only_active_courses: If true, will only return objects for courses the user is actively participating in
+        :type only_active_courses: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._users_activity_stream_serialize(
+            only_active_courses=only_active_courses,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -187,6 +441,8 @@ class UsersApi:
     async def users_activity_stream_without_preload_content(
         self,
         only_active_courses: Annotated[Optional[StrictBool], Field(description="If true, will only return objects for courses the user is actively participating in")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -199,6 +455,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
     ) -> RESTResponseType:
         """List the activity stream
 
@@ -206,6 +463,10 @@ class UsersApi:
 
         :param only_active_courses: If true, will only return objects for courses the user is actively participating in
         :type only_active_courses: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -225,19 +486,28 @@ class UsersApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._users_activity_stream_serialize(
             only_active_courses=only_active_courses,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -249,6 +519,8 @@ class UsersApi:
     def _users_activity_stream_serialize(
         self,
         only_active_courses,
+        page,
+        per_page,
         _request_auth,
         _content_type,
         _headers,
@@ -275,11 +547,26 @@ class UsersApi:
             
             _query_params.append(('only_active_courses', only_active_courses))
             
+        if page is not None:
+            
+            _query_params.append(('page', page))
+            
+        if per_page is not None:
+            
+            _query_params.append(('per_page', per_page))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -309,6 +596,8 @@ class UsersApi:
     async def users_activity_stream_for_other(
         self,
         only_active_courses: Annotated[Optional[StrictBool], Field(description="If true, will only return objects for courses the user is actively participating in")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -321,13 +610,18 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+        _page_url: Optional[StrictStr] = None,
+    ) -> List[UsersActivityStreamResponse]:
         """List the activity stream
 
         Returns the current user's global activity stream, paginated.  There are many types of objects that can be returned in the activity stream. All object types have the same basic set of shared attributes:   !!!javascript   {     'created_at': '2011-07-13T09:12:00Z',     'updated_at': '2011-07-25T08:52:41Z',     'id': 1234,     'title': 'Stream Item Subject',     'message': 'This is the body text of the activity stream item. It is plain-text, and can be multiple paragraphs.',     'type': 'DiscussionTopic|Conversation|Message|Submission|Conference|Collaboration|AssessmentRequest...',     'read_state': false,     'context_type': 'course', // course|group     'course_id': 1,     'group_id': null,     'html_url': \"http://...\" // URL to the Canvas web UI for this stream item   }  In addition, each item type has its own set of attributes available.  DiscussionTopic:    !!!javascript   {     'type': 'DiscussionTopic',     'discussion_topic_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': true,     'root_discussion_entries': {       ...     }   }  For DiscussionTopic, the message is truncated at 4kb.  Announcement:    !!!javascript   {     'type': 'Announcement',     'announcement_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': null,     'root_discussion_entries': {       ...     }   }  For Announcement, the message is truncated at 4kb.  Conversation:    !!!javascript   {     'type': 'Conversation',     'conversation_id': 1234,     'private': false,     'participant_count': 3,   }  Message:    !!!javascript   {     'type': 'Message',     'message_id': 1234,     'notification_category': 'Assignment Graded'   }  Submission:  Returns an {api:Submissions:Submission Submission} with its Course and Assignment data.  Conference:    !!!javascript   {     'type': 'Conference',     'web_conference_id': 1234   }  Collaboration:    !!!javascript   {     'type': 'Collaboration',     'collaboration_id': 1234   }  AssessmentRequest:    !!!javascript   {     'type': 'AssessmentRequest',     'assessment_request_id': 1234   }
 
         :param only_active_courses: If true, will only return objects for courses the user is actively participating in
         :type only_active_courses: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -347,19 +641,28 @@ class UsersApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._users_activity_stream_for_other_serialize(
             only_active_courses=only_active_courses,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -371,10 +674,13 @@ class UsersApi:
             response_types_map=_response_types_map,
         ).data
 
+
     @validate_call
-    async def users_activity_stream_for_other_with_http_info(
+    async def users_activity_stream_for_other_paginated(
         self,
         only_active_courses: Annotated[Optional[StrictBool], Field(description="If true, will only return objects for courses the user is actively participating in")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -387,13 +693,18 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+        _page_url: Optional[StrictStr] = None,
+    ) -> AsyncIterator[List[UsersActivityStreamResponse]]:
         """List the activity stream
 
         Returns the current user's global activity stream, paginated.  There are many types of objects that can be returned in the activity stream. All object types have the same basic set of shared attributes:   !!!javascript   {     'created_at': '2011-07-13T09:12:00Z',     'updated_at': '2011-07-25T08:52:41Z',     'id': 1234,     'title': 'Stream Item Subject',     'message': 'This is the body text of the activity stream item. It is plain-text, and can be multiple paragraphs.',     'type': 'DiscussionTopic|Conversation|Message|Submission|Conference|Collaboration|AssessmentRequest...',     'read_state': false,     'context_type': 'course', // course|group     'course_id': 1,     'group_id': null,     'html_url': \"http://...\" // URL to the Canvas web UI for this stream item   }  In addition, each item type has its own set of attributes available.  DiscussionTopic:    !!!javascript   {     'type': 'DiscussionTopic',     'discussion_topic_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': true,     'root_discussion_entries': {       ...     }   }  For DiscussionTopic, the message is truncated at 4kb.  Announcement:    !!!javascript   {     'type': 'Announcement',     'announcement_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': null,     'root_discussion_entries': {       ...     }   }  For Announcement, the message is truncated at 4kb.  Conversation:    !!!javascript   {     'type': 'Conversation',     'conversation_id': 1234,     'private': false,     'participant_count': 3,   }  Message:    !!!javascript   {     'type': 'Message',     'message_id': 1234,     'notification_category': 'Assignment Graded'   }  Submission:  Returns an {api:Submissions:Submission Submission} with its Course and Assignment data.  Conference:    !!!javascript   {     'type': 'Conference',     'web_conference_id': 1234   }  Collaboration:    !!!javascript   {     'type': 'Collaboration',     'collaboration_id': 1234   }  AssessmentRequest:    !!!javascript   {     'type': 'AssessmentRequest',     'assessment_request_id': 1234   }
 
         :param only_active_courses: If true, will only return objects for courses the user is actively participating in
         :type only_active_courses: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -413,19 +724,237 @@ class UsersApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._users_activity_stream_for_other_serialize(
             only_active_courses=only_active_courses,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamResponse]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout,
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            yield _page_data
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+
+    @validate_call
+    async def users_activity_stream_for_other_all(
+        self,
+        only_active_courses: Annotated[Optional[StrictBool], Field(description="If true, will only return objects for courses the user is actively participating in")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> AsyncIterator[UsersActivityStreamResponse]:
+        """List the activity stream
+
+        Returns the current user's global activity stream, paginated.  There are many types of objects that can be returned in the activity stream. All object types have the same basic set of shared attributes:   !!!javascript   {     'created_at': '2011-07-13T09:12:00Z',     'updated_at': '2011-07-25T08:52:41Z',     'id': 1234,     'title': 'Stream Item Subject',     'message': 'This is the body text of the activity stream item. It is plain-text, and can be multiple paragraphs.',     'type': 'DiscussionTopic|Conversation|Message|Submission|Conference|Collaboration|AssessmentRequest...',     'read_state': false,     'context_type': 'course', // course|group     'course_id': 1,     'group_id': null,     'html_url': \"http://...\" // URL to the Canvas web UI for this stream item   }  In addition, each item type has its own set of attributes available.  DiscussionTopic:    !!!javascript   {     'type': 'DiscussionTopic',     'discussion_topic_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': true,     'root_discussion_entries': {       ...     }   }  For DiscussionTopic, the message is truncated at 4kb.  Announcement:    !!!javascript   {     'type': 'Announcement',     'announcement_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': null,     'root_discussion_entries': {       ...     }   }  For Announcement, the message is truncated at 4kb.  Conversation:    !!!javascript   {     'type': 'Conversation',     'conversation_id': 1234,     'private': false,     'participant_count': 3,   }  Message:    !!!javascript   {     'type': 'Message',     'message_id': 1234,     'notification_category': 'Assignment Graded'   }  Submission:  Returns an {api:Submissions:Submission Submission} with its Course and Assignment data.  Conference:    !!!javascript   {     'type': 'Conference',     'web_conference_id': 1234   }  Collaboration:    !!!javascript   {     'type': 'Collaboration',     'collaboration_id': 1234   }  AssessmentRequest:    !!!javascript   {     'type': 'AssessmentRequest',     'assessment_request_id': 1234   }
+
+        :param only_active_courses: If true, will only return objects for courses the user is actively participating in
+        :type only_active_courses: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._users_activity_stream_for_other_serialize(
+            only_active_courses=only_active_courses,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamResponse]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            for _item in _page_data:
+                yield _item
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def users_activity_stream_for_other_with_http_info(
+        self,
+        only_active_courses: Annotated[Optional[StrictBool], Field(description="If true, will only return objects for courses the user is actively participating in")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[List[UsersActivityStreamResponse]]:
+        """List the activity stream
+
+        Returns the current user's global activity stream, paginated.  There are many types of objects that can be returned in the activity stream. All object types have the same basic set of shared attributes:   !!!javascript   {     'created_at': '2011-07-13T09:12:00Z',     'updated_at': '2011-07-25T08:52:41Z',     'id': 1234,     'title': 'Stream Item Subject',     'message': 'This is the body text of the activity stream item. It is plain-text, and can be multiple paragraphs.',     'type': 'DiscussionTopic|Conversation|Message|Submission|Conference|Collaboration|AssessmentRequest...',     'read_state': false,     'context_type': 'course', // course|group     'course_id': 1,     'group_id': null,     'html_url': \"http://...\" // URL to the Canvas web UI for this stream item   }  In addition, each item type has its own set of attributes available.  DiscussionTopic:    !!!javascript   {     'type': 'DiscussionTopic',     'discussion_topic_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': true,     'root_discussion_entries': {       ...     }   }  For DiscussionTopic, the message is truncated at 4kb.  Announcement:    !!!javascript   {     'type': 'Announcement',     'announcement_id': 1234,     'total_root_discussion_entries': 5,     'require_initial_post': true,     'user_has_posted': null,     'root_discussion_entries': {       ...     }   }  For Announcement, the message is truncated at 4kb.  Conversation:    !!!javascript   {     'type': 'Conversation',     'conversation_id': 1234,     'private': false,     'participant_count': 3,   }  Message:    !!!javascript   {     'type': 'Message',     'message_id': 1234,     'notification_category': 'Assignment Graded'   }  Submission:  Returns an {api:Submissions:Submission Submission} with its Course and Assignment data.  Conference:    !!!javascript   {     'type': 'Conference',     'web_conference_id': 1234   }  Collaboration:    !!!javascript   {     'type': 'Collaboration',     'collaboration_id': 1234   }  AssessmentRequest:    !!!javascript   {     'type': 'AssessmentRequest',     'assessment_request_id': 1234   }
+
+        :param only_active_courses: If true, will only return objects for courses the user is actively participating in
+        :type only_active_courses: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._users_activity_stream_for_other_serialize(
+            only_active_courses=only_active_courses,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -442,6 +971,8 @@ class UsersApi:
     async def users_activity_stream_for_other_without_preload_content(
         self,
         only_active_courses: Annotated[Optional[StrictBool], Field(description="If true, will only return objects for courses the user is actively participating in")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -454,6 +985,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
     ) -> RESTResponseType:
         """List the activity stream
 
@@ -461,6 +993,10 @@ class UsersApi:
 
         :param only_active_courses: If true, will only return objects for courses the user is actively participating in
         :type only_active_courses: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -480,19 +1016,28 @@ class UsersApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._users_activity_stream_for_other_serialize(
             only_active_courses=only_active_courses,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -504,6 +1049,8 @@ class UsersApi:
     def _users_activity_stream_for_other_serialize(
         self,
         only_active_courses,
+        page,
+        per_page,
         _request_auth,
         _content_type,
         _headers,
@@ -530,11 +1077,26 @@ class UsersApi:
             
             _query_params.append(('only_active_courses', only_active_courses))
             
+        if page is not None:
+            
+            _query_params.append(('page', page))
+            
+        if per_page is not None:
+            
+            _query_params.append(('per_page', per_page))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -576,7 +1138,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[UsersActivityStreamSummaryResponse]:
         """Activity stream summary
 
         Returns a summary of the current user's global activity stream.
@@ -615,6 +1177,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamSummaryResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -642,7 +1205,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[UsersActivityStreamSummaryResponse]]:
         """Activity stream summary
 
         Returns a summary of the current user's global activity stream.
@@ -681,6 +1244,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamSummaryResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -748,6 +1312,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UsersActivityStreamSummaryResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2089,7 +2654,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersCreateFileResponse:
         """Upload a file
 
         Upload a file to the user's personal files section.  This API endpoint is the first step in uploading a file to a user's files. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  Note that typically users will only be able to upload files to their own files section. Passing a user_id of +self+ is an easy shortcut to specify the current user.
@@ -2128,6 +2693,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2155,7 +2721,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersCreateFileResponse]:
         """Upload a file
 
         Upload a file to the user's personal files section.  This API endpoint is the first step in uploading a file to a user's files. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  Note that typically users will only be able to upload files to their own files section. Passing a user_id of +self+ is an easy shortcut to specify the current user.
@@ -2194,6 +2760,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2261,6 +2828,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2301,6 +2869,13 @@ class UsersApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2633,7 +3208,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersTerminateSessionsResponse:
         """Log users out of all mobile apps
 
         Permanently expires any active mobile sessions, forcing them to re-authorize.  The route that takes a user id will expire mobile sessions for that user. The route that doesn't take a user id will expire mobile sessions for *all* users in the institution (except for account administrators if +skip_admins+ is given).
@@ -2672,6 +3247,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTerminateSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2699,7 +3275,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersTerminateSessionsResponse]:
         """Log users out of all mobile apps
 
         Permanently expires any active mobile sessions, forcing them to re-authorize.  The route that takes a user id will expire mobile sessions for that user. The route that doesn't take a user id will expire mobile sessions for *all* users in the institution (except for account administrators if +skip_admins+ is given).
@@ -2738,6 +3314,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTerminateSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2805,6 +3382,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTerminateSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2847,6 +3425,13 @@ class UsersApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2889,7 +3474,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersTerminateSessionsResponse:
         """Log users out of all mobile apps
 
         Permanently expires any active mobile sessions, forcing them to re-authorize.  The route that takes a user id will expire mobile sessions for that user. The route that doesn't take a user id will expire mobile sessions for *all* users in the institution (except for account administrators if +skip_admins+ is given).
@@ -2931,6 +3516,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTerminateSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2959,7 +3545,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersTerminateSessionsResponse]:
         """Log users out of all mobile apps
 
         Permanently expires any active mobile sessions, forcing them to re-authorize.  The route that takes a user id will expire mobile sessions for that user. The route that doesn't take a user id will expire mobile sessions for *all* users in the institution (except for account administrators if +skip_admins+ is given).
@@ -3001,6 +3587,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTerminateSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3072,6 +3659,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTerminateSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3117,6 +3705,13 @@ class UsersApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -3159,7 +3754,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersGetCustomColorResponse:
         """Get custom color
 
         Returns the custom colors that have been saved for a user for a given context.  The asset_string parameter should be in the format 'context_id', for example 'course_42'.
@@ -3201,6 +3796,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetCustomColorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3229,7 +3825,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersGetCustomColorResponse]:
         """Get custom color
 
         Returns the custom colors that have been saved for a user for a given context.  The asset_string parameter should be in the format 'context_id', for example 'course_42'.
@@ -3271,6 +3867,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetCustomColorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3342,6 +3939,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetCustomColorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3433,7 +4031,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersGetCustomColorsResponse:
         """Get custom colors
 
         Returns all custom colors that have been saved for a user.
@@ -3472,6 +4070,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetCustomColorsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3499,7 +4098,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersGetCustomColorsResponse]:
         """Get custom colors
 
         Returns all custom colors that have been saved for a user.
@@ -3538,6 +4137,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetCustomColorsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3605,6 +4205,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetCustomColorsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3693,7 +4294,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersGetDashboardPositionsResponse:
         """Get dashboard positions
 
         Returns all dashboard positions that have been saved for a user.
@@ -3732,6 +4333,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetDashboardPositionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3759,7 +4361,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersGetDashboardPositionsResponse]:
         """Get dashboard positions
 
         Returns all dashboard positions that have been saved for a user.
@@ -3798,6 +4400,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetDashboardPositionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3865,6 +4468,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetDashboardPositionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3952,7 +4556,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersIgnoreStreamItemResponse:
         """Hide all stream items
 
         Hide all stream items for the user
@@ -3988,6 +4592,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersIgnoreStreamItemResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4014,7 +4619,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersIgnoreStreamItemResponse]:
         """Hide all stream items
 
         Hide all stream items for the user
@@ -4050,6 +4655,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersIgnoreStreamItemResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4113,6 +4719,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersIgnoreStreamItemResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4198,7 +4805,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersIgnoreStreamItemResponse:
         """Hide a stream item
 
         Hide the given stream item.
@@ -4237,6 +4844,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersIgnoreStreamItemResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4264,7 +4872,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersIgnoreStreamItemResponse]:
         """Hide a stream item
 
         Hide the given stream item.
@@ -4303,6 +4911,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersIgnoreStreamItemResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4370,6 +4979,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersIgnoreStreamItemResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5660,7 +6270,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersPandataEventsTokenResponse:
         """Get a Pandata Events jwt token and its expiration date
 
         Returns a jwt auth and props token that can be used to send events to Pandata.  NOTE: This is currently only available to the mobile developer keys.
@@ -5699,6 +6309,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersPandataEventsTokenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5726,7 +6337,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersPandataEventsTokenResponse]:
         """Get a Pandata Events jwt token and its expiration date
 
         Returns a jwt auth and props token that can be used to send events to Pandata.  NOTE: This is currently only available to the mobile developer keys.
@@ -5765,6 +6376,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersPandataEventsTokenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5832,6 +6444,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersPandataEventsTokenResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5935,7 +6548,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersGetCustomColorResponse:
         """Update custom color
 
         Updates a custom color for a user for a given context.  This allows colors for the calendar and elsewhere to be customized on a user basis.  The asset string parameter should be in the format 'context_id', for example 'course_42'
@@ -5980,6 +6593,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetCustomColorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6009,7 +6623,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersGetCustomColorResponse]:
         """Update custom color
 
         Updates a custom color for a user for a given context.  This allows colors for the calendar and elsewhere to be customized on a user basis.  The asset string parameter should be in the format 'context_id', for example 'course_42'
@@ -6054,6 +6668,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetCustomColorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6129,6 +6744,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetCustomColorResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6236,7 +6852,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersGetDashboardPositionsResponse:
         """Update dashboard positions
 
         Updates the dashboard positions for a user for a given context.  This allows positions for the dashboard cards and elsewhere to be customized on a per user basis.  The asset string parameter should be in the format 'context_id', for example 'course_42'
@@ -6275,6 +6891,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetDashboardPositionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6302,7 +6919,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersGetDashboardPositionsResponse]:
         """Update dashboard positions
 
         Updates the dashboard positions for a user for a given context.  This allows positions for the dashboard cards and elsewhere to be customized on a per user basis.  The asset string parameter should be in the format 'context_id', for example 'course_42'
@@ -6341,6 +6958,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetDashboardPositionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6408,6 +7026,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersGetDashboardPositionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7081,7 +7700,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersSettingsResponse:
         """Update user settings.
 
         Update an existing user's settings.
@@ -7147,6 +7766,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7183,7 +7803,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersSettingsResponse]:
         """Update user settings.
 
         Update an existing user's settings.
@@ -7249,6 +7869,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7352,6 +7973,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7437,6 +8059,13 @@ class UsersApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -7479,7 +8108,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersSettingsResponse:
         """Update user settings.
 
         Update an existing user's settings.
@@ -7521,6 +8150,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7549,7 +8179,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersSettingsResponse]:
         """Update user settings.
 
         Update an existing user's settings.
@@ -7591,6 +8221,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7662,6 +8293,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7705,6 +8337,13 @@ class UsersApi:
             _body_params = users_settings_for_users_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -8022,7 +8661,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersTerminateSessionsResponse:
         """Terminate all user sessions
 
         Terminates all sessions for a user. This includes all browser-based sessions and all access tokens, including manually generated ones. The user can immediately re-authenticate to access Canvas again if they have the current credentials. All integrations will need to be re-authorized.
@@ -8061,6 +8700,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTerminateSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8088,7 +8728,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersTerminateSessionsResponse]:
         """Terminate all user sessions
 
         Terminates all sessions for a user. This includes all browser-based sessions and all access tokens, including manually generated ones. The user can immediately re-authenticate to access Canvas again if they have the current credentials. All integrations will need to be re-authorized.
@@ -8127,6 +8767,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTerminateSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8194,6 +8835,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTerminateSessionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8234,6 +8876,13 @@ class UsersApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -8275,7 +8924,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsersTodoItemCountResponse:
         """List counts for todo items
 
         Counts of different todo items such as the number of assignments needing grading as well as the number of assignments needing submitting.  There is a limit to the number of todo items this endpoint will count. It will only look at the first 100 todo items for the user. If the user has more than 100 todo items this count may not be reliable. The largest reliable number for both counts is 100.
@@ -8314,6 +8963,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTodoItemCountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8341,7 +8991,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsersTodoItemCountResponse]:
         """List counts for todo items
 
         Counts of different todo items such as the number of assignments needing grading as well as the number of assignments needing submitting.  There is a limit to the number of todo items this endpoint will count. It will only look at the first 100 todo items for the user. If the user has more than 100 todo items this count may not be reliable. The largest reliable number for both counts is 100.
@@ -8380,6 +9030,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTodoItemCountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8447,6 +9098,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsersTodoItemCountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -9094,7 +9746,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[CalendarEvent]:
         """List upcoming assignments, calendar events
 
         A paginated list of the current user's upcoming events.
@@ -9130,6 +9782,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CalendarEvent]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -9156,7 +9809,7 @@ class UsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[CalendarEvent]]:
         """List upcoming assignments, calendar events
 
         A paginated list of the current user's upcoming events.
@@ -9192,6 +9845,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CalendarEvent]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -9255,6 +9909,7 @@ class UsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CalendarEvent]",
         }
         response_data = await self.api_client.call_api(
             *_param,

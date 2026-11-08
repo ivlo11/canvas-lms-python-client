@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +29,7 @@ class Day(BaseModel):
     
     """ # noqa: E501
     var_date: Optional[datetime] = Field(default=None, description="the date represented by this entry", alias="date")
-    graders: Optional[StrictInt] = Field(default=None, description="an array of the graders who were responsible for the submissions in this response. the submissions are grouped according to the person who graded them and the assignment they were submitted for.")
+    graders: Optional[List[Dict[str, Any]]] = Field(default=None, description="an array of the graders who were responsible for the submissions in this response. the submissions are grouped according to the person who graded them and the assignment they were submitted for.", json_schema_extra={"examples": [[]]})
     __properties: ClassVar[List[str]] = ["date", "graders"]
 
     model_config = ConfigDict(

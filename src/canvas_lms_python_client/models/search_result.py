@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +33,12 @@ class SearchResult(BaseModel):
     body: Optional[StrictStr] = Field(default=None, description="The body of the matching object.", json_schema_extra={"examples": ["Nicolaus Copernicus was a Renaissance-era mathematician and astronomer who..."]})
     html_url: Optional[StrictStr] = Field(default=None, description="The Canvas URL of the matching object.", json_schema_extra={"examples": ["https://canvas.example.com/courses/123/pages/nicolaus-copernicus"]})
     distance: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The distance between the search query and the result. Smaller numbers indicate closer matches.", json_schema_extra={"examples": [0.212]})
-    __properties: ClassVar[List[str]] = ["content_id", "content_type", "title", "body", "html_url", "distance"]
+    due_date: Optional[StrictStr] = None
+    modules: Optional[List[Dict[str, Any]]] = None
+    published: Optional[StrictBool] = None
+    readable_type: Optional[StrictStr] = None
+    relevance: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["content_id", "content_type", "title", "body", "html_url", "distance", "due_date", "modules", "published", "readable_type", "relevance"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -91,7 +96,12 @@ class SearchResult(BaseModel):
             "title": obj.get("title"),
             "body": obj.get("body"),
             "html_url": obj.get("html_url"),
-            "distance": obj.get("distance")
+            "distance": obj.get("distance"),
+            "due_date": obj.get("due_date"),
+            "modules": obj.get("modules"),
+            "published": obj.get("published"),
+            "readable_type": obj.get("readable_type"),
+            "relevance": obj.get("relevance")
         })
         return _obj
 

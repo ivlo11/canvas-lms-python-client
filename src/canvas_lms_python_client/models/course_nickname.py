@@ -71,6 +71,11 @@ class CourseNickname(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if nickname (nullable) is None
+        # and model_fields_set contains the field
+        if self.nickname is None and "nickname" in self.model_fields_set:
+            _dict['nickname'] = None
+
         return _dict
 
     @classmethod

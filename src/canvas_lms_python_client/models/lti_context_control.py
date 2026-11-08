@@ -45,7 +45,8 @@ class LtiContextControl(BaseModel):
     updated_at: Optional[StrictStr] = Field(default=None, description="Timestamp of the object's last update", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
     created_by: Optional[User] = None
     updated_by: Optional[User] = None
-    __properties: ClassVar[List[str]] = ["id", "course_id", "account_id", "deployment_id", "available", "path", "display_path", "context_name", "depth", "course_count", "child_control_count", "subaccount_count", "workflow_state", "created_at", "updated_at", "created_by", "updated_by"]
+    registration_id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id", "course_id", "account_id", "deployment_id", "available", "path", "display_path", "context_name", "depth", "course_count", "child_control_count", "subaccount_count", "workflow_state", "created_at", "updated_at", "created_by", "updated_by", "registration_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -92,6 +93,16 @@ class LtiContextControl(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of updated_by
         if self.updated_by:
             _dict['updated_by'] = self.updated_by.to_dict()
+        # set to None if course_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.course_id is None and "course_id" in self.model_fields_set:
+            _dict['course_id'] = None
+
+        # set to None if account_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.account_id is None and "account_id" in self.model_fields_set:
+            _dict['account_id'] = None
+
         return _dict
 
     @classmethod
@@ -120,7 +131,8 @@ class LtiContextControl(BaseModel):
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
             "created_by": User.from_dict(obj["created_by"]) if obj.get("created_by") is not None else None,
-            "updated_by": User.from_dict(obj["updated_by"]) if obj.get("updated_by") is not None else None
+            "updated_by": User.from_dict(obj["updated_by"]) if obj.get("updated_by") is not None else None,
+            "registration_id": obj.get("registration_id")
         })
         return _obj
 

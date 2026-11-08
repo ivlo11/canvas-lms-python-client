@@ -250,7 +250,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usage_rights_remove_usage_rights**
-> usage_rights_remove_usage_rights(course_id, file_ids, folder_ids=folder_ids)
+> UsageRightsRemoveUsageRightsResponse usage_rights_remove_usage_rights(course_id, file_ids, folder_ids=folder_ids)
 
 Remove usage rights
 
@@ -262,6 +262,7 @@ Removes copyright and license information associated with one or more files
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.usage_rights_remove_usage_rights_response import UsageRightsRemoveUsageRightsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -291,7 +292,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Remove usage rights
-        await api_instance.usage_rights_remove_usage_rights(course_id, file_ids, folder_ids=folder_ids)
+        api_response = await api_instance.usage_rights_remove_usage_rights(course_id, file_ids, folder_ids=folder_ids)
+        print("The response of UsageRightsApi->usage_rights_remove_usage_rights:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsageRightsApi->usage_rights_remove_usage_rights: %s\n" % e)
 ```
@@ -309,7 +312,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsageRightsRemoveUsageRightsResponse**](UsageRightsRemoveUsageRightsResponse.md)
 
 ### Authorization
 
@@ -318,18 +321,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Remove usage rights |  -  |
+**0** | UsageRightsRemoveUsageRightsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usage_rights_remove_usage_rights_for_groups**
-> usage_rights_remove_usage_rights_for_groups(group_id, file_ids, folder_ids=folder_ids)
+> UsageRightsRemoveUsageRightsResponse usage_rights_remove_usage_rights_for_groups(group_id, file_ids, folder_ids=folder_ids)
 
 Remove usage rights
 
@@ -341,6 +344,7 @@ Removes copyright and license information associated with one or more files
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.usage_rights_remove_usage_rights_response import UsageRightsRemoveUsageRightsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -370,7 +374,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Remove usage rights
-        await api_instance.usage_rights_remove_usage_rights_for_groups(group_id, file_ids, folder_ids=folder_ids)
+        api_response = await api_instance.usage_rights_remove_usage_rights_for_groups(group_id, file_ids, folder_ids=folder_ids)
+        print("The response of UsageRightsApi->usage_rights_remove_usage_rights_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsageRightsApi->usage_rights_remove_usage_rights_for_groups: %s\n" % e)
 ```
@@ -388,7 +394,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsageRightsRemoveUsageRightsResponse**](UsageRightsRemoveUsageRightsResponse.md)
 
 ### Authorization
 
@@ -397,18 +403,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Remove usage rights |  -  |
+**0** | UsageRightsRemoveUsageRightsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **usage_rights_remove_usage_rights_for_users**
-> usage_rights_remove_usage_rights_for_users(user_id, file_ids, folder_ids=folder_ids)
+> UsageRightsRemoveUsageRightsResponse usage_rights_remove_usage_rights_for_users(user_id, file_ids, folder_ids=folder_ids)
 
 Remove usage rights
 
@@ -420,6 +426,7 @@ Removes copyright and license information associated with one or more files
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.usage_rights_remove_usage_rights_response import UsageRightsRemoveUsageRightsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -449,7 +456,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Remove usage rights
-        await api_instance.usage_rights_remove_usage_rights_for_users(user_id, file_ids, folder_ids=folder_ids)
+        api_response = await api_instance.usage_rights_remove_usage_rights_for_users(user_id, file_ids, folder_ids=folder_ids)
+        print("The response of UsageRightsApi->usage_rights_remove_usage_rights_for_users:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsageRightsApi->usage_rights_remove_usage_rights_for_users: %s\n" % e)
 ```
@@ -467,7 +476,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsageRightsRemoveUsageRightsResponse**](UsageRightsRemoveUsageRightsResponse.md)
 
 ### Authorization
 
@@ -476,13 +485,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Remove usage rights |  -  |
+**0** | UsageRightsRemoveUsageRightsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

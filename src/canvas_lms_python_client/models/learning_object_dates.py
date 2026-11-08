@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from canvas_lms_python_client.models.assignment_override import AssignmentOverride
 from canvas_lms_python_client.models.learning_object_dates_peer_review_sub_assignment import LearningObjectDatesPeerReviewSubAssignment
 from typing import Optional, Set
@@ -44,7 +44,10 @@ class LearningObjectDates(BaseModel):
     checkpoints: Optional[List[LearningObjectDates]] = Field(default=None, description="list of Checkpoint objects, only present if a learning object has subAssignments")
     tag: Optional[StrictStr] = Field(default=None, description="the tag identifying the type of checkpoint (only present for checkpoints)", json_schema_extra={"examples": ["reply_to_topic"]})
     peer_review_sub_assignment: Optional[LearningObjectDatesPeerReviewSubAssignment] = None
-    __properties: ClassVar[List[str]] = ["id", "due_at", "lock_at", "reply_to_topic_due_at", "required_replies_due_at", "unlock_at", "only_visible_to_overrides", "graded", "blueprint_date_locks", "visible_to_everyone", "overrides", "checkpoints", "tag", "peer_review_sub_assignment"]
+    name: Optional[StrictStr] = None
+    points_possible: Optional[Union[StrictFloat, StrictInt]] = None
+    group_category_id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id", "due_at", "lock_at", "reply_to_topic_due_at", "required_replies_due_at", "unlock_at", "only_visible_to_overrides", "graded", "blueprint_date_locks", "visible_to_everyone", "overrides", "checkpoints", "tag", "peer_review_sub_assignment", "name", "points_possible", "group_category_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -100,6 +103,26 @@ class LearningObjectDates(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of peer_review_sub_assignment
         if self.peer_review_sub_assignment:
             _dict['peer_review_sub_assignment'] = self.peer_review_sub_assignment.to_dict()
+        # set to None if due_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.due_at is None and "due_at" in self.model_fields_set:
+            _dict['due_at'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if group_category_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.group_category_id is None and "group_category_id" in self.model_fields_set:
+            _dict['group_category_id'] = None
+
         return _dict
 
     @classmethod
@@ -125,7 +148,10 @@ class LearningObjectDates(BaseModel):
             "overrides": [AssignmentOverride.from_dict(_item) for _item in obj["overrides"]] if obj.get("overrides") is not None else None,
             "checkpoints": [LearningObjectDates.from_dict(_item) for _item in obj["checkpoints"]] if obj.get("checkpoints") is not None else None,
             "tag": obj.get("tag"),
-            "peer_review_sub_assignment": LearningObjectDatesPeerReviewSubAssignment.from_dict(obj["peer_review_sub_assignment"]) if obj.get("peer_review_sub_assignment") is not None else None
+            "peer_review_sub_assignment": LearningObjectDatesPeerReviewSubAssignment.from_dict(obj["peer_review_sub_assignment"]) if obj.get("peer_review_sub_assignment") is not None else None,
+            "name": obj.get("name"),
+            "points_possible": obj.get("points_possible"),
+            "group_category_id": obj.get("group_category_id")
         })
         return _obj
 

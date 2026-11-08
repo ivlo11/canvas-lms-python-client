@@ -36,7 +36,8 @@ class LtiOverlayVersion(BaseModel):
     diff: Optional[List[List[Any]]] = Field(default=None, description="A list of changes made in this version compared to the previous version", json_schema_extra={"examples": [[["+", "disabled_placements[0]", "top_navigation"]]]})
     lti_overlay_id: Optional[StrictInt] = Field(default=None, description="The id of the overlay this version is for", json_schema_extra={"examples": [1]})
     account_id: Optional[StrictInt] = Field(default=None, description="The id of the account this version is for", json_schema_extra={"examples": [1]})
-    __properties: ClassVar[List[str]] = ["root_account_id", "created_at", "updated_at", "caused_by_reset", "created_by", "diff", "lti_overlay_id", "account_id"]
+    id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["root_account_id", "created_at", "updated_at", "caused_by_reset", "created_by", "diff", "lti_overlay_id", "account_id", "id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -99,7 +100,8 @@ class LtiOverlayVersion(BaseModel):
             "created_by": LtiRegistrationCreatedBy.from_dict(obj["created_by"]) if obj.get("created_by") is not None else None,
             "diff": obj.get("diff"),
             "lti_overlay_id": obj.get("lti_overlay_id"),
-            "account_id": obj.get("account_id")
+            "account_id": obj.get("account_id"),
+            "id": obj.get("id")
         })
         return _obj
 

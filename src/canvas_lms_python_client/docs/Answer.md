@@ -21,6 +21,11 @@ Name | Type | Description | Notes
 **start** | **int** | Used in numerical questions of type &#39;range_answer&#39;. The start of the allowed range (inclusive). | [optional] 
 **end** | **int** | Used in numerical questions of type &#39;range_answer&#39;. The end of the allowed range (inclusive). | [optional] 
 **blank_id** | **int** | Used in fill in multiple blank and multiple dropdowns questions. | [optional] 
+**html** | **str** |  | [optional] 
+**weight** | **float** |  | [optional] 
+**comments** | **str** |  | [optional] 
+**comments_html** | **str** |  | [optional] 
+**text** | **str** |  | [optional] 
 
 ## Example
 

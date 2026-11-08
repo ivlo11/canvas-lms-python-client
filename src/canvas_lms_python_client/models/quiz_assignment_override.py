@@ -34,7 +34,9 @@ class QuizAssignmentOverride(BaseModel):
     lock_at: Optional[datetime] = Field(default=None, description="When the quiz will stop being available for taking. A value of null means it can always be taken.", json_schema_extra={"examples": ["2014-02-21T06:59:59Z"]})
     title: Optional[StrictStr] = Field(default=None, description="Title of the section this assignment override is for, if any.", json_schema_extra={"examples": ["Project X"]})
     base: Optional[StrictBool] = Field(default=None, description="If this property is present, it means that dates in this structure are not based on an assignment override, but are instead for all students.", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["id", "due_at", "unlock_at", "lock_at", "title", "base"]
+    set_id: Optional[StrictInt] = None
+    set_type: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "due_at", "unlock_at", "lock_at", "title", "base", "set_id", "set_type"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -75,6 +77,21 @@ class QuizAssignmentOverride(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if due_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.due_at is None and "due_at" in self.model_fields_set:
+            _dict['due_at'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
         return _dict
 
     @classmethod
@@ -92,7 +109,9 @@ class QuizAssignmentOverride(BaseModel):
             "unlock_at": obj.get("unlock_at"),
             "lock_at": obj.get("lock_at"),
             "title": obj.get("title"),
-            "base": obj.get("base")
+            "base": obj.get("base"),
+            "set_id": obj.get("set_id"),
+            "set_type": obj.get("set_type")
         })
         return _obj
 

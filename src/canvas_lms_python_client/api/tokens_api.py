@@ -58,7 +58,7 @@ class TokensApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Token:
         """Create an access token
 
         Create a new access token for the specified user. If the user is not the current user, the token will be created as \"pending\", and must be activated by the user before it can be used.
@@ -100,6 +100,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +129,7 @@ class TokensApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Token]:
         """Create an access token
 
         Create a new access token for the specified user. If the user is not the current user, the token will be created as \"pending\", and must be activated by the user before it can be used.
@@ -170,6 +171,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -241,6 +243,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -284,6 +287,13 @@ class TokensApi:
             _body_params = tokens_create_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -339,7 +349,7 @@ class TokensApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Token:
         """Delete an access token
 
         The ID can be the actual database ID of the token, or the 'token_hint' value.
@@ -381,6 +391,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -409,7 +420,7 @@ class TokensApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Token]:
         """Delete an access token
 
         The ID can be the actual database ID of the token, or the 'token_hint' value.
@@ -451,6 +462,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -522,6 +534,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -565,6 +578,13 @@ class TokensApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -607,7 +627,7 @@ class TokensApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Token:
         """Show an access token
 
         The ID can be the actual database ID of the token, or the 'token_hint' value.
@@ -649,6 +669,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -677,7 +698,7 @@ class TokensApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Token]:
         """Show an access token
 
         The ID can be the actual database ID of the token, or the 'token_hint' value.
@@ -719,6 +740,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -790,6 +812,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -833,6 +856,13 @@ class TokensApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -876,7 +906,7 @@ class TokensApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Token:
         """Update an access token
 
         Update an existing access token.  The ID can be the actual database ID of the token, or the 'token_hint' value.  Regenerating an expired token requires a new expiration date.
@@ -921,6 +951,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -950,7 +981,7 @@ class TokensApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Token]:
         """Update an access token
 
         Update an existing access token.  The ID can be the actual database ID of the token, or the 'token_hint' value.  Regenerating an expired token requires a new expiration date.
@@ -995,6 +1026,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1070,6 +1102,7 @@ class TokensApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Token",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1116,6 +1149,13 @@ class TokensApi:
             _body_params = tokens_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

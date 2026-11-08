@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.lti_context_control import LtiContextControl
 from typing import Optional, Set
@@ -36,7 +36,8 @@ class LtiDeployment(BaseModel):
     context_name: Optional[StrictStr] = Field(default=None, description="The name of the context this deployment is associated with", json_schema_extra={"examples": ["My Course"]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="The workflow state of the deployment", json_schema_extra={"examples": ["active"]})
     context_controls: Optional[List[LtiContextControl]] = Field(default=None, description="The context controls for this deployment. Only present in the LTI Context Controls - List All Context Controls endpoint.", json_schema_extra={"examples": [[{"type": "Lti_ContextControl"}]]})
-    __properties: ClassVar[List[str]] = ["id", "registration_id", "deployment_id", "context_id", "context_type", "context_name", "workflow_state", "context_controls"]
+    root_account_deployment: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["id", "registration_id", "deployment_id", "context_id", "context_type", "context_name", "workflow_state", "context_controls", "root_account_deployment"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -102,7 +103,8 @@ class LtiDeployment(BaseModel):
             "context_type": obj.get("context_type"),
             "context_name": obj.get("context_name"),
             "workflow_state": obj.get("workflow_state"),
-            "context_controls": [LtiContextControl.from_dict(_item) for _item in obj["context_controls"]] if obj.get("context_controls") is not None else None
+            "context_controls": [LtiContextControl.from_dict(_item) for _item in obj["context_controls"]] if obj.get("context_controls") is not None else None,
+            "root_account_deployment": obj.get("root_account_deployment")
         })
         return _obj
 

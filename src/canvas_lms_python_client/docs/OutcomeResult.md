@@ -7,10 +7,14 @@ A student's result for an outcome
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** | A unique identifier for this result | [optional] 
-**score** | **int** | The student&#39;s score | [optional] 
+**score** | **float** | The student&#39;s score | [optional] 
 **submitted_or_assessed_at** | **datetime** | The datetime the resulting OutcomeResult was submitted at, or absent that, when it was assessed. | [optional] 
 **links** | **object** | Unique identifiers of objects associated with this result | [optional] 
 **percent** | **float** | score&#39;s percent of maximum points possible for outcome, scaled to reflect any custom mastery levels that differ from the learning outcome | [optional] 
+**hidden** | **bool** |  | [optional] 
+**hide_points** | **bool** |  | [optional] 
+**mastery** | **bool** |  | [optional] 
+**possible** | **float** |  | [optional] 
 
 ## Example
 

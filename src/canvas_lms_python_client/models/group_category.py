@@ -40,7 +40,21 @@ class GroupCategory(BaseModel):
     sis_import_id: Optional[StrictInt] = Field(default=None, description="The unique identifier for the SIS import. This field is only included if the user has permission to manage SIS information.")
     progress: Optional[Progress] = None
     non_collaborative: Optional[StrictBool] = Field(default=None, description="Indicates whether this group category is non-collaborative. A value of true means these group categories rely on the manage_tags permissions and do not have collaborative features")
-    __properties: ClassVar[List[str]] = ["id", "name", "role", "self_signup", "auto_leader", "context_type", "account_id", "group_limit", "sis_group_category_id", "sis_import_id", "progress", "non_collaborative"]
+    allows_multiple_memberships: Optional[StrictBool] = None
+    course_id: Optional[StrictInt] = None
+    created_at: Optional[StrictStr] = None
+    is_member: Optional[StrictBool] = None
+    protected: Optional[StrictBool] = None
+    self_signup_end_at: Optional[Any] = None
+    groups_count: Optional[StrictInt] = None
+    unassigned_users_count: Optional[StrictInt] = None
+    context_id: Optional[StrictInt] = None
+    deleted_at: Optional[StrictStr] = None
+    root_account_id: Optional[StrictInt] = None
+    sis_batch_id: Optional[StrictInt] = None
+    sis_source_id: Optional[StrictStr] = None
+    updated_at: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "role", "self_signup", "auto_leader", "context_type", "account_id", "group_limit", "sis_group_category_id", "sis_import_id", "progress", "non_collaborative", "allows_multiple_memberships", "course_id", "created_at", "is_member", "protected", "self_signup_end_at", "groups_count", "unassigned_users_count", "context_id", "deleted_at", "root_account_id", "sis_batch_id", "sis_source_id", "updated_at"]
 
     @field_validator('self_signup')
     def self_signup_validate_enum(cls, value):
@@ -104,6 +118,56 @@ class GroupCategory(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of progress
         if self.progress:
             _dict['progress'] = self.progress.to_dict()
+        # set to None if role (nullable) is None
+        # and model_fields_set contains the field
+        if self.role is None and "role" in self.model_fields_set:
+            _dict['role'] = None
+
+        # set to None if self_signup (nullable) is None
+        # and model_fields_set contains the field
+        if self.self_signup is None and "self_signup" in self.model_fields_set:
+            _dict['self_signup'] = None
+
+        # set to None if auto_leader (nullable) is None
+        # and model_fields_set contains the field
+        if self.auto_leader is None and "auto_leader" in self.model_fields_set:
+            _dict['auto_leader'] = None
+
+        # set to None if group_limit (nullable) is None
+        # and model_fields_set contains the field
+        if self.group_limit is None and "group_limit" in self.model_fields_set:
+            _dict['group_limit'] = None
+
+        # set to None if sis_group_category_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_group_category_id is None and "sis_group_category_id" in self.model_fields_set:
+            _dict['sis_group_category_id'] = None
+
+        # set to None if sis_import_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_import_id is None and "sis_import_id" in self.model_fields_set:
+            _dict['sis_import_id'] = None
+
+        # set to None if self_signup_end_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.self_signup_end_at is None and "self_signup_end_at" in self.model_fields_set:
+            _dict['self_signup_end_at'] = None
+
+        # set to None if deleted_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.deleted_at is None and "deleted_at" in self.model_fields_set:
+            _dict['deleted_at'] = None
+
+        # set to None if sis_batch_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_batch_id is None and "sis_batch_id" in self.model_fields_set:
+            _dict['sis_batch_id'] = None
+
+        # set to None if sis_source_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_source_id is None and "sis_source_id" in self.model_fields_set:
+            _dict['sis_source_id'] = None
+
         return _dict
 
     @classmethod
@@ -127,7 +191,21 @@ class GroupCategory(BaseModel):
             "sis_group_category_id": obj.get("sis_group_category_id"),
             "sis_import_id": obj.get("sis_import_id"),
             "progress": Progress.from_dict(obj["progress"]) if obj.get("progress") is not None else None,
-            "non_collaborative": obj.get("non_collaborative")
+            "non_collaborative": obj.get("non_collaborative"),
+            "allows_multiple_memberships": obj.get("allows_multiple_memberships"),
+            "course_id": obj.get("course_id"),
+            "created_at": obj.get("created_at"),
+            "is_member": obj.get("is_member"),
+            "protected": obj.get("protected"),
+            "self_signup_end_at": obj.get("self_signup_end_at"),
+            "groups_count": obj.get("groups_count"),
+            "unassigned_users_count": obj.get("unassigned_users_count"),
+            "context_id": obj.get("context_id"),
+            "deleted_at": obj.get("deleted_at"),
+            "root_account_id": obj.get("root_account_id"),
+            "sis_batch_id": obj.get("sis_batch_id"),
+            "sis_source_id": obj.get("sis_source_id"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

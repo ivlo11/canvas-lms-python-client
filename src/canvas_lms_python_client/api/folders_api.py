@@ -22,6 +22,7 @@ from canvas_lms_python_client.models.file import File
 from canvas_lms_python_client.models.folder import Folder
 from canvas_lms_python_client.models.folders_copy_file_request import FoldersCopyFileRequest
 from canvas_lms_python_client.models.folders_copy_folder_request import FoldersCopyFolderRequest
+from canvas_lms_python_client.models.folders_create_file_response import FoldersCreateFileResponse
 from canvas_lms_python_client.models.folders_create_request import FoldersCreateRequest
 from canvas_lms_python_client.models.folders_update_request import FoldersUpdateRequest
 
@@ -61,7 +62,7 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Folder:
         """Delete folder
 
         Remove the specified folder. You can only delete empty folders unless you set the 'force' flag
@@ -103,6 +104,7 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Folder",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -131,7 +133,7 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Folder]:
         """Delete folder
 
         Remove the specified folder. You can only delete empty folders unless you set the 'force' flag
@@ -173,6 +175,7 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Folder",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -244,6 +247,7 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Folder",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -289,6 +293,13 @@ class FoldersApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1731,7 +1742,7 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> FoldersCreateFileResponse:
         """Upload a file
 
         Upload a file to a folder.  This API endpoint is the first step in uploading a file. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  Only those with the \"Manage Files\" permission on a course or group can upload files to a folder in that course or group.
@@ -1770,6 +1781,7 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FoldersCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1797,7 +1809,7 @@ class FoldersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[FoldersCreateFileResponse]:
         """Upload a file
 
         Upload a file to a folder.  This API endpoint is the first step in uploading a file. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  Only those with the \"Manage Files\" permission on a course or group can upload files to a folder in that course or group.
@@ -1836,6 +1848,7 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FoldersCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1903,6 +1916,7 @@ class FoldersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FoldersCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1943,6 +1957,13 @@ class FoldersApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

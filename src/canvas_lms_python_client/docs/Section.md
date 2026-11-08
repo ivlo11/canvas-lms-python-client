@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **nonxlist_course_id** | **int** | The unique identifier of the original course of a cross-listed section | [optional] 
 **total_students** | **int** | optional: the total number of active and invited students in the section | [optional] 
 **students** | [**List[User]**](User.md) | optional: A list of students that are included in the section. Returned only if include[]&#x3D;students. WARNING: this collection&#39;s size is capped (if there are an extremely large number of users in the section (thousands) not all of them will be returned). If you need to capture all the users in a section with certainty or experiencing slow response consider using the paginated /api/v1/sections/&lt;section_id&gt;/users endpoint. | [optional] 
+**created_at** | **str** |  | [optional] 
+**permissions** | **object** |  | [optional] 
 
 ## Example
 

@@ -26,10 +26,11 @@ from pydantic_core import to_jsonable_python
 
 class PollSubmissionsShowResponse(BaseModel):
     """
-    Paginated `poll_submissions` list response (from the Canvas example response).
+    Object response with `poll_submissions`, `meta` (from the Canvas `@returns`).
     """ # noqa: E501
     poll_submissions: Optional[List[PollSubmission]] = None
-    __properties: ClassVar[List[str]] = ["poll_submissions"]
+    meta: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["poll_submissions", "meta"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,7 +89,8 @@ class PollSubmissionsShowResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "poll_submissions": [PollSubmission.from_dict(_item) for _item in obj["poll_submissions"]] if obj.get("poll_submissions") is not None else None
+            "poll_submissions": [PollSubmission.from_dict(_item) for _item in obj["poll_submissions"]] if obj.get("poll_submissions") is not None else None,
+            "meta": obj.get("meta")
         })
         return _obj
 

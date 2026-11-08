@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **gradebook_history_api_day_details**
-> List[Grader] gradebook_history_api_day_details(course_id, var_date)
+> List[Grader] gradebook_history_api_day_details(course_id, var_date, page=page, per_page=per_page)
 
 Details for a given date in gradebook history for this course
 
@@ -51,10 +51,12 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     api_instance = canvas_lms_python_client.GradebookHistoryApiApi(api_client)
     course_id = 'course_id_example' # str | The id of the contextual course for this API call
     var_date = 'var_date_example' # str | The date for which you would like to see detailed information
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # Details for a given date in gradebook history for this course
-        api_response = await api_instance.gradebook_history_api_day_details(course_id, var_date)
+        api_response = await api_instance.gradebook_history_api_day_details(course_id, var_date, page=page, per_page=per_page)
         print("The response of GradebookHistoryApiApi->gradebook_history_api_day_details:\n")
         pprint(api_response)
     except Exception as e:
@@ -70,6 +72,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **course_id** | **str**| The id of the contextual course for this API call | 
  **var_date** | **str**| The date for which you would like to see detailed information | 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 
@@ -93,7 +97,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gradebook_history_api_days**
-> List[Day] gradebook_history_api_days(course_id)
+> List[Day] gradebook_history_api_days(course_id, page=page, per_page=per_page)
 
 Days in gradebook history for this course
 
@@ -130,10 +134,12 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = canvas_lms_python_client.GradebookHistoryApiApi(api_client)
     course_id = 'course_id_example' # str | The id of the contextual course for this API call
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # Days in gradebook history for this course
-        api_response = await api_instance.gradebook_history_api_days(course_id)
+        api_response = await api_instance.gradebook_history_api_days(course_id, page=page, per_page=per_page)
         print("The response of GradebookHistoryApiApi->gradebook_history_api_days:\n")
         pprint(api_response)
     except Exception as e:
@@ -148,6 +154,8 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **course_id** | **str**| The id of the contextual course for this API call | 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 
@@ -262,7 +270,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **gradebook_history_api_submissions**
-> List[SubmissionHistory] gradebook_history_api_submissions(assignment_id, course_id, var_date, grader_id)
+> List[SubmissionHistory] gradebook_history_api_submissions(assignment_id, course_id, var_date, grader_id, page=page, per_page=per_page)
 
 Lists submissions
 
@@ -302,10 +310,12 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     course_id = 'course_id_example' # str | The id of the contextual course for this API call
     var_date = 'var_date_example' # str | The date for which you would like to see submissions
     grader_id = 'grader_id_example' # str | The ID of the grader for which you want to see submissions
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # Lists submissions
-        api_response = await api_instance.gradebook_history_api_submissions(assignment_id, course_id, var_date, grader_id)
+        api_response = await api_instance.gradebook_history_api_submissions(assignment_id, course_id, var_date, grader_id, page=page, per_page=per_page)
         print("The response of GradebookHistoryApiApi->gradebook_history_api_submissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -323,6 +333,8 @@ Name | Type | Description  | Notes
  **course_id** | **str**| The id of the contextual course for this API call | 
  **var_date** | **str**| The date for which you would like to see submissions | 
  **grader_id** | **str**| The ID of the grader for which you want to see submissions | 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 

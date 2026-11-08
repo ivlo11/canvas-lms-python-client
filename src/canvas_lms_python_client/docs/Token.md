@@ -18,6 +18,9 @@ Name | Type | Description | Notes
 **purpose** | **str** | The purpose of the token. | [optional] 
 **app_name** | **str** | If the token was created by an OAuth application, this is the name of that application. Otherwise, null. | [optional] 
 **can_manually_regenerate** | **bool** | Whether the current user can manually regenerate this token. | [optional] 
+**last_used_at** | **object** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
+**visible_token** | **str** |  | [optional] 
 
 ## Example
 

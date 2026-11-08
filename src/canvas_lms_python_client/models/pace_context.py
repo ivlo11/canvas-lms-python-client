@@ -79,6 +79,21 @@ class PaceContext(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of applied_pace
         if self.applied_pace:
             _dict['applied_pace'] = self.applied_pace.to_dict()
+        # set to None if associated_section_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.associated_section_count is None and "associated_section_count" in self.model_fields_set:
+            _dict['associated_section_count'] = None
+
+        # set to None if associated_student_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.associated_student_count is None and "associated_student_count" in self.model_fields_set:
+            _dict['associated_student_count'] = None
+
+        # set to None if on_pace (nullable) is None
+        # and model_fields_set contains the field
+        if self.on_pace is None and "on_pace" in self.model_fields_set:
+            _dict['on_pace'] = None
+
         return _dict
 
     @classmethod

@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.discovery_page_entry_authentication_provider_id import DiscoveryPageEntryAuthenticationProviderId
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,7 +28,7 @@ class DiscoveryPageEntry(BaseModel):
     """
     A single authentication provider entry on the discovery page
     """ # noqa: E501
-    authentication_provider_id: Optional[StrictInt] = Field(default=None, description="The ID of the authentication provider", json_schema_extra={"examples": [1]})
+    authentication_provider_id: Optional[DiscoveryPageEntryAuthenticationProviderId] = None
     label: Optional[StrictStr] = Field(default=None, description="The display label for this provider button", json_schema_extra={"examples": ["Students"]})
     icon: Optional[StrictStr] = Field(default=None, description="Icon key for this provider button", json_schema_extra={"examples": ["google"]})
     __properties: ClassVar[List[str]] = ["authentication_provider_id", "label", "icon"]
@@ -71,6 +72,9 @@ class DiscoveryPageEntry(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of authentication_provider_id
+        if self.authentication_provider_id:
+            _dict['authentication_provider_id'] = self.authentication_provider_id.to_dict()
         return _dict
 
     @classmethod
@@ -83,7 +87,7 @@ class DiscoveryPageEntry(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "authentication_provider_id": obj.get("authentication_provider_id"),
+            "authentication_provider_id": DiscoveryPageEntryAuthenticationProviderId.from_dict(obj["authentication_provider_id"]) if obj.get("authentication_provider_id") is not None else None,
             "label": obj.get("label"),
             "icon": obj.get("icon")
         })

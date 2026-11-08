@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from canvas_lms_python_client.models.developer_key_account_binding_workflow_state import DeveloperKeyAccountBindingWorkflowState
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -30,7 +31,7 @@ class DeveloperKeyAccountBinding(BaseModel):
     id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The Canvas ID of the binding", json_schema_extra={"examples": [1]})
     account_id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The global Canvas ID of the account in the binding", json_schema_extra={"examples": [10000000000001]})
     developer_key_id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The global Canvas ID of the developer key in the binding", json_schema_extra={"examples": [10000000000008]})
-    workflow_state: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The workflow state of the binding. Will be one of 'on', 'off', or 'allow.'")
+    workflow_state: Optional[DeveloperKeyAccountBindingWorkflowState] = None
     account_owns_binding: Optional[StrictBool] = Field(default=None, description="True if the requested context owns the binding", json_schema_extra={"examples": [True]})
     __properties: ClassVar[List[str]] = ["id", "account_id", "developer_key_id", "workflow_state", "account_owns_binding"]
 
@@ -73,6 +74,9 @@ class DeveloperKeyAccountBinding(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of workflow_state
+        if self.workflow_state:
+            _dict['workflow_state'] = self.workflow_state.to_dict()
         return _dict
 
     @classmethod
@@ -88,7 +92,7 @@ class DeveloperKeyAccountBinding(BaseModel):
             "id": obj.get("id"),
             "account_id": obj.get("account_id"),
             "developer_key_id": obj.get("developer_key_id"),
-            "workflow_state": obj.get("workflow_state"),
+            "workflow_state": DeveloperKeyAccountBindingWorkflowState.from_dict(obj["workflow_state"]) if obj.get("workflow_state") is not None else None,
             "account_owns_binding": obj.get("account_owns_binding")
         })
         return _obj

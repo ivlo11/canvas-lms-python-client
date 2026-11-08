@@ -32,7 +32,7 @@ Method | HTTP request | Description
 
 
 # **content_migrations_asset_id_mapping**
-> content_migrations_asset_id_mapping(course_id, id)
+> ContentMigrationsAssetIdMappingResponse content_migrations_asset_id_mapping(course_id, id)
 
 Get asset id mapping
 
@@ -50,6 +50,7 @@ from id in source course to id in destination course for objects of this type.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.content_migrations_asset_id_mapping_response import ContentMigrationsAssetIdMappingResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -78,7 +79,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get asset id mapping
-        await api_instance.content_migrations_asset_id_mapping(course_id, id)
+        api_response = await api_instance.content_migrations_asset_id_mapping(course_id, id)
+        print("The response of ContentMigrationsApi->content_migrations_asset_id_mapping:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ContentMigrationsApi->content_migrations_asset_id_mapping: %s\n" % e)
 ```
@@ -95,7 +98,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ContentMigrationsAssetIdMappingResponse**](ContentMigrationsAssetIdMappingResponse.md)
 
 ### Authorization
 
@@ -110,7 +113,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get asset id mapping |  -  |
+**0** | ContentMigrationsAssetIdMappingResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -427,7 +430,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **content_migrations_content_list**
-> object content_migrations_content_list(account_id, id, type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments=type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments)
+> List[ContentMigrationsContentListResponse] content_migrations_content_list(account_id, id, type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments=type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments)
 
 List items for selective import
 
@@ -491,6 +494,7 @@ You can include multiple copy parameters to selectively import multiple items or
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.content_migrations_content_list_response import ContentMigrationsContentListResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -540,7 +544,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**List[ContentMigrationsContentListResponse]**](ContentMigrationsContentListResponse.md)
 
 ### Authorization
 
@@ -560,7 +564,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **content_migrations_content_list_for_courses**
-> object content_migrations_content_list_for_courses(course_id, id, type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments=type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments)
+> List[ContentMigrationsContentListResponse] content_migrations_content_list_for_courses(course_id, id, type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments=type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments)
 
 List items for selective import
 
@@ -624,6 +628,7 @@ You can include multiple copy parameters to selectively import multiple items or
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.content_migrations_content_list_response import ContentMigrationsContentListResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -673,7 +678,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**List[ContentMigrationsContentListResponse]**](ContentMigrationsContentListResponse.md)
 
 ### Authorization
 
@@ -693,7 +698,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **content_migrations_content_list_for_groups**
-> object content_migrations_content_list_for_groups(group_id, id, type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments=type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments)
+> List[ContentMigrationsContentListResponse] content_migrations_content_list_for_groups(group_id, id, type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments=type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments)
 
 List items for selective import
 
@@ -757,6 +762,7 @@ You can include multiple copy parameters to selectively import multiple items or
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.content_migrations_content_list_response import ContentMigrationsContentListResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -806,7 +812,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**List[ContentMigrationsContentListResponse]**](ContentMigrationsContentListResponse.md)
 
 ### Authorization
 
@@ -826,7 +832,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **content_migrations_content_list_for_users**
-> object content_migrations_content_list_for_users(id, user_id, type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments=type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments)
+> List[ContentMigrationsContentListResponse] content_migrations_content_list_for_users(id, user_id, type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments=type_context_modules_assignments_quizzes_assessment_question_banks_discussion_topics_wiki_pages_context_external_tools_tool_profiles_announcements_calendar_events_rubrics_groups_learning_outcomes_attachments)
 
 List items for selective import
 
@@ -890,6 +896,7 @@ You can include multiple copy parameters to selectively import multiple items or
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.content_migrations_content_list_response import ContentMigrationsContentListResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -939,7 +946,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**List[ContentMigrationsContentListResponse]**](ContentMigrationsContentListResponse.md)
 
 ### Authorization
 

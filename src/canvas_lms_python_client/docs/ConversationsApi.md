@@ -107,7 +107,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **conversations_add_recipients**
-> conversations_add_recipients(id, conversations_add_recipients_request=conversations_add_recipients_request)
+> Conversation conversations_add_recipients(id, conversations_add_recipients_request=conversations_add_recipients_request)
 
 Add recipients
 
@@ -121,6 +121,7 @@ latest message (e.g. "joe was added to the conversation by bob")
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.conversation import Conversation
 from canvas_lms_python_client.models.conversations_add_recipients_request import ConversationsAddRecipientsRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -150,7 +151,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Add recipients
-        await api_instance.conversations_add_recipients(id, conversations_add_recipients_request=conversations_add_recipients_request)
+        api_response = await api_instance.conversations_add_recipients(id, conversations_add_recipients_request=conversations_add_recipients_request)
+        print("The response of ConversationsApi->conversations_add_recipients:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ConversationsApi->conversations_add_recipients: %s\n" % e)
 ```
@@ -167,7 +170,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Conversation**](Conversation.md)
 
 ### Authorization
 
@@ -182,7 +185,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Add recipients |  -  |
+**0** | Conversation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -349,7 +352,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **conversations_create**
-> conversations_create(conversations_create_request=conversations_create_request)
+> List[Conversation] conversations_create(conversations_create_request=conversations_create_request)
 
 Create a conversation
 
@@ -369,6 +372,7 @@ reused.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.conversation import Conversation
 from canvas_lms_python_client.models.conversations_create_request import ConversationsCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -397,7 +401,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a conversation
-        await api_instance.conversations_create(conversations_create_request=conversations_create_request)
+        api_response = await api_instance.conversations_create(conversations_create_request=conversations_create_request)
+        print("The response of ConversationsApi->conversations_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ConversationsApi->conversations_create: %s\n" % e)
 ```
@@ -413,7 +419,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Conversation]**](Conversation.md)
 
 ### Authorization
 
@@ -422,18 +428,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create a conversation |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **conversations_destroy**
-> conversations_destroy(id)
+> Conversation conversations_destroy(id)
 
 Delete a conversation
 
@@ -448,6 +454,7 @@ Response includes same fields as UPDATE action
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.conversation import Conversation
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -475,7 +482,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete a conversation
-        await api_instance.conversations_destroy(id)
+        api_response = await api_instance.conversations_destroy(id)
+        print("The response of ConversationsApi->conversations_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ConversationsApi->conversations_destroy: %s\n" % e)
 ```
@@ -491,7 +500,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Conversation**](Conversation.md)
 
 ### Authorization
 
@@ -506,7 +515,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete a conversation |  -  |
+**0** | Conversation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -679,7 +688,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **conversations_remove_messages**
-> conversations_remove_messages(id, conversations_remove_messages_request=conversations_remove_messages_request)
+> Conversation conversations_remove_messages(id, conversations_remove_messages_request=conversations_remove_messages_request)
 
 Delete a message
 
@@ -693,6 +702,7 @@ conversation will be as well (equivalent to DELETE)
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.conversation import Conversation
 from canvas_lms_python_client.models.conversations_remove_messages_request import ConversationsRemoveMessagesRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -722,7 +732,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete a message
-        await api_instance.conversations_remove_messages(id, conversations_remove_messages_request=conversations_remove_messages_request)
+        api_response = await api_instance.conversations_remove_messages(id, conversations_remove_messages_request=conversations_remove_messages_request)
+        print("The response of ConversationsApi->conversations_remove_messages:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ConversationsApi->conversations_remove_messages: %s\n" % e)
 ```
@@ -739,7 +751,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Conversation**](Conversation.md)
 
 ### Authorization
 
@@ -754,12 +766,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete a message |  -  |
+**0** | Conversation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **conversations_show**
-> conversations_show(id, interleave_submissions=interleave_submissions, scope=scope, filter=filter, filter_mode_and_or=filter_mode_and_or, auto_mark_as_read=auto_mark_as_read)
+> Conversation conversations_show(id, interleave_submissions=interleave_submissions, scope=scope, filter=filter, filter_mode_and_or=filter_mode_and_or, auto_mark_as_read=auto_mark_as_read)
 
 Get a single conversation
 
@@ -773,6 +785,7 @@ and extended participant information.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.conversation import Conversation
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -805,7 +818,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single conversation
-        await api_instance.conversations_show(id, interleave_submissions=interleave_submissions, scope=scope, filter=filter, filter_mode_and_or=filter_mode_and_or, auto_mark_as_read=auto_mark_as_read)
+        api_response = await api_instance.conversations_show(id, interleave_submissions=interleave_submissions, scope=scope, filter=filter, filter_mode_and_or=filter_mode_and_or, auto_mark_as_read=auto_mark_as_read)
+        print("The response of ConversationsApi->conversations_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ConversationsApi->conversations_show: %s\n" % e)
 ```
@@ -826,7 +841,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Conversation**](Conversation.md)
 
 ### Authorization
 
@@ -841,12 +856,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a single conversation |  -  |
+**0** | Conversation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **conversations_unread_count**
-> conversations_unread_count()
+> ConversationsUnreadCountResponse conversations_unread_count()
 
 Unread count
 
@@ -858,6 +873,7 @@ Get the number of unread conversations for the current user
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.conversations_unread_count_response import ConversationsUnreadCountResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -884,7 +900,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Unread count
-        await api_instance.conversations_unread_count()
+        api_response = await api_instance.conversations_unread_count()
+        print("The response of ConversationsApi->conversations_unread_count:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ConversationsApi->conversations_unread_count: %s\n" % e)
 ```
@@ -897,7 +915,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**ConversationsUnreadCountResponse**](ConversationsUnreadCountResponse.md)
 
 ### Authorization
 
@@ -912,12 +930,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Unread count |  -  |
+**0** | ConversationsUnreadCountResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **conversations_update**
-> conversations_update(id, conversations_update_request=conversations_update_request)
+> Conversation conversations_update(id, conversations_update_request=conversations_update_request)
 
 Edit a conversation
 
@@ -929,6 +947,7 @@ Updates attributes for a single conversation.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.conversation import Conversation
 from canvas_lms_python_client.models.conversations_update_request import ConversationsUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -958,7 +977,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Edit a conversation
-        await api_instance.conversations_update(id, conversations_update_request=conversations_update_request)
+        api_response = await api_instance.conversations_update(id, conversations_update_request=conversations_update_request)
+        print("The response of ConversationsApi->conversations_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ConversationsApi->conversations_update: %s\n" % e)
 ```
@@ -975,7 +996,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Conversation**](Conversation.md)
 
 ### Authorization
 
@@ -990,7 +1011,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Edit a conversation |  -  |
+**0** | Conversation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

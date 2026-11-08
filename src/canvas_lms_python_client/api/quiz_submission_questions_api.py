@@ -18,10 +18,12 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import List, Optional, Union
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.quiz_submission_question import QuizSubmissionQuestion
 from canvas_lms_python_client.models.quiz_submission_questions_answer_request import QuizSubmissionQuestionsAnswerRequest
+from canvas_lms_python_client.models.quiz_submission_questions_answer_response import QuizSubmissionQuestionsAnswerResponse
 from canvas_lms_python_client.models.quiz_submission_questions_flag_request import QuizSubmissionQuestionsFlagRequest
 from canvas_lms_python_client.models.quiz_submission_questions_index_response import QuizSubmissionQuestionsIndexResponse
+from canvas_lms_python_client.models.quizzes_quiz_submission_questions_flag_response import QuizzesQuizSubmissionQuestionsFlagResponse
+from canvas_lms_python_client.models.quizzes_quiz_submission_questions_formatted_answer_response import QuizzesQuizSubmissionQuestionsFormattedAnswerResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -59,7 +61,7 @@ class QuizSubmissionQuestionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[QuizSubmissionQuestion]:
+    ) -> QuizSubmissionQuestionsAnswerResponse:
         """Answering questions
 
         Provide or update an answer to one or more QuizQuestions.
@@ -101,7 +103,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[QuizSubmissionQuestion]",
+            'default': "QuizSubmissionQuestionsAnswerResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -130,7 +132,7 @@ class QuizSubmissionQuestionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[QuizSubmissionQuestion]]:
+    ) -> ApiResponse[QuizSubmissionQuestionsAnswerResponse]:
         """Answering questions
 
         Provide or update an answer to one or more QuizQuestions.
@@ -172,7 +174,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[QuizSubmissionQuestion]",
+            'default': "QuizSubmissionQuestionsAnswerResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -244,7 +246,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[QuizSubmissionQuestion]",
+            'default': "QuizSubmissionQuestionsAnswerResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -351,7 +353,7 @@ class QuizSubmissionQuestionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> QuizzesQuizSubmissionQuestionsFlagResponse:
         """Flagging a question.
 
         Set a flag on a quiz question to indicate that you want to return to it later.
@@ -396,6 +398,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionQuestionsFlagResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -425,7 +428,7 @@ class QuizSubmissionQuestionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizzesQuizSubmissionQuestionsFlagResponse]:
         """Flagging a question.
 
         Set a flag on a quiz question to indicate that you want to return to it later.
@@ -470,6 +473,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionQuestionsFlagResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -545,6 +549,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionQuestionsFlagResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -591,6 +596,13 @@ class QuizSubmissionQuestionsApi:
             _body_params = quiz_submission_questions_flag_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -647,7 +659,7 @@ class QuizSubmissionQuestionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> QuizzesQuizSubmissionQuestionsFormattedAnswerResponse:
         """Get a formatted student numerical answer.
 
         Matches the intended behavior of the UI when a numerical answer is entered and returns the resulting formatted number
@@ -692,6 +704,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionQuestionsFormattedAnswerResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -721,7 +734,7 @@ class QuizSubmissionQuestionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizzesQuizSubmissionQuestionsFormattedAnswerResponse]:
         """Get a formatted student numerical answer.
 
         Matches the intended behavior of the UI when a numerical answer is entered and returns the resulting formatted number
@@ -766,6 +779,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionQuestionsFormattedAnswerResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -841,6 +855,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionQuestionsFormattedAnswerResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1220,7 +1235,7 @@ class QuizSubmissionQuestionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> QuizzesQuizSubmissionQuestionsFlagResponse:
         """Unflagging a question.
 
         Remove the flag that you previously set on a quiz question after you've returned to it.
@@ -1265,6 +1280,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionQuestionsFlagResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1294,7 +1310,7 @@ class QuizSubmissionQuestionsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizzesQuizSubmissionQuestionsFlagResponse]:
         """Unflagging a question.
 
         Remove the flag that you previously set on a quiz question after you've returned to it.
@@ -1339,6 +1355,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionQuestionsFlagResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1414,6 +1431,7 @@ class QuizSubmissionQuestionsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionQuestionsFlagResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1460,6 +1478,13 @@ class QuizSubmissionQuestionsApi:
             _body_params = quiz_submission_questions_flag_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

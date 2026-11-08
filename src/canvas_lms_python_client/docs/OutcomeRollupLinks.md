@@ -6,9 +6,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**course** | **int** | If an aggregate result was requested, the course field will be present. Otherwise, the user and section field will be present (Optional) The id of the course that this rollup applies to | [optional] 
-**user** | **int** | (Optional) The id of the user that this rollup applies to | [optional] 
-**section** | **int** | (Optional) The id of the section the user is in | [optional] 
+**course** | [**OutcomeRollupLinksCourse**](OutcomeRollupLinksCourse.md) |  | [optional] 
+**user** | [**OutcomeRollupLinksUser**](OutcomeRollupLinksUser.md) |  | [optional] 
+**section** | [**OutcomeRollupLinksSection**](OutcomeRollupLinksSection.md) |  | [optional] 
+**status** | **str** |  | [optional] 
 
 ## Example
 

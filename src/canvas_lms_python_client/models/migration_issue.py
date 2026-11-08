@@ -99,6 +99,11 @@ class MigrationIssue(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if fix_issue_html_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.fix_issue_html_url is None and "fix_issue_html_url" in self.model_fields_set:
+            _dict['fix_issue_html_url'] = None
+
         return _dict
 
     @classmethod

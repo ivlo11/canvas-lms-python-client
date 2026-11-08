@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **submission_comments_api_create_file**
-> submission_comments_api_create_file(assignment_id, course_id, user_id)
+> SubmissionCommentsCreateFileResponse submission_comments_api_create_file(assignment_id, course_id, user_id)
 
 Upload a file
 
@@ -28,6 +28,7 @@ submission API to attach it to a comment
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission_comments_create_file_response import SubmissionCommentsCreateFileResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -57,7 +58,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Upload a file
-        await api_instance.submission_comments_api_create_file(assignment_id, course_id, user_id)
+        api_response = await api_instance.submission_comments_api_create_file(assignment_id, course_id, user_id)
+        print("The response of SubmissionCommentsApiApi->submission_comments_api_create_file:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionCommentsApiApi->submission_comments_api_create_file: %s\n" % e)
 ```
@@ -75,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionCommentsCreateFileResponse**](SubmissionCommentsCreateFileResponse.md)
 
 ### Authorization
 
@@ -84,13 +87,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Upload a file |  -  |
+**0** | SubmissionCommentsCreateFileResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

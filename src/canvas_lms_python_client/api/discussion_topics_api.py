@@ -20,7 +20,9 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.discussion_topic import DiscussionTopic
 from canvas_lms_python_client.models.discussion_topics_create_request import DiscussionTopicsCreateRequest
+from canvas_lms_python_client.models.discussion_topics_destroy_response import DiscussionTopicsDestroyResponse
 from canvas_lms_python_client.models.discussion_topics_reorder_request import DiscussionTopicsReorderRequest
+from canvas_lms_python_client.models.discussion_topics_reorder_response import DiscussionTopicsReorderResponse
 from canvas_lms_python_client.models.discussion_topics_update_request import DiscussionTopicsUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -59,7 +61,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopic:
         """Create a new discussion topic
 
         Create an new discussion topic for the course or group.
@@ -101,6 +103,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -129,7 +132,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopic]:
         """Create a new discussion topic
 
         Create an new discussion topic for the course or group.
@@ -171,6 +174,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -242,6 +246,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -285,6 +290,13 @@ class DiscussionTopicsApi:
             _body_params = discussion_topics_create_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -340,7 +352,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopic:
         """Create a new discussion topic
 
         Create an new discussion topic for the course or group.
@@ -382,6 +394,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -410,7 +423,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopic]:
         """Create a new discussion topic
 
         Create an new discussion topic for the course or group.
@@ -452,6 +465,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -523,6 +537,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -566,6 +581,13 @@ class DiscussionTopicsApi:
             _body_params = discussion_topics_create_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -621,7 +643,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsDestroyResponse:
         """Delete a topic
 
         Deletes the discussion topic. This will also delete the assignment, if it's an assignment discussion.
@@ -663,6 +685,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -691,7 +714,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsDestroyResponse]:
         """Delete a topic
 
         Deletes the discussion topic. This will also delete the assignment, if it's an assignment discussion.
@@ -733,6 +756,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -804,6 +828,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -847,6 +872,13 @@ class DiscussionTopicsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -889,7 +921,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsDestroyResponse:
         """Delete a topic
 
         Deletes the discussion topic. This will also delete the assignment, if it's an assignment discussion.
@@ -931,6 +963,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -959,7 +992,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsDestroyResponse]:
         """Delete a topic
 
         Deletes the discussion topic. This will also delete the assignment, if it's an assignment discussion.
@@ -1001,6 +1034,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1072,6 +1106,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1115,6 +1150,13 @@ class DiscussionTopicsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2565,7 +2607,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsReorderResponse:
         """Reorder pinned topics
 
         Puts the pinned discussion topics in the specified order. All pinned topics should be included.
@@ -2607,6 +2649,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsReorderResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2635,7 +2678,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsReorderResponse]:
         """Reorder pinned topics
 
         Puts the pinned discussion topics in the specified order. All pinned topics should be included.
@@ -2677,6 +2720,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsReorderResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2748,6 +2792,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsReorderResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2791,6 +2836,13 @@ class DiscussionTopicsApi:
             _body_params = discussion_topics_reorder_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2846,7 +2898,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsReorderResponse:
         """Reorder pinned topics
 
         Puts the pinned discussion topics in the specified order. All pinned topics should be included.
@@ -2888,6 +2940,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsReorderResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2916,7 +2969,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsReorderResponse]:
         """Reorder pinned topics
 
         Puts the pinned discussion topics in the specified order. All pinned topics should be included.
@@ -2958,6 +3011,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsReorderResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3029,6 +3083,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsReorderResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3072,6 +3127,13 @@ class DiscussionTopicsApi:
             _body_params = discussion_topics_reorder_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -3128,7 +3190,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopic:
         """Update a topic
 
         Update an existing discussion topic for the course or group.
@@ -3173,6 +3235,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3202,7 +3265,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopic]:
         """Update a topic
 
         Update an existing discussion topic for the course or group.
@@ -3247,6 +3310,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3322,6 +3386,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3368,6 +3433,13 @@ class DiscussionTopicsApi:
             _body_params = discussion_topics_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -3424,7 +3496,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopic:
         """Update a topic
 
         Update an existing discussion topic for the course or group.
@@ -3469,6 +3541,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3498,7 +3571,7 @@ class DiscussionTopicsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopic]:
         """Update a topic
 
         Update an existing discussion topic for the course or group.
@@ -3543,6 +3616,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3618,6 +3692,7 @@ class DiscussionTopicsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3664,6 +3739,13 @@ class DiscussionTopicsApi:
             _body_params = discussion_topics_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

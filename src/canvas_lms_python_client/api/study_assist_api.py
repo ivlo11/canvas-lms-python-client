@@ -16,8 +16,9 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, Optional
+from typing import Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.assist_response import AssistResponse
 from canvas_lms_python_client.models.study_assist_create_request import StudyAssistCreateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -56,7 +57,7 @@ class StudyAssistApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> AssistResponse:
         """Request a study assist response
 
 
@@ -97,7 +98,7 @@ class StudyAssistApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AssistResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -126,7 +127,7 @@ class StudyAssistApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[AssistResponse]:
         """Request a study assist response
 
 
@@ -167,7 +168,7 @@ class StudyAssistApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AssistResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -238,7 +239,7 @@ class StudyAssistApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AssistResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

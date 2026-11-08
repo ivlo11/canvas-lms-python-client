@@ -44,7 +44,8 @@ class LtiToolConfiguration(BaseModel):
     redirect_uris: Optional[List[StrictStr]] = Field(default=None, description="1.3 specific. List of possible launch URLs for after the Canvas authorize redirect step", json_schema_extra={"examples": [["https://mytool.com/launch", "https://mytool.com/1_3/launch"]]})
     launch_settings: Optional[LtiLaunchSettings] = None
     placements: Optional[List[LtiPlacement]] = Field(default=None, description="List of placements configured by the tool", json_schema_extra={"examples": [[{"type": "Lti_Placement"}]]})
-    __properties: ClassVar[List[str]] = ["title", "description", "custom_fields", "target_link_uri", "domain", "tool_id", "privacy_level", "oidc_initiation_url", "oidc_initiation_urls", "public_jwk", "public_jwk_url", "scopes", "redirect_uris", "launch_settings", "placements"]
+    extensions: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["title", "description", "custom_fields", "target_link_uri", "domain", "tool_id", "privacy_level", "oidc_initiation_url", "oidc_initiation_urls", "public_jwk", "public_jwk_url", "scopes", "redirect_uris", "launch_settings", "placements", "extensions"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -94,6 +95,21 @@ class LtiToolConfiguration(BaseModel):
             for _item_placements in self.placements:
                 _items.append(_item_placements.to_dict() if _item_placements is not None else None)
             _dict['placements'] = _items
+        # set to None if domain (nullable) is None
+        # and model_fields_set contains the field
+        if self.domain is None and "domain" in self.model_fields_set:
+            _dict['domain'] = None
+
+        # set to None if tool_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.tool_id is None and "tool_id" in self.model_fields_set:
+            _dict['tool_id'] = None
+
+        # set to None if public_jwk (nullable) is None
+        # and model_fields_set contains the field
+        if self.public_jwk is None and "public_jwk" in self.model_fields_set:
+            _dict['public_jwk'] = None
+
         return _dict
 
     @classmethod
@@ -120,7 +136,8 @@ class LtiToolConfiguration(BaseModel):
             "scopes": obj.get("scopes"),
             "redirect_uris": obj.get("redirect_uris"),
             "launch_settings": LtiLaunchSettings.from_dict(obj["launch_settings"]) if obj.get("launch_settings") is not None else None,
-            "placements": [LtiPlacement.from_dict(_item) for _item in obj["placements"]] if obj.get("placements") is not None else None
+            "placements": [LtiPlacement.from_dict(_item) for _item in obj["placements"]] if obj.get("placements") is not None else None,
+            "extensions": obj.get("extensions")
         })
         return _obj
 

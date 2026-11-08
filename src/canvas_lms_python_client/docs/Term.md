@@ -10,6 +10,11 @@ Name | Type | Description | Notes
 **name** | **str** |  | [optional] 
 **start_at** | **datetime** |  | [optional] 
 **end_at** | **datetime** |  | [optional] 
+**created_at** | **str** |  | [optional] 
+**grading_period_group_id** | **object** |  | [optional] 
+**sis_import_id** | **object** |  | [optional] 
+**sis_term_id** | **object** |  | [optional] 
+**workflow_state** | **str** |  | [optional] 
 
 ## Example
 

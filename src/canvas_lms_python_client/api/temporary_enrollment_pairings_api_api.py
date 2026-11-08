@@ -20,6 +20,9 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.temporary_enrollment_pairing import TemporaryEnrollmentPairing
 from canvas_lms_python_client.models.temporary_enrollment_pairings_api_create_request import TemporaryEnrollmentPairingsApiCreateRequest
+from canvas_lms_python_client.models.temporary_enrollment_pairings_api_create_response import TemporaryEnrollmentPairingsApiCreateResponse
+from canvas_lms_python_client.models.temporary_enrollment_pairings_api_new_response import TemporaryEnrollmentPairingsApiNewResponse
+from canvas_lms_python_client.models.temporary_enrollment_pairings_api_show_response import TemporaryEnrollmentPairingsApiShowResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -57,7 +60,7 @@ class TemporaryEnrollmentPairingsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TemporaryEnrollmentPairing:
+    ) -> TemporaryEnrollmentPairingsApiCreateResponse:
         """Create Temporary Enrollment Pairing
 
         Create a Temporary Enrollment Pairing.
@@ -99,7 +102,7 @@ class TemporaryEnrollmentPairingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "TemporaryEnrollmentPairing",
+            'default': "TemporaryEnrollmentPairingsApiCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +131,7 @@ class TemporaryEnrollmentPairingsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TemporaryEnrollmentPairing]:
+    ) -> ApiResponse[TemporaryEnrollmentPairingsApiCreateResponse]:
         """Create Temporary Enrollment Pairing
 
         Create a Temporary Enrollment Pairing.
@@ -170,7 +173,7 @@ class TemporaryEnrollmentPairingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "TemporaryEnrollmentPairing",
+            'default': "TemporaryEnrollmentPairingsApiCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -242,7 +245,7 @@ class TemporaryEnrollmentPairingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "TemporaryEnrollmentPairing",
+            'default': "TemporaryEnrollmentPairingsApiCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -888,7 +891,7 @@ class TemporaryEnrollmentPairingsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TemporaryEnrollmentPairing:
+    ) -> TemporaryEnrollmentPairingsApiNewResponse:
         """New TemporaryEnrollmentPairing
 
         Initialize an unsaved Temporary Enrollment Pairing.
@@ -927,7 +930,7 @@ class TemporaryEnrollmentPairingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "TemporaryEnrollmentPairing",
+            'default': "TemporaryEnrollmentPairingsApiNewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -955,7 +958,7 @@ class TemporaryEnrollmentPairingsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TemporaryEnrollmentPairing]:
+    ) -> ApiResponse[TemporaryEnrollmentPairingsApiNewResponse]:
         """New TemporaryEnrollmentPairing
 
         Initialize an unsaved Temporary Enrollment Pairing.
@@ -994,7 +997,7 @@ class TemporaryEnrollmentPairingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "TemporaryEnrollmentPairing",
+            'default': "TemporaryEnrollmentPairingsApiNewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1062,7 +1065,7 @@ class TemporaryEnrollmentPairingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "TemporaryEnrollmentPairing",
+            'default': "TemporaryEnrollmentPairingsApiNewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1152,7 +1155,7 @@ class TemporaryEnrollmentPairingsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> TemporaryEnrollmentPairing:
+    ) -> TemporaryEnrollmentPairingsApiShowResponse:
         """Get a single temporary enrollment pairing
 
         Returns the temporary enrollment pairing with the given id.
@@ -1194,7 +1197,7 @@ class TemporaryEnrollmentPairingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "TemporaryEnrollmentPairing",
+            'default': "TemporaryEnrollmentPairingsApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1223,7 +1226,7 @@ class TemporaryEnrollmentPairingsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[TemporaryEnrollmentPairing]:
+    ) -> ApiResponse[TemporaryEnrollmentPairingsApiShowResponse]:
         """Get a single temporary enrollment pairing
 
         Returns the temporary enrollment pairing with the given id.
@@ -1265,7 +1268,7 @@ class TemporaryEnrollmentPairingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "TemporaryEnrollmentPairing",
+            'default': "TemporaryEnrollmentPairingsApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1337,7 +1340,7 @@ class TemporaryEnrollmentPairingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "TemporaryEnrollmentPairing",
+            'default': "TemporaryEnrollmentPairingsApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

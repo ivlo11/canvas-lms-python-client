@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 
 # **blackout_dates_bulk_update**
-> object blackout_dates_bulk_update(course_id, blackout_dates_bulk_update_request=blackout_dates_bulk_update_request)
+> List[BlackoutDate] blackout_dates_bulk_update(course_id, blackout_dates_bulk_update_request=blackout_dates_bulk_update_request)
 
 Update a list of Blackout Dates
 
@@ -32,6 +32,7 @@ Create, update, and delete blackout dates to sync the db with the incoming data.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.blackout_date import BlackoutDate
 from canvas_lms_python_client.models.blackout_dates_bulk_update_request import BlackoutDatesBulkUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -80,7 +81,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**List[BlackoutDate]**](BlackoutDate.md)
 
 ### Authorization
 
@@ -95,12 +96,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | BlackoutDate[] The result (which should match the input with maybe some different IDs). |  -  |
+**0** | The result (which should match the input with maybe some different IDs). |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **blackout_dates_create**
-> BlackoutDate blackout_dates_create(course_id, blackout_dates_create_request=blackout_dates_create_request)
+> BlackoutDatesCreateResponse blackout_dates_create(course_id, blackout_dates_create_request=blackout_dates_create_request)
 
 Create Blackout Date
 
@@ -112,8 +113,8 @@ Create a blackout date for the given context.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.blackout_date import BlackoutDate
 from canvas_lms_python_client.models.blackout_dates_create_request import BlackoutDatesCreateRequest
+from canvas_lms_python_client.models.blackout_dates_create_response import BlackoutDatesCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -161,7 +162,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BlackoutDate**](BlackoutDate.md)
+[**BlackoutDatesCreateResponse**](BlackoutDatesCreateResponse.md)
 
 ### Authorization
 
@@ -176,12 +177,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | BlackoutDate |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **blackout_dates_create_for_accounts**
-> BlackoutDate blackout_dates_create_for_accounts(account_id, blackout_dates_create_request=blackout_dates_create_request)
+> BlackoutDatesCreateResponse blackout_dates_create_for_accounts(account_id, blackout_dates_create_request=blackout_dates_create_request)
 
 Create Blackout Date
 
@@ -193,8 +194,8 @@ Create a blackout date for the given context.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.blackout_date import BlackoutDate
 from canvas_lms_python_client.models.blackout_dates_create_request import BlackoutDatesCreateRequest
+from canvas_lms_python_client.models.blackout_dates_create_response import BlackoutDatesCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -242,7 +243,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BlackoutDate**](BlackoutDate.md)
+[**BlackoutDatesCreateResponse**](BlackoutDatesCreateResponse.md)
 
 ### Authorization
 
@@ -257,7 +258,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | BlackoutDate |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -578,7 +579,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **blackout_dates_new**
-> BlackoutDate blackout_dates_new(course_id)
+> BlackoutDatesNewResponse blackout_dates_new(course_id)
 
 New Blackout Date
 
@@ -590,7 +591,7 @@ Initialize an unsaved Blackout Date for the given context.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.blackout_date import BlackoutDate
+from canvas_lms_python_client.models.blackout_dates_new_response import BlackoutDatesNewResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -636,7 +637,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BlackoutDate**](BlackoutDate.md)
+[**BlackoutDatesNewResponse**](BlackoutDatesNewResponse.md)
 
 ### Authorization
 
@@ -651,12 +652,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | BlackoutDate |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **blackout_dates_new_for_accounts**
-> BlackoutDate blackout_dates_new_for_accounts(account_id)
+> BlackoutDatesNewResponse blackout_dates_new_for_accounts(account_id)
 
 New Blackout Date
 
@@ -668,7 +669,7 @@ Initialize an unsaved Blackout Date for the given context.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.blackout_date import BlackoutDate
+from canvas_lms_python_client.models.blackout_dates_new_response import BlackoutDatesNewResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -714,7 +715,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BlackoutDate**](BlackoutDate.md)
+[**BlackoutDatesNewResponse**](BlackoutDatesNewResponse.md)
 
 ### Authorization
 
@@ -729,12 +730,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | BlackoutDate |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **blackout_dates_show**
-> BlackoutDate blackout_dates_show(course_id, id)
+> BlackoutDatesShowResponse blackout_dates_show(course_id, id)
 
 Get a single blackout date
 
@@ -746,7 +747,7 @@ Returns the blackout date with the given id.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.blackout_date import BlackoutDate
+from canvas_lms_python_client.models.blackout_dates_show_response import BlackoutDatesShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -794,7 +795,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BlackoutDate**](BlackoutDate.md)
+[**BlackoutDatesShowResponse**](BlackoutDatesShowResponse.md)
 
 ### Authorization
 
@@ -809,12 +810,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | BlackoutDate |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **blackout_dates_show_for_accounts**
-> BlackoutDate blackout_dates_show_for_accounts(account_id, id)
+> BlackoutDatesShowResponse blackout_dates_show_for_accounts(account_id, id)
 
 Get a single blackout date
 
@@ -826,7 +827,7 @@ Returns the blackout date with the given id.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.blackout_date import BlackoutDate
+from canvas_lms_python_client.models.blackout_dates_show_response import BlackoutDatesShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -874,7 +875,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BlackoutDate**](BlackoutDate.md)
+[**BlackoutDatesShowResponse**](BlackoutDatesShowResponse.md)
 
 ### Authorization
 
@@ -889,12 +890,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | BlackoutDate |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **blackout_dates_update**
-> BlackoutDate blackout_dates_update(course_id, id, blackout_dates_create_request=blackout_dates_create_request)
+> BlackoutDatesUpdateResponse blackout_dates_update(course_id, id, blackout_dates_create_request=blackout_dates_create_request)
 
 Update Blackout Date
 
@@ -906,8 +907,8 @@ Update a blackout date for the given context.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.blackout_date import BlackoutDate
 from canvas_lms_python_client.models.blackout_dates_create_request import BlackoutDatesCreateRequest
+from canvas_lms_python_client.models.blackout_dates_update_response import BlackoutDatesUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -957,7 +958,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BlackoutDate**](BlackoutDate.md)
+[**BlackoutDatesUpdateResponse**](BlackoutDatesUpdateResponse.md)
 
 ### Authorization
 
@@ -972,12 +973,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | BlackoutDate |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **blackout_dates_update_for_accounts**
-> BlackoutDate blackout_dates_update_for_accounts(account_id, id, blackout_dates_create_request=blackout_dates_create_request)
+> BlackoutDatesUpdateResponse blackout_dates_update_for_accounts(account_id, id, blackout_dates_create_request=blackout_dates_create_request)
 
 Update Blackout Date
 
@@ -989,8 +990,8 @@ Update a blackout date for the given context.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.blackout_date import BlackoutDate
 from canvas_lms_python_client.models.blackout_dates_create_request import BlackoutDatesCreateRequest
+from canvas_lms_python_client.models.blackout_dates_update_response import BlackoutDatesUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1040,7 +1041,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**BlackoutDate**](BlackoutDate.md)
+[**BlackoutDatesUpdateResponse**](BlackoutDatesUpdateResponse.md)
 
 ### Authorization
 
@@ -1055,7 +1056,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | BlackoutDate |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -20,6 +20,7 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.course import Course
 from canvas_lms_python_client.models.favorite import Favorite
+from canvas_lms_python_client.models.favorites_reset_course_favorites_response import FavoritesResetCourseFavoritesResponse
 from canvas_lms_python_client.models.group import Group
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -1621,7 +1622,7 @@ class FavoritesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> FavoritesResetCourseFavoritesResponse:
         """Reset course favorites
 
         Reset the current user's course favorites to the default automatically generated list of enrolled courses
@@ -1657,6 +1658,7 @@ class FavoritesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FavoritesResetCourseFavoritesResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1683,7 +1685,7 @@ class FavoritesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[FavoritesResetCourseFavoritesResponse]:
         """Reset course favorites
 
         Reset the current user's course favorites to the default automatically generated list of enrolled courses
@@ -1719,6 +1721,7 @@ class FavoritesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FavoritesResetCourseFavoritesResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1782,6 +1785,7 @@ class FavoritesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FavoritesResetCourseFavoritesResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1819,6 +1823,13 @@ class FavoritesApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1859,7 +1870,7 @@ class FavoritesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> FavoritesResetCourseFavoritesResponse:
         """Reset group favorites
 
         Reset the current user's group favorites to the default automatically generated list of enrolled group
@@ -1895,6 +1906,7 @@ class FavoritesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FavoritesResetCourseFavoritesResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1921,7 +1933,7 @@ class FavoritesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[FavoritesResetCourseFavoritesResponse]:
         """Reset group favorites
 
         Reset the current user's group favorites to the default automatically generated list of enrolled group
@@ -1957,6 +1969,7 @@ class FavoritesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FavoritesResetCourseFavoritesResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2020,6 +2033,7 @@ class FavoritesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FavoritesResetCourseFavoritesResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2057,6 +2071,13 @@ class FavoritesApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

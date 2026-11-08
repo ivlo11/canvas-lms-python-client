@@ -1,12 +1,13 @@
 # ResultsIndexResponse
 
-Paginated `results` list response (from the Canvas example response).
+Object response with `results`, `meta` (from the Canvas `@returns`).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **results** | [**List[Result]**](Result.md) |  | [optional] 
+**meta** | **object** |  | [optional] 
 
 ## Example
 

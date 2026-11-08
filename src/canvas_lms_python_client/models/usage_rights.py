@@ -74,6 +74,11 @@ class UsageRights(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if legal_copyright (nullable) is None
+        # and model_fields_set contains the field
+        if self.legal_copyright is None and "legal_copyright" in self.model_fields_set:
+            _dict['legal_copyright'] = None
+
         return _dict
 
     @classmethod

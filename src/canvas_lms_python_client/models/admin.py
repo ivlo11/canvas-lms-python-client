@@ -32,7 +32,8 @@ class Admin(BaseModel):
     role: Optional[StrictStr] = Field(default=None, description="The account role assigned. This can be 'AccountAdmin' or a user-defined role created by the Roles API.", json_schema_extra={"examples": ["AccountAdmin"]})
     user: Optional[User] = None
     workflow_state: Optional[StrictStr] = Field(default=None, description="The status of the account role/user assignment.", json_schema_extra={"examples": ["deleted"]})
-    __properties: ClassVar[List[str]] = ["id", "role", "user", "workflow_state"]
+    role_id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id", "role", "user", "workflow_state", "role_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -91,7 +92,8 @@ class Admin(BaseModel):
             "id": obj.get("id"),
             "role": obj.get("role"),
             "user": User.from_dict(obj["user"]) if obj.get("user") is not None else None,
-            "workflow_state": obj.get("workflow_state")
+            "workflow_state": obj.get("workflow_state"),
+            "role_id": obj.get("role_id")
         })
         return _obj
 

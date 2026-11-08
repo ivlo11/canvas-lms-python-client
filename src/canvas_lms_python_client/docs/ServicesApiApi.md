@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **services_api_show_kaltura_config**
-> services_api_show_kaltura_config()
+> ServicesShowKalturaConfigResponse services_api_show_kaltura_config()
 
 Get Kaltura config
 
@@ -21,6 +21,7 @@ Return the config information for the Kaltura plugin in json format.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.services_show_kaltura_config_response import ServicesShowKalturaConfigResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -47,7 +48,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get Kaltura config
-        await api_instance.services_api_show_kaltura_config()
+        api_response = await api_instance.services_api_show_kaltura_config()
+        print("The response of ServicesApiApi->services_api_show_kaltura_config:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ServicesApiApi->services_api_show_kaltura_config: %s\n" % e)
 ```
@@ -60,7 +63,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**ServicesShowKalturaConfigResponse**](ServicesShowKalturaConfigResponse.md)
 
 ### Authorization
 
@@ -75,12 +78,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get Kaltura config |  -  |
+**0** | ServicesShowKalturaConfigResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **services_api_start_kaltura_session**
-> services_api_start_kaltura_session()
+> ServicesStartKalturaSessionResponse services_api_start_kaltura_session()
 
 Start Kaltura session
 
@@ -93,6 +96,7 @@ to this Canvas instance's Kaltura instance.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.services_start_kaltura_session_response import ServicesStartKalturaSessionResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -119,7 +123,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Start Kaltura session
-        await api_instance.services_api_start_kaltura_session()
+        api_response = await api_instance.services_api_start_kaltura_session()
+        print("The response of ServicesApiApi->services_api_start_kaltura_session:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ServicesApiApi->services_api_start_kaltura_session: %s\n" % e)
 ```
@@ -132,7 +138,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**ServicesStartKalturaSessionResponse**](ServicesStartKalturaSessionResponse.md)
 
 ### Authorization
 
@@ -147,7 +153,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Start Kaltura session |  -  |
+**0** | ServicesStartKalturaSessionResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

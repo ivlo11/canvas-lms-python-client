@@ -18,8 +18,9 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.rubric import Rubric
 from canvas_lms_python_client.models.rubrics_create_request import RubricsCreateRequest
+from canvas_lms_python_client.models.rubrics_create_response import RubricsCreateResponse
+from canvas_lms_python_client.models.rubrics_destroy_response import RubricsDestroyResponse
 from canvas_lms_python_client.models.rubrics_update_request import RubricsUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -58,7 +59,7 @@ class RubricsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> RubricsCreateResponse:
         """Create a single rubric
 
         Returns the rubric with the given id.  Unfortunately this endpoint does not return a standard Rubric object, instead it returns a hash that looks like   { 'rubric': Rubric, 'rubric_association': RubricAssociation }  This may eventually be deprecated in favor of a more standardized return value, but that is not currently planned.
@@ -100,6 +101,7 @@ class RubricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +130,7 @@ class RubricsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[RubricsCreateResponse]:
         """Create a single rubric
 
         Returns the rubric with the given id.  Unfortunately this endpoint does not return a standard Rubric object, instead it returns a hash that looks like   { 'rubric': Rubric, 'rubric_association': RubricAssociation }  This may eventually be deprecated in favor of a more standardized return value, but that is not currently planned.
@@ -170,6 +172,7 @@ class RubricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -241,6 +244,7 @@ class RubricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -284,6 +288,13 @@ class RubricsApi:
             _body_params = rubrics_create_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -339,7 +350,7 @@ class RubricsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Rubric:
+    ) -> RubricsDestroyResponse:
         """Delete a single
 
         Deletes a Rubric and removes all RubricAssociations.
@@ -381,7 +392,7 @@ class RubricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "Rubric",
+            'default': "RubricsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -410,7 +421,7 @@ class RubricsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Rubric]:
+    ) -> ApiResponse[RubricsDestroyResponse]:
         """Delete a single
 
         Deletes a Rubric and removes all RubricAssociations.
@@ -452,7 +463,7 @@ class RubricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "Rubric",
+            'default': "RubricsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -524,7 +535,7 @@ class RubricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "Rubric",
+            'default': "RubricsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -618,7 +629,7 @@ class RubricsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> RubricsCreateResponse:
         """Update a single rubric
 
         Returns the rubric with the given id.  Unfortunately this endpoint does not return a standard Rubric object, instead it returns a hash that looks like   { 'rubric': Rubric, 'rubric_association': RubricAssociation }  This may eventually be deprecated in favor of a more standardized return value, but that is not currently planned.
@@ -663,6 +674,7 @@ class RubricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -692,7 +704,7 @@ class RubricsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[RubricsCreateResponse]:
         """Update a single rubric
 
         Returns the rubric with the given id.  Unfortunately this endpoint does not return a standard Rubric object, instead it returns a hash that looks like   { 'rubric': Rubric, 'rubric_association': RubricAssociation }  This may eventually be deprecated in favor of a more standardized return value, but that is not currently planned.
@@ -737,6 +749,7 @@ class RubricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -812,6 +825,7 @@ class RubricsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -858,6 +872,13 @@ class RubricsApi:
             _body_params = rubrics_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

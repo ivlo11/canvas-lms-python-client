@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **updated_at** | **str** | Timestamp of the object&#39;s last update | [optional] 
 **created_by** | [**User**](User.md) |  | [optional] 
 **updated_by** | [**User**](User.md) |  | [optional] 
+**registration_id** | **int** |  | [optional] 
 
 ## Example
 

@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **result_maximum** | **float** | Maximum possible score for this result; 1 is the default value and will be assumed if not specified otherwise. Minimum value of 0 required. | [optional] 
 **comment** | **str** | Comment visible to the student about the result. | [optional] 
 **score_of** | **str** | URL of the line item this belongs to | [optional] 
+**assessed_at** | **str** |  | [optional] 
+**links** | **object** |  | [optional] 
+**passed** | **bool** |  | [optional] 
 
 ## Example
 

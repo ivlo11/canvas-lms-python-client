@@ -12,6 +12,12 @@ Name | Type | Description | Notes
 **progress_url** | **str** | The api endpoint for polling the current progress | [optional] 
 **user_id** | **int** | The ID of the user who started the export | [optional] 
 **workflow_state** | **str** | Current state of the ePub export: created exporting exported generating generated failed | [optional] 
+**name** | **str** |  | [optional] 
+**content_export_id** | **int** |  | [optional] 
+**course_id** | **int** |  | [optional] 
+**permissions** | **object** |  | [optional] 
+**progress_id** | **int** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
 
 ## Example
 

@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -31,7 +31,7 @@ class LtiAssignment(BaseModel):
     id: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [4]})
     name: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["Midterm Review"]})
     description: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["<p>Do the following:</p>..."]})
-    points_possible: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [10]})
+    points_possible: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, json_schema_extra={"examples": [10]})
     due_at: Optional[datetime] = Field(default=None, description="The due date for the assignment. If a user id is supplied and an assignment override is in place this field will reflect the due date as it applies to the user.", json_schema_extra={"examples": ["2012-07-01T23:59:00-06:00"]})
     lti_id: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["86157096483e6b3a50bfedc6bac902c0b20a824f"]})
     course_id: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [10000000000060]})

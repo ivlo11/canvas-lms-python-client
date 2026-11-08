@@ -26,6 +26,10 @@ Name | Type | Description | Notes
 **locked** | **bool** |  | [optional] 
 **locked_for_user** | **bool** |  | [optional] 
 **for_submissions** | **bool** | If true, indicates this is a read-only folder containing files submitted to assignments | [optional] 
+**data** | **object** |  | [optional] 
+**url** | **str** |  | [optional] 
+**all_url** | **str** |  | [optional] 
+**can_upload** | **bool** |  | [optional] 
 
 ## Example
 

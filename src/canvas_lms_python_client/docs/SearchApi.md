@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **search_all_courses**
-> search_all_courses(search=search, public_only=public_only, open_enrollment_only=open_enrollment_only, page=page, per_page=per_page)
+> List[SearchAllCoursesResponse] search_all_courses(search=search, public_only=public_only, open_enrollment_only=open_enrollment_only, page=page, per_page=per_page)
 
 List all courses
 
@@ -22,6 +22,7 @@ A paginated list of all courses visible in the public index
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.search_all_courses_response import SearchAllCoursesResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -53,7 +54,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List all courses
-        await api_instance.search_all_courses(search=search, public_only=public_only, open_enrollment_only=open_enrollment_only, page=page, per_page=per_page)
+        api_response = await api_instance.search_all_courses(search=search, public_only=public_only, open_enrollment_only=open_enrollment_only, page=page, per_page=per_page)
+        print("The response of SearchApi->search_all_courses:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SearchApi->search_all_courses: %s\n" % e)
 ```
@@ -73,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[SearchAllCoursesResponse]**](SearchAllCoursesResponse.md)
 
 ### Authorization
 
@@ -82,13 +85,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List all courses |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

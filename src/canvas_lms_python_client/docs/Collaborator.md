@@ -9,6 +9,9 @@ Name | Type | Description | Notes
 **id** | **int** | The unique user or group identifier for the collaborator. | 
 **type** | **str** | The type of collaborator (e.g. &#39;user&#39; or &#39;group&#39;). | [optional] 
 **name** | **str** | The name of the collaborator. | [optional] 
+**avatar_image_url** | **str** |  | [optional] 
+**collaborator_id** | **int** |  | [optional] 
+**collaborator_lti_id** | **str** |  | [optional] 
 
 ## Example
 

@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.media_object_media_sources_inner_bitrate import MediaObjectMediaSourcesInnerBitrate
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -32,7 +33,7 @@ class MediaObjectMediaSourcesInner(BaseModel):
     content_type: Optional[StrictStr] = Field(default=None, description="The flavor's content type", json_schema_extra={"examples": ["video/mp4"]})
     container_format: Optional[StrictStr] = Field(default=None, description="The flavor's container format", alias="containerFormat", json_schema_extra={"examples": ["isom"]})
     url: Optional[StrictStr] = Field(default=None, description="The URL to download the flavor", json_schema_extra={"examples": ["https://<canvas>/media_objects/m-JYmy6TLsHkxcrhgYmqa7XW1HCH3wEYc/redirect?bitrate=382"]})
-    bitrate: Optional[StrictStr] = Field(default=None, description="The flavor's bitrate", json_schema_extra={"examples": ["382"]})
+    bitrate: Optional[MediaObjectMediaSourcesInnerBitrate] = None
     size: Optional[StrictStr] = Field(default=None, description="The flavor's size", json_schema_extra={"examples": ["204"]})
     is_original: Optional[StrictStr] = Field(default=None, description="Whether the flavor is the original upload (\"1\") or not (\"0\")", alias="isOriginal", json_schema_extra={"examples": ["0"]})
     file_ext: Optional[StrictStr] = Field(default=None, description="The flavor's file extension", alias="fileExt", json_schema_extra={"examples": ["mp4"]})
@@ -79,6 +80,9 @@ class MediaObjectMediaSourcesInner(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of bitrate
+        if self.bitrate:
+            _dict['bitrate'] = self.bitrate.to_dict()
         return _dict
 
     @classmethod
@@ -96,7 +100,7 @@ class MediaObjectMediaSourcesInner(BaseModel):
             "content_type": obj.get("content_type"),
             "containerFormat": obj.get("containerFormat"),
             "url": obj.get("url"),
-            "bitrate": obj.get("bitrate"),
+            "bitrate": MediaObjectMediaSourcesInnerBitrate.from_dict(obj["bitrate"]) if obj.get("bitrate") is not None else None,
             "size": obj.get("size"),
             "isOriginal": obj.get("isOriginal"),
             "fileExt": obj.get("fileExt"),

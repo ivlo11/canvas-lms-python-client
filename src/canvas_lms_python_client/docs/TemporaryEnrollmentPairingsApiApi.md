@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **temporary_enrollment_pairings_api_create**
-> TemporaryEnrollmentPairing temporary_enrollment_pairings_api_create(account_id, temporary_enrollment_pairings_api_create_request=temporary_enrollment_pairings_api_create_request)
+> TemporaryEnrollmentPairingsApiCreateResponse temporary_enrollment_pairings_api_create(account_id, temporary_enrollment_pairings_api_create_request=temporary_enrollment_pairings_api_create_request)
 
 Create Temporary Enrollment Pairing
 
@@ -24,8 +24,8 @@ Create a Temporary Enrollment Pairing.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.temporary_enrollment_pairing import TemporaryEnrollmentPairing
 from canvas_lms_python_client.models.temporary_enrollment_pairings_api_create_request import TemporaryEnrollmentPairingsApiCreateRequest
+from canvas_lms_python_client.models.temporary_enrollment_pairings_api_create_response import TemporaryEnrollmentPairingsApiCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TemporaryEnrollmentPairing**](TemporaryEnrollmentPairing.md)
+[**TemporaryEnrollmentPairingsApiCreateResponse**](TemporaryEnrollmentPairingsApiCreateResponse.md)
 
 ### Authorization
 
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | TemporaryEnrollmentPairing |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -251,7 +251,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **temporary_enrollment_pairings_api_new**
-> TemporaryEnrollmentPairing temporary_enrollment_pairings_api_new(account_id)
+> TemporaryEnrollmentPairingsApiNewResponse temporary_enrollment_pairings_api_new(account_id)
 
 New TemporaryEnrollmentPairing
 
@@ -263,7 +263,7 @@ Initialize an unsaved Temporary Enrollment Pairing.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.temporary_enrollment_pairing import TemporaryEnrollmentPairing
+from canvas_lms_python_client.models.temporary_enrollment_pairings_api_new_response import TemporaryEnrollmentPairingsApiNewResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -309,7 +309,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TemporaryEnrollmentPairing**](TemporaryEnrollmentPairing.md)
+[**TemporaryEnrollmentPairingsApiNewResponse**](TemporaryEnrollmentPairingsApiNewResponse.md)
 
 ### Authorization
 
@@ -324,12 +324,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | TemporaryEnrollmentPairing |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **temporary_enrollment_pairings_api_show**
-> TemporaryEnrollmentPairing temporary_enrollment_pairings_api_show(account_id, id)
+> TemporaryEnrollmentPairingsApiShowResponse temporary_enrollment_pairings_api_show(account_id, id)
 
 Get a single temporary enrollment pairing
 
@@ -341,7 +341,7 @@ Returns the temporary enrollment pairing with the given id.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.temporary_enrollment_pairing import TemporaryEnrollmentPairing
+from canvas_lms_python_client.models.temporary_enrollment_pairings_api_show_response import TemporaryEnrollmentPairingsApiShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -389,7 +389,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TemporaryEnrollmentPairing**](TemporaryEnrollmentPairing.md)
+[**TemporaryEnrollmentPairingsApiShowResponse**](TemporaryEnrollmentPairingsApiShowResponse.md)
 
 ### Authorization
 
@@ -404,7 +404,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | TemporaryEnrollmentPairing |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

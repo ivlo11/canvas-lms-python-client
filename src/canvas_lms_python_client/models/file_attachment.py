@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +31,27 @@ class FileAttachment(BaseModel):
     url: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["http://www.example.com/courses/1/files/1/download"]})
     filename: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["content.txt"]})
     display_name: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["content.txt"]})
-    __properties: ClassVar[List[str]] = ["content-type", "url", "filename", "display_name"]
+    category: Optional[StrictStr] = None
+    created_at: Optional[StrictStr] = None
+    folder_id: Optional[StrictInt] = None
+    hidden: Optional[StrictBool] = None
+    hidden_for_user: Optional[StrictBool] = None
+    id: Optional[StrictInt] = None
+    lock_at: Optional[Any] = None
+    locked: Optional[StrictBool] = None
+    locked_for_user: Optional[StrictBool] = None
+    media_entry_id: Optional[Any] = None
+    mime_class: Optional[StrictStr] = None
+    modified_at: Optional[StrictStr] = None
+    size: Optional[StrictInt] = None
+    thumbnail_url: Optional[Any] = None
+    unlock_at: Optional[Any] = None
+    updated_at: Optional[StrictStr] = None
+    upload_status: Optional[StrictStr] = None
+    uuid: Optional[StrictStr] = None
+    visibility_level: Optional[StrictStr] = None
+    usage_rights: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["content-type", "url", "filename", "display_name", "category", "created_at", "folder_id", "hidden", "hidden_for_user", "id", "lock_at", "locked", "locked_for_user", "media_entry_id", "mime_class", "modified_at", "size", "thumbnail_url", "unlock_at", "updated_at", "upload_status", "uuid", "visibility_level", "usage_rights"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -72,6 +92,26 @@ class FileAttachment(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
+        # set to None if media_entry_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.media_entry_id is None and "media_entry_id" in self.model_fields_set:
+            _dict['media_entry_id'] = None
+
+        # set to None if thumbnail_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.thumbnail_url is None and "thumbnail_url" in self.model_fields_set:
+            _dict['thumbnail_url'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
         return _dict
 
     @classmethod
@@ -87,7 +127,27 @@ class FileAttachment(BaseModel):
             "content-type": obj.get("content-type"),
             "url": obj.get("url"),
             "filename": obj.get("filename"),
-            "display_name": obj.get("display_name")
+            "display_name": obj.get("display_name"),
+            "category": obj.get("category"),
+            "created_at": obj.get("created_at"),
+            "folder_id": obj.get("folder_id"),
+            "hidden": obj.get("hidden"),
+            "hidden_for_user": obj.get("hidden_for_user"),
+            "id": obj.get("id"),
+            "lock_at": obj.get("lock_at"),
+            "locked": obj.get("locked"),
+            "locked_for_user": obj.get("locked_for_user"),
+            "media_entry_id": obj.get("media_entry_id"),
+            "mime_class": obj.get("mime_class"),
+            "modified_at": obj.get("modified_at"),
+            "size": obj.get("size"),
+            "thumbnail_url": obj.get("thumbnail_url"),
+            "unlock_at": obj.get("unlock_at"),
+            "updated_at": obj.get("updated_at"),
+            "upload_status": obj.get("upload_status"),
+            "uuid": obj.get("uuid"),
+            "visibility_level": obj.get("visibility_level"),
+            "usage_rights": obj.get("usage_rights")
         })
         return _obj
 

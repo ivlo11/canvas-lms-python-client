@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,7 +35,14 @@ class AiExperience(BaseModel):
     pedagogical_guidance: Optional[StrictStr] = Field(default=None, description="The pedagogical guidance for the experience", json_schema_extra={"examples": ["A customer is calling about a billing issue"]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="The current published state of the AI experience", json_schema_extra={"examples": ["published"]})
     course_id: Optional[StrictInt] = Field(default=None, description="The course this experience belongs to", json_schema_extra={"examples": [1578941]})
-    __properties: ClassVar[List[str]] = ["id", "title", "description", "facts", "learning_objective", "pedagogical_guidance", "workflow_state", "course_id"]
+    can_manage: Optional[StrictBool] = None
+    can_unpublish: Optional[StrictBool] = None
+    context_files: Optional[List[Dict[str, Any]]] = None
+    context_index_status: Optional[StrictStr] = None
+    context_ready: Optional[StrictBool] = None
+    created_at: Optional[StrictStr] = None
+    updated_at: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "title", "description", "facts", "learning_objective", "pedagogical_guidance", "workflow_state", "course_id", "can_manage", "can_unpublish", "context_files", "context_index_status", "context_ready", "created_at", "updated_at"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -76,6 +83,11 @@ class AiExperience(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
         return _dict
 
     @classmethod
@@ -95,7 +107,14 @@ class AiExperience(BaseModel):
             "learning_objective": obj.get("learning_objective"),
             "pedagogical_guidance": obj.get("pedagogical_guidance"),
             "workflow_state": obj.get("workflow_state"),
-            "course_id": obj.get("course_id")
+            "course_id": obj.get("course_id"),
+            "can_manage": obj.get("can_manage"),
+            "can_unpublish": obj.get("can_unpublish"),
+            "context_files": obj.get("context_files"),
+            "context_index_status": obj.get("context_index_status"),
+            "context_ready": obj.get("context_ready"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

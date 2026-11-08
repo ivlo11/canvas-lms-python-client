@@ -333,7 +333,7 @@ class BookmarksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Bookmark:
         """Delete bookmark
 
         Deletes a bookmark
@@ -372,6 +372,7 @@ class BookmarksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Bookmark",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -399,7 +400,7 @@ class BookmarksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Bookmark]:
         """Delete bookmark
 
         Deletes a bookmark
@@ -438,6 +439,7 @@ class BookmarksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Bookmark",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -505,6 +507,7 @@ class BookmarksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Bookmark",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -545,6 +548,13 @@ class BookmarksApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

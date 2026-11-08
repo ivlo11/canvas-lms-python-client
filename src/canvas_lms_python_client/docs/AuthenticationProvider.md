@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **requested_authn_context** | **str** | Valid for SAML providers. | [optional] 
 **auth_host** | **str** | Valid for LDAP providers. | [optional] 
 **auth_filter** | **str** | Valid for LDAP providers. | [optional] 
-**auth_over_tls** | **int** | Valid for LDAP providers. | [optional] 
+**auth_over_tls** | [**AuthenticationProviderAuthOverTls**](AuthenticationProviderAuthOverTls.md) |  | [optional] 
 **auth_base** | **str** | Valid for LDAP and CAS providers. | [optional] 
 **auth_username** | **str** | Valid for LDAP providers. | [optional] 
 **auth_port** | **int** | Valid for LDAP providers. | [optional] 
@@ -26,6 +26,19 @@ Name | Type | Description | Notes
 **jit_provisioning** | **bool** | Just In Time provisioning. Valid for all providers except Canvas (which has the similar in concept self_registration setting). | [optional] 
 **federated_attributes** | [**FederatedAttributesConfig**](FederatedAttributesConfig.md) |  | [optional] 
 **mfa_required** | **bool** | If multi-factor authentication is required when logging in with this authentication provider. The account must not have MFA disabled. | [optional] 
+**change_password_url** | **object** |  | [optional] 
+**enable_captcha** | **bool** |  | [optional] 
+**login_handle_name** | **object** |  | [optional] 
+**metadata_uri** | **str** |  | [optional] 
+**otp_via_sms** | **bool** |  | [optional] 
+**parent_registration** | **bool** |  | [optional] 
+**self_registration** | **str** |  | [optional] 
+**skip_internal_mfa** | **bool** |  | [optional] 
+**strip_domain_from_login_attribute** | **bool** |  | [optional] 
+**unknown_user_url** | **object** |  | [optional] 
+**internal_ca** | **str** |  | [optional] 
+**verify_tls_cert_opt_in** | **bool** |  | [optional] 
+**app_id** | **object** |  | [optional] 
 
 ## Example
 

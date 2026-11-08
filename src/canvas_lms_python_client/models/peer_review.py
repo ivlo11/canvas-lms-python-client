@@ -19,6 +19,9 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.peer_review_assessor import PeerReviewAssessor
+from canvas_lms_python_client.models.peer_review_submission_comments import PeerReviewSubmissionComments
+from canvas_lms_python_client.models.peer_review_user import PeerReviewUser
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -33,9 +36,9 @@ class PeerReview(BaseModel):
     id: Optional[StrictInt] = Field(default=None, description="The id of the Peer Review", json_schema_extra={"examples": [1]})
     user_id: Optional[StrictInt] = Field(default=None, description="The user id for the owner of the asset", json_schema_extra={"examples": [7]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="The state of the Peer Review, either 'assigned' or 'completed'", json_schema_extra={"examples": ["assigned"]})
-    user: Optional[StrictStr] = Field(default=None, description="the User object for the owner of the asset if the user include parameter is provided (see user API) (optional)", json_schema_extra={"examples": ["User"]})
-    assessor: Optional[StrictStr] = Field(default=None, description="The User object for the assessor if the user include parameter is provided (see user API) (optional)", json_schema_extra={"examples": ["User"]})
-    submission_comments: Optional[StrictStr] = Field(default=None, description="The submission comments associated with this Peer Review if the submission_comment include parameter is provided (see submissions API) (optional)", json_schema_extra={"examples": ["SubmissionComment"]})
+    user: Optional[PeerReviewUser] = None
+    assessor: Optional[PeerReviewAssessor] = None
+    submission_comments: Optional[PeerReviewSubmissionComments] = None
     __properties: ClassVar[List[str]] = ["assessor_id", "asset_id", "asset_type", "id", "user_id", "workflow_state", "user", "assessor", "submission_comments"]
 
     model_config = ConfigDict(
@@ -77,6 +80,15 @@ class PeerReview(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of user
+        if self.user:
+            _dict['user'] = self.user.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of assessor
+        if self.assessor:
+            _dict['assessor'] = self.assessor.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of submission_comments
+        if self.submission_comments:
+            _dict['submission_comments'] = self.submission_comments.to_dict()
         return _dict
 
     @classmethod
@@ -95,9 +107,9 @@ class PeerReview(BaseModel):
             "id": obj.get("id"),
             "user_id": obj.get("user_id"),
             "workflow_state": obj.get("workflow_state"),
-            "user": obj.get("user"),
-            "assessor": obj.get("assessor"),
-            "submission_comments": obj.get("submission_comments")
+            "user": PeerReviewUser.from_dict(obj["user"]) if obj.get("user") is not None else None,
+            "assessor": PeerReviewAssessor.from_dict(obj["assessor"]) if obj.get("assessor") is not None else None,
+            "submission_comments": PeerReviewSubmissionComments.from_dict(obj["submission_comments"]) if obj.get("submission_comments") is not None else None
         })
         return _obj
 

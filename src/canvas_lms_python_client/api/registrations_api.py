@@ -24,6 +24,7 @@ from canvas_lms_python_client.models.lti_overlay_version import LtiOverlayVersio
 from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.models.lti_registration_account_binding import LtiRegistrationAccountBinding
 from canvas_lms_python_client.models.lti_registration_history_entry import LtiRegistrationHistoryEntry
+from canvas_lms_python_client.models.lti_registration_update_request import LtiRegistrationUpdateRequest
 from canvas_lms_python_client.models.registrations_apply_registration_update_request_request import RegistrationsApplyRegistrationUpdateRequestRequest
 from canvas_lms_python_client.models.registrations_bind_request import RegistrationsBindRequest
 from canvas_lms_python_client.models.registrations_create_request import RegistrationsCreateRequest
@@ -2976,7 +2977,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistrationHistoryEntry:
         """Get Latest LTI Registration Update Request
 
         Retrieves the most recent update request for a registration, regardless of its status. Returns 404 if there are no update requests for this registration.
@@ -3018,7 +3019,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationHistoryEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3047,7 +3048,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistrationHistoryEntry]:
         """Get Latest LTI Registration Update Request
 
         Retrieves the most recent update request for a registration, regardless of its status. Returns 404 if there are no update requests for this registration.
@@ -3089,7 +3090,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationHistoryEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3161,7 +3162,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationHistoryEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5167,7 +5168,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiRegistrationUpdateRequest:
         """Get LTI Registration Update Request
 
         Retrieves details about a specific registration update request.
@@ -5212,7 +5213,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationUpdateRequest",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5242,7 +5243,7 @@ class RegistrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiRegistrationUpdateRequest]:
         """Get LTI Registration Update Request
 
         Retrieves details about a specific registration update request.
@@ -5287,7 +5288,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationUpdateRequest",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5363,7 +5364,7 @@ class RegistrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiRegistrationUpdateRequest",
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -85,6 +85,16 @@ class GradingPeriodSets(BaseModel):
             for _item_grading_periods in self.grading_periods:
                 _items.append(_item_grading_periods.to_dict() if _item_grading_periods is not None else None)
             _dict['grading_periods'] = _items
+        # set to None if weighted (nullable) is None
+        # and model_fields_set contains the field
+        if self.weighted is None and "weighted" in self.model_fields_set:
+            _dict['weighted'] = None
+
+        # set to None if course_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.course_id is None and "course_id" in self.model_fields_set:
+            _dict['course_id'] = None
+
         return _dict
 
     @classmethod

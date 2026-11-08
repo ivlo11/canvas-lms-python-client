@@ -14,6 +14,11 @@ Name | Type | Description | Notes
 **bounce_count** | **int** | The number of bounces the channel has experienced. This is reset if the channel sends successfully. | [optional] 
 **last_bounce_at** | **datetime** | The time the last bounce occurred. | [optional] 
 **workflow_state** | **str** | The current state of the communication channel. Possible values are: &#39;unconfirmed&#39; or &#39;active&#39;. | [optional] 
+**created_at** | **str** |  | [optional] 
+**last_bounce_summary** | **object** |  | [optional] 
+**last_suppression_bounce_at** | **str** |  | [optional] 
+**last_transient_bounce_at** | **str** |  | [optional] 
+**last_transient_bounce_summary** | **object** |  | [optional] 
 
 ## Example
 

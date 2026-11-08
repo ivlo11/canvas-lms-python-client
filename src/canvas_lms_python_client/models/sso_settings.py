@@ -73,6 +73,31 @@ class SSOSettings(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if login_handle_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.login_handle_name is None and "login_handle_name" in self.model_fields_set:
+            _dict['login_handle_name'] = None
+
+        # set to None if change_password_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.change_password_url is None and "change_password_url" in self.model_fields_set:
+            _dict['change_password_url'] = None
+
+        # set to None if auth_discovery_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.auth_discovery_url is None and "auth_discovery_url" in self.model_fields_set:
+            _dict['auth_discovery_url'] = None
+
+        # set to None if unknown_user_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.unknown_user_url is None and "unknown_user_url" in self.model_fields_set:
+            _dict['unknown_user_url'] = None
+
+        # set to None if login_help_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.login_help_url is None and "login_help_url" in self.model_fields_set:
+            _dict['login_help_url'] = None
+
         return _dict
 
     @classmethod

@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.context_external_tool_placement_prefer_sis_email import ContextExternalToolPlacementPreferSisEmail
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -53,9 +54,10 @@ class ContextExternalToolPlacement(BaseModel):
     root_account_only: Optional[StrictBool] = Field(default=None, description="Whether this placement should only be available at the root account level. Only applies to account_navigation placement.")
     description: Optional[StrictStr] = Field(default=None, description="A description of this placement. Only valid for submission_type_selection placement. Maximum length of 255 characters.", json_schema_extra={"examples": ["Submit your work using our external tool"]})
     require_resource_selection: Optional[StrictBool] = Field(default=None, description="Whether resource selection is required for this placement. Only valid for submission_type_selection placement.", json_schema_extra={"examples": [True]})
-    prefer_sis_email: Optional[StrictBool] = Field(default=None, description="If true, the tool will send the SIS email in the lis_person_contact_email_primary launch property. LTI 1.1 only.")
+    prefer_sis_email: Optional[ContextExternalToolPlacementPreferSisEmail] = None
     oauth_compliant: Optional[StrictBool] = Field(default=None, description="If true, query parameters from the launch URL will not be copied to the POST body. LTI 1.1 only.", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["enabled", "url", "target_link_uri", "text", "label", "labels", "message_type", "selection_width", "selection_height", "launch_width", "launch_height", "icon_url", "canvas_icon_class", "allow_fullscreen", "custom_fields", "visibility", "required_permissions", "default", "display_type", "windowTarget", "accept_media_types", "use_tray", "icon_svg_path_64", "root_account_only", "description", "require_resource_selection", "prefer_sis_email", "oauth_compliant"]
+    placement: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["enabled", "url", "target_link_uri", "text", "label", "labels", "message_type", "selection_width", "selection_height", "launch_width", "launch_height", "icon_url", "canvas_icon_class", "allow_fullscreen", "custom_fields", "visibility", "required_permissions", "default", "display_type", "windowTarget", "accept_media_types", "use_tray", "icon_svg_path_64", "root_account_only", "description", "require_resource_selection", "prefer_sis_email", "oauth_compliant", "placement"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -96,6 +98,9 @@ class ContextExternalToolPlacement(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of prefer_sis_email
+        if self.prefer_sis_email:
+            _dict['prefer_sis_email'] = self.prefer_sis_email.to_dict()
         return _dict
 
     @classmethod
@@ -134,8 +139,9 @@ class ContextExternalToolPlacement(BaseModel):
             "root_account_only": obj.get("root_account_only"),
             "description": obj.get("description"),
             "require_resource_selection": obj.get("require_resource_selection"),
-            "prefer_sis_email": obj.get("prefer_sis_email"),
-            "oauth_compliant": obj.get("oauth_compliant")
+            "prefer_sis_email": ContextExternalToolPlacementPreferSisEmail.from_dict(obj["prefer_sis_email"]) if obj.get("prefer_sis_email") is not None else None,
+            "oauth_compliant": obj.get("oauth_compliant"),
+            "placement": obj.get("placement")
         })
         return _obj
 

@@ -32,7 +32,12 @@ class Term(BaseModel):
     name: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["Default Term"]})
     start_at: Optional[datetime] = Field(default=None, json_schema_extra={"examples": ["2012-06-01T00:00:00-06:00"]})
     end_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "start_at", "end_at"]
+    created_at: Optional[StrictStr] = None
+    grading_period_group_id: Optional[Any] = None
+    sis_import_id: Optional[Any] = None
+    sis_term_id: Optional[Any] = None
+    workflow_state: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "start_at", "end_at", "created_at", "grading_period_group_id", "sis_import_id", "sis_term_id", "workflow_state"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -73,6 +78,31 @@ class Term(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if start_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_at is None and "start_at" in self.model_fields_set:
+            _dict['start_at'] = None
+
+        # set to None if end_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_at is None and "end_at" in self.model_fields_set:
+            _dict['end_at'] = None
+
+        # set to None if grading_period_group_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.grading_period_group_id is None and "grading_period_group_id" in self.model_fields_set:
+            _dict['grading_period_group_id'] = None
+
+        # set to None if sis_import_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_import_id is None and "sis_import_id" in self.model_fields_set:
+            _dict['sis_import_id'] = None
+
+        # set to None if sis_term_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_term_id is None and "sis_term_id" in self.model_fields_set:
+            _dict['sis_term_id'] = None
+
         return _dict
 
     @classmethod
@@ -88,7 +118,12 @@ class Term(BaseModel):
             "id": obj.get("id"),
             "name": obj.get("name"),
             "start_at": obj.get("start_at"),
-            "end_at": obj.get("end_at")
+            "end_at": obj.get("end_at"),
+            "created_at": obj.get("created_at"),
+            "grading_period_group_id": obj.get("grading_period_group_id"),
+            "sis_import_id": obj.get("sis_import_id"),
+            "sis_term_id": obj.get("sis_term_id"),
+            "workflow_state": obj.get("workflow_state")
         })
         return _obj
 

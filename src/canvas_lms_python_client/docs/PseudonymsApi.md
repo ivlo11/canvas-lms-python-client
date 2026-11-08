@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **pseudonyms_create**
-> pseudonyms_create(account_id, pseudonyms_create_request=pseudonyms_create_request)
+> Login pseudonyms_create(account_id, pseudonyms_create_request=pseudonyms_create_request)
 
 Create a user login
 
@@ -25,6 +25,7 @@ Create a new login for an existing user in the given account.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.login import Login
 from canvas_lms_python_client.models.pseudonyms_create_request import PseudonymsCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -54,7 +55,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a user login
-        await api_instance.pseudonyms_create(account_id, pseudonyms_create_request=pseudonyms_create_request)
+        api_response = await api_instance.pseudonyms_create(account_id, pseudonyms_create_request=pseudonyms_create_request)
+        print("The response of PseudonymsApi->pseudonyms_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PseudonymsApi->pseudonyms_create: %s\n" % e)
 ```
@@ -71,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Login**](Login.md)
 
 ### Authorization
 
@@ -80,18 +83,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create a user login |  -  |
+**0** | Login |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **pseudonyms_destroy**
-> pseudonyms_destroy(id, user_id)
+> Login pseudonyms_destroy(id, user_id)
 
 Delete a user login
 
@@ -103,6 +106,7 @@ Delete an existing login.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.login import Login
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -131,7 +135,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete a user login
-        await api_instance.pseudonyms_destroy(id, user_id)
+        api_response = await api_instance.pseudonyms_destroy(id, user_id)
+        print("The response of PseudonymsApi->pseudonyms_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PseudonymsApi->pseudonyms_destroy: %s\n" % e)
 ```
@@ -148,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Login**](Login.md)
 
 ### Authorization
 
@@ -163,12 +169,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete a user login |  -  |
+**0** | Login |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **pseudonyms_forgot_password**
-> pseudonyms_forgot_password()
+> PseudonymsForgotPasswordResponse pseudonyms_forgot_password()
 
 Kickoff password recovery flow
 
@@ -180,6 +186,7 @@ Given a user email, generate a nonce and email it to the user
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.pseudonyms_forgot_password_response import PseudonymsForgotPasswordResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -206,7 +213,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Kickoff password recovery flow
-        await api_instance.pseudonyms_forgot_password()
+        api_response = await api_instance.pseudonyms_forgot_password()
+        print("The response of PseudonymsApi->pseudonyms_forgot_password:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PseudonymsApi->pseudonyms_forgot_password: %s\n" % e)
 ```
@@ -219,7 +228,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**PseudonymsForgotPasswordResponse**](PseudonymsForgotPasswordResponse.md)
 
 ### Authorization
 
@@ -234,7 +243,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Kickoff password recovery flow |  -  |
+**0** | PseudonymsForgotPasswordResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -403,7 +412,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **pseudonyms_update**
-> pseudonyms_update(account_id, id, pseudonyms_update_request=pseudonyms_update_request)
+> Login pseudonyms_update(account_id, id, pseudonyms_update_request=pseudonyms_update_request)
 
 Edit a user login
 
@@ -415,6 +424,7 @@ Update an existing login for a user in the given account.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.login import Login
 from canvas_lms_python_client.models.pseudonyms_update_request import PseudonymsUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -445,7 +455,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Edit a user login
-        await api_instance.pseudonyms_update(account_id, id, pseudonyms_update_request=pseudonyms_update_request)
+        api_response = await api_instance.pseudonyms_update(account_id, id, pseudonyms_update_request=pseudonyms_update_request)
+        print("The response of PseudonymsApi->pseudonyms_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PseudonymsApi->pseudonyms_update: %s\n" % e)
 ```
@@ -463,7 +475,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Login**](Login.md)
 
 ### Authorization
 
@@ -478,7 +490,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Edit a user login |  -  |
+**0** | Login |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

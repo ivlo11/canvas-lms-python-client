@@ -18,10 +18,11 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from canvas_lms_python_client.models.assignment_group_attributes import AssignmentGroupAttributes
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from canvas_lms_python_client.models.section_attributes import SectionAttributes
+from canvas_lms_python_client.models.sis_assignment_assignment_group import SisAssignmentAssignmentGroup
+from canvas_lms_python_client.models.sis_assignment_integration_data import SisAssignmentIntegrationData
 from canvas_lms_python_client.models.user_assignment_override_attributes import UserAssignmentOverrideAttributes
 from typing import Optional, Set
 from typing_extensions import Self
@@ -38,12 +39,12 @@ class SisAssignment(BaseModel):
     due_at: Optional[datetime] = Field(default=None, description="the due date for the assignment. returns null if not present. NOTE: If this assignment has assignment overrides, this field will be the due date as it applies to the user requesting information from the API.", json_schema_extra={"examples": ["2012-07-01T23:59:00-06:00"]})
     unlock_at: Optional[datetime] = Field(default=None, description="(Optional) Time at which this was/will be unlocked.", json_schema_extra={"examples": ["2013-01-01T00:00:00-06:00"]})
     lock_at: Optional[datetime] = Field(default=None, description="(Optional) Time at which this was/will be locked.", json_schema_extra={"examples": ["2013-02-01T00:00:00-06:00"]})
-    points_possible: Optional[StrictInt] = Field(default=None, description="The maximum points possible for the assignment", json_schema_extra={"examples": [12]})
+    points_possible: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The maximum points possible for the assignment", json_schema_extra={"examples": [12]})
     submission_types: Optional[List[StrictStr]] = Field(default=None, description="the types of submissions allowed for this assignment list containing one or more of the following: 'discussion_topic', 'online_quiz', 'on_paper', 'none', 'external_tool', 'online_text_entry', 'online_url', 'online_upload', 'media_recording', 'student_annotation'", json_schema_extra={"examples": [["online_text_entry"]]})
     integration_id: Optional[StrictStr] = Field(default=None, description="Third Party integration id for assignment", json_schema_extra={"examples": ["12341234"]})
-    integration_data: Optional[StrictStr] = Field(default=None, description="(optional, Third Party integration data for assignment)", json_schema_extra={"examples": ["other_data"]})
+    integration_data: Optional[SisAssignmentIntegrationData] = None
     include_in_final_grade: Optional[StrictBool] = Field(default=None, description="If false, the assignment will be omitted from the student's final grade", json_schema_extra={"examples": [True]})
-    assignment_group: Optional[List[AssignmentGroupAttributes]] = Field(default=None, description="Includes attributes of a assignment_group for convenience. For more details see Assignments API.")
+    assignment_group: Optional[SisAssignmentAssignmentGroup] = None
     sections: Optional[List[SectionAttributes]] = Field(default=None, description="Includes attributes of a section for convenience. For more details see Sections API.")
     user_overrides: Optional[List[UserAssignmentOverrideAttributes]] = Field(default=None, description="Includes attributes of a user assignment overrides. For more details see Assignments API.")
     __properties: ClassVar[List[str]] = ["id", "course_id", "name", "created_at", "due_at", "unlock_at", "lock_at", "points_possible", "submission_types", "integration_id", "integration_data", "include_in_final_grade", "assignment_group", "sections", "user_overrides"]
@@ -98,12 +99,12 @@ class SisAssignment(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in assignment_group (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of integration_data
+        if self.integration_data:
+            _dict['integration_data'] = self.integration_data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of assignment_group
         if self.assignment_group:
-            for _item_assignment_group in self.assignment_group:
-                _items.append(_item_assignment_group.to_dict() if _item_assignment_group is not None else None)
-            _dict['assignment_group'] = _items
+            _dict['assignment_group'] = self.assignment_group.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in sections (list)
         _items = []
         if self.sections:
@@ -116,6 +117,31 @@ class SisAssignment(BaseModel):
             for _item_user_overrides in self.user_overrides:
                 _items.append(_item_user_overrides.to_dict() if _item_user_overrides is not None else None)
             _dict['user_overrides'] = _items
+        # set to None if due_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.due_at is None and "due_at" in self.model_fields_set:
+            _dict['due_at'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
+        # set to None if points_possible (nullable) is None
+        # and model_fields_set contains the field
+        if self.points_possible is None and "points_possible" in self.model_fields_set:
+            _dict['points_possible'] = None
+
+        # set to None if integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.integration_id is None and "integration_id" in self.model_fields_set:
+            _dict['integration_id'] = None
+
         return _dict
 
     @classmethod
@@ -138,9 +164,9 @@ class SisAssignment(BaseModel):
             "points_possible": obj.get("points_possible"),
             "submission_types": obj.get("submission_types"),
             "integration_id": obj.get("integration_id"),
-            "integration_data": obj.get("integration_data"),
+            "integration_data": SisAssignmentIntegrationData.from_dict(obj["integration_data"]) if obj.get("integration_data") is not None else None,
             "include_in_final_grade": obj.get("include_in_final_grade"),
-            "assignment_group": [AssignmentGroupAttributes.from_dict(_item) for _item in obj["assignment_group"]] if obj.get("assignment_group") is not None else None,
+            "assignment_group": SisAssignmentAssignmentGroup.from_dict(obj["assignment_group"]) if obj.get("assignment_group") is not None else None,
             "sections": [SectionAttributes.from_dict(_item) for _item in obj["sections"]] if obj.get("sections") is not None else None,
             "user_overrides": [UserAssignmentOverrideAttributes.from_dict(_item) for _item in obj["user_overrides"]] if obj.get("user_overrides") is not None else None
         })

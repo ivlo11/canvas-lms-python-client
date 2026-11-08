@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **start_date** | **datetime** | the start date of the blackout date | [optional] 
 **end_date** | **datetime** | the end date of the blackout date | [optional] 
 **event_title** | **str** | title of the blackout date | [optional] 
+**created_at** | **str** |  | [optional] 
+**root_account_id** | **int** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
 
 ## Example
 

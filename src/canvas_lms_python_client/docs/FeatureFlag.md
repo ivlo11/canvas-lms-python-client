@@ -8,6 +8,19 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **state** | **str** | The current state of the feature flag | [optional] 
 **name** | **str** | The name of the feature flag | [optional] 
+**context_id** | **int** |  | [optional] 
+**context_type** | **str** |  | [optional] 
+**feature** | **str** |  | [optional] 
+**hidden** | **bool** |  | [optional] 
+**locked** | **bool** |  | [optional] 
+**locking_account_id** | **object** |  | [optional] 
+**parent_state** | **str** |  | [optional] 
+**transitions** | **object** |  | [optional] 
+**applies_to** | **str** |  | [optional] 
+**autoexpand** | **bool** |  | [optional] 
+**beta** | **bool** |  | [optional] 
+**description** | **object** |  | [optional] 
+**display_name** | **object** |  | [optional] 
 
 ## Example
 

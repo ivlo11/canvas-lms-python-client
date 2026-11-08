@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 
 # **enrollments_api_accept**
-> enrollments_api_accept(course_id, id)
+> EnrollmentsAcceptResponse enrollments_api_accept(course_id, id)
 
 Accept Course Invitation
 
@@ -33,6 +33,7 @@ accepts a pending course invitation for the current user
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.enrollments_accept_response import EnrollmentsAcceptResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -61,7 +62,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Accept Course Invitation
-        await api_instance.enrollments_api_accept(course_id, id)
+        api_response = await api_instance.enrollments_api_accept(course_id, id)
+        print("The response of EnrollmentsApiApi->enrollments_api_accept:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling EnrollmentsApiApi->enrollments_api_accept: %s\n" % e)
 ```
@@ -78,7 +81,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**EnrollmentsAcceptResponse**](EnrollmentsAcceptResponse.md)
 
 ### Authorization
 
@@ -93,7 +96,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Accept Course Invitation |  -  |
+**0** | EnrollmentsAcceptResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1021,7 +1024,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **enrollments_api_reject**
-> enrollments_api_reject(course_id, id)
+> EnrollmentsAcceptResponse enrollments_api_reject(course_id, id)
 
 Reject Course Invitation
 
@@ -1033,6 +1036,7 @@ rejects a pending course invitation for the current user
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.enrollments_accept_response import EnrollmentsAcceptResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1061,7 +1065,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Reject Course Invitation
-        await api_instance.enrollments_api_reject(course_id, id)
+        api_response = await api_instance.enrollments_api_reject(course_id, id)
+        print("The response of EnrollmentsApiApi->enrollments_api_reject:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling EnrollmentsApiApi->enrollments_api_reject: %s\n" % e)
 ```
@@ -1078,7 +1084,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**EnrollmentsAcceptResponse**](EnrollmentsAcceptResponse.md)
 
 ### Authorization
 
@@ -1093,7 +1099,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Reject Course Invitation |  -  |
+**0** | EnrollmentsAcceptResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1178,7 +1184,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **enrollments_api_show_temporary_enrollment_status**
-> enrollments_api_show_temporary_enrollment_status(user_id, account_id=account_id)
+> EnrollmentsShowTemporaryEnrollmentStatusResponse enrollments_api_show_temporary_enrollment_status(user_id, account_id=account_id)
 
 Show Temporary Enrollment recipient and provider status
 
@@ -1190,6 +1196,7 @@ Returns a JSON Object containing the temporary enrollment status for a user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.enrollments_show_temporary_enrollment_status_response import EnrollmentsShowTemporaryEnrollmentStatusResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1218,7 +1225,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Show Temporary Enrollment recipient and provider status
-        await api_instance.enrollments_api_show_temporary_enrollment_status(user_id, account_id=account_id)
+        api_response = await api_instance.enrollments_api_show_temporary_enrollment_status(user_id, account_id=account_id)
+        print("The response of EnrollmentsApiApi->enrollments_api_show_temporary_enrollment_status:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling EnrollmentsApiApi->enrollments_api_show_temporary_enrollment_status: %s\n" % e)
 ```
@@ -1235,7 +1244,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**EnrollmentsShowTemporaryEnrollmentStatusResponse**](EnrollmentsShowTemporaryEnrollmentStatusResponse.md)
 
 ### Authorization
 
@@ -1250,7 +1259,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Show Temporary Enrollment recipient and provider status |  -  |
+**0** | EnrollmentsShowTemporaryEnrollmentStatusResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -45,7 +45,11 @@ class Profile(BaseModel):
     locale: Optional[StrictStr] = Field(default=None, description="The users locale.")
     k5_user: Optional[StrictBool] = Field(default=None, description="Optional: Whether or not the user is a K5 user. This field is nil if the user settings are not for the user making the request.", json_schema_extra={"examples": [True]})
     use_classic_font_in_k5: Optional[StrictBool] = Field(default=None, description="Optional: Whether or not the user should see the classic font on the dashboard. Only applies if k5_user is true. This field is nil if the user settings are not for the user making the request.")
-    __properties: ClassVar[List[str]] = ["id", "name", "short_name", "sortable_name", "title", "bio", "pronunciation", "primary_email", "login_id", "sis_user_id", "lti_user_id", "avatar_url", "calendar", "time_zone", "locale", "k5_user", "use_classic_font_in_k5"]
+    effective_locale: Optional[StrictStr] = None
+    integration_id: Optional[StrictStr] = None
+    links: Optional[List[Dict[str, Any]]] = None
+    user_services: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "short_name", "sortable_name", "title", "bio", "pronunciation", "primary_email", "login_id", "sis_user_id", "lti_user_id", "avatar_url", "calendar", "time_zone", "locale", "k5_user", "use_classic_font_in_k5", "effective_locale", "integration_id", "links", "user_services"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,6 +93,46 @@ class Profile(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of calendar
         if self.calendar:
             _dict['calendar'] = self.calendar.to_dict()
+        # set to None if title (nullable) is None
+        # and model_fields_set contains the field
+        if self.title is None and "title" in self.model_fields_set:
+            _dict['title'] = None
+
+        # set to None if bio (nullable) is None
+        # and model_fields_set contains the field
+        if self.bio is None and "bio" in self.model_fields_set:
+            _dict['bio'] = None
+
+        # set to None if pronunciation (nullable) is None
+        # and model_fields_set contains the field
+        if self.pronunciation is None and "pronunciation" in self.model_fields_set:
+            _dict['pronunciation'] = None
+
+        # set to None if primary_email (nullable) is None
+        # and model_fields_set contains the field
+        if self.primary_email is None and "primary_email" in self.model_fields_set:
+            _dict['primary_email'] = None
+
+        # set to None if login_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.login_id is None and "login_id" in self.model_fields_set:
+            _dict['login_id'] = None
+
+        # set to None if sis_user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_user_id is None and "sis_user_id" in self.model_fields_set:
+            _dict['sis_user_id'] = None
+
+        # set to None if locale (nullable) is None
+        # and model_fields_set contains the field
+        if self.locale is None and "locale" in self.model_fields_set:
+            _dict['locale'] = None
+
+        # set to None if integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.integration_id is None and "integration_id" in self.model_fields_set:
+            _dict['integration_id'] = None
+
         return _dict
 
     @classmethod
@@ -117,7 +161,11 @@ class Profile(BaseModel):
             "time_zone": obj.get("time_zone"),
             "locale": obj.get("locale"),
             "k5_user": obj.get("k5_user"),
-            "use_classic_font_in_k5": obj.get("use_classic_font_in_k5")
+            "use_classic_font_in_k5": obj.get("use_classic_font_in_k5"),
+            "effective_locale": obj.get("effective_locale"),
+            "integration_id": obj.get("integration_id"),
+            "links": obj.get("links"),
+            "user_services": obj.get("user_services")
         })
         return _obj
 

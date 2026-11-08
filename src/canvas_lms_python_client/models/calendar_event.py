@@ -21,6 +21,8 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
+from canvas_lms_python_client.models.assignment_group_assignments_inner import AssignmentGroupAssignmentsInner
+from canvas_lms_python_client.models.calendar_event_id import CalendarEventId
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -29,7 +31,7 @@ class CalendarEvent(BaseModel):
     """
     
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The ID of the calendar event", json_schema_extra={"examples": [234]})
+    id: Optional[CalendarEventId] = None
     title: Optional[StrictStr] = Field(default=None, description="The title of the calendar event", json_schema_extra={"examples": ["Paintball Fight!"]})
     start_at: Optional[datetime] = Field(default=None, description="The start timestamp of the event", json_schema_extra={"examples": ["2012-07-19T15:00:00-06:00"]})
     end_at: Optional[datetime] = Field(default=None, description="The end timestamp of the event", json_schema_extra={"examples": ["2012-07-19T16:00:00-06:00"]})
@@ -44,7 +46,7 @@ class CalendarEvent(BaseModel):
     hidden: Optional[StrictBool] = Field(default=None, description="Whether this event should be displayed on the calendar. Only true for course-level events with section-level child events.")
     parent_event_id: Optional[StrictInt] = Field(default=None, description="Normally null. If this is a reservation (see the Appointment Groups API), the id will indicate the time slot it is for. If this is a section-level event, this will be the course-level parent event.")
     child_events_count: Optional[StrictInt] = Field(default=None, description="The number of child_events. See child_events (and parent_event_id)", json_schema_extra={"examples": [0]})
-    child_events: Optional[List[StrictInt]] = Field(default=None, description="Included by default, but may be excluded (see include[] option). If this is a time slot (see the Appointment Groups API) this will be a list of any reservations. If this is a course-level event, this will be a list of section-level events (if any)")
+    child_events: Optional[List[AssignmentGroupAssignmentsInner]] = Field(default=None, description="Included by default, but may be excluded (see include[] option). If this is a time slot (see the Appointment Groups API) this will be a list of any reservations. If this is a course-level event, this will be a list of section-level events (if any)")
     url: Optional[StrictStr] = Field(default=None, description="URL for this calendar event (to update, delete, etc.)", json_schema_extra={"examples": ["https://example.com/api/v1/calendar_events/234"]})
     html_url: Optional[StrictStr] = Field(default=None, description="URL for a user to view this event", json_schema_extra={"examples": ["https://example.com/calendar?event_id=234&include_contexts=course_123"]})
     all_day_date: Optional[datetime] = Field(default=None, description="The date of this event")
@@ -67,7 +69,20 @@ class CalendarEvent(BaseModel):
     series_head: Optional[StrictBool] = Field(default=None, description="Boolean indicating if is the first event in the series of recurring events.")
     series_natural_language: Optional[StrictStr] = Field(default=None, description="A natural language expression of how events occur in the series.", json_schema_extra={"examples": ["Daily 5 times"]})
     blackout_date: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether this has blackout date.", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["id", "title", "start_at", "end_at", "description", "location_name", "location_address", "context_code", "effective_context_code", "context_name", "all_context_codes", "workflow_state", "hidden", "parent_event_id", "child_events_count", "child_events", "url", "html_url", "all_day_date", "all_day", "created_at", "updated_at", "appointment_group_id", "appointment_group_url", "own_reservation", "reserve_url", "reserved", "participant_type", "participants_per_appointment", "available_slots", "user", "group", "important_dates", "series_uuid", "rrule", "series_head", "series_natural_language", "blackout_date"]
+    can_manage_appointment_group: Optional[StrictBool] = None
+    comments: Optional[StrictStr] = None
+    context_color: Optional[Any] = None
+    duplicates: Optional[List[Dict[str, Any]]] = None
+    type: Optional[StrictStr] = None
+    reserve_comments: Optional[StrictStr] = None
+    assignment: Optional[Dict[str, Any]] = None
+    assignment_overrides: Optional[List[Dict[str, Any]]] = None
+    lock_info: Optional[Dict[str, Any]] = None
+    sub_assignment: Optional[Dict[str, Any]] = None
+    sub_assignment_overrides: Optional[List[Dict[str, Any]]] = None
+    submission_types: Optional[StrictStr] = None
+    web_conference: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "title", "start_at", "end_at", "description", "location_name", "location_address", "context_code", "effective_context_code", "context_name", "all_context_codes", "workflow_state", "hidden", "parent_event_id", "child_events_count", "child_events", "url", "html_url", "all_day_date", "all_day", "created_at", "updated_at", "appointment_group_id", "appointment_group_url", "own_reservation", "reserve_url", "reserved", "participant_type", "participants_per_appointment", "available_slots", "user", "group", "important_dates", "series_uuid", "rrule", "series_head", "series_natural_language", "blackout_date", "can_manage_appointment_group", "comments", "context_color", "duplicates", "type", "reserve_comments", "assignment", "assignment_overrides", "lock_info", "sub_assignment", "sub_assignment_overrides", "submission_types", "web_conference"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -108,6 +123,75 @@ class CalendarEvent(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of id
+        if self.id:
+            _dict['id'] = self.id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in child_events (list)
+        _items = []
+        if self.child_events:
+            for _item_child_events in self.child_events:
+                _items.append(_item_child_events.to_dict() if _item_child_events is not None else None)
+            _dict['child_events'] = _items
+        # set to None if start_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_at is None and "start_at" in self.model_fields_set:
+            _dict['start_at'] = None
+
+        # set to None if end_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_at is None and "end_at" in self.model_fields_set:
+            _dict['end_at'] = None
+
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if location_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.location_name is None and "location_name" in self.model_fields_set:
+            _dict['location_name'] = None
+
+        # set to None if location_address (nullable) is None
+        # and model_fields_set contains the field
+        if self.location_address is None and "location_address" in self.model_fields_set:
+            _dict['location_address'] = None
+
+        # set to None if context_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_name is None and "context_name" in self.model_fields_set:
+            _dict['context_name'] = None
+
+        # set to None if parent_event_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.parent_event_id is None and "parent_event_id" in self.model_fields_set:
+            _dict['parent_event_id'] = None
+
+        # set to None if all_day_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.all_day_date is None and "all_day_date" in self.model_fields_set:
+            _dict['all_day_date'] = None
+
+        # set to None if series_uuid (nullable) is None
+        # and model_fields_set contains the field
+        if self.series_uuid is None and "series_uuid" in self.model_fields_set:
+            _dict['series_uuid'] = None
+
+        # set to None if rrule (nullable) is None
+        # and model_fields_set contains the field
+        if self.rrule is None and "rrule" in self.model_fields_set:
+            _dict['rrule'] = None
+
+        # set to None if comments (nullable) is None
+        # and model_fields_set contains the field
+        if self.comments is None and "comments" in self.model_fields_set:
+            _dict['comments'] = None
+
+        # set to None if context_color (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_color is None and "context_color" in self.model_fields_set:
+            _dict['context_color'] = None
+
         return _dict
 
     @classmethod
@@ -120,7 +204,7 @@ class CalendarEvent(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
+            "id": CalendarEventId.from_dict(obj["id"]) if obj.get("id") is not None else None,
             "title": obj.get("title"),
             "start_at": obj.get("start_at"),
             "end_at": obj.get("end_at"),
@@ -135,7 +219,7 @@ class CalendarEvent(BaseModel):
             "hidden": obj.get("hidden"),
             "parent_event_id": obj.get("parent_event_id"),
             "child_events_count": obj.get("child_events_count"),
-            "child_events": obj.get("child_events"),
+            "child_events": [AssignmentGroupAssignmentsInner.from_dict(_item) for _item in obj["child_events"]] if obj.get("child_events") is not None else None,
             "url": obj.get("url"),
             "html_url": obj.get("html_url"),
             "all_day_date": obj.get("all_day_date"),
@@ -157,7 +241,20 @@ class CalendarEvent(BaseModel):
             "rrule": obj.get("rrule"),
             "series_head": obj.get("series_head"),
             "series_natural_language": obj.get("series_natural_language"),
-            "blackout_date": obj.get("blackout_date")
+            "blackout_date": obj.get("blackout_date"),
+            "can_manage_appointment_group": obj.get("can_manage_appointment_group"),
+            "comments": obj.get("comments"),
+            "context_color": obj.get("context_color"),
+            "duplicates": obj.get("duplicates"),
+            "type": obj.get("type"),
+            "reserve_comments": obj.get("reserve_comments"),
+            "assignment": obj.get("assignment"),
+            "assignment_overrides": obj.get("assignment_overrides"),
+            "lock_info": obj.get("lock_info"),
+            "sub_assignment": obj.get("sub_assignment"),
+            "sub_assignment_overrides": obj.get("sub_assignment_overrides"),
+            "submission_types": obj.get("submission_types"),
+            "web_conference": obj.get("web_conference")
         })
         return _obj
 

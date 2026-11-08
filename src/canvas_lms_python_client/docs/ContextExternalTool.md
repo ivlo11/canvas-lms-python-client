@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **lti_registration_id** | **int** | The LTI registration id associated with this tool. Only present for LTI 1.3 tools. | [optional] 
 **deployment_id** | **str** | The unique identifier for the deployment of the tool | [optional] 
 **allow_membership_service_access** | **bool** | Whether the tool can access the membership service. Only present if the feature is enabled. | [optional] 
-**prefer_sis_email** | **bool** | Whether to send the SIS email address in launches | [optional] 
+**prefer_sis_email** | [**ContextExternalToolPreferSisEmail**](ContextExternalToolPreferSisEmail.md) |  | [optional] 
 **estimated_duration** | [**EstimatedDuration**](EstimatedDuration.md) |  | [optional] 
 **account_navigation** | [**ContextExternalToolPlacement**](ContextExternalToolPlacement.md) |  | [optional] 
 **analytics_hub** | [**ContextExternalToolPlacement**](ContextExternalToolPlacement.md) |  | [optional] 
@@ -76,6 +76,8 @@ Name | Type | Description | Notes
 **activity_asset_processor** | [**ContextExternalToolPlacement**](ContextExternalToolPlacement.md) |  | [optional] 
 **activity_asset_processor_contribution** | [**ContextExternalToolPlacement**](ContextExternalToolPlacement.md) |  | [optional] 
 **message_settings** | [**List[ContextExternalToolMessageSettings]**](ContextExternalToolMessageSettings.md) | Configuration for placementless message types (currently only LtiEulaRequest). | [optional] 
+**context_id** | **int** |  | [optional] 
+**context_name** | **str** |  | [optional] 
 
 ## Example
 

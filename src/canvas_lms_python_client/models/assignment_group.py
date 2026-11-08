@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from canvas_lms_python_client.models.assignment_group_assignments_inner import AssignmentGroupAssignmentsInner
 from canvas_lms_python_client.models.grading_rules import GradingRules
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,12 +32,13 @@ class AssignmentGroup(BaseModel):
     id: Optional[StrictInt] = Field(default=None, description="the id of the Assignment Group", json_schema_extra={"examples": [1]})
     name: Optional[StrictStr] = Field(default=None, description="the name of the Assignment Group", json_schema_extra={"examples": ["group2"]})
     position: Optional[StrictInt] = Field(default=None, description="the position of the Assignment Group", json_schema_extra={"examples": [7]})
-    group_weight: Optional[StrictInt] = Field(default=None, description="the weight of the Assignment Group", json_schema_extra={"examples": [20]})
+    group_weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="the weight of the Assignment Group", json_schema_extra={"examples": [20]})
     sis_source_id: Optional[StrictStr] = Field(default=None, description="the sis source id of the Assignment Group", json_schema_extra={"examples": ["1234"]})
     integration_data: Optional[Dict[str, Any]] = Field(default=None, description="the integration data of the Assignment Group", json_schema_extra={"examples": [{"5678": "0954"}]})
-    assignments: Optional[List[StrictInt]] = Field(default=None, description="the assignments in this Assignment Group (see the Assignment API for a detailed list of fields)", json_schema_extra={"examples": [[]]})
+    assignments: Optional[List[AssignmentGroupAssignmentsInner]] = Field(default=None, description="the assignments in this Assignment Group (see the Assignment API for a detailed list of fields)", json_schema_extra={"examples": [[]]})
     rules: Optional[GradingRules] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "position", "group_weight", "sis_source_id", "integration_data", "assignments", "rules"]
+    any_assignment_in_closed_grading_period: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "position", "group_weight", "sis_source_id", "integration_data", "assignments", "rules", "any_assignment_in_closed_grading_period"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -77,9 +79,20 @@ class AssignmentGroup(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in assignments (list)
+        _items = []
+        if self.assignments:
+            for _item_assignments in self.assignments:
+                _items.append(_item_assignments.to_dict() if _item_assignments is not None else None)
+            _dict['assignments'] = _items
         # override the default output from pydantic by calling `to_dict()` of rules
         if self.rules:
             _dict['rules'] = self.rules.to_dict()
+        # set to None if sis_source_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_source_id is None and "sis_source_id" in self.model_fields_set:
+            _dict['sis_source_id'] = None
+
         return _dict
 
     @classmethod
@@ -98,8 +111,9 @@ class AssignmentGroup(BaseModel):
             "group_weight": obj.get("group_weight"),
             "sis_source_id": obj.get("sis_source_id"),
             "integration_data": obj.get("integration_data"),
-            "assignments": obj.get("assignments"),
-            "rules": GradingRules.from_dict(obj["rules"]) if obj.get("rules") is not None else None
+            "assignments": [AssignmentGroupAssignmentsInner.from_dict(_item) for _item in obj["assignments"]] if obj.get("assignments") is not None else None,
+            "rules": GradingRules.from_dict(obj["rules"]) if obj.get("rules") is not None else None,
+            "any_assignment_in_closed_grading_period": obj.get("any_assignment_in_closed_grading_period")
         })
         return _obj
 

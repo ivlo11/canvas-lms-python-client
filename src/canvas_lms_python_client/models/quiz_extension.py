@@ -20,6 +20,8 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.quiz_extension_quiz_id import QuizExtensionQuizId
+from canvas_lms_python_client.models.quiz_extension_user_id import QuizExtensionUserId
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,8 +30,8 @@ class QuizExtension(BaseModel):
     """
     QuizExtension
     """ # noqa: E501
-    quiz_id: StrictInt = Field(description="The ID of the Quiz the quiz extension belongs to.", json_schema_extra={"examples": [2]})
-    user_id: StrictInt = Field(description="The ID of the Student that needs the quiz extension.", json_schema_extra={"examples": [3]})
+    quiz_id: QuizExtensionQuizId
+    user_id: QuizExtensionUserId
     extra_attempts: Optional[StrictInt] = Field(default=None, description="Number of times the student is allowed to re-take the quiz over the multiple-attempt limit.", json_schema_extra={"examples": [1]})
     extra_time: Optional[StrictInt] = Field(default=None, description="Amount of extra time allowed for the quiz submission, in minutes.", json_schema_extra={"examples": [60]})
     manually_unlocked: Optional[StrictBool] = Field(default=None, description="The student can take the quiz even if it's locked for everyone else", json_schema_extra={"examples": [True]})
@@ -75,6 +77,27 @@ class QuizExtension(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of quiz_id
+        if self.quiz_id:
+            _dict['quiz_id'] = self.quiz_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of user_id
+        if self.user_id:
+            _dict['user_id'] = self.user_id.to_dict()
+        # set to None if extra_time (nullable) is None
+        # and model_fields_set contains the field
+        if self.extra_time is None and "extra_time" in self.model_fields_set:
+            _dict['extra_time'] = None
+
+        # set to None if manually_unlocked (nullable) is None
+        # and model_fields_set contains the field
+        if self.manually_unlocked is None and "manually_unlocked" in self.model_fields_set:
+            _dict['manually_unlocked'] = None
+
+        # set to None if end_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_at is None and "end_at" in self.model_fields_set:
+            _dict['end_at'] = None
+
         return _dict
 
     @classmethod
@@ -87,8 +110,8 @@ class QuizExtension(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "quiz_id": obj.get("quiz_id"),
-            "user_id": obj.get("user_id"),
+            "quiz_id": QuizExtensionQuizId.from_dict(obj["quiz_id"]) if obj.get("quiz_id") is not None else None,
+            "user_id": QuizExtensionUserId.from_dict(obj["user_id"]) if obj.get("user_id") is not None else None,
             "extra_attempts": obj.get("extra_attempts"),
             "extra_time": obj.get("extra_time"),
             "manually_unlocked": obj.get("manually_unlocked"),

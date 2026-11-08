@@ -26,10 +26,11 @@ from pydantic_core import to_jsonable_python
 
 class GradingPeriodSetsIndexResponse(BaseModel):
     """
-    Object response with `grading_period_sets` (from the Canvas `@returns`).
+    Object response with `grading_period_sets`, `meta` (from the Canvas `@returns`).
     """ # noqa: E501
     grading_period_sets: Optional[List[GradingPeriodSets]] = None
-    __properties: ClassVar[List[str]] = ["grading_period_sets"]
+    meta: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["grading_period_sets", "meta"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,7 +89,8 @@ class GradingPeriodSetsIndexResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "grading_period_sets": [GradingPeriodSets.from_dict(_item) for _item in obj["grading_period_sets"]] if obj.get("grading_period_sets") is not None else None
+            "grading_period_sets": [GradingPeriodSets.from_dict(_item) for _item in obj["grading_period_sets"]] if obj.get("grading_period_sets") is not None else None,
+            "meta": obj.get("meta")
         })
         return _obj
 

@@ -36,7 +36,12 @@ class CommunicationChannel(BaseModel):
     bounce_count: Optional[StrictInt] = Field(default=None, description="The number of bounces the channel has experienced. This is reset if the channel sends successfully.", json_schema_extra={"examples": [0]})
     last_bounce_at: Optional[datetime] = Field(default=None, description="The time the last bounce occurred.", json_schema_extra={"examples": ["2012-05-30T17:00:00Z"]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="The current state of the communication channel. Possible values are: 'unconfirmed' or 'active'.", json_schema_extra={"examples": ["active"]})
-    __properties: ClassVar[List[str]] = ["id", "address", "type", "position", "user_id", "bounce_count", "last_bounce_at", "workflow_state"]
+    created_at: Optional[StrictStr] = None
+    last_bounce_summary: Optional[Any] = None
+    last_suppression_bounce_at: Optional[StrictStr] = None
+    last_transient_bounce_at: Optional[StrictStr] = None
+    last_transient_bounce_summary: Optional[Any] = None
+    __properties: ClassVar[List[str]] = ["id", "address", "type", "position", "user_id", "bounce_count", "last_bounce_at", "workflow_state", "created_at", "last_bounce_summary", "last_suppression_bounce_at", "last_transient_bounce_at", "last_transient_bounce_summary"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -97,6 +102,31 @@ class CommunicationChannel(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if last_bounce_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_bounce_at is None and "last_bounce_at" in self.model_fields_set:
+            _dict['last_bounce_at'] = None
+
+        # set to None if last_bounce_summary (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_bounce_summary is None and "last_bounce_summary" in self.model_fields_set:
+            _dict['last_bounce_summary'] = None
+
+        # set to None if last_suppression_bounce_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_suppression_bounce_at is None and "last_suppression_bounce_at" in self.model_fields_set:
+            _dict['last_suppression_bounce_at'] = None
+
+        # set to None if last_transient_bounce_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_transient_bounce_at is None and "last_transient_bounce_at" in self.model_fields_set:
+            _dict['last_transient_bounce_at'] = None
+
+        # set to None if last_transient_bounce_summary (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_transient_bounce_summary is None and "last_transient_bounce_summary" in self.model_fields_set:
+            _dict['last_transient_bounce_summary'] = None
+
         return _dict
 
     @classmethod
@@ -116,7 +146,12 @@ class CommunicationChannel(BaseModel):
             "user_id": obj.get("user_id"),
             "bounce_count": obj.get("bounce_count"),
             "last_bounce_at": obj.get("last_bounce_at"),
-            "workflow_state": obj.get("workflow_state")
+            "workflow_state": obj.get("workflow_state"),
+            "created_at": obj.get("created_at"),
+            "last_bounce_summary": obj.get("last_bounce_summary"),
+            "last_suppression_bounce_at": obj.get("last_suppression_bounce_at"),
+            "last_transient_bounce_at": obj.get("last_transient_bounce_at"),
+            "last_transient_bounce_summary": obj.get("last_transient_bounce_summary")
         })
         return _obj
 

@@ -47,7 +47,12 @@ class Page(BaseModel):
     lock_explanation: Optional[StrictStr] = Field(default=None, description="(Optional) An explanation of why this is locked for the user. Present when locked_for_user is true.", json_schema_extra={"examples": ["This page is locked until September 1 at 12:00am"]})
     editor: Optional[StrictStr] = Field(default=None, description="The editor used to create and edit this page. May be one of 'rce' or 'block_editor'.", json_schema_extra={"examples": ["rce"]})
     block_editor_attributes: Optional[Dict[str, Any]] = Field(default=None, description="The block editor attributes for this page. (optionally included, and only if this is a block editor created page)", json_schema_extra={"examples": [{"id": 278, "version": "0.2", "blocks": "{...block json here...}"}]})
-    __properties: ClassVar[List[str]] = ["page_id", "url", "title", "created_at", "updated_at", "hide_from_students", "editing_roles", "last_edited_by", "body", "published", "publish_at", "front_page", "locked_for_user", "lock_info", "lock_explanation", "editor", "block_editor_attributes"]
+    html_url: Optional[StrictStr] = None
+    todo_date: Optional[StrictStr] = None
+    assignment: Optional[Dict[str, Any]] = None
+    estimated_duration: Optional[Dict[str, Any]] = None
+    block_editor_data: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["page_id", "url", "title", "created_at", "updated_at", "hide_from_students", "editing_roles", "last_edited_by", "body", "published", "publish_at", "front_page", "locked_for_user", "lock_info", "lock_explanation", "editor", "block_editor_attributes", "html_url", "todo_date", "assignment", "estimated_duration", "block_editor_data"]
 
     @field_validator('editor')
     def editor_validate_enum(cls, value):
@@ -104,6 +109,21 @@ class Page(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of lock_info
         if self.lock_info:
             _dict['lock_info'] = self.lock_info.to_dict()
+        # set to None if body (nullable) is None
+        # and model_fields_set contains the field
+        if self.body is None and "body" in self.model_fields_set:
+            _dict['body'] = None
+
+        # set to None if publish_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.publish_at is None and "publish_at" in self.model_fields_set:
+            _dict['publish_at'] = None
+
+        # set to None if todo_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.todo_date is None and "todo_date" in self.model_fields_set:
+            _dict['todo_date'] = None
+
         return _dict
 
     @classmethod
@@ -132,7 +152,12 @@ class Page(BaseModel):
             "lock_info": LockInfo.from_dict(obj["lock_info"]) if obj.get("lock_info") is not None else None,
             "lock_explanation": obj.get("lock_explanation"),
             "editor": obj.get("editor"),
-            "block_editor_attributes": obj.get("block_editor_attributes")
+            "block_editor_attributes": obj.get("block_editor_attributes"),
+            "html_url": obj.get("html_url"),
+            "todo_date": obj.get("todo_date"),
+            "assignment": obj.get("assignment"),
+            "estimated_duration": obj.get("estimated_duration"),
+            "block_editor_data": obj.get("block_editor_data")
         })
         return _obj
 

@@ -38,7 +38,8 @@ class NamesAndRoleMembership(BaseModel):
     user_id: Optional[StrictStr] = Field(default=None, description="Member's unique LTI identifier.", json_schema_extra={"examples": ["535fa085f22b4655f48cd5a36a9215f64c062838"]})
     roles: Optional[List[StrictStr]] = Field(default=None, description="Member's roles in the current Context, expressed as LTI/LIS URNs.", json_schema_extra={"examples": [["http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor", "http://purl.imsglobal.org/vocab/lis/v2/membership#ContentDeveloper"]]})
     message: Optional[List[NamesAndRoleMessage]] = Field(default=None, description="Only present when the request specifies a `rlid` query parameter. Contains additional attributes which would appear in the LTI launch message were this member to click the link referenced by the `rlid` query parameter", json_schema_extra={"examples": [[{"https://purl.imsglobal.org/spec/lti/claim/message_type": "LtiResourceLinkRequest", "locale": "en", "https://www.instructure.com/canvas_user_id": 1, "https://www.instructure.com/canvas_user_login_id": "showell@school.edu", "https://purl.imsglobal.org/spec/lti/claim/custom": {"message_locale": "en", "person_address_timezone": "America/Denver"}}]]})
-    __properties: ClassVar[List[str]] = ["status", "name", "picture", "given_name", "family_name", "email", "lis_person_sourcedid", "user_id", "roles", "message"]
+    lti11_legacy_user_id: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["status", "name", "picture", "given_name", "family_name", "email", "lis_person_sourcedid", "user_id", "roles", "message", "lti11_legacy_user_id"]
 
     @field_validator('roles')
     def roles_validate_enum(cls, value):
@@ -117,7 +118,8 @@ class NamesAndRoleMembership(BaseModel):
             "lis_person_sourcedid": obj.get("lis_person_sourcedid"),
             "user_id": obj.get("user_id"),
             "roles": obj.get("roles"),
-            "message": [NamesAndRoleMessage.from_dict(_item) for _item in obj["message"]] if obj.get("message") is not None else None
+            "message": [NamesAndRoleMessage.from_dict(_item) for _item in obj["message"]] if obj.get("message") is not None else None,
+            "lti11_legacy_user_id": obj.get("lti11_legacy_user_id")
         })
         return _obj
 

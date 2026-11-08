@@ -33,7 +33,8 @@ class Scope(BaseModel):
     action: Optional[StrictStr] = Field(default=None, description="The controller action the scope is associated to", json_schema_extra={"examples": ["index"]})
     verb: Optional[StrictStr] = Field(default=None, description="The HTTP verb for the scope", json_schema_extra={"examples": ["GET"]})
     scope: Optional[StrictStr] = Field(default=None, description="The identifier for the scope", json_schema_extra={"examples": ["url:GET|/api/v1/courses"]})
-    __properties: ClassVar[List[str]] = ["resource", "resource_name", "controller", "action", "verb", "scope"]
+    path: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["resource", "resource_name", "controller", "action", "verb", "scope", "path"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -91,7 +92,8 @@ class Scope(BaseModel):
             "controller": obj.get("controller"),
             "action": obj.get("action"),
             "verb": obj.get("verb"),
-            "scope": obj.get("scope")
+            "scope": obj.get("scope"),
+            "path": obj.get("path")
         })
         return _obj
 

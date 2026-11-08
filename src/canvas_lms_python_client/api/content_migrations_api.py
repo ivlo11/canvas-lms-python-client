@@ -16,9 +16,11 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.content_migration import ContentMigration
+from canvas_lms_python_client.models.content_migrations_asset_id_mapping_response import ContentMigrationsAssetIdMappingResponse
+from canvas_lms_python_client.models.content_migrations_content_list_response import ContentMigrationsContentListResponse
 from canvas_lms_python_client.models.content_migrations_create_request import ContentMigrationsCreateRequest
 from canvas_lms_python_client.models.migrator import Migrator
 
@@ -58,7 +60,7 @@ class ContentMigrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ContentMigrationsAssetIdMappingResponse:
         """Get asset id mapping
 
         Given a complete course copy or blueprint import content migration, return a mapping of asset ids from the source course to the destination course that were copied in this migration or an earlier one with the same course pair and migration_type (course copy or blueprint).  The returned object's keys are asset types as they appear in API URLs (+announcements+, +assignments+, +discussion_topics+, +files+, +module_items+, +modules+, +pages+, and +quizzes+). The values are a mapping from id in source course to id in destination course for objects of this type.
@@ -100,6 +102,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContentMigrationsAssetIdMappingResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +131,7 @@ class ContentMigrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ContentMigrationsAssetIdMappingResponse]:
         """Get asset id mapping
 
         Given a complete course copy or blueprint import content migration, return a mapping of asset ids from the source course to the destination course that were copied in this migration or an earlier one with the same course pair and migration_type (course copy or blueprint).  The returned object's keys are asset types as they appear in API URLs (+announcements+, +assignments+, +discussion_topics+, +files+, +module_items+, +modules+, +pages+, and +quizzes+). The values are a mapping from id in source course to id in destination course for objects of this type.
@@ -170,6 +173,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContentMigrationsAssetIdMappingResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -241,6 +245,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContentMigrationsAssetIdMappingResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1386,7 +1391,7 @@ class ContentMigrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> List[ContentMigrationsContentListResponse]:
         """List items for selective import
 
         Enumerates the content available for selective import in a tree structure. Each node provides a +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint} to selectively copy the content associated with that tree node and its children. Each node may also provide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters for a subset of the resources in a given node.  If no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:    [{     \"type\": \"course_settings\",     \"property\": \"copy[all_course_settings]\",     \"title\": \"Course Settings\"   },   {     \"type\": \"context_modules\",     \"property\": \"copy[all_context_modules]\",     \"title\": \"Modules\",     \"count\": 5,     \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"   },   {     \"type\": \"assignments\",     \"property\": \"copy[all_assignments]\",     \"title\": \"Assignments\",     \"count\": 2,     \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"   }]  When a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+ results in a node for each assignment group and a sub_item for each assignment, like this:    [{     \"type\": \"assignment_groups\",     \"title\": \"An Assignment Group\",     \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",     \"sub_items\": [{         \"type\": \"assignments\",         \"title\": \"Assignment 1\",         \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"     }, {         \"type\": \"assignments\",         \"title\": \"Assignment 2\",         \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"     }]   }]   To import the items corresponding to a particular tree node, use the +property+ as a parameter to the {api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:    copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1  You can include multiple copy parameters to selectively import multiple items or groups of items.
@@ -1431,7 +1436,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1461,7 +1466,7 @@ class ContentMigrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[List[ContentMigrationsContentListResponse]]:
         """List items for selective import
 
         Enumerates the content available for selective import in a tree structure. Each node provides a +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint} to selectively copy the content associated with that tree node and its children. Each node may also provide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters for a subset of the resources in a given node.  If no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:    [{     \"type\": \"course_settings\",     \"property\": \"copy[all_course_settings]\",     \"title\": \"Course Settings\"   },   {     \"type\": \"context_modules\",     \"property\": \"copy[all_context_modules]\",     \"title\": \"Modules\",     \"count\": 5,     \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"   },   {     \"type\": \"assignments\",     \"property\": \"copy[all_assignments]\",     \"title\": \"Assignments\",     \"count\": 2,     \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"   }]  When a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+ results in a node for each assignment group and a sub_item for each assignment, like this:    [{     \"type\": \"assignment_groups\",     \"title\": \"An Assignment Group\",     \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",     \"sub_items\": [{         \"type\": \"assignments\",         \"title\": \"Assignment 1\",         \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"     }, {         \"type\": \"assignments\",         \"title\": \"Assignment 2\",         \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"     }]   }]   To import the items corresponding to a particular tree node, use the +property+ as a parameter to the {api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:    copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1  You can include multiple copy parameters to selectively import multiple items or groups of items.
@@ -1506,7 +1511,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1582,7 +1587,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1681,7 +1686,7 @@ class ContentMigrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> List[ContentMigrationsContentListResponse]:
         """List items for selective import
 
         Enumerates the content available for selective import in a tree structure. Each node provides a +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint} to selectively copy the content associated with that tree node and its children. Each node may also provide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters for a subset of the resources in a given node.  If no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:    [{     \"type\": \"course_settings\",     \"property\": \"copy[all_course_settings]\",     \"title\": \"Course Settings\"   },   {     \"type\": \"context_modules\",     \"property\": \"copy[all_context_modules]\",     \"title\": \"Modules\",     \"count\": 5,     \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"   },   {     \"type\": \"assignments\",     \"property\": \"copy[all_assignments]\",     \"title\": \"Assignments\",     \"count\": 2,     \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"   }]  When a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+ results in a node for each assignment group and a sub_item for each assignment, like this:    [{     \"type\": \"assignment_groups\",     \"title\": \"An Assignment Group\",     \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",     \"sub_items\": [{         \"type\": \"assignments\",         \"title\": \"Assignment 1\",         \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"     }, {         \"type\": \"assignments\",         \"title\": \"Assignment 2\",         \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"     }]   }]   To import the items corresponding to a particular tree node, use the +property+ as a parameter to the {api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:    copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1  You can include multiple copy parameters to selectively import multiple items or groups of items.
@@ -1726,7 +1731,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1756,7 +1761,7 @@ class ContentMigrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[List[ContentMigrationsContentListResponse]]:
         """List items for selective import
 
         Enumerates the content available for selective import in a tree structure. Each node provides a +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint} to selectively copy the content associated with that tree node and its children. Each node may also provide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters for a subset of the resources in a given node.  If no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:    [{     \"type\": \"course_settings\",     \"property\": \"copy[all_course_settings]\",     \"title\": \"Course Settings\"   },   {     \"type\": \"context_modules\",     \"property\": \"copy[all_context_modules]\",     \"title\": \"Modules\",     \"count\": 5,     \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"   },   {     \"type\": \"assignments\",     \"property\": \"copy[all_assignments]\",     \"title\": \"Assignments\",     \"count\": 2,     \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"   }]  When a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+ results in a node for each assignment group and a sub_item for each assignment, like this:    [{     \"type\": \"assignment_groups\",     \"title\": \"An Assignment Group\",     \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",     \"sub_items\": [{         \"type\": \"assignments\",         \"title\": \"Assignment 1\",         \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"     }, {         \"type\": \"assignments\",         \"title\": \"Assignment 2\",         \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"     }]   }]   To import the items corresponding to a particular tree node, use the +property+ as a parameter to the {api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:    copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1  You can include multiple copy parameters to selectively import multiple items or groups of items.
@@ -1801,7 +1806,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1877,7 +1882,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1976,7 +1981,7 @@ class ContentMigrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> List[ContentMigrationsContentListResponse]:
         """List items for selective import
 
         Enumerates the content available for selective import in a tree structure. Each node provides a +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint} to selectively copy the content associated with that tree node and its children. Each node may also provide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters for a subset of the resources in a given node.  If no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:    [{     \"type\": \"course_settings\",     \"property\": \"copy[all_course_settings]\",     \"title\": \"Course Settings\"   },   {     \"type\": \"context_modules\",     \"property\": \"copy[all_context_modules]\",     \"title\": \"Modules\",     \"count\": 5,     \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"   },   {     \"type\": \"assignments\",     \"property\": \"copy[all_assignments]\",     \"title\": \"Assignments\",     \"count\": 2,     \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"   }]  When a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+ results in a node for each assignment group and a sub_item for each assignment, like this:    [{     \"type\": \"assignment_groups\",     \"title\": \"An Assignment Group\",     \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",     \"sub_items\": [{         \"type\": \"assignments\",         \"title\": \"Assignment 1\",         \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"     }, {         \"type\": \"assignments\",         \"title\": \"Assignment 2\",         \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"     }]   }]   To import the items corresponding to a particular tree node, use the +property+ as a parameter to the {api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:    copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1  You can include multiple copy parameters to selectively import multiple items or groups of items.
@@ -2021,7 +2026,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2051,7 +2056,7 @@ class ContentMigrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[List[ContentMigrationsContentListResponse]]:
         """List items for selective import
 
         Enumerates the content available for selective import in a tree structure. Each node provides a +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint} to selectively copy the content associated with that tree node and its children. Each node may also provide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters for a subset of the resources in a given node.  If no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:    [{     \"type\": \"course_settings\",     \"property\": \"copy[all_course_settings]\",     \"title\": \"Course Settings\"   },   {     \"type\": \"context_modules\",     \"property\": \"copy[all_context_modules]\",     \"title\": \"Modules\",     \"count\": 5,     \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"   },   {     \"type\": \"assignments\",     \"property\": \"copy[all_assignments]\",     \"title\": \"Assignments\",     \"count\": 2,     \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"   }]  When a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+ results in a node for each assignment group and a sub_item for each assignment, like this:    [{     \"type\": \"assignment_groups\",     \"title\": \"An Assignment Group\",     \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",     \"sub_items\": [{         \"type\": \"assignments\",         \"title\": \"Assignment 1\",         \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"     }, {         \"type\": \"assignments\",         \"title\": \"Assignment 2\",         \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"     }]   }]   To import the items corresponding to a particular tree node, use the +property+ as a parameter to the {api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:    copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1  You can include multiple copy parameters to selectively import multiple items or groups of items.
@@ -2096,7 +2101,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2172,7 +2177,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2271,7 +2276,7 @@ class ContentMigrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> List[ContentMigrationsContentListResponse]:
         """List items for selective import
 
         Enumerates the content available for selective import in a tree structure. Each node provides a +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint} to selectively copy the content associated with that tree node and its children. Each node may also provide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters for a subset of the resources in a given node.  If no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:    [{     \"type\": \"course_settings\",     \"property\": \"copy[all_course_settings]\",     \"title\": \"Course Settings\"   },   {     \"type\": \"context_modules\",     \"property\": \"copy[all_context_modules]\",     \"title\": \"Modules\",     \"count\": 5,     \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"   },   {     \"type\": \"assignments\",     \"property\": \"copy[all_assignments]\",     \"title\": \"Assignments\",     \"count\": 2,     \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"   }]  When a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+ results in a node for each assignment group and a sub_item for each assignment, like this:    [{     \"type\": \"assignment_groups\",     \"title\": \"An Assignment Group\",     \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",     \"sub_items\": [{         \"type\": \"assignments\",         \"title\": \"Assignment 1\",         \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"     }, {         \"type\": \"assignments\",         \"title\": \"Assignment 2\",         \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"     }]   }]   To import the items corresponding to a particular tree node, use the +property+ as a parameter to the {api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:    copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1  You can include multiple copy parameters to selectively import multiple items or groups of items.
@@ -2316,7 +2321,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2346,7 +2351,7 @@ class ContentMigrationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[List[ContentMigrationsContentListResponse]]:
         """List items for selective import
 
         Enumerates the content available for selective import in a tree structure. Each node provides a +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint} to selectively copy the content associated with that tree node and its children. Each node may also provide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters for a subset of the resources in a given node.  If no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:    [{     \"type\": \"course_settings\",     \"property\": \"copy[all_course_settings]\",     \"title\": \"Course Settings\"   },   {     \"type\": \"context_modules\",     \"property\": \"copy[all_context_modules]\",     \"title\": \"Modules\",     \"count\": 5,     \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"   },   {     \"type\": \"assignments\",     \"property\": \"copy[all_assignments]\",     \"title\": \"Assignments\",     \"count\": 2,     \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"   }]  When a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+ results in a node for each assignment group and a sub_item for each assignment, like this:    [{     \"type\": \"assignment_groups\",     \"title\": \"An Assignment Group\",     \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",     \"sub_items\": [{         \"type\": \"assignments\",         \"title\": \"Assignment 1\",         \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"     }, {         \"type\": \"assignments\",         \"title\": \"Assignment 2\",         \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"     }]   }]   To import the items corresponding to a particular tree node, use the +property+ as a parameter to the {api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:    copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1  You can include multiple copy parameters to selectively import multiple items or groups of items.
@@ -2391,7 +2396,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2467,7 +2472,7 @@ class ContentMigrationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[ContentMigrationsContentListResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,

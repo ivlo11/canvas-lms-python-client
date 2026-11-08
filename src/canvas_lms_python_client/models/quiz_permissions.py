@@ -34,7 +34,18 @@ class QuizPermissions(BaseModel):
     read_statistics: Optional[StrictBool] = Field(default=None, description="whether the user may view quiz statistics for this quiz", json_schema_extra={"examples": [True]})
     review_grades: Optional[StrictBool] = Field(default=None, description="whether the user may review grades for all quiz submissions for this quiz", json_schema_extra={"examples": [True]})
     update: Optional[StrictBool] = Field(default=None, description="whether the user may update the quiz", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["read", "submit", "create", "manage", "read_statistics", "review_grades", "update"]
+    delete: Optional[StrictBool] = None
+    grade: Optional[StrictBool] = None
+    manage_assign_to: Optional[StrictBool] = None
+    preview: Optional[StrictBool] = None
+    view_answer_audits: Optional[StrictBool] = None
+    attach_submission_comment_files: Optional[StrictBool] = None
+    manage_files_add: Optional[StrictBool] = None
+    manage_files_delete: Optional[StrictBool] = None
+    manage_files_edit: Optional[StrictBool] = None
+    read_own_submission: Optional[StrictBool] = None
+    set_grading_scheme: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["read", "submit", "create", "manage", "read_statistics", "review_grades", "update", "delete", "grade", "manage_assign_to", "preview", "view_answer_audits", "attach_submission_comment_files", "manage_files_add", "manage_files_delete", "manage_files_edit", "read_own_submission", "set_grading_scheme"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -93,7 +104,18 @@ class QuizPermissions(BaseModel):
             "manage": obj.get("manage"),
             "read_statistics": obj.get("read_statistics"),
             "review_grades": obj.get("review_grades"),
-            "update": obj.get("update")
+            "update": obj.get("update"),
+            "delete": obj.get("delete"),
+            "grade": obj.get("grade"),
+            "manage_assign_to": obj.get("manage_assign_to"),
+            "preview": obj.get("preview"),
+            "view_answer_audits": obj.get("view_answer_audits"),
+            "attach_submission_comment_files": obj.get("attach_submission_comment_files"),
+            "manage_files_add": obj.get("manage_files_add"),
+            "manage_files_delete": obj.get("manage_files_delete"),
+            "manage_files_edit": obj.get("manage_files_edit"),
+            "read_own_submission": obj.get("read_own_submission"),
+            "set_grading_scheme": obj.get("set_grading_scheme")
         })
         return _obj
 

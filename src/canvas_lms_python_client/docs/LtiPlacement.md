@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **default** | **str** | Default display state for course_navigation. If &#39;enabled&#39;, will show in course sidebar. If &#39;disabled&#39;, will be hidden. | [optional] 
 **accept_media_types** | **str** | Comma-separated list of media types that the tool can accept. Only valid for file_item. | [optional] 
 **use_tray** | **bool** | If true, the tool will be launched in the tray. Only used by the editor_button placement. | [optional] 
+**title** | **str** |  | [optional] 
 
 ## Example
 

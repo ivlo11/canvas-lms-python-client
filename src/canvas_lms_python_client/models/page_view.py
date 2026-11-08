@@ -50,7 +50,9 @@ class PageView(BaseModel):
     developer_key_id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The ID of the developer key that authorized the API request, if applicable", json_schema_extra={"examples": [42]})
     asset_user_access_id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The ID of the asset (e.g. an assignment) associated with this page view, if applicable", json_schema_extra={"examples": [9876]})
     links: Optional[PageViewLinks] = None
-    __properties: ClassVar[List[str]] = ["id", "app_name", "url", "context_type", "asset_type", "controller", "action", "contributed", "interaction_seconds", "created_at", "user_request", "render_time", "user_agent", "participated", "http_method", "remote_ip", "session_id", "developer_key_id", "asset_user_access_id", "links"]
+    summarized: Optional[StrictBool] = None
+    updated_at: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "app_name", "url", "context_type", "asset_type", "controller", "action", "contributed", "interaction_seconds", "created_at", "user_request", "render_time", "user_agent", "participated", "http_method", "remote_ip", "session_id", "developer_key_id", "asset_user_access_id", "links", "summarized", "updated_at"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -94,6 +96,86 @@ class PageView(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             _dict['links'] = self.links.to_dict()
+        # set to None if app_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.app_name is None and "app_name" in self.model_fields_set:
+            _dict['app_name'] = None
+
+        # set to None if url (nullable) is None
+        # and model_fields_set contains the field
+        if self.url is None and "url" in self.model_fields_set:
+            _dict['url'] = None
+
+        # set to None if context_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_type is None and "context_type" in self.model_fields_set:
+            _dict['context_type'] = None
+
+        # set to None if asset_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.asset_type is None and "asset_type" in self.model_fields_set:
+            _dict['asset_type'] = None
+
+        # set to None if controller (nullable) is None
+        # and model_fields_set contains the field
+        if self.controller is None and "controller" in self.model_fields_set:
+            _dict['controller'] = None
+
+        # set to None if action (nullable) is None
+        # and model_fields_set contains the field
+        if self.action is None and "action" in self.model_fields_set:
+            _dict['action'] = None
+
+        # set to None if user_request (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_request is None and "user_request" in self.model_fields_set:
+            _dict['user_request'] = None
+
+        # set to None if render_time (nullable) is None
+        # and model_fields_set contains the field
+        if self.render_time is None and "render_time" in self.model_fields_set:
+            _dict['render_time'] = None
+
+        # set to None if user_agent (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_agent is None and "user_agent" in self.model_fields_set:
+            _dict['user_agent'] = None
+
+        # set to None if participated (nullable) is None
+        # and model_fields_set contains the field
+        if self.participated is None and "participated" in self.model_fields_set:
+            _dict['participated'] = None
+
+        # set to None if http_method (nullable) is None
+        # and model_fields_set contains the field
+        if self.http_method is None and "http_method" in self.model_fields_set:
+            _dict['http_method'] = None
+
+        # set to None if remote_ip (nullable) is None
+        # and model_fields_set contains the field
+        if self.remote_ip is None and "remote_ip" in self.model_fields_set:
+            _dict['remote_ip'] = None
+
+        # set to None if session_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.session_id is None and "session_id" in self.model_fields_set:
+            _dict['session_id'] = None
+
+        # set to None if developer_key_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.developer_key_id is None and "developer_key_id" in self.model_fields_set:
+            _dict['developer_key_id'] = None
+
+        # set to None if asset_user_access_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.asset_user_access_id is None and "asset_user_access_id" in self.model_fields_set:
+            _dict['asset_user_access_id'] = None
+
+        # set to None if summarized (nullable) is None
+        # and model_fields_set contains the field
+        if self.summarized is None and "summarized" in self.model_fields_set:
+            _dict['summarized'] = None
+
         return _dict
 
     @classmethod
@@ -125,7 +207,9 @@ class PageView(BaseModel):
             "session_id": obj.get("session_id"),
             "developer_key_id": obj.get("developer_key_id"),
             "asset_user_access_id": obj.get("asset_user_access_id"),
-            "links": PageViewLinks.from_dict(obj["links"]) if obj.get("links") is not None else None
+            "links": PageViewLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
+            "summarized": obj.get("summarized"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

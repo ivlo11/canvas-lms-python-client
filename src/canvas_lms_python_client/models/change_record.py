@@ -34,7 +34,8 @@ class ChangeRecord(BaseModel):
     html_url: Optional[StrictStr] = Field(default=None, description="The URL of the changed object", json_schema_extra={"examples": ["https://canvas.example.com/courses/101/assignments/2"]})
     locked: Optional[StrictBool] = Field(default=None, description="Whether the object is locked in the blueprint")
     exceptions: Optional[List[Dict[str, Any]]] = Field(default=None, description="A list of ExceptionRecords for linked courses that did not receive this update.", json_schema_extra={"examples": [[{"course_id": 101, "conflicting_changes": ["points"]}]]})
-    __properties: ClassVar[List[str]] = ["asset_id", "asset_type", "asset_name", "change_type", "html_url", "locked", "exceptions"]
+    locale: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["asset_id", "asset_type", "asset_name", "change_type", "html_url", "locked", "exceptions", "locale"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -93,7 +94,8 @@ class ChangeRecord(BaseModel):
             "change_type": obj.get("change_type"),
             "html_url": obj.get("html_url"),
             "locked": obj.get("locked"),
-            "exceptions": obj.get("exceptions")
+            "exceptions": obj.get("exceptions"),
+            "locale": obj.get("locale")
         })
         return _obj
 

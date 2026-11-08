@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.conversation_audience_contexts import ConversationAudienceContexts
 from canvas_lms_python_client.models.conversation_participant import ConversationParticipant
 from typing import Optional, Set
 from typing_extensions import Self
@@ -40,12 +41,19 @@ class Conversation(BaseModel):
     starred: Optional[StrictBool] = Field(default=None, description="whether the conversation is starred.", json_schema_extra={"examples": [True]})
     properties: Optional[List[StrictStr]] = Field(default=None, description="Additional conversation flags (last_author, attachments, media_objects). Each listed property means the flag is set to true (i.e. the current user is the most recent author, there are attachments, or there are media objects)")
     audience: Optional[List[StrictInt]] = Field(default=None, description="Array of user ids who are involved in the conversation, ordered by participation level, then alphabetical. Excludes current user, unless this is a monologue.")
-    audience_contexts: Optional[List[StrictStr]] = Field(default=None, description="Most relevant shared contexts (courses and groups) between current user and other participants. If there is only one participant, it will also include that user's enrollment(s)/ membership type(s) in each course/group.")
+    audience_contexts: Optional[ConversationAudienceContexts] = None
     avatar_url: Optional[StrictStr] = Field(default=None, description="URL to appropriate icon for this conversation (custom, individual or group avatar, depending on audience).", json_schema_extra={"examples": ["https://canvas.instructure.com/images/messages/avatar-group-50.png"]})
     participants: Optional[List[ConversationParticipant]] = Field(default=None, description="Array of users participating in the conversation. Includes current user.")
     visible: Optional[StrictBool] = Field(default=None, description="indicates whether the conversation is visible under the current scope and filter. This attribute is always true in the index API response, and is primarily useful in create/update responses so that you can know if the record should be displayed in the UI. The default scope is assumed, unless a scope or filter is passed to the create/update API call.", json_schema_extra={"examples": [True]})
     context_name: Optional[StrictStr] = Field(default=None, description="Name of the course or group in which the conversation is occurring.", json_schema_extra={"examples": ["Canvas 101"]})
-    __properties: ClassVar[List[str]] = ["id", "subject", "workflow_state", "last_message", "start_at", "message_count", "subscribed", "private", "starred", "properties", "audience", "audience_contexts", "avatar_url", "participants", "visible", "context_name"]
+    context_code: Optional[StrictStr] = None
+    last_authored_message: Optional[StrictStr] = None
+    last_authored_message_at: Optional[StrictStr] = None
+    last_message_at: Optional[StrictStr] = None
+    messages: Optional[List[Dict[str, Any]]] = None
+    cannot_reply: Optional[StrictBool] = None
+    submissions: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["id", "subject", "workflow_state", "last_message", "start_at", "message_count", "subscribed", "private", "starred", "properties", "audience", "audience_contexts", "avatar_url", "participants", "visible", "context_name", "context_code", "last_authored_message", "last_authored_message_at", "last_message_at", "messages", "cannot_reply", "submissions"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -86,12 +94,50 @@ class Conversation(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of audience_contexts
+        if self.audience_contexts:
+            _dict['audience_contexts'] = self.audience_contexts.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in participants (list)
         _items = []
         if self.participants:
             for _item_participants in self.participants:
                 _items.append(_item_participants.to_dict() if _item_participants is not None else None)
             _dict['participants'] = _items
+        # set to None if subject (nullable) is None
+        # and model_fields_set contains the field
+        if self.subject is None and "subject" in self.model_fields_set:
+            _dict['subject'] = None
+
+        # set to None if last_message (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_message is None and "last_message" in self.model_fields_set:
+            _dict['last_message'] = None
+
+        # set to None if context_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_name is None and "context_name" in self.model_fields_set:
+            _dict['context_name'] = None
+
+        # set to None if context_code (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_code is None and "context_code" in self.model_fields_set:
+            _dict['context_code'] = None
+
+        # set to None if last_authored_message (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_authored_message is None and "last_authored_message" in self.model_fields_set:
+            _dict['last_authored_message'] = None
+
+        # set to None if last_authored_message_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_authored_message_at is None and "last_authored_message_at" in self.model_fields_set:
+            _dict['last_authored_message_at'] = None
+
+        # set to None if last_message_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_message_at is None and "last_message_at" in self.model_fields_set:
+            _dict['last_message_at'] = None
+
         return _dict
 
     @classmethod
@@ -115,11 +161,18 @@ class Conversation(BaseModel):
             "starred": obj.get("starred"),
             "properties": obj.get("properties"),
             "audience": obj.get("audience"),
-            "audience_contexts": obj.get("audience_contexts"),
+            "audience_contexts": ConversationAudienceContexts.from_dict(obj["audience_contexts"]) if obj.get("audience_contexts") is not None else None,
             "avatar_url": obj.get("avatar_url"),
             "participants": [ConversationParticipant.from_dict(_item) for _item in obj["participants"]] if obj.get("participants") is not None else None,
             "visible": obj.get("visible"),
-            "context_name": obj.get("context_name")
+            "context_name": obj.get("context_name"),
+            "context_code": obj.get("context_code"),
+            "last_authored_message": obj.get("last_authored_message"),
+            "last_authored_message_at": obj.get("last_authored_message_at"),
+            "last_message_at": obj.get("last_message_at"),
+            "messages": obj.get("messages"),
+            "cannot_reply": obj.get("cannot_reply"),
+            "submissions": obj.get("submissions")
         })
         return _obj
 

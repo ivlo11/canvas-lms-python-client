@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **header_match** | **str** | If not null, only feed entries whose title contains this string will trigger new posts in Canvas | [optional] 
 **created_at** | **datetime** | When this external feed was added to Canvas | [optional] 
 **verbosity** | **str** | The verbosity setting determines how much of the feed&#39;s content is imported into Canvas as part of the posting. &#39;link_only&#39; means that only the title and a link to the item. &#39;truncate&#39; means that a summary of the first portion of the item body will be used. &#39;full&#39; means that the full item body will be used. | [optional] 
+**external_feed_entries_count** | **int** |  | [optional] 
 
 ## Example
 

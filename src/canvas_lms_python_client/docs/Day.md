@@ -7,7 +7,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_date** | **datetime** | the date represented by this entry | [optional] 
-**graders** | **int** | an array of the graders who were responsible for the submissions in this response. the submissions are grouped according to the person who graded them and the assignment they were submitted for. | [optional] 
+**graders** | **List[object]** | an array of the graders who were responsible for the submissions in this response. the submissions are grouped according to the person who graded them and the assignment they were submitted for. | [optional] 
 
 ## Example
 

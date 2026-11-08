@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | The ID of the calendar event | [optional] 
+**id** | [**CalendarEventId**](CalendarEventId.md) |  | [optional] 
 **title** | **str** | The title of the calendar event | [optional] 
 **start_at** | **datetime** | The start timestamp of the event | [optional] 
 **end_at** | **datetime** | The end timestamp of the event | [optional] 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **hidden** | **bool** | Whether this event should be displayed on the calendar. Only true for course-level events with section-level child events. | [optional] 
 **parent_event_id** | **int** | Normally null. If this is a reservation (see the Appointment Groups API), the id will indicate the time slot it is for. If this is a section-level event, this will be the course-level parent event. | [optional] 
 **child_events_count** | **int** | The number of child_events. See child_events (and parent_event_id) | [optional] 
-**child_events** | **List[int]** | Included by default, but may be excluded (see include[] option). If this is a time slot (see the Appointment Groups API) this will be a list of any reservations. If this is a course-level event, this will be a list of section-level events (if any) | [optional] 
+**child_events** | [**List[AssignmentGroupAssignmentsInner]**](AssignmentGroupAssignmentsInner.md) | Included by default, but may be excluded (see include[] option). If this is a time slot (see the Appointment Groups API) this will be a list of any reservations. If this is a course-level event, this will be a list of section-level events (if any) | [optional] 
 **url** | **str** | URL for this calendar event (to update, delete, etc.) | [optional] 
 **html_url** | **str** | URL for a user to view this event | [optional] 
 **all_day_date** | **datetime** | The date of this event | [optional] 
@@ -44,6 +44,19 @@ Name | Type | Description | Notes
 **series_head** | **bool** | Boolean indicating if is the first event in the series of recurring events. | [optional] 
 **series_natural_language** | **str** | A natural language expression of how events occur in the series. | [optional] 
 **blackout_date** | **bool** | Boolean indicating whether this has blackout date. | [optional] 
+**can_manage_appointment_group** | **bool** |  | [optional] 
+**comments** | **str** |  | [optional] 
+**context_color** | **object** |  | [optional] 
+**duplicates** | **List[object]** |  | [optional] 
+**type** | **str** |  | [optional] 
+**reserve_comments** | **str** |  | [optional] 
+**assignment** | **object** |  | [optional] 
+**assignment_overrides** | **List[object]** |  | [optional] 
+**lock_info** | **object** |  | [optional] 
+**sub_assignment** | **object** |  | [optional] 
+**sub_assignment_overrides** | **List[object]** |  | [optional] 
+**submission_types** | **str** |  | [optional] 
+**web_conference** | **object** |  | [optional] 
 
 ## Example
 

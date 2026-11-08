@@ -43,7 +43,9 @@ class QuizReport(BaseModel):
     file: Optional[File] = None
     progress_url: Optional[StrictStr] = Field(default=None, description="if the report has not yet finished generating, a URL where information about its progress can be retrieved. refer to the Progress API for more information (Note: not available in JSON-API format)")
     progress: Optional[Progress] = None
-    __properties: ClassVar[List[str]] = ["id", "quiz_id", "report_type", "readable_type", "includes_all_versions", "anonymous", "generatable", "created_at", "updated_at", "url", "file", "progress_url", "progress"]
+    includes_sis_ids: Optional[StrictBool] = None
+    quiz_reports: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["id", "quiz_id", "report_type", "readable_type", "includes_all_versions", "anonymous", "generatable", "created_at", "updated_at", "url", "file", "progress_url", "progress", "includes_sis_ids", "quiz_reports"]
 
     @field_validator('report_type')
     def report_type_validate_enum(cls, value):
@@ -124,7 +126,9 @@ class QuizReport(BaseModel):
             "url": obj.get("url"),
             "file": File.from_dict(obj["file"]) if obj.get("file") is not None else None,
             "progress_url": obj.get("progress_url"),
-            "progress": Progress.from_dict(obj["progress"]) if obj.get("progress") is not None else None
+            "progress": Progress.from_dict(obj["progress"]) if obj.get("progress") is not None else None,
+            "includes_sis_ids": obj.get("includes_sis_ids"),
+            "quiz_reports": obj.get("quiz_reports")
         })
         return _obj
 

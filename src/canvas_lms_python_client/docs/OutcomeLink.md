@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **outcome** | [**Outcome**](Outcome.md) |  | [optional] 
 **assessed** | **bool** | whether this outcome has been used to assess a student in the context of this outcome link.  In other words, this will be set to true if the context is a course, and a student has been assessed with this outcome in that course. | [optional] 
 **can_unlink** | **bool** | whether this outcome link is manageable and is not the last link to an aligned outcome | [optional] 
+**quiz_lti** | **bool** |  | [optional] 
 
 ## Example
 

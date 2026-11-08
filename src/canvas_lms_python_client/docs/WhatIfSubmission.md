@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** | The ID of the submission | [optional] 
-**student_entered_score** | **str** | The score the student wants to test | [optional] 
+**student_entered_score** | [**WhatIfSubmissionStudentEnteredScore**](WhatIfSubmissionStudentEnteredScore.md) |  | [optional] 
 
 ## Example
 

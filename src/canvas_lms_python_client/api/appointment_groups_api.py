@@ -60,7 +60,7 @@ class AppointmentGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AppointmentGroup:
         """Create an appointment group
 
         Create and return a new appointment group. If new_appointments are specified, the response will return a new_appointments array (same format as appointments array, see \"List appointment groups\" action)
@@ -99,6 +99,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -126,7 +127,7 @@ class AppointmentGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AppointmentGroup]:
         """Create an appointment group
 
         Create and return a new appointment group. If new_appointments are specified, the response will return a new_appointments array (same format as appointments array, see \"List appointment groups\" action)
@@ -165,6 +166,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -232,6 +234,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -272,6 +275,13 @@ class AppointmentGroupsApi:
             _body_params = appointment_groups_create_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -327,7 +337,7 @@ class AppointmentGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AppointmentGroup:
         """Delete an appointment group
 
         Delete an appointment group (and associated time slots and reservations) and return the deleted group
@@ -369,6 +379,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -397,7 +408,7 @@ class AppointmentGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AppointmentGroup]:
         """Delete an appointment group
 
         Delete an appointment group (and associated time slots and reservations) and return the deleted group
@@ -439,6 +450,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -510,6 +522,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -555,6 +568,13 @@ class AppointmentGroupsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2022,7 +2042,7 @@ class AppointmentGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AppointmentGroup:
         """Get a single appointment group
 
         Returns information for a single appointment group
@@ -2064,6 +2084,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2092,7 +2113,7 @@ class AppointmentGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AppointmentGroup]:
         """Get a single appointment group
 
         Returns information for a single appointment group
@@ -2134,6 +2155,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2205,6 +2227,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2250,6 +2273,13 @@ class AppointmentGroupsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2292,7 +2322,7 @@ class AppointmentGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AppointmentGroup:
         """Update an appointment group
 
         Update and return an appointment group. If new_appointments are specified, the response will return a new_appointments array (same format as appointments array, see \"List appointment groups\" action).
@@ -2334,6 +2364,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2362,7 +2393,7 @@ class AppointmentGroupsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AppointmentGroup]:
         """Update an appointment group
 
         Update and return an appointment group. If new_appointments are specified, the response will return a new_appointments array (same format as appointments array, see \"List appointment groups\" action).
@@ -2404,6 +2435,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2475,6 +2507,7 @@ class AppointmentGroupsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AppointmentGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2518,6 +2551,13 @@ class AppointmentGroupsApi:
             _body_params = appointment_groups_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

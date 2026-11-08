@@ -17,11 +17,18 @@ Name | Type | Description | Notes
 **starred** | **bool** | whether the conversation is starred. | [optional] 
 **properties** | **List[str]** | Additional conversation flags (last_author, attachments, media_objects). Each listed property means the flag is set to true (i.e. the current user is the most recent author, there are attachments, or there are media objects) | [optional] 
 **audience** | **List[int]** | Array of user ids who are involved in the conversation, ordered by participation level, then alphabetical. Excludes current user, unless this is a monologue. | [optional] 
-**audience_contexts** | **List[str]** | Most relevant shared contexts (courses and groups) between current user and other participants. If there is only one participant, it will also include that user&#39;s enrollment(s)/ membership type(s) in each course/group. | [optional] 
+**audience_contexts** | [**ConversationAudienceContexts**](ConversationAudienceContexts.md) |  | [optional] 
 **avatar_url** | **str** | URL to appropriate icon for this conversation (custom, individual or group avatar, depending on audience). | [optional] 
 **participants** | [**List[ConversationParticipant]**](ConversationParticipant.md) | Array of users participating in the conversation. Includes current user. | [optional] 
 **visible** | **bool** | indicates whether the conversation is visible under the current scope and filter. This attribute is always true in the index API response, and is primarily useful in create/update responses so that you can know if the record should be displayed in the UI. The default scope is assumed, unless a scope or filter is passed to the create/update API call. | [optional] 
 **context_name** | **str** | Name of the course or group in which the conversation is occurring. | [optional] 
+**context_code** | **str** |  | [optional] 
+**last_authored_message** | **str** |  | [optional] 
+**last_authored_message_at** | **str** |  | [optional] 
+**last_message_at** | **str** |  | [optional] 
+**messages** | **List[object]** |  | [optional] 
+**cannot_reply** | **bool** |  | [optional] 
+**submissions** | **List[object]** |  | [optional] 
 
 ## Example
 

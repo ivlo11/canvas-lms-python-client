@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** | The shared_brand_config identifier. | [optional] 
-**account_id** | **str** | The id of the account it should be shared within. | [optional] 
+**account_id** | [**SharedBrandConfigAccountId**](SharedBrandConfigAccountId.md) |  | [optional] 
 **brand_config_md5** | **str** | The md5 (since BrandConfigs are identified by MD5 and not numeric id) of the BrandConfig to share. | [optional] 
 **name** | **str** | The name to share this theme as | [optional] 
 **created_at** | **datetime** | When this was created | [optional] 

@@ -26,6 +26,11 @@ from canvas_lms_python_client.models.discussion_topics_api_mark_all_read_request
 from canvas_lms_python_client.models.discussion_topics_api_mark_entry_read_request import DiscussionTopicsApiMarkEntryReadRequest
 from canvas_lms_python_client.models.discussion_topics_api_rate_entry_request import DiscussionTopicsApiRateEntryRequest
 from canvas_lms_python_client.models.discussion_topics_api_summary_feedback_request import DiscussionTopicsApiSummaryFeedbackRequest
+from canvas_lms_python_client.models.discussion_topics_disable_summary_response import DiscussionTopicsDisableSummaryResponse
+from canvas_lms_python_client.models.discussion_topics_find_or_create_summary_response import DiscussionTopicsFindOrCreateSummaryResponse
+from canvas_lms_python_client.models.discussion_topics_find_summary_response import DiscussionTopicsFindSummaryResponse
+from canvas_lms_python_client.models.discussion_topics_summary_feedback_response import DiscussionTopicsSummaryFeedbackResponse
+from canvas_lms_python_client.models.discussion_topics_view_response import DiscussionTopicsViewResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -64,7 +69,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionEntry:
         """Post an entry
 
         Create a new entry in a discussion topic. Returns a json representation of the created entry (see documentation for 'entries' method) on success.
@@ -109,6 +114,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -138,7 +144,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionEntry]:
         """Post an entry
 
         Create a new entry in a discussion topic. Returns a json representation of the created entry (see documentation for 'entries' method) on success.
@@ -183,6 +189,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -258,6 +265,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -304,6 +312,13 @@ class DiscussionTopicsApiApi:
             _body_params = discussion_topics_api_add_entry_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -360,7 +375,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionEntry:
         """Post an entry
 
         Create a new entry in a discussion topic. Returns a json representation of the created entry (see documentation for 'entries' method) on success.
@@ -405,6 +420,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -434,7 +450,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionEntry]:
         """Post an entry
 
         Create a new entry in a discussion topic. Returns a json representation of the created entry (see documentation for 'entries' method) on success.
@@ -479,6 +495,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -554,6 +571,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -600,6 +618,13 @@ class DiscussionTopicsApiApi:
             _body_params = discussion_topics_api_add_entry_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -657,7 +682,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionEntry:
         """Post a reply
 
         Add a reply to an entry in a discussion topic. Returns a json representation of the created reply (see documentation for 'replies' method) on success.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
@@ -705,6 +730,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -735,7 +761,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionEntry]:
         """Post a reply
 
         Add a reply to an entry in a discussion topic. Returns a json representation of the created reply (see documentation for 'replies' method) on success.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
@@ -783,6 +809,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -862,6 +889,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -911,6 +939,13 @@ class DiscussionTopicsApiApi:
             _body_params = discussion_topics_api_add_entry_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -968,7 +1003,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionEntry:
         """Post a reply
 
         Add a reply to an entry in a discussion topic. Returns a json representation of the created reply (see documentation for 'replies' method) on success.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
@@ -1016,6 +1051,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1046,7 +1082,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionEntry]:
         """Post a reply
 
         Add a reply to an entry in a discussion topic. Returns a json representation of the created reply (see documentation for 'replies' method) on success.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.
@@ -1094,6 +1130,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1173,6 +1210,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1222,6 +1260,13 @@ class DiscussionTopicsApiApi:
             _body_params = discussion_topics_api_add_entry_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -1277,7 +1322,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsDisableSummaryResponse:
         """Disable summary
 
         Deprecated, to remove after VICE-5047 gets merged Disables the summary for a discussion topic.
@@ -1319,6 +1364,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDisableSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1347,7 +1393,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsDisableSummaryResponse]:
         """Disable summary
 
         Deprecated, to remove after VICE-5047 gets merged Disables the summary for a discussion topic.
@@ -1389,6 +1435,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDisableSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1460,6 +1507,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDisableSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1552,7 +1600,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsDisableSummaryResponse:
         """Disable summary
 
         Deprecated, to remove after VICE-5047 gets merged Disables the summary for a discussion topic.
@@ -1594,6 +1642,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDisableSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1622,7 +1671,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsDisableSummaryResponse]:
         """Disable summary
 
         Deprecated, to remove after VICE-5047 gets merged Disables the summary for a discussion topic.
@@ -1664,6 +1713,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDisableSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1735,6 +1785,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsDisableSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4640,7 +4691,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsFindOrCreateSummaryResponse:
         """Find or Create Summary
 
         Generates a summary for a discussion topic. Returns the summary text and usage information.
@@ -4685,6 +4736,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindOrCreateSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4714,7 +4766,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsFindOrCreateSummaryResponse]:
         """Find or Create Summary
 
         Generates a summary for a discussion topic. Returns the summary text and usage information.
@@ -4759,6 +4811,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindOrCreateSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4834,6 +4887,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindOrCreateSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4943,7 +4997,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsFindOrCreateSummaryResponse:
         """Find or Create Summary
 
         Generates a summary for a discussion topic. Returns the summary text and usage information.
@@ -4988,6 +5042,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindOrCreateSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5017,7 +5072,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsFindOrCreateSummaryResponse]:
         """Find or Create Summary
 
         Generates a summary for a discussion topic. Returns the summary text and usage information.
@@ -5062,6 +5117,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindOrCreateSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5137,6 +5193,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindOrCreateSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5245,7 +5302,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsFindSummaryResponse:
         """Find Last Summary
 
         Returns: (1) last userInput (what current user had keyed in to produce the last discussion summary), (2) last discussion summary generated by the current user for current discussion topic, based on userInput, (3) and some usage information.
@@ -5287,6 +5344,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5315,7 +5373,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsFindSummaryResponse]:
         """Find Last Summary
 
         Returns: (1) last userInput (what current user had keyed in to produce the last discussion summary), (2) last discussion summary generated by the current user for current discussion topic, based on userInput, (3) and some usage information.
@@ -5357,6 +5415,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5428,6 +5487,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5520,7 +5580,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsFindSummaryResponse:
         """Find Last Summary
 
         Returns: (1) last userInput (what current user had keyed in to produce the last discussion summary), (2) last discussion summary generated by the current user for current discussion topic, based on userInput, (3) and some usage information.
@@ -5562,6 +5622,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5590,7 +5651,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsFindSummaryResponse]:
         """Find Last Summary
 
         Returns: (1) last userInput (what current user had keyed in to produce the last discussion summary), (2) last discussion summary generated by the current user for current discussion topic, based on userInput, (3) and some usage information.
@@ -5632,6 +5693,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5703,6 +5765,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsFindSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11528,7 +11591,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopic:
         """Get a single topic
 
         Returns data on an individual discussion topic. See the List action for the response formatting.
@@ -11573,6 +11636,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11602,7 +11666,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopic]:
         """Get a single topic
 
         Returns data on an individual discussion topic. See the List action for the response formatting.
@@ -11647,6 +11711,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11722,6 +11787,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11771,6 +11837,13 @@ class DiscussionTopicsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -11814,7 +11887,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopic:
         """Get a single topic
 
         Returns data on an individual discussion topic. See the List action for the response formatting.
@@ -11859,6 +11932,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11888,7 +11962,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopic]:
         """Get a single topic
 
         Returns data on an individual discussion topic. See the List action for the response formatting.
@@ -11933,6 +12007,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12008,6 +12083,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopic",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12057,6 +12133,13 @@ class DiscussionTopicsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -12637,7 +12720,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsSummaryFeedbackResponse:
         """Summary Feedback
 
         Persists feedback on a discussion topic summary.
@@ -12685,6 +12768,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsSummaryFeedbackResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12715,7 +12799,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsSummaryFeedbackResponse]:
         """Summary Feedback
 
         Persists feedback on a discussion topic summary.
@@ -12763,6 +12847,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsSummaryFeedbackResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12842,6 +12927,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsSummaryFeedbackResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12955,7 +13041,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsSummaryFeedbackResponse:
         """Summary Feedback
 
         Persists feedback on a discussion topic summary.
@@ -13003,6 +13089,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsSummaryFeedbackResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -13033,7 +13120,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsSummaryFeedbackResponse]:
         """Summary Feedback
 
         Persists feedback on a discussion topic summary.
@@ -13081,6 +13168,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsSummaryFeedbackResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -13160,6 +13248,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsSummaryFeedbackResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -13807,7 +13896,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsViewResponse:
         """Get the full topic
 
         Return a cached structure of the discussion topic, containing all entries, their authors, and their message bodies.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  In some rare situations, this cached structure may not be available yet. In that case, the server will respond with a 503 error, and the caller should try again soon.  The response is an object containing the following keys: * \"participants\": A list of summary information on users who have posted to   the discussion. Each value is an object containing their id, display_name,   and avatar_url. * \"unread_entries\": A list of entry ids that are unread by the current   user. this implies that any entry not in this list is read. * \"entry_ratings\": A map of entry ids to ratings by the current user. Entries   not in this list have no rating. Only populated if rating is enabled. * \"forced_entries\": A list of entry ids that have forced_read_state set to   true. This flag is meant to indicate the entry's read_state has been   manually set to 'unread' by the user, so the entry should not be   automatically marked as read. * \"view\": A threaded view of all the entries in the discussion, containing   the id, user_id, and message. * \"new_entries\": Because this view is eventually consistent, it's possible   that newly created or updated entries won't yet be reflected in the view.   If the application wants to also get a flat list of all entries not yet   reflected in the view, pass include_new_entries=1 to the request and this   array of entries will be returned. These entries are returned in a flat   array, in ascending created_at order.
@@ -13849,6 +13938,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsViewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -13877,7 +13967,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsViewResponse]:
         """Get the full topic
 
         Return a cached structure of the discussion topic, containing all entries, their authors, and their message bodies.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  In some rare situations, this cached structure may not be available yet. In that case, the server will respond with a 503 error, and the caller should try again soon.  The response is an object containing the following keys: * \"participants\": A list of summary information on users who have posted to   the discussion. Each value is an object containing their id, display_name,   and avatar_url. * \"unread_entries\": A list of entry ids that are unread by the current   user. this implies that any entry not in this list is read. * \"entry_ratings\": A map of entry ids to ratings by the current user. Entries   not in this list have no rating. Only populated if rating is enabled. * \"forced_entries\": A list of entry ids that have forced_read_state set to   true. This flag is meant to indicate the entry's read_state has been   manually set to 'unread' by the user, so the entry should not be   automatically marked as read. * \"view\": A threaded view of all the entries in the discussion, containing   the id, user_id, and message. * \"new_entries\": Because this view is eventually consistent, it's possible   that newly created or updated entries won't yet be reflected in the view.   If the application wants to also get a flat list of all entries not yet   reflected in the view, pass include_new_entries=1 to the request and this   array of entries will be returned. These entries are returned in a flat   array, in ascending created_at order.
@@ -13919,6 +14009,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsViewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -13990,6 +14081,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsViewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14082,7 +14174,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionTopicsViewResponse:
         """Get the full topic
 
         Return a cached structure of the discussion topic, containing all entries, their authors, and their message bodies.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  In some rare situations, this cached structure may not be available yet. In that case, the server will respond with a 503 error, and the caller should try again soon.  The response is an object containing the following keys: * \"participants\": A list of summary information on users who have posted to   the discussion. Each value is an object containing their id, display_name,   and avatar_url. * \"unread_entries\": A list of entry ids that are unread by the current   user. this implies that any entry not in this list is read. * \"entry_ratings\": A map of entry ids to ratings by the current user. Entries   not in this list have no rating. Only populated if rating is enabled. * \"forced_entries\": A list of entry ids that have forced_read_state set to   true. This flag is meant to indicate the entry's read_state has been   manually set to 'unread' by the user, so the entry should not be   automatically marked as read. * \"view\": A threaded view of all the entries in the discussion, containing   the id, user_id, and message. * \"new_entries\": Because this view is eventually consistent, it's possible   that newly created or updated entries won't yet be reflected in the view.   If the application wants to also get a flat list of all entries not yet   reflected in the view, pass include_new_entries=1 to the request and this   array of entries will be returned. These entries are returned in a flat   array, in ascending created_at order.
@@ -14124,6 +14216,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsViewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14152,7 +14245,7 @@ class DiscussionTopicsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionTopicsViewResponse]:
         """Get the full topic
 
         Return a cached structure of the discussion topic, containing all entries, their authors, and their message bodies.  May require (depending on the topic) that the user has posted in the topic. If it is required, and the user has not posted, will respond with a 403 Forbidden status and the body 'require_initial_post'.  In some rare situations, this cached structure may not be available yet. In that case, the server will respond with a 503 error, and the caller should try again soon.  The response is an object containing the following keys: * \"participants\": A list of summary information on users who have posted to   the discussion. Each value is an object containing their id, display_name,   and avatar_url. * \"unread_entries\": A list of entry ids that are unread by the current   user. this implies that any entry not in this list is read. * \"entry_ratings\": A map of entry ids to ratings by the current user. Entries   not in this list have no rating. Only populated if rating is enabled. * \"forced_entries\": A list of entry ids that have forced_read_state set to   true. This flag is meant to indicate the entry's read_state has been   manually set to 'unread' by the user, so the entry should not be   automatically marked as read. * \"view\": A threaded view of all the entries in the discussion, containing   the id, user_id, and message. * \"new_entries\": Because this view is eventually consistent, it's possible   that newly created or updated entries won't yet be reflected in the view.   If the application wants to also get a flat list of all entries not yet   reflected in the view, pass include_new_entries=1 to the request and this   array of entries will be returned. These entries are returned in a flat   array, in ascending created_at order.
@@ -14194,6 +14287,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsViewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14265,6 +14359,7 @@ class DiscussionTopicsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionTopicsViewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

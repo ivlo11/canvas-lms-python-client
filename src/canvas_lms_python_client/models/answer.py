@@ -43,7 +43,12 @@ class Answer(BaseModel):
     start: Optional[StrictInt] = Field(default=None, description="Used in numerical questions of type 'range_answer'. The start of the allowed range (inclusive).", json_schema_extra={"examples": [1]})
     end: Optional[StrictInt] = Field(default=None, description="Used in numerical questions of type 'range_answer'. The end of the allowed range (inclusive).", json_schema_extra={"examples": [10]})
     blank_id: Optional[StrictInt] = Field(default=None, description="Used in fill in multiple blank and multiple dropdowns questions.", json_schema_extra={"examples": [1170]})
-    __properties: ClassVar[List[str]] = ["id", "answer_text", "answer_weight", "answer_comments", "text_after_answers", "answer_match_left", "answer_match_right", "matching_answer_incorrect_matches", "numerical_answer_type", "exact", "margin", "approximate", "precision", "start", "end", "blank_id"]
+    html: Optional[StrictStr] = None
+    weight: Optional[Union[StrictFloat, StrictInt]] = None
+    comments: Optional[StrictStr] = None
+    comments_html: Optional[StrictStr] = None
+    text: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "answer_text", "answer_weight", "answer_comments", "text_after_answers", "answer_match_left", "answer_match_right", "matching_answer_incorrect_matches", "numerical_answer_type", "exact", "margin", "approximate", "precision", "start", "end", "blank_id", "html", "weight", "comments", "comments_html", "text"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -84,6 +89,11 @@ class Answer(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if html (nullable) is None
+        # and model_fields_set contains the field
+        if self.html is None and "html" in self.model_fields_set:
+            _dict['html'] = None
+
         return _dict
 
     @classmethod
@@ -111,7 +121,12 @@ class Answer(BaseModel):
             "precision": obj.get("precision"),
             "start": obj.get("start"),
             "end": obj.get("end"),
-            "blank_id": obj.get("blank_id")
+            "blank_id": obj.get("blank_id"),
+            "html": obj.get("html"),
+            "weight": obj.get("weight"),
+            "comments": obj.get("comments"),
+            "comments_html": obj.get("comments_html"),
+            "text": obj.get("text")
         })
         return _obj
 

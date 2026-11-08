@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **content_imports_copy_course_content**
-> content_imports_copy_course_content(course_id, content_imports_copy_course_content_request=content_imports_copy_course_content_request)
+> ContentImportsCopyCourseStatusResponse content_imports_copy_course_content(course_id, content_imports_copy_course_content_request=content_imports_copy_course_content_request)
 
 Copy course content
 
@@ -28,6 +28,7 @@ The response is the same as the course copy status endpoint
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.content_imports_copy_course_content_request import ContentImportsCopyCourseContentRequest
+from canvas_lms_python_client.models.content_imports_copy_course_status_response import ContentImportsCopyCourseStatusResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -56,7 +57,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Copy course content
-        await api_instance.content_imports_copy_course_content(course_id, content_imports_copy_course_content_request=content_imports_copy_course_content_request)
+        api_response = await api_instance.content_imports_copy_course_content(course_id, content_imports_copy_course_content_request=content_imports_copy_course_content_request)
+        print("The response of ContentImportsApi->content_imports_copy_course_content:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ContentImportsApi->content_imports_copy_course_content: %s\n" % e)
 ```
@@ -73,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ContentImportsCopyCourseStatusResponse**](ContentImportsCopyCourseStatusResponse.md)
 
 ### Authorization
 
@@ -82,18 +85,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Copy course content |  -  |
+**0** | ContentImportsCopyCourseStatusResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **content_imports_copy_course_status**
-> content_imports_copy_course_status(course_id, id)
+> ContentImportsCopyCourseStatusResponse content_imports_copy_course_status(course_id, id)
 
 Get course copy status
 
@@ -107,6 +110,7 @@ Retrieve the status of a course copy
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.content_imports_copy_course_status_response import ContentImportsCopyCourseStatusResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -135,7 +139,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get course copy status
-        await api_instance.content_imports_copy_course_status(course_id, id)
+        api_response = await api_instance.content_imports_copy_course_status(course_id, id)
+        print("The response of ContentImportsApi->content_imports_copy_course_status:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ContentImportsApi->content_imports_copy_course_status: %s\n" % e)
 ```
@@ -152,7 +158,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ContentImportsCopyCourseStatusResponse**](ContentImportsCopyCourseStatusResponse.md)
 
 ### Authorization
 
@@ -167,7 +173,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get course copy status |  -  |
+**0** | ContentImportsCopyCourseStatusResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

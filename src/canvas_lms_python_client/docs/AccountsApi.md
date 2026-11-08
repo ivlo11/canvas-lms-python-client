@@ -313,7 +313,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **accounts_environment**
-> accounts_environment()
+> AccountsEnvironmentResponse accounts_environment()
 
 List environment settings
 
@@ -326,6 +326,7 @@ This is the same information supplied to the web interface as +ENV.SETTINGS+.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.accounts_environment_response import AccountsEnvironmentResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -352,7 +353,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List environment settings
-        await api_instance.accounts_environment()
+        api_response = await api_instance.accounts_environment()
+        print("The response of AccountsApi->accounts_environment:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AccountsApi->accounts_environment: %s\n" % e)
 ```
@@ -365,7 +368,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**AccountsEnvironmentResponse**](AccountsEnvironmentResponse.md)
 
 ### Authorization
 
@@ -380,7 +383,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List environment settings |  -  |
+**0** | AccountsEnvironmentResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -791,7 +794,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **accounts_permissions**
-> accounts_permissions(account_id, permissions=permissions)
+> AccountsPermissionsResponse accounts_permissions(account_id, permissions=permissions)
 
 Permissions
 
@@ -809,6 +812,7 @@ counterparts.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.accounts_permissions_response import AccountsPermissionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -837,7 +841,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Permissions
-        await api_instance.accounts_permissions(account_id, permissions=permissions)
+        api_response = await api_instance.accounts_permissions(account_id, permissions=permissions)
+        print("The response of AccountsApi->accounts_permissions:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AccountsApi->accounts_permissions: %s\n" % e)
 ```
@@ -854,7 +860,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AccountsPermissionsResponse**](AccountsPermissionsResponse.md)
 
 ### Authorization
 
@@ -869,12 +875,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Permissions |  -  |
+**0** | AccountsPermissionsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **accounts_remove_user**
-> User accounts_remove_user(account_id, user_id)
+> AccountsRemoveUserResponse accounts_remove_user(account_id, user_id)
 
 Delete a user from the root account
 
@@ -892,7 +898,7 @@ that account.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.user import User
+from canvas_lms_python_client.models.accounts_remove_user_response import AccountsRemoveUserResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -940,7 +946,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**User**](User.md)
+[**AccountsRemoveUserResponse**](AccountsRemoveUserResponse.md)
 
 ### Authorization
 
@@ -955,7 +961,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | User |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1204,7 +1210,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **accounts_show_settings**
-> accounts_show_settings(account_id)
+> AccountsShowSettingsResponse accounts_show_settings(account_id)
 
 Settings
 
@@ -1218,6 +1224,7 @@ The caller must be an Account admin with the manage_account_settings permission.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.accounts_show_settings_response import AccountsShowSettingsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1245,7 +1252,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Settings
-        await api_instance.accounts_show_settings(account_id)
+        api_response = await api_instance.accounts_show_settings(account_id)
+        print("The response of AccountsApi->accounts_show_settings:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AccountsApi->accounts_show_settings: %s\n" % e)
 ```
@@ -1261,7 +1270,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AccountsShowSettingsResponse**](AccountsShowSettingsResponse.md)
 
 ### Authorization
 
@@ -1276,7 +1285,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Settings |  -  |
+**0** | AccountsShowSettingsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -21,6 +21,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.context_external_tool_message_settings import ContextExternalToolMessageSettings
 from canvas_lms_python_client.models.context_external_tool_placement import ContextExternalToolPlacement
+from canvas_lms_python_client.models.context_external_tool_prefer_sis_email import ContextExternalToolPreferSisEmail
 from canvas_lms_python_client.models.estimated_duration import EstimatedDuration
 from typing import Optional, Set
 from typing_extensions import Self
@@ -53,7 +54,7 @@ class ContextExternalTool(BaseModel):
     lti_registration_id: Optional[StrictInt] = Field(default=None, description="The LTI registration id associated with this tool. Only present for LTI 1.3 tools.", json_schema_extra={"examples": [456]})
     deployment_id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the deployment of the tool", json_schema_extra={"examples": ["37:b82229c6e10bcb87beb1f1b287faee560ddc3109"]})
     allow_membership_service_access: Optional[StrictBool] = Field(default=None, description="Whether the tool can access the membership service. Only present if the feature is enabled.")
-    prefer_sis_email: Optional[StrictBool] = Field(default=None, description="Whether to send the SIS email address in launches")
+    prefer_sis_email: Optional[ContextExternalToolPreferSisEmail] = None
     estimated_duration: Optional[EstimatedDuration] = None
     account_navigation: Optional[ContextExternalToolPlacement] = None
     analytics_hub: Optional[ContextExternalToolPlacement] = None
@@ -100,7 +101,9 @@ class ContextExternalTool(BaseModel):
     activity_asset_processor: Optional[ContextExternalToolPlacement] = Field(default=None, alias="ActivityAssetProcessor")
     activity_asset_processor_contribution: Optional[ContextExternalToolPlacement] = Field(default=None, alias="ActivityAssetProcessorContribution")
     message_settings: Optional[List[ContextExternalToolMessageSettings]] = Field(default=None, description="Configuration for placementless message types (currently only LtiEulaRequest).", json_schema_extra={"examples": [[{"type": "LtiEulaRequest", "enabled": True, "target_link_uri": "https://example.com/eula", "custom_fields": {"agreement_version": "2.1"}}]]})
-    __properties: ClassVar[List[str]] = ["id", "name", "description", "url", "domain", "consumer_key", "created_at", "updated_at", "privacy_level", "custom_fields", "workflow_state", "is_rce_favorite", "is_top_nav_favorite", "selection_width", "selection_height", "icon_url", "not_selectable", "version", "unified_tool_id", "developer_key_id", "lti_registration_id", "deployment_id", "allow_membership_service_access", "prefer_sis_email", "estimated_duration", "account_navigation", "analytics_hub", "assignment_edit", "assignment_group_menu", "assignment_index_menu", "assignment_menu", "assignment_selection", "assignment_view", "collaboration", "conference_selection", "course_assignments_menu", "course_home_sub_navigation", "course_navigation", "course_settings_sub_navigation", "discussion_topic_index_menu", "discussion_topic_menu", "editor_button", "file_index_menu", "file_menu", "global_navigation", "homework_submission", "link_selection", "migration_selection", "module_group_menu", "module_index_menu", "module_index_menu_modal", "module_menu_modal", "module_menu", "page_index_menu", "page_menu", "post_grades", "quiz_index_menu", "quiz_menu", "resource_selection", "similarity_detection", "student_context_card", "submission_type_selection", "tool_configuration", "top_navigation", "user_navigation", "wiki_index_menu", "wiki_page_menu", "ActivityAssetProcessor", "ActivityAssetProcessorContribution", "message_settings"]
+    context_id: Optional[StrictInt] = None
+    context_name: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "description", "url", "domain", "consumer_key", "created_at", "updated_at", "privacy_level", "custom_fields", "workflow_state", "is_rce_favorite", "is_top_nav_favorite", "selection_width", "selection_height", "icon_url", "not_selectable", "version", "unified_tool_id", "developer_key_id", "lti_registration_id", "deployment_id", "allow_membership_service_access", "prefer_sis_email", "estimated_duration", "account_navigation", "analytics_hub", "assignment_edit", "assignment_group_menu", "assignment_index_menu", "assignment_menu", "assignment_selection", "assignment_view", "collaboration", "conference_selection", "course_assignments_menu", "course_home_sub_navigation", "course_navigation", "course_settings_sub_navigation", "discussion_topic_index_menu", "discussion_topic_menu", "editor_button", "file_index_menu", "file_menu", "global_navigation", "homework_submission", "link_selection", "migration_selection", "module_group_menu", "module_index_menu", "module_index_menu_modal", "module_menu_modal", "module_menu", "page_index_menu", "page_menu", "post_grades", "quiz_index_menu", "quiz_menu", "resource_selection", "similarity_detection", "student_context_card", "submission_type_selection", "tool_configuration", "top_navigation", "user_navigation", "wiki_index_menu", "wiki_page_menu", "ActivityAssetProcessor", "ActivityAssetProcessorContribution", "message_settings", "context_id", "context_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -141,6 +144,9 @@ class ContextExternalTool(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of prefer_sis_email
+        if self.prefer_sis_email:
+            _dict['prefer_sis_email'] = self.prefer_sis_email.to_dict()
         # override the default output from pydantic by calling `to_dict()` of estimated_duration
         if self.estimated_duration:
             _dict['estimated_duration'] = self.estimated_duration.to_dict()
@@ -282,6 +288,36 @@ class ContextExternalTool(BaseModel):
             for _item_message_settings in self.message_settings:
                 _items.append(_item_message_settings.to_dict() if _item_message_settings is not None else None)
             _dict['message_settings'] = _items
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if url (nullable) is None
+        # and model_fields_set contains the field
+        if self.url is None and "url" in self.model_fields_set:
+            _dict['url'] = None
+
+        # set to None if domain (nullable) is None
+        # and model_fields_set contains the field
+        if self.domain is None and "domain" in self.model_fields_set:
+            _dict['domain'] = None
+
+        # set to None if custom_fields (nullable) is None
+        # and model_fields_set contains the field
+        if self.custom_fields is None and "custom_fields" in self.model_fields_set:
+            _dict['custom_fields'] = None
+
+        # set to None if unified_tool_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.unified_tool_id is None and "unified_tool_id" in self.model_fields_set:
+            _dict['unified_tool_id'] = None
+
+        # set to None if message_settings (nullable) is None
+        # and model_fields_set contains the field
+        if self.message_settings is None and "message_settings" in self.model_fields_set:
+            _dict['message_settings'] = None
+
         return _dict
 
     @classmethod
@@ -317,7 +353,7 @@ class ContextExternalTool(BaseModel):
             "lti_registration_id": obj.get("lti_registration_id"),
             "deployment_id": obj.get("deployment_id"),
             "allow_membership_service_access": obj.get("allow_membership_service_access"),
-            "prefer_sis_email": obj.get("prefer_sis_email"),
+            "prefer_sis_email": ContextExternalToolPreferSisEmail.from_dict(obj["prefer_sis_email"]) if obj.get("prefer_sis_email") is not None else None,
             "estimated_duration": EstimatedDuration.from_dict(obj["estimated_duration"]) if obj.get("estimated_duration") is not None else None,
             "account_navigation": ContextExternalToolPlacement.from_dict(obj["account_navigation"]) if obj.get("account_navigation") is not None else None,
             "analytics_hub": ContextExternalToolPlacement.from_dict(obj["analytics_hub"]) if obj.get("analytics_hub") is not None else None,
@@ -363,7 +399,9 @@ class ContextExternalTool(BaseModel):
             "wiki_page_menu": ContextExternalToolPlacement.from_dict(obj["wiki_page_menu"]) if obj.get("wiki_page_menu") is not None else None,
             "ActivityAssetProcessor": ContextExternalToolPlacement.from_dict(obj["ActivityAssetProcessor"]) if obj.get("ActivityAssetProcessor") is not None else None,
             "ActivityAssetProcessorContribution": ContextExternalToolPlacement.from_dict(obj["ActivityAssetProcessorContribution"]) if obj.get("ActivityAssetProcessorContribution") is not None else None,
-            "message_settings": [ContextExternalToolMessageSettings.from_dict(_item) for _item in obj["message_settings"]] if obj.get("message_settings") is not None else None
+            "message_settings": [ContextExternalToolMessageSettings.from_dict(_item) for _item in obj["message_settings"]] if obj.get("message_settings") is not None else None,
+            "context_id": obj.get("context_id"),
+            "context_name": obj.get("context_name")
         })
         return _obj
 

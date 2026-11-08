@@ -42,7 +42,8 @@ class Collaboration(BaseModel):
     type: Optional[StrictStr] = Field(default=None, description="Another representation of the collaboration type", json_schema_extra={"examples": ["ExternalToolCollaboration"]})
     update_url: Optional[StrictStr] = Field(default=None, description="The LTI launch url to edit the collaboration")
     user_name: Optional[StrictStr] = Field(default=None, description="The name of the user who owns the collaboration", json_schema_extra={"examples": ["John Danger"]})
-    __properties: ClassVar[List[str]] = ["id", "collaboration_type", "document_id", "user_id", "context_id", "context_type", "url", "created_at", "updated_at", "description", "title", "type", "update_url", "user_name"]
+    permissions: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "collaboration_type", "document_id", "user_id", "context_id", "context_type", "url", "created_at", "updated_at", "description", "title", "type", "update_url", "user_name", "permissions"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -83,6 +84,16 @@ class Collaboration(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if update_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.update_url is None and "update_url" in self.model_fields_set:
+            _dict['update_url'] = None
+
         return _dict
 
     @classmethod
@@ -108,7 +119,8 @@ class Collaboration(BaseModel):
             "title": obj.get("title"),
             "type": obj.get("type"),
             "update_url": obj.get("update_url"),
-            "user_name": obj.get("user_name")
+            "user_name": obj.get("user_name"),
+            "permissions": obj.get("permissions")
         })
         return _obj
 

@@ -19,6 +19,8 @@ Name | Type | Description | Notes
 **file** | [**File**](File.md) |  | [optional] 
 **progress_url** | **str** | if the report has not yet finished generating, a URL where information about its progress can be retrieved. refer to the Progress API for more information (Note: not available in JSON-API format) | [optional] 
 **progress** | [**Progress**](Progress.md) |  | [optional] 
+**includes_sis_ids** | **bool** |  | [optional] 
+**quiz_reports** | **List[object]** |  | [optional] 
 
 ## Example
 

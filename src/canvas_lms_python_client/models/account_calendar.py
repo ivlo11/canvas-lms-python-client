@@ -81,6 +81,11 @@ class AccountCalendar(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if parent_account_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.parent_account_id is None and "parent_account_id" in self.model_fields_set:
+            _dict['parent_account_id'] = None
+
         return _dict
 
     @classmethod

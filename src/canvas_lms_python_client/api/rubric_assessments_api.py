@@ -18,8 +18,10 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.rubric_assessment import RubricAssessment
 from canvas_lms_python_client.models.rubric_assessments_create_request import RubricAssessmentsCreateRequest
+from canvas_lms_python_client.models.rubric_assessments_create_response import RubricAssessmentsCreateResponse
+from canvas_lms_python_client.models.rubric_assessments_destroy_response import RubricAssessmentsDestroyResponse
+from canvas_lms_python_client.models.rubric_assessments_update_response import RubricAssessmentsUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -58,7 +60,7 @@ class RubricAssessmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> RubricAssessmentsCreateResponse:
         """Create a single rubric assessment
 
         Returns the rubric assessment with the given id. The returned object also provides the information of   :ratings, :assessor_name, :related_group_submissions_and_assessments, :artifact
@@ -103,6 +105,7 @@ class RubricAssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricAssessmentsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -132,7 +135,7 @@ class RubricAssessmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[RubricAssessmentsCreateResponse]:
         """Create a single rubric assessment
 
         Returns the rubric assessment with the given id. The returned object also provides the information of   :ratings, :assessor_name, :related_group_submissions_and_assessments, :artifact
@@ -177,6 +180,7 @@ class RubricAssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricAssessmentsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -252,6 +256,7 @@ class RubricAssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricAssessmentsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -298,6 +303,13 @@ class RubricAssessmentsApi:
             _body_params = rubric_assessments_create_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -354,7 +366,7 @@ class RubricAssessmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RubricAssessment:
+    ) -> RubricAssessmentsDestroyResponse:
         """Delete a single rubric assessment
 
         Deletes a rubric assessment
@@ -399,7 +411,7 @@ class RubricAssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssessment",
+            'default': "RubricAssessmentsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -429,7 +441,7 @@ class RubricAssessmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[RubricAssessment]:
+    ) -> ApiResponse[RubricAssessmentsDestroyResponse]:
         """Delete a single rubric assessment
 
         Deletes a rubric assessment
@@ -474,7 +486,7 @@ class RubricAssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssessment",
+            'default': "RubricAssessmentsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -550,7 +562,7 @@ class RubricAssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssessment",
+            'default': "RubricAssessmentsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -648,7 +660,7 @@ class RubricAssessmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> RubricAssessmentsUpdateResponse:
         """Update a single rubric assessment
 
         Returns the rubric assessment with the given id. The returned object also provides the information of   :ratings, :assessor_name, :related_group_submissions_and_assessments, :artifact
@@ -696,6 +708,7 @@ class RubricAssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricAssessmentsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -726,7 +739,7 @@ class RubricAssessmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[RubricAssessmentsUpdateResponse]:
         """Update a single rubric assessment
 
         Returns the rubric assessment with the given id. The returned object also provides the information of   :ratings, :assessor_name, :related_group_submissions_and_assessments, :artifact
@@ -774,6 +787,7 @@ class RubricAssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricAssessmentsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -853,6 +867,7 @@ class RubricAssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "RubricAssessmentsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -902,6 +917,13 @@ class RubricAssessmentsApi:
             _body_params = rubric_assessments_create_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

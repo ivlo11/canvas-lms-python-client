@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -31,7 +31,7 @@ class QuizGroup(BaseModel):
     quiz_id: StrictInt = Field(description="The ID of the Quiz the question group belongs to.", json_schema_extra={"examples": [2]})
     name: Optional[StrictStr] = Field(default=None, description="The name of the question group.", json_schema_extra={"examples": ["Fraction questions"]})
     pick_count: Optional[StrictInt] = Field(default=None, description="The number of questions to pick from the group to display to the student.", json_schema_extra={"examples": [3]})
-    question_points: Optional[StrictInt] = Field(default=None, description="The amount of points allotted to each question in the group.", json_schema_extra={"examples": [10]})
+    question_points: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount of points allotted to each question in the group.", json_schema_extra={"examples": [10]})
     assessment_question_bank_id: Optional[StrictInt] = Field(default=None, description="The ID of the Assessment question bank to pull questions from.", json_schema_extra={"examples": [2]})
     position: Optional[StrictInt] = Field(default=None, description="The order in which the question group will be retrieved and displayed.", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["id", "quiz_id", "name", "pick_count", "question_points", "assessment_question_bank_id", "position"]
@@ -75,6 +75,21 @@ class QuizGroup(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if name (nullable) is None
+        # and model_fields_set contains the field
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
+
+        # set to None if question_points (nullable) is None
+        # and model_fields_set contains the field
+        if self.question_points is None and "question_points" in self.model_fields_set:
+            _dict['question_points'] = None
+
+        # set to None if assessment_question_bank_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.assessment_question_bank_id is None and "assessment_question_bank_id" in self.model_fields_set:
+            _dict['assessment_question_bank_id'] = None
+
         return _dict
 
     @classmethod

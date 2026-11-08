@@ -19,17 +19,24 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.quiz import Quiz
 from canvas_lms_python_client.models.quiz_submission import QuizSubmission
+from canvas_lms_python_client.models.submission import Submission
+from canvas_lms_python_client.models.user import User
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
 
 class QuizSubmissionsApiSubmissionResponse(BaseModel):
     """
-    Paginated `quiz_submissions` list response (from the Canvas example response).
+    Object response with `quiz_submissions`, `quizzes`, `submissions`, `users`, `meta` (from the Canvas `@returns`).
     """ # noqa: E501
     quiz_submissions: Optional[List[QuizSubmission]] = None
-    __properties: ClassVar[List[str]] = ["quiz_submissions"]
+    quizzes: Optional[List[Quiz]] = None
+    submissions: Optional[List[Submission]] = None
+    users: Optional[List[User]] = None
+    meta: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["quiz_submissions", "quizzes", "submissions", "users", "meta"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -76,6 +83,24 @@ class QuizSubmissionsApiSubmissionResponse(BaseModel):
             for _item_quiz_submissions in self.quiz_submissions:
                 _items.append(_item_quiz_submissions.to_dict() if _item_quiz_submissions is not None else None)
             _dict['quiz_submissions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in quizzes (list)
+        _items = []
+        if self.quizzes:
+            for _item_quizzes in self.quizzes:
+                _items.append(_item_quizzes.to_dict() if _item_quizzes is not None else None)
+            _dict['quizzes'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in submissions (list)
+        _items = []
+        if self.submissions:
+            for _item_submissions in self.submissions:
+                _items.append(_item_submissions.to_dict() if _item_submissions is not None else None)
+            _dict['submissions'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in users (list)
+        _items = []
+        if self.users:
+            for _item_users in self.users:
+                _items.append(_item_users.to_dict() if _item_users is not None else None)
+            _dict['users'] = _items
         return _dict
 
     @classmethod
@@ -88,7 +113,11 @@ class QuizSubmissionsApiSubmissionResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "quiz_submissions": [QuizSubmission.from_dict(_item) for _item in obj["quiz_submissions"]] if obj.get("quiz_submissions") is not None else None
+            "quiz_submissions": [QuizSubmission.from_dict(_item) for _item in obj["quiz_submissions"]] if obj.get("quiz_submissions") is not None else None,
+            "quizzes": [Quiz.from_dict(_item) for _item in obj["quizzes"]] if obj.get("quizzes") is not None else None,
+            "submissions": [Submission.from_dict(_item) for _item in obj["submissions"]] if obj.get("submissions") is not None else None,
+            "users": [User.from_dict(_item) for _item in obj["users"]] if obj.get("users") is not None else None,
+            "meta": obj.get("meta")
         })
         return _obj
 

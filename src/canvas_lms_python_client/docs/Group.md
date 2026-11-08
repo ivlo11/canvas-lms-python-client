@@ -25,6 +25,15 @@ Name | Type | Description | Notes
 **permissions** | **object** | optional: the permissions the user has for the group. returned only for a single group and include[]&#x3D;permissions | [optional] 
 **users** | [**List[User]**](User.md) | optional: A list of users that are members in the group. Returned only if include[]&#x3D;users. WARNING: this collection&#39;s size is capped (if there are an extremely large number of users in the group (thousands) not all of them will be returned). If you need to capture all the users in a group with certainty or experiencing slow response consider using the paginated /api/v1/groups/&lt;group_id&gt;/users endpoint. | [optional] 
 **non_collaborative** | **bool** | Indicates whether this group category is non-collaborative. A value of true means these group categories rely on the manage_tags permissions and do not have collaborative features | [optional] 
+**concluded** | **bool** |  | [optional] 
+**created_at** | **str** |  | [optional] 
+**has_submission** | **bool** |  | [optional] 
+**leader** | **object** |  | [optional] 
+**max_membership** | **int** |  | [optional] 
+**account_id** | **int** |  | [optional] 
+**group_category** | **object** |  | [optional] 
+**is_favorite** | **bool** |  | [optional] 
+**tabs** | **List[object]** |  | [optional] 
 
 ## Example
 

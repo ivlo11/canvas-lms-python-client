@@ -94,6 +94,16 @@ class MediaObject(BaseModel):
             for _item_media_tracks in self.media_tracks:
                 _items.append(_item_media_tracks.to_dict() if _item_media_tracks is not None else None)
             _dict['media_tracks'] = _items
+        # set to None if media_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.media_type is None and "media_type" in self.model_fields_set:
+            _dict['media_type'] = None
+
+        # set to None if auto_caption_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.auto_caption_status is None and "auto_caption_status" in self.model_fields_set:
+            _dict['auto_caption_status'] = None
+
         return _dict
 
     @classmethod

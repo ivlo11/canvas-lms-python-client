@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,12 +27,12 @@ class ScoreStatistic(BaseModel):
     """
     Used by Assignment model
     """ # noqa: E501
-    min: Optional[StrictInt] = Field(default=None, description="Min score", json_schema_extra={"examples": [1]})
-    max: Optional[StrictInt] = Field(default=None, description="Max score", json_schema_extra={"examples": [10]})
-    mean: Optional[StrictInt] = Field(default=None, description="Mean score", json_schema_extra={"examples": [6]})
-    upper_q: Optional[StrictInt] = Field(default=None, description="Upper quartile score", json_schema_extra={"examples": [10]})
-    median: Optional[StrictInt] = Field(default=None, description="Median score", json_schema_extra={"examples": [6]})
-    lower_q: Optional[StrictInt] = Field(default=None, description="Lower quartile score", json_schema_extra={"examples": [1]})
+    min: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Min score", json_schema_extra={"examples": [1]})
+    max: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Max score", json_schema_extra={"examples": [10]})
+    mean: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Mean score", json_schema_extra={"examples": [6]})
+    upper_q: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Upper quartile score", json_schema_extra={"examples": [10]})
+    median: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Median score", json_schema_extra={"examples": [6]})
+    lower_q: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Lower quartile score", json_schema_extra={"examples": [1]})
     __properties: ClassVar[List[str]] = ["min", "max", "mean", "upper_q", "median", "lower_q"]
 
     model_config = ConfigDict(

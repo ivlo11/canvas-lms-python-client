@@ -26,7 +26,8 @@ from canvas_lms_python_client.models.quiz_submissions_api_index_response import 
 from canvas_lms_python_client.models.quiz_submissions_api_show_response import QuizSubmissionsApiShowResponse
 from canvas_lms_python_client.models.quiz_submissions_api_submission_response import QuizSubmissionsApiSubmissionResponse
 from canvas_lms_python_client.models.quiz_submissions_api_update_request import QuizSubmissionsApiUpdateRequest
-from canvas_lms_python_client.models.quiz_submissions_api_update_response import QuizSubmissionsApiUpdateResponse
+from canvas_lms_python_client.models.quizzes_quiz_submissions_time_response import QuizzesQuizSubmissionsTimeResponse
+from canvas_lms_python_client.models.quizzes_quiz_submissions_update_response import QuizzesQuizSubmissionsUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -1763,7 +1764,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> QuizzesQuizSubmissionsTimeResponse:
         """Get current quiz submission times.
 
         Get the current timing data for the quiz attempt, both the end_at timestamp and the time_left parameter.  <b>Responses</b>  * <b>200 OK</b> if the request was successful
@@ -1808,6 +1809,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionsTimeResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1837,7 +1839,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizzesQuizSubmissionsTimeResponse]:
         """Get current quiz submission times.
 
         Get the current timing data for the quiz attempt, both the end_at timestamp and the time_left parameter.  <b>Responses</b>  * <b>200 OK</b> if the request was successful
@@ -1882,6 +1884,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionsTimeResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1957,6 +1960,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionsTimeResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2054,7 +2058,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> QuizSubmissionsApiUpdateResponse:
+    ) -> QuizzesQuizSubmissionsUpdateResponse:
         """Update student question scores and comments.
 
         Update the amount of points a student has scored for questions they've answered, provide comments for the student about their answer(s), or simply fudge the total score by a specific amount of points.  <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>403 Forbidden</b> if you are not a teacher in this course * <b>400 Bad Request</b> if the attempt parameter is missing or invalid * <b>400 Bad Request</b> if the specified QS attempt is not yet complete
@@ -2102,7 +2106,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsApiUpdateResponse",
+            'default': "QuizzesQuizSubmissionsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2133,7 +2137,7 @@ class QuizSubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[QuizSubmissionsApiUpdateResponse]:
+    ) -> ApiResponse[QuizzesQuizSubmissionsUpdateResponse]:
         """Update student question scores and comments.
 
         Update the amount of points a student has scored for questions they've answered, provide comments for the student about their answer(s), or simply fudge the total score by a specific amount of points.  <b>Responses</b>  * <b>200 OK</b> if the request was successful * <b>403 Forbidden</b> if you are not a teacher in this course * <b>400 Bad Request</b> if the attempt parameter is missing or invalid * <b>400 Bad Request</b> if the specified QS attempt is not yet complete
@@ -2181,7 +2185,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsApiUpdateResponse",
+            'default': "QuizzesQuizSubmissionsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2261,7 +2265,7 @@ class QuizSubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "QuizSubmissionsApiUpdateResponse",
+            'default': "QuizzesQuizSubmissionsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

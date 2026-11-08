@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **results_index**
-> ResultsIndexResponse results_index(assessment_id, course_id, user_id=user_id)
+> ResultsIndexResponse results_index(assessment_id, course_id, user_id=user_id, page=page, per_page=per_page)
 
 List live assessment results
 
@@ -128,10 +128,12 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     assessment_id = 'assessment_id_example' # str | Scope response to assessment_id
     course_id = 'course_id_example' # str | Scope response to course_id
     user_id = 56 # int | If set, restrict results to those for this user (optional)
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # List live assessment results
-        api_response = await api_instance.results_index(assessment_id, course_id, user_id=user_id)
+        api_response = await api_instance.results_index(assessment_id, course_id, user_id=user_id, page=page, per_page=per_page)
         print("The response of ResultsApi->results_index:\n")
         pprint(api_response)
     except Exception as e:
@@ -148,6 +150,8 @@ Name | Type | Description  | Notes
  **assessment_id** | **str**| Scope response to assessment_id | 
  **course_id** | **str**| Scope response to course_id | 
  **user_id** | **int**| If set, restrict results to those for this user | [optional] 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 
@@ -166,7 +170,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List live assessment results |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

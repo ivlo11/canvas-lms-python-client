@@ -26,6 +26,8 @@ Name | Type | Description | Notes
 **developer_key_id** | **float** | The ID of the developer key that authorized the API request, if applicable | [optional] 
 **asset_user_access_id** | **float** | The ID of the asset (e.g. an assignment) associated with this page view, if applicable | [optional] 
 **links** | [**PageViewLinks**](PageViewLinks.md) |  | [optional] 
+**summarized** | **bool** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
 
 ## Example
 

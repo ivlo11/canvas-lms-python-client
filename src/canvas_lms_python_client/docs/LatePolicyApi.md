@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **late_policy_create**
-> late_policy_create(id, late_policy_create_request=late_policy_create_request)
+> LatePolicyCreateResponse late_policy_create(id, late_policy_create_request=late_policy_create_request)
 
 Create a late policy
 
@@ -25,6 +25,7 @@ per course.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.late_policy_create_request import LatePolicyCreateRequest
+from canvas_lms_python_client.models.late_policy_create_response import LatePolicyCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -53,7 +54,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a late policy
-        await api_instance.late_policy_create(id, late_policy_create_request=late_policy_create_request)
+        api_response = await api_instance.late_policy_create(id, late_policy_create_request=late_policy_create_request)
+        print("The response of LatePolicyApi->late_policy_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling LatePolicyApi->late_policy_create: %s\n" % e)
 ```
@@ -70,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**LatePolicyCreateResponse**](LatePolicyCreateResponse.md)
 
 ### Authorization
 
@@ -85,12 +88,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create a late policy |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **late_policy_show**
-> late_policy_show(id)
+> LatePolicyShowResponse late_policy_show(id)
 
 Get a late policy
 
@@ -102,6 +105,7 @@ Returns the late policy for a course.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.late_policy_show_response import LatePolicyShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -129,7 +133,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a late policy
-        await api_instance.late_policy_show(id)
+        api_response = await api_instance.late_policy_show(id)
+        print("The response of LatePolicyApi->late_policy_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling LatePolicyApi->late_policy_show: %s\n" % e)
 ```
@@ -145,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**LatePolicyShowResponse**](LatePolicyShowResponse.md)
 
 ### Authorization
 
@@ -160,7 +166,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a late policy |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

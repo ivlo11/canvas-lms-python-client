@@ -692,7 +692,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **master_templates_restrict_item**
-> master_templates_restrict_item(course_id, template_id, master_templates_restrict_item_request=master_templates_restrict_item_request)
+> MasterCoursesMasterTemplatesUpdateAssociationsResponse master_templates_restrict_item(course_id, template_id, master_templates_restrict_item_request=master_templates_restrict_item_request)
 
 Set or remove restrictions on a blueprint course object
 
@@ -704,6 +704,7 @@ If a blueprint course object is restricted, editing will be limited for copies i
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.master_courses_master_templates_update_associations_response import MasterCoursesMasterTemplatesUpdateAssociationsResponse
 from canvas_lms_python_client.models.master_templates_restrict_item_request import MasterTemplatesRestrictItemRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -734,7 +735,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Set or remove restrictions on a blueprint course object
-        await api_instance.master_templates_restrict_item(course_id, template_id, master_templates_restrict_item_request=master_templates_restrict_item_request)
+        api_response = await api_instance.master_templates_restrict_item(course_id, template_id, master_templates_restrict_item_request=master_templates_restrict_item_request)
+        print("The response of MasterTemplatesApi->master_templates_restrict_item:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling MasterTemplatesApi->master_templates_restrict_item: %s\n" % e)
 ```
@@ -752,7 +755,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**MasterCoursesMasterTemplatesUpdateAssociationsResponse**](MasterCoursesMasterTemplatesUpdateAssociationsResponse.md)
 
 ### Authorization
 
@@ -761,13 +764,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Set or remove restrictions on a blueprint course object |  -  |
+**0** | MasterCoursesMasterTemplatesUpdateAssociationsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1016,7 +1019,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **master_templates_update_associations**
-> master_templates_update_associations(course_id, template_id, master_templates_update_associations_request=master_templates_update_associations_request)
+> MasterCoursesMasterTemplatesUpdateAssociationsResponse master_templates_update_associations(course_id, template_id, master_templates_update_associations_request=master_templates_update_associations_request)
 
 Update associated courses
 
@@ -1032,6 +1035,7 @@ After associating new courses, {api:MasterCourses::MasterTemplatesController#que
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.master_courses_master_templates_update_associations_response import MasterCoursesMasterTemplatesUpdateAssociationsResponse
 from canvas_lms_python_client.models.master_templates_update_associations_request import MasterTemplatesUpdateAssociationsRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -1062,7 +1066,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update associated courses
-        await api_instance.master_templates_update_associations(course_id, template_id, master_templates_update_associations_request=master_templates_update_associations_request)
+        api_response = await api_instance.master_templates_update_associations(course_id, template_id, master_templates_update_associations_request=master_templates_update_associations_request)
+        print("The response of MasterTemplatesApi->master_templates_update_associations:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling MasterTemplatesApi->master_templates_update_associations: %s\n" % e)
 ```
@@ -1080,7 +1086,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**MasterCoursesMasterTemplatesUpdateAssociationsResponse**](MasterCoursesMasterTemplatesUpdateAssociationsResponse.md)
 
 ### Authorization
 
@@ -1089,13 +1095,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update associated courses |  -  |
+**0** | MasterCoursesMasterTemplatesUpdateAssociationsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

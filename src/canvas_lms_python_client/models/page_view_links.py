@@ -73,6 +73,26 @@ class PageViewLinks(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if context (nullable) is None
+        # and model_fields_set contains the field
+        if self.context is None and "context" in self.model_fields_set:
+            _dict['context'] = None
+
+        # set to None if asset (nullable) is None
+        # and model_fields_set contains the field
+        if self.asset is None and "asset" in self.model_fields_set:
+            _dict['asset'] = None
+
+        # set to None if real_user (nullable) is None
+        # and model_fields_set contains the field
+        if self.real_user is None and "real_user" in self.model_fields_set:
+            _dict['real_user'] = None
+
+        # set to None if account (nullable) is None
+        # and model_fields_set contains the field
+        if self.account is None and "account" in self.model_fields_set:
+            _dict['account'] = None
+
         return _dict
 
     @classmethod

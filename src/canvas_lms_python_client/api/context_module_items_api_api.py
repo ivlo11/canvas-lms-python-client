@@ -21,6 +21,8 @@ from typing_extensions import Annotated
 from canvas_lms_python_client.models.context_module_items_api_create_request import ContextModuleItemsApiCreateRequest
 from canvas_lms_python_client.models.context_module_items_api_select_mastery_path_request import ContextModuleItemsApiSelectMasteryPathRequest
 from canvas_lms_python_client.models.context_module_items_api_update_request import ContextModuleItemsApiUpdateRequest
+from canvas_lms_python_client.models.context_module_items_mark_as_done_response import ContextModuleItemsMarkAsDoneResponse
+from canvas_lms_python_client.models.context_module_items_select_mastery_path_response import ContextModuleItemsSelectMasteryPathResponse
 from canvas_lms_python_client.models.module_item import ModuleItem
 from canvas_lms_python_client.models.module_item_sequence import ModuleItemSequence
 
@@ -1584,7 +1586,7 @@ class ContextModuleItemsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ContextModuleItemsMarkAsDoneResponse:
         """Mark module item as done/not done
 
         Mark a module item as done/not done. Use HTTP method PUT to mark as done, and DELETE to mark as not done.
@@ -1629,6 +1631,7 @@ class ContextModuleItemsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContextModuleItemsMarkAsDoneResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1658,7 +1661,7 @@ class ContextModuleItemsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ContextModuleItemsMarkAsDoneResponse]:
         """Mark module item as done/not done
 
         Mark a module item as done/not done. Use HTTP method PUT to mark as done, and DELETE to mark as not done.
@@ -1703,6 +1706,7 @@ class ContextModuleItemsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContextModuleItemsMarkAsDoneResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1778,6 +1782,7 @@ class ContextModuleItemsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContextModuleItemsMarkAsDoneResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1824,6 +1829,13 @@ class ContextModuleItemsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1867,7 +1879,7 @@ class ContextModuleItemsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ContextModuleItemsMarkAsDoneResponse:
         """Mark module item read
 
         Fulfills \"must view\" requirement for a module item. It is generally not necessary to do this explicitly, but it is provided for applications that need to access external content directly (bypassing the html_url redirect that normally allows Canvas to fulfill \"must view\" requirements).  This endpoint cannot be used to complete requirements on locked or unpublished module items.
@@ -1912,6 +1924,7 @@ class ContextModuleItemsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContextModuleItemsMarkAsDoneResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1941,7 +1954,7 @@ class ContextModuleItemsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ContextModuleItemsMarkAsDoneResponse]:
         """Mark module item read
 
         Fulfills \"must view\" requirement for a module item. It is generally not necessary to do this explicitly, but it is provided for applications that need to access external content directly (bypassing the html_url redirect that normally allows Canvas to fulfill \"must view\" requirements).  This endpoint cannot be used to complete requirements on locked or unpublished module items.
@@ -1986,6 +1999,7 @@ class ContextModuleItemsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContextModuleItemsMarkAsDoneResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2061,6 +2075,7 @@ class ContextModuleItemsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContextModuleItemsMarkAsDoneResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2107,6 +2122,13 @@ class ContextModuleItemsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2151,7 +2173,7 @@ class ContextModuleItemsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ContextModuleItemsSelectMasteryPathResponse:
         """Select a mastery path
 
         Select a mastery path when module item includes several possible paths. Requires Mastery Paths feature to be enabled.  Returns a compound document with the assignments included in the given path and any module items related to those assignments
@@ -2199,6 +2221,7 @@ class ContextModuleItemsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContextModuleItemsSelectMasteryPathResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2229,7 +2252,7 @@ class ContextModuleItemsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ContextModuleItemsSelectMasteryPathResponse]:
         """Select a mastery path
 
         Select a mastery path when module item includes several possible paths. Requires Mastery Paths feature to be enabled.  Returns a compound document with the assignments included in the given path and any module items related to those assignments
@@ -2277,6 +2300,7 @@ class ContextModuleItemsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContextModuleItemsSelectMasteryPathResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2356,6 +2380,7 @@ class ContextModuleItemsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContextModuleItemsSelectMasteryPathResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2405,6 +2430,13 @@ class ContextModuleItemsApiApi:
             _body_params = context_module_items_api_select_mastery_path_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

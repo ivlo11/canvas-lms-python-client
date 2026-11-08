@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **new_activity** | **bool** | Whether the item has new or unread activity for the user | [optional] 
 **submissions** | **object** | false if the item has no associated assignment; otherwise the status of the user&#39;s submission, with submitted, excused, graded, posted_at, late, missing, needs_grading, has_feedback and redo_request | [optional] 
 **html_url** | **str** | The URL of the item in Canvas | [optional] 
+**account_id** | **int** |  | [optional] 
+**details** | **object** |  | [optional] 
 
 ## Example
 

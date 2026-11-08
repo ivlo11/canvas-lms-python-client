@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.lock_info_context_module import LockInfoContextModule
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -31,9 +32,11 @@ class LockInfo(BaseModel):
     asset_string: Optional[StrictStr] = Field(default=None, description="Asset string for the object causing the lock", json_schema_extra={"examples": ["assignment_4"]})
     unlock_at: Optional[datetime] = Field(default=None, description="(Optional) Time at which this was/will be unlocked. Must be before the due date.", json_schema_extra={"examples": ["2013-01-01T00:00:00-06:00"]})
     lock_at: Optional[datetime] = Field(default=None, description="(Optional) Time at which this was/will be locked. Must be after the due date.", json_schema_extra={"examples": ["2013-02-01T00:00:00-06:00"]})
-    context_module: Optional[StrictStr] = Field(default=None, description="(Optional) Context module causing the lock.", json_schema_extra={"examples": ["{}"]})
+    context_module: Optional[LockInfoContextModule] = None
     manually_locked: Optional[StrictBool] = Field(default=None, json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["asset_string", "unlock_at", "lock_at", "context_module", "manually_locked"]
+    can_view: Optional[StrictBool] = None
+    missing_permission: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["asset_string", "unlock_at", "lock_at", "context_module", "manually_locked", "can_view", "missing_permission"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -74,6 +77,9 @@ class LockInfo(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of context_module
+        if self.context_module:
+            _dict['context_module'] = self.context_module.to_dict()
         return _dict
 
     @classmethod
@@ -89,8 +95,10 @@ class LockInfo(BaseModel):
             "asset_string": obj.get("asset_string"),
             "unlock_at": obj.get("unlock_at"),
             "lock_at": obj.get("lock_at"),
-            "context_module": obj.get("context_module"),
-            "manually_locked": obj.get("manually_locked")
+            "context_module": LockInfoContextModule.from_dict(obj["context_module"]) if obj.get("context_module") is not None else None,
+            "manually_locked": obj.get("manually_locked"),
+            "can_view": obj.get("can_view"),
+            "missing_permission": obj.get("missing_permission")
         })
         return _obj
 

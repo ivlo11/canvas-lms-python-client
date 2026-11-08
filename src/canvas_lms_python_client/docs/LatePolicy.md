@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | the unique identifier for the late policy | [optional] 
-**course_id** | **int** | the unique identifier for the course | 
+**id** | [**LatePolicyId**](LatePolicyId.md) |  | [optional] 
+**course_id** | **int** | the unique identifier for the course | [optional] 
 **missing_submission_deduction_enabled** | **bool** | whether to enable missing submission deductions | [optional] 
 **missing_submission_deduction** | **float** | amount of percentage points to deduct | [optional] 
 **late_submission_deduction_enabled** | **bool** | whether to enable late submission deductions | [optional] 

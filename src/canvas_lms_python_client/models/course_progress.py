@@ -73,6 +73,16 @@ class CourseProgress(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if next_requirement_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.next_requirement_url is None and "next_requirement_url" in self.model_fields_set:
+            _dict['next_requirement_url'] = None
+
+        # set to None if completed_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.completed_at is None and "completed_at" in self.model_fields_set:
+            _dict['completed_at'] = None
+
         return _dict
 
     @classmethod

@@ -1,12 +1,15 @@
 # GradingPeriodsIndexResponse
 
-Paginated `grading_periods` list response (from the Canvas example response).
+Object response with `grading_periods`, `can_create_grading_periods`, `grading_periods_read_only`, `meta` (from the Canvas `@returns`).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **grading_periods** | [**List[GradingPeriod]**](GradingPeriod.md) |  | [optional] 
+**can_create_grading_periods** | **bool** |  | [optional] 
+**grading_periods_read_only** | **bool** |  | [optional] 
+**meta** | **object** |  | [optional] 
 
 ## Example
 

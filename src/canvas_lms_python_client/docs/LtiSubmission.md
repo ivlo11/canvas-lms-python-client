@@ -14,10 +14,11 @@ Name | Type | Description | Notes
 **submission_type** | **str** | The types of submission ex: (&#39;online_text_entry&#39;|&#39;online_url&#39;|&#39;online_upload&#39;|&#39;media_recording&#39;|&#39;student_annotation&#39;) | [optional] 
 **submitted_at** | **datetime** | The timestamp when the assignment was submitted | [optional] 
 **url** | **str** | The URL of the submission (for &#39;online_url&#39; submissions). | [optional] 
-**user_id** | **int** | The id of the user who created the submission | [optional] 
-**eula_agreement_timestamp** | **str** | UTC timestamp showing when the user agreed to the EULA (if given by the tool provider) | [optional] 
+**user_id** | [**LtiSubmissionUserId**](LtiSubmissionUserId.md) |  | [optional] 
+**eula_agreement_timestamp** | [**LtiSubmissionEulaAgreementTimestamp**](LtiSubmissionEulaAgreementTimestamp.md) |  | [optional] 
 **workflow_state** | **str** | The current state of the submission | [optional] 
-**attachments** | [**File**](File.md) |  | [optional] 
+**attachments** | [**List[File]**](File.md) | Files that are attached to the submission | [optional] 
+**id** | **int** |  | [optional] 
 
 ## Example
 

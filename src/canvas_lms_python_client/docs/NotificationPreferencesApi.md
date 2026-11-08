@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **notification_preferences_category_index**
-> notification_preferences_category_index(communication_channel_id, user_id)
+> NotificationPreferencesCategoryIndexResponse notification_preferences_category_index(communication_channel_id, user_id)
 
 List of preference categories
 
@@ -29,6 +29,7 @@ Fetch all notification preference categories for the given communication channel
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.notification_preferences_category_index_response import NotificationPreferencesCategoryIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -57,7 +58,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List of preference categories
-        await api_instance.notification_preferences_category_index(communication_channel_id, user_id)
+        api_response = await api_instance.notification_preferences_category_index(communication_channel_id, user_id)
+        print("The response of NotificationPreferencesApi->notification_preferences_category_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling NotificationPreferencesApi->notification_preferences_category_index: %s\n" % e)
 ```
@@ -74,7 +77,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**NotificationPreferencesCategoryIndexResponse**](NotificationPreferencesCategoryIndexResponse.md)
 
 ### Authorization
 
@@ -83,18 +86,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List of preference categories |  -  |
+**0** | NotificationPreferencesCategoryIndexResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notification_preferences_index**
-> List[NotificationPreference] notification_preferences_index(communication_channel_id, user_id)
+> NotificationPreferencesIndexResponse notification_preferences_index(communication_channel_id, user_id)
 
 List preferences
 
@@ -106,7 +109,7 @@ Fetch all preferences for the given communication channel
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.notification_preference import NotificationPreference
+from canvas_lms_python_client.models.notification_preferences_index_response import NotificationPreferencesIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -154,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[NotificationPreference]**](NotificationPreference.md)
+[**NotificationPreferencesIndexResponse**](NotificationPreferencesIndexResponse.md)
 
 ### Authorization
 
@@ -174,7 +177,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notification_preferences_index_for_users**
-> List[NotificationPreference] notification_preferences_index_for_users(address, type, user_id)
+> NotificationPreferencesIndexResponse notification_preferences_index_for_users(address, type, user_id)
 
 List preferences
 
@@ -186,7 +189,7 @@ Fetch all preferences for the given communication channel
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.notification_preference import NotificationPreference
+from canvas_lms_python_client.models.notification_preferences_index_response import NotificationPreferencesIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -236,7 +239,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[NotificationPreference]**](NotificationPreference.md)
+[**NotificationPreferencesIndexResponse**](NotificationPreferencesIndexResponse.md)
 
 ### Authorization
 
@@ -256,7 +259,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notification_preferences_show**
-> NotificationPreference notification_preferences_show(communication_channel_id, notification, user_id)
+> NotificationPreferencesShowResponse notification_preferences_show(communication_channel_id, notification, user_id)
 
 Get a preference
 
@@ -268,7 +271,7 @@ Fetch the preference for the given notification for the given communication chan
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.notification_preference import NotificationPreference
+from canvas_lms_python_client.models.notification_preferences_show_response import NotificationPreferencesShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -318,7 +321,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NotificationPreference**](NotificationPreference.md)
+[**NotificationPreferencesShowResponse**](NotificationPreferencesShowResponse.md)
 
 ### Authorization
 
@@ -333,12 +336,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | NotificationPreference |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notification_preferences_show_for_users**
-> NotificationPreference notification_preferences_show_for_users(address, notification, type, user_id)
+> NotificationPreferencesShowResponse notification_preferences_show_for_users(address, notification, type, user_id)
 
 Get a preference
 
@@ -350,7 +353,7 @@ Fetch the preference for the given notification for the given communication chan
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.notification_preference import NotificationPreference
+from canvas_lms_python_client.models.notification_preferences_show_response import NotificationPreferencesShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -402,7 +405,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**NotificationPreference**](NotificationPreference.md)
+[**NotificationPreferencesShowResponse**](NotificationPreferencesShowResponse.md)
 
 ### Authorization
 
@@ -417,12 +420,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | NotificationPreference |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notification_preferences_update**
-> notification_preferences_update(communication_channel_id, notification, notification_preferences_update_request=notification_preferences_update_request)
+> NotificationPreferencesUpdateResponse notification_preferences_update(communication_channel_id, notification, notification_preferences_update_request=notification_preferences_update_request)
 
 Update a preference
 
@@ -435,6 +438,7 @@ Change the preference for a single notification for a single communication chann
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.notification_preferences_update_request import NotificationPreferencesUpdateRequest
+from canvas_lms_python_client.models.notification_preferences_update_response import NotificationPreferencesUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -464,7 +468,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a preference
-        await api_instance.notification_preferences_update(communication_channel_id, notification, notification_preferences_update_request=notification_preferences_update_request)
+        api_response = await api_instance.notification_preferences_update(communication_channel_id, notification, notification_preferences_update_request=notification_preferences_update_request)
+        print("The response of NotificationPreferencesApi->notification_preferences_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling NotificationPreferencesApi->notification_preferences_update: %s\n" % e)
 ```
@@ -482,7 +488,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**NotificationPreferencesUpdateResponse**](NotificationPreferencesUpdateResponse.md)
 
 ### Authorization
 
@@ -491,18 +497,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update a preference |  -  |
+**0** | NotificationPreferencesUpdateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notification_preferences_update_all**
-> notification_preferences_update_all(communication_channel_id, notification_preferences_update_all_request=notification_preferences_update_all_request)
+> NotificationPreferencesUpdateResponse notification_preferences_update_all(communication_channel_id, notification_preferences_update_all_request=notification_preferences_update_all_request)
 
 Update multiple preferences
 
@@ -515,6 +521,7 @@ Change the preferences for multiple notifications for a single communication cha
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.notification_preferences_update_all_request import NotificationPreferencesUpdateAllRequest
+from canvas_lms_python_client.models.notification_preferences_update_response import NotificationPreferencesUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -543,7 +550,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update multiple preferences
-        await api_instance.notification_preferences_update_all(communication_channel_id, notification_preferences_update_all_request=notification_preferences_update_all_request)
+        api_response = await api_instance.notification_preferences_update_all(communication_channel_id, notification_preferences_update_all_request=notification_preferences_update_all_request)
+        print("The response of NotificationPreferencesApi->notification_preferences_update_all:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling NotificationPreferencesApi->notification_preferences_update_all: %s\n" % e)
 ```
@@ -560,7 +569,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**NotificationPreferencesUpdateResponse**](NotificationPreferencesUpdateResponse.md)
 
 ### Authorization
 
@@ -569,18 +578,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update multiple preferences |  -  |
+**0** | NotificationPreferencesUpdateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notification_preferences_update_all_for_self**
-> notification_preferences_update_all_for_self(address, type, notification_preferences_update_all_request=notification_preferences_update_all_request)
+> NotificationPreferencesUpdateResponse notification_preferences_update_all_for_self(address, type, notification_preferences_update_all_request=notification_preferences_update_all_request)
 
 Update multiple preferences
 
@@ -593,6 +602,7 @@ Change the preferences for multiple notifications for a single communication cha
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.notification_preferences_update_all_request import NotificationPreferencesUpdateAllRequest
+from canvas_lms_python_client.models.notification_preferences_update_response import NotificationPreferencesUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -622,7 +632,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update multiple preferences
-        await api_instance.notification_preferences_update_all_for_self(address, type, notification_preferences_update_all_request=notification_preferences_update_all_request)
+        api_response = await api_instance.notification_preferences_update_all_for_self(address, type, notification_preferences_update_all_request=notification_preferences_update_all_request)
+        print("The response of NotificationPreferencesApi->notification_preferences_update_all_for_self:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling NotificationPreferencesApi->notification_preferences_update_all_for_self: %s\n" % e)
 ```
@@ -640,7 +652,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**NotificationPreferencesUpdateResponse**](NotificationPreferencesUpdateResponse.md)
 
 ### Authorization
 
@@ -649,18 +661,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update multiple preferences |  -  |
+**0** | NotificationPreferencesUpdateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notification_preferences_update_for_self**
-> notification_preferences_update_for_self(address, notification, type, notification_preferences_update_request=notification_preferences_update_request)
+> NotificationPreferencesUpdateResponse notification_preferences_update_for_self(address, notification, type, notification_preferences_update_request=notification_preferences_update_request)
 
 Update a preference
 
@@ -673,6 +685,7 @@ Change the preference for a single notification for a single communication chann
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.notification_preferences_update_request import NotificationPreferencesUpdateRequest
+from canvas_lms_python_client.models.notification_preferences_update_response import NotificationPreferencesUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -703,7 +716,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a preference
-        await api_instance.notification_preferences_update_for_self(address, notification, type, notification_preferences_update_request=notification_preferences_update_request)
+        api_response = await api_instance.notification_preferences_update_for_self(address, notification, type, notification_preferences_update_request=notification_preferences_update_request)
+        print("The response of NotificationPreferencesApi->notification_preferences_update_for_self:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling NotificationPreferencesApi->notification_preferences_update_for_self: %s\n" % e)
 ```
@@ -722,7 +737,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**NotificationPreferencesUpdateResponse**](NotificationPreferencesUpdateResponse.md)
 
 ### Authorization
 
@@ -731,18 +746,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update a preference |  -  |
+**0** | NotificationPreferencesUpdateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **notification_preferences_update_preferences_by_category**
-> notification_preferences_update_preferences_by_category(category, communication_channel_id, notification_preferences_update_preferences_by_category_request=notification_preferences_update_preferences_by_category_request)
+> NotificationPreferencesUpdateResponse notification_preferences_update_preferences_by_category(category, communication_channel_id, notification_preferences_update_preferences_by_category_request=notification_preferences_update_preferences_by_category_request)
 
 Update preferences by category
 
@@ -755,6 +770,7 @@ Change the preferences for multiple notifications based on the category for a si
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.notification_preferences_update_preferences_by_category_request import NotificationPreferencesUpdatePreferencesByCategoryRequest
+from canvas_lms_python_client.models.notification_preferences_update_response import NotificationPreferencesUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -784,7 +800,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update preferences by category
-        await api_instance.notification_preferences_update_preferences_by_category(category, communication_channel_id, notification_preferences_update_preferences_by_category_request=notification_preferences_update_preferences_by_category_request)
+        api_response = await api_instance.notification_preferences_update_preferences_by_category(category, communication_channel_id, notification_preferences_update_preferences_by_category_request=notification_preferences_update_preferences_by_category_request)
+        print("The response of NotificationPreferencesApi->notification_preferences_update_preferences_by_category:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling NotificationPreferencesApi->notification_preferences_update_preferences_by_category: %s\n" % e)
 ```
@@ -802,7 +820,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**NotificationPreferencesUpdateResponse**](NotificationPreferencesUpdateResponse.md)
 
 ### Authorization
 
@@ -811,13 +829,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update preferences by category |  -  |
+**0** | NotificationPreferencesUpdateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

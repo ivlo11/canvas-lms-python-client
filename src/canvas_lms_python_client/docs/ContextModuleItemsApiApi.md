@@ -354,7 +354,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **context_module_items_api_mark_as_done**
-> context_module_items_api_mark_as_done(course_id, id, module_id)
+> ContextModuleItemsMarkAsDoneResponse context_module_items_api_mark_as_done(course_id, id, module_id)
 
 Mark module item as done/not done
 
@@ -367,6 +367,7 @@ and DELETE to mark as not done.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.context_module_items_mark_as_done_response import ContextModuleItemsMarkAsDoneResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -396,7 +397,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Mark module item as done/not done
-        await api_instance.context_module_items_api_mark_as_done(course_id, id, module_id)
+        api_response = await api_instance.context_module_items_api_mark_as_done(course_id, id, module_id)
+        print("The response of ContextModuleItemsApiApi->context_module_items_api_mark_as_done:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ContextModuleItemsApiApi->context_module_items_api_mark_as_done: %s\n" % e)
 ```
@@ -414,7 +417,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ContextModuleItemsMarkAsDoneResponse**](ContextModuleItemsMarkAsDoneResponse.md)
 
 ### Authorization
 
@@ -423,18 +426,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Mark module item as done/not done |  -  |
+**0** | ContextModuleItemsMarkAsDoneResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **context_module_items_api_mark_item_read**
-> context_module_items_api_mark_item_read(course_id, id, module_id)
+> ContextModuleItemsMarkAsDoneResponse context_module_items_api_mark_item_read(course_id, id, module_id)
 
 Mark module item read
 
@@ -450,6 +453,7 @@ This endpoint cannot be used to complete requirements on locked or unpublished m
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.context_module_items_mark_as_done_response import ContextModuleItemsMarkAsDoneResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -479,7 +483,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Mark module item read
-        await api_instance.context_module_items_api_mark_item_read(course_id, id, module_id)
+        api_response = await api_instance.context_module_items_api_mark_item_read(course_id, id, module_id)
+        print("The response of ContextModuleItemsApiApi->context_module_items_api_mark_item_read:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ContextModuleItemsApiApi->context_module_items_api_mark_item_read: %s\n" % e)
 ```
@@ -497,7 +503,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ContextModuleItemsMarkAsDoneResponse**](ContextModuleItemsMarkAsDoneResponse.md)
 
 ### Authorization
 
@@ -506,18 +512,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Mark module item read |  -  |
+**0** | ContextModuleItemsMarkAsDoneResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **context_module_items_api_select_mastery_path**
-> context_module_items_api_select_mastery_path(course_id, id, module_id, context_module_items_api_select_mastery_path_request=context_module_items_api_select_mastery_path_request)
+> ContextModuleItemsSelectMasteryPathResponse context_module_items_api_select_mastery_path(course_id, id, module_id, context_module_items_api_select_mastery_path_request=context_module_items_api_select_mastery_path_request)
 
 Select a mastery path
 
@@ -533,6 +539,7 @@ related to those assignments
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.context_module_items_api_select_mastery_path_request import ContextModuleItemsApiSelectMasteryPathRequest
+from canvas_lms_python_client.models.context_module_items_select_mastery_path_response import ContextModuleItemsSelectMasteryPathResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -563,7 +570,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Select a mastery path
-        await api_instance.context_module_items_api_select_mastery_path(course_id, id, module_id, context_module_items_api_select_mastery_path_request=context_module_items_api_select_mastery_path_request)
+        api_response = await api_instance.context_module_items_api_select_mastery_path(course_id, id, module_id, context_module_items_api_select_mastery_path_request=context_module_items_api_select_mastery_path_request)
+        print("The response of ContextModuleItemsApiApi->context_module_items_api_select_mastery_path:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ContextModuleItemsApiApi->context_module_items_api_select_mastery_path: %s\n" % e)
 ```
@@ -582,7 +591,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ContextModuleItemsSelectMasteryPathResponse**](ContextModuleItemsSelectMasteryPathResponse.md)
 
 ### Authorization
 
@@ -591,13 +600,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Select a mastery path |  -  |
+**0** | ContextModuleItemsSelectMasteryPathResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

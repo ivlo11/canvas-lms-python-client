@@ -21,6 +21,8 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.outcome_import_data import OutcomeImportData
+from canvas_lms_python_client.models.outcome_import_processing_errors_inner import OutcomeImportProcessingErrorsInner
+from canvas_lms_python_client.models.outcome_import_progress import OutcomeImportProgress
 from canvas_lms_python_client.models.user import User
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,9 +39,9 @@ class OutcomeImport(BaseModel):
     updated_at: Optional[datetime] = Field(default=None, description="The date the outcome import was last updated.", json_schema_extra={"examples": ["2013-12-02T00:03:21-06:00"]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="The current state of the outcome import.  - 'created': The outcome import has been created.  - 'importing': The outcome import is currently processing.  - 'succeeded': The outcome import has completed successfully.  - 'failed': The outcome import failed.", json_schema_extra={"examples": ["imported"]})
     data: Optional[OutcomeImportData] = None
-    progress: Optional[StrictStr] = Field(default=None, description="The progress of the outcome import.", json_schema_extra={"examples": ["100"]})
+    progress: Optional[OutcomeImportProgress] = None
     user: Optional[User] = None
-    processing_errors: Optional[List[List[Dict[str, Any]]]] = Field(default=None, description="An array of row number / error message pairs. Returns the first 25 errors.", json_schema_extra={"examples": [[[1, "Missing required fields: title"]]]})
+    processing_errors: Optional[List[Optional[OutcomeImportProcessingErrorsInner]]] = Field(default=None, description="An array of row number / error message pairs. Returns the first 25 errors.", json_schema_extra={"examples": [[[1, "Missing required fields: title"]]]})
     __properties: ClassVar[List[str]] = ["id", "learning_outcome_group_id", "created_at", "ended_at", "updated_at", "workflow_state", "data", "progress", "user", "processing_errors"]
 
     @field_validator('workflow_state')
@@ -94,9 +96,33 @@ class OutcomeImport(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
             _dict['data'] = self.data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of progress
+        if self.progress:
+            _dict['progress'] = self.progress.to_dict()
         # override the default output from pydantic by calling `to_dict()` of user
         if self.user:
             _dict['user'] = self.user.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in processing_errors (list)
+        _items = []
+        if self.processing_errors:
+            for _item_processing_errors in self.processing_errors:
+                _items.append(_item_processing_errors.to_dict() if _item_processing_errors is not None else None)
+            _dict['processing_errors'] = _items
+        # set to None if ended_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.ended_at is None and "ended_at" in self.model_fields_set:
+            _dict['ended_at'] = None
+
+        # set to None if progress (nullable) is None
+        # and model_fields_set contains the field
+        if self.progress is None and "progress" in self.model_fields_set:
+            _dict['progress'] = None
+
+        # set to None if processing_errors (nullable) is None
+        # and model_fields_set contains the field
+        if self.processing_errors is None and "processing_errors" in self.model_fields_set:
+            _dict['processing_errors'] = None
+
         return _dict
 
     @classmethod
@@ -116,9 +142,9 @@ class OutcomeImport(BaseModel):
             "updated_at": obj.get("updated_at"),
             "workflow_state": obj.get("workflow_state"),
             "data": OutcomeImportData.from_dict(obj["data"]) if obj.get("data") is not None else None,
-            "progress": obj.get("progress"),
+            "progress": OutcomeImportProgress.from_dict(obj["progress"]) if obj.get("progress") is not None else None,
             "user": User.from_dict(obj["user"]) if obj.get("user") is not None else None,
-            "processing_errors": obj.get("processing_errors")
+            "processing_errors": [OutcomeImportProcessingErrorsInner.from_dict(_item) for _item in obj["processing_errors"]] if obj.get("processing_errors") is not None else None
         })
         return _obj
 

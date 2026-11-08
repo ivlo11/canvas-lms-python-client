@@ -9,6 +9,11 @@ Name | Type | Description | Notes
 **import_type** | **str** | The type of SIS import | [optional] 
 **supplied_batches** | **List[str]** | Which files were included in the SIS import | [optional] 
 **counts** | [**SisImportCounts**](SisImportCounts.md) |  | [optional] 
+**completed_importers** | **List[str]** |  | [optional] 
+**diffed_attachment_ids** | **List[int]** |  | [optional] 
+**downloadable_attachment_ids** | **List[int]** |  | [optional] 
+**running_immediately** | **bool** |  | [optional] 
+**statistics** | **object** |  | [optional] 
 
 ## Example
 

@@ -29,7 +29,7 @@ class OutcomeRollup(BaseModel):
     """
     
     """ # noqa: E501
-    scores: Optional[OutcomeRollupScore] = None
+    scores: Optional[List[OutcomeRollupScore]] = Field(default=None, description="an array of OutcomeRollupScore objects")
     name: Optional[StrictStr] = Field(default=None, description="The name of the resource for this rollup. For example, the user name.", json_schema_extra={"examples": ["John Doe"]})
     links: Optional[OutcomeRollupLinks] = None
     __properties: ClassVar[List[str]] = ["scores", "name", "links"]
@@ -73,9 +73,12 @@ class OutcomeRollup(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of scores
+        # override the default output from pydantic by calling `to_dict()` of each item in scores (list)
+        _items = []
         if self.scores:
-            _dict['scores'] = self.scores.to_dict()
+            for _item_scores in self.scores:
+                _items.append(_item_scores.to_dict() if _item_scores is not None else None)
+            _dict['scores'] = _items
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             _dict['links'] = self.links.to_dict()
@@ -91,7 +94,7 @@ class OutcomeRollup(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "scores": OutcomeRollupScore.from_dict(obj["scores"]) if obj.get("scores") is not None else None,
+            "scores": [OutcomeRollupScore.from_dict(_item) for _item in obj["scores"]] if obj.get("scores") is not None else None,
             "name": obj.get("name"),
             "links": OutcomeRollupLinks.from_dict(obj["links"]) if obj.get("links") is not None else None
         })

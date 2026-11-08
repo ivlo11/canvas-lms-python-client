@@ -39,7 +39,8 @@ class Role(BaseModel):
     created_at: Optional[datetime] = Field(default=None, description="The date and time the role was created.", json_schema_extra={"examples": ["2020-12-01T16:20:00-06:00"]})
     last_updated_at: Optional[datetime] = Field(default=None, description="The date and time the role was last updated.", json_schema_extra={"examples": ["2023-10-31T23:59:00-06:00"]})
     permissions: Optional[Dict[str, Any]] = Field(default=None, description="A dictionary of permissions keyed by name (see 'List assignable permissions' API).", json_schema_extra={"examples": [{"read_course_content": {"enabled": True, "locked": False, "readonly": False, "explicit": True, "prior_default": False}, "read_course_list": {"enabled": True, "locked": True, "readonly": True, "explicit": False}, "read_question_banks": {"enabled": False, "locked": True, "readonly": False, "explicit": True, "prior_default": False}, "read_reports": {"enabled": True, "locked": False, "readonly": False, "explicit": False}}]})
-    __properties: ClassVar[List[str]] = ["id", "label", "role", "base_role_type", "is_account_role", "account", "workflow_state", "created_at", "last_updated_at", "permissions"]
+    base_role_type_label: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "label", "role", "base_role_type", "is_account_role", "account", "workflow_state", "created_at", "last_updated_at", "permissions", "base_role_type_label"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -104,7 +105,8 @@ class Role(BaseModel):
             "workflow_state": obj.get("workflow_state"),
             "created_at": obj.get("created_at"),
             "last_updated_at": obj.get("last_updated_at"),
-            "permissions": obj.get("permissions")
+            "permissions": obj.get("permissions"),
+            "base_role_type_label": obj.get("base_role_type_label")
         })
         return _obj
 

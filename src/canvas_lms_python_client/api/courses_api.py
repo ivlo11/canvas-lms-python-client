@@ -20,12 +20,20 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.course import Course
 from canvas_lms_python_client.models.course_progress import CourseProgress
+from canvas_lms_python_client.models.courses_activity_stream_summary_response import CoursesActivityStreamSummaryResponse
+from canvas_lms_python_client.models.courses_api_settings_response import CoursesApiSettingsResponse
 from canvas_lms_python_client.models.courses_batch_update_request import CoursesBatchUpdateRequest
+from canvas_lms_python_client.models.courses_create_file_response import CoursesCreateFileResponse
 from canvas_lms_python_client.models.courses_create_request import CoursesCreateRequest
+from canvas_lms_python_client.models.courses_destroy_response import CoursesDestroyResponse
+from canvas_lms_python_client.models.courses_dismiss_migration_limitation_msg_response import CoursesDismissMigrationLimitationMsgResponse
+from canvas_lms_python_client.models.courses_permissions_response import CoursesPermissionsResponse
 from canvas_lms_python_client.models.courses_preview_html_request import CoursesPreviewHtmlRequest
+from canvas_lms_python_client.models.courses_preview_html_response import CoursesPreviewHtmlResponse
 from canvas_lms_python_client.models.courses_update_request import CoursesUpdateRequest
 from canvas_lms_python_client.models.courses_update_settings_request import CoursesUpdateSettingsRequest
 from canvas_lms_python_client.models.progress import Progress
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.models.todo_item import TodoItem
 from canvas_lms_python_client.models.user import User
 from canvas_lms_python_client.models.user_progress import UserProgress
@@ -53,6 +61,8 @@ class CoursesApi:
     async def courses_activity_stream(
         self,
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -65,13 +75,18 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+        _page_url: Optional[StrictStr] = None,
+    ) -> List[Submission]:
         """Course activity stream
 
         Returns the current user's course-specific activity stream, paginated.  For full documentation, see the API documentation for the user activity stream, in the user api.
 
         :param course_id: Scope response to course_id (required)
         :type course_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -91,19 +106,28 @@ class CoursesApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._courses_activity_stream_serialize(
             course_id=course_id,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -115,10 +139,13 @@ class CoursesApi:
             response_types_map=_response_types_map,
         ).data
 
+
     @validate_call
-    async def courses_activity_stream_with_http_info(
+    async def courses_activity_stream_paginated(
         self,
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -131,13 +158,18 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+        _page_url: Optional[StrictStr] = None,
+    ) -> AsyncIterator[List[Submission]]:
         """Course activity stream
 
         Returns the current user's course-specific activity stream, paginated.  For full documentation, see the API documentation for the user activity stream, in the user api.
 
         :param course_id: Scope response to course_id (required)
         :type course_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -157,19 +189,237 @@ class CoursesApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._courses_activity_stream_serialize(
             course_id=course_id,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout,
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            yield _page_data
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+
+    @validate_call
+    async def courses_activity_stream_all(
+        self,
+        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> AsyncIterator[Submission]:
+        """Course activity stream
+
+        Returns the current user's course-specific activity stream, paginated.  For full documentation, see the API documentation for the user activity stream, in the user api.
+
+        :param course_id: Scope response to course_id (required)
+        :type course_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._courses_activity_stream_serialize(
+            course_id=course_id,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            for _item in _page_data:
+                yield _item
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def courses_activity_stream_with_http_info(
+        self,
+        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[List[Submission]]:
+        """Course activity stream
+
+        Returns the current user's course-specific activity stream, paginated.  For full documentation, see the API documentation for the user activity stream, in the user api.
+
+        :param course_id: Scope response to course_id (required)
+        :type course_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._courses_activity_stream_serialize(
+            course_id=course_id,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -186,6 +436,8 @@ class CoursesApi:
     async def courses_activity_stream_without_preload_content(
         self,
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -198,6 +450,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
     ) -> RESTResponseType:
         """Course activity stream
 
@@ -205,6 +458,10 @@ class CoursesApi:
 
         :param course_id: Scope response to course_id (required)
         :type course_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -224,19 +481,28 @@ class CoursesApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._courses_activity_stream_serialize(
             course_id=course_id,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Submission]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -248,6 +514,8 @@ class CoursesApi:
     def _courses_activity_stream_serialize(
         self,
         course_id,
+        page,
+        per_page,
         _request_auth,
         _content_type,
         _headers,
@@ -272,11 +540,26 @@ class CoursesApi:
         if course_id is not None:
             _path_params['course_id'] = course_id
         # process the query parameters
+        if page is not None:
+            
+            _query_params.append(('page', page))
+            
+        if per_page is not None:
+            
+            _query_params.append(('per_page', per_page))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -318,7 +601,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[CoursesActivityStreamSummaryResponse]:
         """Course activity stream summary
 
         Returns a summary of the current user's course-specific activity stream.  For full documentation, see the API documentation for the user activity stream summary, in the user api.
@@ -357,6 +640,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CoursesActivityStreamSummaryResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -384,7 +668,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[CoursesActivityStreamSummaryResponse]]:
         """Course activity stream summary
 
         Returns a summary of the current user's course-specific activity stream.  For full documentation, see the API documentation for the user activity stream summary, in the user api.
@@ -423,6 +707,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CoursesActivityStreamSummaryResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -490,6 +775,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CoursesActivityStreamSummaryResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -530,6 +816,13 @@ class CoursesApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -571,7 +864,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CoursesApiSettingsResponse:
         """Get course settings
 
         Returns some of a course's settings.
@@ -610,6 +903,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesApiSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -637,7 +931,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CoursesApiSettingsResponse]:
         """Get course settings
 
         Returns some of a course's settings.
@@ -676,6 +970,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesApiSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -743,6 +1038,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesApiSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2494,7 +2790,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CoursesCreateFileResponse:
         """Upload a file
 
         Upload a file to the course.  This API endpoint is the first step in uploading a file to a course. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  Only those with the \"Manage Files\" permission on a course can upload files to the course. By default, this is Teachers, TAs and Designers.
@@ -2533,6 +2829,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2560,7 +2857,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CoursesCreateFileResponse]:
         """Upload a file
 
         Upload a file to the course.  This API endpoint is the first step in uploading a file to a course. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  Only those with the \"Manage Files\" permission on a course can upload files to the course. By default, this is Teachers, TAs and Designers.
@@ -2599,6 +2896,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2666,6 +2964,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2706,6 +3005,13 @@ class CoursesApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -2748,7 +3054,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CoursesDestroyResponse:
         """Delete/Conclude a course
 
         Delete or conclude an existing course
@@ -2790,6 +3096,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2818,7 +3125,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CoursesDestroyResponse]:
         """Delete/Conclude a course
 
         Delete or conclude an existing course
@@ -2860,6 +3167,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2931,6 +3239,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3024,7 +3333,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CoursesDismissMigrationLimitationMsgResponse:
         """Remove quiz migration alert
 
         Remove alert about the limitations of quiz migrations that is displayed to a user in a course  you must be logged in to use this endpoint
@@ -3063,6 +3372,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesDismissMigrationLimitationMsgResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3090,7 +3400,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CoursesDismissMigrationLimitationMsgResponse]:
         """Remove quiz migration alert
 
         Remove alert about the limitations of quiz migrations that is displayed to a user in a course  you must be logged in to use this endpoint
@@ -3129,6 +3439,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesDismissMigrationLimitationMsgResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3196,6 +3507,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesDismissMigrationLimitationMsgResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4245,7 +4557,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CoursesPermissionsResponse:
         """Permissions
 
         Returns permission information for the calling user in the given course. See also the {api:AccountsController#permissions Account} and {api:GroupsController#permissions Group} counterparts.
@@ -4287,6 +4599,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesPermissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4315,7 +4628,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CoursesPermissionsResponse]:
         """Permissions
 
         Returns permission information for the calling user in the given course. See also the {api:AccountsController#permissions Account} and {api:GroupsController#permissions Group} counterparts.
@@ -4357,6 +4670,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesPermissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4428,6 +4742,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesPermissionsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4523,7 +4838,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CoursesPreviewHtmlResponse:
         """Preview processed html
 
         Preview html content processed for this course
@@ -4565,6 +4880,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesPreviewHtmlResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4593,7 +4909,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CoursesPreviewHtmlResponse]:
         """Preview processed html
 
         Preview html content processed for this course
@@ -4635,6 +4951,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesPreviewHtmlResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4706,6 +5023,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesPreviewHtmlResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7545,7 +7863,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Course:
         """Update a course
 
         Update an existing course.  Arguments are the same as Courses#create, with a few exceptions (enroll_me).  If a user has content management rights, but not full course editing rights, the only attribute editable through this endpoint will be \"syllabus_body\"  If an account has set prevent_course_availability_editing_by_teachers, a teacher cannot change +course[start_at]+, +course[conclude_at]+, or +course[restrict_enrollments_to_course_dates]+ here.
@@ -7587,6 +7905,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Course",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7615,7 +7934,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Course]:
         """Update a course
 
         Update an existing course.  Arguments are the same as Courses#create, with a few exceptions (enroll_me).  If a user has content management rights, but not full course editing rights, the only attribute editable through this endpoint will be \"syllabus_body\"  If an account has set prevent_course_availability_editing_by_teachers, a teacher cannot change +course[start_at]+, +course[conclude_at]+, or +course[restrict_enrollments_to_course_dates]+ here.
@@ -7657,6 +7976,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Course",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7728,6 +8048,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Course",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7833,7 +8154,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CoursesApiSettingsResponse:
         """Update course settings
 
         Can update the following course settings:
@@ -7875,6 +8196,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesApiSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7903,7 +8225,7 @@ class CoursesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CoursesApiSettingsResponse]:
         """Update course settings
 
         Can update the following course settings:
@@ -7945,6 +8267,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesApiSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8016,6 +8339,7 @@ class CoursesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CoursesApiSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8059,6 +8383,13 @@ class CoursesApi:
             _body_params = courses_update_settings_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

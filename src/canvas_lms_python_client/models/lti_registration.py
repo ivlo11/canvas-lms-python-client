@@ -50,7 +50,17 @@ class LtiRegistration(BaseModel):
     root_account_id: Optional[StrictInt] = Field(default=None, description="The Canvas id of the root account", json_schema_extra={"examples": [1]})
     account_binding: Optional[LtiRegistrationAccountBinding] = None
     configuration: Optional[LtiToolConfiguration] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "admin_nickname", "icon_url", "vendor", "account_id", "internal_service", "lock_deploying", "inherited", "template_registration_id", "lti_version", "dynamic_registration", "workflow_state", "created_at", "updated_at", "created_by", "updated_by", "root_account_id", "account_binding", "configuration"]
+    description: Optional[StrictStr] = None
+    developer_key_id: Optional[StrictInt] = None
+    dynamic_registration_url: Optional[Any] = None
+    ims_registration_id: Optional[StrictInt] = None
+    manual_configuration_id: Optional[StrictInt] = None
+    overlay: Optional[Dict[str, Any]] = None
+    pending_update: Optional[StrictStr] = None
+    reinstall_disabled: Optional[StrictBool] = None
+    overlaid_configuration: Optional[Dict[str, Any]] = None
+    overlaid_legacy_configuration: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "admin_nickname", "icon_url", "vendor", "account_id", "internal_service", "lock_deploying", "inherited", "template_registration_id", "lti_version", "dynamic_registration", "workflow_state", "created_at", "updated_at", "created_by", "updated_by", "root_account_id", "account_binding", "configuration", "description", "developer_key_id", "dynamic_registration_url", "ims_registration_id", "manual_configuration_id", "overlay", "pending_update", "reinstall_disabled", "overlaid_configuration", "overlaid_legacy_configuration"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -103,6 +113,61 @@ class LtiRegistration(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of configuration
         if self.configuration:
             _dict['configuration'] = self.configuration.to_dict()
+        # set to None if admin_nickname (nullable) is None
+        # and model_fields_set contains the field
+        if self.admin_nickname is None and "admin_nickname" in self.model_fields_set:
+            _dict['admin_nickname'] = None
+
+        # set to None if icon_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.icon_url is None and "icon_url" in self.model_fields_set:
+            _dict['icon_url'] = None
+
+        # set to None if vendor (nullable) is None
+        # and model_fields_set contains the field
+        if self.vendor is None and "vendor" in self.model_fields_set:
+            _dict['vendor'] = None
+
+        # set to None if template_registration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.template_registration_id is None and "template_registration_id" in self.model_fields_set:
+            _dict['template_registration_id'] = None
+
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if developer_key_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.developer_key_id is None and "developer_key_id" in self.model_fields_set:
+            _dict['developer_key_id'] = None
+
+        # set to None if dynamic_registration_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.dynamic_registration_url is None and "dynamic_registration_url" in self.model_fields_set:
+            _dict['dynamic_registration_url'] = None
+
+        # set to None if ims_registration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.ims_registration_id is None and "ims_registration_id" in self.model_fields_set:
+            _dict['ims_registration_id'] = None
+
+        # set to None if manual_configuration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.manual_configuration_id is None and "manual_configuration_id" in self.model_fields_set:
+            _dict['manual_configuration_id'] = None
+
+        # set to None if pending_update (nullable) is None
+        # and model_fields_set contains the field
+        if self.pending_update is None and "pending_update" in self.model_fields_set:
+            _dict['pending_update'] = None
+
+        # set to None if reinstall_disabled (nullable) is None
+        # and model_fields_set contains the field
+        if self.reinstall_disabled is None and "reinstall_disabled" in self.model_fields_set:
+            _dict['reinstall_disabled'] = None
+
         return _dict
 
     @classmethod
@@ -134,7 +199,17 @@ class LtiRegistration(BaseModel):
             "updated_by": LtiRegistrationCreatedBy.from_dict(obj["updated_by"]) if obj.get("updated_by") is not None else None,
             "root_account_id": obj.get("root_account_id"),
             "account_binding": LtiRegistrationAccountBinding.from_dict(obj["account_binding"]) if obj.get("account_binding") is not None else None,
-            "configuration": LtiToolConfiguration.from_dict(obj["configuration"]) if obj.get("configuration") is not None else None
+            "configuration": LtiToolConfiguration.from_dict(obj["configuration"]) if obj.get("configuration") is not None else None,
+            "description": obj.get("description"),
+            "developer_key_id": obj.get("developer_key_id"),
+            "dynamic_registration_url": obj.get("dynamic_registration_url"),
+            "ims_registration_id": obj.get("ims_registration_id"),
+            "manual_configuration_id": obj.get("manual_configuration_id"),
+            "overlay": obj.get("overlay"),
+            "pending_update": obj.get("pending_update"),
+            "reinstall_disabled": obj.get("reinstall_disabled"),
+            "overlaid_configuration": obj.get("overlaid_configuration"),
+            "overlaid_legacy_configuration": obj.get("overlaid_legacy_configuration")
         })
         return _obj
 

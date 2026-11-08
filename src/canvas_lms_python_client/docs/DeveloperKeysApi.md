@@ -256,7 +256,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **developer_keys_lookup_utids**
-> List[object] developer_keys_lookup_utids(account_id, redirect_uris, sources=sources)
+> DeveloperKeysLookupUtidsResponse developer_keys_lookup_utids(account_id, redirect_uris, sources=sources)
 
 Lookup LP API Registrations by Redirect URIs
 
@@ -269,6 +269,7 @@ for the given redirect URIs.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.developer_keys_lookup_utids_response import DeveloperKeysLookupUtidsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -318,7 +319,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**DeveloperKeysLookupUtidsResponse**](DeveloperKeysLookupUtidsResponse.md)
 
 ### Authorization
 

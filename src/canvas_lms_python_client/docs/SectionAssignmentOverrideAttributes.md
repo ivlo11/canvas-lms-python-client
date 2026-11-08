@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **due_at** | **datetime** | the due date for the assignment. returns null if not present. NOTE: If this assignment has assignment overrides, this field will be the due date as it applies to the user requesting information from the API. | [optional] 
 **unlock_at** | **datetime** | (Optional) Time at which this was/will be unlocked. | [optional] 
 **lock_at** | **datetime** | (Optional) Time at which this was/will be locked. | [optional] 
+**id** | **int** |  | [optional] 
 
 ## Example
 

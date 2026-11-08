@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **format** | **str** | The format that results will be returned in | 
 **results_url** | **str** | URL to retrieve query results. Only present when status is &#39;finished&#39; | [optional] 
 **error_code** | **str** | Error code indicating the reason for query failure, if applicable | [optional] 
+**warnings** | **List[object]** |  | [optional] 
 
 ## Example
 

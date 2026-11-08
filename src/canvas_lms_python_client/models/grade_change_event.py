@@ -88,6 +88,26 @@ class GradeChangeEvent(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             _dict['links'] = self.links.to_dict()
+        # set to None if grade_after (nullable) is None
+        # and model_fields_set contains the field
+        if self.grade_after is None and "grade_after" in self.model_fields_set:
+            _dict['grade_after'] = None
+
+        # set to None if grade_before (nullable) is None
+        # and model_fields_set contains the field
+        if self.grade_before is None and "grade_before" in self.model_fields_set:
+            _dict['grade_before'] = None
+
+        # set to None if points_possible_before (nullable) is None
+        # and model_fields_set contains the field
+        if self.points_possible_before is None and "points_possible_before" in self.model_fields_set:
+            _dict['points_possible_before'] = None
+
+        # set to None if points_possible_after (nullable) is None
+        # and model_fields_set contains the field
+        if self.points_possible_after is None and "points_possible_after" in self.model_fields_set:
+            _dict['points_possible_after'] = None
+
         return _dict
 
     @classmethod

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.grading_period import GradingPeriod
 from typing import Optional, Set
@@ -26,10 +26,13 @@ from pydantic_core import to_jsonable_python
 
 class GradingPeriodsIndexResponse(BaseModel):
     """
-    Paginated `grading_periods` list response (from the Canvas example response).
+    Object response with `grading_periods`, `can_create_grading_periods`, `grading_periods_read_only`, `meta` (from the Canvas `@returns`).
     """ # noqa: E501
     grading_periods: Optional[List[GradingPeriod]] = None
-    __properties: ClassVar[List[str]] = ["grading_periods"]
+    can_create_grading_periods: Optional[StrictBool] = None
+    grading_periods_read_only: Optional[StrictBool] = None
+    meta: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["grading_periods", "can_create_grading_periods", "grading_periods_read_only", "meta"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,7 +91,10 @@ class GradingPeriodsIndexResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "grading_periods": [GradingPeriod.from_dict(_item) for _item in obj["grading_periods"]] if obj.get("grading_periods") is not None else None
+            "grading_periods": [GradingPeriod.from_dict(_item) for _item in obj["grading_periods"]] if obj.get("grading_periods") is not None else None,
+            "can_create_grading_periods": obj.get("can_create_grading_periods"),
+            "grading_periods_read_only": obj.get("grading_periods_read_only"),
+            "meta": obj.get("meta")
         })
         return _obj
 

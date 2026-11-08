@@ -16,8 +16,8 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.accessibility_resource_scan import AccessibilityResourceScan
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -54,7 +54,7 @@ class SyllabusApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> AccessibilityResourceScan:
         """Queue syllabus accessibility scan
 
         Queues a course syllabus for accessibility scanning.
@@ -93,7 +93,7 @@ class SyllabusApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AccessibilityResourceScan",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -121,7 +121,7 @@ class SyllabusApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[AccessibilityResourceScan]:
         """Queue syllabus accessibility scan
 
         Queues a course syllabus for accessibility scanning.
@@ -160,7 +160,7 @@ class SyllabusApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AccessibilityResourceScan",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -228,7 +228,7 @@ class SyllabusApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AccessibilityResourceScan",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -317,7 +317,7 @@ class SyllabusApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> AccessibilityResourceScan:
         """Scan syllabus for accessibility issues
 
         Scans a course syllabus for accessibility issues and returns the results.
@@ -356,7 +356,7 @@ class SyllabusApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AccessibilityResourceScan",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -384,7 +384,7 @@ class SyllabusApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[AccessibilityResourceScan]:
         """Scan syllabus for accessibility issues
 
         Scans a course syllabus for accessibility issues and returns the results.
@@ -423,7 +423,7 @@ class SyllabusApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AccessibilityResourceScan",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -491,7 +491,7 @@ class SyllabusApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AccessibilityResourceScan",
         }
         response_data = await self.api_client.call_api(
             *_param,

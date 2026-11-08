@@ -324,6 +324,8 @@ class ResultsApi:
         assessment_id: Annotated[StrictStr, Field(description="Scope response to assessment_id")],
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
         user_id: Annotated[Optional[StrictInt], Field(description="If set, restrict results to those for this user")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -336,6 +338,7 @@ class ResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
     ) -> ResultsIndexResponse:
         """List live assessment results
 
@@ -347,6 +350,10 @@ class ResultsApi:
         :type course_id: str
         :param user_id: If set, restrict results to those for this user
         :type user_id: int
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -366,6 +373,8 @@ class ResultsApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
@@ -374,11 +383,17 @@ class ResultsApi:
             assessment_id=assessment_id,
             course_id=course_id,
             user_id=user_id,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
             'default': "ResultsIndexResponse",
@@ -393,12 +408,15 @@ class ResultsApi:
             response_types_map=_response_types_map,
         ).data
 
+
     @validate_call
-    async def results_index_with_http_info(
+    async def results_index_paginated(
         self,
         assessment_id: Annotated[StrictStr, Field(description="Scope response to assessment_id")],
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
         user_id: Annotated[Optional[StrictInt], Field(description="If set, restrict results to those for this user")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -411,7 +429,8 @@ class ResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ResultsIndexResponse]:
+        _page_url: Optional[StrictStr] = None,
+    ) -> AsyncIterator[ResultsIndexResponse]:
         """List live assessment results
 
         Returns a paginated list of live assessment results
@@ -422,6 +441,10 @@ class ResultsApi:
         :type course_id: str
         :param user_id: If set, restrict results to those for this user
         :type user_id: int
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -441,6 +464,8 @@ class ResultsApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
@@ -449,11 +474,129 @@ class ResultsApi:
             assessment_id=assessment_id,
             course_id=course_id,
             user_id=user_id,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ResultsIndexResponse",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout,
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            yield _page_data
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def results_index_with_http_info(
+        self,
+        assessment_id: Annotated[StrictStr, Field(description="Scope response to assessment_id")],
+        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        user_id: Annotated[Optional[StrictInt], Field(description="If set, restrict results to those for this user")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[ResultsIndexResponse]:
+        """List live assessment results
+
+        Returns a paginated list of live assessment results
+
+        :param assessment_id: Scope response to assessment_id (required)
+        :type assessment_id: str
+        :param course_id: Scope response to course_id (required)
+        :type course_id: str
+        :param user_id: If set, restrict results to those for this user
+        :type user_id: int
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._results_index_serialize(
+            assessment_id=assessment_id,
+            course_id=course_id,
+            user_id=user_id,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
             'default': "ResultsIndexResponse",
@@ -475,6 +618,8 @@ class ResultsApi:
         assessment_id: Annotated[StrictStr, Field(description="Scope response to assessment_id")],
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
         user_id: Annotated[Optional[StrictInt], Field(description="If set, restrict results to those for this user")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -487,6 +632,7 @@ class ResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
     ) -> RESTResponseType:
         """List live assessment results
 
@@ -498,6 +644,10 @@ class ResultsApi:
         :type course_id: str
         :param user_id: If set, restrict results to those for this user
         :type user_id: int
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -517,6 +667,8 @@ class ResultsApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
@@ -525,11 +677,17 @@ class ResultsApi:
             assessment_id=assessment_id,
             course_id=course_id,
             user_id=user_id,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
             'default': "ResultsIndexResponse",
@@ -546,6 +704,8 @@ class ResultsApi:
         assessment_id,
         course_id,
         user_id,
+        page,
+        per_page,
         _request_auth,
         _content_type,
         _headers,
@@ -575,6 +735,14 @@ class ResultsApi:
         if user_id is not None:
             
             _query_params.append(('user_id', user_id))
+            
+        if page is not None:
+            
+            _query_params.append(('page', page))
+            
+        if per_page is not None:
+            
+            _query_params.append(('per_page', per_page))
             
         # process the header parameters
         # process the form parameters

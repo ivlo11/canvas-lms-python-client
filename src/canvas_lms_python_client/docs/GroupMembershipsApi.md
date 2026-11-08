@@ -111,7 +111,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **group_memberships_destroy**
-> group_memberships_destroy(group_id, membership_id)
+> GroupMembershipsDestroyResponse group_memberships_destroy(group_id, membership_id)
 
 Leave a group
 
@@ -125,6 +125,7 @@ in place of a membership_id.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.group_memberships_destroy_response import GroupMembershipsDestroyResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -153,7 +154,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Leave a group
-        await api_instance.group_memberships_destroy(group_id, membership_id)
+        api_response = await api_instance.group_memberships_destroy(group_id, membership_id)
+        print("The response of GroupMembershipsApi->group_memberships_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GroupMembershipsApi->group_memberships_destroy: %s\n" % e)
 ```
@@ -170,7 +173,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GroupMembershipsDestroyResponse**](GroupMembershipsDestroyResponse.md)
 
 ### Authorization
 
@@ -179,18 +182,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Leave a group |  -  |
+**0** | GroupMembershipsDestroyResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **group_memberships_destroy_bulk**
-> List[object] group_memberships_destroy_bulk(group_id, user_ids=user_ids)
+> object group_memberships_destroy_bulk(group_id, user_ids=user_ids)
 
 Bulk delete memberships
 
@@ -249,7 +252,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 
@@ -264,12 +267,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | - For single deletion: &#x60;{ \&quot;ok\&quot;: true }&#x60; - For bulk deletion:   &#x60;&#x60;&#x60;json   {     \&quot;message\&quot;: \&quot;Bulk delete completed\&quot;,     \&quot;deleted_user_ids\&quot;: [123, 456],     \&quot;unauthorized_user_ids\&quot;: [789]   } |  -  |
+**0** | JSON - For single deletion: &#x60;{ \&quot;ok\&quot;: true }&#x60; - For bulk deletion:   &#x60;&#x60;&#x60;json   {     \&quot;message\&quot;: \&quot;Bulk delete completed\&quot;,     \&quot;deleted_user_ids\&quot;: [123, 456],     \&quot;unauthorized_user_ids\&quot;: [789]   } |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **group_memberships_destroy_for_groups**
-> group_memberships_destroy_for_groups(group_id, user_id)
+> GroupMembershipsDestroyResponse group_memberships_destroy_for_groups(group_id, user_id)
 
 Leave a group
 
@@ -283,6 +286,7 @@ in place of a membership_id.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.group_memberships_destroy_response import GroupMembershipsDestroyResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -311,7 +315,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Leave a group
-        await api_instance.group_memberships_destroy_for_groups(group_id, user_id)
+        api_response = await api_instance.group_memberships_destroy_for_groups(group_id, user_id)
+        print("The response of GroupMembershipsApi->group_memberships_destroy_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GroupMembershipsApi->group_memberships_destroy_for_groups: %s\n" % e)
 ```
@@ -328,7 +334,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GroupMembershipsDestroyResponse**](GroupMembershipsDestroyResponse.md)
 
 ### Authorization
 
@@ -337,13 +343,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Leave a group |  -  |
+**0** | GroupMembershipsDestroyResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

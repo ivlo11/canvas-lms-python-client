@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **custom_data_delete_data**
-> custom_data_delete_data(user_id, ns)
+> CustomDataSetDataResponse custom_data_delete_data(user_id, ns)
 
 Delete custom data
 
@@ -124,6 +124,7 @@ or if the specified scope does not contain any data.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.custom_data_set_data_response import CustomDataSetDataResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -152,7 +153,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete custom data
-        await api_instance.custom_data_delete_data(user_id, ns)
+        api_response = await api_instance.custom_data_delete_data(user_id, ns)
+        print("The response of CustomDataApi->custom_data_delete_data:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CustomDataApi->custom_data_delete_data: %s\n" % e)
 ```
@@ -169,7 +172,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CustomDataSetDataResponse**](CustomDataSetDataResponse.md)
 
 ### Authorization
 
@@ -184,12 +187,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete custom data |  -  |
+**0** | CustomDataSetDataResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **custom_data_get_data**
-> custom_data_get_data(user_id, ns)
+> CustomDataSetDataResponse custom_data_get_data(user_id, ns)
 
 Load custom data
 
@@ -211,6 +214,7 @@ or if the specified scope does not contain any data.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.custom_data_set_data_response import CustomDataSetDataResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -239,7 +243,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Load custom data
-        await api_instance.custom_data_get_data(user_id, ns)
+        api_response = await api_instance.custom_data_get_data(user_id, ns)
+        print("The response of CustomDataApi->custom_data_get_data:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CustomDataApi->custom_data_get_data: %s\n" % e)
 ```
@@ -256,7 +262,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CustomDataSetDataResponse**](CustomDataSetDataResponse.md)
 
 ### Authorization
 
@@ -271,12 +277,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Load custom data |  -  |
+**0** | CustomDataSetDataResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **custom_data_set_data**
-> custom_data_set_data(user_id, custom_data_set_data_request=custom_data_set_data_request)
+> CustomDataSetDataResponse custom_data_set_data(user_id, custom_data_set_data_request=custom_data_set_data_request)
 
 Store custom data
 
@@ -433,6 +439,7 @@ following format:
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.custom_data_set_data_request import CustomDataSetDataRequest
+from canvas_lms_python_client.models.custom_data_set_data_response import CustomDataSetDataResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -461,7 +468,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Store custom data
-        await api_instance.custom_data_set_data(user_id, custom_data_set_data_request=custom_data_set_data_request)
+        api_response = await api_instance.custom_data_set_data(user_id, custom_data_set_data_request=custom_data_set_data_request)
+        print("The response of CustomDataApi->custom_data_set_data:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CustomDataApi->custom_data_set_data: %s\n" % e)
 ```
@@ -478,7 +487,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CustomDataSetDataResponse**](CustomDataSetDataResponse.md)
 
 ### Authorization
 
@@ -493,7 +502,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Store custom data |  -  |
+**0** | CustomDataSetDataResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

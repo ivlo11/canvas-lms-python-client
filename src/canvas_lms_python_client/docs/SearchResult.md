@@ -12,6 +12,11 @@ Name | Type | Description | Notes
 **body** | **str** | The body of the matching object. | [optional] 
 **html_url** | **str** | The Canvas URL of the matching object. | [optional] 
 **distance** | **float** | The distance between the search query and the result. Smaller numbers indicate closer matches. | [optional] 
+**due_date** | **str** |  | [optional] 
+**modules** | **List[object]** |  | [optional] 
+**published** | **bool** |  | [optional] 
+**readable_type** | **str** |  | [optional] 
+**relevance** | **int** |  | [optional] 
 
 ## Example
 

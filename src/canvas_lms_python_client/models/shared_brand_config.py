@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.shared_brand_config_account_id import SharedBrandConfigAccountId
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -29,7 +30,7 @@ class SharedBrandConfig(BaseModel):
     SharedBrandConfig
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="The shared_brand_config identifier.", json_schema_extra={"examples": [987]})
-    account_id: Optional[StrictStr] = Field(default=None, description="The id of the account it should be shared within.", json_schema_extra={"examples": [""]})
+    account_id: Optional[SharedBrandConfigAccountId] = None
     brand_config_md5: Optional[StrictStr] = Field(default=None, description="The md5 (since BrandConfigs are identified by MD5 and not numeric id) of the BrandConfig to share.", json_schema_extra={"examples": ["1d31002c95842f8fe16da7dfcc0d1f39"]})
     name: Optional[StrictStr] = Field(default=None, description="The name to share this theme as", json_schema_extra={"examples": ["Crimson and Gold Verson 1"]})
     created_at: Optional[datetime] = Field(default=None, description="When this was created", json_schema_extra={"examples": ["2012-07-13T10:55:20-06:00"]})
@@ -75,6 +76,9 @@ class SharedBrandConfig(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of account_id
+        if self.account_id:
+            _dict['account_id'] = self.account_id.to_dict()
         return _dict
 
     @classmethod
@@ -88,7 +92,7 @@ class SharedBrandConfig(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "account_id": obj.get("account_id"),
+            "account_id": SharedBrandConfigAccountId.from_dict(obj["account_id"]) if obj.get("account_id") is not None else None,
             "brand_config_md5": obj.get("brand_config_md5"),
             "name": obj.get("name"),
             "created_at": obj.get("created_at"),

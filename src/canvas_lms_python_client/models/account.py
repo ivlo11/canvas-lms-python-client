@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +33,22 @@ class Account(BaseModel):
     parent_account_id: Optional[StrictInt] = Field(default=None, description="The account's parent ID, or null if this is the root account", json_schema_extra={"examples": [1]})
     root_account_id: Optional[StrictInt] = Field(default=None, description="The ID of the root account, or null if this is the root account", json_schema_extra={"examples": [1]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="The state of the account. Can be 'active' or 'deleted'.", json_schema_extra={"examples": ["active"]})
-    __properties: ClassVar[List[str]] = ["id", "name", "uuid", "parent_account_id", "root_account_id", "workflow_state"]
+    course_count: Optional[StrictInt] = None
+    course_template_id: Optional[StrictInt] = None
+    default_group_storage_quota_mb: Optional[StrictInt] = None
+    default_storage_quota_mb: Optional[StrictInt] = None
+    default_time_zone: Optional[StrictStr] = None
+    default_user_storage_quota_mb: Optional[StrictInt] = None
+    global_id: Optional[StrictInt] = None
+    horizon_account: Optional[StrictBool] = None
+    integration_id: Optional[StrictStr] = None
+    lti_guid: Optional[StrictStr] = None
+    sis_account_id: Optional[StrictStr] = None
+    sis_import_id: Optional[StrictInt] = None
+    sub_account_count: Optional[StrictInt] = None
+    site_admin: Optional[StrictBool] = None
+    services: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "uuid", "parent_account_id", "root_account_id", "workflow_state", "course_count", "course_template_id", "default_group_storage_quota_mb", "default_storage_quota_mb", "default_time_zone", "default_user_storage_quota_mb", "global_id", "horizon_account", "integration_id", "lti_guid", "sis_account_id", "sis_import_id", "sub_account_count", "site_admin", "services"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -74,6 +89,41 @@ class Account(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if name (nullable) is None
+        # and model_fields_set contains the field
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
+
+        # set to None if parent_account_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.parent_account_id is None and "parent_account_id" in self.model_fields_set:
+            _dict['parent_account_id'] = None
+
+        # set to None if root_account_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.root_account_id is None and "root_account_id" in self.model_fields_set:
+            _dict['root_account_id'] = None
+
+        # set to None if course_template_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.course_template_id is None and "course_template_id" in self.model_fields_set:
+            _dict['course_template_id'] = None
+
+        # set to None if integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.integration_id is None and "integration_id" in self.model_fields_set:
+            _dict['integration_id'] = None
+
+        # set to None if sis_account_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_account_id is None and "sis_account_id" in self.model_fields_set:
+            _dict['sis_account_id'] = None
+
+        # set to None if sis_import_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_import_id is None and "sis_import_id" in self.model_fields_set:
+            _dict['sis_import_id'] = None
+
         return _dict
 
     @classmethod
@@ -91,7 +141,22 @@ class Account(BaseModel):
             "uuid": obj.get("uuid"),
             "parent_account_id": obj.get("parent_account_id"),
             "root_account_id": obj.get("root_account_id"),
-            "workflow_state": obj.get("workflow_state")
+            "workflow_state": obj.get("workflow_state"),
+            "course_count": obj.get("course_count"),
+            "course_template_id": obj.get("course_template_id"),
+            "default_group_storage_quota_mb": obj.get("default_group_storage_quota_mb"),
+            "default_storage_quota_mb": obj.get("default_storage_quota_mb"),
+            "default_time_zone": obj.get("default_time_zone"),
+            "default_user_storage_quota_mb": obj.get("default_user_storage_quota_mb"),
+            "global_id": obj.get("global_id"),
+            "horizon_account": obj.get("horizon_account"),
+            "integration_id": obj.get("integration_id"),
+            "lti_guid": obj.get("lti_guid"),
+            "sis_account_id": obj.get("sis_account_id"),
+            "sis_import_id": obj.get("sis_import_id"),
+            "sub_account_count": obj.get("sub_account_count"),
+            "site_admin": obj.get("site_admin"),
+            "services": obj.get("services")
         })
         return _obj
 

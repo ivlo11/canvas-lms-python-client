@@ -34,7 +34,10 @@ class BlackoutDate(BaseModel):
     start_date: Optional[datetime] = Field(default=None, description="the start date of the blackout date")
     end_date: Optional[datetime] = Field(default=None, description="the end date of the blackout date")
     event_title: Optional[StrictStr] = Field(default=None, description="title of the blackout date", json_schema_extra={"examples": ["some title"]})
-    __properties: ClassVar[List[str]] = ["id", "context_id", "context_type", "start_date", "end_date", "event_title"]
+    created_at: Optional[StrictStr] = None
+    root_account_id: Optional[StrictInt] = None
+    updated_at: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "context_id", "context_type", "start_date", "end_date", "event_title", "created_at", "root_account_id", "updated_at"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -75,6 +78,41 @@ class BlackoutDate(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if id (nullable) is None
+        # and model_fields_set contains the field
+        if self.id is None and "id" in self.model_fields_set:
+            _dict['id'] = None
+
+        # set to None if start_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_date is None and "start_date" in self.model_fields_set:
+            _dict['start_date'] = None
+
+        # set to None if end_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_date is None and "end_date" in self.model_fields_set:
+            _dict['end_date'] = None
+
+        # set to None if event_title (nullable) is None
+        # and model_fields_set contains the field
+        if self.event_title is None and "event_title" in self.model_fields_set:
+            _dict['event_title'] = None
+
+        # set to None if created_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.created_at is None and "created_at" in self.model_fields_set:
+            _dict['created_at'] = None
+
+        # set to None if root_account_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.root_account_id is None and "root_account_id" in self.model_fields_set:
+            _dict['root_account_id'] = None
+
+        # set to None if updated_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.updated_at is None and "updated_at" in self.model_fields_set:
+            _dict['updated_at'] = None
+
         return _dict
 
     @classmethod
@@ -92,7 +130,10 @@ class BlackoutDate(BaseModel):
             "context_type": obj.get("context_type"),
             "start_date": obj.get("start_date"),
             "end_date": obj.get("end_date"),
-            "event_title": obj.get("event_title")
+            "event_title": obj.get("event_title"),
+            "created_at": obj.get("created_at"),
+            "root_account_id": obj.get("root_account_id"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

@@ -26,10 +26,11 @@ from pydantic_core import to_jsonable_python
 
 class GradingPeriodsBatchUpdateResponse(BaseModel):
     """
-    Paginated `grading_periods` list response (from the Canvas example response).
+    Object response with `grading_periods`, `meta` (from the Canvas `@returns`).
     """ # noqa: E501
     grading_periods: Optional[List[GradingPeriod]] = None
-    __properties: ClassVar[List[str]] = ["grading_periods"]
+    meta: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["grading_periods", "meta"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,7 +89,8 @@ class GradingPeriodsBatchUpdateResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "grading_periods": [GradingPeriod.from_dict(_item) for _item in obj["grading_periods"]] if obj.get("grading_periods") is not None else None
+            "grading_periods": [GradingPeriod.from_dict(_item) for _item in obj["grading_periods"]] if obj.get("grading_periods") is not None else None,
+            "meta": obj.get("meta")
         })
         return _obj
 

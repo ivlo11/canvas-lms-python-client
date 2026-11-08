@@ -12,8 +12,15 @@ Name | Type | Description | Notes
 **created_at** | **datetime** | The date and time the report was created. | [optional] 
 **started_at** | **datetime** | The date and time the report started processing. | [optional] 
 **ended_at** | **datetime** | The date and time the report finished processing. | [optional] 
-**parameters** | **object** | The parameters returned will vary for each report. | [optional] 
+**parameters** | [**ReportParameters**](ReportParameters.md) |  | [optional] 
 **progress** | **int** | The progress of the report | [optional] 
+**current_line** | **object** |  | [optional] 
+**message** | **object** |  | [optional] 
+**report** | **str** |  | [optional] 
+**run_time** | **float** |  | [optional] 
+**user** | **object** |  | [optional] 
+**course_id** | **int** |  | [optional] 
+**report_type** | **str** |  | [optional] 
 
 ## Example
 

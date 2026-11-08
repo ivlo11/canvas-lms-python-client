@@ -19,6 +19,7 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.quiz_submission_files_create_request import QuizSubmissionFilesCreateRequest
+from canvas_lms_python_client.models.quizzes_quiz_submission_files_create_response import QuizzesQuizSubmissionFilesCreateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -57,7 +58,7 @@ class QuizSubmissionFilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> QuizzesQuizSubmissionFilesCreateResponse:
         """Upload a file
 
         Associate a new quiz submission file  This API endpoint is the first step in uploading a quiz submission file. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow as these parameters are interpreted as per the documentation there.
@@ -102,6 +103,7 @@ class QuizSubmissionFilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionFilesCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -131,7 +133,7 @@ class QuizSubmissionFilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizzesQuizSubmissionFilesCreateResponse]:
         """Upload a file
 
         Associate a new quiz submission file  This API endpoint is the first step in uploading a quiz submission file. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow as these parameters are interpreted as per the documentation there.
@@ -176,6 +178,7 @@ class QuizSubmissionFilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionFilesCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -251,6 +254,7 @@ class QuizSubmissionFilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionFilesCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

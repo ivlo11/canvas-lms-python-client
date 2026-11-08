@@ -18,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.account_reports_available_reports_response import AccountReportsAvailableReportsResponse
 from canvas_lms_python_client.models.account_reports_create_request import AccountReportsCreateRequest
 from canvas_lms_python_client.models.report import Report
 
@@ -350,7 +351,7 @@ class AccountReportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[AccountReportsAvailableReportsResponse]:
         """List Available Reports
 
         Returns a paginated list of reports for the current context.
@@ -392,6 +393,7 @@ class AccountReportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[AccountReportsAvailableReportsResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -420,7 +422,7 @@ class AccountReportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[AccountReportsAvailableReportsResponse]]:
         """List Available Reports
 
         Returns a paginated list of reports for the current context.
@@ -462,6 +464,7 @@ class AccountReportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[AccountReportsAvailableReportsResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -533,6 +536,7 @@ class AccountReportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[AccountReportsAvailableReportsResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,

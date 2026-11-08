@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -33,7 +33,7 @@ class Progress(BaseModel):
     context_type: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["Account"]})
     user_id: Optional[StrictInt] = Field(default=None, description="the id of the user who started the job", json_schema_extra={"examples": [123]})
     tag: Optional[StrictStr] = Field(default=None, description="the type of operation", json_schema_extra={"examples": ["course_batch_update"]})
-    completion: Optional[StrictInt] = Field(default=None, description="percent completed", json_schema_extra={"examples": [100]})
+    completion: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="percent completed", json_schema_extra={"examples": [100]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="the state of the job one of 'queued', 'running', 'completed', 'failed'", json_schema_extra={"examples": ["completed"]})
     created_at: Optional[datetime] = Field(default=None, description="the time the job was created", json_schema_extra={"examples": ["2013-01-15T15:00:00Z"]})
     updated_at: Optional[datetime] = Field(default=None, description="the time the job was last updated", json_schema_extra={"examples": ["2013-01-15T15:04:00Z"]})
@@ -91,6 +91,21 @@ class Progress(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
+
+        # set to None if completion (nullable) is None
+        # and model_fields_set contains the field
+        if self.completion is None and "completion" in self.model_fields_set:
+            _dict['completion'] = None
+
+        # set to None if message (nullable) is None
+        # and model_fields_set contains the field
+        if self.message is None and "message" in self.model_fields_set:
+            _dict['message'] = None
+
         return _dict
 
     @classmethod

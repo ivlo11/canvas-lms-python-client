@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **sis_import_errors_api_index**
-> List[SisImportError] sis_import_errors_api_index(account_id, id, failure=failure, page=page, per_page=per_page)
+> SisImportErrorsApiIndexResponse sis_import_errors_api_index(account_id, id, failure=failure, page=page, per_page=per_page)
 
 Get SIS import error list
 
@@ -30,7 +30,7 @@ Example:
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.sis_import_error import SisImportError
+from canvas_lms_python_client.models.sis_import_errors_api_index_response import SisImportErrorsApiIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[SisImportError]**](SisImportError.md)
+[**SisImportErrorsApiIndexResponse**](SisImportErrorsApiIndexResponse.md)
 
 ### Authorization
 
@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **sis_import_errors_api_index_for_accounts**
-> List[SisImportError] sis_import_errors_api_index_for_accounts(account_id, failure=failure, page=page, per_page=per_page)
+> SisImportErrorsApiIndexResponse sis_import_errors_api_index_for_accounts(account_id, failure=failure, page=page, per_page=per_page)
 
 Get SIS import error list
 
@@ -125,7 +125,7 @@ Example:
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.sis_import_error import SisImportError
+from canvas_lms_python_client.models.sis_import_errors_api_index_response import SisImportErrorsApiIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -177,7 +177,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[SisImportError]**](SisImportError.md)
+[**SisImportErrorsApiIndexResponse**](SisImportErrorsApiIndexResponse.md)
 
 ### Authorization
 

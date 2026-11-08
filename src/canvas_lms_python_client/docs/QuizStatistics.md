@@ -5,16 +5,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | The ID of the quiz statistics report. | 
-**quiz_id** | **int** | The ID of the Quiz the statistics report is for.  NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS. | 
+**id** | [**QuizStatisticsId**](QuizStatisticsId.md) |  | 
+**quiz_id** | **int** | The ID of the Quiz the statistics report is for.  NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS. | [optional] 
 **multiple_attempts_exist** | **bool** | Whether there are any students that have made mutliple submissions for this quiz. | [optional] 
 **includes_all_versions** | **bool** | In the presence of multiple attempts, this field describes whether the statistics describe all the submission attempts and not only the latest ones. | [optional] 
 **generated_at** | **datetime** | The time at which the statistics were generated, which is usually after the occurrence of a quiz event, like a student submitting it. | [optional] 
 **url** | **str** | The API HTTP/HTTPS URL to this quiz statistics. | [optional] 
 **html_url** | **str** | The HTTP/HTTPS URL to the page where the statistics can be seen visually. | [optional] 
-**question_statistics** | [**QuizStatisticsQuestionStatistics**](QuizStatisticsQuestionStatistics.md) |  | [optional] 
+**question_statistics** | [**List[QuizStatisticsQuestionStatistics]**](QuizStatisticsQuestionStatistics.md) | Question-specific statistics for each question and its answers. | [optional] 
 **submission_statistics** | [**QuizStatisticsSubmissionStatistics**](QuizStatisticsSubmissionStatistics.md) |  | [optional] 
 **links** | [**QuizStatisticsLinks**](QuizStatisticsLinks.md) |  | [optional] 
+**anonymous_survey** | **bool** |  | [optional] 
+**includes_sis_ids** | **bool** |  | [optional] 
+**points_possible** | **float** |  | [optional] 
+**quiz_submissions_zip_url** | **str** |  | [optional] 
+**speed_grader_url** | **str** |  | [optional] 
 
 ## Example
 

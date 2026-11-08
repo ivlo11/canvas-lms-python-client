@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,7 +32,8 @@ class SectionAssignmentOverrideAttributes(BaseModel):
     due_at: Optional[datetime] = Field(default=None, description="the due date for the assignment. returns null if not present. NOTE: If this assignment has assignment overrides, this field will be the due date as it applies to the user requesting information from the API.", json_schema_extra={"examples": ["2012-07-01T23:59:00-06:00"]})
     unlock_at: Optional[datetime] = Field(default=None, description="(Optional) Time at which this was/will be unlocked.", json_schema_extra={"examples": ["2013-01-01T00:00:00-06:00"]})
     lock_at: Optional[datetime] = Field(default=None, description="(Optional) Time at which this was/will be locked.", json_schema_extra={"examples": ["2013-02-01T00:00:00-06:00"]})
-    __properties: ClassVar[List[str]] = ["override_title", "due_at", "unlock_at", "lock_at"]
+    id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["override_title", "due_at", "unlock_at", "lock_at", "id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -73,6 +74,16 @@ class SectionAssignmentOverrideAttributes(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
         return _dict
 
     @classmethod
@@ -88,7 +99,8 @@ class SectionAssignmentOverrideAttributes(BaseModel):
             "override_title": obj.get("override_title"),
             "due_at": obj.get("due_at"),
             "unlock_at": obj.get("unlock_at"),
-            "lock_at": obj.get("lock_at")
+            "lock_at": obj.get("lock_at"),
+            "id": obj.get("id")
         })
         return _obj
 

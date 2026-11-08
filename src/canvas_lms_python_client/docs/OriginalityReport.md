@@ -15,6 +15,13 @@ Name | Type | Description | Notes
 **error_report** | **str** | A message describing the error. If set, the workflow_state will become &#39;error.&#39; | [optional] 
 **submission_time** | **datetime** | The submitted_at date time of the submission. | [optional] 
 **root_account_id** | **int** | The id of the root Account associated with the OriginalityReport | [optional] 
+**created_at** | **str** |  | [optional] 
+**error_message** | **str** |  | [optional] 
+**link_id** | **str** |  | [optional] 
+**originality_report_lti_url** | **str** |  | [optional] 
+**submission_id** | **int** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
+**workflow_state** | **str** |  | [optional] 
 
 ## Example
 

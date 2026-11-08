@@ -23,6 +23,7 @@ from canvas_lms_python_client.models.blueprint_subscription import BlueprintSubs
 from canvas_lms_python_client.models.blueprint_template import BlueprintTemplate
 from canvas_lms_python_client.models.change_record import ChangeRecord
 from canvas_lms_python_client.models.course import Course
+from canvas_lms_python_client.models.master_courses_master_templates_update_associations_response import MasterCoursesMasterTemplatesUpdateAssociationsResponse
 from canvas_lms_python_client.models.master_templates_queue_migration_request import MasterTemplatesQueueMigrationRequest
 from canvas_lms_python_client.models.master_templates_restrict_item_request import MasterTemplatesRestrictItemRequest
 from canvas_lms_python_client.models.master_templates_update_associations_request import MasterTemplatesUpdateAssociationsRequest
@@ -3195,7 +3196,7 @@ class MasterTemplatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> MasterCoursesMasterTemplatesUpdateAssociationsResponse:
         """Set or remove restrictions on a blueprint course object
 
         If a blueprint course object is restricted, editing will be limited for copies in associated courses.
@@ -3240,6 +3241,7 @@ class MasterTemplatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MasterCoursesMasterTemplatesUpdateAssociationsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3269,7 +3271,7 @@ class MasterTemplatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[MasterCoursesMasterTemplatesUpdateAssociationsResponse]:
         """Set or remove restrictions on a blueprint course object
 
         If a blueprint course object is restricted, editing will be limited for copies in associated courses.
@@ -3314,6 +3316,7 @@ class MasterTemplatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MasterCoursesMasterTemplatesUpdateAssociationsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3389,6 +3392,7 @@ class MasterTemplatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MasterCoursesMasterTemplatesUpdateAssociationsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3435,6 +3439,13 @@ class MasterTemplatesApi:
             _body_params = master_templates_restrict_item_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -4575,7 +4586,7 @@ class MasterTemplatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> MasterCoursesMasterTemplatesUpdateAssociationsResponse:
         """Update associated courses
 
         Send a list of course ids to add or remove new associations for the template. Cannot add courses that do not belong to the blueprint course's account. Also cannot add other blueprint courses or courses that already have an association with another blueprint course.  After associating new courses, {api:MasterCourses::MasterTemplatesController#queue_migration start a sync} to populate their contents from the blueprint.
@@ -4620,6 +4631,7 @@ class MasterTemplatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MasterCoursesMasterTemplatesUpdateAssociationsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4649,7 +4661,7 @@ class MasterTemplatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[MasterCoursesMasterTemplatesUpdateAssociationsResponse]:
         """Update associated courses
 
         Send a list of course ids to add or remove new associations for the template. Cannot add courses that do not belong to the blueprint course's account. Also cannot add other blueprint courses or courses that already have an association with another blueprint course.  After associating new courses, {api:MasterCourses::MasterTemplatesController#queue_migration start a sync} to populate their contents from the blueprint.
@@ -4694,6 +4706,7 @@ class MasterTemplatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MasterCoursesMasterTemplatesUpdateAssociationsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4769,6 +4782,7 @@ class MasterTemplatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MasterCoursesMasterTemplatesUpdateAssociationsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4815,6 +4829,13 @@ class MasterTemplatesApi:
             _body_params = master_templates_update_associations_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

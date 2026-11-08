@@ -17,6 +17,7 @@ from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.brand_configs_show_response import BrandConfigsShowResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -52,7 +53,7 @@ class BrandConfigsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> BrandConfigsShowResponse:
         """Get the brand config variables that should be used for this domain
 
         Will redirect to a static json file that has all of the brand variables used by this account. Even though this is a redirect, do not store the redirected url since if the account makes any changes it will redirect to a new url. Needs no authentication.
@@ -88,6 +89,7 @@ class BrandConfigsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "BrandConfigsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -114,7 +116,7 @@ class BrandConfigsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[BrandConfigsShowResponse]:
         """Get the brand config variables that should be used for this domain
 
         Will redirect to a static json file that has all of the brand variables used by this account. Even though this is a redirect, do not store the redirected url since if the account makes any changes it will redirect to a new url. Needs no authentication.
@@ -150,6 +152,7 @@ class BrandConfigsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "BrandConfigsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -213,6 +216,7 @@ class BrandConfigsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "BrandConfigsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -250,6 +254,13 @@ class BrandConfigsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -291,7 +302,7 @@ class BrandConfigsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> BrandConfigsShowResponse:
         """Get the brand config variables for a sub-account or course
 
         Will redirect to a static json file that has all of the brand variables used by the provided context. Even though this is a redirect, do not store the redirected url since if the sub-account makes any changes it will redirect to a new url.
@@ -330,6 +341,7 @@ class BrandConfigsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "BrandConfigsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -357,7 +369,7 @@ class BrandConfigsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[BrandConfigsShowResponse]:
         """Get the brand config variables for a sub-account or course
 
         Will redirect to a static json file that has all of the brand variables used by the provided context. Even though this is a redirect, do not store the redirected url since if the sub-account makes any changes it will redirect to a new url.
@@ -396,6 +408,7 @@ class BrandConfigsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "BrandConfigsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -463,6 +476,7 @@ class BrandConfigsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "BrandConfigsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -503,6 +517,13 @@ class BrandConfigsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -544,7 +565,7 @@ class BrandConfigsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> BrandConfigsShowResponse:
         """Get the brand config variables for a sub-account or course
 
         Will redirect to a static json file that has all of the brand variables used by the provided context. Even though this is a redirect, do not store the redirected url since if the sub-account makes any changes it will redirect to a new url.
@@ -583,6 +604,7 @@ class BrandConfigsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "BrandConfigsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -610,7 +632,7 @@ class BrandConfigsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[BrandConfigsShowResponse]:
         """Get the brand config variables for a sub-account or course
 
         Will redirect to a static json file that has all of the brand variables used by the provided context. Even though this is a redirect, do not store the redirected url since if the sub-account makes any changes it will redirect to a new url.
@@ -649,6 +671,7 @@ class BrandConfigsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "BrandConfigsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -716,6 +739,7 @@ class BrandConfigsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "BrandConfigsShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -756,6 +780,13 @@ class BrandConfigsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

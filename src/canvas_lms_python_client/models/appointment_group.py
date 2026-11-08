@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.appointment import Appointment
+from canvas_lms_python_client.models.appointment_group_sub_context_codes_inner import AppointmentGroupSubContextCodesInner
 from canvas_lms_python_client.models.calendar_event import CalendarEvent
 from typing import Optional, Set
 from typing_extensions import Self
@@ -41,7 +42,7 @@ class AppointmentGroup(BaseModel):
     reserved_times: Optional[List[Appointment]] = Field(default=None, description="The start and end times of slots reserved by the current user as well as the id of the calendar event for the reservation (see include[] argument)", json_schema_extra={"examples": [[{"id": 987, "start_at": "2012-07-20T15:00:00-06:00", "end_at": "2012-07-20T15:00:00-06:00"}]]})
     allow_observer_signup: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether observer users should be able to sign-up for an appointment")
     context_codes: Optional[List[StrictStr]] = Field(default=None, description="The context codes (i.e. courses) this appointment group belongs to. Only people in these courses will be eligible to sign up.", json_schema_extra={"examples": [["course_123"]]})
-    sub_context_codes: Optional[List[StrictInt]] = Field(default=None, description="The sub-context codes (i.e. course sections and group categories) this appointment group is restricted to", json_schema_extra={"examples": [["course_section_234"]]})
+    sub_context_codes: Optional[List[AppointmentGroupSubContextCodesInner]] = Field(default=None, description="The sub-context codes (i.e. course sections and group categories) this appointment group is restricted to", json_schema_extra={"examples": [["course_section_234"]]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="Current state of the appointment group ('pending', 'active' or 'deleted'). 'pending' indicates that it has not been published yet and is invisible to participants.", json_schema_extra={"examples": ["active"]})
     requiring_action: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether the current user needs to sign up for this appointment group (i.e. it's reservable and the min_appointments_per_participant limit has not been met by this user).", json_schema_extra={"examples": [True]})
     appointments_count: Optional[StrictInt] = Field(default=None, description="Number of time slots in this appointment group", json_schema_extra={"examples": [2]})
@@ -56,7 +57,8 @@ class AppointmentGroup(BaseModel):
     html_url: Optional[StrictStr] = Field(default=None, description="URL for a user to view this appointment group", json_schema_extra={"examples": ["http://example.com/appointment_groups/1"]})
     created_at: Optional[datetime] = Field(default=None, description="When the appointment group was created", json_schema_extra={"examples": ["2012-07-13T10:55:20-06:00"]})
     updated_at: Optional[datetime] = Field(default=None, description="When the appointment group was last updated", json_schema_extra={"examples": ["2012-07-13T10:55:20-06:00"]})
-    __properties: ClassVar[List[str]] = ["id", "title", "start_at", "end_at", "description", "location_name", "location_address", "participant_count", "reserved_times", "allow_observer_signup", "context_codes", "sub_context_codes", "workflow_state", "requiring_action", "appointments_count", "appointments", "new_appointments", "max_appointments_per_participant", "min_appointments_per_participant", "participants_per_appointment", "participant_visibility", "participant_type", "url", "html_url", "created_at", "updated_at"]
+    all_context_codes: Optional[List[StrictStr]] = None
+    __properties: ClassVar[List[str]] = ["id", "title", "start_at", "end_at", "description", "location_name", "location_address", "participant_count", "reserved_times", "allow_observer_signup", "context_codes", "sub_context_codes", "workflow_state", "requiring_action", "appointments_count", "appointments", "new_appointments", "max_appointments_per_participant", "min_appointments_per_participant", "participants_per_appointment", "participant_visibility", "participant_type", "url", "html_url", "created_at", "updated_at", "all_context_codes"]
 
     @field_validator('workflow_state')
     def workflow_state_validate_enum(cls, value):
@@ -133,6 +135,12 @@ class AppointmentGroup(BaseModel):
             for _item_reserved_times in self.reserved_times:
                 _items.append(_item_reserved_times.to_dict() if _item_reserved_times is not None else None)
             _dict['reserved_times'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in sub_context_codes (list)
+        _items = []
+        if self.sub_context_codes:
+            for _item_sub_context_codes in self.sub_context_codes:
+                _items.append(_item_sub_context_codes.to_dict() if _item_sub_context_codes is not None else None)
+            _dict['sub_context_codes'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in appointments (list)
         _items = []
         if self.appointments:
@@ -145,6 +153,41 @@ class AppointmentGroup(BaseModel):
             for _item_new_appointments in self.new_appointments:
                 _items.append(_item_new_appointments.to_dict() if _item_new_appointments is not None else None)
             _dict['new_appointments'] = _items
+        # set to None if start_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_at is None and "start_at" in self.model_fields_set:
+            _dict['start_at'] = None
+
+        # set to None if end_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_at is None and "end_at" in self.model_fields_set:
+            _dict['end_at'] = None
+
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if location_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.location_name is None and "location_name" in self.model_fields_set:
+            _dict['location_name'] = None
+
+        # set to None if location_address (nullable) is None
+        # and model_fields_set contains the field
+        if self.location_address is None and "location_address" in self.model_fields_set:
+            _dict['location_address'] = None
+
+        # set to None if max_appointments_per_participant (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_appointments_per_participant is None and "max_appointments_per_participant" in self.model_fields_set:
+            _dict['max_appointments_per_participant'] = None
+
+        # set to None if participants_per_appointment (nullable) is None
+        # and model_fields_set contains the field
+        if self.participants_per_appointment is None and "participants_per_appointment" in self.model_fields_set:
+            _dict['participants_per_appointment'] = None
+
         return _dict
 
     @classmethod
@@ -168,7 +211,7 @@ class AppointmentGroup(BaseModel):
             "reserved_times": [Appointment.from_dict(_item) for _item in obj["reserved_times"]] if obj.get("reserved_times") is not None else None,
             "allow_observer_signup": obj.get("allow_observer_signup"),
             "context_codes": obj.get("context_codes"),
-            "sub_context_codes": obj.get("sub_context_codes"),
+            "sub_context_codes": [AppointmentGroupSubContextCodesInner.from_dict(_item) for _item in obj["sub_context_codes"]] if obj.get("sub_context_codes") is not None else None,
             "workflow_state": obj.get("workflow_state"),
             "requiring_action": obj.get("requiring_action"),
             "appointments_count": obj.get("appointments_count"),
@@ -182,7 +225,8 @@ class AppointmentGroup(BaseModel):
             "url": obj.get("url"),
             "html_url": obj.get("html_url"),
             "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at")
+            "updated_at": obj.get("updated_at"),
+            "all_context_codes": obj.get("all_context_codes")
         })
         return _obj
 

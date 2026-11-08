@@ -43,7 +43,9 @@ class PlannerItem(BaseModel):
     new_activity: Optional[StrictBool] = Field(default=None, description="Whether the item has new or unread activity for the user")
     submissions: Optional[Any] = Field(default=None, description="false if the item has no associated assignment; otherwise the status of the user's submission, with submitted, excused, graded, posted_at, late, missing, needs_grading, has_feedback and redo_request", json_schema_extra={"examples": [{"submitted": False, "graded": False, "missing": True}]})
     html_url: Optional[StrictStr] = Field(default=None, description="The URL of the item in Canvas", json_schema_extra={"examples": ["http://canvas.instructure.com/courses/1/assignments/1#submit"]})
-    __properties: ClassVar[List[str]] = ["context_type", "course_id", "group_id", "user_id", "context_name", "context_image", "plannable_id", "plannable_type", "plannable_date", "plannable", "planner_override", "new_activity", "submissions", "html_url"]
+    account_id: Optional[StrictInt] = None
+    details: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["context_type", "course_id", "group_id", "user_id", "context_name", "context_image", "plannable_id", "plannable_type", "plannable_date", "plannable", "planner_override", "new_activity", "submissions", "html_url", "account_id", "details"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -87,6 +89,11 @@ class PlannerItem(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of planner_override
         if self.planner_override:
             _dict['planner_override'] = self.planner_override.to_dict()
+        # set to None if context_image (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_image is None and "context_image" in self.model_fields_set:
+            _dict['context_image'] = None
+
         # set to None if plannable (nullable) is None
         # and model_fields_set contains the field
         if self.plannable is None and "plannable" in self.model_fields_set:
@@ -122,7 +129,9 @@ class PlannerItem(BaseModel):
             "planner_override": PlannerOverride.from_dict(obj["planner_override"]) if obj.get("planner_override") is not None else None,
             "new_activity": obj.get("new_activity"),
             "submissions": obj.get("submissions"),
-            "html_url": obj.get("html_url")
+            "html_url": obj.get("html_url"),
+            "account_id": obj.get("account_id"),
+            "details": obj.get("details")
         })
         return _obj
 

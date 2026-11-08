@@ -16,6 +16,20 @@ Name | Type | Description | Notes
 **hide_score_total** | **bool** | Whether or not the score total is displayed within the rubric. This option is only available if the rubric is not used for grading. | [optional] 
 **hide_points** | **bool** |  | [optional] 
 **hide_outcome_results** | **bool** |  | [optional] 
+**bookmarked** | **bool** |  | [optional] 
+**context_code** | **str** |  | [optional] 
+**context_id** | **int** |  | [optional] 
+**context_type** | **str** |  | [optional] 
+**created_at** | **str** |  | [optional] 
+**root_account_id** | **int** |  | [optional] 
+**title** | **str** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
+**url** | **str** |  | [optional] 
+**workflow_state** | **str** |  | [optional] 
+**assessment_requests** | **List[object]** |  | [optional] 
+**association_count** | **int** |  | [optional] 
+**permissions** | **object** |  | [optional] 
+**rubric_assessments** | **List[object]** |  | [optional] 
 
 ## Example
 

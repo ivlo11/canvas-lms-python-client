@@ -80,6 +80,26 @@ class Login(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if sis_user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_user_id is None and "sis_user_id" in self.model_fields_set:
+            _dict['sis_user_id'] = None
+
+        # set to None if integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.integration_id is None and "integration_id" in self.model_fields_set:
+            _dict['integration_id'] = None
+
+        # set to None if authentication_provider_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.authentication_provider_id is None and "authentication_provider_id" in self.model_fields_set:
+            _dict['authentication_provider_id'] = None
+
+        # set to None if declared_user_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.declared_user_type is None and "declared_user_type" in self.model_fields_set:
+            _dict['declared_user_type'] = None
+
         return _dict
 
     @classmethod

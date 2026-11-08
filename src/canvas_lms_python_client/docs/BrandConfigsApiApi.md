@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **brand_configs_api_show**
-> brand_configs_api_show()
+> BrandConfigsShowResponse brand_configs_api_show()
 
 Get the brand config variables that should be used for this domain
 
@@ -25,6 +25,7 @@ it will redirect to a new url. Needs no authentication.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.brand_configs_show_response import BrandConfigsShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -51,7 +52,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get the brand config variables that should be used for this domain
-        await api_instance.brand_configs_api_show()
+        api_response = await api_instance.brand_configs_api_show()
+        print("The response of BrandConfigsApiApi->brand_configs_api_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling BrandConfigsApiApi->brand_configs_api_show: %s\n" % e)
 ```
@@ -64,7 +67,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**BrandConfigsShowResponse**](BrandConfigsShowResponse.md)
 
 ### Authorization
 
@@ -73,18 +76,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get the brand config variables that should be used for this domain |  -  |
+**0** | BrandConfigsShowResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brand_configs_api_show_context**
-> brand_configs_api_show_context(account_id)
+> BrandConfigsShowResponse brand_configs_api_show_context(account_id)
 
 Get the brand config variables for a sub-account or course
 
@@ -99,6 +102,7 @@ it will redirect to a new url.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.brand_configs_show_response import BrandConfigsShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -126,7 +130,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get the brand config variables for a sub-account or course
-        await api_instance.brand_configs_api_show_context(account_id)
+        api_response = await api_instance.brand_configs_api_show_context(account_id)
+        print("The response of BrandConfigsApiApi->brand_configs_api_show_context:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling BrandConfigsApiApi->brand_configs_api_show_context: %s\n" % e)
 ```
@@ -142,7 +148,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**BrandConfigsShowResponse**](BrandConfigsShowResponse.md)
 
 ### Authorization
 
@@ -151,18 +157,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get the brand config variables for a sub-account or course |  -  |
+**0** | BrandConfigsShowResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **brand_configs_api_show_context_for_courses**
-> brand_configs_api_show_context_for_courses(course_id)
+> BrandConfigsShowResponse brand_configs_api_show_context_for_courses(course_id)
 
 Get the brand config variables for a sub-account or course
 
@@ -177,6 +183,7 @@ it will redirect to a new url.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.brand_configs_show_response import BrandConfigsShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -204,7 +211,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get the brand config variables for a sub-account or course
-        await api_instance.brand_configs_api_show_context_for_courses(course_id)
+        api_response = await api_instance.brand_configs_api_show_context_for_courses(course_id)
+        print("The response of BrandConfigsApiApi->brand_configs_api_show_context_for_courses:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling BrandConfigsApiApi->brand_configs_api_show_context_for_courses: %s\n" % e)
 ```
@@ -220,7 +229,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**BrandConfigsShowResponse**](BrandConfigsShowResponse.md)
 
 ### Authorization
 
@@ -229,13 +238,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get the brand config variables for a sub-account or course |  -  |
+**0** | BrandConfigsShowResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

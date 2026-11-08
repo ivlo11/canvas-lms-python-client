@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **id** | **float** | The Canvas ID of the binding | [optional] 
 **account_id** | **float** | The global Canvas ID of the account in the binding | [optional] 
 **developer_key_id** | **float** | The global Canvas ID of the developer key in the binding | [optional] 
-**workflow_state** | **float** | The workflow state of the binding. Will be one of &#39;on&#39;, &#39;off&#39;, or &#39;allow.&#39; | [optional] 
+**workflow_state** | [**DeveloperKeyAccountBindingWorkflowState**](DeveloperKeyAccountBindingWorkflowState.md) |  | [optional] 
 **account_owns_binding** | **bool** | True if the requested context owns the binding | [optional] 
 
 ## Example

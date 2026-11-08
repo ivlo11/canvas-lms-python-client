@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **html_url** | **str** | The URL of the changed object | [optional] 
 **locked** | **bool** | Whether the object is locked in the blueprint | [optional] 
 **exceptions** | **List[object]** | A list of ExceptionRecords for linked courses that did not receive this update. | [optional] 
+**locale** | **str** |  | [optional] 
 
 ## Example
 

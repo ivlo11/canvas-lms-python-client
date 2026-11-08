@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **anonymous_provisional_grades_status**
-> anonymous_provisional_grades_status(assignment_id, course_id, anonymous_id=anonymous_id)
+> AnonymousProvisionalGradesStatusResponse anonymous_provisional_grades_status(assignment_id, course_id, anonymous_id=anonymous_id)
 
 Show provisional grade status for a student
 
@@ -20,6 +20,7 @@ Determine whether or not the student's submission needs one or more provisional 
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.anonymous_provisional_grades_status_response import AnonymousProvisionalGradesStatusResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -49,7 +50,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Show provisional grade status for a student
-        await api_instance.anonymous_provisional_grades_status(assignment_id, course_id, anonymous_id=anonymous_id)
+        api_response = await api_instance.anonymous_provisional_grades_status(assignment_id, course_id, anonymous_id=anonymous_id)
+        print("The response of AnonymousProvisionalGradesApi->anonymous_provisional_grades_status:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AnonymousProvisionalGradesApi->anonymous_provisional_grades_status: %s\n" % e)
 ```
@@ -67,7 +70,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AnonymousProvisionalGradesStatusResponse**](AnonymousProvisionalGradesStatusResponse.md)
 
 ### Authorization
 
@@ -82,7 +85,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Show provisional grade status for a student |  -  |
+**0** | AnonymousProvisionalGradesStatusResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

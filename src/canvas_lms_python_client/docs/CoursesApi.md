@@ -36,7 +36,7 @@ Method | HTTP request | Description
 
 
 # **courses_activity_stream**
-> courses_activity_stream(course_id)
+> List[Submission] courses_activity_stream(course_id, page=page, per_page=per_page)
 
 Course activity stream
 
@@ -51,6 +51,7 @@ stream, in the user api.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -75,10 +76,14 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = canvas_lms_python_client.CoursesApi(api_client)
     course_id = 'course_id_example' # str | Scope response to course_id
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # Course activity stream
-        await api_instance.courses_activity_stream(course_id)
+        api_response = await api_instance.courses_activity_stream(course_id, page=page, per_page=per_page)
+        print("The response of CoursesApi->courses_activity_stream:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_activity_stream: %s\n" % e)
 ```
@@ -91,10 +96,12 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **course_id** | **str**| Scope response to course_id | 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 
-void (empty response body)
+[**List[Submission]**](Submission.md)
 
 ### Authorization
 
@@ -103,18 +110,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Course activity stream |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **courses_activity_stream_summary**
-> courses_activity_stream_summary(course_id)
+> List[CoursesActivityStreamSummaryResponse] courses_activity_stream_summary(course_id)
 
 Course activity stream summary
 
@@ -129,6 +136,7 @@ stream summary, in the user api.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.courses_activity_stream_summary_response import CoursesActivityStreamSummaryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -156,7 +164,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Course activity stream summary
-        await api_instance.courses_activity_stream_summary(course_id)
+        api_response = await api_instance.courses_activity_stream_summary(course_id)
+        print("The response of CoursesApi->courses_activity_stream_summary:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_activity_stream_summary: %s\n" % e)
 ```
@@ -172,7 +182,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[CoursesActivityStreamSummaryResponse]**](CoursesActivityStreamSummaryResponse.md)
 
 ### Authorization
 
@@ -181,18 +191,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Course activity stream summary |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **courses_api_settings**
-> courses_api_settings(course_id)
+> CoursesApiSettingsResponse courses_api_settings(course_id)
 
 Get course settings
 
@@ -204,6 +214,7 @@ Returns some of a course's settings.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.courses_api_settings_response import CoursesApiSettingsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -231,7 +242,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get course settings
-        await api_instance.courses_api_settings(course_id)
+        api_response = await api_instance.courses_api_settings(course_id)
+        print("The response of CoursesApi->courses_api_settings:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_api_settings: %s\n" % e)
 ```
@@ -247,7 +260,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CoursesApiSettingsResponse**](CoursesApiSettingsResponse.md)
 
 ### Authorization
 
@@ -262,7 +275,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get course settings |  -  |
+**0** | CoursesApiSettingsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -599,7 +612,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **courses_create_file**
-> courses_create_file(course_id)
+> CoursesCreateFileResponse courses_create_file(course_id)
 
 Upload a file
 
@@ -618,6 +631,7 @@ to the course. By default, this is Teachers, TAs and Designers.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.courses_create_file_response import CoursesCreateFileResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -645,7 +659,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Upload a file
-        await api_instance.courses_create_file(course_id)
+        api_response = await api_instance.courses_create_file(course_id)
+        print("The response of CoursesApi->courses_create_file:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_create_file: %s\n" % e)
 ```
@@ -661,7 +677,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CoursesCreateFileResponse**](CoursesCreateFileResponse.md)
 
 ### Authorization
 
@@ -670,18 +686,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Upload a file |  -  |
+**0** | CoursesCreateFileResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **courses_destroy**
-> courses_destroy(id, event)
+> CoursesDestroyResponse courses_destroy(id, event)
 
 Delete/Conclude a course
 
@@ -693,6 +709,7 @@ Delete or conclude an existing course
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.courses_destroy_response import CoursesDestroyResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -721,7 +738,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete/Conclude a course
-        await api_instance.courses_destroy(id, event)
+        api_response = await api_instance.courses_destroy(id, event)
+        print("The response of CoursesApi->courses_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_destroy: %s\n" % e)
 ```
@@ -738,7 +757,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CoursesDestroyResponse**](CoursesDestroyResponse.md)
 
 ### Authorization
 
@@ -753,12 +772,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete/Conclude a course |  -  |
+**0** | CoursesDestroyResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **courses_dismiss_migration_limitation_msg**
-> courses_dismiss_migration_limitation_msg(id)
+> CoursesDismissMigrationLimitationMsgResponse courses_dismiss_migration_limitation_msg(id)
 
 Remove quiz migration alert
 
@@ -773,6 +792,7 @@ you must be logged in to use this endpoint
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.courses_dismiss_migration_limitation_msg_response import CoursesDismissMigrationLimitationMsgResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -800,7 +820,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Remove quiz migration alert
-        await api_instance.courses_dismiss_migration_limitation_msg(id)
+        api_response = await api_instance.courses_dismiss_migration_limitation_msg(id)
+        print("The response of CoursesApi->courses_dismiss_migration_limitation_msg:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_dismiss_migration_limitation_msg: %s\n" % e)
 ```
@@ -816,7 +838,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CoursesDismissMigrationLimitationMsgResponse**](CoursesDismissMigrationLimitationMsgResponse.md)
 
 ### Authorization
 
@@ -831,7 +853,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Remove quiz migration alert |  -  |
+**0** | CoursesDismissMigrationLimitationMsgResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1015,7 +1037,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **courses_permissions**
-> courses_permissions(course_id, permissions=permissions)
+> CoursesPermissionsResponse courses_permissions(course_id, permissions=permissions)
 
 Permissions
 
@@ -1029,6 +1051,7 @@ See also the {api:AccountsController#permissions Account} and
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.courses_permissions_response import CoursesPermissionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1057,7 +1080,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Permissions
-        await api_instance.courses_permissions(course_id, permissions=permissions)
+        api_response = await api_instance.courses_permissions(course_id, permissions=permissions)
+        print("The response of CoursesApi->courses_permissions:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_permissions: %s\n" % e)
 ```
@@ -1074,7 +1099,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CoursesPermissionsResponse**](CoursesPermissionsResponse.md)
 
 ### Authorization
 
@@ -1089,12 +1114,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Permissions |  -  |
+**0** | CoursesPermissionsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **courses_preview_html**
-> courses_preview_html(course_id, courses_preview_html_request=courses_preview_html_request)
+> CoursesPreviewHtmlResponse courses_preview_html(course_id, courses_preview_html_request=courses_preview_html_request)
 
 Preview processed html
 
@@ -1107,6 +1132,7 @@ Preview html content processed for this course
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.courses_preview_html_request import CoursesPreviewHtmlRequest
+from canvas_lms_python_client.models.courses_preview_html_response import CoursesPreviewHtmlResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1135,7 +1161,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Preview processed html
-        await api_instance.courses_preview_html(course_id, courses_preview_html_request=courses_preview_html_request)
+        api_response = await api_instance.courses_preview_html(course_id, courses_preview_html_request=courses_preview_html_request)
+        print("The response of CoursesApi->courses_preview_html:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_preview_html: %s\n" % e)
 ```
@@ -1152,7 +1180,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CoursesPreviewHtmlResponse**](CoursesPreviewHtmlResponse.md)
 
 ### Authorization
 
@@ -1167,7 +1195,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Preview processed html |  -  |
+**0** | CoursesPreviewHtmlResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1831,7 +1859,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **courses_update**
-> courses_update(id, courses_update_request=courses_update_request)
+> Course courses_update(id, courses_update_request=courses_update_request)
 
 Update a course
 
@@ -1851,6 +1879,7 @@ If an account has set prevent_course_availability_editing_by_teachers, a teacher
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.course import Course
 from canvas_lms_python_client.models.courses_update_request import CoursesUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -1880,7 +1909,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a course
-        await api_instance.courses_update(id, courses_update_request=courses_update_request)
+        api_response = await api_instance.courses_update(id, courses_update_request=courses_update_request)
+        print("The response of CoursesApi->courses_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_update: %s\n" % e)
 ```
@@ -1897,7 +1928,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Course**](Course.md)
 
 ### Authorization
 
@@ -1912,12 +1943,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update a course |  -  |
+**0** | Course |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **courses_update_settings**
-> courses_update_settings(course_id, courses_update_settings_request=courses_update_settings_request)
+> CoursesApiSettingsResponse courses_update_settings(course_id, courses_update_settings_request=courses_update_settings_request)
 
 Update course settings
 
@@ -1929,6 +1960,7 @@ Can update the following course settings:
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.courses_api_settings_response import CoursesApiSettingsResponse
 from canvas_lms_python_client.models.courses_update_settings_request import CoursesUpdateSettingsRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -1958,7 +1990,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update course settings
-        await api_instance.courses_update_settings(course_id, courses_update_settings_request=courses_update_settings_request)
+        api_response = await api_instance.courses_update_settings(course_id, courses_update_settings_request=courses_update_settings_request)
+        print("The response of CoursesApi->courses_update_settings:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CoursesApi->courses_update_settings: %s\n" % e)
 ```
@@ -1975,7 +2009,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CoursesApiSettingsResponse**](CoursesApiSettingsResponse.md)
 
 ### Authorization
 
@@ -1984,13 +2018,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update course settings |  -  |
+**0** | CoursesApiSettingsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

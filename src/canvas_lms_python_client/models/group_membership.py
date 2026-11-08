@@ -34,7 +34,12 @@ class GroupMembership(BaseModel):
     moderator: Optional[StrictBool] = Field(default=None, description="Whether or not the user is a moderator of the group (the must also be an active member of the group to moderate)", json_schema_extra={"examples": [True]})
     just_created: Optional[StrictBool] = Field(default=None, description="optional: whether or not the record was just created on a create call (POST), i.e. was the user just added to the group, or was the user already a member", json_schema_extra={"examples": [True]})
     sis_import_id: Optional[StrictInt] = Field(default=None, description="The id of the SIS import if created through SIS. Only included if the user has permission to manage SIS information.", json_schema_extra={"examples": [4]})
-    __properties: ClassVar[List[str]] = ["id", "group_id", "user_id", "workflow_state", "moderator", "just_created", "sis_import_id"]
+    created_at: Optional[StrictStr] = None
+    sis_group_id: Optional[Any] = None
+    invalid_user_ids: Optional[List[StrictInt]] = None
+    membership_errors: Optional[List[Dict[str, Any]]] = None
+    message: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "group_id", "user_id", "workflow_state", "moderator", "just_created", "sis_import_id", "created_at", "sis_group_id", "invalid_user_ids", "membership_errors", "message"]
 
     @field_validator('workflow_state')
     def workflow_state_validate_enum(cls, value):
@@ -85,6 +90,16 @@ class GroupMembership(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if sis_import_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_import_id is None and "sis_import_id" in self.model_fields_set:
+            _dict['sis_import_id'] = None
+
+        # set to None if sis_group_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_group_id is None and "sis_group_id" in self.model_fields_set:
+            _dict['sis_group_id'] = None
+
         return _dict
 
     @classmethod
@@ -103,7 +118,12 @@ class GroupMembership(BaseModel):
             "workflow_state": obj.get("workflow_state"),
             "moderator": obj.get("moderator"),
             "just_created": obj.get("just_created"),
-            "sis_import_id": obj.get("sis_import_id")
+            "sis_import_id": obj.get("sis_import_id"),
+            "created_at": obj.get("created_at"),
+            "sis_group_id": obj.get("sis_group_id"),
+            "invalid_user_ids": obj.get("invalid_user_ids"),
+            "membership_errors": obj.get("membership_errors"),
+            "message": obj.get("message")
         })
         return _obj
 

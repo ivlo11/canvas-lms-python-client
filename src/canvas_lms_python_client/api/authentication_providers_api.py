@@ -19,7 +19,8 @@ from pydantic import Field, StrictStr
 from typing import List
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.authentication_provider import AuthenticationProvider
-from canvas_lms_python_client.models.sso_settings import SSOSettings
+from canvas_lms_python_client.models.authentication_providers_show_sso_settings_response import AuthenticationProvidersShowSsoSettingsResponse
+from canvas_lms_python_client.models.authentication_providers_update_sso_settings_response import AuthenticationProvidersUpdateSsoSettingsResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -320,7 +321,7 @@ class AuthenticationProvidersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AuthenticationProvider:
         """Delete authentication provider
 
         Delete the config
@@ -362,6 +363,7 @@ class AuthenticationProvidersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationProvider",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -390,7 +392,7 @@ class AuthenticationProvidersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AuthenticationProvider]:
         """Delete authentication provider
 
         Delete the config
@@ -432,6 +434,7 @@ class AuthenticationProvidersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationProvider",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -503,6 +506,7 @@ class AuthenticationProvidersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AuthenticationProvider",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -546,6 +550,13 @@ class AuthenticationProvidersApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1406,7 +1417,7 @@ class AuthenticationProvidersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> SSOSettings:
+    ) -> AuthenticationProvidersShowSsoSettingsResponse:
         """Show account auth settings
 
         The way to get the current state of each account level setting that's relevant to Single Sign On configuration  You can list the current state of each setting with \"update_sso_settings\"
@@ -1445,7 +1456,7 @@ class AuthenticationProvidersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "SSOSettings",
+            'default': "AuthenticationProvidersShowSsoSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1473,7 +1484,7 @@ class AuthenticationProvidersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[SSOSettings]:
+    ) -> ApiResponse[AuthenticationProvidersShowSsoSettingsResponse]:
         """Show account auth settings
 
         The way to get the current state of each account level setting that's relevant to Single Sign On configuration  You can list the current state of each setting with \"update_sso_settings\"
@@ -1512,7 +1523,7 @@ class AuthenticationProvidersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "SSOSettings",
+            'default': "AuthenticationProvidersShowSsoSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1580,7 +1591,7 @@ class AuthenticationProvidersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "SSOSettings",
+            'default': "AuthenticationProvidersShowSsoSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1947,7 +1958,7 @@ class AuthenticationProvidersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> SSOSettings:
+    ) -> AuthenticationProvidersUpdateSsoSettingsResponse:
         """Update account auth settings
 
         For various cases of mixed SSO configurations, you may need to set some configuration at the account level to handle the particulars of your setup.  This endpoint accepts a PUT request to set several possible account settings. All setting are optional on each request, any that are not provided at all are simply retained as is.  Any that provide the key but a null-ish value (blank string, null, undefined) will be UN-set.  You can list the current state of each setting with \"show_sso_settings\"
@@ -1986,7 +1997,7 @@ class AuthenticationProvidersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "SSOSettings",
+            'default': "AuthenticationProvidersUpdateSsoSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2014,7 +2025,7 @@ class AuthenticationProvidersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[SSOSettings]:
+    ) -> ApiResponse[AuthenticationProvidersUpdateSsoSettingsResponse]:
         """Update account auth settings
 
         For various cases of mixed SSO configurations, you may need to set some configuration at the account level to handle the particulars of your setup.  This endpoint accepts a PUT request to set several possible account settings. All setting are optional on each request, any that are not provided at all are simply retained as is.  Any that provide the key but a null-ish value (blank string, null, undefined) will be UN-set.  You can list the current state of each setting with \"show_sso_settings\"
@@ -2053,7 +2064,7 @@ class AuthenticationProvidersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "SSOSettings",
+            'default': "AuthenticationProvidersUpdateSsoSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2121,7 +2132,7 @@ class AuthenticationProvidersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "SSOSettings",
+            'default': "AuthenticationProvidersUpdateSsoSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -452,7 +452,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authentication_providers_destroy**
-> authentication_providers_destroy(account_id, id)
+> AuthenticationProvider authentication_providers_destroy(account_id, id)
 
 Delete authentication provider
 
@@ -464,6 +464,7 @@ Delete the config
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.authentication_provider import AuthenticationProvider
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -492,7 +493,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete authentication provider
-        await api_instance.authentication_providers_destroy(account_id, id)
+        api_response = await api_instance.authentication_providers_destroy(account_id, id)
+        print("The response of AuthenticationProvidersApi->authentication_providers_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AuthenticationProvidersApi->authentication_providers_destroy: %s\n" % e)
 ```
@@ -509,7 +512,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AuthenticationProvider**](AuthenticationProvider.md)
 
 ### Authorization
 
@@ -518,13 +521,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete authentication provider |  -  |
+**0** | AuthenticationProvider |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -768,7 +771,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authentication_providers_show_sso_settings**
-> SSOSettings authentication_providers_show_sso_settings(account_id)
+> AuthenticationProvidersShowSsoSettingsResponse authentication_providers_show_sso_settings(account_id)
 
 Show account auth settings
 
@@ -783,7 +786,7 @@ You can list the current state of each setting with "update_sso_settings"
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.sso_settings import SSOSettings
+from canvas_lms_python_client.models.authentication_providers_show_sso_settings_response import AuthenticationProvidersShowSsoSettingsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -829,7 +832,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SSOSettings**](SSOSettings.md)
+[**AuthenticationProvidersShowSsoSettingsResponse**](AuthenticationProvidersShowSsoSettingsResponse.md)
 
 ### Authorization
 
@@ -844,7 +847,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | SSOSettings |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -931,7 +934,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authentication_providers_update_sso_settings**
-> SSOSettings authentication_providers_update_sso_settings(account_id)
+> AuthenticationProvidersUpdateSsoSettingsResponse authentication_providers_update_sso_settings(account_id)
 
 Update account auth settings
 
@@ -952,7 +955,7 @@ You can list the current state of each setting with "show_sso_settings"
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.sso_settings import SSOSettings
+from canvas_lms_python_client.models.authentication_providers_update_sso_settings_response import AuthenticationProvidersUpdateSsoSettingsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -998,7 +1001,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SSOSettings**](SSOSettings.md)
+[**AuthenticationProvidersUpdateSsoSettingsResponse**](AuthenticationProvidersUpdateSsoSettingsResponse.md)
 
 ### Authorization
 
@@ -1013,7 +1016,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | SSOSettings |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

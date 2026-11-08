@@ -26,6 +26,16 @@ Name | Type | Description | Notes
 **root_account_id** | **int** | The Canvas id of the root account | [optional] 
 **account_binding** | [**LtiRegistrationAccountBinding**](LtiRegistrationAccountBinding.md) |  | [optional] 
 **configuration** | [**LtiToolConfiguration**](LtiToolConfiguration.md) |  | [optional] 
+**description** | **str** |  | [optional] 
+**developer_key_id** | **int** |  | [optional] 
+**dynamic_registration_url** | **object** |  | [optional] 
+**ims_registration_id** | **int** |  | [optional] 
+**manual_configuration_id** | **int** |  | [optional] 
+**overlay** | **object** |  | [optional] 
+**pending_update** | **str** |  | [optional] 
+**reinstall_disabled** | **bool** |  | [optional] 
+**overlaid_configuration** | **object** |  | [optional] 
+**overlaid_legacy_configuration** | **object** |  | [optional] 
 
 ## Example
 

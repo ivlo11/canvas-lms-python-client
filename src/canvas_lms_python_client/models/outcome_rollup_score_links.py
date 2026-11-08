@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.outcome_rollup_score_links_outcome import OutcomeRollupScoreLinksOutcome
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,7 +28,7 @@ class OutcomeRollupScoreLinks(BaseModel):
     """
     
     """ # noqa: E501
-    outcome: Optional[StrictInt] = Field(default=None, description="The id of the related outcome", json_schema_extra={"examples": [42]})
+    outcome: Optional[OutcomeRollupScoreLinksOutcome] = None
     __properties: ClassVar[List[str]] = ["outcome"]
 
     model_config = ConfigDict(
@@ -69,6 +70,9 @@ class OutcomeRollupScoreLinks(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of outcome
+        if self.outcome:
+            _dict['outcome'] = self.outcome.to_dict()
         return _dict
 
     @classmethod
@@ -81,7 +85,7 @@ class OutcomeRollupScoreLinks(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "outcome": obj.get("outcome")
+            "outcome": OutcomeRollupScoreLinksOutcome.from_dict(obj["outcome"]) if obj.get("outcome") is not None else None
         })
         return _obj
 

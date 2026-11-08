@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **tabs_index**
-> tabs_index(account_id, include=include)
+> List[Tab] tabs_index(account_id, include=include)
 
 List available tabs for a course or group
 
@@ -24,6 +24,7 @@ Returns a paginated list of navigation tabs available in the current context.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.tab import Tab
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -52,7 +53,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List available tabs for a course or group
-        await api_instance.tabs_index(account_id, include=include)
+        api_response = await api_instance.tabs_index(account_id, include=include)
+        print("The response of TabsApi->tabs_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling TabsApi->tabs_index: %s\n" % e)
 ```
@@ -69,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Tab]**](Tab.md)
 
 ### Authorization
 
@@ -84,12 +87,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List available tabs for a course or group |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **tabs_index_for_courses**
-> tabs_index_for_courses(course_id, include=include)
+> List[Tab] tabs_index_for_courses(course_id, include=include)
 
 List available tabs for a course or group
 
@@ -101,6 +104,7 @@ Returns a paginated list of navigation tabs available in the current context.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.tab import Tab
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -129,7 +133,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List available tabs for a course or group
-        await api_instance.tabs_index_for_courses(course_id, include=include)
+        api_response = await api_instance.tabs_index_for_courses(course_id, include=include)
+        print("The response of TabsApi->tabs_index_for_courses:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling TabsApi->tabs_index_for_courses: %s\n" % e)
 ```
@@ -146,7 +152,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Tab]**](Tab.md)
 
 ### Authorization
 
@@ -161,12 +167,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List available tabs for a course or group |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **tabs_index_for_groups**
-> tabs_index_for_groups(group_id, include=include)
+> List[Tab] tabs_index_for_groups(group_id, include=include)
 
 List available tabs for a course or group
 
@@ -178,6 +184,7 @@ Returns a paginated list of navigation tabs available in the current context.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.tab import Tab
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -206,7 +213,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List available tabs for a course or group
-        await api_instance.tabs_index_for_groups(group_id, include=include)
+        api_response = await api_instance.tabs_index_for_groups(group_id, include=include)
+        print("The response of TabsApi->tabs_index_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling TabsApi->tabs_index_for_groups: %s\n" % e)
 ```
@@ -223,7 +232,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Tab]**](Tab.md)
 
 ### Authorization
 
@@ -238,12 +247,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List available tabs for a course or group |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **tabs_index_for_users**
-> tabs_index_for_users(user_id, include=include)
+> List[Tab] tabs_index_for_users(user_id, include=include)
 
 List available tabs for a course or group
 
@@ -255,6 +264,7 @@ Returns a paginated list of navigation tabs available in the current context.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.tab import Tab
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -283,7 +293,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List available tabs for a course or group
-        await api_instance.tabs_index_for_users(user_id, include=include)
+        api_response = await api_instance.tabs_index_for_users(user_id, include=include)
+        print("The response of TabsApi->tabs_index_for_users:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling TabsApi->tabs_index_for_users: %s\n" % e)
 ```
@@ -300,7 +312,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Tab]**](Tab.md)
 
 ### Authorization
 
@@ -315,7 +327,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List available tabs for a course or group |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **lock_at** | **datetime** | When the quiz will stop being available for taking. A value of null means it can always be taken. | [optional] 
 **title** | **str** | Title of the section this assignment override is for, if any. | [optional] 
 **base** | **bool** | If this property is present, it means that dates in this structure are not based on an assignment override, but are instead for all students. | [optional] 
+**set_id** | **int** |  | [optional] 
+**set_type** | **str** |  | [optional] 
 
 ## Example
 

@@ -72,6 +72,16 @@ class CourseAttributes(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if sis_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_id is None and "sis_id" in self.model_fields_set:
+            _dict['sis_id'] = None
+
+        # set to None if integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.integration_id is None and "integration_id" in self.model_fields_set:
+            _dict['integration_id'] = None
+
         return _dict
 
     @classmethod

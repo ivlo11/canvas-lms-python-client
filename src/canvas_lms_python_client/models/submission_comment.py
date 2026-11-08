@@ -18,9 +18,10 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.media_comment import MediaComment
+from canvas_lms_python_client.models.submission_comment_author import SubmissionCommentAuthor
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -32,12 +33,20 @@ class SubmissionComment(BaseModel):
     id: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [37]})
     author_id: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [134]})
     author_name: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["Toph Beifong"]})
-    author: Optional[StrictStr] = Field(default=None, description="Abbreviated user object UserDisplay (see users API).", json_schema_extra={"examples": ["{}"]})
+    author: Optional[SubmissionCommentAuthor] = None
     comment: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["Well here's the thing..."]})
     created_at: Optional[datetime] = Field(default=None, json_schema_extra={"examples": ["2012-01-01T01:00:00Z"]})
     edited_at: Optional[datetime] = Field(default=None, json_schema_extra={"examples": ["2012-01-02T01:00:00Z"]})
     media_comment: Optional[MediaComment] = None
-    __properties: ClassVar[List[str]] = ["id", "author_id", "author_name", "author", "comment", "created_at", "edited_at", "media_comment"]
+    attempt: Optional[StrictInt] = None
+    cached_attachments: Optional[List[Dict[str, Any]]] = None
+    draft: Optional[StrictBool] = None
+    group_comment_id: Optional[StrictStr] = None
+    media_comment_id: Optional[StrictStr] = None
+    media_comment_type: Optional[StrictStr] = None
+    publishable: Optional[StrictBool] = None
+    attachments: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["id", "author_id", "author_name", "author", "comment", "created_at", "edited_at", "media_comment", "attempt", "cached_attachments", "draft", "group_comment_id", "media_comment_id", "media_comment_type", "publishable", "attachments"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -78,9 +87,42 @@ class SubmissionComment(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of author
+        if self.author:
+            _dict['author'] = self.author.to_dict()
         # override the default output from pydantic by calling `to_dict()` of media_comment
         if self.media_comment:
             _dict['media_comment'] = self.media_comment.to_dict()
+        # set to None if author_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.author_id is None and "author_id" in self.model_fields_set:
+            _dict['author_id'] = None
+
+        # set to None if edited_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.edited_at is None and "edited_at" in self.model_fields_set:
+            _dict['edited_at'] = None
+
+        # set to None if attempt (nullable) is None
+        # and model_fields_set contains the field
+        if self.attempt is None and "attempt" in self.model_fields_set:
+            _dict['attempt'] = None
+
+        # set to None if group_comment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.group_comment_id is None and "group_comment_id" in self.model_fields_set:
+            _dict['group_comment_id'] = None
+
+        # set to None if media_comment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.media_comment_id is None and "media_comment_id" in self.model_fields_set:
+            _dict['media_comment_id'] = None
+
+        # set to None if media_comment_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.media_comment_type is None and "media_comment_type" in self.model_fields_set:
+            _dict['media_comment_type'] = None
+
         return _dict
 
     @classmethod
@@ -96,11 +138,19 @@ class SubmissionComment(BaseModel):
             "id": obj.get("id"),
             "author_id": obj.get("author_id"),
             "author_name": obj.get("author_name"),
-            "author": obj.get("author"),
+            "author": SubmissionCommentAuthor.from_dict(obj["author"]) if obj.get("author") is not None else None,
             "comment": obj.get("comment"),
             "created_at": obj.get("created_at"),
             "edited_at": obj.get("edited_at"),
-            "media_comment": MediaComment.from_dict(obj["media_comment"]) if obj.get("media_comment") is not None else None
+            "media_comment": MediaComment.from_dict(obj["media_comment"]) if obj.get("media_comment") is not None else None,
+            "attempt": obj.get("attempt"),
+            "cached_attachments": obj.get("cached_attachments"),
+            "draft": obj.get("draft"),
+            "group_comment_id": obj.get("group_comment_id"),
+            "media_comment_id": obj.get("media_comment_id"),
+            "media_comment_type": obj.get("media_comment_type"),
+            "publishable": obj.get("publishable"),
+            "attachments": obj.get("attachments")
         })
         return _obj
 

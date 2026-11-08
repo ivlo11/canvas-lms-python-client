@@ -73,6 +73,16 @@ class SisImportError(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if row_info (nullable) is None
+        # and model_fields_set contains the field
+        if self.row_info is None and "row_info" in self.model_fields_set:
+            _dict['row_info'] = None
+
+        # set to None if row (nullable) is None
+        # and model_fields_set contains the field
+        if self.row is None and "row" in self.model_fields_set:
+            _dict['row'] = None
+
         return _dict
 
     @classmethod

@@ -18,9 +18,10 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from canvas_lms_python_client.models.file import File
+from canvas_lms_python_client.models.report_parameters import ReportParameters
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -36,9 +37,16 @@ class Report(BaseModel):
     created_at: Optional[datetime] = Field(default=None, description="The date and time the report was created.", json_schema_extra={"examples": ["2013-12-01T23:59:00-06:00"]})
     started_at: Optional[datetime] = Field(default=None, description="The date and time the report started processing.", json_schema_extra={"examples": ["2013-12-02T00:03:21-06:00"]})
     ended_at: Optional[datetime] = Field(default=None, description="The date and time the report finished processing.", json_schema_extra={"examples": ["2013-12-02T00:03:21-06:00"]})
-    parameters: Optional[Dict[str, Any]] = Field(default=None, description="The parameters returned will vary for each report.")
+    parameters: Optional[ReportParameters] = None
     progress: Optional[StrictInt] = Field(default=None, description="The progress of the report", json_schema_extra={"examples": [100]})
-    __properties: ClassVar[List[str]] = ["id", "file_url", "attachment", "status", "created_at", "started_at", "ended_at", "parameters", "progress"]
+    current_line: Optional[Any] = None
+    message: Optional[Any] = None
+    report: Optional[StrictStr] = None
+    run_time: Optional[Union[StrictFloat, StrictInt]] = None
+    user: Optional[Dict[str, Any]] = None
+    course_id: Optional[StrictInt] = None
+    report_type: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "file_url", "attachment", "status", "created_at", "started_at", "ended_at", "parameters", "progress", "current_line", "message", "report", "run_time", "user", "course_id", "report_type"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -82,6 +90,34 @@ class Report(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of attachment
         if self.attachment:
             _dict['attachment'] = self.attachment.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of parameters
+        if self.parameters:
+            _dict['parameters'] = self.parameters.to_dict()
+        # set to None if file_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.file_url is None and "file_url" in self.model_fields_set:
+            _dict['file_url'] = None
+
+        # set to None if started_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.started_at is None and "started_at" in self.model_fields_set:
+            _dict['started_at'] = None
+
+        # set to None if ended_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.ended_at is None and "ended_at" in self.model_fields_set:
+            _dict['ended_at'] = None
+
+        # set to None if current_line (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_line is None and "current_line" in self.model_fields_set:
+            _dict['current_line'] = None
+
+        # set to None if message (nullable) is None
+        # and model_fields_set contains the field
+        if self.message is None and "message" in self.model_fields_set:
+            _dict['message'] = None
+
         return _dict
 
     @classmethod
@@ -101,8 +137,15 @@ class Report(BaseModel):
             "created_at": obj.get("created_at"),
             "started_at": obj.get("started_at"),
             "ended_at": obj.get("ended_at"),
-            "parameters": obj.get("parameters"),
-            "progress": obj.get("progress")
+            "parameters": ReportParameters.from_dict(obj["parameters"]) if obj.get("parameters") is not None else None,
+            "progress": obj.get("progress"),
+            "current_line": obj.get("current_line"),
+            "message": obj.get("message"),
+            "report": obj.get("report"),
+            "run_time": obj.get("run_time"),
+            "user": obj.get("user"),
+            "course_id": obj.get("course_id"),
+            "report_type": obj.get("report_type")
         })
         return _obj
 

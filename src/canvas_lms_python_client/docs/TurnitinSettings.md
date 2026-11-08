@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **exclude_quoted** | **bool** |  | [optional] 
 **exclude_small_matches_type** | **str** |  | [optional] 
 **exclude_small_matches_value** | **int** |  | [optional] 
+**submit_papers_to** | **bool** |  | [optional] 
 
 ## Example
 

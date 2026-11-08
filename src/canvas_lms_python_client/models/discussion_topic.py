@@ -68,7 +68,55 @@ class DiscussionTopic(BaseModel):
     sort_order_locked: Optional[StrictBool] = Field(default=None, description="Can users decide their preferred sort order.", json_schema_extra={"examples": [True]})
     expand: Optional[StrictBool] = Field(default=None, description="Threaded replies should be expanded by default.", json_schema_extra={"examples": [True]})
     expand_locked: Optional[StrictBool] = Field(default=None, description="Can users decide their preferred thread expand setting.", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["id", "title", "message", "html_url", "posted_at", "last_reply_at", "require_initial_post", "user_can_see_posts", "discussion_subentry_count", "read_state", "unread_count", "subscribed", "subscription_hold", "assignment_id", "delayed_post_at", "published", "lock_at", "locked", "pinned", "locked_for_user", "lock_info", "lock_explanation", "user_name", "topic_children", "group_topic_children", "root_topic_id", "podcast_url", "discussion_type", "group_category_id", "attachments", "permissions", "allow_rating", "only_graders_can_rate", "sort_by_rating", "sort_order", "sort_order_locked", "expand", "expand_locked"]
+    anonymous_state: Optional[StrictStr] = None
+    author: Optional[Dict[str, Any]] = None
+    can_group: Optional[StrictBool] = None
+    can_lock: Optional[StrictBool] = None
+    can_unpublish: Optional[StrictBool] = None
+    comments_disabled: Optional[StrictBool] = None
+    context_code: Optional[StrictStr] = None
+    created_at: Optional[StrictStr] = None
+    expanded: Optional[StrictBool] = None
+    expanded_locked: Optional[StrictBool] = None
+    is_announcement: Optional[StrictBool] = None
+    is_section_specific: Optional[StrictBool] = None
+    podcast_has_student_posts: Optional[StrictBool] = None
+    position: Optional[StrictInt] = None
+    sections: Optional[List[Dict[str, Any]]] = None
+    summary_enabled: Optional[StrictBool] = None
+    todo_date: Optional[StrictStr] = None
+    ungraded_discussion_overrides: Optional[List[Dict[str, Any]]] = None
+    url: Optional[StrictStr] = None
+    new_positions: Optional[Dict[str, Any]] = None
+    assignment: Optional[Dict[str, Any]] = None
+    in_paced_course: Optional[StrictBool] = None
+    user_count: Optional[StrictInt] = None
+    is_checkpointed: Optional[StrictBool] = None
+    reply_to_entry_required_count: Optional[StrictInt] = None
+    attachment_id: Optional[StrictInt] = None
+    cloned_item_id: Optional[StrictInt] = None
+    context_id: Optional[StrictInt] = None
+    context_type: Optional[StrictStr] = None
+    could_be_locked: Optional[StrictBool] = None
+    deleted_at: Optional[StrictStr] = None
+    edited_at: Optional[Any] = None
+    editor_id: Optional[StrictInt] = None
+    external_feed_id: Optional[StrictInt] = None
+    is_anonymous_author: Optional[StrictBool] = None
+    last_assignment_id: Optional[StrictInt] = None
+    migration_id: Optional[StrictStr] = None
+    old_assignment_id: Optional[StrictInt] = None
+    only_visible_to_overrides: Optional[StrictBool] = None
+    ordered_pinned_posts: Optional[List[Dict[str, Any]]] = None
+    podcast_enabled: Optional[StrictBool] = None
+    root_account_id: Optional[StrictInt] = None
+    subtopics_refreshed_at: Optional[StrictStr] = None
+    unlock_at: Optional[Any] = None
+    updated_at: Optional[StrictStr] = None
+    user: Optional[Dict[str, Any]] = None
+    user_id: Optional[StrictInt] = None
+    workflow_state: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "title", "message", "html_url", "posted_at", "last_reply_at", "require_initial_post", "user_can_see_posts", "discussion_subentry_count", "read_state", "unread_count", "subscribed", "subscription_hold", "assignment_id", "delayed_post_at", "published", "lock_at", "locked", "pinned", "locked_for_user", "lock_info", "lock_explanation", "user_name", "topic_children", "group_topic_children", "root_topic_id", "podcast_url", "discussion_type", "group_category_id", "attachments", "permissions", "allow_rating", "only_graders_can_rate", "sort_by_rating", "sort_order", "sort_order_locked", "expand", "expand_locked", "anonymous_state", "author", "can_group", "can_lock", "can_unpublish", "comments_disabled", "context_code", "created_at", "expanded", "expanded_locked", "is_announcement", "is_section_specific", "podcast_has_student_posts", "position", "sections", "summary_enabled", "todo_date", "ungraded_discussion_overrides", "url", "new_positions", "assignment", "in_paced_course", "user_count", "is_checkpointed", "reply_to_entry_required_count", "attachment_id", "cloned_item_id", "context_id", "context_type", "could_be_locked", "deleted_at", "edited_at", "editor_id", "external_feed_id", "is_anonymous_author", "last_assignment_id", "migration_id", "old_assignment_id", "only_visible_to_overrides", "ordered_pinned_posts", "podcast_enabled", "root_account_id", "subtopics_refreshed_at", "unlock_at", "updated_at", "user", "user_id", "workflow_state"]
 
     @field_validator('read_state')
     def read_state_validate_enum(cls, value):
@@ -158,6 +206,126 @@ class DiscussionTopic(BaseModel):
             for _item_attachments in self.attachments:
                 _items.append(_item_attachments.to_dict() if _item_attachments is not None else None)
             _dict['attachments'] = _items
+        # set to None if message (nullable) is None
+        # and model_fields_set contains the field
+        if self.message is None and "message" in self.model_fields_set:
+            _dict['message'] = None
+
+        # set to None if last_reply_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_reply_at is None and "last_reply_at" in self.model_fields_set:
+            _dict['last_reply_at'] = None
+
+        # set to None if require_initial_post (nullable) is None
+        # and model_fields_set contains the field
+        if self.require_initial_post is None and "require_initial_post" in self.model_fields_set:
+            _dict['require_initial_post'] = None
+
+        # set to None if assignment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.assignment_id is None and "assignment_id" in self.model_fields_set:
+            _dict['assignment_id'] = None
+
+        # set to None if delayed_post_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.delayed_post_at is None and "delayed_post_at" in self.model_fields_set:
+            _dict['delayed_post_at'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
+        # set to None if user_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_name is None and "user_name" in self.model_fields_set:
+            _dict['user_name'] = None
+
+        # set to None if root_topic_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.root_topic_id is None and "root_topic_id" in self.model_fields_set:
+            _dict['root_topic_id'] = None
+
+        # set to None if podcast_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.podcast_url is None and "podcast_url" in self.model_fields_set:
+            _dict['podcast_url'] = None
+
+        # set to None if group_category_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.group_category_id is None and "group_category_id" in self.model_fields_set:
+            _dict['group_category_id'] = None
+
+        # set to None if anonymous_state (nullable) is None
+        # and model_fields_set contains the field
+        if self.anonymous_state is None and "anonymous_state" in self.model_fields_set:
+            _dict['anonymous_state'] = None
+
+        # set to None if author (nullable) is None
+        # and model_fields_set contains the field
+        if self.author is None and "author" in self.model_fields_set:
+            _dict['author'] = None
+
+        # set to None if position (nullable) is None
+        # and model_fields_set contains the field
+        if self.position is None and "position" in self.model_fields_set:
+            _dict['position'] = None
+
+        # set to None if todo_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.todo_date is None and "todo_date" in self.model_fields_set:
+            _dict['todo_date'] = None
+
+        # set to None if ungraded_discussion_overrides (nullable) is None
+        # and model_fields_set contains the field
+        if self.ungraded_discussion_overrides is None and "ungraded_discussion_overrides" in self.model_fields_set:
+            _dict['ungraded_discussion_overrides'] = None
+
+        # set to None if cloned_item_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.cloned_item_id is None and "cloned_item_id" in self.model_fields_set:
+            _dict['cloned_item_id'] = None
+
+        # set to None if edited_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.edited_at is None and "edited_at" in self.model_fields_set:
+            _dict['edited_at'] = None
+
+        # set to None if editor_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.editor_id is None and "editor_id" in self.model_fields_set:
+            _dict['editor_id'] = None
+
+        # set to None if external_feed_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.external_feed_id is None and "external_feed_id" in self.model_fields_set:
+            _dict['external_feed_id'] = None
+
+        # set to None if last_assignment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_assignment_id is None and "last_assignment_id" in self.model_fields_set:
+            _dict['last_assignment_id'] = None
+
+        # set to None if migration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.migration_id is None and "migration_id" in self.model_fields_set:
+            _dict['migration_id'] = None
+
+        # set to None if old_assignment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.old_assignment_id is None and "old_assignment_id" in self.model_fields_set:
+            _dict['old_assignment_id'] = None
+
+        # set to None if subtopics_refreshed_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.subtopics_refreshed_at is None and "subtopics_refreshed_at" in self.model_fields_set:
+            _dict['subtopics_refreshed_at'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
         return _dict
 
     @classmethod
@@ -207,7 +375,55 @@ class DiscussionTopic(BaseModel):
             "sort_order": obj.get("sort_order"),
             "sort_order_locked": obj.get("sort_order_locked"),
             "expand": obj.get("expand"),
-            "expand_locked": obj.get("expand_locked")
+            "expand_locked": obj.get("expand_locked"),
+            "anonymous_state": obj.get("anonymous_state"),
+            "author": obj.get("author"),
+            "can_group": obj.get("can_group"),
+            "can_lock": obj.get("can_lock"),
+            "can_unpublish": obj.get("can_unpublish"),
+            "comments_disabled": obj.get("comments_disabled"),
+            "context_code": obj.get("context_code"),
+            "created_at": obj.get("created_at"),
+            "expanded": obj.get("expanded"),
+            "expanded_locked": obj.get("expanded_locked"),
+            "is_announcement": obj.get("is_announcement"),
+            "is_section_specific": obj.get("is_section_specific"),
+            "podcast_has_student_posts": obj.get("podcast_has_student_posts"),
+            "position": obj.get("position"),
+            "sections": obj.get("sections"),
+            "summary_enabled": obj.get("summary_enabled"),
+            "todo_date": obj.get("todo_date"),
+            "ungraded_discussion_overrides": obj.get("ungraded_discussion_overrides"),
+            "url": obj.get("url"),
+            "new_positions": obj.get("new_positions"),
+            "assignment": obj.get("assignment"),
+            "in_paced_course": obj.get("in_paced_course"),
+            "user_count": obj.get("user_count"),
+            "is_checkpointed": obj.get("is_checkpointed"),
+            "reply_to_entry_required_count": obj.get("reply_to_entry_required_count"),
+            "attachment_id": obj.get("attachment_id"),
+            "cloned_item_id": obj.get("cloned_item_id"),
+            "context_id": obj.get("context_id"),
+            "context_type": obj.get("context_type"),
+            "could_be_locked": obj.get("could_be_locked"),
+            "deleted_at": obj.get("deleted_at"),
+            "edited_at": obj.get("edited_at"),
+            "editor_id": obj.get("editor_id"),
+            "external_feed_id": obj.get("external_feed_id"),
+            "is_anonymous_author": obj.get("is_anonymous_author"),
+            "last_assignment_id": obj.get("last_assignment_id"),
+            "migration_id": obj.get("migration_id"),
+            "old_assignment_id": obj.get("old_assignment_id"),
+            "only_visible_to_overrides": obj.get("only_visible_to_overrides"),
+            "ordered_pinned_posts": obj.get("ordered_pinned_posts"),
+            "podcast_enabled": obj.get("podcast_enabled"),
+            "root_account_id": obj.get("root_account_id"),
+            "subtopics_refreshed_at": obj.get("subtopics_refreshed_at"),
+            "unlock_at": obj.get("unlock_at"),
+            "updated_at": obj.get("updated_at"),
+            "user": obj.get("user"),
+            "user_id": obj.get("user_id"),
+            "workflow_state": obj.get("workflow_state")
         })
         return _obj
 

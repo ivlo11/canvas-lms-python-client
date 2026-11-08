@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**quiz_id** | **int** | The ID of the Quiz the quiz extension belongs to. | 
-**user_id** | **int** | The ID of the Student that needs the quiz extension. | 
+**quiz_id** | [**QuizExtensionQuizId**](QuizExtensionQuizId.md) |  | 
+**user_id** | [**QuizExtensionUserId**](QuizExtensionUserId.md) |  | 
 **extra_attempts** | **int** | Number of times the student is allowed to re-take the quiz over the multiple-attempt limit. | [optional] 
 **extra_time** | **int** | Amount of extra time allowed for the quiz submission, in minutes. | [optional] 
 **manually_unlocked** | **bool** | The student can take the quiz even if it&#39;s locked for everyone else | [optional] 

@@ -38,7 +38,8 @@ class PollSession(BaseModel):
     created_at: Optional[datetime] = Field(default=None, description="The time at which the poll session was created.", json_schema_extra={"examples": ["2014-01-07T15:16:18Z"]})
     results: Optional[Dict[str, Any]] = Field(default=None, description="The results of the submissions of the poll. Each key is the poll choice id, and the value is the count of submissions.", json_schema_extra={"examples": [{"144": 10, "145": 3, "146": 27, "147": 8}]})
     poll_submissions: Optional[List[PollSubmission]] = Field(default=None, description="If the poll session has public results, this will return an array of all submissions, viewable by both students and teachers. If the results are not public, for students it will return their submission only.")
-    __properties: ClassVar[List[str]] = ["id", "poll_id", "course_id", "course_section_id", "is_published", "has_public_results", "created_at", "results", "poll_submissions"]
+    has_submitted: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["id", "poll_id", "course_id", "course_section_id", "is_published", "has_public_results", "created_at", "results", "poll_submissions", "has_submitted"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -85,6 +86,11 @@ class PollSession(BaseModel):
             for _item_poll_submissions in self.poll_submissions:
                 _items.append(_item_poll_submissions.to_dict() if _item_poll_submissions is not None else None)
             _dict['poll_submissions'] = _items
+        # set to None if course_section_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.course_section_id is None and "course_section_id" in self.model_fields_set:
+            _dict['course_section_id'] = None
+
         return _dict
 
     @classmethod
@@ -105,7 +111,8 @@ class PollSession(BaseModel):
             "has_public_results": obj.get("has_public_results"),
             "created_at": obj.get("created_at"),
             "results": obj.get("results"),
-            "poll_submissions": [PollSubmission.from_dict(_item) for _item in obj["poll_submissions"]] if obj.get("poll_submissions") is not None else None
+            "poll_submissions": [PollSubmission.from_dict(_item) for _item in obj["poll_submissions"]] if obj.get("poll_submissions") is not None else None,
+            "has_submitted": obj.get("has_submitted")
         })
         return _obj
 

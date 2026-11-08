@@ -36,7 +36,8 @@ class OutcomeLink(BaseModel):
     outcome: Optional[Outcome] = None
     assessed: Optional[StrictBool] = Field(default=None, description="whether this outcome has been used to assess a student in the context of this outcome link.  In other words, this will be set to true if the context is a course, and a student has been assessed with this outcome in that course.", json_schema_extra={"examples": [True]})
     can_unlink: Optional[StrictBool] = Field(default=None, description="whether this outcome link is manageable and is not the last link to an aligned outcome")
-    __properties: ClassVar[List[str]] = ["url", "context_id", "context_type", "outcome_group", "outcome", "assessed", "can_unlink"]
+    quiz_lti: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["url", "context_id", "context_type", "outcome_group", "outcome", "assessed", "can_unlink", "quiz_lti"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -83,6 +84,16 @@ class OutcomeLink(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of outcome
         if self.outcome:
             _dict['outcome'] = self.outcome.to_dict()
+        # set to None if context_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_id is None and "context_id" in self.model_fields_set:
+            _dict['context_id'] = None
+
+        # set to None if context_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_type is None and "context_type" in self.model_fields_set:
+            _dict['context_type'] = None
+
         return _dict
 
     @classmethod
@@ -101,7 +112,8 @@ class OutcomeLink(BaseModel):
             "outcome_group": OutcomeGroup.from_dict(obj["outcome_group"]) if obj.get("outcome_group") is not None else None,
             "outcome": Outcome.from_dict(obj["outcome"]) if obj.get("outcome") is not None else None,
             "assessed": obj.get("assessed"),
-            "can_unlink": obj.get("can_unlink")
+            "can_unlink": obj.get("can_unlink"),
+            "quiz_lti": obj.get("quiz_lti")
         })
         return _obj
 

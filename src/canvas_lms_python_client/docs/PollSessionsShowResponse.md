@@ -1,12 +1,13 @@
 # PollSessionsShowResponse
 
-Paginated `poll_sessions` list response (from the Canvas example response).
+Object response with `poll_sessions`, `meta` (from the Canvas `@returns`).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **poll_sessions** | [**List[PollSession]**](PollSession.md) |  | [optional] 
+**meta** | **object** |  | [optional] 
 
 ## Example
 

@@ -9,8 +9,10 @@ Name | Type | Description | Notes
 **asset_string** | **str** | Asset string for the object causing the lock | [optional] 
 **unlock_at** | **datetime** | (Optional) Time at which this was/will be unlocked. Must be before the due date. | [optional] 
 **lock_at** | **datetime** | (Optional) Time at which this was/will be locked. Must be after the due date. | [optional] 
-**context_module** | **str** | (Optional) Context module causing the lock. | [optional] 
+**context_module** | [**LockInfoContextModule**](LockInfoContextModule.md) |  | [optional] 
 **manually_locked** | **bool** |  | [optional] 
+**can_view** | **bool** |  | [optional] 
+**missing_permission** | **str** |  | [optional] 
 
 ## Example
 

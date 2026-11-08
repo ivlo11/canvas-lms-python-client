@@ -16,10 +16,13 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.ai_conversation import AiConversation
 from canvas_lms_python_client.models.ai_experience import AiExperience
+from canvas_lms_python_client.models.ai_experiences_ai_conversation_show_response import AiExperiencesAiConversationShowResponse
 from canvas_lms_python_client.models.ai_experiences_create_request import AiExperiencesCreateRequest
+from canvas_lms_python_client.models.ai_experiences_index_response import AiExperiencesIndexResponse
 from canvas_lms_python_client.models.ai_experiences_update_request import AiExperiencesUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -59,7 +62,7 @@ class AiExperiencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> AiExperiencesAiConversationShowResponse:
         """Show student AI conversation
 
         Retrieve a specific student's AI conversation with full message history. Only available to teachers and course managers.
@@ -104,7 +107,7 @@ class AiExperiencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AiExperiencesAiConversationShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -134,7 +137,7 @@ class AiExperiencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[AiExperiencesAiConversationShowResponse]:
         """Show student AI conversation
 
         Retrieve a specific student's AI conversation with full message history. Only available to teachers and course managers.
@@ -179,7 +182,7 @@ class AiExperiencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AiExperiencesAiConversationShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -255,7 +258,7 @@ class AiExperiencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "AiExperiencesAiConversationShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -351,7 +354,7 @@ class AiExperiencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> AiConversation:
         """List student AI conversations
 
         Retrieve the latest AI conversation for each student in the course for this AI experience. Only available to teachers and course managers.
@@ -393,7 +396,7 @@ class AiExperiencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "AiConversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -422,7 +425,7 @@ class AiExperiencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[AiConversation]:
         """List student AI conversations
 
         Retrieve the latest AI conversation for each student in the course for this AI experience. Only available to teachers and course managers.
@@ -464,7 +467,7 @@ class AiExperiencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "AiConversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -536,7 +539,7 @@ class AiExperiencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "AiConversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1466,7 +1469,7 @@ class AiExperiencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[AiExperience]:
+    ) -> AiExperiencesIndexResponse:
         """List AI experiences
 
         Retrieve the paginated list of AI experiences for a course
@@ -1508,7 +1511,7 @@ class AiExperiencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[AiExperience]",
+            'default': "AiExperiencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1537,7 +1540,7 @@ class AiExperiencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[AiExperience]]:
+    ) -> ApiResponse[AiExperiencesIndexResponse]:
         """List AI experiences
 
         Retrieve the paginated list of AI experiences for a course
@@ -1579,7 +1582,7 @@ class AiExperiencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[AiExperience]",
+            'default': "AiExperiencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1651,7 +1654,7 @@ class AiExperiencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[AiExperience]",
+            'default': "AiExperiencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

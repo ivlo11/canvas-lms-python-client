@@ -80,6 +80,11 @@ class UserProgress(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of progress
         if self.progress:
             _dict['progress'] = self.progress.to_dict()
+        # set to None if pronouns (nullable) is None
+        # and model_fields_set contains the field
+        if self.pronouns is None and "pronouns" in self.model_fields_set:
+            _dict['pronouns'] = None
+
         return _dict
 
     @classmethod

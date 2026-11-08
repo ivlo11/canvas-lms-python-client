@@ -181,7 +181,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | GroupCategory and groups operation results |  -  |
+**0** | GroupCategoriesBulkManageDifferentiationTagResponse GroupCategory and groups operation results |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **group_categories_destroy**
-> group_categories_destroy(group_category_id)
+> GroupCategory group_categories_destroy(group_category_id)
 
 Delete a Group Category
 
@@ -361,6 +361,7 @@ categories can not be deleted, i.e. "communities" and "student_organized".
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.group_category import GroupCategory
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -388,7 +389,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete a Group Category
-        await api_instance.group_categories_destroy(group_category_id)
+        api_response = await api_instance.group_categories_destroy(group_category_id)
+        print("The response of GroupCategoriesApi->group_categories_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GroupCategoriesApi->group_categories_destroy: %s\n" % e)
 ```
@@ -404,7 +407,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GroupCategory**](GroupCategory.md)
 
 ### Authorization
 
@@ -413,13 +416,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete a Group Category |  -  |
+**0** | GroupCategory |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -41,7 +41,10 @@ class Token(BaseModel):
     purpose: Optional[StrictStr] = Field(default=None, description="The purpose of the token.")
     app_name: Optional[StrictStr] = Field(default=None, description="If the token was created by an OAuth application, this is the name of that application. Otherwise, null.")
     can_manually_regenerate: Optional[StrictBool] = Field(default=None, description="Whether the current user can manually regenerate this token.")
-    __properties: ClassVar[List[str]] = ["id", "created_at", "expires_at", "workflow_state", "remember_access", "scopes", "real_user_id", "token", "token_hint", "user_id", "purpose", "app_name", "can_manually_regenerate"]
+    last_used_at: Optional[Any] = None
+    updated_at: Optional[StrictStr] = None
+    visible_token: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "created_at", "expires_at", "workflow_state", "remember_access", "scopes", "real_user_id", "token", "token_hint", "user_id", "purpose", "app_name", "can_manually_regenerate", "last_used_at", "updated_at", "visible_token"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -87,6 +90,11 @@ class Token(BaseModel):
         if self.expires_at is None and "expires_at" in self.model_fields_set:
             _dict['expires_at'] = None
 
+        # set to None if remember_access (nullable) is None
+        # and model_fields_set contains the field
+        if self.remember_access is None and "remember_access" in self.model_fields_set:
+            _dict['remember_access'] = None
+
         # set to None if real_user_id (nullable) is None
         # and model_fields_set contains the field
         if self.real_user_id is None and "real_user_id" in self.model_fields_set:
@@ -96,6 +104,16 @@ class Token(BaseModel):
         # and model_fields_set contains the field
         if self.app_name is None and "app_name" in self.model_fields_set:
             _dict['app_name'] = None
+
+        # set to None if last_used_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_used_at is None and "last_used_at" in self.model_fields_set:
+            _dict['last_used_at'] = None
+
+        # set to None if visible_token (nullable) is None
+        # and model_fields_set contains the field
+        if self.visible_token is None and "visible_token" in self.model_fields_set:
+            _dict['visible_token'] = None
 
         return _dict
 
@@ -121,7 +139,10 @@ class Token(BaseModel):
             "user_id": obj.get("user_id"),
             "purpose": obj.get("purpose"),
             "app_name": obj.get("app_name"),
-            "can_manually_regenerate": obj.get("can_manually_regenerate")
+            "can_manually_regenerate": obj.get("can_manually_regenerate"),
+            "last_used_at": obj.get("last_used_at"),
+            "updated_at": obj.get("updated_at"),
+            "visible_token": obj.get("visible_token")
         })
         return _obj
 

@@ -16,8 +16,9 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.learning_mastery_gradebook_settings_api_show_response import LearningMasteryGradebookSettingsApiShowResponse
+from canvas_lms_python_client.models.learning_mastery_gradebook_settings_api_update_response import LearningMasteryGradebookSettingsApiUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -54,7 +55,7 @@ class LearningMasteryGradebookSettingsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> LearningMasteryGradebookSettingsApiShowResponse:
         """Get Learning Mastery Gradebook Settings
 
         Get the current user's Learning Mastery Gradebook settings for the current context.
@@ -93,7 +94,7 @@ class LearningMasteryGradebookSettingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "LearningMasteryGradebookSettingsApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -121,7 +122,7 @@ class LearningMasteryGradebookSettingsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[LearningMasteryGradebookSettingsApiShowResponse]:
         """Get Learning Mastery Gradebook Settings
 
         Get the current user's Learning Mastery Gradebook settings for the current context.
@@ -160,7 +161,7 @@ class LearningMasteryGradebookSettingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "LearningMasteryGradebookSettingsApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -228,7 +229,7 @@ class LearningMasteryGradebookSettingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "LearningMasteryGradebookSettingsApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -317,7 +318,7 @@ class LearningMasteryGradebookSettingsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> LearningMasteryGradebookSettingsApiUpdateResponse:
         """Update Learning Mastery Gradebook Settings
 
         Update the current user's Learning Mastery Gradebook settings for the current context.
@@ -356,7 +357,7 @@ class LearningMasteryGradebookSettingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "LearningMasteryGradebookSettingsApiUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -384,7 +385,7 @@ class LearningMasteryGradebookSettingsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[LearningMasteryGradebookSettingsApiUpdateResponse]:
         """Update Learning Mastery Gradebook Settings
 
         Update the current user's Learning Mastery Gradebook settings for the current context.
@@ -423,7 +424,7 @@ class LearningMasteryGradebookSettingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "LearningMasteryGradebookSettingsApiUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -491,7 +492,7 @@ class LearningMasteryGradebookSettingsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "LearningMasteryGradebookSettingsApiUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

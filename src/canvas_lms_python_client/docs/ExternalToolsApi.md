@@ -104,7 +104,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **external_tools_all_visible_nav_tools**
-> external_tools_all_visible_nav_tools(context_codes)
+> List[ContextExternalTool] external_tools_all_visible_nav_tools(context_codes)
 
 Get visible course navigation tools
 
@@ -121,6 +121,7 @@ context_name fields on each element in the array.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.context_external_tool import ContextExternalTool
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -148,7 +149,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get visible course navigation tools
-        await api_instance.external_tools_all_visible_nav_tools(context_codes)
+        api_response = await api_instance.external_tools_all_visible_nav_tools(context_codes)
+        print("The response of ExternalToolsApi->external_tools_all_visible_nav_tools:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ExternalToolsApi->external_tools_all_visible_nav_tools: %s\n" % e)
 ```
@@ -164,7 +167,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[ContextExternalTool]**](ContextExternalTool.md)
 
 ### Authorization
 
@@ -179,7 +182,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get visible course navigation tools |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -973,7 +976,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **external_tools_mark_rce_favorite**
-> external_tools_mark_rce_favorite(account_id, id)
+> ExternalToolsMarkRceFavoriteResponse external_tools_mark_rce_favorite(account_id, id)
 
 Mark tool as RCE Favorite
 
@@ -988,6 +991,7 @@ in the RCE. Cannot mark more than 2 tools as RCE Favorites.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.external_tools_mark_rce_favorite_response import ExternalToolsMarkRceFavoriteResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1016,7 +1020,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Mark tool as RCE Favorite
-        await api_instance.external_tools_mark_rce_favorite(account_id, id)
+        api_response = await api_instance.external_tools_mark_rce_favorite(account_id, id)
+        print("The response of ExternalToolsApi->external_tools_mark_rce_favorite:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ExternalToolsApi->external_tools_mark_rce_favorite: %s\n" % e)
 ```
@@ -1033,7 +1039,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ExternalToolsMarkRceFavoriteResponse**](ExternalToolsMarkRceFavoriteResponse.md)
 
 ### Authorization
 
@@ -1042,13 +1048,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Mark tool as RCE Favorite |  -  |
+**0** | ExternalToolsMarkRceFavoriteResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1290,7 +1296,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **external_tools_unmark_rce_favorite**
-> external_tools_unmark_rce_favorite(account_id, id)
+> ExternalToolsMarkRceFavoriteResponse external_tools_unmark_rce_favorite(account_id, id)
 
 Unmark tool as RCE Favorite
 
@@ -1304,6 +1310,7 @@ appear in the preferred favorites location.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.external_tools_mark_rce_favorite_response import ExternalToolsMarkRceFavoriteResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1332,7 +1339,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Unmark tool as RCE Favorite
-        await api_instance.external_tools_unmark_rce_favorite(account_id, id)
+        api_response = await api_instance.external_tools_unmark_rce_favorite(account_id, id)
+        print("The response of ExternalToolsApi->external_tools_unmark_rce_favorite:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ExternalToolsApi->external_tools_unmark_rce_favorite: %s\n" % e)
 ```
@@ -1349,7 +1358,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ExternalToolsMarkRceFavoriteResponse**](ExternalToolsMarkRceFavoriteResponse.md)
 
 ### Authorization
 
@@ -1358,13 +1367,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Unmark tool as RCE Favorite |  -  |
+**0** | ExternalToolsMarkRceFavoriteResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1537,7 +1546,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **external_tools_visible_course_nav_tools**
-> external_tools_visible_course_nav_tools(course_id)
+> List[ContextExternalTool] external_tools_visible_course_nav_tools(course_id)
 
 Get visible course navigation tools for a single course
 
@@ -1553,6 +1562,7 @@ The response format is the same as Get visible course navigation tools.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.context_external_tool import ContextExternalTool
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1580,7 +1590,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get visible course navigation tools for a single course
-        await api_instance.external_tools_visible_course_nav_tools(course_id)
+        api_response = await api_instance.external_tools_visible_course_nav_tools(course_id)
+        print("The response of ExternalToolsApi->external_tools_visible_course_nav_tools:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ExternalToolsApi->external_tools_visible_course_nav_tools: %s\n" % e)
 ```
@@ -1596,7 +1608,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[ContextExternalTool]**](ContextExternalTool.md)
 
 ### Authorization
 
@@ -1605,13 +1617,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get visible course navigation tools for a single course |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
