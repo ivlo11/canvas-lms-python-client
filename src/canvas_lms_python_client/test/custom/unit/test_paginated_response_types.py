@@ -99,6 +99,66 @@ def test_all_iterator_only_for_list_responses():
     assert not unexpected, f"Non-list-response operations with {ALL_SUFFIX}: {sorted(unexpected)}"
 
 
+# Operations that paginate through a helper (a bare call, a lib/api/v1 helper or
+# Api.jsonapi_paginate), which the generator once missed
+HELPER_PAGINATED_OPERATIONS = frozenset(
+    {
+        "outcome_results_rollups",
+        "sis_api_sis_assignments",
+        "sis_api_sis_assignments_for_courses",
+        "courses_activity_stream",
+        "groups_activity_stream",
+        "users_activity_stream",
+        "users_activity_stream_for_other",
+        "gradebook_history_api_days",
+        "gradebook_history_api_day_details",
+        "gradebook_history_api_submissions",
+        "grading_periods_index",
+        "grading_periods_index_for_courses",
+        "assessments_index",
+        "results_index",
+    }
+)
+
+# Reads of one record, which must not be detected as paginated
+SINGLE_RECORD_READS = (
+    "courses_show",
+    "sections_show",
+    "submissions_api_show",
+    "groups_show_for_other",
+)
+
+
+def _api_operations():
+    """Every public method name on the generated API classes."""
+    package = canvas_lms_python_client.api
+    names = set()
+    for module_info in pkgutil.iter_modules(package.__path__):
+        module = importlib.import_module(f"{package.__name__}.{module_info.name}")
+        for _, cls in inspect.getmembers(module, inspect.isclass):
+            if cls.__module__ == module.__name__:
+                names.update(name for name in vars(cls) if not name.startswith("_"))
+    return names
+
+
+def test_operations_paginating_through_helpers_are_paginated():
+    paginated = {operation for _, operation, _ in _paginated_methods()}
+    missing = sorted(HELPER_PAGINATED_OPERATIONS - paginated)
+
+    assert not missing, (
+        f"Operations that paginate through a helper have no {PAGINATED_SUFFIX}: {missing}"
+    )
+
+
+def test_single_record_reads_are_not_paginated():
+    operations = _api_operations()
+
+    assert set(SINGLE_RECORD_READS) <= operations, (
+        "A single-record read was renamed; update SINGLE_RECORD_READS"
+    )
+    assert not [name for name in SINGLE_RECORD_READS if name + PAGINATED_SUFFIX in operations]
+
+
 # Paginated operation -> page item type (namespaced Lti::X models resolve)
 LTI_LIST_ITEM_TYPES = {
     "deployments_list": "LtiDeployment",

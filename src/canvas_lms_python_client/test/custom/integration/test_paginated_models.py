@@ -33,6 +33,7 @@ from canvas_lms_python_client.api.deployments_api import DeploymentsApi
 from canvas_lms_python_client.api.discussion_topics_api import DiscussionTopicsApi
 from canvas_lms_python_client.api.discussion_topics_api_api import DiscussionTopicsApiApi
 from canvas_lms_python_client.api.grade_change_audit_api_api import GradeChangeAuditApiApi
+from canvas_lms_python_client.api.gradebook_history_api_api import GradebookHistoryApiApi
 from canvas_lms_python_client.api.grading_period_sets_api import GradingPeriodSetsApi
 from canvas_lms_python_client.api.grading_periods_api import GradingPeriodsApi
 from canvas_lms_python_client.api.lti_apps_api import LtiAppsApi
@@ -80,6 +81,7 @@ from canvas_lms_python_client.models.course_event import CourseEvent
 from canvas_lms_python_client.models.course_event_link import CourseEventLink
 from canvas_lms_python_client.models.course_grading_period import CourseGradingPeriod
 from canvas_lms_python_client.models.course_progress import CourseProgress
+from canvas_lms_python_client.models.day import Day
 from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.models.grade_change_audit_api_for_course_response import (
     GradeChangeAuditApiForCourseResponse,
@@ -91,6 +93,9 @@ from canvas_lms_python_client.models.grading_period import GradingPeriod
 from canvas_lms_python_client.models.grading_period_sets import GradingPeriodSets
 from canvas_lms_python_client.models.grading_period_sets_index_response import (
     GradingPeriodSetsIndexResponse,
+)
+from canvas_lms_python_client.models.grading_periods_index_response import (
+    GradingPeriodsIndexResponse,
 )
 from canvas_lms_python_client.models.group import Group
 from canvas_lms_python_client.models.list_lti_registrations_response import (
@@ -575,6 +580,52 @@ async def test_course_include_grading_periods_typed(canvas_admin_api_client):
     require(periods, "course whose term has grading periods")
 
     assert_typed(periods, CourseGradingPeriod)
+
+
+async def test_gradebook_history_days_span_pages(canvas_admin_api_client):
+    """Gradebook history paginates through a lib/api/v1 helper, which the generator missed."""
+    account = await root_account(canvas_admin_api_client)
+    api = GradebookHistoryApiApi(canvas_admin_api_client)
+
+    days: List[Day] = []
+    course_id = None
+    for course in await account_courses(canvas_admin_api_client, account):
+        days = await collect(
+            api.gradebook_history_api_days_all(course_id=str(course.id), per_page=1)
+        )
+        if len(days) > 1:
+            course_id = str(course.id)
+            break
+    require(days if course_id else [], "course with grades on more than one day")
+
+    # Canvas pages through graded submissions, so one date can repeat across pages
+    assert all(isinstance(day, Day) for day in days)
+    unpaged = await collect(api.gradebook_history_api_days_all(course_id=course_id))
+    assert {day.var_date for day in days} == {day.var_date for day in unpaged}
+
+
+async def test_grading_periods_span_pages(canvas_admin_api_client):
+    """Grading periods paginate through Api.jsonapi_paginate, which the generator missed."""
+    account = await root_account(canvas_admin_api_client)
+    api = GradingPeriodsApi(canvas_admin_api_client)
+
+    pages = await collect(
+        api.grading_periods_index_paginated(account_id=str(account.id), per_page=1)
+    )
+    periods = wrapped_items(pages, GradingPeriodsIndexResponse, "grading_periods")
+    if len(pages) < 2:
+        pytest.skip("the root account's grading periods fit on one page")
+
+    assert_typed(periods, GradingPeriod, str)
+    paged_ids = [period.id for period in periods]
+    assert len(paged_ids) == len(set(paged_ids)), "duplicate grading periods across pages"
+    single = await collect(
+        api.grading_periods_index_paginated(account_id=str(account.id), per_page=100)
+    )
+    assert set(paged_ids) == {
+        period.id
+        for period in wrapped_items(single, GradingPeriodsIndexResponse, "grading_periods")
+    }
 
 
 async def test_users_and_roles_pages_typed(canvas_admin_api_client):
