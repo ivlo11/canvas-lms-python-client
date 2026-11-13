@@ -20,6 +20,7 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.context_external_tool import ContextExternalTool
 from canvas_lms_python_client.models.external_tools_create_request import ExternalToolsCreateRequest
+from canvas_lms_python_client.models.external_tools_mark_rce_favorite_response import ExternalToolsMarkRceFavoriteResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -324,7 +325,7 @@ class ExternalToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[ContextExternalTool]:
         """Get visible course navigation tools
 
         Get a list of external tools with the course_navigation placement that have not been hidden in course settings and whose visibility settings apply to the requesting user. These tools are the same that appear in the course navigation.  The response format is the same as for List external tools, but with additional context_id and context_name fields on each element in the array.
@@ -363,6 +364,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ContextExternalTool]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -390,7 +392,7 @@ class ExternalToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[ContextExternalTool]]:
         """Get visible course navigation tools
 
         Get a list of external tools with the course_navigation placement that have not been hidden in course settings and whose visibility settings apply to the requesting user. These tools are the same that appear in the course navigation.  The response format is the same as for List external tools, but with additional context_id and context_name fields on each element in the array.
@@ -429,6 +431,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ContextExternalTool]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -496,6 +499,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ContextExternalTool]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4320,7 +4324,7 @@ class ExternalToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ExternalToolsMarkRceFavoriteResponse:
         """Mark tool as RCE Favorite
 
         Mark the specified editor_button external tool as a favorite in the RCE editor for courses in the given account and its subaccounts (if the subaccounts haven't set their own RCE Favorites). This places the tool in a preferred location in the RCE. Cannot mark more than 2 tools as RCE Favorites.
@@ -4362,6 +4366,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ExternalToolsMarkRceFavoriteResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4390,7 +4395,7 @@ class ExternalToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ExternalToolsMarkRceFavoriteResponse]:
         """Mark tool as RCE Favorite
 
         Mark the specified editor_button external tool as a favorite in the RCE editor for courses in the given account and its subaccounts (if the subaccounts haven't set their own RCE Favorites). This places the tool in a preferred location in the RCE. Cannot mark more than 2 tools as RCE Favorites.
@@ -4432,6 +4437,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ExternalToolsMarkRceFavoriteResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4503,6 +4509,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ExternalToolsMarkRceFavoriteResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4546,6 +4553,13 @@ class ExternalToolsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -5412,7 +5426,7 @@ class ExternalToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ExternalToolsMarkRceFavoriteResponse:
         """Unmark tool as RCE Favorite
 
         Unmark the specified external tool as a favorite in the RCE editor for the given account. The tool will remain available but will no longer appear in the preferred favorites location.
@@ -5454,6 +5468,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ExternalToolsMarkRceFavoriteResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5482,7 +5497,7 @@ class ExternalToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ExternalToolsMarkRceFavoriteResponse]:
         """Unmark tool as RCE Favorite
 
         Unmark the specified external tool as a favorite in the RCE editor for the given account. The tool will remain available but will no longer appear in the preferred favorites location.
@@ -5524,6 +5539,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ExternalToolsMarkRceFavoriteResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5595,6 +5611,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ExternalToolsMarkRceFavoriteResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5638,6 +5655,13 @@ class ExternalToolsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -6235,7 +6259,7 @@ class ExternalToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[ContextExternalTool]:
         """Get visible course navigation tools for a single course
 
         Get a list of external tools with the course_navigation placement that have not been hidden in course settings and whose visibility settings apply to the requesting user. These tools are the same that appear in the course navigation.  The response format is the same as Get visible course navigation tools.
@@ -6274,6 +6298,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ContextExternalTool]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6301,7 +6326,7 @@ class ExternalToolsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[ContextExternalTool]]:
         """Get visible course navigation tools for a single course
 
         Get a list of external tools with the course_navigation placement that have not been hidden in course settings and whose visibility settings apply to the requesting user. These tools are the same that appear in the course navigation.  The response format is the same as Get visible course navigation tools.
@@ -6340,6 +6365,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ContextExternalTool]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6407,6 +6433,7 @@ class ExternalToolsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ContextExternalTool]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6447,6 +6474,13 @@ class ExternalToolsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

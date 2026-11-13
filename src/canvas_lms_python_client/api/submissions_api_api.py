@@ -26,6 +26,9 @@ from canvas_lms_python_client.models.submissions_api_bulk_update_request import 
 from canvas_lms_python_client.models.submissions_api_mark_bulk_submissions_as_read_request import SubmissionsApiMarkBulkSubmissionsAsReadRequest
 from canvas_lms_python_client.models.submissions_api_update_anonymous_request import SubmissionsApiUpdateAnonymousRequest
 from canvas_lms_python_client.models.submissions_api_update_request import SubmissionsApiUpdateRequest
+from canvas_lms_python_client.models.submissions_create_file_response import SubmissionsCreateFileResponse
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
+from canvas_lms_python_client.models.submissions_submission_summary_response import SubmissionsSubmissionSummaryResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -1258,7 +1261,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsCreateFileResponse:
         """Upload a file
 
         Upload a file to a submission.  This API endpoint is the first step in uploading a file to a submission as a student. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  The final step of the file upload workflow will return the attachment data, including the new file id. The caller can then POST to submit the +online_upload+ assignment with these file ids.
@@ -1303,6 +1306,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1332,7 +1336,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsCreateFileResponse]:
         """Upload a file
 
         Upload a file to a submission.  This API endpoint is the first step in uploading a file to a submission as a student. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  The final step of the file upload workflow will return the attachment data, including the new file id. The caller can then POST to submit the +online_upload+ assignment with these file ids.
@@ -1377,6 +1381,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1452,6 +1457,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1498,6 +1504,13 @@ class SubmissionsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1541,7 +1554,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsCreateFileResponse:
         """Upload a file
 
         Upload a file to a submission.  This API endpoint is the first step in uploading a file to a submission as a student. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  The final step of the file upload workflow will return the attachment data, including the new file id. The caller can then POST to submit the +online_upload+ assignment with these file ids.
@@ -1586,6 +1599,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1615,7 +1629,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsCreateFileResponse]:
         """Upload a file
 
         Upload a file to a submission.  This API endpoint is the first step in uploading a file to a submission as a student. See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  The final step of the file upload workflow will return the attachment data, including the new file id. The caller can then POST to submit the +online_upload+ assignment with these file ids.
@@ -1660,6 +1674,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1735,6 +1750,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1781,6 +1797,13 @@ class SubmissionsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1824,7 +1847,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Get document annotations read state
 
         Return whether annotations made on a submitted document have been read by the student
@@ -1869,6 +1892,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1898,7 +1922,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Get document annotations read state
 
         Return whether annotations made on a submitted document have been read by the student
@@ -1943,6 +1967,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2018,6 +2043,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2114,7 +2140,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Get document annotations read state
 
         Return whether annotations made on a submitted document have been read by the student
@@ -2159,6 +2185,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2188,7 +2215,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Get document annotations read state
 
         Return whether annotations made on a submitted document have been read by the student
@@ -2233,6 +2260,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2308,6 +2336,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6483,7 +6512,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Mark document annotations as read
 
         Indicate that annotations made on a submitted document have been read by the student. Only the student who owns the submission can use this endpoint.  NOTE: Document annotations will be marked as read automatically when they are viewed in Canvas web.
@@ -6528,6 +6557,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6557,7 +6587,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Mark document annotations as read
 
         Indicate that annotations made on a submitted document have been read by the student. Only the student who owns the submission can use this endpoint.  NOTE: Document annotations will be marked as read automatically when they are viewed in Canvas web.
@@ -6602,6 +6632,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6677,6 +6708,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6773,7 +6805,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Mark document annotations as read
 
         Indicate that annotations made on a submitted document have been read by the student. Only the student who owns the submission can use this endpoint.  NOTE: Document annotations will be marked as read automatically when they are viewed in Canvas web.
@@ -6818,6 +6850,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6847,7 +6880,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Mark document annotations as read
 
         Indicate that annotations made on a submitted document have been read by the student. Only the student who owns the submission can use this endpoint.  NOTE: Document annotations will be marked as read automatically when they are viewed in Canvas web.
@@ -6892,6 +6925,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6967,6 +7001,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7063,7 +7098,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Mark rubric assessments as read
 
         Indicate that rubric comments/grading made on a submission have been read by the student being assessed. Only the student who owns the submission can use this endpoint.  NOTE: Rubric assessments will be marked as read automatically when they are viewed in Canvas web.
@@ -7108,6 +7143,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7137,7 +7173,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Mark rubric assessments as read
 
         Indicate that rubric comments/grading made on a submission have been read by the student being assessed. Only the student who owns the submission can use this endpoint.  NOTE: Rubric assessments will be marked as read automatically when they are viewed in Canvas web.
@@ -7182,6 +7218,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7257,6 +7294,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7353,7 +7391,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Mark rubric assessments as read
 
         Indicate that rubric comments/grading made on a submission have been read by the student being assessed. Only the student who owns the submission can use this endpoint.  NOTE: Rubric assessments will be marked as read automatically when they are viewed in Canvas web.
@@ -7398,6 +7436,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7427,7 +7466,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Mark rubric assessments as read
 
         Indicate that rubric comments/grading made on a submission have been read by the student being assessed. Only the student who owns the submission can use this endpoint.  NOTE: Rubric assessments will be marked as read automatically when they are viewed in Canvas web.
@@ -7472,6 +7511,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7547,6 +7587,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7643,7 +7684,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Mark rubric assessments as read
 
         Indicate that rubric comments/grading made on a submission have been read by the student being assessed. Only the student who owns the submission can use this endpoint.  NOTE: Rubric assessments will be marked as read automatically when they are viewed in Canvas web.
@@ -7688,6 +7729,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7717,7 +7759,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Mark rubric assessments as read
 
         Indicate that rubric comments/grading made on a submission have been read by the student being assessed. Only the student who owns the submission can use this endpoint.  NOTE: Rubric assessments will be marked as read automatically when they are viewed in Canvas web.
@@ -7762,6 +7804,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7837,6 +7880,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7933,7 +7977,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Mark rubric assessments as read
 
         Indicate that rubric comments/grading made on a submission have been read by the student being assessed. Only the student who owns the submission can use this endpoint.  NOTE: Rubric assessments will be marked as read automatically when they are viewed in Canvas web.
@@ -7978,6 +8022,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8007,7 +8052,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Mark rubric assessments as read
 
         Indicate that rubric comments/grading made on a submission have been read by the student being assessed. Only the student who owns the submission can use this endpoint.  NOTE: Rubric assessments will be marked as read automatically when they are viewed in Canvas web.
@@ -8052,6 +8097,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8127,6 +8173,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10505,7 +10552,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Get rubric assessments read state
 
         Return whether new rubric comments/grading made on a submission have been seen by the student being assessed.
@@ -10550,6 +10597,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10579,7 +10627,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Get rubric assessments read state
 
         Return whether new rubric comments/grading made on a submission have been seen by the student being assessed.
@@ -10624,6 +10672,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10699,6 +10748,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10795,7 +10845,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Get rubric assessments read state
 
         Return whether new rubric comments/grading made on a submission have been seen by the student being assessed.
@@ -10840,6 +10890,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10869,7 +10920,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Get rubric assessments read state
 
         Return whether new rubric comments/grading made on a submission have been seen by the student being assessed.
@@ -10914,6 +10965,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10989,6 +11041,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11085,7 +11138,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Get rubric assessments read state
 
         Return whether new rubric comments/grading made on a submission have been seen by the student being assessed.
@@ -11130,6 +11183,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11159,7 +11213,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Get rubric assessments read state
 
         Return whether new rubric comments/grading made on a submission have been seen by the student being assessed.
@@ -11204,6 +11258,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11279,6 +11334,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11375,7 +11431,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsRubricAssessmentsReadStateResponse:
         """Get rubric assessments read state
 
         Return whether new rubric comments/grading made on a submission have been seen by the student being assessed.
@@ -11420,6 +11476,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11449,7 +11506,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsRubricAssessmentsReadStateResponse]:
         """Get rubric assessments read state
 
         Return whether new rubric comments/grading made on a submission have been seen by the student being assessed.
@@ -11494,6 +11551,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11569,6 +11627,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsRubricAssessmentsReadStateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11666,7 +11725,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Submission:
         """Get a single submission
 
         Get a single submission, based on user id.
@@ -11714,6 +11773,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11744,7 +11804,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Submission]:
         """Get a single submission
 
         Get a single submission, based on user id.
@@ -11792,6 +11852,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11871,6 +11932,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -11923,6 +11985,13 @@ class SubmissionsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -12589,7 +12658,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Submission:
         """Get a single submission
 
         Get a single submission, based on user id.
@@ -12637,6 +12706,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12667,7 +12737,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Submission]:
         """Get a single submission
 
         Get a single submission, based on user id.
@@ -12715,6 +12785,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12794,6 +12865,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12846,6 +12918,13 @@ class SubmissionsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -12890,7 +12969,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsSubmissionSummaryResponse:
         """Submission Summary
 
         Returns the number of submissions for the given assignment based on gradeable students that fall into three categories: graded, ungraded, not submitted.
@@ -12938,6 +13017,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsSubmissionSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -12968,7 +13048,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsSubmissionSummaryResponse]:
         """Submission Summary
 
         Returns the number of submissions for the given assignment based on gradeable students that fall into three categories: graded, ungraded, not submitted.
@@ -13016,6 +13096,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsSubmissionSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -13095,6 +13176,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsSubmissionSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -13199,7 +13281,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionsSubmissionSummaryResponse:
         """Submission Summary
 
         Returns the number of submissions for the given assignment based on gradeable students that fall into three categories: graded, ungraded, not submitted.
@@ -13247,6 +13329,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsSubmissionSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -13277,7 +13360,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionsSubmissionSummaryResponse]:
         """Submission Summary
 
         Returns the number of submissions for the given assignment based on gradeable students that fall into three categories: graded, ungraded, not submitted.
@@ -13325,6 +13408,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsSubmissionSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -13404,6 +13488,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionsSubmissionSummaryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14044,7 +14129,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Submission:
         """Grade or comment on a submission
 
         Comment on and/or update the grading for a student's assignment submission. If any submission or rubric_assessment arguments are provided, the user must have permission to manage grades in the appropriate context (course or section).
@@ -14092,6 +14177,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14122,7 +14208,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Submission]:
         """Grade or comment on a submission
 
         Comment on and/or update the grading for a student's assignment submission. If any submission or rubric_assessment arguments are provided, the user must have permission to manage grades in the appropriate context (course or section).
@@ -14170,6 +14256,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14249,6 +14336,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14298,6 +14386,13 @@ class SubmissionsApiApi:
             _body_params = submissions_api_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -14355,7 +14450,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Submission:
         """Grade or comment on a submission by anonymous id
 
         Comment on and/or update the grading for a student's assignment submission, fetching the submission by anonymous id (instead of user id). If any submission or rubric_assessment arguments are provided, the user must have permission to manage grades in the appropriate context (course or section).
@@ -14403,6 +14498,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14433,7 +14529,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Submission]:
         """Grade or comment on a submission by anonymous id
 
         Comment on and/or update the grading for a student's assignment submission, fetching the submission by anonymous id (instead of user id). If any submission or rubric_assessment arguments are provided, the user must have permission to manage grades in the appropriate context (course or section).
@@ -14481,6 +14577,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14560,6 +14657,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14609,6 +14707,13 @@ class SubmissionsApiApi:
             _body_params = submissions_api_update_anonymous_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -14666,7 +14771,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Submission:
         """Grade or comment on a submission by anonymous id
 
         Comment on and/or update the grading for a student's assignment submission, fetching the submission by anonymous id (instead of user id). If any submission or rubric_assessment arguments are provided, the user must have permission to manage grades in the appropriate context (course or section).
@@ -14714,6 +14819,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14744,7 +14850,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Submission]:
         """Grade or comment on a submission by anonymous id
 
         Comment on and/or update the grading for a student's assignment submission, fetching the submission by anonymous id (instead of user id). If any submission or rubric_assessment arguments are provided, the user must have permission to manage grades in the appropriate context (course or section).
@@ -14792,6 +14898,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14871,6 +14978,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -14920,6 +15028,13 @@ class SubmissionsApiApi:
             _body_params = submissions_api_update_anonymous_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -14977,7 +15092,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Submission:
         """Grade or comment on a submission
 
         Comment on and/or update the grading for a student's assignment submission. If any submission or rubric_assessment arguments are provided, the user must have permission to manage grades in the appropriate context (course or section).
@@ -15025,6 +15140,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -15055,7 +15171,7 @@ class SubmissionsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Submission]:
         """Grade or comment on a submission
 
         Comment on and/or update the grading for a student's assignment submission. If any submission or rubric_assessment arguments are provided, the user must have permission to manage grades in the appropriate context (course or section).
@@ -15103,6 +15219,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -15182,6 +15299,7 @@ class SubmissionsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Submission",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -15231,6 +15349,13 @@ class SubmissionsApiApi:
             _body_params = submissions_api_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

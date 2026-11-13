@@ -18,8 +18,10 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.rubric_association import RubricAssociation
 from canvas_lms_python_client.models.rubric_associations_create_request import RubricAssociationsCreateRequest
+from canvas_lms_python_client.models.rubric_associations_create_response import RubricAssociationsCreateResponse
+from canvas_lms_python_client.models.rubric_associations_destroy_response import RubricAssociationsDestroyResponse
+from canvas_lms_python_client.models.rubric_associations_update_response import RubricAssociationsUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -57,7 +59,7 @@ class RubricAssociationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RubricAssociation:
+    ) -> RubricAssociationsCreateResponse:
         """Create a RubricAssociation
 
         Returns the rubric with the given id.
@@ -99,7 +101,7 @@ class RubricAssociationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssociation",
+            'default': "RubricAssociationsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +130,7 @@ class RubricAssociationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[RubricAssociation]:
+    ) -> ApiResponse[RubricAssociationsCreateResponse]:
         """Create a RubricAssociation
 
         Returns the rubric with the given id.
@@ -170,7 +172,7 @@ class RubricAssociationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssociation",
+            'default': "RubricAssociationsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -242,7 +244,7 @@ class RubricAssociationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssociation",
+            'default': "RubricAssociationsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -348,7 +350,7 @@ class RubricAssociationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RubricAssociation:
+    ) -> RubricAssociationsDestroyResponse:
         """Delete a RubricAssociation
 
         Delete the RubricAssociation with the given ID
@@ -390,7 +392,7 @@ class RubricAssociationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssociation",
+            'default': "RubricAssociationsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -419,7 +421,7 @@ class RubricAssociationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[RubricAssociation]:
+    ) -> ApiResponse[RubricAssociationsDestroyResponse]:
         """Delete a RubricAssociation
 
         Delete the RubricAssociation with the given ID
@@ -461,7 +463,7 @@ class RubricAssociationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssociation",
+            'default': "RubricAssociationsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -533,7 +535,7 @@ class RubricAssociationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssociation",
+            'default': "RubricAssociationsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -627,7 +629,7 @@ class RubricAssociationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RubricAssociation:
+    ) -> RubricAssociationsUpdateResponse:
         """Update a RubricAssociation
 
         Returns the rubric with the given id.
@@ -672,7 +674,7 @@ class RubricAssociationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssociation",
+            'default': "RubricAssociationsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -702,7 +704,7 @@ class RubricAssociationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[RubricAssociation]:
+    ) -> ApiResponse[RubricAssociationsUpdateResponse]:
         """Update a RubricAssociation
 
         Returns the rubric with the given id.
@@ -747,7 +749,7 @@ class RubricAssociationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssociation",
+            'default': "RubricAssociationsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -823,7 +825,7 @@ class RubricAssociationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "RubricAssociation",
+            'default': "RubricAssociationsUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

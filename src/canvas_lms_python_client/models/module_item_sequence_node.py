@@ -82,6 +82,11 @@ class ModuleItemSequenceNode(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of next
         if self.next:
             _dict['next'] = self.next.to_dict()
+        # set to None if mastery_path (nullable) is None
+        # and model_fields_set contains the field
+        if self.mastery_path is None and "mastery_path" in self.model_fields_set:
+            _dict['mastery_path'] = None
+
         return _dict
 
     @classmethod

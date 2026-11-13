@@ -20,6 +20,7 @@ from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.group_membership import GroupMembership
 from canvas_lms_python_client.models.group_memberships_create_request import GroupMembershipsCreateRequest
+from canvas_lms_python_client.models.group_memberships_destroy_response import GroupMembershipsDestroyResponse
 from canvas_lms_python_client.models.group_memberships_update_request import GroupMembershipsUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -349,7 +350,7 @@ class GroupMembershipsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> GroupMembershipsDestroyResponse:
         """Leave a group
 
         Leave a group if you are allowed to leave (some groups, such as sets of course groups created by teachers, cannot be left). You may also use 'self' in place of a membership_id.
@@ -391,6 +392,7 @@ class GroupMembershipsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GroupMembershipsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -419,7 +421,7 @@ class GroupMembershipsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[GroupMembershipsDestroyResponse]:
         """Leave a group
 
         Leave a group if you are allowed to leave (some groups, such as sets of course groups created by teachers, cannot be left). You may also use 'self' in place of a membership_id.
@@ -461,6 +463,7 @@ class GroupMembershipsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GroupMembershipsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -532,6 +535,7 @@ class GroupMembershipsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GroupMembershipsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -575,6 +579,13 @@ class GroupMembershipsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -617,7 +628,7 @@ class GroupMembershipsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> object:
         """Bulk delete memberships
 
         Bulk deletes memberships by providing an array of user IDs.
@@ -659,7 +670,7 @@ class GroupMembershipsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -688,7 +699,7 @@ class GroupMembershipsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[object]:
         """Bulk delete memberships
 
         Bulk deletes memberships by providing an array of user IDs.
@@ -730,7 +741,7 @@ class GroupMembershipsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -802,7 +813,7 @@ class GroupMembershipsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "object",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -898,7 +909,7 @@ class GroupMembershipsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> GroupMembershipsDestroyResponse:
         """Leave a group
 
         Leave a group if you are allowed to leave (some groups, such as sets of course groups created by teachers, cannot be left). You may also use 'self' in place of a membership_id.
@@ -940,6 +951,7 @@ class GroupMembershipsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GroupMembershipsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -968,7 +980,7 @@ class GroupMembershipsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[GroupMembershipsDestroyResponse]:
         """Leave a group
 
         Leave a group if you are allowed to leave (some groups, such as sets of course groups created by teachers, cannot be left). You may also use 'self' in place of a membership_id.
@@ -1010,6 +1022,7 @@ class GroupMembershipsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GroupMembershipsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1081,6 +1094,7 @@ class GroupMembershipsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "GroupMembershipsDestroyResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1124,6 +1138,13 @@ class GroupMembershipsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

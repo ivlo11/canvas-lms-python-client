@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **appointment_groups_create**
-> appointment_groups_create(appointment_groups_create_request=appointment_groups_create_request)
+> AppointmentGroup appointment_groups_create(appointment_groups_create_request=appointment_groups_create_request)
 
 Create an appointment group
 
@@ -29,6 +29,7 @@ as appointments array, see "List appointment groups" action)
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.models.appointment_groups_create_request import AppointmentGroupsCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -57,7 +58,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create an appointment group
-        await api_instance.appointment_groups_create(appointment_groups_create_request=appointment_groups_create_request)
+        api_response = await api_instance.appointment_groups_create(appointment_groups_create_request=appointment_groups_create_request)
+        print("The response of AppointmentGroupsApi->appointment_groups_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AppointmentGroupsApi->appointment_groups_create: %s\n" % e)
 ```
@@ -73,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AppointmentGroup**](AppointmentGroup.md)
 
 ### Authorization
 
@@ -82,18 +85,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create an appointment group |  -  |
+**0** | AppointmentGroup |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **appointment_groups_destroy**
-> appointment_groups_destroy(id, cancel_reason=cancel_reason)
+> AppointmentGroup appointment_groups_destroy(id, cancel_reason=cancel_reason)
 
 Delete an appointment group
 
@@ -106,6 +109,7 @@ and return the deleted group
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -134,7 +138,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete an appointment group
-        await api_instance.appointment_groups_destroy(id, cancel_reason=cancel_reason)
+        api_response = await api_instance.appointment_groups_destroy(id, cancel_reason=cancel_reason)
+        print("The response of AppointmentGroupsApi->appointment_groups_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AppointmentGroupsApi->appointment_groups_destroy: %s\n" % e)
 ```
@@ -151,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AppointmentGroup**](AppointmentGroup.md)
 
 ### Authorization
 
@@ -160,13 +166,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete an appointment group |  -  |
+**0** | AppointmentGroup |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -426,7 +432,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **appointment_groups_show**
-> appointment_groups_show(id, include_child_events_appointments_all_context_codes=include_child_events_appointments_all_context_codes)
+> AppointmentGroup appointment_groups_show(id, include_child_events_appointments_all_context_codes=include_child_events_appointments_all_context_codes)
 
 Get a single appointment group
 
@@ -438,6 +444,7 @@ Returns information for a single appointment group
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -466,7 +473,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single appointment group
-        await api_instance.appointment_groups_show(id, include_child_events_appointments_all_context_codes=include_child_events_appointments_all_context_codes)
+        api_response = await api_instance.appointment_groups_show(id, include_child_events_appointments_all_context_codes=include_child_events_appointments_all_context_codes)
+        print("The response of AppointmentGroupsApi->appointment_groups_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AppointmentGroupsApi->appointment_groups_show: %s\n" % e)
 ```
@@ -483,7 +492,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AppointmentGroup**](AppointmentGroup.md)
 
 ### Authorization
 
@@ -492,18 +501,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a single appointment group |  -  |
+**0** | AppointmentGroup |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **appointment_groups_update**
-> appointment_groups_update(id, appointment_groups_update_request=appointment_groups_update_request)
+> AppointmentGroup appointment_groups_update(id, appointment_groups_update_request=appointment_groups_update_request)
 
 Update an appointment group
 
@@ -517,6 +526,7 @@ appointments array, see "List appointment groups" action).
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.models.appointment_groups_update_request import AppointmentGroupsUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -546,7 +556,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update an appointment group
-        await api_instance.appointment_groups_update(id, appointment_groups_update_request=appointment_groups_update_request)
+        api_response = await api_instance.appointment_groups_update(id, appointment_groups_update_request=appointment_groups_update_request)
+        print("The response of AppointmentGroupsApi->appointment_groups_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AppointmentGroupsApi->appointment_groups_update: %s\n" % e)
 ```
@@ -563,7 +575,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AppointmentGroup**](AppointmentGroup.md)
 
 ### Authorization
 
@@ -572,13 +584,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update an appointment group |  -  |
+**0** | AppointmentGroup |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

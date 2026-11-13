@@ -9,11 +9,12 @@ Name | Type | Description | Notes
 **id** | **int** | the id of the Assignment Group | [optional] 
 **name** | **str** | the name of the Assignment Group | [optional] 
 **position** | **int** | the position of the Assignment Group | [optional] 
-**group_weight** | **int** | the weight of the Assignment Group | [optional] 
+**group_weight** | **float** | the weight of the Assignment Group | [optional] 
 **sis_source_id** | **str** | the sis source id of the Assignment Group | [optional] 
 **integration_data** | **object** | the integration data of the Assignment Group | [optional] 
-**assignments** | **List[int]** | the assignments in this Assignment Group (see the Assignment API for a detailed list of fields) | [optional] 
+**assignments** | [**List[AssignmentGroupAssignmentsInner]**](AssignmentGroupAssignmentsInner.md) | the assignments in this Assignment Group (see the Assignment API for a detailed list of fields) | [optional] 
 **rules** | [**GradingRules**](GradingRules.md) |  | [optional] 
+**any_assignment_in_closed_grading_period** | **bool** |  | [optional] 
 
 ## Example
 

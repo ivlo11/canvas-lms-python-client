@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 # **calendar_events_api_create**
-> calendar_events_api_create(calendar_events_api_create_request=calendar_events_api_create_request)
+> CalendarEvent calendar_events_api_create(calendar_events_api_create_request=calendar_events_api_create_request)
 
 Create a calendar event
 
@@ -31,6 +31,7 @@ Create and return a new calendar event
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.calendar_event import CalendarEvent
 from canvas_lms_python_client.models.calendar_events_api_create_request import CalendarEventsApiCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -59,7 +60,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a calendar event
-        await api_instance.calendar_events_api_create(calendar_events_api_create_request=calendar_events_api_create_request)
+        api_response = await api_instance.calendar_events_api_create(calendar_events_api_create_request=calendar_events_api_create_request)
+        print("The response of CalendarEventsApiApi->calendar_events_api_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CalendarEventsApiApi->calendar_events_api_create: %s\n" % e)
 ```
@@ -75,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CalendarEvent**](CalendarEvent.md)
 
 ### Authorization
 
@@ -84,18 +87,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create a calendar event |  -  |
+**0** | CalendarEvent |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calendar_events_api_destroy**
-> calendar_events_api_destroy(id, cancel_reason=cancel_reason, which=which)
+> List[CalendarEvent] calendar_events_api_destroy(id, cancel_reason=cancel_reason, which=which)
 
 Delete a calendar event
 
@@ -107,6 +110,7 @@ Delete an event from the calendar and return the deleted event
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.calendar_event import CalendarEvent
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -136,7 +140,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete a calendar event
-        await api_instance.calendar_events_api_destroy(id, cancel_reason=cancel_reason, which=which)
+        api_response = await api_instance.calendar_events_api_destroy(id, cancel_reason=cancel_reason, which=which)
+        print("The response of CalendarEventsApiApi->calendar_events_api_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CalendarEventsApiApi->calendar_events_api_destroy: %s\n" % e)
 ```
@@ -154,7 +160,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[CalendarEvent]**](CalendarEvent.md)
 
 ### Authorization
 
@@ -163,18 +169,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete a calendar event |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calendar_events_api_get_course_timetable**
-> calendar_events_api_get_course_timetable(course_id)
+> CalendarEventsGetCourseTimetableResponse calendar_events_api_get_course_timetable(course_id)
 
 Get course timetable
 
@@ -187,6 +193,7 @@ Returns the last timetable set by the
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.calendar_events_get_course_timetable_response import CalendarEventsGetCourseTimetableResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -214,7 +221,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get course timetable
-        await api_instance.calendar_events_api_get_course_timetable(course_id)
+        api_response = await api_instance.calendar_events_api_get_course_timetable(course_id)
+        print("The response of CalendarEventsApiApi->calendar_events_api_get_course_timetable:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CalendarEventsApiApi->calendar_events_api_get_course_timetable: %s\n" % e)
 ```
@@ -230,7 +239,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CalendarEventsGetCourseTimetableResponse**](CalendarEventsGetCourseTimetableResponse.md)
 
 ### Authorization
 
@@ -239,13 +248,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get course timetable |  -  |
+**0** | CalendarEventsGetCourseTimetableResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -350,7 +359,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calendar_events_api_reserve**
-> calendar_events_api_reserve(id, calendar_events_api_reserve_request=calendar_events_api_reserve_request)
+> CalendarEvent calendar_events_api_reserve(id, calendar_events_api_reserve_request=calendar_events_api_reserve_request)
 
 Reserve a time slot
 
@@ -362,6 +371,7 @@ Reserves a particular time slot and return the new reservation
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.calendar_event import CalendarEvent
 from canvas_lms_python_client.models.calendar_events_api_reserve_request import CalendarEventsApiReserveRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -391,7 +401,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Reserve a time slot
-        await api_instance.calendar_events_api_reserve(id, calendar_events_api_reserve_request=calendar_events_api_reserve_request)
+        api_response = await api_instance.calendar_events_api_reserve(id, calendar_events_api_reserve_request=calendar_events_api_reserve_request)
+        print("The response of CalendarEventsApiApi->calendar_events_api_reserve:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CalendarEventsApiApi->calendar_events_api_reserve: %s\n" % e)
 ```
@@ -408,7 +420,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CalendarEvent**](CalendarEvent.md)
 
 ### Authorization
 
@@ -417,18 +429,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Reserve a time slot |  -  |
+**0** | CalendarEvent |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calendar_events_api_reserve_for_other**
-> calendar_events_api_reserve_for_other(id, participant_id, calendar_events_api_reserve_for_other_request=calendar_events_api_reserve_for_other_request)
+> CalendarEvent calendar_events_api_reserve_for_other(id, participant_id, calendar_events_api_reserve_for_other_request=calendar_events_api_reserve_for_other_request)
 
 Reserve a time slot
 
@@ -440,6 +452,7 @@ Reserves a particular time slot and return the new reservation
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.calendar_event import CalendarEvent
 from canvas_lms_python_client.models.calendar_events_api_reserve_for_other_request import CalendarEventsApiReserveForOtherRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -470,7 +483,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Reserve a time slot
-        await api_instance.calendar_events_api_reserve_for_other(id, participant_id, calendar_events_api_reserve_for_other_request=calendar_events_api_reserve_for_other_request)
+        api_response = await api_instance.calendar_events_api_reserve_for_other(id, participant_id, calendar_events_api_reserve_for_other_request=calendar_events_api_reserve_for_other_request)
+        print("The response of CalendarEventsApiApi->calendar_events_api_reserve_for_other:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CalendarEventsApiApi->calendar_events_api_reserve_for_other: %s\n" % e)
 ```
@@ -488,7 +503,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CalendarEvent**](CalendarEvent.md)
 
 ### Authorization
 
@@ -497,18 +512,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Reserve a time slot |  -  |
+**0** | CalendarEvent |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calendar_events_api_save_enabled_account_calendars**
-> calendar_events_api_save_enabled_account_calendars(calendar_events_api_save_enabled_account_calendars_request=calendar_events_api_save_enabled_account_calendars_request)
+> CalendarEventsSaveEnabledAccountCalendarsResponse calendar_events_api_save_enabled_account_calendars(calendar_events_api_save_enabled_account_calendars_request=calendar_events_api_save_enabled_account_calendars_request)
 
 Save enabled account calendars
 
@@ -521,6 +536,7 @@ Creates and updates the enabled_account_calendars and mark_feature_as_seen user 
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.calendar_events_api_save_enabled_account_calendars_request import CalendarEventsApiSaveEnabledAccountCalendarsRequest
+from canvas_lms_python_client.models.calendar_events_save_enabled_account_calendars_response import CalendarEventsSaveEnabledAccountCalendarsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -548,7 +564,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Save enabled account calendars
-        await api_instance.calendar_events_api_save_enabled_account_calendars(calendar_events_api_save_enabled_account_calendars_request=calendar_events_api_save_enabled_account_calendars_request)
+        api_response = await api_instance.calendar_events_api_save_enabled_account_calendars(calendar_events_api_save_enabled_account_calendars_request=calendar_events_api_save_enabled_account_calendars_request)
+        print("The response of CalendarEventsApiApi->calendar_events_api_save_enabled_account_calendars:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CalendarEventsApiApi->calendar_events_api_save_enabled_account_calendars: %s\n" % e)
 ```
@@ -564,7 +582,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CalendarEventsSaveEnabledAccountCalendarsResponse**](CalendarEventsSaveEnabledAccountCalendarsResponse.md)
 
 ### Authorization
 
@@ -573,18 +591,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Save enabled account calendars |  -  |
+**0** | CalendarEventsSaveEnabledAccountCalendarsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calendar_events_api_set_course_timetable**
-> calendar_events_api_set_course_timetable(course_id, calendar_events_api_set_course_timetable_request=calendar_events_api_set_course_timetable_request)
+> CalendarEventsSaveEnabledAccountCalendarsResponse calendar_events_api_set_course_timetable(course_id, calendar_events_api_set_course_timetable_request=calendar_events_api_set_course_timetable_request)
 
 Set a course timetable
 
@@ -603,6 +621,7 @@ Otherwise, they will be deleted.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.calendar_events_api_set_course_timetable_request import CalendarEventsApiSetCourseTimetableRequest
+from canvas_lms_python_client.models.calendar_events_save_enabled_account_calendars_response import CalendarEventsSaveEnabledAccountCalendarsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -631,7 +650,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Set a course timetable
-        await api_instance.calendar_events_api_set_course_timetable(course_id, calendar_events_api_set_course_timetable_request=calendar_events_api_set_course_timetable_request)
+        api_response = await api_instance.calendar_events_api_set_course_timetable(course_id, calendar_events_api_set_course_timetable_request=calendar_events_api_set_course_timetable_request)
+        print("The response of CalendarEventsApiApi->calendar_events_api_set_course_timetable:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CalendarEventsApiApi->calendar_events_api_set_course_timetable: %s\n" % e)
 ```
@@ -648,7 +669,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CalendarEventsSaveEnabledAccountCalendarsResponse**](CalendarEventsSaveEnabledAccountCalendarsResponse.md)
 
 ### Authorization
 
@@ -657,18 +678,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Set a course timetable |  -  |
+**0** | CalendarEventsSaveEnabledAccountCalendarsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calendar_events_api_set_course_timetable_events**
-> calendar_events_api_set_course_timetable_events(course_id, calendar_events_api_set_course_timetable_events_request=calendar_events_api_set_course_timetable_events_request)
+> CalendarEventsSaveEnabledAccountCalendarsResponse calendar_events_api_set_course_timetable_events(course_id, calendar_events_api_set_course_timetable_events_request=calendar_events_api_set_course_timetable_events_request)
 
 Create or update events directly for a course timetable
 
@@ -684,6 +705,7 @@ this endpoint expects a complete list of events.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.calendar_events_api_set_course_timetable_events_request import CalendarEventsApiSetCourseTimetableEventsRequest
+from canvas_lms_python_client.models.calendar_events_save_enabled_account_calendars_response import CalendarEventsSaveEnabledAccountCalendarsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -712,7 +734,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create or update events directly for a course timetable
-        await api_instance.calendar_events_api_set_course_timetable_events(course_id, calendar_events_api_set_course_timetable_events_request=calendar_events_api_set_course_timetable_events_request)
+        api_response = await api_instance.calendar_events_api_set_course_timetable_events(course_id, calendar_events_api_set_course_timetable_events_request=calendar_events_api_set_course_timetable_events_request)
+        print("The response of CalendarEventsApiApi->calendar_events_api_set_course_timetable_events:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CalendarEventsApiApi->calendar_events_api_set_course_timetable_events: %s\n" % e)
 ```
@@ -729,7 +753,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**CalendarEventsSaveEnabledAccountCalendarsResponse**](CalendarEventsSaveEnabledAccountCalendarsResponse.md)
 
 ### Authorization
 
@@ -738,13 +762,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create or update events directly for a course timetable |  -  |
+**0** | CalendarEventsSaveEnabledAccountCalendarsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -827,7 +851,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **calendar_events_api_update**
-> calendar_events_api_update(id, calendar_events_api_update_request=calendar_events_api_update_request)
+> List[CalendarEvent] calendar_events_api_update(id, calendar_events_api_update_request=calendar_events_api_update_request)
 
 Update a calendar event
 
@@ -839,6 +863,7 @@ Update and return a calendar event
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.calendar_event import CalendarEvent
 from canvas_lms_python_client.models.calendar_events_api_update_request import CalendarEventsApiUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -868,7 +893,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a calendar event
-        await api_instance.calendar_events_api_update(id, calendar_events_api_update_request=calendar_events_api_update_request)
+        api_response = await api_instance.calendar_events_api_update(id, calendar_events_api_update_request=calendar_events_api_update_request)
+        print("The response of CalendarEventsApiApi->calendar_events_api_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CalendarEventsApiApi->calendar_events_api_update: %s\n" % e)
 ```
@@ -885,7 +912,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[CalendarEvent]**](CalendarEvent.md)
 
 ### Authorization
 
@@ -894,13 +921,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update a calendar event |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

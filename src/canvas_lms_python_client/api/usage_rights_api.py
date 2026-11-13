@@ -20,6 +20,7 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.license import License
 from canvas_lms_python_client.models.usage_rights import UsageRights
+from canvas_lms_python_client.models.usage_rights_remove_usage_rights_response import UsageRightsRemoveUsageRightsResponse
 from canvas_lms_python_client.models.usage_rights_set_usage_rights_request import UsageRightsSetUsageRightsRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -848,7 +849,7 @@ class UsageRightsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsageRightsRemoveUsageRightsResponse:
         """Remove usage rights
 
         Removes copyright and license information associated with one or more files
@@ -893,6 +894,7 @@ class UsageRightsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsageRightsRemoveUsageRightsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -922,7 +924,7 @@ class UsageRightsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsageRightsRemoveUsageRightsResponse]:
         """Remove usage rights
 
         Removes copyright and license information associated with one or more files
@@ -967,6 +969,7 @@ class UsageRightsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsageRightsRemoveUsageRightsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1042,6 +1045,7 @@ class UsageRightsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsageRightsRemoveUsageRightsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1094,6 +1098,13 @@ class UsageRightsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1137,7 +1148,7 @@ class UsageRightsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsageRightsRemoveUsageRightsResponse:
         """Remove usage rights
 
         Removes copyright and license information associated with one or more files
@@ -1182,6 +1193,7 @@ class UsageRightsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsageRightsRemoveUsageRightsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1211,7 +1223,7 @@ class UsageRightsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsageRightsRemoveUsageRightsResponse]:
         """Remove usage rights
 
         Removes copyright and license information associated with one or more files
@@ -1256,6 +1268,7 @@ class UsageRightsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsageRightsRemoveUsageRightsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1331,6 +1344,7 @@ class UsageRightsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsageRightsRemoveUsageRightsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1383,6 +1397,13 @@ class UsageRightsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1426,7 +1447,7 @@ class UsageRightsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> UsageRightsRemoveUsageRightsResponse:
         """Remove usage rights
 
         Removes copyright and license information associated with one or more files
@@ -1471,6 +1492,7 @@ class UsageRightsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsageRightsRemoveUsageRightsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1500,7 +1522,7 @@ class UsageRightsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[UsageRightsRemoveUsageRightsResponse]:
         """Remove usage rights
 
         Removes copyright and license information associated with one or more files
@@ -1545,6 +1567,7 @@ class UsageRightsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsageRightsRemoveUsageRightsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1620,6 +1643,7 @@ class UsageRightsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "UsageRightsRemoveUsageRightsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1672,6 +1696,13 @@ class UsageRightsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

@@ -16,8 +16,11 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.provisional_grades_bulk_select_response import ProvisionalGradesBulkSelectResponse
+from canvas_lms_python_client.models.provisional_grades_publish_response import ProvisionalGradesPublishResponse
+from canvas_lms_python_client.models.provisional_grades_status_response import ProvisionalGradesStatusResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -55,7 +58,7 @@ class ProvisionalGradesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[ProvisionalGradesBulkSelectResponse]:
         """Bulk select provisional grades
 
         Choose which provisional grades will be received by associated students for an assignment. The caller must be the final grader for the assignment or an admin with :select_final_grade rights.
@@ -97,6 +100,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ProvisionalGradesBulkSelectResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -125,7 +129,7 @@ class ProvisionalGradesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[ProvisionalGradesBulkSelectResponse]]:
         """Bulk select provisional grades
 
         Choose which provisional grades will be received by associated students for an assignment. The caller must be the final grader for the assignment or an admin with :select_final_grade rights.
@@ -167,6 +171,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ProvisionalGradesBulkSelectResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -238,6 +243,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ProvisionalGradesBulkSelectResponse]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -330,7 +336,7 @@ class ProvisionalGradesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ProvisionalGradesPublishResponse:
         """Publish provisional grades for an assignment
 
         Publish the selected provisional grade for all submissions to an assignment. Use the \"Select provisional grade\" endpoint to choose which provisional grade to publish for a particular submission.  Students not in the moderation set will have their one and only provisional grade published.  WARNING: This is irreversible. This will overwrite existing grades in the gradebook.
@@ -372,6 +378,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ProvisionalGradesPublishResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -400,7 +407,7 @@ class ProvisionalGradesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ProvisionalGradesPublishResponse]:
         """Publish provisional grades for an assignment
 
         Publish the selected provisional grade for all submissions to an assignment. Use the \"Select provisional grade\" endpoint to choose which provisional grade to publish for a particular submission.  Students not in the moderation set will have their one and only provisional grade published.  WARNING: This is irreversible. This will overwrite existing grades in the gradebook.
@@ -442,6 +449,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ProvisionalGradesPublishResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -513,6 +521,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ProvisionalGradesPublishResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -556,6 +565,13 @@ class ProvisionalGradesApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -599,7 +615,7 @@ class ProvisionalGradesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ProvisionalGradesBulkSelectResponse:
         """Select provisional grade
 
         Choose which provisional grade the student should receive for a submission. The caller must be the final grader for the assignment or an admin with :select_final_grade rights.
@@ -644,6 +660,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ProvisionalGradesBulkSelectResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -673,7 +690,7 @@ class ProvisionalGradesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ProvisionalGradesBulkSelectResponse]:
         """Select provisional grade
 
         Choose which provisional grade the student should receive for a submission. The caller must be the final grader for the assignment or an admin with :select_final_grade rights.
@@ -718,6 +735,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ProvisionalGradesBulkSelectResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -793,6 +811,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ProvisionalGradesBulkSelectResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -889,7 +908,7 @@ class ProvisionalGradesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ProvisionalGradesStatusResponse:
         """Show provisional grade status for a student
 
         Tell whether the student's submission needs one or more provisional grades.
@@ -934,6 +953,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ProvisionalGradesStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -963,7 +983,7 @@ class ProvisionalGradesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ProvisionalGradesStatusResponse]:
         """Show provisional grade status for a student
 
         Tell whether the student's submission needs one or more provisional grades.
@@ -1008,6 +1028,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ProvisionalGradesStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1083,6 +1104,7 @@ class ProvisionalGradesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ProvisionalGradesStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **outcome_results_contributing_scores**
-> outcome_results_contributing_scores(course_id, outcome_id, user_ids=user_ids, only_assignment_alignments=only_assignment_alignments, show_unpublished_assignments=show_unpublished_assignments)
+> OutcomeResultsContributingScoresResponse outcome_results_contributing_scores(course_id, outcome_id, user_ids=user_ids, only_assignment_alignments=only_assignment_alignments, show_unpublished_assignments=show_unpublished_assignments)
 
 Get contributing scores
 
@@ -29,6 +29,7 @@ Returns all alignments for the outcome in the course context.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.outcome_results_contributing_scores_response import OutcomeResultsContributingScoresResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -60,7 +61,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get contributing scores
-        await api_instance.outcome_results_contributing_scores(course_id, outcome_id, user_ids=user_ids, only_assignment_alignments=only_assignment_alignments, show_unpublished_assignments=show_unpublished_assignments)
+        api_response = await api_instance.outcome_results_contributing_scores(course_id, outcome_id, user_ids=user_ids, only_assignment_alignments=only_assignment_alignments, show_unpublished_assignments=show_unpublished_assignments)
+        print("The response of OutcomeResultsApi->outcome_results_contributing_scores:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling OutcomeResultsApi->outcome_results_contributing_scores: %s\n" % e)
 ```
@@ -80,7 +83,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**OutcomeResultsContributingScoresResponse**](OutcomeResultsContributingScoresResponse.md)
 
 ### Authorization
 
@@ -95,12 +98,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get contributing scores |  -  |
+**0** | OutcomeResultsContributingScoresResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **outcome_results_enqueue_outcome_rollup_calculation**
-> object outcome_results_enqueue_outcome_rollup_calculation(outcome_results_enqueue_outcome_rollup_calculation_request=outcome_results_enqueue_outcome_rollup_calculation_request)
+> RollupJob outcome_results_enqueue_outcome_rollup_calculation(outcome_results_enqueue_outcome_rollup_calculation_request=outcome_results_enqueue_outcome_rollup_calculation_request)
 
 Enqueue a delayed Outcome Rollup Calculation Job
 
@@ -111,6 +114,7 @@ Enqueue a delayed Outcome Rollup Calculation Job
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.outcome_results_enqueue_outcome_rollup_calculation_request import OutcomeResultsEnqueueOutcomeRollupCalculationRequest
+from canvas_lms_python_client.models.rollup_job import RollupJob
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -156,7 +160,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**RollupJob**](RollupJob.md)
 
 ### Authorization
 
@@ -263,12 +267,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get outcome results |  -  |
+**0** | OutcomeResultsIndexResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **outcome_results_mastery_distribution**
-> object outcome_results_mastery_distribution(course_id, exclude=exclude, outcome_ids=outcome_ids, student_ids=student_ids, include=include, only_assignment_alignments=only_assignment_alignments, show_unpublished_assignments=show_unpublished_assignments, add_defaults=add_defaults)
+> MasteryDistributionResponse outcome_results_mastery_distribution(course_id, exclude=exclude, outcome_ids=outcome_ids, student_ids=student_ids, include=include, only_assignment_alignments=only_assignment_alignments, show_unpublished_assignments=show_unpublished_assignments, add_defaults=add_defaults)
 
 Get mastery distribution
 
@@ -282,6 +286,7 @@ distribution statistics for charts and analytics.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.mastery_distribution_response import MasteryDistributionResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -341,7 +346,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**MasteryDistributionResponse**](MasteryDistributionResponse.md)
 
 ### Authorization
 
@@ -436,7 +441,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **outcome_results_rollups**
-> outcome_results_rollups(course_id, aggregate=aggregate, aggregate_stat=aggregate_stat, user_ids=user_ids, outcome_ids=outcome_ids, include=include, exclude=exclude, sort_by=sort_by, sort_outcome_id=sort_outcome_id, sort_order=sort_order, add_defaults=add_defaults, contributing_scores=contributing_scores)
+> OutcomeResultsRollupsResponse outcome_results_rollups(course_id, aggregate=aggregate, aggregate_stat=aggregate_stat, user_ids=user_ids, outcome_ids=outcome_ids, include=include, exclude=exclude, sort_by=sort_by, sort_outcome_id=sort_outcome_id, sort_order=sort_order, add_defaults=add_defaults, contributing_scores=contributing_scores, page=page, per_page=per_page)
 
 Get outcome result rollups
 
@@ -449,6 +454,7 @@ context.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.outcome_results_rollups_response import OutcomeResultsRollupsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -484,10 +490,14 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     sort_order = 'sort_order_example' # str | If sorting requested, then this allows changing the default sort order of ascending to descending. (optional)
     add_defaults = True # bool | If defaults are requested, then color and mastery level defaults will be added to outcome ratings in the rollup. This will only take effect if the Account Level Mastery Scales FF is DISABLED (optional)
     contributing_scores = True # bool | **DEPRECATED**: This parameter is deprecated. Use the separate GET /api/v1/courses/:course_id/outcomes/:outcome_id/contributing_scores endpoint instead to fetch contributing scores for a specific outcome. If contributing scores are requested, then each individual outcome score will also include all graded artifacts that contributed to the outcome score (optional)
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # Get outcome result rollups
-        await api_instance.outcome_results_rollups(course_id, aggregate=aggregate, aggregate_stat=aggregate_stat, user_ids=user_ids, outcome_ids=outcome_ids, include=include, exclude=exclude, sort_by=sort_by, sort_outcome_id=sort_outcome_id, sort_order=sort_order, add_defaults=add_defaults, contributing_scores=contributing_scores)
+        api_response = await api_instance.outcome_results_rollups(course_id, aggregate=aggregate, aggregate_stat=aggregate_stat, user_ids=user_ids, outcome_ids=outcome_ids, include=include, exclude=exclude, sort_by=sort_by, sort_outcome_id=sort_outcome_id, sort_order=sort_order, add_defaults=add_defaults, contributing_scores=contributing_scores, page=page, per_page=per_page)
+        print("The response of OutcomeResultsApi->outcome_results_rollups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling OutcomeResultsApi->outcome_results_rollups: %s\n" % e)
 ```
@@ -511,10 +521,12 @@ Name | Type | Description  | Notes
  **sort_order** | **str**| If sorting requested, then this allows changing the default sort order of ascending to descending. | [optional] 
  **add_defaults** | **bool**| If defaults are requested, then color and mastery level defaults will be added to outcome ratings in the rollup. This will only take effect if the Account Level Mastery Scales FF is DISABLED | [optional] 
  **contributing_scores** | **bool**| **DEPRECATED**: This parameter is deprecated. Use the separate GET /api/v1/courses/:course_id/outcomes/:outcome_id/contributing_scores endpoint instead to fetch contributing scores for a specific outcome. If contributing scores are requested, then each individual outcome score will also include all graded artifacts that contributed to the outcome score | [optional] 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 
-void (empty response body)
+[**OutcomeResultsRollupsResponse**](OutcomeResultsRollupsResponse.md)
 
 ### Authorization
 
@@ -529,7 +541,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get outcome result rollups |  -  |
+**0** | OutcomeResultsRollupsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

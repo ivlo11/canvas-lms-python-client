@@ -93,6 +93,31 @@ class DiscussionEntry(BaseModel):
             for _item_recent_replies in self.recent_replies:
                 _items.append(_item_recent_replies.to_dict() if _item_recent_replies is not None else None)
             _dict['recent_replies'] = _items
+        # set to None if editor_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.editor_id is None and "editor_id" in self.model_fields_set:
+            _dict['editor_id'] = None
+
+        # set to None if message (nullable) is None
+        # and model_fields_set contains the field
+        if self.message is None and "message" in self.model_fields_set:
+            _dict['message'] = None
+
+        # set to None if parent_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.parent_id is None and "parent_id" in self.model_fields_set:
+            _dict['parent_id'] = None
+
+        # set to None if rating_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.rating_count is None and "rating_count" in self.model_fields_set:
+            _dict['rating_count'] = None
+
+        # set to None if rating_sum (nullable) is None
+        # and model_fields_set contains the field
+        if self.rating_sum is None and "rating_sum" in self.model_fields_set:
+            _dict['rating_sum'] = None
+
         return _dict
 
     @classmethod

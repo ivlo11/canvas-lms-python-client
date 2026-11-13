@@ -21,7 +21,10 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.file import File
+from canvas_lms_python_client.models.sis_import_batch_mode_term_id import SisImportBatchModeTermId
+from canvas_lms_python_client.models.sis_import_csv_attachments_inner import SisImportCsvAttachmentsInner
 from canvas_lms_python_client.models.sis_import_data import SisImportData
+from canvas_lms_python_client.models.sis_import_progress import SisImportProgress
 from canvas_lms_python_client.models.sis_import_statistics import SisImportStatistics
 from canvas_lms_python_client.models.user import User
 from typing import Optional, Set
@@ -39,13 +42,13 @@ class SisImport(BaseModel):
     workflow_state: Optional[StrictStr] = Field(default=None, description="The current state of the SIS import.  - 'initializing': The SIS import is being created, if this gets stuck in initializing, it will not import and will continue on to next import.  - 'created': The SIS import has been created.  - 'importing': The SIS import is currently processing.  - 'cleanup_batch': The SIS import is currently cleaning up courses, sections, and enrollments not included in the batch for batch_mode imports.  - 'imported': The SIS import has completed successfully.  - 'imported_with_messages': The SIS import completed with errors or warnings.  - 'aborted': The SIS import was aborted.  - 'failed_with_messages': The SIS import failed with errors.  - 'failed': The SIS import failed.  - 'restoring': The SIS import is restoring states of imported items.  - 'partially_restored': The SIS import is restored some of the states of imported items. This is generally due to passing a param like undelete only.  - 'restored': The SIS import is restored all of the states of imported items.", json_schema_extra={"examples": ["imported"]})
     data: Optional[SisImportData] = None
     statistics: Optional[SisImportStatistics] = None
-    progress: Optional[StrictStr] = Field(default=None, description="The progress of the SIS import. The progress will reset when using batch_mode and have a different progress for the cleanup stage", json_schema_extra={"examples": ["100"]})
+    progress: Optional[SisImportProgress] = None
     errors_attachment: Optional[File] = None
     user: Optional[User] = None
     processing_warnings: Optional[List[List[StrictStr]]] = Field(default=None, description="Only imports that are complete will get this data. An array of CSV_file/warning_message pairs.", json_schema_extra={"examples": [[["students.csv", "user John Doe has already claimed john_doe's requested login information, skipping"]]]})
     processing_errors: Optional[List[List[StrictStr]]] = Field(default=None, description="An array of CSV_file/error_message pairs.", json_schema_extra={"examples": [[["students.csv", "Error while importing CSV. Please contact support."]]]})
     batch_mode: Optional[StrictBool] = Field(default=None, description="Whether the import was run in batch mode.", json_schema_extra={"examples": [True]})
-    batch_mode_term_id: Optional[StrictStr] = Field(default=None, description="The term the batch was limited to.", json_schema_extra={"examples": ["1234"]})
+    batch_mode_term_id: Optional[SisImportBatchModeTermId] = None
     multi_term_batch_mode: Optional[StrictBool] = Field(default=None, description="Enables batch mode against all terms in term file. Requires change_threshold to be set.", json_schema_extra={"examples": [False]})
     skip_deletes: Optional[StrictBool] = Field(default=None, description="When set the import will skip any deletes.", json_schema_extra={"examples": [False]})
     override_sis_stickiness: Optional[StrictBool] = Field(default=None, description="Whether UI changes were overridden.", json_schema_extra={"examples": [False]})
@@ -55,8 +58,16 @@ class SisImport(BaseModel):
     diffing_data_set_identifier: Optional[StrictStr] = Field(default=None, description="The identifier of the data set that this SIS batch diffs against", json_schema_extra={"examples": ["account-5-enrollments"]})
     diffing_remaster: Optional[StrictBool] = Field(default=None, description="Whether diffing remaster data was enabled.", json_schema_extra={"examples": [False]})
     diffed_against_import_id: Optional[StrictInt] = Field(default=None, description="The ID of the SIS Import that this import was diffed against", json_schema_extra={"examples": [1]})
-    csv_attachments: Optional[List[List[File]]] = Field(default=None, description="An array of CSV files for processing", json_schema_extra={"examples": [[]]})
-    __properties: ClassVar[List[str]] = ["id", "created_at", "ended_at", "updated_at", "workflow_state", "data", "statistics", "progress", "errors_attachment", "user", "processing_warnings", "processing_errors", "batch_mode", "batch_mode_term_id", "multi_term_batch_mode", "skip_deletes", "override_sis_stickiness", "add_sis_stickiness", "clear_sis_stickiness", "diffing_threshold_exceeded", "diffing_data_set_identifier", "diffing_remaster", "diffed_against_import_id", "csv_attachments"]
+    csv_attachments: Optional[List[SisImportCsvAttachmentsInner]] = Field(default=None, description="An array of CSV files for processing", json_schema_extra={"examples": [[]]})
+    change_threshold: Optional[StrictInt] = None
+    diff_row_count_threshold: Optional[StrictInt] = None
+    diffed_csv_attachments: Optional[List[Dict[str, Any]]] = None
+    diffing_drop_status: Optional[StrictStr] = None
+    diffing_user_remove_status: Optional[Any] = None
+    started_at: Optional[StrictStr] = None
+    update_sis_id_if_login_claimed: Optional[StrictBool] = None
+    pre_attachment: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "created_at", "ended_at", "updated_at", "workflow_state", "data", "statistics", "progress", "errors_attachment", "user", "processing_warnings", "processing_errors", "batch_mode", "batch_mode_term_id", "multi_term_batch_mode", "skip_deletes", "override_sis_stickiness", "add_sis_stickiness", "clear_sis_stickiness", "diffing_threshold_exceeded", "diffing_data_set_identifier", "diffing_remaster", "diffed_against_import_id", "csv_attachments", "change_threshold", "diff_row_count_threshold", "diffed_csv_attachments", "diffing_drop_status", "diffing_user_remove_status", "started_at", "update_sis_id_if_login_claimed", "pre_attachment"]
 
     @field_validator('workflow_state')
     def workflow_state_validate_enum(cls, value):
@@ -113,20 +124,114 @@ class SisImport(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of statistics
         if self.statistics:
             _dict['statistics'] = self.statistics.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of progress
+        if self.progress:
+            _dict['progress'] = self.progress.to_dict()
         # override the default output from pydantic by calling `to_dict()` of errors_attachment
         if self.errors_attachment:
             _dict['errors_attachment'] = self.errors_attachment.to_dict()
         # override the default output from pydantic by calling `to_dict()` of user
         if self.user:
             _dict['user'] = self.user.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of each item in csv_attachments (list of list)
+        # override the default output from pydantic by calling `to_dict()` of batch_mode_term_id
+        if self.batch_mode_term_id:
+            _dict['batch_mode_term_id'] = self.batch_mode_term_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in csv_attachments (list)
         _items = []
         if self.csv_attachments:
             for _item_csv_attachments in self.csv_attachments:
-                _items.append(
-                     [_inner_item.to_dict() if _inner_item is not None else None for _inner_item in _item_csv_attachments] if _item_csv_attachments is not None else None
-                )
+                _items.append(_item_csv_attachments.to_dict() if _item_csv_attachments is not None else None)
             _dict['csv_attachments'] = _items
+        # set to None if ended_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.ended_at is None and "ended_at" in self.model_fields_set:
+            _dict['ended_at'] = None
+
+        # set to None if progress (nullable) is None
+        # and model_fields_set contains the field
+        if self.progress is None and "progress" in self.model_fields_set:
+            _dict['progress'] = None
+
+        # set to None if batch_mode (nullable) is None
+        # and model_fields_set contains the field
+        if self.batch_mode is None and "batch_mode" in self.model_fields_set:
+            _dict['batch_mode'] = None
+
+        # set to None if batch_mode_term_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.batch_mode_term_id is None and "batch_mode_term_id" in self.model_fields_set:
+            _dict['batch_mode_term_id'] = None
+
+        # set to None if multi_term_batch_mode (nullable) is None
+        # and model_fields_set contains the field
+        if self.multi_term_batch_mode is None and "multi_term_batch_mode" in self.model_fields_set:
+            _dict['multi_term_batch_mode'] = None
+
+        # set to None if skip_deletes (nullable) is None
+        # and model_fields_set contains the field
+        if self.skip_deletes is None and "skip_deletes" in self.model_fields_set:
+            _dict['skip_deletes'] = None
+
+        # set to None if override_sis_stickiness (nullable) is None
+        # and model_fields_set contains the field
+        if self.override_sis_stickiness is None and "override_sis_stickiness" in self.model_fields_set:
+            _dict['override_sis_stickiness'] = None
+
+        # set to None if add_sis_stickiness (nullable) is None
+        # and model_fields_set contains the field
+        if self.add_sis_stickiness is None and "add_sis_stickiness" in self.model_fields_set:
+            _dict['add_sis_stickiness'] = None
+
+        # set to None if clear_sis_stickiness (nullable) is None
+        # and model_fields_set contains the field
+        if self.clear_sis_stickiness is None and "clear_sis_stickiness" in self.model_fields_set:
+            _dict['clear_sis_stickiness'] = None
+
+        # set to None if diffing_data_set_identifier (nullable) is None
+        # and model_fields_set contains the field
+        if self.diffing_data_set_identifier is None and "diffing_data_set_identifier" in self.model_fields_set:
+            _dict['diffing_data_set_identifier'] = None
+
+        # set to None if diffing_remaster (nullable) is None
+        # and model_fields_set contains the field
+        if self.diffing_remaster is None and "diffing_remaster" in self.model_fields_set:
+            _dict['diffing_remaster'] = None
+
+        # set to None if diffed_against_import_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.diffed_against_import_id is None and "diffed_against_import_id" in self.model_fields_set:
+            _dict['diffed_against_import_id'] = None
+
+        # set to None if change_threshold (nullable) is None
+        # and model_fields_set contains the field
+        if self.change_threshold is None and "change_threshold" in self.model_fields_set:
+            _dict['change_threshold'] = None
+
+        # set to None if diff_row_count_threshold (nullable) is None
+        # and model_fields_set contains the field
+        if self.diff_row_count_threshold is None and "diff_row_count_threshold" in self.model_fields_set:
+            _dict['diff_row_count_threshold'] = None
+
+        # set to None if diffing_drop_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.diffing_drop_status is None and "diffing_drop_status" in self.model_fields_set:
+            _dict['diffing_drop_status'] = None
+
+        # set to None if diffing_user_remove_status (nullable) is None
+        # and model_fields_set contains the field
+        if self.diffing_user_remove_status is None and "diffing_user_remove_status" in self.model_fields_set:
+            _dict['diffing_user_remove_status'] = None
+
+        # set to None if started_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.started_at is None and "started_at" in self.model_fields_set:
+            _dict['started_at'] = None
+
+        # set to None if update_sis_id_if_login_claimed (nullable) is None
+        # and model_fields_set contains the field
+        if self.update_sis_id_if_login_claimed is None and "update_sis_id_if_login_claimed" in self.model_fields_set:
+            _dict['update_sis_id_if_login_claimed'] = None
+
         return _dict
 
     @classmethod
@@ -146,13 +251,13 @@ class SisImport(BaseModel):
             "workflow_state": obj.get("workflow_state"),
             "data": SisImportData.from_dict(obj["data"]) if obj.get("data") is not None else None,
             "statistics": SisImportStatistics.from_dict(obj["statistics"]) if obj.get("statistics") is not None else None,
-            "progress": obj.get("progress"),
+            "progress": SisImportProgress.from_dict(obj["progress"]) if obj.get("progress") is not None else None,
             "errors_attachment": File.from_dict(obj["errors_attachment"]) if obj.get("errors_attachment") is not None else None,
             "user": User.from_dict(obj["user"]) if obj.get("user") is not None else None,
             "processing_warnings": obj.get("processing_warnings"),
             "processing_errors": obj.get("processing_errors"),
             "batch_mode": obj.get("batch_mode"),
-            "batch_mode_term_id": obj.get("batch_mode_term_id"),
+            "batch_mode_term_id": SisImportBatchModeTermId.from_dict(obj["batch_mode_term_id"]) if obj.get("batch_mode_term_id") is not None else None,
             "multi_term_batch_mode": obj.get("multi_term_batch_mode"),
             "skip_deletes": obj.get("skip_deletes"),
             "override_sis_stickiness": obj.get("override_sis_stickiness"),
@@ -162,10 +267,15 @@ class SisImport(BaseModel):
             "diffing_data_set_identifier": obj.get("diffing_data_set_identifier"),
             "diffing_remaster": obj.get("diffing_remaster"),
             "diffed_against_import_id": obj.get("diffed_against_import_id"),
-            "csv_attachments": [
-                    [File.from_dict(_inner_item) for _inner_item in _item] if _item is not None else None
-                    for _item in obj["csv_attachments"]
-                ] if obj.get("csv_attachments") is not None else None
+            "csv_attachments": [SisImportCsvAttachmentsInner.from_dict(_item) for _item in obj["csv_attachments"]] if obj.get("csv_attachments") is not None else None,
+            "change_threshold": obj.get("change_threshold"),
+            "diff_row_count_threshold": obj.get("diff_row_count_threshold"),
+            "diffed_csv_attachments": obj.get("diffed_csv_attachments"),
+            "diffing_drop_status": obj.get("diffing_drop_status"),
+            "diffing_user_remove_status": obj.get("diffing_user_remove_status"),
+            "started_at": obj.get("started_at"),
+            "update_sis_id_if_login_claimed": obj.get("update_sis_id_if_login_claimed"),
+            "pre_attachment": obj.get("pre_attachment")
         })
         return _obj
 

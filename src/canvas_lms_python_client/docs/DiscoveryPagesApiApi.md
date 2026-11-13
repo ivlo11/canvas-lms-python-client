@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **discovery_pages_api_show**
-> DiscoveryPage discovery_pages_api_show()
+> DiscoveryPagesApiShowResponse discovery_pages_api_show()
 
 Get Discovery Page
 
@@ -22,7 +22,7 @@ Get the discovery page configuration for the domain root account.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.discovery_page import DiscoveryPage
+from canvas_lms_python_client.models.discovery_pages_api_show_response import DiscoveryPagesApiShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -64,7 +64,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**DiscoveryPage**](DiscoveryPage.md)
+[**DiscoveryPagesApiShowResponse**](DiscoveryPagesApiShowResponse.md)
 
 ### Authorization
 
@@ -79,7 +79,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | DiscoveryPage |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discovery_pages_api_upsert**
-> DiscoveryPage discovery_pages_api_upsert(discovery_pages_api_upsert_request=discovery_pages_api_upsert_request)
+> DiscoveryPagesApiUpsertResponse discovery_pages_api_upsert(discovery_pages_api_upsert_request=discovery_pages_api_upsert_request)
 
 Update Discovery Page
 
@@ -182,8 +182,8 @@ primary, secondary, and active fields. Any fields omitted will be removed.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.discovery_page import DiscoveryPage
 from canvas_lms_python_client.models.discovery_pages_api_upsert_request import DiscoveryPagesApiUpsertRequest
+from canvas_lms_python_client.models.discovery_pages_api_upsert_response import DiscoveryPagesApiUpsertResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -229,7 +229,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DiscoveryPage**](DiscoveryPage.md)
+[**DiscoveryPagesApiUpsertResponse**](DiscoveryPagesApiUpsertResponse.md)
 
 ### Authorization
 
@@ -244,7 +244,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | DiscoveryPage |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

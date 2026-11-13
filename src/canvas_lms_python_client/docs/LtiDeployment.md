@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **context_name** | **str** | The name of the context this deployment is associated with | [optional] 
 **workflow_state** | **str** | The workflow state of the deployment | [optional] 
 **context_controls** | [**List[LtiContextControl]**](LtiContextControl.md) | The context controls for this deployment. Only present in the LTI Context Controls - List All Context Controls endpoint. | [optional] 
+**root_account_deployment** | **bool** |  | [optional] 
 
 ## Example
 

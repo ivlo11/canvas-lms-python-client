@@ -12,6 +12,22 @@ Name | Type | Description | Notes
 **items** | [**List[ModuleItem]**](ModuleItem.md) | list of module items | [optional] 
 **context_id** | **int** | the ID of the context for this course pace | [optional] 
 **context_type** | **str** | The given context for the course pace | [optional] 
+**items_count** | **int** |  | [optional] 
+**items_url** | **str** |  | [optional] 
+**prerequisite_module_ids** | **List[int]** |  | [optional] 
+**publish_final_grade** | **bool** |  | [optional] 
+**published** | **bool** |  | [optional] 
+**require_sequential_progress** | **bool** |  | [optional] 
+**requirement_type** | **str** |  | [optional] 
+**unlock_at** | **str** |  | [optional] 
+**completed_at** | **str** |  | [optional] 
+**estimated_duration** | **str** |  | [optional] 
+**requirement_count** | **int** |  | [optional] 
+**state** | **str** |  | [optional] 
+**publish_warning** | **bool** |  | [optional] 
+**publish_warning_items** | **List[object]** |  | [optional] 
+**relock_warning** | **bool** |  | [optional] 
+**unpublish_warning** | **bool** |  | [optional] 
 
 ## Example
 

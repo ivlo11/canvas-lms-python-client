@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +29,20 @@ class FeatureFlag(BaseModel):
     """ # noqa: E501
     state: Optional[StrictStr] = Field(default=None, description="The current state of the feature flag", json_schema_extra={"examples": ["on"]})
     name: Optional[StrictStr] = Field(default=None, description="The name of the feature flag", json_schema_extra={"examples": ["New Feature"]})
-    __properties: ClassVar[List[str]] = ["state", "name"]
+    context_id: Optional[StrictInt] = None
+    context_type: Optional[StrictStr] = None
+    feature: Optional[StrictStr] = None
+    hidden: Optional[StrictBool] = None
+    locked: Optional[StrictBool] = None
+    locking_account_id: Optional[Any] = None
+    parent_state: Optional[StrictStr] = None
+    transitions: Optional[Dict[str, Any]] = None
+    applies_to: Optional[StrictStr] = None
+    autoexpand: Optional[StrictBool] = None
+    beta: Optional[StrictBool] = None
+    description: Optional[Dict[str, Any]] = None
+    display_name: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["state", "name", "context_id", "context_type", "feature", "hidden", "locked", "locking_account_id", "parent_state", "transitions", "applies_to", "autoexpand", "beta", "description", "display_name"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -70,6 +83,16 @@ class FeatureFlag(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if locking_account_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.locking_account_id is None and "locking_account_id" in self.model_fields_set:
+            _dict['locking_account_id'] = None
+
+        # set to None if parent_state (nullable) is None
+        # and model_fields_set contains the field
+        if self.parent_state is None and "parent_state" in self.model_fields_set:
+            _dict['parent_state'] = None
+
         return _dict
 
     @classmethod
@@ -83,7 +106,20 @@ class FeatureFlag(BaseModel):
 
         _obj = cls.model_validate({
             "state": obj.get("state"),
-            "name": obj.get("name")
+            "name": obj.get("name"),
+            "context_id": obj.get("context_id"),
+            "context_type": obj.get("context_type"),
+            "feature": obj.get("feature"),
+            "hidden": obj.get("hidden"),
+            "locked": obj.get("locked"),
+            "locking_account_id": obj.get("locking_account_id"),
+            "parent_state": obj.get("parent_state"),
+            "transitions": obj.get("transitions"),
+            "applies_to": obj.get("applies_to"),
+            "autoexpand": obj.get("autoexpand"),
+            "beta": obj.get("beta"),
+            "description": obj.get("description"),
+            "display_name": obj.get("display_name")
         })
         return _obj
 

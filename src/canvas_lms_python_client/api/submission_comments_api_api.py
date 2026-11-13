@@ -20,6 +20,7 @@ from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.submission_comment import SubmissionComment
 from canvas_lms_python_client.models.submission_comments_api_update_request import SubmissionCommentsApiUpdateRequest
+from canvas_lms_python_client.models.submission_comments_create_file_response import SubmissionCommentsCreateFileResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -58,7 +59,7 @@ class SubmissionCommentsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SubmissionCommentsCreateFileResponse:
         """Upload a file
 
         Upload a file to attach to a submission comment  See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  The final step of the file upload workflow will return the attachment data, including the new file id. The caller can then PUT the file_id to the submission API to attach it to a comment
@@ -103,6 +104,7 @@ class SubmissionCommentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionCommentsCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -132,7 +134,7 @@ class SubmissionCommentsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SubmissionCommentsCreateFileResponse]:
         """Upload a file
 
         Upload a file to attach to a submission comment  See the {file:file.file_uploads.html File Upload Documentation} for details on the file upload workflow.  The final step of the file upload workflow will return the attachment data, including the new file id. The caller can then PUT the file_id to the submission API to attach it to a comment
@@ -177,6 +179,7 @@ class SubmissionCommentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionCommentsCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -252,6 +255,7 @@ class SubmissionCommentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SubmissionCommentsCreateFileResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -298,6 +302,13 @@ class SubmissionCommentsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

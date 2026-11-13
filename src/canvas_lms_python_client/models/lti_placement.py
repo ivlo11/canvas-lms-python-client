@@ -51,7 +51,8 @@ class LtiPlacement(BaseModel):
     default: Optional[StrictStr] = Field(default=None, description="Default display state for course_navigation. If 'enabled', will show in course sidebar. If 'disabled', will be hidden.", json_schema_extra={"examples": ["disabled"]})
     accept_media_types: Optional[StrictStr] = Field(default=None, description="Comma-separated list of media types that the tool can accept. Only valid for file_item.", json_schema_extra={"examples": ["image/*,video/*"]})
     use_tray: Optional[StrictBool] = Field(default=None, description="If true, the tool will be launched in the tray. Only used by the editor_button placement.", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["placement", "enabled", "message_type", "text", "labels", "custom_fields", "selection_height", "selection_width", "launch_height", "launch_width", "icon_url", "canvas_icon_class", "required_permissions", "windowTarget", "display_type", "url", "target_link_uri", "visibility", "prefer_sis_email", "oauth_compliant", "icon_svg_path_64", "default", "accept_media_types", "use_tray"]
+    title: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["placement", "enabled", "message_type", "text", "labels", "custom_fields", "selection_height", "selection_width", "launch_height", "launch_width", "icon_url", "canvas_icon_class", "required_permissions", "windowTarget", "display_type", "url", "target_link_uri", "visibility", "prefer_sis_email", "oauth_compliant", "icon_svg_path_64", "default", "accept_media_types", "use_tray", "title"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -127,7 +128,8 @@ class LtiPlacement(BaseModel):
             "icon_svg_path_64": obj.get("icon_svg_path_64"),
             "default": obj.get("default"),
             "accept_media_types": obj.get("accept_media_types"),
-            "use_tray": obj.get("use_tray")
+            "use_tray": obj.get("use_tray"),
+            "title": obj.get("title")
         })
         return _obj
 

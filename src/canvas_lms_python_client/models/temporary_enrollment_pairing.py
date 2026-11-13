@@ -29,7 +29,13 @@ class TemporaryEnrollmentPairing(BaseModel):
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="the ID of the temporary enrollment pairing", json_schema_extra={"examples": [1]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="The current status of the temporary enrollment pairing", json_schema_extra={"examples": ["active"]})
-    __properties: ClassVar[List[str]] = ["id", "workflow_state"]
+    created_at: Optional[StrictStr] = None
+    created_by_id: Optional[StrictInt] = None
+    deleted_by_id: Optional[StrictInt] = None
+    ending_enrollment_state: Optional[StrictStr] = None
+    root_account_id: Optional[StrictInt] = None
+    updated_at: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "workflow_state", "created_at", "created_by_id", "deleted_by_id", "ending_enrollment_state", "root_account_id", "updated_at"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -70,6 +76,36 @@ class TemporaryEnrollmentPairing(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if id (nullable) is None
+        # and model_fields_set contains the field
+        if self.id is None and "id" in self.model_fields_set:
+            _dict['id'] = None
+
+        # set to None if created_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.created_at is None and "created_at" in self.model_fields_set:
+            _dict['created_at'] = None
+
+        # set to None if created_by_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.created_by_id is None and "created_by_id" in self.model_fields_set:
+            _dict['created_by_id'] = None
+
+        # set to None if deleted_by_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.deleted_by_id is None and "deleted_by_id" in self.model_fields_set:
+            _dict['deleted_by_id'] = None
+
+        # set to None if ending_enrollment_state (nullable) is None
+        # and model_fields_set contains the field
+        if self.ending_enrollment_state is None and "ending_enrollment_state" in self.model_fields_set:
+            _dict['ending_enrollment_state'] = None
+
+        # set to None if updated_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.updated_at is None and "updated_at" in self.model_fields_set:
+            _dict['updated_at'] = None
+
         return _dict
 
     @classmethod
@@ -83,7 +119,13 @@ class TemporaryEnrollmentPairing(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "workflow_state": obj.get("workflow_state")
+            "workflow_state": obj.get("workflow_state"),
+            "created_at": obj.get("created_at"),
+            "created_by_id": obj.get("created_by_id"),
+            "deleted_by_id": obj.get("deleted_by_id"),
+            "ending_enrollment_state": obj.get("ending_enrollment_state"),
+            "root_account_id": obj.get("root_account_id"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

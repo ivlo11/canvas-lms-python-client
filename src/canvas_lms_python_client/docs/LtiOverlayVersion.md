@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **diff** | **List[List[object]]** | A list of changes made in this version compared to the previous version | [optional] 
 **lti_overlay_id** | **int** | The id of the overlay this version is for | [optional] 
 **account_id** | **int** | The id of the account this version is for | [optional] 
+**id** | **int** |  | [optional] 
 
 ## Example
 

@@ -19,6 +19,7 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.quiz_submission_users_message_request import QuizSubmissionUsersMessageRequest
+from canvas_lms_python_client.models.quizzes_quiz_submission_users_message_response import QuizzesQuizSubmissionUsersMessageResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -57,7 +58,7 @@ class QuizSubmissionUsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> QuizzesQuizSubmissionUsersMessageResponse:
         """Send a message to unsubmitted or submitted users for the quiz
 
         {   \"body\": {     \"type\": \"string\",     \"description\": \"message body of the conversation to be created\",     \"example\": \"Please take the quiz.\"   },   \"recipients\": {     \"type\": \"string\",     \"description\": \"Who to send the message to. May be either 'submitted' or 'unsubmitted'\",     \"example\": \"submitted\"   },   \"subject\": {     \"type\": \"string\",     \"description\": \"Subject of the new Conversation created\",     \"example\": \"ATTN: Quiz 101 Students\"   } }
@@ -102,6 +103,7 @@ class QuizSubmissionUsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionUsersMessageResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -131,7 +133,7 @@ class QuizSubmissionUsersApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[QuizzesQuizSubmissionUsersMessageResponse]:
         """Send a message to unsubmitted or submitted users for the quiz
 
         {   \"body\": {     \"type\": \"string\",     \"description\": \"message body of the conversation to be created\",     \"example\": \"Please take the quiz.\"   },   \"recipients\": {     \"type\": \"string\",     \"description\": \"Who to send the message to. May be either 'submitted' or 'unsubmitted'\",     \"example\": \"submitted\"   },   \"subject\": {     \"type\": \"string\",     \"description\": \"Subject of the new Conversation created\",     \"example\": \"ATTN: Quiz 101 Students\"   } }
@@ -176,6 +178,7 @@ class QuizSubmissionUsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionUsersMessageResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -251,6 +254,7 @@ class QuizSubmissionUsersApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "QuizzesQuizSubmissionUsersMessageResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -297,6 +301,13 @@ class QuizSubmissionUsersApi:
             _body_params = quiz_submission_users_message_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

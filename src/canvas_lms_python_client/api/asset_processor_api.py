@@ -20,6 +20,7 @@ from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.asset_processor_bulk_resubmit_discussion_request import AssetProcessorBulkResubmitDiscussionRequest
 from canvas_lms_python_client.models.asset_processor_bulk_resubmit_request import AssetProcessorBulkResubmitRequest
+from canvas_lms_python_client.models.support_helpers_asset_processor_submission_details_response import SupportHelpersAssetProcessorSubmissionDetailsResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -590,7 +591,7 @@ class AssetProcessorApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> SupportHelpersAssetProcessorSubmissionDetailsResponse:
         """Get Asset Processor Details
 
         Get all asset processor information for a specific submission including Asset Processors, Assets, and Asset Reports. This endpoint is intended for troubleshooting and support purposes.  Example Request: http://canvas-web.inseng.test/api/v1/support_helpers/asset_processor/submission_details?   assignment_id=123&student_id=456  Example Graph Request: http://canvas-web.inseng.test/api/v1/support_helpers/asset_processor/submission_details?   assignment_id=123&student_id=456&graph=true
@@ -635,6 +636,7 @@ class AssetProcessorApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SupportHelpersAssetProcessorSubmissionDetailsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -664,7 +666,7 @@ class AssetProcessorApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[SupportHelpersAssetProcessorSubmissionDetailsResponse]:
         """Get Asset Processor Details
 
         Get all asset processor information for a specific submission including Asset Processors, Assets, and Asset Reports. This endpoint is intended for troubleshooting and support purposes.  Example Request: http://canvas-web.inseng.test/api/v1/support_helpers/asset_processor/submission_details?   assignment_id=123&student_id=456  Example Graph Request: http://canvas-web.inseng.test/api/v1/support_helpers/asset_processor/submission_details?   assignment_id=123&student_id=456&graph=true
@@ -709,6 +711,7 @@ class AssetProcessorApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SupportHelpersAssetProcessorSubmissionDetailsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -784,6 +787,7 @@ class AssetProcessorApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "SupportHelpersAssetProcessorSubmissionDetailsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -836,6 +840,13 @@ class AssetProcessorApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

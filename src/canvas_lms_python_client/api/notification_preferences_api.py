@@ -16,12 +16,15 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.notification_preference import NotificationPreference
+from canvas_lms_python_client.models.notification_preferences_category_index_response import NotificationPreferencesCategoryIndexResponse
+from canvas_lms_python_client.models.notification_preferences_index_response import NotificationPreferencesIndexResponse
+from canvas_lms_python_client.models.notification_preferences_show_response import NotificationPreferencesShowResponse
 from canvas_lms_python_client.models.notification_preferences_update_all_request import NotificationPreferencesUpdateAllRequest
 from canvas_lms_python_client.models.notification_preferences_update_preferences_by_category_request import NotificationPreferencesUpdatePreferencesByCategoryRequest
 from canvas_lms_python_client.models.notification_preferences_update_request import NotificationPreferencesUpdateRequest
+from canvas_lms_python_client.models.notification_preferences_update_response import NotificationPreferencesUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -59,7 +62,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> NotificationPreferencesCategoryIndexResponse:
         """List of preference categories
 
         Fetch all notification preference categories for the given communication channel
@@ -101,6 +104,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesCategoryIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -129,7 +133,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[NotificationPreferencesCategoryIndexResponse]:
         """List of preference categories
 
         Fetch all notification preference categories for the given communication channel
@@ -171,6 +175,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesCategoryIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -242,6 +247,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesCategoryIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -285,6 +291,13 @@ class NotificationPreferencesApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -327,7 +340,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[NotificationPreference]:
+    ) -> NotificationPreferencesIndexResponse:
         """List preferences
 
         Fetch all preferences for the given communication channel
@@ -369,7 +382,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[NotificationPreference]",
+            'default': "NotificationPreferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -398,7 +411,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[NotificationPreference]]:
+    ) -> ApiResponse[NotificationPreferencesIndexResponse]:
         """List preferences
 
         Fetch all preferences for the given communication channel
@@ -440,7 +453,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[NotificationPreference]",
+            'default': "NotificationPreferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -512,7 +525,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[NotificationPreference]",
+            'default': "NotificationPreferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -606,7 +619,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[NotificationPreference]:
+    ) -> NotificationPreferencesIndexResponse:
         """List preferences
 
         Fetch all preferences for the given communication channel
@@ -651,7 +664,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[NotificationPreference]",
+            'default': "NotificationPreferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -681,7 +694,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[NotificationPreference]]:
+    ) -> ApiResponse[NotificationPreferencesIndexResponse]:
         """List preferences
 
         Fetch all preferences for the given communication channel
@@ -726,7 +739,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[NotificationPreference]",
+            'default': "NotificationPreferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -802,7 +815,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[NotificationPreference]",
+            'default': "NotificationPreferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -899,7 +912,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> NotificationPreference:
+    ) -> NotificationPreferencesShowResponse:
         """Get a preference
 
         Fetch the preference for the given notification for the given communication channel
@@ -944,7 +957,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "NotificationPreference",
+            'default': "NotificationPreferencesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -974,7 +987,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[NotificationPreference]:
+    ) -> ApiResponse[NotificationPreferencesShowResponse]:
         """Get a preference
 
         Fetch the preference for the given notification for the given communication channel
@@ -1019,7 +1032,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "NotificationPreference",
+            'default': "NotificationPreferencesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1095,7 +1108,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "NotificationPreference",
+            'default': "NotificationPreferencesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1193,7 +1206,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> NotificationPreference:
+    ) -> NotificationPreferencesShowResponse:
         """Get a preference
 
         Fetch the preference for the given notification for the given communication channel
@@ -1241,7 +1254,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "NotificationPreference",
+            'default': "NotificationPreferencesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1272,7 +1285,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[NotificationPreference]:
+    ) -> ApiResponse[NotificationPreferencesShowResponse]:
         """Get a preference
 
         Fetch the preference for the given notification for the given communication channel
@@ -1320,7 +1333,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "NotificationPreference",
+            'default': "NotificationPreferencesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1400,7 +1413,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "NotificationPreference",
+            'default': "NotificationPreferencesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1500,7 +1513,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> NotificationPreferencesUpdateResponse:
         """Update a preference
 
         Change the preference for a single notification for a single communication channel
@@ -1545,6 +1558,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1574,7 +1588,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[NotificationPreferencesUpdateResponse]:
         """Update a preference
 
         Change the preference for a single notification for a single communication channel
@@ -1619,6 +1633,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1694,6 +1709,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1740,6 +1756,13 @@ class NotificationPreferencesApi:
             _body_params = notification_preferences_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -1795,7 +1818,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> NotificationPreferencesUpdateResponse:
         """Update multiple preferences
 
         Change the preferences for multiple notifications for a single communication channel at once
@@ -1837,6 +1860,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1865,7 +1889,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[NotificationPreferencesUpdateResponse]:
         """Update multiple preferences
 
         Change the preferences for multiple notifications for a single communication channel at once
@@ -1907,6 +1931,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1978,6 +2003,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2021,6 +2047,13 @@ class NotificationPreferencesApi:
             _body_params = notification_preferences_update_all_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2077,7 +2110,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> NotificationPreferencesUpdateResponse:
         """Update multiple preferences
 
         Change the preferences for multiple notifications for a single communication channel at once
@@ -2122,6 +2155,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2151,7 +2185,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[NotificationPreferencesUpdateResponse]:
         """Update multiple preferences
 
         Change the preferences for multiple notifications for a single communication channel at once
@@ -2196,6 +2230,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2271,6 +2306,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2317,6 +2353,13 @@ class NotificationPreferencesApi:
             _body_params = notification_preferences_update_all_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2374,7 +2417,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> NotificationPreferencesUpdateResponse:
         """Update a preference
 
         Change the preference for a single notification for a single communication channel
@@ -2422,6 +2465,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2452,7 +2496,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[NotificationPreferencesUpdateResponse]:
         """Update a preference
 
         Change the preference for a single notification for a single communication channel
@@ -2500,6 +2544,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2579,6 +2624,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2628,6 +2674,13 @@ class NotificationPreferencesApi:
             _body_params = notification_preferences_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2684,7 +2737,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> NotificationPreferencesUpdateResponse:
         """Update preferences by category
 
         Change the preferences for multiple notifications based on the category for a single communication channel
@@ -2729,6 +2782,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2758,7 +2812,7 @@ class NotificationPreferencesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[NotificationPreferencesUpdateResponse]:
         """Update preferences by category
 
         Change the preferences for multiple notifications based on the category for a single communication channel
@@ -2803,6 +2857,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2878,6 +2933,7 @@ class NotificationPreferencesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "NotificationPreferencesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2924,6 +2980,13 @@ class NotificationPreferencesApi:
             _body_params = notification_preferences_update_preferences_by_category_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

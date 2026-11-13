@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.notice_handler_max_batch_size import NoticeHandlerMaxBatchSize
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -29,7 +30,7 @@ class NoticeHandler(BaseModel):
     """ # noqa: E501
     handler: Optional[StrictStr] = Field(default=None, description="URL to receive the notice", json_schema_extra={"examples": ["https://example.com/notice_handler"]})
     notice_type: Optional[StrictStr] = Field(default=None, description="The type of notice", json_schema_extra={"examples": ["LtiHelloWorldNotice"]})
-    max_batch_size: Optional[StrictInt] = Field(default=None, description="The maximum number of notices to include in a single batch, or 'null' if not set.", json_schema_extra={"examples": [100]})
+    max_batch_size: Optional[NoticeHandlerMaxBatchSize] = None
     __properties: ClassVar[List[str]] = ["handler", "notice_type", "max_batch_size"]
 
     model_config = ConfigDict(
@@ -71,6 +72,9 @@ class NoticeHandler(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of max_batch_size
+        if self.max_batch_size:
+            _dict['max_batch_size'] = self.max_batch_size.to_dict()
         return _dict
 
     @classmethod
@@ -85,7 +89,7 @@ class NoticeHandler(BaseModel):
         _obj = cls.model_validate({
             "handler": obj.get("handler"),
             "notice_type": obj.get("notice_type"),
-            "max_batch_size": obj.get("max_batch_size")
+            "max_batch_size": NoticeHandlerMaxBatchSize.from_dict(obj["max_batch_size"]) if obj.get("max_batch_size") is not None else None
         })
         return _obj
 

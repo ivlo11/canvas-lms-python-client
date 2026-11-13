@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **redirect_uris** | **List[str]** | 1.3 specific. List of possible launch URLs for after the Canvas authorize redirect step | [optional] 
 **launch_settings** | [**LtiLaunchSettings**](LtiLaunchSettings.md) |  | [optional] 
 **placements** | [**List[LtiPlacement]**](LtiPlacement.md) | List of placements configured by the tool | [optional] 
+**extensions** | **List[object]** |  | [optional] 
 
 ## Example
 

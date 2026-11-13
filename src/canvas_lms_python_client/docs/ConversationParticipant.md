@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **full_name** | **str** | The full name of the user. | [optional] 
 **avatar_url** | **str** | If requested, this field will be included and contain a url to retrieve the user&#39;s avatar. | [optional] 
 **uuid** | **str** | The Canvas UUID for the participant. | [optional] 
+**pronouns** | **object** |  | [optional] 
+**common_courses** | **object** |  | [optional] 
+**common_groups** | **object** |  | [optional] 
 
 ## Example
 

@@ -395,7 +395,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_create_file**
-> submissions_api_create_file(assignment_id, course_id, user_id)
+> SubmissionsCreateFileResponse submissions_api_create_file(assignment_id, course_id, user_id)
 
 Upload a file
 
@@ -414,6 +414,7 @@ including the new file id. The caller can then POST to submit the
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_create_file_response import SubmissionsCreateFileResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -443,7 +444,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Upload a file
-        await api_instance.submissions_api_create_file(assignment_id, course_id, user_id)
+        api_response = await api_instance.submissions_api_create_file(assignment_id, course_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_create_file:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_create_file: %s\n" % e)
 ```
@@ -461,7 +464,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsCreateFileResponse**](SubmissionsCreateFileResponse.md)
 
 ### Authorization
 
@@ -470,18 +473,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Upload a file |  -  |
+**0** | SubmissionsCreateFileResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_create_file_for_sections**
-> submissions_api_create_file_for_sections(assignment_id, section_id, user_id)
+> SubmissionsCreateFileResponse submissions_api_create_file_for_sections(assignment_id, section_id, user_id)
 
 Upload a file
 
@@ -500,6 +503,7 @@ including the new file id. The caller can then POST to submit the
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_create_file_response import SubmissionsCreateFileResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -529,7 +533,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Upload a file
-        await api_instance.submissions_api_create_file_for_sections(assignment_id, section_id, user_id)
+        api_response = await api_instance.submissions_api_create_file_for_sections(assignment_id, section_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_create_file_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_create_file_for_sections: %s\n" % e)
 ```
@@ -547,7 +553,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsCreateFileResponse**](SubmissionsCreateFileResponse.md)
 
 ### Authorization
 
@@ -556,18 +562,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Upload a file |  -  |
+**0** | SubmissionsCreateFileResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_document_annotations_read_state**
-> submissions_api_document_annotations_read_state(assignment_id, course_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_document_annotations_read_state(assignment_id, course_id, user_id)
 
 Get document annotations read state
 
@@ -579,6 +585,7 @@ Return whether annotations made on a submitted document have been read by the st
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -608,7 +615,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get document annotations read state
-        await api_instance.submissions_api_document_annotations_read_state(assignment_id, course_id, user_id)
+        api_response = await api_instance.submissions_api_document_annotations_read_state(assignment_id, course_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_document_annotations_read_state:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_document_annotations_read_state: %s\n" % e)
 ```
@@ -626,7 +635,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -641,12 +650,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get document annotations read state |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_document_annotations_read_state_for_sections**
-> submissions_api_document_annotations_read_state_for_sections(assignment_id, section_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_document_annotations_read_state_for_sections(assignment_id, section_id, user_id)
 
 Get document annotations read state
 
@@ -658,6 +667,7 @@ Return whether annotations made on a submitted document have been read by the st
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -687,7 +697,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get document annotations read state
-        await api_instance.submissions_api_document_annotations_read_state_for_sections(assignment_id, section_id, user_id)
+        api_response = await api_instance.submissions_api_document_annotations_read_state_for_sections(assignment_id, section_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_document_annotations_read_state_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_document_annotations_read_state_for_sections: %s\n" % e)
 ```
@@ -705,7 +717,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -720,7 +732,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get document annotations read state |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1371,7 +1383,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_mark_document_annotations_read**
-> submissions_api_mark_document_annotations_read(assignment_id, course_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_mark_document_annotations_read(assignment_id, course_id, user_id)
 
 Mark document annotations as read
 
@@ -1386,6 +1398,7 @@ NOTE: Document annotations will be marked as read automatically when they are vi
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1415,7 +1428,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Mark document annotations as read
-        await api_instance.submissions_api_mark_document_annotations_read(assignment_id, course_id, user_id)
+        api_response = await api_instance.submissions_api_mark_document_annotations_read(assignment_id, course_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_mark_document_annotations_read:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_mark_document_annotations_read: %s\n" % e)
 ```
@@ -1433,7 +1448,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -1448,12 +1463,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Mark document annotations as read |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_mark_document_annotations_read_for_sections**
-> submissions_api_mark_document_annotations_read_for_sections(assignment_id, section_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_mark_document_annotations_read_for_sections(assignment_id, section_id, user_id)
 
 Mark document annotations as read
 
@@ -1468,6 +1483,7 @@ NOTE: Document annotations will be marked as read automatically when they are vi
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1497,7 +1513,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Mark document annotations as read
-        await api_instance.submissions_api_mark_document_annotations_read_for_sections(assignment_id, section_id, user_id)
+        api_response = await api_instance.submissions_api_mark_document_annotations_read_for_sections(assignment_id, section_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_mark_document_annotations_read_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_mark_document_annotations_read_for_sections: %s\n" % e)
 ```
@@ -1515,7 +1533,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -1530,12 +1548,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Mark document annotations as read |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_mark_rubric_assessments_read**
-> submissions_api_mark_rubric_assessments_read(assignment_id, course_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_mark_rubric_assessments_read(assignment_id, course_id, user_id)
 
 Mark rubric assessments as read
 
@@ -1550,6 +1568,7 @@ NOTE: Rubric assessments will be marked as read automatically when they are view
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1579,7 +1598,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Mark rubric assessments as read
-        await api_instance.submissions_api_mark_rubric_assessments_read(assignment_id, course_id, user_id)
+        api_response = await api_instance.submissions_api_mark_rubric_assessments_read(assignment_id, course_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_mark_rubric_assessments_read:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_mark_rubric_assessments_read: %s\n" % e)
 ```
@@ -1597,7 +1618,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -1612,12 +1633,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Mark rubric assessments as read |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_mark_rubric_assessments_read_by_user_id_for_sections**
-> submissions_api_mark_rubric_assessments_read_by_user_id_for_sections(assignment_id, section_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_mark_rubric_assessments_read_by_user_id_for_sections(assignment_id, section_id, user_id)
 
 Mark rubric assessments as read
 
@@ -1632,6 +1653,7 @@ NOTE: Rubric assessments will be marked as read automatically when they are view
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1661,7 +1683,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Mark rubric assessments as read
-        await api_instance.submissions_api_mark_rubric_assessments_read_by_user_id_for_sections(assignment_id, section_id, user_id)
+        api_response = await api_instance.submissions_api_mark_rubric_assessments_read_by_user_id_for_sections(assignment_id, section_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_mark_rubric_assessments_read_by_user_id_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_mark_rubric_assessments_read_by_user_id_for_sections: %s\n" % e)
 ```
@@ -1679,7 +1703,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -1694,12 +1718,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Mark rubric assessments as read |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_mark_rubric_assessments_read_for_courses**
-> submissions_api_mark_rubric_assessments_read_for_courses(assignment_id, course_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_mark_rubric_assessments_read_for_courses(assignment_id, course_id, user_id)
 
 Mark rubric assessments as read
 
@@ -1714,6 +1738,7 @@ NOTE: Rubric assessments will be marked as read automatically when they are view
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1743,7 +1768,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Mark rubric assessments as read
-        await api_instance.submissions_api_mark_rubric_assessments_read_for_courses(assignment_id, course_id, user_id)
+        api_response = await api_instance.submissions_api_mark_rubric_assessments_read_for_courses(assignment_id, course_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_mark_rubric_assessments_read_for_courses:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_mark_rubric_assessments_read_for_courses: %s\n" % e)
 ```
@@ -1761,7 +1788,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -1776,12 +1803,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Mark rubric assessments as read |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_mark_rubric_assessments_read_for_sections**
-> submissions_api_mark_rubric_assessments_read_for_sections(assignment_id, section_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_mark_rubric_assessments_read_for_sections(assignment_id, section_id, user_id)
 
 Mark rubric assessments as read
 
@@ -1796,6 +1823,7 @@ NOTE: Rubric assessments will be marked as read automatically when they are view
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1825,7 +1853,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Mark rubric assessments as read
-        await api_instance.submissions_api_mark_rubric_assessments_read_for_sections(assignment_id, section_id, user_id)
+        api_response = await api_instance.submissions_api_mark_rubric_assessments_read_for_sections(assignment_id, section_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_mark_rubric_assessments_read_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_mark_rubric_assessments_read_for_sections: %s\n" % e)
 ```
@@ -1843,7 +1873,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -1858,7 +1888,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Mark rubric assessments as read |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2444,7 +2474,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_rubric_assessments_read_state**
-> submissions_api_rubric_assessments_read_state(assignment_id, course_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_rubric_assessments_read_state(assignment_id, course_id, user_id)
 
 Get rubric assessments read state
 
@@ -2456,6 +2486,7 @@ Return whether new rubric comments/grading made on a submission have been seen b
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2485,7 +2516,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get rubric assessments read state
-        await api_instance.submissions_api_rubric_assessments_read_state(assignment_id, course_id, user_id)
+        api_response = await api_instance.submissions_api_rubric_assessments_read_state(assignment_id, course_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_rubric_assessments_read_state:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_rubric_assessments_read_state: %s\n" % e)
 ```
@@ -2503,7 +2536,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -2518,12 +2551,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get rubric assessments read state |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_rubric_assessments_read_state_by_user_id_for_sections**
-> submissions_api_rubric_assessments_read_state_by_user_id_for_sections(assignment_id, section_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_rubric_assessments_read_state_by_user_id_for_sections(assignment_id, section_id, user_id)
 
 Get rubric assessments read state
 
@@ -2535,6 +2568,7 @@ Return whether new rubric comments/grading made on a submission have been seen b
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2564,7 +2598,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get rubric assessments read state
-        await api_instance.submissions_api_rubric_assessments_read_state_by_user_id_for_sections(assignment_id, section_id, user_id)
+        api_response = await api_instance.submissions_api_rubric_assessments_read_state_by_user_id_for_sections(assignment_id, section_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_rubric_assessments_read_state_by_user_id_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_rubric_assessments_read_state_by_user_id_for_sections: %s\n" % e)
 ```
@@ -2582,7 +2618,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -2597,12 +2633,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get rubric assessments read state |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_rubric_assessments_read_state_for_courses**
-> submissions_api_rubric_assessments_read_state_for_courses(assignment_id, course_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_rubric_assessments_read_state_for_courses(assignment_id, course_id, user_id)
 
 Get rubric assessments read state
 
@@ -2614,6 +2650,7 @@ Return whether new rubric comments/grading made on a submission have been seen b
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2643,7 +2680,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get rubric assessments read state
-        await api_instance.submissions_api_rubric_assessments_read_state_for_courses(assignment_id, course_id, user_id)
+        api_response = await api_instance.submissions_api_rubric_assessments_read_state_for_courses(assignment_id, course_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_rubric_assessments_read_state_for_courses:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_rubric_assessments_read_state_for_courses: %s\n" % e)
 ```
@@ -2661,7 +2700,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -2676,12 +2715,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get rubric assessments read state |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_rubric_assessments_read_state_for_sections**
-> submissions_api_rubric_assessments_read_state_for_sections(assignment_id, section_id, user_id)
+> SubmissionsRubricAssessmentsReadStateResponse submissions_api_rubric_assessments_read_state_for_sections(assignment_id, section_id, user_id)
 
 Get rubric assessments read state
 
@@ -2693,6 +2732,7 @@ Return whether new rubric comments/grading made on a submission have been seen b
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_rubric_assessments_read_state_response import SubmissionsRubricAssessmentsReadStateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2722,7 +2762,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get rubric assessments read state
-        await api_instance.submissions_api_rubric_assessments_read_state_for_sections(assignment_id, section_id, user_id)
+        api_response = await api_instance.submissions_api_rubric_assessments_read_state_for_sections(assignment_id, section_id, user_id)
+        print("The response of SubmissionsApiApi->submissions_api_rubric_assessments_read_state_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_rubric_assessments_read_state_for_sections: %s\n" % e)
 ```
@@ -2740,7 +2782,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsRubricAssessmentsReadStateResponse**](SubmissionsRubricAssessmentsReadStateResponse.md)
 
 ### Authorization
 
@@ -2755,12 +2797,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get rubric assessments read state |  -  |
+**0** | SubmissionsRubricAssessmentsReadStateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_show**
-> submissions_api_show(assignment_id, course_id, user_id, include=include)
+> Submission submissions_api_show(assignment_id, course_id, user_id, include=include)
 
 Get a single submission
 
@@ -2772,6 +2814,7 @@ Get a single submission, based on user id.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2802,7 +2845,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single submission
-        await api_instance.submissions_api_show(assignment_id, course_id, user_id, include=include)
+        api_response = await api_instance.submissions_api_show(assignment_id, course_id, user_id, include=include)
+        print("The response of SubmissionsApiApi->submissions_api_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_show: %s\n" % e)
 ```
@@ -2821,7 +2866,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -2830,13 +2875,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a single submission |  -  |
+**0** | Submission |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3009,7 +3054,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_show_for_sections**
-> submissions_api_show_for_sections(assignment_id, section_id, user_id, include=include)
+> Submission submissions_api_show_for_sections(assignment_id, section_id, user_id, include=include)
 
 Get a single submission
 
@@ -3021,6 +3066,7 @@ Get a single submission, based on user id.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -3051,7 +3097,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single submission
-        await api_instance.submissions_api_show_for_sections(assignment_id, section_id, user_id, include=include)
+        api_response = await api_instance.submissions_api_show_for_sections(assignment_id, section_id, user_id, include=include)
+        print("The response of SubmissionsApiApi->submissions_api_show_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_show_for_sections: %s\n" % e)
 ```
@@ -3070,7 +3118,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -3079,18 +3127,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a single submission |  -  |
+**0** | Submission |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_submission_summary**
-> submissions_api_submission_summary(assignment_id, course_id, grouped=grouped, include_deactivated=include_deactivated)
+> SubmissionsSubmissionSummaryResponse submissions_api_submission_summary(assignment_id, course_id, grouped=grouped, include_deactivated=include_deactivated)
 
 Submission Summary
 
@@ -3103,6 +3151,7 @@ that fall into three categories: graded, ungraded, not submitted.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_submission_summary_response import SubmissionsSubmissionSummaryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -3133,7 +3182,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Submission Summary
-        await api_instance.submissions_api_submission_summary(assignment_id, course_id, grouped=grouped, include_deactivated=include_deactivated)
+        api_response = await api_instance.submissions_api_submission_summary(assignment_id, course_id, grouped=grouped, include_deactivated=include_deactivated)
+        print("The response of SubmissionsApiApi->submissions_api_submission_summary:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_submission_summary: %s\n" % e)
 ```
@@ -3152,7 +3203,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsSubmissionSummaryResponse**](SubmissionsSubmissionSummaryResponse.md)
 
 ### Authorization
 
@@ -3167,12 +3218,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Submission Summary |  -  |
+**0** | SubmissionsSubmissionSummaryResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_submission_summary_for_sections**
-> submissions_api_submission_summary_for_sections(assignment_id, section_id, grouped=grouped, include_deactivated=include_deactivated)
+> SubmissionsSubmissionSummaryResponse submissions_api_submission_summary_for_sections(assignment_id, section_id, grouped=grouped, include_deactivated=include_deactivated)
 
 Submission Summary
 
@@ -3185,6 +3236,7 @@ that fall into three categories: graded, ungraded, not submitted.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submissions_submission_summary_response import SubmissionsSubmissionSummaryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -3215,7 +3267,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Submission Summary
-        await api_instance.submissions_api_submission_summary_for_sections(assignment_id, section_id, grouped=grouped, include_deactivated=include_deactivated)
+        api_response = await api_instance.submissions_api_submission_summary_for_sections(assignment_id, section_id, grouped=grouped, include_deactivated=include_deactivated)
+        print("The response of SubmissionsApiApi->submissions_api_submission_summary_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_submission_summary_for_sections: %s\n" % e)
 ```
@@ -3234,7 +3288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SubmissionsSubmissionSummaryResponse**](SubmissionsSubmissionSummaryResponse.md)
 
 ### Authorization
 
@@ -3249,7 +3303,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Submission Summary |  -  |
+**0** | SubmissionsSubmissionSummaryResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3416,7 +3470,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_update**
-> submissions_api_update(assignment_id, course_id, user_id, submissions_api_update_request=submissions_api_update_request)
+> Submission submissions_api_update(assignment_id, course_id, user_id, submissions_api_update_request=submissions_api_update_request)
 
 Grade or comment on a submission
 
@@ -3431,6 +3485,7 @@ section).
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.models.submissions_api_update_request import SubmissionsApiUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -3462,7 +3517,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Grade or comment on a submission
-        await api_instance.submissions_api_update(assignment_id, course_id, user_id, submissions_api_update_request=submissions_api_update_request)
+        api_response = await api_instance.submissions_api_update(assignment_id, course_id, user_id, submissions_api_update_request=submissions_api_update_request)
+        print("The response of SubmissionsApiApi->submissions_api_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_update: %s\n" % e)
 ```
@@ -3481,7 +3538,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -3490,18 +3547,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Grade or comment on a submission |  -  |
+**0** | Submission |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_update_anonymous**
-> submissions_api_update_anonymous(anonymous_id, assignment_id, course_id, submissions_api_update_anonymous_request=submissions_api_update_anonymous_request)
+> Submission submissions_api_update_anonymous(anonymous_id, assignment_id, course_id, submissions_api_update_anonymous_request=submissions_api_update_anonymous_request)
 
 Grade or comment on a submission by anonymous id
 
@@ -3517,6 +3574,7 @@ section).
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.models.submissions_api_update_anonymous_request import SubmissionsApiUpdateAnonymousRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -3548,7 +3606,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Grade or comment on a submission by anonymous id
-        await api_instance.submissions_api_update_anonymous(anonymous_id, assignment_id, course_id, submissions_api_update_anonymous_request=submissions_api_update_anonymous_request)
+        api_response = await api_instance.submissions_api_update_anonymous(anonymous_id, assignment_id, course_id, submissions_api_update_anonymous_request=submissions_api_update_anonymous_request)
+        print("The response of SubmissionsApiApi->submissions_api_update_anonymous:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_update_anonymous: %s\n" % e)
 ```
@@ -3567,7 +3627,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -3576,18 +3636,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Grade or comment on a submission by anonymous id |  -  |
+**0** | Submission |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_update_anonymous_for_sections**
-> submissions_api_update_anonymous_for_sections(anonymous_id, assignment_id, section_id, submissions_api_update_anonymous_request=submissions_api_update_anonymous_request)
+> Submission submissions_api_update_anonymous_for_sections(anonymous_id, assignment_id, section_id, submissions_api_update_anonymous_request=submissions_api_update_anonymous_request)
 
 Grade or comment on a submission by anonymous id
 
@@ -3603,6 +3663,7 @@ section).
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.models.submissions_api_update_anonymous_request import SubmissionsApiUpdateAnonymousRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -3634,7 +3695,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Grade or comment on a submission by anonymous id
-        await api_instance.submissions_api_update_anonymous_for_sections(anonymous_id, assignment_id, section_id, submissions_api_update_anonymous_request=submissions_api_update_anonymous_request)
+        api_response = await api_instance.submissions_api_update_anonymous_for_sections(anonymous_id, assignment_id, section_id, submissions_api_update_anonymous_request=submissions_api_update_anonymous_request)
+        print("The response of SubmissionsApiApi->submissions_api_update_anonymous_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_update_anonymous_for_sections: %s\n" % e)
 ```
@@ -3653,7 +3716,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -3662,18 +3725,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Grade or comment on a submission by anonymous id |  -  |
+**0** | Submission |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submissions_api_update_for_sections**
-> submissions_api_update_for_sections(assignment_id, section_id, user_id, submissions_api_update_request=submissions_api_update_request)
+> Submission submissions_api_update_for_sections(assignment_id, section_id, user_id, submissions_api_update_request=submissions_api_update_request)
 
 Grade or comment on a submission
 
@@ -3688,6 +3751,7 @@ section).
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.models.submissions_api_update_request import SubmissionsApiUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -3719,7 +3783,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Grade or comment on a submission
-        await api_instance.submissions_api_update_for_sections(assignment_id, section_id, user_id, submissions_api_update_request=submissions_api_update_request)
+        api_response = await api_instance.submissions_api_update_for_sections(assignment_id, section_id, user_id, submissions_api_update_request=submissions_api_update_request)
+        print("The response of SubmissionsApiApi->submissions_api_update_for_sections:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SubmissionsApiApi->submissions_api_update_for_sections: %s\n" % e)
 ```
@@ -3738,7 +3804,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -3747,13 +3813,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Grade or comment on a submission |  -  |
+**0** | Submission |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

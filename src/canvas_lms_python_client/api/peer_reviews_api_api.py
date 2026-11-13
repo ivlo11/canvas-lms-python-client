@@ -57,7 +57,7 @@ class PeerReviewsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PeerReview:
+    ) -> List[PeerReview]:
         """Allocate Peer Review
 
         Allocates a submission for the current user to peer review
@@ -99,7 +99,7 @@ class PeerReviewsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PeerReview",
+            'default': "List[PeerReview]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +128,7 @@ class PeerReviewsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PeerReview]:
+    ) -> ApiResponse[List[PeerReview]]:
         """Allocate Peer Review
 
         Allocates a submission for the current user to peer review
@@ -170,7 +170,7 @@ class PeerReviewsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PeerReview",
+            'default': "List[PeerReview]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -242,7 +242,7 @@ class PeerReviewsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "PeerReview",
+            'default': "List[PeerReview]",
         }
         response_data = await self.api_client.call_api(
             *_param,

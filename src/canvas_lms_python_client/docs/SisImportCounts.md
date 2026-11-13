@@ -22,6 +22,17 @@ Name | Type | Description | Notes
 **batch_enrollments_deleted** | **int** | the number of enrollments that were removed because they were not included in the batch for batch_mode imports. Only included if enrollments were deleted | [optional] 
 **error_count** | **int** |  | [optional] 
 **warning_count** | **int** |  | [optional] 
+**admins** | **int** |  | [optional] 
+**change_sis_ids** | **int** |  | [optional] 
+**differentiation_tag_memberships** | **int** |  | [optional] 
+**differentiation_tag_sets** | **int** |  | [optional] 
+**differentiation_tags** | **int** |  | [optional] 
+**group_categories** | **int** |  | [optional] 
+**institutional_tag_associations** | **int** |  | [optional] 
+**institutional_tag_categories** | **int** |  | [optional] 
+**institutional_tags** | **int** |  | [optional] 
+**logins** | **int** |  | [optional] 
+**user_observers** | **int** |  | [optional] 
 
 ## Example
 

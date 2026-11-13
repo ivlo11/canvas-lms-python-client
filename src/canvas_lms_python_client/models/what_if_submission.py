@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.what_if_submission_student_entered_score import WhatIfSubmissionStudentEnteredScore
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,7 +29,7 @@ class WhatIfSubmission(BaseModel):
     WhatIfSubmission
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="The ID of the submission", json_schema_extra={"examples": [123]})
-    student_entered_score: Optional[StrictStr] = Field(default=None, description="The score the student wants to test", json_schema_extra={"examples": ["20.0"]})
+    student_entered_score: Optional[WhatIfSubmissionStudentEnteredScore] = None
     __properties: ClassVar[List[str]] = ["id", "student_entered_score"]
 
     model_config = ConfigDict(
@@ -70,6 +71,14 @@ class WhatIfSubmission(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of student_entered_score
+        if self.student_entered_score:
+            _dict['student_entered_score'] = self.student_entered_score.to_dict()
+        # set to None if student_entered_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.student_entered_score is None and "student_entered_score" in self.model_fields_set:
+            _dict['student_entered_score'] = None
+
         return _dict
 
     @classmethod
@@ -83,7 +92,7 @@ class WhatIfSubmission(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "student_entered_score": obj.get("student_entered_score")
+            "student_entered_score": WhatIfSubmissionStudentEnteredScore.from_dict(obj["student_entered_score"]) if obj.get("student_entered_score") is not None else None
         })
         return _obj
 

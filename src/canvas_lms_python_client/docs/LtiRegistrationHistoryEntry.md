@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **lti_registration_id** | **int** | The id of the registration this entry is for | [optional] 
 **created_at** | **datetime** | Timestamp of the entry&#39;s creation | [optional] 
 **updated_at** | **datetime** | Timestamp of the entry&#39;s last update | [optional] 
-**diff** | **object** | The changes made, keyed by the changed part of the registration | [optional] 
+**diff** | [**LtiRegistrationHistoryEntryDiff**](LtiRegistrationHistoryEntryDiff.md) |  | [optional] 
 **update_type** | **str** | What caused the change: manual_edit, registration_update, bulk_control_create or control_edit | [optional] 
 **comment** | **str** | A comment entered with the change, if any | [optional] 
 **old_configuration** | **object** | The registration&#39;s configuration before the change, for configuration changes | [optional] 
@@ -19,6 +19,13 @@ Name | Type | Description | Notes
 **created_by** | [**LtiRegistrationCreatedBy**](LtiRegistrationCreatedBy.md) |  | [optional] 
 **old_controls_by_deployment** | [**List[LtiDeployment]**](LtiDeployment.md) | The affected deployments and their context controls before the change, for control changes | [optional] 
 **new_controls_by_deployment** | [**List[LtiDeployment]**](LtiDeployment.md) | The affected deployments and their context controls after the change, for control changes | [optional] 
+**accepted_at** | **str** |  | [optional] 
+**internal_lti_configuration** | **object** |  | [optional] 
+**reinstall** | **bool** |  | [optional] 
+**rejected_at** | **str** |  | [optional] 
+**status** | **str** |  | [optional] 
+**tool_initiated** | **bool** |  | [optional] 
+**uuid** | **str** |  | [optional] 
 
 ## Example
 

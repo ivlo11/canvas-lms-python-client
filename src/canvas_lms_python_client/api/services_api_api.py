@@ -15,6 +15,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from canvas_lms_python_client.models.services_show_kaltura_config_response import ServicesShowKalturaConfigResponse
+from canvas_lms_python_client.models.services_start_kaltura_session_response import ServicesStartKalturaSessionResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -50,7 +52,7 @@ class ServicesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ServicesShowKalturaConfigResponse:
         """Get Kaltura config
 
         Return the config information for the Kaltura plugin in json format.
@@ -86,6 +88,7 @@ class ServicesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ServicesShowKalturaConfigResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -112,7 +115,7 @@ class ServicesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ServicesShowKalturaConfigResponse]:
         """Get Kaltura config
 
         Return the config information for the Kaltura plugin in json format.
@@ -148,6 +151,7 @@ class ServicesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ServicesShowKalturaConfigResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -211,6 +215,7 @@ class ServicesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ServicesShowKalturaConfigResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -295,7 +300,7 @@ class ServicesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ServicesStartKalturaSessionResponse:
         """Start Kaltura session
 
         Start a new Kaltura session, so that new media can be recorded and uploaded to this Canvas instance's Kaltura instance.
@@ -331,6 +336,7 @@ class ServicesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ServicesStartKalturaSessionResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -357,7 +363,7 @@ class ServicesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ServicesStartKalturaSessionResponse]:
         """Start Kaltura session
 
         Start a new Kaltura session, so that new media can be recorded and uploaded to this Canvas instance's Kaltura instance.
@@ -393,6 +399,7 @@ class ServicesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ServicesStartKalturaSessionResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -456,6 +463,7 @@ class ServicesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ServicesStartKalturaSessionResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

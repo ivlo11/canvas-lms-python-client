@@ -14,6 +14,13 @@ Name | Type | Description | Notes
 **pedagogical_guidance** | **str** | The pedagogical guidance for the experience | [optional] 
 **workflow_state** | **str** | The current published state of the AI experience | [optional] 
 **course_id** | **int** | The course this experience belongs to | [optional] 
+**can_manage** | **bool** |  | [optional] 
+**can_unpublish** | **bool** |  | [optional] 
+**context_files** | **List[object]** |  | [optional] 
+**context_index_status** | **str** |  | [optional] 
+**context_ready** | **bool** |  | [optional] 
+**created_at** | **str** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
 
 ## Example
 

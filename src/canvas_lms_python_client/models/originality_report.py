@@ -38,7 +38,14 @@ class OriginalityReport(BaseModel):
     error_report: Optional[StrictStr] = Field(default=None, description="A message describing the error. If set, the workflow_state will become 'error.'")
     submission_time: Optional[datetime] = Field(default=None, description="The submitted_at date time of the submission.")
     root_account_id: Optional[StrictInt] = Field(default=None, description="The id of the root Account associated with the OriginalityReport", json_schema_extra={"examples": [1]})
-    __properties: ClassVar[List[str]] = ["id", "file_id", "originality_score", "originality_report_file_id", "originality_report_url", "tool_setting", "error_report", "submission_time", "root_account_id"]
+    created_at: Optional[StrictStr] = None
+    error_message: Optional[StrictStr] = None
+    link_id: Optional[StrictStr] = None
+    originality_report_lti_url: Optional[StrictStr] = None
+    submission_id: Optional[StrictInt] = None
+    updated_at: Optional[StrictStr] = None
+    workflow_state: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "file_id", "originality_score", "originality_report_file_id", "originality_report_url", "tool_setting", "error_report", "submission_time", "root_account_id", "created_at", "error_message", "link_id", "originality_report_lti_url", "submission_id", "updated_at", "workflow_state"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -82,6 +89,46 @@ class OriginalityReport(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of tool_setting
         if self.tool_setting:
             _dict['tool_setting'] = self.tool_setting.to_dict()
+        # set to None if file_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.file_id is None and "file_id" in self.model_fields_set:
+            _dict['file_id'] = None
+
+        # set to None if originality_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.originality_score is None and "originality_score" in self.model_fields_set:
+            _dict['originality_score'] = None
+
+        # set to None if originality_report_file_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.originality_report_file_id is None and "originality_report_file_id" in self.model_fields_set:
+            _dict['originality_report_file_id'] = None
+
+        # set to None if originality_report_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.originality_report_url is None and "originality_report_url" in self.model_fields_set:
+            _dict['originality_report_url'] = None
+
+        # set to None if submission_time (nullable) is None
+        # and model_fields_set contains the field
+        if self.submission_time is None and "submission_time" in self.model_fields_set:
+            _dict['submission_time'] = None
+
+        # set to None if error_message (nullable) is None
+        # and model_fields_set contains the field
+        if self.error_message is None and "error_message" in self.model_fields_set:
+            _dict['error_message'] = None
+
+        # set to None if link_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.link_id is None and "link_id" in self.model_fields_set:
+            _dict['link_id'] = None
+
+        # set to None if originality_report_lti_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.originality_report_lti_url is None and "originality_report_lti_url" in self.model_fields_set:
+            _dict['originality_report_lti_url'] = None
+
         return _dict
 
     @classmethod
@@ -102,7 +149,14 @@ class OriginalityReport(BaseModel):
             "tool_setting": ToolSetting.from_dict(obj["tool_setting"]) if obj.get("tool_setting") is not None else None,
             "error_report": obj.get("error_report"),
             "submission_time": obj.get("submission_time"),
-            "root_account_id": obj.get("root_account_id")
+            "root_account_id": obj.get("root_account_id"),
+            "created_at": obj.get("created_at"),
+            "error_message": obj.get("error_message"),
+            "link_id": obj.get("link_id"),
+            "originality_report_lti_url": obj.get("originality_report_lti_url"),
+            "submission_id": obj.get("submission_id"),
+            "updated_at": obj.get("updated_at"),
+            "workflow_state": obj.get("workflow_state")
         })
         return _obj
 

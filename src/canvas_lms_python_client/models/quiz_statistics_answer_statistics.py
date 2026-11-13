@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from canvas_lms_python_client.models.quiz_statistics_answer_statistics_id import QuizStatisticsAnswerStatisticsId
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,11 +28,16 @@ class QuizStatisticsAnswerStatistics(BaseModel):
     """
     Statistics for a specific pre-defined answer in a Multiple-Choice or True/False quiz question.
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="ID of the answer.", json_schema_extra={"examples": [3866]})
+    id: Optional[QuizStatisticsAnswerStatisticsId] = None
     text: Optional[StrictStr] = Field(default=None, description="The text attached to the answer.", json_schema_extra={"examples": ["Blue."]})
     weight: Optional[StrictInt] = Field(default=None, description="An integer to determine correctness of the answer. Incorrect answers should be 0, correct answers should 100", json_schema_extra={"examples": [100]})
     responses: Optional[StrictInt] = Field(default=None, description="Number of students who have chosen this answer.", json_schema_extra={"examples": [2]})
-    __properties: ClassVar[List[str]] = ["id", "text", "weight", "responses"]
+    correct: Optional[StrictBool] = None
+    full_credit: Optional[StrictBool] = None
+    score: Optional[Union[StrictFloat, StrictInt]] = None
+    user_ids: Optional[List[StrictInt]] = None
+    user_names: Optional[List[StrictStr]] = None
+    __properties: ClassVar[List[str]] = ["id", "text", "weight", "responses", "correct", "full_credit", "score", "user_ids", "user_names"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -72,6 +78,9 @@ class QuizStatisticsAnswerStatistics(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of id
+        if self.id:
+            _dict['id'] = self.id.to_dict()
         return _dict
 
     @classmethod
@@ -84,10 +93,15 @@ class QuizStatisticsAnswerStatistics(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
+            "id": QuizStatisticsAnswerStatisticsId.from_dict(obj["id"]) if obj.get("id") is not None else None,
             "text": obj.get("text"),
             "weight": obj.get("weight"),
-            "responses": obj.get("responses")
+            "responses": obj.get("responses"),
+            "correct": obj.get("correct"),
+            "full_credit": obj.get("full_credit"),
+            "score": obj.get("score"),
+            "user_ids": obj.get("user_ids"),
+            "user_names": obj.get("user_names")
         })
         return _obj
 

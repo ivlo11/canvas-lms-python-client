@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **tokens_create**
-> tokens_create(user_id, tokens_create_request=tokens_create_request)
+> Token tokens_create(user_id, tokens_create_request=tokens_create_request)
 
 Create an access token
 
@@ -26,6 +26,7 @@ and must be activated by the user before it can be used.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.token import Token
 from canvas_lms_python_client.models.tokens_create_request import TokensCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -55,7 +56,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create an access token
-        await api_instance.tokens_create(user_id, tokens_create_request=tokens_create_request)
+        api_response = await api_instance.tokens_create(user_id, tokens_create_request=tokens_create_request)
+        print("The response of TokensApi->tokens_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling TokensApi->tokens_create: %s\n" % e)
 ```
@@ -72,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Token**](Token.md)
 
 ### Authorization
 
@@ -81,18 +84,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create an access token |  -  |
+**0** | Token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **tokens_destroy**
-> tokens_destroy(id, user_id)
+> Token tokens_destroy(id, user_id)
 
 Delete an access token
 
@@ -104,6 +107,7 @@ The ID can be the actual database ID of the token, or the 'token_hint' value.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.token import Token
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -132,7 +136,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete an access token
-        await api_instance.tokens_destroy(id, user_id)
+        api_response = await api_instance.tokens_destroy(id, user_id)
+        print("The response of TokensApi->tokens_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling TokensApi->tokens_destroy: %s\n" % e)
 ```
@@ -149,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Token**](Token.md)
 
 ### Authorization
 
@@ -158,18 +164,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete an access token |  -  |
+**0** | Token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **tokens_show**
-> tokens_show(id, user_id)
+> Token tokens_show(id, user_id)
 
 Show an access token
 
@@ -181,6 +187,7 @@ The ID can be the actual database ID of the token, or the 'token_hint' value.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.token import Token
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -209,7 +216,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Show an access token
-        await api_instance.tokens_show(id, user_id)
+        api_response = await api_instance.tokens_show(id, user_id)
+        print("The response of TokensApi->tokens_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling TokensApi->tokens_show: %s\n" % e)
 ```
@@ -226,7 +235,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Token**](Token.md)
 
 ### Authorization
 
@@ -235,18 +244,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Show an access token |  -  |
+**0** | Token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **tokens_update**
-> tokens_update(id, user_id, tokens_update_request=tokens_update_request)
+> Token tokens_update(id, user_id, tokens_update_request=tokens_update_request)
 
 Update an access token
 
@@ -262,6 +271,7 @@ Regenerating an expired token requires a new expiration date.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.token import Token
 from canvas_lms_python_client.models.tokens_update_request import TokensUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -292,7 +302,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update an access token
-        await api_instance.tokens_update(id, user_id, tokens_update_request=tokens_update_request)
+        api_response = await api_instance.tokens_update(id, user_id, tokens_update_request=tokens_update_request)
+        print("The response of TokensApi->tokens_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling TokensApi->tokens_update: %s\n" % e)
 ```
@@ -310,7 +322,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Token**](Token.md)
 
 ### Authorization
 
@@ -319,13 +331,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update an access token |  -  |
+**0** | Token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

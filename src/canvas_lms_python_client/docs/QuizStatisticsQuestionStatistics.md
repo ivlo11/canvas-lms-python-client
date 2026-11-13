@@ -7,7 +7,30 @@ Statistics for submissions made to a specific quiz question.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **responses** | **int** | Number of students who have provided an answer to this question. Blank or empty responses are not counted. | [optional] 
-**answers** | [**QuizStatisticsAnswerStatistics**](QuizStatisticsAnswerStatistics.md) |  | [optional] 
+**answers** | [**List[QuizStatisticsAnswerStatistics]**](QuizStatisticsAnswerStatistics.md) | Statistics related to each individual pre-defined answer. | [optional] 
+**alpha** | **float** |  | [optional] 
+**answered_student_count** | **int** |  | [optional] 
+**bottom_student_count** | **int** |  | [optional] 
+**correct_bottom_student_count** | **int** |  | [optional] 
+**correct_middle_student_count** | **int** |  | [optional] 
+**correct_student_count** | **int** |  | [optional] 
+**correct_student_ratio** | **float** |  | [optional] 
+**correct_top_student_count** | **int** |  | [optional] 
+**difficulty_index** | **float** |  | [optional] 
+**full_credit** | **int** |  | [optional] 
+**graded** | **int** |  | [optional] 
+**id** | **str** |  | [optional] 
+**incorrect_student_count** | **int** |  | [optional] 
+**incorrect_student_ratio** | **float** |  | [optional] 
+**middle_student_count** | **int** |  | [optional] 
+**point_biserials** | **List[object]** |  | [optional] 
+**point_distribution** | **List[object]** |  | [optional] 
+**position** | **int** |  | [optional] 
+**question_text** | **str** |  | [optional] 
+**question_type** | **str** |  | [optional] 
+**stdev** | **float** |  | [optional] 
+**top_student_count** | **int** |  | [optional] 
+**variance** | **float** |  | [optional] 
 
 ## Example
 

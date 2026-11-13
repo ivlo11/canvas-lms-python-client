@@ -26,6 +26,8 @@ from canvas_lms_python_client.models.calendar_events_api_save_enabled_account_ca
 from canvas_lms_python_client.models.calendar_events_api_set_course_timetable_events_request import CalendarEventsApiSetCourseTimetableEventsRequest
 from canvas_lms_python_client.models.calendar_events_api_set_course_timetable_request import CalendarEventsApiSetCourseTimetableRequest
 from canvas_lms_python_client.models.calendar_events_api_update_request import CalendarEventsApiUpdateRequest
+from canvas_lms_python_client.models.calendar_events_get_course_timetable_response import CalendarEventsGetCourseTimetableResponse
+from canvas_lms_python_client.models.calendar_events_save_enabled_account_calendars_response import CalendarEventsSaveEnabledAccountCalendarsResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -62,7 +64,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CalendarEvent:
         """Create a calendar event
 
         Create and return a new calendar event
@@ -101,6 +103,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEvent",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +131,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CalendarEvent]:
         """Create a calendar event
 
         Create and return a new calendar event
@@ -167,6 +170,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEvent",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -234,6 +238,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEvent",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -274,6 +279,13 @@ class CalendarEventsApiApi:
             _body_params = calendar_events_api_create_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -330,7 +342,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[CalendarEvent]:
         """Delete a calendar event
 
         Delete an event from the calendar and return the deleted event
@@ -375,6 +387,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CalendarEvent]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -404,7 +417,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[CalendarEvent]]:
         """Delete a calendar event
 
         Delete an event from the calendar and return the deleted event
@@ -449,6 +462,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CalendarEvent]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -524,6 +538,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CalendarEvent]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -574,6 +589,13 @@ class CalendarEventsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -615,7 +637,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CalendarEventsGetCourseTimetableResponse:
         """Get course timetable
 
         Returns the last timetable set by the {api:CalendarEventsApiController#set_course_timetable Set a course timetable} endpoint
@@ -654,6 +676,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsGetCourseTimetableResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -681,7 +704,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CalendarEventsGetCourseTimetableResponse]:
         """Get course timetable
 
         Returns the last timetable set by the {api:CalendarEventsApiController#set_course_timetable Set a course timetable} endpoint
@@ -720,6 +743,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsGetCourseTimetableResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -787,6 +811,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsGetCourseTimetableResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -827,6 +852,13 @@ class CalendarEventsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1627,7 +1659,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CalendarEvent:
         """Reserve a time slot
 
         Reserves a particular time slot and return the new reservation
@@ -1669,6 +1701,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEvent",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1697,7 +1730,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CalendarEvent]:
         """Reserve a time slot
 
         Reserves a particular time slot and return the new reservation
@@ -1739,6 +1772,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEvent",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1810,6 +1844,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEvent",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1853,6 +1888,13 @@ class CalendarEventsApiApi:
             _body_params = calendar_events_api_reserve_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -1909,7 +1951,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CalendarEvent:
         """Reserve a time slot
 
         Reserves a particular time slot and return the new reservation
@@ -1954,6 +1996,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEvent",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1983,7 +2026,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CalendarEvent]:
         """Reserve a time slot
 
         Reserves a particular time slot and return the new reservation
@@ -2028,6 +2071,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEvent",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2103,6 +2147,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEvent",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2149,6 +2194,13 @@ class CalendarEventsApiApi:
             _body_params = calendar_events_api_reserve_for_other_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2203,7 +2255,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CalendarEventsSaveEnabledAccountCalendarsResponse:
         """Save enabled account calendars
 
         Creates and updates the enabled_account_calendars and mark_feature_as_seen user preferences
@@ -2242,6 +2294,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsSaveEnabledAccountCalendarsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2269,7 +2322,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CalendarEventsSaveEnabledAccountCalendarsResponse]:
         """Save enabled account calendars
 
         Creates and updates the enabled_account_calendars and mark_feature_as_seen user preferences
@@ -2308,6 +2361,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsSaveEnabledAccountCalendarsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2375,6 +2429,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsSaveEnabledAccountCalendarsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2415,6 +2470,13 @@ class CalendarEventsApiApi:
             _body_params = calendar_events_api_save_enabled_account_calendars_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2470,7 +2532,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CalendarEventsSaveEnabledAccountCalendarsResponse:
         """Set a course timetable
 
         Creates and updates \"timetable\" events for a course. Can automaticaly generate a series of calendar events based on simple schedules (e.g. \"Monday and Wednesday at 2:00pm\" )  Existing timetable events for the course and course sections will be updated if they still are part of the timetable. Otherwise, they will be deleted.
@@ -2512,6 +2574,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsSaveEnabledAccountCalendarsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2540,7 +2603,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CalendarEventsSaveEnabledAccountCalendarsResponse]:
         """Set a course timetable
 
         Creates and updates \"timetable\" events for a course. Can automaticaly generate a series of calendar events based on simple schedules (e.g. \"Monday and Wednesday at 2:00pm\" )  Existing timetable events for the course and course sections will be updated if they still are part of the timetable. Otherwise, they will be deleted.
@@ -2582,6 +2645,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsSaveEnabledAccountCalendarsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2653,6 +2717,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsSaveEnabledAccountCalendarsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2696,6 +2761,13 @@ class CalendarEventsApiApi:
             _body_params = calendar_events_api_set_course_timetable_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -2751,7 +2823,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CalendarEventsSaveEnabledAccountCalendarsResponse:
         """Create or update events directly for a course timetable
 
         Creates and updates \"timetable\" events for a course or course section. Similar to {api:CalendarEventsApiController#set_course_timetable setting a course timetable}, but instead of generating a list of events based on a timetable schedule, this endpoint expects a complete list of events.
@@ -2793,6 +2865,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsSaveEnabledAccountCalendarsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2821,7 +2894,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CalendarEventsSaveEnabledAccountCalendarsResponse]:
         """Create or update events directly for a course timetable
 
         Creates and updates \"timetable\" events for a course or course section. Similar to {api:CalendarEventsApiController#set_course_timetable setting a course timetable}, but instead of generating a list of events based on a timetable schedule, this endpoint expects a complete list of events.
@@ -2863,6 +2936,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsSaveEnabledAccountCalendarsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2934,6 +3008,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CalendarEventsSaveEnabledAccountCalendarsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2977,6 +3052,13 @@ class CalendarEventsApiApi:
             _body_params = calendar_events_api_set_course_timetable_events_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -3295,7 +3377,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[CalendarEvent]:
         """Update a calendar event
 
         Update and return a calendar event
@@ -3337,6 +3419,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CalendarEvent]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3365,7 +3448,7 @@ class CalendarEventsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[CalendarEvent]]:
         """Update a calendar event
 
         Update and return a calendar event
@@ -3407,6 +3490,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CalendarEvent]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3478,6 +3562,7 @@ class CalendarEventsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[CalendarEvent]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3521,6 +3606,13 @@ class CalendarEventsApiApi:
             _body_params = calendar_events_api_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

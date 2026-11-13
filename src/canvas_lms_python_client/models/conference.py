@@ -48,7 +48,10 @@ class Conference(BaseModel):
     join_url: Optional[StrictStr] = Field(default=None, description="URL to join the conference, may be null if the conference type doesn't set it")
     context_type: Optional[StrictStr] = Field(default=None, description="The type of this conference's context, typically 'Course' or 'Group'.")
     context_id: Optional[StrictInt] = Field(default=None, description="The ID of this conference's context.")
-    __properties: ClassVar[List[str]] = ["id", "conference_type", "conference_key", "description", "duration", "ended_at", "started_at", "title", "users", "invitees", "attendees", "has_advanced_settings", "long_running", "user_settings", "recordings", "url", "join_url", "context_type", "context_id"]
+    end_at: Optional[StrictStr] = None
+    has_calendar_event: Optional[StrictInt] = None
+    start_at: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "conference_type", "conference_key", "description", "duration", "ended_at", "started_at", "title", "users", "invitees", "attendees", "has_advanced_settings", "long_running", "user_settings", "recordings", "url", "join_url", "context_type", "context_id", "end_at", "has_calendar_event", "start_at"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -95,6 +98,46 @@ class Conference(BaseModel):
             for _item_recordings in self.recordings:
                 _items.append(_item_recordings.to_dict() if _item_recordings is not None else None)
             _dict['recordings'] = _items
+        # set to None if conference_key (nullable) is None
+        # and model_fields_set contains the field
+        if self.conference_key is None and "conference_key" in self.model_fields_set:
+            _dict['conference_key'] = None
+
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if duration (nullable) is None
+        # and model_fields_set contains the field
+        if self.duration is None and "duration" in self.model_fields_set:
+            _dict['duration'] = None
+
+        # set to None if ended_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.ended_at is None and "ended_at" in self.model_fields_set:
+            _dict['ended_at'] = None
+
+        # set to None if started_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.started_at is None and "started_at" in self.model_fields_set:
+            _dict['started_at'] = None
+
+        # set to None if join_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.join_url is None and "join_url" in self.model_fields_set:
+            _dict['join_url'] = None
+
+        # set to None if end_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_at is None and "end_at" in self.model_fields_set:
+            _dict['end_at'] = None
+
+        # set to None if start_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_at is None and "start_at" in self.model_fields_set:
+            _dict['start_at'] = None
+
         return _dict
 
     @classmethod
@@ -125,7 +168,10 @@ class Conference(BaseModel):
             "url": obj.get("url"),
             "join_url": obj.get("join_url"),
             "context_type": obj.get("context_type"),
-            "context_id": obj.get("context_id")
+            "context_id": obj.get("context_id"),
+            "end_at": obj.get("end_at"),
+            "has_calendar_event": obj.get("has_calendar_event"),
+            "start_at": obj.get("start_at")
         })
         return _obj
 

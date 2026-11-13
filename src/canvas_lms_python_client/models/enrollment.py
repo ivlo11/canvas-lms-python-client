@@ -81,7 +81,14 @@ class Enrollment(BaseModel):
     current_period_unposted_final_score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="optional: The student's score in the course for the current grading period, including muted/unposted assignments and including ungraded assignments with a score of 0. Only included if user has permission to view this score, typically teachers, TAs, and admins. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)", json_schema_extra={"examples": [85.25]})
     current_period_unposted_current_grade: Optional[StrictStr] = Field(default=None, description="optional: The letter grade equivalent of current_period_unposted_current_score, if available. Only included if user has permission to view this grade, typically teachers, TAs, and admins. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)", json_schema_extra={"examples": ["A"]})
     current_period_unposted_final_grade: Optional[StrictStr] = Field(default=None, description="optional: The letter grade equivalent of current_period_unposted_final_score, if available. Only included if user has permission to view this grade, typically teachers, TAs, and admins. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)", json_schema_extra={"examples": ["B"]})
-    __properties: ClassVar[List[str]] = ["id", "course_id", "sis_course_id", "course_integration_id", "course_section_id", "section_integration_id", "sis_account_id", "sis_section_id", "sis_user_id", "enrollment_state", "limit_privileges_to_course_section", "sis_import_id", "root_account_id", "type", "user_id", "associated_user_id", "role", "role_id", "created_at", "updated_at", "start_at", "end_at", "last_activity_at", "last_attended_at", "total_activity_time", "html_url", "grades", "user", "override_grade", "override_score", "unposted_current_grade", "unposted_final_grade", "unposted_current_score", "unposted_final_score", "has_grading_periods", "totals_for_all_grading_periods_option", "current_grading_period_title", "current_grading_period_id", "current_period_override_grade", "current_period_override_score", "computed_current_score", "computed_final_score", "computed_current_grade", "computed_final_grade", "current_period_computed_current_score", "current_period_computed_final_score", "current_period_computed_current_grade", "current_period_computed_final_grade", "current_period_unposted_current_score", "current_period_unposted_final_score", "current_period_unposted_current_grade", "current_period_unposted_final_grade"]
+    computed_current_letter_grade: Optional[StrictStr] = None
+    multiple_grading_periods_enabled: Optional[StrictBool] = None
+    observed_user: Optional[Dict[str, Any]] = None
+    temporary_enrollment_display_state: Optional[StrictStr] = None
+    temporary_enrollment_pairing_id: Optional[StrictInt] = None
+    temporary_enrollment_provider: Optional[Dict[str, Any]] = None
+    temporary_enrollment_source_user_id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id", "course_id", "sis_course_id", "course_integration_id", "course_section_id", "section_integration_id", "sis_account_id", "sis_section_id", "sis_user_id", "enrollment_state", "limit_privileges_to_course_section", "sis_import_id", "root_account_id", "type", "user_id", "associated_user_id", "role", "role_id", "created_at", "updated_at", "start_at", "end_at", "last_activity_at", "last_attended_at", "total_activity_time", "html_url", "grades", "user", "override_grade", "override_score", "unposted_current_grade", "unposted_final_grade", "unposted_current_score", "unposted_final_score", "has_grading_periods", "totals_for_all_grading_periods_option", "current_grading_period_title", "current_grading_period_id", "current_period_override_grade", "current_period_override_score", "computed_current_score", "computed_final_score", "computed_current_grade", "computed_final_grade", "current_period_computed_current_score", "current_period_computed_final_score", "current_period_computed_current_grade", "current_period_computed_final_grade", "current_period_unposted_current_score", "current_period_unposted_final_score", "current_period_unposted_current_grade", "current_period_unposted_final_grade", "computed_current_letter_grade", "multiple_grading_periods_enabled", "observed_user", "temporary_enrollment_display_state", "temporary_enrollment_pairing_id", "temporary_enrollment_provider", "temporary_enrollment_source_user_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -128,6 +135,136 @@ class Enrollment(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of user
         if self.user:
             _dict['user'] = self.user.to_dict()
+        # set to None if id (nullable) is None
+        # and model_fields_set contains the field
+        if self.id is None and "id" in self.model_fields_set:
+            _dict['id'] = None
+
+        # set to None if sis_course_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_course_id is None and "sis_course_id" in self.model_fields_set:
+            _dict['sis_course_id'] = None
+
+        # set to None if course_integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.course_integration_id is None and "course_integration_id" in self.model_fields_set:
+            _dict['course_integration_id'] = None
+
+        # set to None if section_integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.section_integration_id is None and "section_integration_id" in self.model_fields_set:
+            _dict['section_integration_id'] = None
+
+        # set to None if sis_account_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_account_id is None and "sis_account_id" in self.model_fields_set:
+            _dict['sis_account_id'] = None
+
+        # set to None if sis_section_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_section_id is None and "sis_section_id" in self.model_fields_set:
+            _dict['sis_section_id'] = None
+
+        # set to None if sis_user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_user_id is None and "sis_user_id" in self.model_fields_set:
+            _dict['sis_user_id'] = None
+
+        # set to None if sis_import_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_import_id is None and "sis_import_id" in self.model_fields_set:
+            _dict['sis_import_id'] = None
+
+        # set to None if associated_user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.associated_user_id is None and "associated_user_id" in self.model_fields_set:
+            _dict['associated_user_id'] = None
+
+        # set to None if created_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.created_at is None and "created_at" in self.model_fields_set:
+            _dict['created_at'] = None
+
+        # set to None if updated_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.updated_at is None and "updated_at" in self.model_fields_set:
+            _dict['updated_at'] = None
+
+        # set to None if start_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_at is None and "start_at" in self.model_fields_set:
+            _dict['start_at'] = None
+
+        # set to None if end_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_at is None and "end_at" in self.model_fields_set:
+            _dict['end_at'] = None
+
+        # set to None if last_activity_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_activity_at is None and "last_activity_at" in self.model_fields_set:
+            _dict['last_activity_at'] = None
+
+        # set to None if last_attended_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_attended_at is None and "last_attended_at" in self.model_fields_set:
+            _dict['last_attended_at'] = None
+
+        # set to None if current_grading_period_title (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_grading_period_title is None and "current_grading_period_title" in self.model_fields_set:
+            _dict['current_grading_period_title'] = None
+
+        # set to None if current_grading_period_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_grading_period_id is None and "current_grading_period_id" in self.model_fields_set:
+            _dict['current_grading_period_id'] = None
+
+        # set to None if computed_current_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.computed_current_score is None and "computed_current_score" in self.model_fields_set:
+            _dict['computed_current_score'] = None
+
+        # set to None if computed_final_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.computed_final_score is None and "computed_final_score" in self.model_fields_set:
+            _dict['computed_final_score'] = None
+
+        # set to None if computed_current_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.computed_current_grade is None and "computed_current_grade" in self.model_fields_set:
+            _dict['computed_current_grade'] = None
+
+        # set to None if computed_final_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.computed_final_grade is None and "computed_final_grade" in self.model_fields_set:
+            _dict['computed_final_grade'] = None
+
+        # set to None if current_period_computed_current_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_period_computed_current_score is None and "current_period_computed_current_score" in self.model_fields_set:
+            _dict['current_period_computed_current_score'] = None
+
+        # set to None if current_period_computed_final_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_period_computed_final_score is None and "current_period_computed_final_score" in self.model_fields_set:
+            _dict['current_period_computed_final_score'] = None
+
+        # set to None if current_period_computed_current_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_period_computed_current_grade is None and "current_period_computed_current_grade" in self.model_fields_set:
+            _dict['current_period_computed_current_grade'] = None
+
+        # set to None if current_period_computed_final_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_period_computed_final_grade is None and "current_period_computed_final_grade" in self.model_fields_set:
+            _dict['current_period_computed_final_grade'] = None
+
+        # set to None if computed_current_letter_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.computed_current_letter_grade is None and "computed_current_letter_grade" in self.model_fields_set:
+            _dict['computed_current_letter_grade'] = None
+
         return _dict
 
     @classmethod
@@ -191,7 +328,14 @@ class Enrollment(BaseModel):
             "current_period_unposted_current_score": obj.get("current_period_unposted_current_score"),
             "current_period_unposted_final_score": obj.get("current_period_unposted_final_score"),
             "current_period_unposted_current_grade": obj.get("current_period_unposted_current_grade"),
-            "current_period_unposted_final_grade": obj.get("current_period_unposted_final_grade")
+            "current_period_unposted_final_grade": obj.get("current_period_unposted_final_grade"),
+            "computed_current_letter_grade": obj.get("computed_current_letter_grade"),
+            "multiple_grading_periods_enabled": obj.get("multiple_grading_periods_enabled"),
+            "observed_user": obj.get("observed_user"),
+            "temporary_enrollment_display_state": obj.get("temporary_enrollment_display_state"),
+            "temporary_enrollment_pairing_id": obj.get("temporary_enrollment_pairing_id"),
+            "temporary_enrollment_provider": obj.get("temporary_enrollment_provider"),
+            "temporary_enrollment_source_user_id": obj.get("temporary_enrollment_source_user_id")
         })
         return _obj
 

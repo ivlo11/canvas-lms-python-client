@@ -22,6 +22,16 @@ Name | Type | Description | Notes
 **all_day_date** | **datetime** | the overridden all day date (present if due_at is overridden) | [optional] 
 **unlock_at** | **datetime** | the overridden unlock at (present if unlock_at is overridden) | [optional] 
 **lock_at** | **datetime** | the overridden lock at, if any (present if lock_at is overridden) | [optional] 
+**unassign_item** | **bool** |  | [optional] 
+**group_category_id** | **int** |  | [optional] 
+**non_collaborative** | **bool** |  | [optional] 
+**noop_id** | **object** |  | [optional] 
+**course_id** | **int** |  | [optional] 
+**parent_override_id** | **int** |  | [optional] 
+**context_module_name** | **str** |  | [optional] 
+**peer_review_dates** | **object** |  | [optional] 
+**students** | **List[object]** |  | [optional] 
+**sub_assignment_due_dates** | **List[object]** |  | [optional] 
 
 ## Example
 

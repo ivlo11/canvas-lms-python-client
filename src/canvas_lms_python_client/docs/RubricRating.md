@@ -9,7 +9,9 @@ Name | Type | Description | Notes
 **criterion_id** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
 **long_description** | **str** |  | [optional] 
-**points** | **int** |  | [optional] 
+**points** | **float** |  | [optional] 
+**color** | **str** |  | [optional] 
+**mastery** | **bool** |  | [optional] 
 
 ## Example
 

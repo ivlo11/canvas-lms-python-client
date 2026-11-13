@@ -22,6 +22,7 @@ from canvas_lms_python_client.models.account_calendar import AccountCalendar
 from canvas_lms_python_client.models.account_calendars_api_index_response import AccountCalendarsApiIndexResponse
 from canvas_lms_python_client.models.account_calendars_api_update_request import AccountCalendarsApiUpdateRequest
 from canvas_lms_python_client.models.account_calendars_api_visible_calendars_count_response import AccountCalendarsApiVisibleCalendarsCountResponse
+from canvas_lms_python_client.models.account_calendars_bulk_update_response import AccountCalendarsBulkUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -636,7 +637,7 @@ class AccountCalendarsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AccountCalendarsBulkUpdateResponse:
         """Update several calendars
 
         Set visibility and/or auto_subscribe on many calendars simultaneously. Requires the `manage_account_calendar_visibility` permission on the account.  Accepts a JSON array of objects containing 2-3 keys each: `id` (the account's id, required), `visible` (a boolean indicating whether the account calendar is visible), and `auto_subscribe` (a boolean indicating whether users should see these events in their calendar without manually subscribing).  Returns the count of updated accounts.
@@ -675,6 +676,7 @@ class AccountCalendarsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountCalendarsBulkUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -702,7 +704,7 @@ class AccountCalendarsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AccountCalendarsBulkUpdateResponse]:
         """Update several calendars
 
         Set visibility and/or auto_subscribe on many calendars simultaneously. Requires the `manage_account_calendar_visibility` permission on the account.  Accepts a JSON array of objects containing 2-3 keys each: `id` (the account's id, required), `visible` (a boolean indicating whether the account calendar is visible), and `auto_subscribe` (a boolean indicating whether users should see these events in their calendar without manually subscribing).  Returns the count of updated accounts.
@@ -741,6 +743,7 @@ class AccountCalendarsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountCalendarsBulkUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -808,6 +811,7 @@ class AccountCalendarsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountCalendarsBulkUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -848,6 +852,13 @@ class AccountCalendarsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

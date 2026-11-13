@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -37,7 +37,7 @@ class HistoryEntry(BaseModel):
     context_name: Optional[StrictStr] = Field(default=None, description="The name of the context", json_schema_extra={"examples": ["Something 101"]})
     visited_url: StrictStr = Field(description="The URL of the item", json_schema_extra={"examples": ["https://canvas.example.com/courses/123/assignments/456"]})
     visited_at: datetime = Field(description="When the page was visited", json_schema_extra={"examples": ["2019-08-01T19:49:47Z"]})
-    interaction_seconds: Optional[StrictInt] = Field(default=None, description="The estimated time spent on the page in seconds", json_schema_extra={"examples": [400]})
+    interaction_seconds: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The estimated time spent on the page in seconds", json_schema_extra={"examples": [400]})
     __properties: ClassVar[List[str]] = ["asset_code", "asset_name", "asset_icon", "asset_readable_category", "context_type", "context_id", "context_name", "visited_url", "visited_at", "interaction_seconds"]
 
     model_config = ConfigDict(

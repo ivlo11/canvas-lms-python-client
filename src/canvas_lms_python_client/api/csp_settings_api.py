@@ -20,6 +20,7 @@ from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.csp_settings_add_domain_request import CspSettingsAddDomainRequest
 from canvas_lms_python_client.models.csp_settings_add_multiple_domains_request import CspSettingsAddMultipleDomainsRequest
+from canvas_lms_python_client.models.csp_settings_get_csp_settings_response import CspSettingsGetCspSettingsResponse
 from canvas_lms_python_client.models.csp_settings_set_csp_lock_request import CspSettingsSetCspLockRequest
 from canvas_lms_python_client.models.csp_settings_set_csp_setting_request import CspSettingsSetCspSettingRequest
 
@@ -620,7 +621,7 @@ class CspSettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CspSettingsGetCspSettingsResponse:
         """Get current settings for account or course
 
         Update multiple modules in an account.
@@ -659,6 +660,7 @@ class CspSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CspSettingsGetCspSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -686,7 +688,7 @@ class CspSettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CspSettingsGetCspSettingsResponse]:
         """Get current settings for account or course
 
         Update multiple modules in an account.
@@ -725,6 +727,7 @@ class CspSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CspSettingsGetCspSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -792,6 +795,7 @@ class CspSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CspSettingsGetCspSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -832,6 +836,13 @@ class CspSettingsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -873,7 +884,7 @@ class CspSettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CspSettingsGetCspSettingsResponse:
         """Get current settings for account or course
 
         Update multiple modules in an account.
@@ -912,6 +923,7 @@ class CspSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CspSettingsGetCspSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -939,7 +951,7 @@ class CspSettingsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CspSettingsGetCspSettingsResponse]:
         """Get current settings for account or course
 
         Update multiple modules in an account.
@@ -978,6 +990,7 @@ class CspSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CspSettingsGetCspSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1045,6 +1058,7 @@ class CspSettingsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CspSettingsGetCspSettingsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1085,6 +1099,13 @@ class CspSettingsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

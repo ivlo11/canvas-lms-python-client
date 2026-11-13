@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **account_calendars_api_bulk_update**
-> account_calendars_api_bulk_update(account_id)
+> AccountCalendarsBulkUpdateResponse account_calendars_api_bulk_update(account_id)
 
 Update several calendars
 
@@ -122,6 +122,7 @@ Returns the count of updated accounts.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.account_calendars_bulk_update_response import AccountCalendarsBulkUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -149,7 +150,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update several calendars
-        await api_instance.account_calendars_api_bulk_update(account_id)
+        api_response = await api_instance.account_calendars_api_bulk_update(account_id)
+        print("The response of AccountCalendarsApiApi->account_calendars_api_bulk_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AccountCalendarsApiApi->account_calendars_api_bulk_update: %s\n" % e)
 ```
@@ -165,7 +168,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AccountCalendarsBulkUpdateResponse**](AccountCalendarsBulkUpdateResponse.md)
 
 ### Authorization
 
@@ -174,13 +177,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update several calendars |  -  |
+**0** | AccountCalendarsBulkUpdateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

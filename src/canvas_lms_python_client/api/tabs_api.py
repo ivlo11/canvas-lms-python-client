@@ -57,7 +57,7 @@ class TabsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[Tab]:
         """List available tabs for a course or group
 
         Returns a paginated list of navigation tabs available in the current context.
@@ -99,6 +99,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -127,7 +128,7 @@ class TabsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Tab]]:
         """List available tabs for a course or group
 
         Returns a paginated list of navigation tabs available in the current context.
@@ -169,6 +170,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -240,6 +242,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -335,7 +338,7 @@ class TabsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[Tab]:
         """List available tabs for a course or group
 
         Returns a paginated list of navigation tabs available in the current context.
@@ -377,6 +380,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -405,7 +409,7 @@ class TabsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Tab]]:
         """List available tabs for a course or group
 
         Returns a paginated list of navigation tabs available in the current context.
@@ -447,6 +451,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -518,6 +523,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -613,7 +619,7 @@ class TabsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[Tab]:
         """List available tabs for a course or group
 
         Returns a paginated list of navigation tabs available in the current context.
@@ -655,6 +661,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -683,7 +690,7 @@ class TabsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Tab]]:
         """List available tabs for a course or group
 
         Returns a paginated list of navigation tabs available in the current context.
@@ -725,6 +732,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -796,6 +804,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -891,7 +900,7 @@ class TabsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[Tab]:
         """List available tabs for a course or group
 
         Returns a paginated list of navigation tabs available in the current context.
@@ -933,6 +942,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -961,7 +971,7 @@ class TabsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Tab]]:
         """List available tabs for a course or group
 
         Returns a paginated list of navigation tabs available in the current context.
@@ -1003,6 +1013,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1074,6 +1085,7 @@ class TabsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Tab]",
         }
         response_data = await self.api_client.call_api(
             *_param,

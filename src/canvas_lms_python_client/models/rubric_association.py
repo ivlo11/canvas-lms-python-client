@@ -37,7 +37,21 @@ class RubricAssociation(BaseModel):
     hide_score_total: Optional[StrictBool] = Field(default=None, description="Whether or not the score total is displayed within the rubric. This option is only available if the rubric is not used for grading.", json_schema_extra={"examples": [True]})
     hide_points: Optional[StrictBool] = Field(default=None, json_schema_extra={"examples": [True]})
     hide_outcome_results: Optional[StrictBool] = Field(default=None, json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["id", "rubric_id", "association_id", "association_type", "use_for_grading", "summary_data", "purpose", "hide_score_total", "hide_points", "hide_outcome_results"]
+    bookmarked: Optional[StrictBool] = None
+    context_code: Optional[StrictStr] = None
+    context_id: Optional[StrictInt] = None
+    context_type: Optional[StrictStr] = None
+    created_at: Optional[StrictStr] = None
+    root_account_id: Optional[StrictInt] = None
+    title: Optional[StrictStr] = None
+    updated_at: Optional[StrictStr] = None
+    url: Optional[StrictStr] = None
+    workflow_state: Optional[StrictStr] = None
+    assessment_requests: Optional[List[Dict[str, Any]]] = None
+    association_count: Optional[StrictInt] = None
+    permissions: Optional[Dict[str, Any]] = None
+    rubric_assessments: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["id", "rubric_id", "association_id", "association_type", "use_for_grading", "summary_data", "purpose", "hide_score_total", "hide_points", "hide_outcome_results", "bookmarked", "context_code", "context_id", "context_type", "created_at", "root_account_id", "title", "updated_at", "url", "workflow_state", "assessment_requests", "association_count", "permissions", "rubric_assessments"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -78,6 +92,26 @@ class RubricAssociation(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if use_for_grading (nullable) is None
+        # and model_fields_set contains the field
+        if self.use_for_grading is None and "use_for_grading" in self.model_fields_set:
+            _dict['use_for_grading'] = None
+
+        # set to None if summary_data (nullable) is None
+        # and model_fields_set contains the field
+        if self.summary_data is None and "summary_data" in self.model_fields_set:
+            _dict['summary_data'] = None
+
+        # set to None if hide_score_total (nullable) is None
+        # and model_fields_set contains the field
+        if self.hide_score_total is None and "hide_score_total" in self.model_fields_set:
+            _dict['hide_score_total'] = None
+
+        # set to None if url (nullable) is None
+        # and model_fields_set contains the field
+        if self.url is None and "url" in self.model_fields_set:
+            _dict['url'] = None
+
         return _dict
 
     @classmethod
@@ -99,7 +133,21 @@ class RubricAssociation(BaseModel):
             "purpose": obj.get("purpose"),
             "hide_score_total": obj.get("hide_score_total"),
             "hide_points": obj.get("hide_points"),
-            "hide_outcome_results": obj.get("hide_outcome_results")
+            "hide_outcome_results": obj.get("hide_outcome_results"),
+            "bookmarked": obj.get("bookmarked"),
+            "context_code": obj.get("context_code"),
+            "context_id": obj.get("context_id"),
+            "context_type": obj.get("context_type"),
+            "created_at": obj.get("created_at"),
+            "root_account_id": obj.get("root_account_id"),
+            "title": obj.get("title"),
+            "updated_at": obj.get("updated_at"),
+            "url": obj.get("url"),
+            "workflow_state": obj.get("workflow_state"),
+            "assessment_requests": obj.get("assessment_requests"),
+            "association_count": obj.get("association_count"),
+            "permissions": obj.get("permissions"),
+            "rubric_assessments": obj.get("rubric_assessments")
         })
         return _obj
 

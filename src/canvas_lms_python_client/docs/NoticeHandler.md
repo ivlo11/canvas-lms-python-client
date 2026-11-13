@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **handler** | **str** | URL to receive the notice | [optional] 
 **notice_type** | **str** | The type of notice | [optional] 
-**max_batch_size** | **int** | The maximum number of notices to include in a single batch, or &#39;null&#39; if not set. | [optional] 
+**max_batch_size** | [**NoticeHandlerMaxBatchSize**](NoticeHandlerMaxBatchSize.md) |  | [optional] 
 
 ## Example
 

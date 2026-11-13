@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **rubrics_create**
-> rubrics_create(course_id, rubrics_create_request=rubrics_create_request)
+> RubricsCreateResponse rubrics_create(course_id, rubrics_create_request=rubrics_create_request)
 
 Create a single rubric
 
@@ -30,6 +30,7 @@ value, but that is not currently planned.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.rubrics_create_request import RubricsCreateRequest
+from canvas_lms_python_client.models.rubrics_create_response import RubricsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -58,7 +59,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a single rubric
-        await api_instance.rubrics_create(course_id, rubrics_create_request=rubrics_create_request)
+        api_response = await api_instance.rubrics_create(course_id, rubrics_create_request=rubrics_create_request)
+        print("The response of RubricsApi->rubrics_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling RubricsApi->rubrics_create: %s\n" % e)
 ```
@@ -75,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**RubricsCreateResponse**](RubricsCreateResponse.md)
 
 ### Authorization
 
@@ -84,18 +87,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create a single rubric |  -  |
+**0** | RubricsCreateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubrics_destroy**
-> Rubric rubrics_destroy(course_id, id)
+> RubricsDestroyResponse rubrics_destroy(course_id, id)
 
 Delete a single
 
@@ -107,7 +110,7 @@ Deletes a Rubric and removes all RubricAssociations.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.rubric import Rubric
+from canvas_lms_python_client.models.rubrics_destroy_response import RubricsDestroyResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -155,7 +158,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Rubric**](Rubric.md)
+[**RubricsDestroyResponse**](RubricsDestroyResponse.md)
 
 ### Authorization
 
@@ -170,12 +173,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Rubric |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubrics_update**
-> rubrics_update(course_id, id, rubrics_update_request=rubrics_update_request)
+> RubricsCreateResponse rubrics_update(course_id, id, rubrics_update_request=rubrics_update_request)
 
 Update a single rubric
 
@@ -194,6 +197,7 @@ value, but that is not currently planned.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.rubrics_create_response import RubricsCreateResponse
 from canvas_lms_python_client.models.rubrics_update_request import RubricsUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -224,7 +228,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a single rubric
-        await api_instance.rubrics_update(course_id, id, rubrics_update_request=rubrics_update_request)
+        api_response = await api_instance.rubrics_update(course_id, id, rubrics_update_request=rubrics_update_request)
+        print("The response of RubricsApi->rubrics_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling RubricsApi->rubrics_update: %s\n" % e)
 ```
@@ -242,7 +248,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**RubricsCreateResponse**](RubricsCreateResponse.md)
 
 ### Authorization
 
@@ -251,13 +257,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update a single rubric |  -  |
+**0** | RubricsCreateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

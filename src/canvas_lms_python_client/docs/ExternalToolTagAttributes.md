@@ -9,6 +9,11 @@ Name | Type | Description | Notes
 **url** | **str** | URL to the external tool | [optional] 
 **new_tab** | **bool** | Whether or not there is a new tab for the external tool | [optional] 
 **resource_link_id** | **str** | the identifier for this tool_tag | [optional] 
+**content_id** | **int** |  | [optional] 
+**content_type** | **str** |  | [optional] 
+**custom_params** | **object** |  | [optional] 
+**external_data** | **str** |  | [optional] 
+**resource_link_title** | **object** |  | [optional] 
 
 ## Example
 

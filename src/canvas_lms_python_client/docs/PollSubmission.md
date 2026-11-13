@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **poll_choice_id** | **str** | The unique identifier of the poll choice chosen for this submission. | 
 **user_id** | **str** | the unique identifier of the user who submitted this poll submission. | [optional] 
 **created_at** | **datetime** | The date and time the poll submission was submitted. | [optional] 
+**poll_session_id** | **str** |  | [optional] 
 
 ## Example
 

@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.authentication_provider_auth_over_tls import AuthenticationProviderAuthOverTls
 from canvas_lms_python_client.models.federated_attributes_config import FederatedAttributesConfig
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,7 +38,7 @@ class AuthenticationProvider(BaseModel):
     requested_authn_context: Optional[StrictStr] = Field(default=None, description="Valid for SAML providers.")
     auth_host: Optional[StrictStr] = Field(default=None, description="Valid for LDAP providers.", json_schema_extra={"examples": ["127.0.0.1"]})
     auth_filter: Optional[StrictStr] = Field(default=None, description="Valid for LDAP providers.", json_schema_extra={"examples": ["filter1"]})
-    auth_over_tls: Optional[StrictInt] = Field(default=None, description="Valid for LDAP providers.")
+    auth_over_tls: Optional[AuthenticationProviderAuthOverTls] = None
     auth_base: Optional[StrictStr] = Field(default=None, description="Valid for LDAP and CAS providers.")
     auth_username: Optional[StrictStr] = Field(default=None, description="Valid for LDAP providers.", json_schema_extra={"examples": ["username1"]})
     auth_port: Optional[StrictInt] = Field(default=None, description="Valid for LDAP providers.")
@@ -48,7 +49,20 @@ class AuthenticationProvider(BaseModel):
     jit_provisioning: Optional[StrictBool] = Field(default=None, description="Just In Time provisioning. Valid for all providers except Canvas (which has the similar in concept self_registration setting).")
     federated_attributes: Optional[FederatedAttributesConfig] = None
     mfa_required: Optional[StrictBool] = Field(default=None, description="If multi-factor authentication is required when logging in with this authentication provider. The account must not have MFA disabled.")
-    __properties: ClassVar[List[str]] = ["identifier_format", "auth_type", "id", "log_out_url", "log_in_url", "certificate_fingerprint", "requested_authn_context", "auth_host", "auth_filter", "auth_over_tls", "auth_base", "auth_username", "auth_port", "position", "idp_entity_id", "login_attribute", "sig_alg", "jit_provisioning", "federated_attributes", "mfa_required"]
+    change_password_url: Optional[Any] = None
+    enable_captcha: Optional[StrictBool] = None
+    login_handle_name: Optional[Any] = None
+    metadata_uri: Optional[StrictStr] = None
+    otp_via_sms: Optional[StrictBool] = None
+    parent_registration: Optional[StrictBool] = None
+    self_registration: Optional[StrictStr] = None
+    skip_internal_mfa: Optional[StrictBool] = None
+    strip_domain_from_login_attribute: Optional[StrictBool] = None
+    unknown_user_url: Optional[Any] = None
+    internal_ca: Optional[StrictStr] = None
+    verify_tls_cert_opt_in: Optional[StrictBool] = None
+    app_id: Optional[Any] = None
+    __properties: ClassVar[List[str]] = ["identifier_format", "auth_type", "id", "log_out_url", "log_in_url", "certificate_fingerprint", "requested_authn_context", "auth_host", "auth_filter", "auth_over_tls", "auth_base", "auth_username", "auth_port", "position", "idp_entity_id", "login_attribute", "sig_alg", "jit_provisioning", "federated_attributes", "mfa_required", "change_password_url", "enable_captcha", "login_handle_name", "metadata_uri", "otp_via_sms", "parent_registration", "self_registration", "skip_internal_mfa", "strip_domain_from_login_attribute", "unknown_user_url", "internal_ca", "verify_tls_cert_opt_in", "app_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,9 +103,67 @@ class AuthenticationProvider(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of auth_over_tls
+        if self.auth_over_tls:
+            _dict['auth_over_tls'] = self.auth_over_tls.to_dict()
         # override the default output from pydantic by calling `to_dict()` of federated_attributes
         if self.federated_attributes:
             _dict['federated_attributes'] = self.federated_attributes.to_dict()
+        # set to None if identifier_format (nullable) is None
+        # and model_fields_set contains the field
+        if self.identifier_format is None and "identifier_format" in self.model_fields_set:
+            _dict['identifier_format'] = None
+
+        # set to None if log_in_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.log_in_url is None and "log_in_url" in self.model_fields_set:
+            _dict['log_in_url'] = None
+
+        # set to None if requested_authn_context (nullable) is None
+        # and model_fields_set contains the field
+        if self.requested_authn_context is None and "requested_authn_context" in self.model_fields_set:
+            _dict['requested_authn_context'] = None
+
+        # set to None if auth_base (nullable) is None
+        # and model_fields_set contains the field
+        if self.auth_base is None and "auth_base" in self.model_fields_set:
+            _dict['auth_base'] = None
+
+        # set to None if auth_port (nullable) is None
+        # and model_fields_set contains the field
+        if self.auth_port is None and "auth_port" in self.model_fields_set:
+            _dict['auth_port'] = None
+
+        # set to None if change_password_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.change_password_url is None and "change_password_url" in self.model_fields_set:
+            _dict['change_password_url'] = None
+
+        # set to None if login_handle_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.login_handle_name is None and "login_handle_name" in self.model_fields_set:
+            _dict['login_handle_name'] = None
+
+        # set to None if metadata_uri (nullable) is None
+        # and model_fields_set contains the field
+        if self.metadata_uri is None and "metadata_uri" in self.model_fields_set:
+            _dict['metadata_uri'] = None
+
+        # set to None if unknown_user_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.unknown_user_url is None and "unknown_user_url" in self.model_fields_set:
+            _dict['unknown_user_url'] = None
+
+        # set to None if internal_ca (nullable) is None
+        # and model_fields_set contains the field
+        if self.internal_ca is None and "internal_ca" in self.model_fields_set:
+            _dict['internal_ca'] = None
+
+        # set to None if app_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.app_id is None and "app_id" in self.model_fields_set:
+            _dict['app_id'] = None
+
         return _dict
 
     @classmethod
@@ -113,7 +185,7 @@ class AuthenticationProvider(BaseModel):
             "requested_authn_context": obj.get("requested_authn_context"),
             "auth_host": obj.get("auth_host"),
             "auth_filter": obj.get("auth_filter"),
-            "auth_over_tls": obj.get("auth_over_tls"),
+            "auth_over_tls": AuthenticationProviderAuthOverTls.from_dict(obj["auth_over_tls"]) if obj.get("auth_over_tls") is not None else None,
             "auth_base": obj.get("auth_base"),
             "auth_username": obj.get("auth_username"),
             "auth_port": obj.get("auth_port"),
@@ -123,7 +195,20 @@ class AuthenticationProvider(BaseModel):
             "sig_alg": obj.get("sig_alg"),
             "jit_provisioning": obj.get("jit_provisioning"),
             "federated_attributes": FederatedAttributesConfig.from_dict(obj["federated_attributes"]) if obj.get("federated_attributes") is not None else None,
-            "mfa_required": obj.get("mfa_required")
+            "mfa_required": obj.get("mfa_required"),
+            "change_password_url": obj.get("change_password_url"),
+            "enable_captcha": obj.get("enable_captcha"),
+            "login_handle_name": obj.get("login_handle_name"),
+            "metadata_uri": obj.get("metadata_uri"),
+            "otp_via_sms": obj.get("otp_via_sms"),
+            "parent_registration": obj.get("parent_registration"),
+            "self_registration": obj.get("self_registration"),
+            "skip_internal_mfa": obj.get("skip_internal_mfa"),
+            "strip_domain_from_login_attribute": obj.get("strip_domain_from_login_attribute"),
+            "unknown_user_url": obj.get("unknown_user_url"),
+            "internal_ca": obj.get("internal_ca"),
+            "verify_tls_cert_opt_in": obj.get("verify_tls_cert_opt_in"),
+            "app_id": obj.get("app_id")
         })
         return _obj
 

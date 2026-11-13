@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**scores** | [**OutcomeRollupScore**](OutcomeRollupScore.md) |  | [optional] 
+**scores** | [**List[OutcomeRollupScore]**](OutcomeRollupScore.md) | an array of OutcomeRollupScore objects | [optional] 
 **name** | **str** | The name of the resource for this rollup. For example, the user name. | [optional] 
 **links** | [**OutcomeRollupLinks**](OutcomeRollupLinks.md) |  | [optional] 
 

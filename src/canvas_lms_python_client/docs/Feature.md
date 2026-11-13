@@ -15,6 +15,9 @@ Name | Type | Description | Notes
 **early_access_program** | **bool** | Indicates the feature is part of the Early Access Program. | [optional] 
 **autoexpand** | **bool** | Whether the details of the feature are autoexpanded on page load vs. the user clicking to expand. | [optional] 
 **release_notes_url** | **str** | A URL to the release notes describing the feature | [optional] 
+**description** | **str** |  | [optional] 
+**shadow** | **bool** |  | [optional] 
+**type** | **str** |  | [optional] 
 
 ## Example
 

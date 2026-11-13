@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **lmgb_user_details_show**
-> object lmgb_user_details_show(course_id, id)
+> OutcomeRollupLinks lmgb_user_details_show(course_id, id)
 
 Get LMGB user details
 
@@ -20,6 +20,7 @@ Returns details about a user in the context of a course for LMGB
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.outcome_rollup_links import OutcomeRollupLinks
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -67,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**OutcomeRollupLinks**](OutcomeRollupLinks.md)
 
 ### Authorization
 
@@ -82,7 +83,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | LmgbUserDetails |  -  |
+**0** | OutcomeRollupLinks |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

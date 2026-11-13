@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **rubric_assessments_create**
-> rubric_assessments_create(course_id, rubric_association_id, rubric_assessments_create_request=rubric_assessments_create_request)
+> RubricAssessmentsCreateResponse rubric_assessments_create(course_id, rubric_association_id, rubric_assessments_create_request=rubric_assessments_create_request)
 
 Create a single rubric assessment
 
@@ -25,6 +25,7 @@ The returned object also provides the information of
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.rubric_assessments_create_request import RubricAssessmentsCreateRequest
+from canvas_lms_python_client.models.rubric_assessments_create_response import RubricAssessmentsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -54,7 +55,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a single rubric assessment
-        await api_instance.rubric_assessments_create(course_id, rubric_association_id, rubric_assessments_create_request=rubric_assessments_create_request)
+        api_response = await api_instance.rubric_assessments_create(course_id, rubric_association_id, rubric_assessments_create_request=rubric_assessments_create_request)
+        print("The response of RubricAssessmentsApi->rubric_assessments_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling RubricAssessmentsApi->rubric_assessments_create: %s\n" % e)
 ```
@@ -72,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**RubricAssessmentsCreateResponse**](RubricAssessmentsCreateResponse.md)
 
 ### Authorization
 
@@ -81,18 +84,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create a single rubric assessment |  -  |
+**0** | RubricAssessmentsCreateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubric_assessments_destroy**
-> RubricAssessment rubric_assessments_destroy(course_id, id, rubric_association_id)
+> RubricAssessmentsDestroyResponse rubric_assessments_destroy(course_id, id, rubric_association_id)
 
 Delete a single rubric assessment
 
@@ -104,7 +107,7 @@ Deletes a rubric assessment
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.rubric_assessment import RubricAssessment
+from canvas_lms_python_client.models.rubric_assessments_destroy_response import RubricAssessmentsDestroyResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -154,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**RubricAssessment**](RubricAssessment.md)
+[**RubricAssessmentsDestroyResponse**](RubricAssessmentsDestroyResponse.md)
 
 ### Authorization
 
@@ -169,12 +172,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | RubricAssessment |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubric_assessments_update**
-> rubric_assessments_update(course_id, id, rubric_association_id, rubric_assessments_create_request=rubric_assessments_create_request)
+> RubricAssessmentsUpdateResponse rubric_assessments_update(course_id, id, rubric_association_id, rubric_assessments_create_request=rubric_assessments_create_request)
 
 Update a single rubric assessment
 
@@ -189,6 +192,7 @@ The returned object also provides the information of
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.rubric_assessments_create_request import RubricAssessmentsCreateRequest
+from canvas_lms_python_client.models.rubric_assessments_update_response import RubricAssessmentsUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -219,7 +223,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a single rubric assessment
-        await api_instance.rubric_assessments_update(course_id, id, rubric_association_id, rubric_assessments_create_request=rubric_assessments_create_request)
+        api_response = await api_instance.rubric_assessments_update(course_id, id, rubric_association_id, rubric_assessments_create_request=rubric_assessments_create_request)
+        print("The response of RubricAssessmentsApi->rubric_assessments_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling RubricAssessmentsApi->rubric_assessments_update: %s\n" % e)
 ```
@@ -238,7 +244,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**RubricAssessmentsUpdateResponse**](RubricAssessmentsUpdateResponse.md)
 
 ### Authorization
 
@@ -247,13 +253,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update a single rubric assessment |  -  |
+**0** | RubricAssessmentsUpdateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

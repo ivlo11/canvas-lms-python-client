@@ -37,7 +37,10 @@ class Feature(BaseModel):
     early_access_program: Optional[StrictBool] = Field(default=None, description="Indicates the feature is part of the Early Access Program.")
     autoexpand: Optional[StrictBool] = Field(default=None, description="Whether the details of the feature are autoexpanded on page load vs. the user clicking to expand.", json_schema_extra={"examples": [True]})
     release_notes_url: Optional[StrictStr] = Field(default=None, description="A URL to the release notes describing the feature", json_schema_extra={"examples": ["http://canvas.example.com/release_notes#fancy_wickets"]})
-    __properties: ClassVar[List[str]] = ["feature", "display_name", "applies_to", "feature_flag", "root_opt_in", "beta", "early_access_program", "autoexpand", "release_notes_url"]
+    description: Optional[StrictStr] = None
+    shadow: Optional[StrictBool] = None
+    type: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["feature", "display_name", "applies_to", "feature_flag", "root_opt_in", "beta", "early_access_program", "autoexpand", "release_notes_url", "description", "shadow", "type"]
 
     @field_validator('applies_to')
     def applies_to_validate_enum(cls, value):
@@ -111,7 +114,10 @@ class Feature(BaseModel):
             "beta": obj.get("beta"),
             "early_access_program": obj.get("early_access_program"),
             "autoexpand": obj.get("autoexpand"),
-            "release_notes_url": obj.get("release_notes_url")
+            "release_notes_url": obj.get("release_notes_url"),
+            "description": obj.get("description"),
+            "shadow": obj.get("shadow"),
+            "type": obj.get("type")
         })
         return _obj
 

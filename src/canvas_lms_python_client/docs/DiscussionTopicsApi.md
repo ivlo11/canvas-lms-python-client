@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **discussion_topics_create**
-> discussion_topics_create(course_id, discussion_topics_create_request=discussion_topics_create_request)
+> DiscussionTopic discussion_topics_create(course_id, discussion_topics_create_request=discussion_topics_create_request)
 
 Create a new discussion topic
 
@@ -29,6 +29,7 @@ Create an new discussion topic for the course or group.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topic import DiscussionTopic
 from canvas_lms_python_client.models.discussion_topics_create_request import DiscussionTopicsCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -58,7 +59,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a new discussion topic
-        await api_instance.discussion_topics_create(course_id, discussion_topics_create_request=discussion_topics_create_request)
+        api_response = await api_instance.discussion_topics_create(course_id, discussion_topics_create_request=discussion_topics_create_request)
+        print("The response of DiscussionTopicsApi->discussion_topics_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApi->discussion_topics_create: %s\n" % e)
 ```
@@ -75,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopic**](DiscussionTopic.md)
 
 ### Authorization
 
@@ -84,18 +87,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create a new discussion topic |  -  |
+**0** | DiscussionTopic |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_create_for_groups**
-> discussion_topics_create_for_groups(group_id, discussion_topics_create_request=discussion_topics_create_request)
+> DiscussionTopic discussion_topics_create_for_groups(group_id, discussion_topics_create_request=discussion_topics_create_request)
 
 Create a new discussion topic
 
@@ -107,6 +110,7 @@ Create an new discussion topic for the course or group.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topic import DiscussionTopic
 from canvas_lms_python_client.models.discussion_topics_create_request import DiscussionTopicsCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -136,7 +140,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a new discussion topic
-        await api_instance.discussion_topics_create_for_groups(group_id, discussion_topics_create_request=discussion_topics_create_request)
+        api_response = await api_instance.discussion_topics_create_for_groups(group_id, discussion_topics_create_request=discussion_topics_create_request)
+        print("The response of DiscussionTopicsApi->discussion_topics_create_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApi->discussion_topics_create_for_groups: %s\n" % e)
 ```
@@ -153,7 +159,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopic**](DiscussionTopic.md)
 
 ### Authorization
 
@@ -162,18 +168,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create a new discussion topic |  -  |
+**0** | DiscussionTopic |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_destroy**
-> discussion_topics_destroy(course_id, topic_id)
+> DiscussionTopicsDestroyResponse discussion_topics_destroy(course_id, topic_id)
 
 Delete a topic
 
@@ -186,6 +192,7 @@ an assignment discussion.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topics_destroy_response import DiscussionTopicsDestroyResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -214,7 +221,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete a topic
-        await api_instance.discussion_topics_destroy(course_id, topic_id)
+        api_response = await api_instance.discussion_topics_destroy(course_id, topic_id)
+        print("The response of DiscussionTopicsApi->discussion_topics_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApi->discussion_topics_destroy: %s\n" % e)
 ```
@@ -231,7 +240,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsDestroyResponse**](DiscussionTopicsDestroyResponse.md)
 
 ### Authorization
 
@@ -240,18 +249,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete a topic |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_destroy_for_groups**
-> discussion_topics_destroy_for_groups(group_id, topic_id)
+> DiscussionTopicsDestroyResponse discussion_topics_destroy_for_groups(group_id, topic_id)
 
 Delete a topic
 
@@ -264,6 +273,7 @@ an assignment discussion.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topics_destroy_response import DiscussionTopicsDestroyResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -292,7 +302,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete a topic
-        await api_instance.discussion_topics_destroy_for_groups(group_id, topic_id)
+        api_response = await api_instance.discussion_topics_destroy_for_groups(group_id, topic_id)
+        print("The response of DiscussionTopicsApi->discussion_topics_destroy_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApi->discussion_topics_destroy_for_groups: %s\n" % e)
 ```
@@ -309,7 +321,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsDestroyResponse**](DiscussionTopicsDestroyResponse.md)
 
 ### Authorization
 
@@ -318,13 +330,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete a topic |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -521,7 +533,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_reorder**
-> discussion_topics_reorder(course_id, discussion_topics_reorder_request=discussion_topics_reorder_request)
+> DiscussionTopicsReorderResponse discussion_topics_reorder(course_id, discussion_topics_reorder_request=discussion_topics_reorder_request)
 
 Reorder pinned topics
 
@@ -535,6 +547,7 @@ All pinned topics should be included.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.discussion_topics_reorder_request import DiscussionTopicsReorderRequest
+from canvas_lms_python_client.models.discussion_topics_reorder_response import DiscussionTopicsReorderResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -563,7 +576,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Reorder pinned topics
-        await api_instance.discussion_topics_reorder(course_id, discussion_topics_reorder_request=discussion_topics_reorder_request)
+        api_response = await api_instance.discussion_topics_reorder(course_id, discussion_topics_reorder_request=discussion_topics_reorder_request)
+        print("The response of DiscussionTopicsApi->discussion_topics_reorder:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApi->discussion_topics_reorder: %s\n" % e)
 ```
@@ -580,7 +595,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsReorderResponse**](DiscussionTopicsReorderResponse.md)
 
 ### Authorization
 
@@ -589,18 +604,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Reorder pinned topics |  -  |
+**0** | DiscussionTopicsReorderResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_reorder_for_groups**
-> discussion_topics_reorder_for_groups(group_id, discussion_topics_reorder_request=discussion_topics_reorder_request)
+> DiscussionTopicsReorderResponse discussion_topics_reorder_for_groups(group_id, discussion_topics_reorder_request=discussion_topics_reorder_request)
 
 Reorder pinned topics
 
@@ -614,6 +629,7 @@ All pinned topics should be included.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.discussion_topics_reorder_request import DiscussionTopicsReorderRequest
+from canvas_lms_python_client.models.discussion_topics_reorder_response import DiscussionTopicsReorderResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -642,7 +658,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Reorder pinned topics
-        await api_instance.discussion_topics_reorder_for_groups(group_id, discussion_topics_reorder_request=discussion_topics_reorder_request)
+        api_response = await api_instance.discussion_topics_reorder_for_groups(group_id, discussion_topics_reorder_request=discussion_topics_reorder_request)
+        print("The response of DiscussionTopicsApi->discussion_topics_reorder_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApi->discussion_topics_reorder_for_groups: %s\n" % e)
 ```
@@ -659,7 +677,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsReorderResponse**](DiscussionTopicsReorderResponse.md)
 
 ### Authorization
 
@@ -668,18 +686,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Reorder pinned topics |  -  |
+**0** | DiscussionTopicsReorderResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_update**
-> discussion_topics_update(course_id, topic_id, discussion_topics_update_request=discussion_topics_update_request)
+> DiscussionTopic discussion_topics_update(course_id, topic_id, discussion_topics_update_request=discussion_topics_update_request)
 
 Update a topic
 
@@ -691,6 +709,7 @@ Update an existing discussion topic for the course or group.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topic import DiscussionTopic
 from canvas_lms_python_client.models.discussion_topics_update_request import DiscussionTopicsUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -721,7 +740,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a topic
-        await api_instance.discussion_topics_update(course_id, topic_id, discussion_topics_update_request=discussion_topics_update_request)
+        api_response = await api_instance.discussion_topics_update(course_id, topic_id, discussion_topics_update_request=discussion_topics_update_request)
+        print("The response of DiscussionTopicsApi->discussion_topics_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApi->discussion_topics_update: %s\n" % e)
 ```
@@ -739,7 +760,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopic**](DiscussionTopic.md)
 
 ### Authorization
 
@@ -748,18 +769,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update a topic |  -  |
+**0** | DiscussionTopic |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_update_for_groups**
-> discussion_topics_update_for_groups(group_id, topic_id, discussion_topics_update_request=discussion_topics_update_request)
+> DiscussionTopic discussion_topics_update_for_groups(group_id, topic_id, discussion_topics_update_request=discussion_topics_update_request)
 
 Update a topic
 
@@ -771,6 +792,7 @@ Update an existing discussion topic for the course or group.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topic import DiscussionTopic
 from canvas_lms_python_client.models.discussion_topics_update_request import DiscussionTopicsUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -801,7 +823,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a topic
-        await api_instance.discussion_topics_update_for_groups(group_id, topic_id, discussion_topics_update_request=discussion_topics_update_request)
+        api_response = await api_instance.discussion_topics_update_for_groups(group_id, topic_id, discussion_topics_update_request=discussion_topics_update_request)
+        print("The response of DiscussionTopicsApi->discussion_topics_update_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApi->discussion_topics_update_for_groups: %s\n" % e)
 ```
@@ -819,7 +843,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopic**](DiscussionTopic.md)
 
 ### Authorization
 
@@ -828,13 +852,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update a topic |  -  |
+**0** | DiscussionTopic |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

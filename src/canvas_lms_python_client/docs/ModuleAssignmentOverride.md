@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **id** | **int** | the ID of the assignment override | [optional] 
 **context_module_id** | **int** | the ID of the module the override applies to | [optional] 
 **title** | **str** | the title of the override | [optional] 
-**students** | [**OverrideTarget**](OverrideTarget.md) |  | [optional] 
+**students** | [**List[OverrideTarget]**](OverrideTarget.md) | an array of the override&#39;s target students (present only if the override targets an adhoc set of students) | [optional] 
 **course_section** | [**OverrideTarget**](OverrideTarget.md) |  | [optional] 
+**group** | **object** |  | [optional] 
 
 ## Example
 

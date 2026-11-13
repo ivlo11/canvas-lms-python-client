@@ -16,8 +16,8 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.outcome_rollup_links import OutcomeRollupLinks
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -55,7 +55,7 @@ class LmgbUserDetailsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> OutcomeRollupLinks:
         """Get LMGB user details
 
         Returns details about a user in the context of a course for LMGB
@@ -97,7 +97,7 @@ class LmgbUserDetailsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "OutcomeRollupLinks",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -126,7 +126,7 @@ class LmgbUserDetailsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[OutcomeRollupLinks]:
         """Get LMGB user details
 
         Returns details about a user in the context of a course for LMGB
@@ -168,7 +168,7 @@ class LmgbUserDetailsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "OutcomeRollupLinks",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -240,7 +240,7 @@ class LmgbUserDetailsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "OutcomeRollupLinks",
         }
         response_data = await self.api_client.call_api(
             *_param,

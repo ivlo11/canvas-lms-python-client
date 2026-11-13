@@ -13,6 +13,17 @@ Name | Type | Description | Notes
 **read_statistics** | **bool** | whether the user may view quiz statistics for this quiz | [optional] 
 **review_grades** | **bool** | whether the user may review grades for all quiz submissions for this quiz | [optional] 
 **update** | **bool** | whether the user may update the quiz | [optional] 
+**delete** | **bool** |  | [optional] 
+**grade** | **bool** |  | [optional] 
+**manage_assign_to** | **bool** |  | [optional] 
+**preview** | **bool** |  | [optional] 
+**view_answer_audits** | **bool** |  | [optional] 
+**attach_submission_comment_files** | **bool** |  | [optional] 
+**manage_files_add** | **bool** |  | [optional] 
+**manage_files_delete** | **bool** |  | [optional] 
+**manage_files_edit** | **bool** |  | [optional] 
+**read_own_submission** | **bool** |  | [optional] 
+**set_grading_scheme** | **bool** |  | [optional] 
 
 ## Example
 

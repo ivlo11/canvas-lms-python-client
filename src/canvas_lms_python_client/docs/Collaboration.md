@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **type** | **str** | Another representation of the collaboration type | [optional] 
 **update_url** | **str** | The LTI launch url to edit the collaboration | [optional] 
 **user_name** | **str** | The name of the user who owns the collaboration | [optional] 
+**permissions** | **object** |  | [optional] 
 
 ## Example
 

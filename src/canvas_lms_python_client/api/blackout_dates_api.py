@@ -16,11 +16,15 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.blackout_date import BlackoutDate
 from canvas_lms_python_client.models.blackout_dates_bulk_update_request import BlackoutDatesBulkUpdateRequest
 from canvas_lms_python_client.models.blackout_dates_create_request import BlackoutDatesCreateRequest
+from canvas_lms_python_client.models.blackout_dates_create_response import BlackoutDatesCreateResponse
+from canvas_lms_python_client.models.blackout_dates_new_response import BlackoutDatesNewResponse
+from canvas_lms_python_client.models.blackout_dates_show_response import BlackoutDatesShowResponse
+from canvas_lms_python_client.models.blackout_dates_update_response import BlackoutDatesUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -58,7 +62,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> List[BlackoutDate]:
         """Update a list of Blackout Dates
 
         Create, update, and delete blackout dates to sync the db with the incoming data.
@@ -100,7 +104,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[BlackoutDate]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -129,7 +133,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[List[BlackoutDate]]:
         """Update a list of Blackout Dates
 
         Create, update, and delete blackout dates to sync the db with the incoming data.
@@ -171,7 +175,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[BlackoutDate]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -243,7 +247,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[BlackoutDate]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -349,7 +353,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> BlackoutDate:
+    ) -> BlackoutDatesCreateResponse:
         """Create Blackout Date
 
         Create a blackout date for the given context.
@@ -391,7 +395,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -420,7 +424,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[BlackoutDate]:
+    ) -> ApiResponse[BlackoutDatesCreateResponse]:
         """Create Blackout Date
 
         Create a blackout date for the given context.
@@ -462,7 +466,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -534,7 +538,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -640,7 +644,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> BlackoutDate:
+    ) -> BlackoutDatesCreateResponse:
         """Create Blackout Date
 
         Create a blackout date for the given context.
@@ -682,7 +686,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -711,7 +715,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[BlackoutDate]:
+    ) -> ApiResponse[BlackoutDatesCreateResponse]:
         """Create Blackout Date
 
         Create a blackout date for the given context.
@@ -753,7 +757,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -825,7 +829,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2012,7 +2016,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> BlackoutDate:
+    ) -> BlackoutDatesNewResponse:
         """New Blackout Date
 
         Initialize an unsaved Blackout Date for the given context.
@@ -2051,7 +2055,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesNewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2079,7 +2083,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[BlackoutDate]:
+    ) -> ApiResponse[BlackoutDatesNewResponse]:
         """New Blackout Date
 
         Initialize an unsaved Blackout Date for the given context.
@@ -2118,7 +2122,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesNewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2186,7 +2190,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesNewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2275,7 +2279,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> BlackoutDate:
+    ) -> BlackoutDatesNewResponse:
         """New Blackout Date
 
         Initialize an unsaved Blackout Date for the given context.
@@ -2314,7 +2318,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesNewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2342,7 +2346,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[BlackoutDate]:
+    ) -> ApiResponse[BlackoutDatesNewResponse]:
         """New Blackout Date
 
         Initialize an unsaved Blackout Date for the given context.
@@ -2381,7 +2385,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesNewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2449,7 +2453,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesNewResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2539,7 +2543,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> BlackoutDate:
+    ) -> BlackoutDatesShowResponse:
         """Get a single blackout date
 
         Returns the blackout date with the given id.
@@ -2581,7 +2585,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2610,7 +2614,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[BlackoutDate]:
+    ) -> ApiResponse[BlackoutDatesShowResponse]:
         """Get a single blackout date
 
         Returns the blackout date with the given id.
@@ -2652,7 +2656,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2724,7 +2728,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2817,7 +2821,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> BlackoutDate:
+    ) -> BlackoutDatesShowResponse:
         """Get a single blackout date
 
         Returns the blackout date with the given id.
@@ -2859,7 +2863,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2888,7 +2892,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[BlackoutDate]:
+    ) -> ApiResponse[BlackoutDatesShowResponse]:
         """Get a single blackout date
 
         Returns the blackout date with the given id.
@@ -2930,7 +2934,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3002,7 +3006,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3096,7 +3100,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> BlackoutDate:
+    ) -> BlackoutDatesUpdateResponse:
         """Update Blackout Date
 
         Update a blackout date for the given context.
@@ -3141,7 +3145,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3171,7 +3175,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[BlackoutDate]:
+    ) -> ApiResponse[BlackoutDatesUpdateResponse]:
         """Update Blackout Date
 
         Update a blackout date for the given context.
@@ -3216,7 +3220,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3292,7 +3296,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3402,7 +3406,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> BlackoutDate:
+    ) -> BlackoutDatesUpdateResponse:
         """Update Blackout Date
 
         Update a blackout date for the given context.
@@ -3447,7 +3451,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3477,7 +3481,7 @@ class BlackoutDatesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[BlackoutDate]:
+    ) -> ApiResponse[BlackoutDatesUpdateResponse]:
         """Update Blackout Date
 
         Update a blackout date for the given context.
@@ -3522,7 +3526,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3598,7 +3602,7 @@ class BlackoutDatesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "BlackoutDate",
+            'default': "BlackoutDatesUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

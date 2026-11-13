@@ -58,6 +58,13 @@ Name | Type | Description | Notes
 **current_period_unposted_final_score** | **float** | optional: The student&#39;s score in the course for the current grading period, including muted/unposted assignments and including ungraded assignments with a score of 0. Only included if user has permission to view this score, typically teachers, TAs, and admins. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints) | [optional] 
 **current_period_unposted_current_grade** | **str** | optional: The letter grade equivalent of current_period_unposted_current_score, if available. Only included if user has permission to view this grade, typically teachers, TAs, and admins. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints) | [optional] 
 **current_period_unposted_final_grade** | **str** | optional: The letter grade equivalent of current_period_unposted_final_score, if available. Only included if user has permission to view this grade, typically teachers, TAs, and admins. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints) | [optional] 
+**computed_current_letter_grade** | **str** |  | [optional] 
+**multiple_grading_periods_enabled** | **bool** |  | [optional] 
+**observed_user** | **object** |  | [optional] 
+**temporary_enrollment_display_state** | **str** |  | [optional] 
+**temporary_enrollment_pairing_id** | **int** |  | [optional] 
+**temporary_enrollment_provider** | **object** |  | [optional] 
+**temporary_enrollment_source_user_id** | **int** |  | [optional] 
 
 ## Example
 

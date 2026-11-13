@@ -15,8 +15,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field, StrictInt, StrictStr
+from typing import Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.live_assessments_assessments_create_response import LiveAssessmentsAssessmentsCreateResponse
+from canvas_lms_python_client.models.live_assessments_assessments_index_response import LiveAssessmentsAssessmentsIndexResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -53,7 +56,7 @@ class AssessmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> LiveAssessmentsAssessmentsCreateResponse:
         """Create or find a live assessment
 
         Creates or finds an existing live assessment with the given key and aligns it with the linked outcome
@@ -92,6 +95,7 @@ class AssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LiveAssessmentsAssessmentsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -119,7 +123,7 @@ class AssessmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[LiveAssessmentsAssessmentsCreateResponse]:
         """Create or find a live assessment
 
         Creates or finds an existing live assessment with the given key and aligns it with the linked outcome
@@ -158,6 +162,7 @@ class AssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LiveAssessmentsAssessmentsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -225,6 +230,7 @@ class AssessmentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LiveAssessmentsAssessmentsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -301,6 +307,8 @@ class AssessmentsApi:
     async def assessments_index(
         self,
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -313,13 +321,18 @@ class AssessmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+        _page_url: Optional[StrictStr] = None,
+    ) -> LiveAssessmentsAssessmentsIndexResponse:
         """List live assessments
 
         Returns a paginated list of live assessments.
 
         :param course_id: Scope response to course_id (required)
         :type course_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -339,19 +352,28 @@ class AssessmentsApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._assessments_index_serialize(
             course_id=course_id,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LiveAssessmentsAssessmentsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -363,10 +385,13 @@ class AssessmentsApi:
             response_types_map=_response_types_map,
         ).data
 
+
     @validate_call
-    async def assessments_index_with_http_info(
+    async def assessments_index_paginated(
         self,
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -379,13 +404,18 @@ class AssessmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+        _page_url: Optional[StrictStr] = None,
+    ) -> AsyncIterator[LiveAssessmentsAssessmentsIndexResponse]:
         """List live assessments
 
         Returns a paginated list of live assessments.
 
         :param course_id: Scope response to course_id (required)
         :type course_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -405,19 +435,132 @@ class AssessmentsApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._assessments_index_serialize(
             course_id=course_id,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LiveAssessmentsAssessmentsIndexResponse",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout,
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            yield _page_data
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
+
+    @validate_call
+    async def assessments_index_with_http_info(
+        self,
+        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[LiveAssessmentsAssessmentsIndexResponse]:
+        """List live assessments
+
+        Returns a paginated list of live assessments.
+
+        :param course_id: Scope response to course_id (required)
+        :type course_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._assessments_index_serialize(
+            course_id=course_id,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LiveAssessmentsAssessmentsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -434,6 +577,8 @@ class AssessmentsApi:
     async def assessments_index_without_preload_content(
         self,
         course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -446,6 +591,7 @@ class AssessmentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
     ) -> RESTResponseType:
         """List live assessments
 
@@ -453,6 +599,10 @@ class AssessmentsApi:
 
         :param course_id: Scope response to course_id (required)
         :type course_id: str
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -472,19 +622,28 @@ class AssessmentsApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._assessments_index_serialize(
             course_id=course_id,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "LiveAssessmentsAssessmentsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -496,6 +655,8 @@ class AssessmentsApi:
     def _assessments_index_serialize(
         self,
         course_id,
+        page,
+        per_page,
         _request_auth,
         _content_type,
         _headers,
@@ -520,6 +681,14 @@ class AssessmentsApi:
         if course_id is not None:
             _path_params['course_id'] = course_id
         # process the query parameters
+        if page is not None:
+            
+            _query_params.append(('page', page))
+            
+        if per_page is not None:
+            
+            _query_params.append(('per_page', per_page))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter

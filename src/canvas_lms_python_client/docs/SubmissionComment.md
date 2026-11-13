@@ -9,11 +9,19 @@ Name | Type | Description | Notes
 **id** | **int** |  | [optional] 
 **author_id** | **int** |  | [optional] 
 **author_name** | **str** |  | [optional] 
-**author** | **str** | Abbreviated user object UserDisplay (see users API). | [optional] 
+**author** | [**SubmissionCommentAuthor**](SubmissionCommentAuthor.md) |  | [optional] 
 **comment** | **str** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **edited_at** | **datetime** |  | [optional] 
 **media_comment** | [**MediaComment**](MediaComment.md) |  | [optional] 
+**attempt** | **int** |  | [optional] 
+**cached_attachments** | **List[object]** |  | [optional] 
+**draft** | **bool** |  | [optional] 
+**group_comment_id** | **str** |  | [optional] 
+**media_comment_id** | **str** |  | [optional] 
+**media_comment_type** | **str** |  | [optional] 
+**publishable** | **bool** |  | [optional] 
+**attachments** | **List[object]** |  | [optional] 
 
 ## Example
 

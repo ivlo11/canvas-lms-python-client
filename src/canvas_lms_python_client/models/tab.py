@@ -34,7 +34,10 @@ class Tab(BaseModel):
     hidden: Optional[StrictBool] = Field(default=None, description="only included if true", json_schema_extra={"examples": [True]})
     visibility: Optional[StrictStr] = Field(default=None, description="possible values are: public, members, admins, and none", json_schema_extra={"examples": ["public"]})
     position: Optional[StrictInt] = Field(default=None, description="1 based", json_schema_extra={"examples": [2]})
-    __properties: ClassVar[List[str]] = ["html_url", "id", "label", "type", "hidden", "visibility", "position"]
+    full_url: Optional[StrictStr] = None
+    url: Optional[StrictStr] = None
+    unused: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["html_url", "id", "label", "type", "hidden", "visibility", "position", "full_url", "url", "unused"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -75,6 +78,11 @@ class Tab(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if url (nullable) is None
+        # and model_fields_set contains the field
+        if self.url is None and "url" in self.model_fields_set:
+            _dict['url'] = None
+
         return _dict
 
     @classmethod
@@ -93,7 +101,10 @@ class Tab(BaseModel):
             "type": obj.get("type"),
             "hidden": obj.get("hidden"),
             "visibility": obj.get("visibility"),
-            "position": obj.get("position")
+            "position": obj.get("position"),
+            "full_url": obj.get("full_url"),
+            "url": obj.get("url"),
+            "unused": obj.get("unused")
         })
         return _obj
 

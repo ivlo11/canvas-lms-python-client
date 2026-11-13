@@ -1,12 +1,13 @@
 # GradingPeriodsShowResponse
 
-Paginated `grading_periods` list response (from the Canvas example response).
+Object response with `grading_periods`, `meta` (from the Canvas `@returns`).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **grading_periods** | [**List[GradingPeriod]**](GradingPeriod.md) |  | [optional] 
+**meta** | **object** |  | [optional] 
 
 ## Example
 

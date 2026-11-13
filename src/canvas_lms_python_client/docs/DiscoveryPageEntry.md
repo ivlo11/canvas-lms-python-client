@@ -6,7 +6,7 @@ A single authentication provider entry on the discovery page
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**authentication_provider_id** | **int** | The ID of the authentication provider | [optional] 
+**authentication_provider_id** | [**DiscoveryPageEntryAuthenticationProviderId**](DiscoveryPageEntryAuthenticationProviderId.md) |  | [optional] 
 **label** | **str** | The display label for this provider button | [optional] 
 **icon** | **str** | Icon key for this provider button | [optional] 
 

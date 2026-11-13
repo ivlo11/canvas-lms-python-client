@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **updated_at** | **datetime** | The timestamp of the last time any of the ePortfolio attributes changed | [optional] 
 **workflow_state** | **str** | The state of the ePortfolio. Either &#39;active&#39; or &#39;deleted&#39; | [optional] 
 **deleted_at** | **datetime** | The timestamp when the ePortfolio was deleted, or else null | [optional] 
-**spam_status** | **str** | A flag indicating whether the ePortfolio has been       flagged or moderated as spam. One of &#39;flagged_as_possible_spam&#39;,       &#39;marked_as_safe&#39;, &#39;marked_as_spam&#39;, or null | [optional] 
+**spam_status** | **str** | A flag indicating whether the ePortfolio has been flagged or moderated as spam. One of &#39;flagged_as_possible_spam&#39;, &#39;marked_as_safe&#39;, &#39;marked_as_spam&#39;, or null | [optional] 
 
 ## Example
 

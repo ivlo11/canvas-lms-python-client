@@ -48,7 +48,11 @@ class Folder(BaseModel):
     locked: Optional[StrictBool] = Field(default=None, json_schema_extra={"examples": [True]})
     locked_for_user: Optional[StrictBool] = None
     for_submissions: Optional[StrictBool] = Field(default=None, description="If true, indicates this is a read-only folder containing files submitted to assignments")
-    __properties: ClassVar[List[str]] = ["context_type", "context_id", "files_count", "position", "updated_at", "folders_url", "files_url", "full_name", "lock_at", "id", "folders_count", "name", "parent_folder_id", "created_at", "unlock_at", "hidden", "hidden_for_user", "locked", "locked_for_user", "for_submissions"]
+    data: Optional[Any] = None
+    url: Optional[StrictStr] = None
+    all_url: Optional[StrictStr] = None
+    can_upload: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["context_type", "context_id", "files_count", "position", "updated_at", "folders_url", "files_url", "full_name", "lock_at", "id", "folders_count", "name", "parent_folder_id", "created_at", "unlock_at", "hidden", "hidden_for_user", "locked", "locked_for_user", "for_submissions", "data", "url", "all_url", "can_upload"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,6 +93,36 @@ class Folder(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if position (nullable) is None
+        # and model_fields_set contains the field
+        if self.position is None and "position" in self.model_fields_set:
+            _dict['position'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
+        # set to None if parent_folder_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.parent_folder_id is None and "parent_folder_id" in self.model_fields_set:
+            _dict['parent_folder_id'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if hidden (nullable) is None
+        # and model_fields_set contains the field
+        if self.hidden is None and "hidden" in self.model_fields_set:
+            _dict['hidden'] = None
+
+        # set to None if data (nullable) is None
+        # and model_fields_set contains the field
+        if self.data is None and "data" in self.model_fields_set:
+            _dict['data'] = None
+
         return _dict
 
     @classmethod
@@ -120,7 +154,11 @@ class Folder(BaseModel):
             "hidden_for_user": obj.get("hidden_for_user"),
             "locked": obj.get("locked"),
             "locked_for_user": obj.get("locked_for_user"),
-            "for_submissions": obj.get("for_submissions")
+            "for_submissions": obj.get("for_submissions"),
+            "data": obj.get("data"),
+            "url": obj.get("url"),
+            "all_url": obj.get("all_url"),
+            "can_upload": obj.get("can_upload")
         })
         return _obj
 

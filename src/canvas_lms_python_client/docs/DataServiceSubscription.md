@@ -10,8 +10,13 @@ Name | Type | Description | Notes
 **context_type** | **str** | The type of context for the subscription. Must be &#39;assignment&#39;, or &#39;root_account&#39; | [optional] 
 **event_types** | **List[str]** | Array of strings representing the event types for the subscription. | [optional] 
 **format** | **str** | Format to deliver the live events. Must be &#39;live-event&#39; or &#39;caliper&#39;. | [optional] 
-**transport_metadata** | **str** | An object with a single key: &#39;Url&#39;. | [optional] 
+**transport_metadata** | [**DataServiceSubscriptionTransportMetadata**](DataServiceSubscriptionTransportMetadata.md) |  | [optional] 
 **transport_type** | **str** | The type of transport for the event. Must be either &#39;sqs&#39; or &#39;https&#39;. | [optional] 
+**id** | **str** |  | [optional] 
+**owner_id** | **str** |  | [optional] 
+**owner_type** | **str** |  | [optional] 
+**updated_by** | **str** |  | [optional] 
+**updated_by_type** | **str** |  | [optional] 
 
 ## Example
 

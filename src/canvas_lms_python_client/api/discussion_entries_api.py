@@ -19,6 +19,7 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.discussion_entries_update_request import DiscussionEntriesUpdateRequest
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -624,7 +625,7 @@ class DiscussionEntriesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionEntry:
         """Update an entry
 
         Update an existing discussion entry.  The entry must have been created by the current user, or the current user must have admin rights to the discussion. If the edit is not allowed, a 401 will be returned.
@@ -672,6 +673,7 @@ class DiscussionEntriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -702,7 +704,7 @@ class DiscussionEntriesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionEntry]:
         """Update an entry
 
         Update an existing discussion entry.  The entry must have been created by the current user, or the current user must have admin rights to the discussion. If the edit is not allowed, a 401 will be returned.
@@ -750,6 +752,7 @@ class DiscussionEntriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -829,6 +832,7 @@ class DiscussionEntriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -878,6 +882,13 @@ class DiscussionEntriesApi:
             _body_params = discussion_entries_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -935,7 +946,7 @@ class DiscussionEntriesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> DiscussionEntry:
         """Update an entry
 
         Update an existing discussion entry.  The entry must have been created by the current user, or the current user must have admin rights to the discussion. If the edit is not allowed, a 401 will be returned.
@@ -983,6 +994,7 @@ class DiscussionEntriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1013,7 +1025,7 @@ class DiscussionEntriesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[DiscussionEntry]:
         """Update an entry
 
         Update an existing discussion entry.  The entry must have been created by the current user, or the current user must have admin rights to the discussion. If the edit is not allowed, a 401 will be returned.
@@ -1061,6 +1073,7 @@ class DiscussionEntriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1140,6 +1153,7 @@ class DiscussionEntriesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "DiscussionEntry",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1189,6 +1203,13 @@ class DiscussionEntriesApi:
             _body_params = discussion_entries_update_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **reserved_times** | [**List[Appointment]**](Appointment.md) | The start and end times of slots reserved by the current user as well as the id of the calendar event for the reservation (see include[] argument) | [optional] 
 **allow_observer_signup** | **bool** | Boolean indicating whether observer users should be able to sign-up for an appointment | [optional] 
 **context_codes** | **List[str]** | The context codes (i.e. courses) this appointment group belongs to. Only people in these courses will be eligible to sign up. | [optional] 
-**sub_context_codes** | **List[int]** | The sub-context codes (i.e. course sections and group categories) this appointment group is restricted to | [optional] 
+**sub_context_codes** | [**List[AppointmentGroupSubContextCodesInner]**](AppointmentGroupSubContextCodesInner.md) | The sub-context codes (i.e. course sections and group categories) this appointment group is restricted to | [optional] 
 **workflow_state** | **str** | Current state of the appointment group (&#39;pending&#39;, &#39;active&#39; or &#39;deleted&#39;). &#39;pending&#39; indicates that it has not been published yet and is invisible to participants. | [optional] 
 **requiring_action** | **bool** | Boolean indicating whether the current user needs to sign up for this appointment group (i.e. it&#39;s reservable and the min_appointments_per_participant limit has not been met by this user). | [optional] 
 **appointments_count** | **int** | Number of time slots in this appointment group | [optional] 
@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **html_url** | **str** | URL for a user to view this appointment group | [optional] 
 **created_at** | **datetime** | When the appointment group was created | [optional] 
 **updated_at** | **datetime** | When the appointment group was last updated | [optional] 
+**all_context_codes** | **List[str]** |  | [optional] 
 
 ## Example
 

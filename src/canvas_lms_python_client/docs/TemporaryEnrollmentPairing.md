@@ -8,6 +8,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** | the ID of the temporary enrollment pairing | [optional] 
 **workflow_state** | **str** | The current status of the temporary enrollment pairing | [optional] 
+**created_at** | **str** |  | [optional] 
+**created_by_id** | **int** |  | [optional] 
+**deleted_by_id** | **int** |  | [optional] 
+**ending_enrollment_state** | **str** |  | [optional] 
+**root_account_id** | **int** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
 
 ## Example
 

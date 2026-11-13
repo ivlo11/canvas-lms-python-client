@@ -80,6 +80,16 @@ class PlannerOverride(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if assignment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.assignment_id is None and "assignment_id" in self.model_fields_set:
+            _dict['assignment_id'] = None
+
+        # set to None if deleted_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.deleted_at is None and "deleted_at" in self.model_fields_set:
+            _dict['deleted_at'] = None
+
         return _dict
 
     @classmethod

@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **hidden** | **bool** | only included if true | [optional] 
 **visibility** | **str** | possible values are: public, members, admins, and none | [optional] 
 **position** | **int** | 1 based | [optional] 
+**full_url** | **str** |  | [optional] 
+**url** | **str** |  | [optional] 
+**unused** | **bool** |  | [optional] 
 
 ## Example
 

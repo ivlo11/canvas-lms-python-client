@@ -47,7 +47,16 @@ class Group(BaseModel):
     permissions: Optional[Dict[str, Any]] = Field(default=None, description="optional: the permissions the user has for the group. returned only for a single group and include[]=permissions", json_schema_extra={"examples": [{"create_discussion_topic": True, "create_announcement": True}]})
     users: Optional[List[User]] = Field(default=None, description="optional: A list of users that are members in the group. Returned only if include[]=users. WARNING: this collection's size is capped (if there are an extremely large number of users in the group (thousands) not all of them will be returned). If you need to capture all the users in a group with certainty or experiencing slow response consider using the paginated /api/v1/groups/<group_id>/users endpoint.")
     non_collaborative: Optional[StrictBool] = Field(default=None, description="Indicates whether this group category is non-collaborative. A value of true means these group categories rely on the manage_tags permissions and do not have collaborative features")
-    __properties: ClassVar[List[str]] = ["id", "name", "description", "is_public", "followed_by_user", "join_level", "members_count", "avatar_url", "context_type", "context_name", "course_id", "role", "group_category_id", "sis_group_id", "sis_import_id", "storage_quota_mb", "permissions", "users", "non_collaborative"]
+    concluded: Optional[StrictBool] = None
+    created_at: Optional[StrictStr] = None
+    has_submission: Optional[StrictBool] = None
+    leader: Optional[Any] = None
+    max_membership: Optional[StrictInt] = None
+    account_id: Optional[StrictInt] = None
+    group_category: Optional[Dict[str, Any]] = None
+    is_favorite: Optional[StrictBool] = None
+    tabs: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "description", "is_public", "followed_by_user", "join_level", "members_count", "avatar_url", "context_type", "context_name", "course_id", "role", "group_category_id", "sis_group_id", "sis_import_id", "storage_quota_mb", "permissions", "users", "non_collaborative", "concluded", "created_at", "has_submission", "leader", "max_membership", "account_id", "group_category", "is_favorite", "tabs"]
 
     @field_validator('join_level')
     def join_level_validate_enum(cls, value):
@@ -114,6 +123,51 @@ class Group(BaseModel):
             for _item_users in self.users:
                 _items.append(_item_users.to_dict() if _item_users is not None else None)
             _dict['users'] = _items
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if avatar_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.avatar_url is None and "avatar_url" in self.model_fields_set:
+            _dict['avatar_url'] = None
+
+        # set to None if role (nullable) is None
+        # and model_fields_set contains the field
+        if self.role is None and "role" in self.model_fields_set:
+            _dict['role'] = None
+
+        # set to None if group_category_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.group_category_id is None and "group_category_id" in self.model_fields_set:
+            _dict['group_category_id'] = None
+
+        # set to None if sis_group_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_group_id is None and "sis_group_id" in self.model_fields_set:
+            _dict['sis_group_id'] = None
+
+        # set to None if sis_import_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_import_id is None and "sis_import_id" in self.model_fields_set:
+            _dict['sis_import_id'] = None
+
+        # set to None if leader (nullable) is None
+        # and model_fields_set contains the field
+        if self.leader is None and "leader" in self.model_fields_set:
+            _dict['leader'] = None
+
+        # set to None if max_membership (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_membership is None and "max_membership" in self.model_fields_set:
+            _dict['max_membership'] = None
+
+        # set to None if group_category (nullable) is None
+        # and model_fields_set contains the field
+        if self.group_category is None and "group_category" in self.model_fields_set:
+            _dict['group_category'] = None
+
         return _dict
 
     @classmethod
@@ -144,7 +198,16 @@ class Group(BaseModel):
             "storage_quota_mb": obj.get("storage_quota_mb"),
             "permissions": obj.get("permissions"),
             "users": [User.from_dict(_item) for _item in obj["users"]] if obj.get("users") is not None else None,
-            "non_collaborative": obj.get("non_collaborative")
+            "non_collaborative": obj.get("non_collaborative"),
+            "concluded": obj.get("concluded"),
+            "created_at": obj.get("created_at"),
+            "has_submission": obj.get("has_submission"),
+            "leader": obj.get("leader"),
+            "max_membership": obj.get("max_membership"),
+            "account_id": obj.get("account_id"),
+            "group_category": obj.get("group_category"),
+            "is_favorite": obj.get("is_favorite"),
+            "tabs": obj.get("tabs")
         })
         return _obj
 

@@ -18,6 +18,23 @@ Name | Type | Description | Notes
 **data** | [**List[RubricCriterion]**](RubricCriterion.md) | An array with all of this Rubric&#39;s grading Criteria | [optional] 
 **assessments** | [**List[RubricAssessment]**](RubricAssessment.md) | If an assessment type is included in the &#39;include&#39; parameter, includes an array of rubric assessment objects for a given rubric, based on the assessment type requested. If the user does not request an assessment type this key will be absent. | [optional] 
 **associations** | [**List[RubricAssociation]**](RubricAssociation.md) | If an association type is included in the &#39;include&#39; parameter, includes an array of rubric association objects for a given rubric, based on the association type requested. If the user does not request an association type this key will be absent. | [optional] 
+**association_count** | **int** |  | [optional] 
+**button_display** | **str** |  | [optional] 
+**context_code** | **str** |  | [optional] 
+**created_at** | **str** |  | [optional] 
+**description** | **str** |  | [optional] 
+**hide_points** | **bool** |  | [optional] 
+**migration_id** | **str** |  | [optional] 
+**public** | **bool** |  | [optional] 
+**rating_order** | **str** |  | [optional] 
+**root_account_id** | **int** |  | [optional] 
+**rubric_id** | **int** |  | [optional] 
+**rubric_imports_id** | **int** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
+**user_id** | **int** |  | [optional] 
+**workflow_state** | **str** |  | [optional] 
+**criteria** | **List[object]** |  | [optional] 
+**permissions** | **object** |  | [optional] 
 
 ## Example
 

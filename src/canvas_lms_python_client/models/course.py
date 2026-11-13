@@ -84,7 +84,29 @@ class Course(BaseModel):
     blueprint_restrictions: Optional[Dict[str, Any]] = Field(default=None, description="optional: Set of restrictions applied to all locked course objects", json_schema_extra={"examples": [{"content": True, "points": True, "due_dates": False, "availability_dates": False}]})
     blueprint_restrictions_by_object_type: Optional[Dict[str, Any]] = Field(default=None, description="optional: Sets of restrictions differentiated by object type applied to locked course objects", json_schema_extra={"examples": [{"assignment": {"content": True, "points": True}, "wiki_page": {"content": True}}]})
     template: Optional[StrictBool] = Field(default=None, description="optional: whether the course is set as a template (requires the Course Templates feature)", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["id", "sis_course_id", "uuid", "integration_id", "sis_import_id", "name", "course_code", "original_name", "workflow_state", "account_id", "root_account_id", "enrollment_term_id", "grading_periods", "grading_standard_id", "grade_passback_setting", "created_at", "start_at", "end_at", "locale", "enrollments", "total_students", "calendar", "default_view", "syllabus_body", "needs_grading_count", "term", "course_progress", "apply_assignment_group_weights", "permissions", "is_public", "is_public_to_auth_users", "public_syllabus", "public_syllabus_to_auth", "public_description", "storage_quota_mb", "storage_quota_used_mb", "hide_final_grades", "license", "allow_student_assignment_edits", "allow_wiki_comments", "allow_student_forum_attachments", "open_enrollment", "self_enrollment", "restrict_enrollments_to_course_dates", "course_format", "access_restricted_by_date", "time_zone", "blueprint", "blueprint_restrictions", "blueprint_restrictions_by_object_type", "template"]
+    accessibility_course_statistic: Optional[Dict[str, Any]] = None
+    account_name: Optional[StrictStr] = None
+    concluded: Optional[StrictBool] = None
+    course_color: Optional[Any] = None
+    friendly_name: Optional[StrictStr] = None
+    homeroom_course: Optional[StrictBool] = None
+    post_manually: Optional[StrictBool] = None
+    teacher_count: Optional[StrictInt] = None
+    teachers: Optional[List[Dict[str, Any]]] = None
+    account: Optional[Dict[str, Any]] = None
+    has_grading_periods: Optional[StrictBool] = None
+    has_weighted_grading_periods: Optional[StrictBool] = None
+    multiple_grading_periods_enabled: Optional[StrictBool] = None
+    sections: Optional[List[Dict[str, Any]]] = None
+    subaccount_id: Optional[StrictInt] = None
+    subaccount_name: Optional[StrictStr] = None
+    tabs: Optional[List[Dict[str, Any]]] = None
+    conclude_at: Optional[StrictStr] = None
+    global_id: Optional[StrictInt] = None
+    syllabus_versions: Optional[List[Dict[str, Any]]] = None
+    term_name: Optional[StrictStr] = None
+    html_url: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "sis_course_id", "uuid", "integration_id", "sis_import_id", "name", "course_code", "original_name", "workflow_state", "account_id", "root_account_id", "enrollment_term_id", "grading_periods", "grading_standard_id", "grade_passback_setting", "created_at", "start_at", "end_at", "locale", "enrollments", "total_students", "calendar", "default_view", "syllabus_body", "needs_grading_count", "term", "course_progress", "apply_assignment_group_weights", "permissions", "is_public", "is_public_to_auth_users", "public_syllabus", "public_syllabus_to_auth", "public_description", "storage_quota_mb", "storage_quota_used_mb", "hide_final_grades", "license", "allow_student_assignment_edits", "allow_wiki_comments", "allow_student_forum_attachments", "open_enrollment", "self_enrollment", "restrict_enrollments_to_course_dates", "course_format", "access_restricted_by_date", "time_zone", "blueprint", "blueprint_restrictions", "blueprint_restrictions_by_object_type", "template", "accessibility_course_statistic", "account_name", "concluded", "course_color", "friendly_name", "homeroom_course", "post_manually", "teacher_count", "teachers", "account", "has_grading_periods", "has_weighted_grading_periods", "multiple_grading_periods_enabled", "sections", "subaccount_id", "subaccount_name", "tabs", "conclude_at", "global_id", "syllabus_versions", "term_name", "html_url"]
 
     @field_validator('workflow_state')
     def workflow_state_validate_enum(cls, value):
@@ -166,6 +188,101 @@ class Course(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of course_progress
         if self.course_progress:
             _dict['course_progress'] = self.course_progress.to_dict()
+        # set to None if sis_course_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_course_id is None and "sis_course_id" in self.model_fields_set:
+            _dict['sis_course_id'] = None
+
+        # set to None if uuid (nullable) is None
+        # and model_fields_set contains the field
+        if self.uuid is None and "uuid" in self.model_fields_set:
+            _dict['uuid'] = None
+
+        # set to None if integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.integration_id is None and "integration_id" in self.model_fields_set:
+            _dict['integration_id'] = None
+
+        # set to None if sis_import_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_import_id is None and "sis_import_id" in self.model_fields_set:
+            _dict['sis_import_id'] = None
+
+        # set to None if course_code (nullable) is None
+        # and model_fields_set contains the field
+        if self.course_code is None and "course_code" in self.model_fields_set:
+            _dict['course_code'] = None
+
+        # set to None if grading_standard_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.grading_standard_id is None and "grading_standard_id" in self.model_fields_set:
+            _dict['grading_standard_id'] = None
+
+        # set to None if grade_passback_setting (nullable) is None
+        # and model_fields_set contains the field
+        if self.grade_passback_setting is None and "grade_passback_setting" in self.model_fields_set:
+            _dict['grade_passback_setting'] = None
+
+        # set to None if start_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_at is None and "start_at" in self.model_fields_set:
+            _dict['start_at'] = None
+
+        # set to None if end_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_at is None and "end_at" in self.model_fields_set:
+            _dict['end_at'] = None
+
+        # set to None if default_view (nullable) is None
+        # and model_fields_set contains the field
+        if self.default_view is None and "default_view" in self.model_fields_set:
+            _dict['default_view'] = None
+
+        # set to None if is_public (nullable) is None
+        # and model_fields_set contains the field
+        if self.is_public is None and "is_public" in self.model_fields_set:
+            _dict['is_public'] = None
+
+        # set to None if license (nullable) is None
+        # and model_fields_set contains the field
+        if self.license is None and "license" in self.model_fields_set:
+            _dict['license'] = None
+
+        # set to None if allow_wiki_comments (nullable) is None
+        # and model_fields_set contains the field
+        if self.allow_wiki_comments is None and "allow_wiki_comments" in self.model_fields_set:
+            _dict['allow_wiki_comments'] = None
+
+        # set to None if open_enrollment (nullable) is None
+        # and model_fields_set contains the field
+        if self.open_enrollment is None and "open_enrollment" in self.model_fields_set:
+            _dict['open_enrollment'] = None
+
+        # set to None if self_enrollment (nullable) is None
+        # and model_fields_set contains the field
+        if self.self_enrollment is None and "self_enrollment" in self.model_fields_set:
+            _dict['self_enrollment'] = None
+
+        # set to None if accessibility_course_statistic (nullable) is None
+        # and model_fields_set contains the field
+        if self.accessibility_course_statistic is None and "accessibility_course_statistic" in self.model_fields_set:
+            _dict['accessibility_course_statistic'] = None
+
+        # set to None if course_color (nullable) is None
+        # and model_fields_set contains the field
+        if self.course_color is None and "course_color" in self.model_fields_set:
+            _dict['course_color'] = None
+
+        # set to None if friendly_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.friendly_name is None and "friendly_name" in self.model_fields_set:
+            _dict['friendly_name'] = None
+
+        # set to None if conclude_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.conclude_at is None and "conclude_at" in self.model_fields_set:
+            _dict['conclude_at'] = None
+
         return _dict
 
     @classmethod
@@ -228,7 +345,29 @@ class Course(BaseModel):
             "blueprint": obj.get("blueprint"),
             "blueprint_restrictions": obj.get("blueprint_restrictions"),
             "blueprint_restrictions_by_object_type": obj.get("blueprint_restrictions_by_object_type"),
-            "template": obj.get("template")
+            "template": obj.get("template"),
+            "accessibility_course_statistic": obj.get("accessibility_course_statistic"),
+            "account_name": obj.get("account_name"),
+            "concluded": obj.get("concluded"),
+            "course_color": obj.get("course_color"),
+            "friendly_name": obj.get("friendly_name"),
+            "homeroom_course": obj.get("homeroom_course"),
+            "post_manually": obj.get("post_manually"),
+            "teacher_count": obj.get("teacher_count"),
+            "teachers": obj.get("teachers"),
+            "account": obj.get("account"),
+            "has_grading_periods": obj.get("has_grading_periods"),
+            "has_weighted_grading_periods": obj.get("has_weighted_grading_periods"),
+            "multiple_grading_periods_enabled": obj.get("multiple_grading_periods_enabled"),
+            "sections": obj.get("sections"),
+            "subaccount_id": obj.get("subaccount_id"),
+            "subaccount_name": obj.get("subaccount_name"),
+            "tabs": obj.get("tabs"),
+            "conclude_at": obj.get("conclude_at"),
+            "global_id": obj.get("global_id"),
+            "syllabus_versions": obj.get("syllabus_versions"),
+            "term_name": obj.get("term_name"),
+            "html_url": obj.get("html_url")
         })
         return _obj
 

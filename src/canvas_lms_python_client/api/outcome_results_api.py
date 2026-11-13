@@ -16,10 +16,14 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.mastery_distribution_response import MasteryDistributionResponse
+from canvas_lms_python_client.models.outcome_results_contributing_scores_response import OutcomeResultsContributingScoresResponse
 from canvas_lms_python_client.models.outcome_results_enqueue_outcome_rollup_calculation_request import OutcomeResultsEnqueueOutcomeRollupCalculationRequest
 from canvas_lms_python_client.models.outcome_results_index_response import OutcomeResultsIndexResponse
+from canvas_lms_python_client.models.outcome_results_rollups_response import OutcomeResultsRollupsResponse
+from canvas_lms_python_client.models.rollup_job import RollupJob
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -60,7 +64,7 @@ class OutcomeResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> OutcomeResultsContributingScoresResponse:
         """Get contributing scores
 
         Gets the contributing scores for a specific outcome and set of users. Contributing scores are the individual assignment/quiz scores that contributed to the outcome score for each user.  Returns all alignments for the outcome in the course context.
@@ -111,6 +115,7 @@ class OutcomeResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeResultsContributingScoresResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -142,7 +147,7 @@ class OutcomeResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[OutcomeResultsContributingScoresResponse]:
         """Get contributing scores
 
         Gets the contributing scores for a specific outcome and set of users. Contributing scores are the individual assignment/quiz scores that contributed to the outcome score for each user.  Returns all alignments for the outcome in the course context.
@@ -193,6 +198,7 @@ class OutcomeResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeResultsContributingScoresResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -276,6 +282,7 @@ class OutcomeResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeResultsContributingScoresResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -383,7 +390,7 @@ class OutcomeResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> RollupJob:
         """Enqueue a delayed Outcome Rollup Calculation Job
 
 
@@ -421,7 +428,7 @@ class OutcomeResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RollupJob",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -449,7 +456,7 @@ class OutcomeResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[RollupJob]:
         """Enqueue a delayed Outcome Rollup Calculation Job
 
 
@@ -487,7 +494,7 @@ class OutcomeResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RollupJob",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -554,7 +561,7 @@ class OutcomeResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RollupJob",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1173,7 +1180,7 @@ class OutcomeResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> MasteryDistributionResponse:
         """Get mastery distribution
 
         Returns the distribution of student scores across mastery levels for all outcomes. This endpoint fetches data for ALL students (not paginated) to provide accurate distribution statistics for charts and analytics.
@@ -1233,7 +1240,7 @@ class OutcomeResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "MasteryDistributionResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1268,7 +1275,7 @@ class OutcomeResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[MasteryDistributionResponse]:
         """Get mastery distribution
 
         Returns the distribution of student scores across mastery levels for all outcomes. This endpoint fetches data for ALL students (not paginated) to provide accurate distribution statistics for charts and analytics.
@@ -1328,7 +1335,7 @@ class OutcomeResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "MasteryDistributionResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1424,7 +1431,7 @@ class OutcomeResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "MasteryDistributionResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1804,6 +1811,8 @@ class OutcomeResultsApi:
         sort_order: Annotated[Optional[StrictStr], Field(description="If sorting requested, then this allows changing the default sort order of ascending to descending.")] = None,
         add_defaults: Annotated[Optional[StrictBool], Field(description="If defaults are requested, then color and mastery level defaults will be added to outcome ratings in the rollup. This will only take effect if the Account Level Mastery Scales FF is DISABLED")] = None,
         contributing_scores: Annotated[Optional[StrictBool], Field(description="**DEPRECATED**: This parameter is deprecated. Use the separate GET /api/v1/courses/:course_id/outcomes/:outcome_id/contributing_scores endpoint instead to fetch contributing scores for a specific outcome. If contributing scores are requested, then each individual outcome score will also include all graded artifacts that contributed to the outcome score")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1816,7 +1825,8 @@ class OutcomeResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+        _page_url: Optional[StrictStr] = None,
+    ) -> OutcomeResultsRollupsResponse:
         """Get outcome result rollups
 
         Gets the outcome rollups for the users and outcomes in the specified context.
@@ -1845,6 +1855,10 @@ class OutcomeResultsApi:
         :type add_defaults: bool
         :param contributing_scores: **DEPRECATED**: This parameter is deprecated. Use the separate GET /api/v1/courses/:course_id/outcomes/:outcome_id/contributing_scores endpoint instead to fetch contributing scores for a specific outcome. If contributing scores are requested, then each individual outcome score will also include all graded artifacts that contributed to the outcome score
         :type contributing_scores: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1864,6 +1878,8 @@ class OutcomeResultsApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
@@ -1881,13 +1897,20 @@ class OutcomeResultsApi:
             sort_order=sort_order,
             add_defaults=add_defaults,
             contributing_scores=contributing_scores,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeResultsRollupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1898,6 +1921,155 @@ class OutcomeResultsApi:
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
+
+
+    @validate_call
+    async def outcome_results_rollups_paginated(
+        self,
+        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
+        aggregate: Annotated[Optional[StrictStr], Field(description="If specified, instead of returning one rollup for each user, all the user rollups will be combined into one rollup for the course that will contain the average (or median, see below) rollup score for each outcome.")] = None,
+        aggregate_stat: Annotated[Optional[StrictStr], Field(description="If aggregate rollups requested, then this value determines what statistic is used for the aggregate. Defaults to \"mean\" if this value is not specified.")] = None,
+        user_ids: Annotated[Optional[List[StrictInt]], Field(description="If specified, only the users whose ids are given will be included in the results or used in an aggregate result. it is an error to specify an id for a user who is not a student in the context")] = None,
+        outcome_ids: Annotated[Optional[List[StrictInt]], Field(description="If specified, only the outcomes whose ids are given will be included in the results. it is an error to specify an id for an outcome which is not linked to the context.")] = None,
+        include: Annotated[Optional[List[StrictStr]], Field(description="Specify additional collections to be side loaded with the result.")] = None,
+        exclude: Annotated[Optional[List[StrictStr]], Field(description="Specify additional values to exclude. \"missing_user_rollups\" excludes rollups for users without results. \"missing_outcome_results\" excludes outcomes without results.")] = None,
+        sort_by: Annotated[Optional[StrictStr], Field(description="If specified, sorts outcome result rollups. \"student\" sorting will sort by a user's sortable name. \"outcome\" sorting will sort by the given outcome's rollup score. The latter requires specifying the \"sort_outcome_id\" parameter. By default, the sort order is ascending.")] = None,
+        sort_outcome_id: Annotated[Optional[StrictInt], Field(description="If outcome sorting requested, then this determines which outcome to use for rollup score sorting.")] = None,
+        sort_order: Annotated[Optional[StrictStr], Field(description="If sorting requested, then this allows changing the default sort order of ascending to descending.")] = None,
+        add_defaults: Annotated[Optional[StrictBool], Field(description="If defaults are requested, then color and mastery level defaults will be added to outcome ratings in the rollup. This will only take effect if the Account Level Mastery Scales FF is DISABLED")] = None,
+        contributing_scores: Annotated[Optional[StrictBool], Field(description="**DEPRECATED**: This parameter is deprecated. Use the separate GET /api/v1/courses/:course_id/outcomes/:outcome_id/contributing_scores endpoint instead to fetch contributing scores for a specific outcome. If contributing scores are requested, then each individual outcome score will also include all graded artifacts that contributed to the outcome score")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
+    ) -> AsyncIterator[OutcomeResultsRollupsResponse]:
+        """Get outcome result rollups
+
+        Gets the outcome rollups for the users and outcomes in the specified context.
+
+        :param course_id: Scope response to course_id (required)
+        :type course_id: str
+        :param aggregate: If specified, instead of returning one rollup for each user, all the user rollups will be combined into one rollup for the course that will contain the average (or median, see below) rollup score for each outcome.
+        :type aggregate: str
+        :param aggregate_stat: If aggregate rollups requested, then this value determines what statistic is used for the aggregate. Defaults to \"mean\" if this value is not specified.
+        :type aggregate_stat: str
+        :param user_ids: If specified, only the users whose ids are given will be included in the results or used in an aggregate result. it is an error to specify an id for a user who is not a student in the context
+        :type user_ids: List[int]
+        :param outcome_ids: If specified, only the outcomes whose ids are given will be included in the results. it is an error to specify an id for an outcome which is not linked to the context.
+        :type outcome_ids: List[int]
+        :param include: Specify additional collections to be side loaded with the result.
+        :type include: List[str]
+        :param exclude: Specify additional values to exclude. \"missing_user_rollups\" excludes rollups for users without results. \"missing_outcome_results\" excludes outcomes without results.
+        :type exclude: List[str]
+        :param sort_by: If specified, sorts outcome result rollups. \"student\" sorting will sort by a user's sortable name. \"outcome\" sorting will sort by the given outcome's rollup score. The latter requires specifying the \"sort_outcome_id\" parameter. By default, the sort order is ascending.
+        :type sort_by: str
+        :param sort_outcome_id: If outcome sorting requested, then this determines which outcome to use for rollup score sorting.
+        :type sort_outcome_id: int
+        :param sort_order: If sorting requested, then this allows changing the default sort order of ascending to descending.
+        :type sort_order: str
+        :param add_defaults: If defaults are requested, then color and mastery level defaults will be added to outcome ratings in the rollup. This will only take effect if the Account Level Mastery Scales FF is DISABLED
+        :type add_defaults: bool
+        :param contributing_scores: **DEPRECATED**: This parameter is deprecated. Use the separate GET /api/v1/courses/:course_id/outcomes/:outcome_id/contributing_scores endpoint instead to fetch contributing scores for a specific outcome. If contributing scores are requested, then each individual outcome score will also include all graded artifacts that contributed to the outcome score
+        :type contributing_scores: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
+
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._outcome_results_rollups_serialize(
+            course_id=course_id,
+            aggregate=aggregate,
+            aggregate_stat=aggregate_stat,
+            user_ids=user_ids,
+            outcome_ids=outcome_ids,
+            include=include,
+            exclude=exclude,
+            sort_by=sort_by,
+            sort_outcome_id=sort_outcome_id,
+            sort_order=sort_order,
+            add_defaults=add_defaults,
+            contributing_scores=contributing_scores,
+            page=page,
+            per_page=per_page,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeResultsRollupsResponse",
+        }
+
+        _method, _url, _header_params, _body, _post_params = _param
+
+        while True:
+            response_data = await self.api_client.call_api(
+                _method,
+                _url,
+                _header_params,
+                _body,
+                _post_params,
+                _request_timeout=_request_timeout,
+            )
+
+            await response_data.read()
+            _api_response = self.api_client.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+
+            _page_data = _api_response.data
+            if _page_data is None:
+                return
+            yield _page_data
+
+            _next_url = get_next_page_url(
+                response_data.headers.get("Link"),
+                self.api_client.configuration.host,
+            )
+            if not _next_url:
+                return
+            _url = _next_url
 
     @validate_call
     async def outcome_results_rollups_with_http_info(
@@ -1914,6 +2086,8 @@ class OutcomeResultsApi:
         sort_order: Annotated[Optional[StrictStr], Field(description="If sorting requested, then this allows changing the default sort order of ascending to descending.")] = None,
         add_defaults: Annotated[Optional[StrictBool], Field(description="If defaults are requested, then color and mastery level defaults will be added to outcome ratings in the rollup. This will only take effect if the Account Level Mastery Scales FF is DISABLED")] = None,
         contributing_scores: Annotated[Optional[StrictBool], Field(description="**DEPRECATED**: This parameter is deprecated. Use the separate GET /api/v1/courses/:course_id/outcomes/:outcome_id/contributing_scores endpoint instead to fetch contributing scores for a specific outcome. If contributing scores are requested, then each individual outcome score will also include all graded artifacts that contributed to the outcome score")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1926,7 +2100,8 @@ class OutcomeResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+        _page_url: Optional[StrictStr] = None,
+    ) -> ApiResponse[OutcomeResultsRollupsResponse]:
         """Get outcome result rollups
 
         Gets the outcome rollups for the users and outcomes in the specified context.
@@ -1955,6 +2130,10 @@ class OutcomeResultsApi:
         :type add_defaults: bool
         :param contributing_scores: **DEPRECATED**: This parameter is deprecated. Use the separate GET /api/v1/courses/:course_id/outcomes/:outcome_id/contributing_scores endpoint instead to fetch contributing scores for a specific outcome. If contributing scores are requested, then each individual outcome score will also include all graded artifacts that contributed to the outcome score
         :type contributing_scores: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1974,6 +2153,8 @@ class OutcomeResultsApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
@@ -1991,13 +2172,20 @@ class OutcomeResultsApi:
             sort_order=sort_order,
             add_defaults=add_defaults,
             contributing_scores=contributing_scores,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeResultsRollupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2025,6 +2213,8 @@ class OutcomeResultsApi:
         sort_order: Annotated[Optional[StrictStr], Field(description="If sorting requested, then this allows changing the default sort order of ascending to descending.")] = None,
         add_defaults: Annotated[Optional[StrictBool], Field(description="If defaults are requested, then color and mastery level defaults will be added to outcome ratings in the rollup. This will only take effect if the Account Level Mastery Scales FF is DISABLED")] = None,
         contributing_scores: Annotated[Optional[StrictBool], Field(description="**DEPRECATED**: This parameter is deprecated. Use the separate GET /api/v1/courses/:course_id/outcomes/:outcome_id/contributing_scores endpoint instead to fetch contributing scores for a specific outcome. If contributing scores are requested, then each individual outcome score will also include all graded artifacts that contributed to the outcome score")] = None,
+        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
+        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2037,6 +2227,7 @@ class OutcomeResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        _page_url: Optional[StrictStr] = None,
     ) -> RESTResponseType:
         """Get outcome result rollups
 
@@ -2066,6 +2257,10 @@ class OutcomeResultsApi:
         :type add_defaults: bool
         :param contributing_scores: **DEPRECATED**: This parameter is deprecated. Use the separate GET /api/v1/courses/:course_id/outcomes/:outcome_id/contributing_scores endpoint instead to fetch contributing scores for a specific outcome. If contributing scores are requested, then each individual outcome score will also include all graded artifacts that contributed to the outcome score
         :type contributing_scores: bool
+        :param page: The page number to return. Defaults to 1.
+        :type page: int
+        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
+        :type per_page: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -2085,6 +2280,8 @@ class OutcomeResultsApi:
                             request; this effectively ignores the host_index
                             in the spec for a single request.
         :type _host_index: int, optional
+        :param _page_url: navigate to a pagination URL
+        :type _page_url: str, Optional
 
         :return: Returns the result object.
         """ # noqa: E501
@@ -2102,13 +2299,20 @@ class OutcomeResultsApi:
             sort_order=sort_order,
             add_defaults=add_defaults,
             contributing_scores=contributing_scores,
+            page=page,
+            per_page=per_page,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
+        if _page_url is not None:
+            _param = list(_param)
+            _param[1] = _page_url
+
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeResultsRollupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2131,6 +2335,8 @@ class OutcomeResultsApi:
         sort_order,
         add_defaults,
         contributing_scores,
+        page,
+        per_page,
         _request_auth,
         _content_type,
         _headers,
@@ -2202,6 +2408,14 @@ class OutcomeResultsApi:
         if contributing_scores is not None:
             
             _query_params.append(('contributing_scores', contributing_scores))
+            
+        if page is not None:
+            
+            _query_params.append(('page', page))
+            
+        if per_page is not None:
+            
+            _query_params.append(('per_page', per_page))
             
         # process the header parameters
         # process the form parameters

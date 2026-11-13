@@ -17,6 +17,9 @@ Name | Type | Description | Notes
 **linked_object_id** | **int** | the id of the linked learning object | [optional] 
 **linked_object_html_url** | **str** | the Canvas web URL of the linked learning object | [optional] 
 **linked_object_url** | **str** | the API URL of the linked learning object | [optional] 
+**created_at** | **str** |  | [optional] 
+**details** | **str** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
 
 ## Example
 

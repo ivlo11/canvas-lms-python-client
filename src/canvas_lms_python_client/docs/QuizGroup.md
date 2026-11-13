@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **quiz_id** | **int** | The ID of the Quiz the question group belongs to. | 
 **name** | **str** | The name of the question group. | [optional] 
 **pick_count** | **int** | The number of questions to pick from the group to display to the student. | [optional] 
-**question_points** | **int** | The amount of points allotted to each question in the group. | [optional] 
+**question_points** | **float** | The amount of points allotted to each question in the group. | [optional] 
 **assessment_question_bank_id** | **int** | The ID of the Assessment question bank to pull questions from. | [optional] 
 **position** | **int** | The order in which the question group will be retrieved and displayed. | [optional] 
 

@@ -260,7 +260,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **sis_imports_api_importing**
-> SisImport sis_imports_api_importing(account_id)
+> SisImportsApiImportingResponse sis_imports_api_importing(account_id)
 
 Get the current importing SIS import
 
@@ -277,7 +277,7 @@ Example:
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.sis_import import SisImport
+from canvas_lms_python_client.models.sis_imports_api_importing_response import SisImportsApiImportingResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -323,7 +323,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SisImport**](SisImport.md)
+[**SisImportsApiImportingResponse**](SisImportsApiImportingResponse.md)
 
 ### Authorization
 
@@ -338,12 +338,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | SisImport |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **sis_imports_api_index**
-> List[SisImport] sis_imports_api_index(account_id, created_since=created_since, created_before=created_before, workflow_state=workflow_state, page=page, per_page=per_page)
+> SisImportsApiIndexResponse sis_imports_api_index(account_id, created_since=created_since, created_before=created_before, workflow_state=workflow_state, page=page, per_page=per_page)
 
 Get SIS import list
 
@@ -359,7 +359,7 @@ Example:
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.sis_import import SisImport
+from canvas_lms_python_client.models.sis_imports_api_index_response import SisImportsApiIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -415,7 +415,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[SisImport]**](SisImport.md)
+[**SisImportsApiIndexResponse**](SisImportsApiIndexResponse.md)
 
 ### Authorization
 

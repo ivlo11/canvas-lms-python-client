@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **context_name** | **str** | The name of the context | [optional] 
 **visited_url** | **str** | The URL of the item | 
 **visited_at** | **datetime** | When the page was visited | 
-**interaction_seconds** | **int** | The estimated time spent on the page in seconds | [optional] 
+**interaction_seconds** | **float** | The estimated time spent on the page in seconds | [optional] 
 
 ## Example
 

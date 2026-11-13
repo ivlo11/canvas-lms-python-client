@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **progress_url** | **str** | The api endpoint for polling the current progress | [optional] 
 **user_id** | **int** | The ID of the user who started the export | [optional] 
 **workflow_state** | **str** | Current state of the content migration: created exporting exported failed | [optional] 
+**course_id** | **int** |  | [optional] 
+**migrated_assignment** | **List[object]** |  | [optional] 
+**migrated_quiz** | **List[object]** |  | [optional] 
 
 ## Example
 

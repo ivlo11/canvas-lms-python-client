@@ -17,9 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.quiz_assignment_override import QuizAssignmentOverride
+from canvas_lms_python_client.models.quiz_assignment_override_set_quiz_id import QuizAssignmentOverrideSetQuizId
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,9 +29,9 @@ class QuizAssignmentOverrideSet(BaseModel):
     """
     Set of assignment-overridden dates for a quiz.
     """ # noqa: E501
-    quiz_id: Optional[StrictStr] = Field(default=None, description="ID of the quiz those dates are for.", json_schema_extra={"examples": ["1"]})
-    due_dates: Optional[QuizAssignmentOverride] = None
-    all_dates: Optional[QuizAssignmentOverride] = None
+    quiz_id: Optional[QuizAssignmentOverrideSetQuizId] = None
+    due_dates: Optional[List[QuizAssignmentOverride]] = Field(default=None, description="An array of quiz assignment overrides. For students, this array will always contain a single item which is the set of dates that apply to that student. For teachers and staff, it may contain more.")
+    all_dates: Optional[List[QuizAssignmentOverride]] = Field(default=None, description="An array of all assignment overrides active for the quiz. This is visible only to teachers and staff.")
     __properties: ClassVar[List[str]] = ["quiz_id", "due_dates", "all_dates"]
 
     model_config = ConfigDict(
@@ -72,12 +73,21 @@ class QuizAssignmentOverrideSet(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of due_dates
+        # override the default output from pydantic by calling `to_dict()` of quiz_id
+        if self.quiz_id:
+            _dict['quiz_id'] = self.quiz_id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in due_dates (list)
+        _items = []
         if self.due_dates:
-            _dict['due_dates'] = self.due_dates.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of all_dates
+            for _item_due_dates in self.due_dates:
+                _items.append(_item_due_dates.to_dict() if _item_due_dates is not None else None)
+            _dict['due_dates'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in all_dates (list)
+        _items = []
         if self.all_dates:
-            _dict['all_dates'] = self.all_dates.to_dict()
+            for _item_all_dates in self.all_dates:
+                _items.append(_item_all_dates.to_dict() if _item_all_dates is not None else None)
+            _dict['all_dates'] = _items
         return _dict
 
     @classmethod
@@ -90,9 +100,9 @@ class QuizAssignmentOverrideSet(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "quiz_id": obj.get("quiz_id"),
-            "due_dates": QuizAssignmentOverride.from_dict(obj["due_dates"]) if obj.get("due_dates") is not None else None,
-            "all_dates": QuizAssignmentOverride.from_dict(obj["all_dates"]) if obj.get("all_dates") is not None else None
+            "quiz_id": QuizAssignmentOverrideSetQuizId.from_dict(obj["quiz_id"]) if obj.get("quiz_id") is not None else None,
+            "due_dates": [QuizAssignmentOverride.from_dict(_item) for _item in obj["due_dates"]] if obj.get("due_dates") is not None else None,
+            "all_dates": [QuizAssignmentOverride.from_dict(_item) for _item in obj["all_dates"]] if obj.get("all_dates") is not None else None
         })
         return _obj
 

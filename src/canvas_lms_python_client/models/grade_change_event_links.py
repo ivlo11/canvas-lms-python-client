@@ -73,6 +73,21 @@ class GradeChangeEventLinks(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if student (nullable) is None
+        # and model_fields_set contains the field
+        if self.student is None and "student" in self.model_fields_set:
+            _dict['student'] = None
+
+        # set to None if grader (nullable) is None
+        # and model_fields_set contains the field
+        if self.grader is None and "grader" in self.model_fields_set:
+            _dict['grader'] = None
+
+        # set to None if page_view (nullable) is None
+        # and model_fields_set contains the field
+        if self.page_view is None and "page_view" in self.model_fields_set:
+            _dict['page_view'] = None
+
         return _dict
 
     @classmethod

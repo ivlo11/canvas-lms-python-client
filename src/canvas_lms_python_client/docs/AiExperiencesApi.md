@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **ai_experiences_ai_conversation_show**
-> object ai_experiences_ai_conversation_show(conversation_id, course_id, id)
+> AiExperiencesAiConversationShowResponse ai_experiences_ai_conversation_show(conversation_id, course_id, id)
 
 Show student AI conversation
 
@@ -29,6 +29,7 @@ Only available to teachers and course managers.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.ai_experiences_ai_conversation_show_response import AiExperiencesAiConversationShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -78,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**AiExperiencesAiConversationShowResponse**](AiExperiencesAiConversationShowResponse.md)
 
 ### Authorization
 
@@ -93,12 +94,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | AiConversation |  -  |
+**0** | AiExperiencesAiConversationShowResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_experiences_ai_conversations_index**
-> List[object] ai_experiences_ai_conversations_index(course_id, id)
+> AiConversation ai_experiences_ai_conversations_index(course_id, id)
 
 List student AI conversations
 
@@ -111,6 +112,7 @@ Only available to teachers and course managers.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.ai_conversation import AiConversation
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -158,7 +160,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**AiConversation**](AiConversation.md)
 
 ### Authorization
 
@@ -173,7 +175,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** |  |  -  |
+**0** | AiConversation |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -416,7 +418,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ai_experiences_index**
-> List[AiExperience] ai_experiences_index(course_id, workflow_state=workflow_state)
+> AiExperiencesIndexResponse ai_experiences_index(course_id, workflow_state=workflow_state)
 
 List AI experiences
 
@@ -428,7 +430,7 @@ Retrieve the paginated list of AI experiences for a course
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.ai_experience import AiExperience
+from canvas_lms_python_client.models.ai_experiences_index_response import AiExperiencesIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -476,7 +478,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[AiExperience]**](AiExperience.md)
+[**AiExperiencesIndexResponse**](AiExperiencesIndexResponse.md)
 
 ### Authorization
 

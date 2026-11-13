@@ -6,7 +6,7 @@ Set of notice handlers (one per notice type) for an LTI tool deployment.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**client_id** | **str** | The LTI tool&#39;s client ID (global developer key ID) | [optional] 
+**client_id** | [**NoticeCatalogClientId**](NoticeCatalogClientId.md) |  | [optional] 
 **deployment_id** | **str** | String that identifies the Platform-Tool integration governing the notices | [optional] 
 **notice_handlers** | [**List[NoticeHandler]**](NoticeHandler.md) | List of notice handlers for the tool | [optional] 
 

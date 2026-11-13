@@ -12,6 +12,21 @@ Name | Type | Description | Notes
 **parent_account_id** | **int** | The account&#39;s parent ID, or null if this is the root account | [optional] 
 **root_account_id** | **int** | The ID of the root account, or null if this is the root account | [optional] 
 **workflow_state** | **str** | The state of the account. Can be &#39;active&#39; or &#39;deleted&#39;. | [optional] 
+**course_count** | **int** |  | [optional] 
+**course_template_id** | **int** |  | [optional] 
+**default_group_storage_quota_mb** | **int** |  | [optional] 
+**default_storage_quota_mb** | **int** |  | [optional] 
+**default_time_zone** | **str** |  | [optional] 
+**default_user_storage_quota_mb** | **int** |  | [optional] 
+**global_id** | **int** |  | [optional] 
+**horizon_account** | **bool** |  | [optional] 
+**integration_id** | **str** |  | [optional] 
+**lti_guid** | **str** |  | [optional] 
+**sis_account_id** | **str** |  | [optional] 
+**sis_import_id** | **int** |  | [optional] 
+**sub_account_count** | **int** |  | [optional] 
+**site_admin** | **bool** |  | [optional] 
+**services** | **object** |  | [optional] 
 
 ## Example
 

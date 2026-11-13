@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 
 # **groups_activity_stream**
-> groups_activity_stream(group_id)
+> List[GroupsActivityStreamResponse] groups_activity_stream(group_id, page=page, per_page=per_page)
 
 Group activity stream
 
@@ -38,6 +38,7 @@ stream, in the user api.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.groups_activity_stream_response import GroupsActivityStreamResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -62,10 +63,14 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = canvas_lms_python_client.GroupsApi(api_client)
     group_id = 'group_id_example' # str | Scope response to group_id
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # Group activity stream
-        await api_instance.groups_activity_stream(group_id)
+        api_response = await api_instance.groups_activity_stream(group_id, page=page, per_page=per_page)
+        print("The response of GroupsApi->groups_activity_stream:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GroupsApi->groups_activity_stream: %s\n" % e)
 ```
@@ -78,10 +83,12 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **str**| Scope response to group_id | 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 
-void (empty response body)
+[**List[GroupsActivityStreamResponse]**](GroupsActivityStreamResponse.md)
 
 ### Authorization
 
@@ -90,18 +97,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Group activity stream |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **groups_activity_stream_summary**
-> groups_activity_stream_summary(group_id)
+> List[GroupsActivityStreamSummaryResponse] groups_activity_stream_summary(group_id)
 
 Group activity stream summary
 
@@ -116,6 +123,7 @@ stream summary, in the user api.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.groups_activity_stream_summary_response import GroupsActivityStreamSummaryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -143,7 +151,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Group activity stream summary
-        await api_instance.groups_activity_stream_summary(group_id)
+        api_response = await api_instance.groups_activity_stream_summary(group_id)
+        print("The response of GroupsApi->groups_activity_stream_summary:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GroupsApi->groups_activity_stream_summary: %s\n" % e)
 ```
@@ -159,7 +169,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[GroupsActivityStreamSummaryResponse]**](GroupsActivityStreamSummaryResponse.md)
 
 ### Authorization
 
@@ -168,18 +178,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Group activity stream summary |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **groups_bulk_user_tags**
-> List[object] groups_bulk_user_tags(course_id, user_ids=user_ids)
+> object groups_bulk_user_tags(course_id, user_ids=user_ids)
 
 Bulk fetch user tags for multiple users in a course
 
@@ -238,7 +248,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 
@@ -253,7 +263,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | A mapping of user IDs to arrays of tag (group) IDs. Example:   {     \&quot;35\&quot;: [5],     \&quot;79\&quot;: [3, 4, 5]   } |  -  |
+**0** | Hash A mapping of user IDs to arrays of tag (group) IDs. Example:   {     \&quot;35\&quot;: [5],     \&quot;79\&quot;: [3, 4, 5]   } |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -434,7 +444,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **groups_create_file**
-> groups_create_file(group_id)
+> GroupsCreateFileResponse groups_create_file(group_id)
 
 Upload a file
 
@@ -454,6 +464,7 @@ group, or any admin over the group.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.groups_create_file_response import GroupsCreateFileResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -481,7 +492,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Upload a file
-        await api_instance.groups_create_file(group_id)
+        api_response = await api_instance.groups_create_file(group_id)
+        print("The response of GroupsApi->groups_create_file:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GroupsApi->groups_create_file: %s\n" % e)
 ```
@@ -497,7 +510,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GroupsCreateFileResponse**](GroupsCreateFileResponse.md)
 
 ### Authorization
 
@@ -506,13 +519,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Upload a file |  -  |
+**0** | GroupsCreateFileResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -841,7 +854,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **groups_invite**
-> groups_invite(group_id, groups_invite_request=groups_invite_request)
+> List[GroupMembership] groups_invite(group_id, groups_invite_request=groups_invite_request)
 
 Invite others to a group
 
@@ -854,6 +867,7 @@ receivers to join the group.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.group_membership import GroupMembership
 from canvas_lms_python_client.models.groups_invite_request import GroupsInviteRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -883,7 +897,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Invite others to a group
-        await api_instance.groups_invite(group_id, groups_invite_request=groups_invite_request)
+        api_response = await api_instance.groups_invite(group_id, groups_invite_request=groups_invite_request)
+        print("The response of GroupsApi->groups_invite:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GroupsApi->groups_invite: %s\n" % e)
 ```
@@ -900,7 +916,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[GroupMembership]**](GroupMembership.md)
 
 ### Authorization
 
@@ -909,18 +925,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Invite others to a group |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **groups_permissions**
-> groups_permissions(group_id, permissions=permissions)
+> GroupsPermissionsResponse groups_permissions(group_id, permissions=permissions)
 
 Permissions
 
@@ -934,6 +950,7 @@ See also the {api:AccountsController#permissions Account} and
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.groups_permissions_response import GroupsPermissionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -962,7 +979,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Permissions
-        await api_instance.groups_permissions(group_id, permissions=permissions)
+        api_response = await api_instance.groups_permissions(group_id, permissions=permissions)
+        print("The response of GroupsApi->groups_permissions:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GroupsApi->groups_permissions: %s\n" % e)
 ```
@@ -979,7 +998,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GroupsPermissionsResponse**](GroupsPermissionsResponse.md)
 
 ### Authorization
 
@@ -994,12 +1013,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Permissions |  -  |
+**0** | GroupsPermissionsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **groups_preview_html**
-> groups_preview_html(group_id, courses_preview_html_request=courses_preview_html_request)
+> GroupsPreviewHtmlResponse groups_preview_html(group_id, courses_preview_html_request=courses_preview_html_request)
 
 Preview processed html
 
@@ -1012,6 +1031,7 @@ Preview html content processed for this group
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.courses_preview_html_request import CoursesPreviewHtmlRequest
+from canvas_lms_python_client.models.groups_preview_html_response import GroupsPreviewHtmlResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1040,7 +1060,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Preview processed html
-        await api_instance.groups_preview_html(group_id, courses_preview_html_request=courses_preview_html_request)
+        api_response = await api_instance.groups_preview_html(group_id, courses_preview_html_request=courses_preview_html_request)
+        print("The response of GroupsApi->groups_preview_html:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GroupsApi->groups_preview_html: %s\n" % e)
 ```
@@ -1057,7 +1079,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GroupsPreviewHtmlResponse**](GroupsPreviewHtmlResponse.md)
 
 ### Authorization
 
@@ -1072,7 +1094,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Preview processed html |  -  |
+**0** | GroupsPreviewHtmlResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -13,9 +13,9 @@ Name | Type | Description | Notes
 **updated_at** | **datetime** | The date the outcome import was last updated. | [optional] 
 **workflow_state** | **str** | The current state of the outcome import.  - &#39;created&#39;: The outcome import has been created.  - &#39;importing&#39;: The outcome import is currently processing.  - &#39;succeeded&#39;: The outcome import has completed successfully.  - &#39;failed&#39;: The outcome import failed. | [optional] 
 **data** | [**OutcomeImportData**](OutcomeImportData.md) |  | [optional] 
-**progress** | **str** | The progress of the outcome import. | [optional] 
+**progress** | [**OutcomeImportProgress**](OutcomeImportProgress.md) |  | [optional] 
 **user** | [**User**](User.md) |  | [optional] 
-**processing_errors** | **List[List[object]]** | An array of row number / error message pairs. Returns the first 25 errors. | [optional] 
+**processing_errors** | [**List[OutcomeImportProcessingErrorsInner]**](OutcomeImportProcessingErrorsInner.md) | An array of row number / error message pairs. Returns the first 25 errors. | [optional] 
 
 ## Example
 

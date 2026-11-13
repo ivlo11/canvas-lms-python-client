@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from canvas_lms_python_client.models.late_policy_id import LatePolicyId
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,8 +29,8 @@ class LatePolicy(BaseModel):
     """
     LatePolicy
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="the unique identifier for the late policy", json_schema_extra={"examples": [123]})
-    course_id: StrictInt = Field(description="the unique identifier for the course", json_schema_extra={"examples": [123]})
+    id: Optional[LatePolicyId] = None
+    course_id: Optional[StrictInt] = Field(default=None, description="the unique identifier for the course", json_schema_extra={"examples": [123]})
     missing_submission_deduction_enabled: Optional[StrictBool] = Field(default=None, description="whether to enable missing submission deductions", json_schema_extra={"examples": [True]})
     missing_submission_deduction: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="amount of percentage points to deduct", json_schema_extra={"examples": [12.34]})
     late_submission_deduction_enabled: Optional[StrictBool] = Field(default=None, description="whether to enable late submission deductions", json_schema_extra={"examples": [True]})
@@ -80,6 +81,9 @@ class LatePolicy(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of id
+        if self.id:
+            _dict['id'] = self.id.to_dict()
         return _dict
 
     @classmethod
@@ -92,7 +96,7 @@ class LatePolicy(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
+            "id": LatePolicyId.from_dict(obj["id"]) if obj.get("id") is not None else None,
             "course_id": obj.get("course_id"),
             "missing_submission_deduction_enabled": obj.get("missing_submission_deduction_enabled"),
             "missing_submission_deduction": obj.get("missing_submission_deduction"),

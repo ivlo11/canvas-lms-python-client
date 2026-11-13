@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **assessments_create**
-> assessments_create(course_id)
+> LiveAssessmentsAssessmentsCreateResponse assessments_create(course_id)
 
 Create or find a live assessment
 
@@ -22,6 +22,7 @@ the linked outcome
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.live_assessments_assessments_create_response import LiveAssessmentsAssessmentsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -49,7 +50,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create or find a live assessment
-        await api_instance.assessments_create(course_id)
+        api_response = await api_instance.assessments_create(course_id)
+        print("The response of AssessmentsApi->assessments_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AssessmentsApi->assessments_create: %s\n" % e)
 ```
@@ -65,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**LiveAssessmentsAssessmentsCreateResponse**](LiveAssessmentsAssessmentsCreateResponse.md)
 
 ### Authorization
 
@@ -80,12 +83,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create or find a live assessment |  -  |
+**0** | LiveAssessmentsAssessmentsCreateResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **assessments_index**
-> assessments_index(course_id)
+> LiveAssessmentsAssessmentsIndexResponse assessments_index(course_id, page=page, per_page=per_page)
 
 List live assessments
 
@@ -97,6 +100,7 @@ Returns a paginated list of live assessments.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.live_assessments_assessments_index_response import LiveAssessmentsAssessmentsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -121,10 +125,14 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = canvas_lms_python_client.AssessmentsApi(api_client)
     course_id = 'course_id_example' # str | Scope response to course_id
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # List live assessments
-        await api_instance.assessments_index(course_id)
+        api_response = await api_instance.assessments_index(course_id, page=page, per_page=per_page)
+        print("The response of AssessmentsApi->assessments_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AssessmentsApi->assessments_index: %s\n" % e)
 ```
@@ -137,10 +145,12 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **course_id** | **str**| Scope response to course_id | 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 
-void (empty response body)
+[**LiveAssessmentsAssessmentsIndexResponse**](LiveAssessmentsAssessmentsIndexResponse.md)
 
 ### Authorization
 
@@ -155,7 +165,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List live assessments |  -  |
+**0** | LiveAssessmentsAssessmentsIndexResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -31,9 +31,10 @@ class ModuleAssignmentOverride(BaseModel):
     id: Optional[StrictInt] = Field(default=None, description="the ID of the assignment override", json_schema_extra={"examples": [4355]})
     context_module_id: Optional[StrictInt] = Field(default=None, description="the ID of the module the override applies to", json_schema_extra={"examples": [567]})
     title: Optional[StrictStr] = Field(default=None, description="the title of the override", json_schema_extra={"examples": ["Section 6"]})
-    students: Optional[OverrideTarget] = None
+    students: Optional[List[OverrideTarget]] = Field(default=None, description="an array of the override's target students (present only if the override targets an adhoc set of students)")
     course_section: Optional[OverrideTarget] = None
-    __properties: ClassVar[List[str]] = ["id", "context_module_id", "title", "students", "course_section"]
+    group: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "context_module_id", "title", "students", "course_section", "group"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -74,9 +75,12 @@ class ModuleAssignmentOverride(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of students
+        # override the default output from pydantic by calling `to_dict()` of each item in students (list)
+        _items = []
         if self.students:
-            _dict['students'] = self.students.to_dict()
+            for _item_students in self.students:
+                _items.append(_item_students.to_dict() if _item_students is not None else None)
+            _dict['students'] = _items
         # override the default output from pydantic by calling `to_dict()` of course_section
         if self.course_section:
             _dict['course_section'] = self.course_section.to_dict()
@@ -95,8 +99,9 @@ class ModuleAssignmentOverride(BaseModel):
             "id": obj.get("id"),
             "context_module_id": obj.get("context_module_id"),
             "title": obj.get("title"),
-            "students": OverrideTarget.from_dict(obj["students"]) if obj.get("students") is not None else None,
-            "course_section": OverrideTarget.from_dict(obj["course_section"]) if obj.get("course_section") is not None else None
+            "students": [OverrideTarget.from_dict(_item) for _item in obj["students"]] if obj.get("students") is not None else None,
+            "course_section": OverrideTarget.from_dict(obj["course_section"]) if obj.get("course_section") is not None else None,
+            "group": obj.get("group")
         })
         return _obj
 

@@ -16,10 +16,9 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import List
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.course_epub_export import CourseEpubExport
-from canvas_lms_python_client.models.epub_export import EpubExport
+from canvas_lms_python_client.models.epub_exports_index_response import EpubExportsIndexResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -56,7 +55,7 @@ class EpubExportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> EpubExport:
+    ) -> CourseEpubExport:
         """Create ePub Export
 
         Begin an ePub export for a course.  You can use the {api:ProgressController#show Progress API} to track the progress of the export. The export's progress is linked to with the _progress_url_ value.  When the export completes, use the {api:EpubExportsController#show Show content export} endpoint to retrieve a download URL for the exported content.
@@ -95,7 +94,7 @@ class EpubExportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "EpubExport",
+            'default': "CourseEpubExport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -123,7 +122,7 @@ class EpubExportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[EpubExport]:
+    ) -> ApiResponse[CourseEpubExport]:
         """Create ePub Export
 
         Begin an ePub export for a course.  You can use the {api:ProgressController#show Progress API} to track the progress of the export. The export's progress is linked to with the _progress_url_ value.  When the export completes, use the {api:EpubExportsController#show Show content export} endpoint to retrieve a download URL for the exported content.
@@ -162,7 +161,7 @@ class EpubExportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "EpubExport",
+            'default': "CourseEpubExport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -230,7 +229,7 @@ class EpubExportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "EpubExport",
+            'default': "CourseEpubExport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -318,7 +317,7 @@ class EpubExportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[CourseEpubExport]:
+    ) -> EpubExportsIndexResponse:
         """List courses with their latest ePub export
 
         A paginated list of all courses a user is actively participating in, and the latest ePub export associated with the user & course.
@@ -354,7 +353,7 @@ class EpubExportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[CourseEpubExport]",
+            'default': "EpubExportsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -381,7 +380,7 @@ class EpubExportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[CourseEpubExport]]:
+    ) -> ApiResponse[EpubExportsIndexResponse]:
         """List courses with their latest ePub export
 
         A paginated list of all courses a user is actively participating in, and the latest ePub export associated with the user & course.
@@ -417,7 +416,7 @@ class EpubExportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[CourseEpubExport]",
+            'default': "EpubExportsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -481,7 +480,7 @@ class EpubExportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[CourseEpubExport]",
+            'default': "EpubExportsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -568,7 +567,7 @@ class EpubExportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> EpubExport:
+    ) -> CourseEpubExport:
         """Show ePub export
 
         Get information about a single ePub export.
@@ -610,7 +609,7 @@ class EpubExportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "EpubExport",
+            'default': "CourseEpubExport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -639,7 +638,7 @@ class EpubExportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[EpubExport]:
+    ) -> ApiResponse[CourseEpubExport]:
         """Show ePub export
 
         Get information about a single ePub export.
@@ -681,7 +680,7 @@ class EpubExportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "EpubExport",
+            'default': "CourseEpubExport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -753,7 +752,7 @@ class EpubExportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "EpubExport",
+            'default': "CourseEpubExport",
         }
         response_data = await self.api_client.call_api(
             *_param,

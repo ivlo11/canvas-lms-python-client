@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **quiz_submission_users_message**
-> quiz_submission_users_message(course_id, id, quiz_submission_users_message_request=quiz_submission_users_message_request)
+> QuizzesQuizSubmissionUsersMessageResponse quiz_submission_users_message(course_id, id, quiz_submission_users_message_request=quiz_submission_users_message_request)
 
 Send a message to unsubmitted or submitted users for the quiz
 
@@ -37,6 +37,7 @@ Send a message to unsubmitted or submitted users for the quiz
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_submission_users_message_request import QuizSubmissionUsersMessageRequest
+from canvas_lms_python_client.models.quizzes_quiz_submission_users_message_response import QuizzesQuizSubmissionUsersMessageResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -66,7 +67,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Send a message to unsubmitted or submitted users for the quiz
-        await api_instance.quiz_submission_users_message(course_id, id, quiz_submission_users_message_request=quiz_submission_users_message_request)
+        api_response = await api_instance.quiz_submission_users_message(course_id, id, quiz_submission_users_message_request=quiz_submission_users_message_request)
+        print("The response of QuizSubmissionUsersApi->quiz_submission_users_message:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizSubmissionUsersApi->quiz_submission_users_message: %s\n" % e)
 ```
@@ -84,7 +87,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizzesQuizSubmissionUsersMessageResponse**](QuizzesQuizSubmissionUsersMessageResponse.md)
 
 ### Authorization
 
@@ -93,13 +96,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Send a message to unsubmitted or submitted users for the quiz |  -  |
+**0** | QuizzesQuizSubmissionUsersMessageResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

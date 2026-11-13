@@ -78,6 +78,11 @@ class BlueprintTemplate(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of latest_migration
         if self.latest_migration:
             _dict['latest_migration'] = self.latest_migration.to_dict()
+        # set to None if last_export_completed_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_export_completed_at is None and "last_export_completed_at" in self.model_fields_set:
+            _dict['last_export_completed_at'] = None
+
         return _dict
 
     @classmethod

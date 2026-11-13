@@ -43,7 +43,18 @@ class SisImportCounts(BaseModel):
     batch_enrollments_deleted: Optional[StrictInt] = Field(default=None, description="the number of enrollments that were removed because they were not included in the batch for batch_mode imports. Only included if enrollments were deleted", json_schema_extra={"examples": [150]})
     error_count: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [0]})
     warning_count: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [0]})
-    __properties: ClassVar[List[str]] = ["accounts", "terms", "abstract_courses", "courses", "sections", "xlists", "users", "enrollments", "groups", "group_memberships", "grade_publishing_results", "batch_courses_deleted", "batch_sections_deleted", "batch_enrollments_deleted", "error_count", "warning_count"]
+    admins: Optional[StrictInt] = None
+    change_sis_ids: Optional[StrictInt] = None
+    differentiation_tag_memberships: Optional[StrictInt] = None
+    differentiation_tag_sets: Optional[StrictInt] = None
+    differentiation_tags: Optional[StrictInt] = None
+    group_categories: Optional[StrictInt] = None
+    institutional_tag_associations: Optional[StrictInt] = None
+    institutional_tag_categories: Optional[StrictInt] = None
+    institutional_tags: Optional[StrictInt] = None
+    logins: Optional[StrictInt] = None
+    user_observers: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["accounts", "terms", "abstract_courses", "courses", "sections", "xlists", "users", "enrollments", "groups", "group_memberships", "grade_publishing_results", "batch_courses_deleted", "batch_sections_deleted", "batch_enrollments_deleted", "error_count", "warning_count", "admins", "change_sis_ids", "differentiation_tag_memberships", "differentiation_tag_sets", "differentiation_tags", "group_categories", "institutional_tag_associations", "institutional_tag_categories", "institutional_tags", "logins", "user_observers"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -111,7 +122,18 @@ class SisImportCounts(BaseModel):
             "batch_sections_deleted": obj.get("batch_sections_deleted"),
             "batch_enrollments_deleted": obj.get("batch_enrollments_deleted"),
             "error_count": obj.get("error_count"),
-            "warning_count": obj.get("warning_count")
+            "warning_count": obj.get("warning_count"),
+            "admins": obj.get("admins"),
+            "change_sis_ids": obj.get("change_sis_ids"),
+            "differentiation_tag_memberships": obj.get("differentiation_tag_memberships"),
+            "differentiation_tag_sets": obj.get("differentiation_tag_sets"),
+            "differentiation_tags": obj.get("differentiation_tags"),
+            "group_categories": obj.get("group_categories"),
+            "institutional_tag_associations": obj.get("institutional_tag_associations"),
+            "institutional_tag_categories": obj.get("institutional_tag_categories"),
+            "institutional_tags": obj.get("institutional_tags"),
+            "logins": obj.get("logins"),
+            "user_observers": obj.get("user_observers")
         })
         return _obj
 

@@ -20,6 +20,7 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.feature import Feature
 from canvas_lms_python_client.models.feature_flag import FeatureFlag
+from canvas_lms_python_client.models.feature_flags_environment_response import FeatureFlagsEnvironmentResponse
 from canvas_lms_python_client.models.feature_flags_update_request import FeatureFlagsUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -891,7 +892,7 @@ class FeatureFlagsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[str]:
         """List enabled features
 
         A paginated list of all features that are enabled on a given Account, Course, or User. Only the feature names are returned.
@@ -930,6 +931,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -957,7 +959,7 @@ class FeatureFlagsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[str]]:
         """List enabled features
 
         A paginated list of all features that are enabled on a given Account, Course, or User. Only the feature names are returned.
@@ -996,6 +998,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1063,6 +1066,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1151,7 +1155,7 @@ class FeatureFlagsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[str]:
         """List enabled features
 
         A paginated list of all features that are enabled on a given Account, Course, or User. Only the feature names are returned.
@@ -1190,6 +1194,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1217,7 +1222,7 @@ class FeatureFlagsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[str]]:
         """List enabled features
 
         A paginated list of all features that are enabled on a given Account, Course, or User. Only the feature names are returned.
@@ -1256,6 +1261,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1323,6 +1329,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1411,7 +1418,7 @@ class FeatureFlagsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[str]:
         """List enabled features
 
         A paginated list of all features that are enabled on a given Account, Course, or User. Only the feature names are returned.
@@ -1450,6 +1457,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1477,7 +1485,7 @@ class FeatureFlagsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[str]]:
         """List enabled features
 
         A paginated list of all features that are enabled on a given Account, Course, or User. Only the feature names are returned.
@@ -1516,6 +1524,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1583,6 +1592,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[str]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1670,7 +1680,7 @@ class FeatureFlagsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> FeatureFlagsEnvironmentResponse:
         """List environment features
 
         Return a hash of global feature options that pertain to the Canvas user interface. This is the same information supplied to the web interface as +ENV.FEATURES+.
@@ -1706,6 +1716,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FeatureFlagsEnvironmentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1732,7 +1743,7 @@ class FeatureFlagsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[FeatureFlagsEnvironmentResponse]:
         """List environment features
 
         Return a hash of global feature options that pertain to the Canvas user interface. This is the same information supplied to the web interface as +ENV.FEATURES+.
@@ -1768,6 +1779,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FeatureFlagsEnvironmentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1831,6 +1843,7 @@ class FeatureFlagsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FeatureFlagsEnvironmentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

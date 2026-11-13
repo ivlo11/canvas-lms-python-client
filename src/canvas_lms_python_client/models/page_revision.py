@@ -80,6 +80,11 @@ class PageRevision(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of edited_by
         if self.edited_by:
             _dict['edited_by'] = self.edited_by.to_dict()
+        # set to None if body (nullable) is None
+        # and model_fields_set contains the field
+        if self.body is None and "body" in self.model_fields_set:
+            _dict['body'] = None
+
         return _dict
 
     @classmethod

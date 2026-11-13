@@ -19,8 +19,11 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.file import File
+from canvas_lms_python_client.models.files_api_quota_response import FilesApiQuotaResponse
 from canvas_lms_python_client.models.files_api_show_for_other_request import FilesApiShowForOtherRequest
 from canvas_lms_python_client.models.files_api_update_request import FilesApiUpdateRequest
+from canvas_lms_python_client.models.files_icon_metadata_response import FilesIconMetadataResponse
+from canvas_lms_python_client.models.files_public_url_response import FilesPublicUrlResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -2881,7 +2884,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> FilesApiQuotaResponse:
         """Get quota information
 
         Returns the total and used storage quota for the course, group, or user.
@@ -2920,6 +2923,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesApiQuotaResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2947,7 +2951,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[FilesApiQuotaResponse]:
         """Get quota information
 
         Returns the total and used storage quota for the course, group, or user.
@@ -2986,6 +2990,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesApiQuotaResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3053,6 +3058,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesApiQuotaResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3141,7 +3147,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> FilesApiQuotaResponse:
         """Get quota information
 
         Returns the total and used storage quota for the course, group, or user.
@@ -3180,6 +3186,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesApiQuotaResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3207,7 +3214,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[FilesApiQuotaResponse]:
         """Get quota information
 
         Returns the total and used storage quota for the course, group, or user.
@@ -3246,6 +3253,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesApiQuotaResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3313,6 +3321,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesApiQuotaResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3401,7 +3410,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> FilesApiQuotaResponse:
         """Get quota information
 
         Returns the total and used storage quota for the course, group, or user.
@@ -3440,6 +3449,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesApiQuotaResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3467,7 +3477,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[FilesApiQuotaResponse]:
         """Get quota information
 
         Returns the total and used storage quota for the course, group, or user.
@@ -3506,6 +3516,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesApiQuotaResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3573,6 +3584,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesApiQuotaResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6102,7 +6114,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> FilesIconMetadataResponse:
         """Get icon metadata
 
         Returns the icon maker file attachment metadata
@@ -6141,6 +6153,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesIconMetadataResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6168,7 +6181,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[FilesIconMetadataResponse]:
         """Get icon metadata
 
         Returns the icon maker file attachment metadata
@@ -6207,6 +6220,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesIconMetadataResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6274,6 +6288,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesIconMetadataResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6363,7 +6378,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> FilesPublicUrlResponse:
         """Get public inline preview url
 
         Determine the URL that should be used for inline preview of the file.
@@ -6405,6 +6420,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesPublicUrlResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6433,7 +6449,7 @@ class FilesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[FilesPublicUrlResponse]:
         """Get public inline preview url
 
         Determine the URL that should be used for inline preview of the file.
@@ -6475,6 +6491,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesPublicUrlResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -6546,6 +6563,7 @@ class FilesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "FilesPublicUrlResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

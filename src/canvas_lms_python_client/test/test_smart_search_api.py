@@ -21,7 +21,7 @@ from canvas_lms_python_client.api.smart_search_api import SmartSearchApi
 from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.search_result import SearchResult
+from canvas_lms_python_client.models.smart_search_search_response import SmartSearchSearchResponse
 
 
 class TestSmartSearchApi(unittest.IsolatedAsyncioTestCase):
@@ -91,8 +91,8 @@ class TestSmartSearchApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Array response
-        mock_data = [MagicMock(), MagicMock()]
+        # Non-array response: one wrapper per page
+        mock_data = MagicMock()
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -104,7 +104,7 @@ class TestSmartSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.smart_search_search_all(
+        async for page in self.api.smart_search_search_paginated(
             course_id="invalid",
             q="invalid",
             filter=[],
@@ -115,7 +115,7 @@ class TestSmartSearchApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == len(mock_data)
+        assert len(pages) == 1  # One wrapper page
 
     async def test_smart_search_search_paginated_multiple_pages(self) -> None:
         """Test smart_search_search_fetch_all_items following pagination links.
@@ -127,7 +127,7 @@ class TestSmartSearchApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = [MagicMock(), MagicMock()]
+        mock_page_data = MagicMock()
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -167,7 +167,7 @@ class TestSmartSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.smart_search_search_all(
+        async for item in self.api.smart_search_search_paginated(
             course_id="invalid",
             q="invalid",
             filter=[],
@@ -178,7 +178,7 @@ class TestSmartSearchApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_smart_search_search_paginated_empty_result(self) -> None:
@@ -202,7 +202,7 @@ class TestSmartSearchApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.smart_search_search_all(
+        async for item in self.api.smart_search_search_paginated(
             course_id="invalid",
             q="invalid",
             filter=[],

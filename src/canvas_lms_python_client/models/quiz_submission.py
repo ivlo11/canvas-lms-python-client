@@ -47,7 +47,13 @@ class QuizSubmission(BaseModel):
     has_seen_results: Optional[StrictBool] = Field(default=None, description="Whether the student has viewed their results to the quiz.", json_schema_extra={"examples": [True]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="The current state of the quiz submission. Possible values: ['untaken'|'pending_review'|'complete'|'settings_only'|'preview'].", json_schema_extra={"examples": ["untaken"]})
     overdue_and_needs_submission: Optional[StrictBool] = Field(default=None, description="Indicates whether the quiz submission is overdue and needs submission", json_schema_extra={"examples": [False]})
-    __properties: ClassVar[List[str]] = ["id", "quiz_id", "user_id", "submission_id", "started_at", "finished_at", "end_at", "attempt", "extra_attempts", "extra_time", "manually_unlocked", "time_spent", "score", "score_before_regrade", "kept_score", "fudge_points", "has_seen_results", "workflow_state", "overdue_and_needs_submission"]
+    attempts_left: Optional[StrictInt] = None
+    html_url: Optional[StrictStr] = None
+    quiz_points_possible: Optional[Union[StrictFloat, StrictInt]] = None
+    quiz_version: Optional[StrictInt] = None
+    result_url: Optional[StrictStr] = None
+    validation_token: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "quiz_id", "user_id", "submission_id", "started_at", "finished_at", "end_at", "attempt", "extra_attempts", "extra_time", "manually_unlocked", "time_spent", "score", "score_before_regrade", "kept_score", "fudge_points", "has_seen_results", "workflow_state", "overdue_and_needs_submission", "attempts_left", "html_url", "quiz_points_possible", "quiz_version", "result_url", "validation_token"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,6 +94,71 @@ class QuizSubmission(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
+
+        # set to None if submission_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.submission_id is None and "submission_id" in self.model_fields_set:
+            _dict['submission_id'] = None
+
+        # set to None if finished_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.finished_at is None and "finished_at" in self.model_fields_set:
+            _dict['finished_at'] = None
+
+        # set to None if end_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_at is None and "end_at" in self.model_fields_set:
+            _dict['end_at'] = None
+
+        # set to None if extra_attempts (nullable) is None
+        # and model_fields_set contains the field
+        if self.extra_attempts is None and "extra_attempts" in self.model_fields_set:
+            _dict['extra_attempts'] = None
+
+        # set to None if extra_time (nullable) is None
+        # and model_fields_set contains the field
+        if self.extra_time is None and "extra_time" in self.model_fields_set:
+            _dict['extra_time'] = None
+
+        # set to None if manually_unlocked (nullable) is None
+        # and model_fields_set contains the field
+        if self.manually_unlocked is None and "manually_unlocked" in self.model_fields_set:
+            _dict['manually_unlocked'] = None
+
+        # set to None if time_spent (nullable) is None
+        # and model_fields_set contains the field
+        if self.time_spent is None and "time_spent" in self.model_fields_set:
+            _dict['time_spent'] = None
+
+        # set to None if score (nullable) is None
+        # and model_fields_set contains the field
+        if self.score is None and "score" in self.model_fields_set:
+            _dict['score'] = None
+
+        # set to None if score_before_regrade (nullable) is None
+        # and model_fields_set contains the field
+        if self.score_before_regrade is None and "score_before_regrade" in self.model_fields_set:
+            _dict['score_before_regrade'] = None
+
+        # set to None if kept_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.kept_score is None and "kept_score" in self.model_fields_set:
+            _dict['kept_score'] = None
+
+        # set to None if fudge_points (nullable) is None
+        # and model_fields_set contains the field
+        if self.fudge_points is None and "fudge_points" in self.model_fields_set:
+            _dict['fudge_points'] = None
+
+        # set to None if has_seen_results (nullable) is None
+        # and model_fields_set contains the field
+        if self.has_seen_results is None and "has_seen_results" in self.model_fields_set:
+            _dict['has_seen_results'] = None
+
         return _dict
 
     @classmethod
@@ -118,7 +189,13 @@ class QuizSubmission(BaseModel):
             "fudge_points": obj.get("fudge_points"),
             "has_seen_results": obj.get("has_seen_results"),
             "workflow_state": obj.get("workflow_state"),
-            "overdue_and_needs_submission": obj.get("overdue_and_needs_submission")
+            "overdue_and_needs_submission": obj.get("overdue_and_needs_submission"),
+            "attempts_left": obj.get("attempts_left"),
+            "html_url": obj.get("html_url"),
+            "quiz_points_possible": obj.get("quiz_points_possible"),
+            "quiz_version": obj.get("quiz_version"),
+            "result_url": obj.get("result_url"),
+            "validation_token": obj.get("validation_token")
         })
         return _obj
 

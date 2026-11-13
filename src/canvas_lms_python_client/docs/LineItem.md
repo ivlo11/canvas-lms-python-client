@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **resource_link_id** | **str** | The resource link id the Line Item is attached to | [optional] 
 **https___canvas_instructure_com_lti_submission_type** | **str** | The extension that defines the submission_type of the line_item. Only returns if set through the line_item create endpoint. | [optional] 
 **https___canvas_instructure_com_lti_launch_url** | **str** | The launch url of the Line Item. Only returned if &#x60;include&#x3D;launch_url&#x60; query parameter is passed, and only for Show and List actions. | [optional] 
+**end_date_time** | **str** |  | [optional] 
+**start_date_time** | **str** |  | [optional] 
 
 ## Example
 

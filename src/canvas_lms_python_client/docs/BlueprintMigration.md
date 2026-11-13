@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **imports_queued_at** | **datetime** | Time when the exports were completed and imports were queued | [optional] 
 **imports_completed_at** | **datetime** | Time when the imports were completed | [optional] 
 **comment** | **str** | User-specified comment describing changes made in this operation | [optional] 
+**user** | **object** |  | [optional] 
 
 ## Example
 

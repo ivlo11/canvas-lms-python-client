@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **visible** | **bool** | True for all keys except Site Admin-level keys, which default to false. Controls visibility in the Inherited tab. | [optional] 
 **scopes** | **List[str]** | List of API endpoints key is allowed to access (API keys), or LTI 1.3 scopes (LTI keys) | [optional] 
 **redirect_uri** | **str** | Deprecated in favor of redirect_uris. Do not use. | [optional] 
-**redirect_uris** | **List[str]** | List of URLs used during OAuth2 flow to validate given redirect URI (API keys), or to redirect to after login (LTI keys) | [optional] 
+**redirect_uris** | [**DeveloperKeyRedirectUris**](DeveloperKeyRedirectUris.md) |  | [optional] 
 **access_token_count** | **int** | (API keys only) The number of active access tokens associated with the key | [optional] 
 **last_used_at** | **datetime** | (API keys only) The last time an access token for this key was used in an API request | [optional] 
 **test_cluster_only** | **bool** | (API keys only) If true, key is only usable in non-production environments (test, beta). Avoids problems with beta refresh. | [optional] 
@@ -36,6 +36,10 @@ Name | Type | Description | Notes
 **user_name** | **str** | Unused. | [optional] 
 **user_id** | **str** | Unused. | [optional] 
 **unified_tool_id** | **str** | Correlates an API key to a product configuration. | [optional] 
+**developer_key_account_binding** | **object** |  | [optional] 
+**inherited_from** | **str** |  | [optional] 
+**lti_registration_id** | **int** |  | [optional] 
+**lti_registration_workflow_state** | **str** |  | [optional] 
 
 ## Example
 

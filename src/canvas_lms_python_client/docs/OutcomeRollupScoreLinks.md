@@ -6,7 +6,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**outcome** | **int** | The id of the related outcome | [optional] 
+**outcome** | [**OutcomeRollupScoreLinksOutcome**](OutcomeRollupScoreLinksOutcome.md) |  | [optional] 
 
 ## Example
 

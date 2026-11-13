@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **display_name** | **str** | Optional friendly name for reporting | [optional] 
 **description** | **str** | description of the outcome. omitted in the abbreviated form. | [optional] 
 **vendor_guid** | **str** | A custom GUID for the learning standard. | [optional] 
-**points_possible** | **int** | maximum points possible. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form. | [optional] 
-**mastery_points** | **int** | points necessary to demonstrate mastery outcomes. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form. | [optional] 
+**points_possible** | **float** | maximum points possible. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form. | [optional] 
+**mastery_points** | **float** | points necessary to demonstrate mastery outcomes. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form. | [optional] 
 **calculation_method** | **str** | the method used to calculate a students score | [optional] 
 **calculation_int** | **int** | this defines the variable value used by the calculation_method. included only if calculation_method uses it | [optional] 
 **ratings** | [**List[RubricRating]**](RubricRating.md) | possible ratings for this outcome. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form. | [optional] 
@@ -23,6 +23,9 @@ Name | Type | Description | Notes
 **can_unlink** | **bool** | whether the outcome can be unlinked | [optional] 
 **assessed** | **bool** | whether this outcome has been used to assess a student | [optional] 
 **has_updateable_rubrics** | **bool** | whether updates to this outcome will propagate to unassessed rubrics that have imported it | [optional] 
+**friendly_description** | **str** |  | [optional] 
+**proficiency_context_id** | **str** |  | [optional] 
+**proficiency_context_type** | **str** |  | [optional] 
 
 ## Example
 

@@ -30,7 +30,10 @@ class Collaborator(BaseModel):
     id: StrictInt = Field(description="The unique user or group identifier for the collaborator.", json_schema_extra={"examples": [12345]})
     type: Optional[StrictStr] = Field(default=None, description="The type of collaborator (e.g. 'user' or 'group').", json_schema_extra={"examples": ["user"]})
     name: Optional[StrictStr] = Field(default=None, description="The name of the collaborator.", json_schema_extra={"examples": ["Don Draper"]})
-    __properties: ClassVar[List[str]] = ["id", "type", "name"]
+    avatar_image_url: Optional[StrictStr] = None
+    collaborator_id: Optional[StrictInt] = None
+    collaborator_lti_id: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "type", "name", "avatar_image_url", "collaborator_id", "collaborator_lti_id"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -95,7 +98,10 @@ class Collaborator(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "type": obj.get("type"),
-            "name": obj.get("name")
+            "name": obj.get("name"),
+            "avatar_image_url": obj.get("avatar_image_url"),
+            "collaborator_id": obj.get("collaborator_id"),
+            "collaborator_lti_id": obj.get("collaborator_lti_id")
         })
         return _obj
 

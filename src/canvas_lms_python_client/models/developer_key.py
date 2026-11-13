@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.developer_key_redirect_uris import DeveloperKeyRedirectUris
 from canvas_lms_python_client.models.lti_tool_configuration import LtiToolConfiguration
 from typing import Optional, Set
 from typing_extensions import Self
@@ -43,7 +44,7 @@ class DeveloperKey(BaseModel):
     visible: Optional[StrictBool] = Field(default=None, description="True for all keys except Site Admin-level keys, which default to false. Controls visibility in the Inherited tab.", json_schema_extra={"examples": [True]})
     scopes: Optional[List[StrictStr]] = Field(default=None, description="List of API endpoints key is allowed to access (API keys), or LTI 1.3 scopes (LTI keys)", json_schema_extra={"examples": [["url:GET|/api/v1/accounts"]]})
     redirect_uri: Optional[StrictStr] = Field(default=None, description="Deprecated in favor of redirect_uris. Do not use.", json_schema_extra={"examples": ["no"]})
-    redirect_uris: Optional[List[StrictStr]] = Field(default=None, description="List of URLs used during OAuth2 flow to validate given redirect URI (API keys), or to redirect to after login (LTI keys)", json_schema_extra={"examples": [["https://mytool.com/oauth2/redirect", "https://mytool.com/1_3/launch"]]})
+    redirect_uris: Optional[DeveloperKeyRedirectUris] = None
     access_token_count: Optional[StrictInt] = Field(default=None, description="(API keys only) The number of active access tokens associated with the key", json_schema_extra={"examples": [42]})
     last_used_at: Optional[datetime] = Field(default=None, description="(API keys only) The last time an access token for this key was used in an API request", json_schema_extra={"examples": ["2025-05-30T17:09:18Z"]})
     test_cluster_only: Optional[StrictBool] = Field(default=None, description="(API keys only) If true, key is only usable in non-production environments (test, beta). Avoids problems with beta refresh.")
@@ -59,7 +60,11 @@ class DeveloperKey(BaseModel):
     user_name: Optional[StrictStr] = Field(default=None, description="Unused.", json_schema_extra={"examples": [""]})
     user_id: Optional[StrictStr] = Field(default=None, description="Unused.", json_schema_extra={"examples": [""]})
     unified_tool_id: Optional[StrictStr] = Field(default=None, description="Correlates an API key to a product configuration.", json_schema_extra={"examples": ["6ba7b810-9dad-11d1-80b4-00c04fd430c8"]})
-    __properties: ClassVar[List[str]] = ["id", "name", "created_at", "updated_at", "workflow_state", "is_lti_key", "email", "icon_url", "notes", "vendor_code", "account_name", "visible", "scopes", "redirect_uri", "redirect_uris", "access_token_count", "last_used_at", "test_cluster_only", "allow_includes", "require_scopes", "client_credentials_audience", "api_key", "tool_configuration", "public_jwk", "public_jwk_url", "lti_registration", "is_lti_registration", "user_name", "user_id", "unified_tool_id"]
+    developer_key_account_binding: Optional[Dict[str, Any]] = None
+    inherited_from: Optional[StrictStr] = None
+    lti_registration_id: Optional[StrictInt] = None
+    lti_registration_workflow_state: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "created_at", "updated_at", "workflow_state", "is_lti_key", "email", "icon_url", "notes", "vendor_code", "account_name", "visible", "scopes", "redirect_uri", "redirect_uris", "access_token_count", "last_used_at", "test_cluster_only", "allow_includes", "require_scopes", "client_credentials_audience", "api_key", "tool_configuration", "public_jwk", "public_jwk_url", "lti_registration", "is_lti_registration", "user_name", "user_id", "unified_tool_id", "developer_key_account_binding", "inherited_from", "lti_registration_id", "lti_registration_workflow_state"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -100,9 +105,92 @@ class DeveloperKey(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of redirect_uris
+        if self.redirect_uris:
+            _dict['redirect_uris'] = self.redirect_uris.to_dict()
         # override the default output from pydantic by calling `to_dict()` of tool_configuration
         if self.tool_configuration:
             _dict['tool_configuration'] = self.tool_configuration.to_dict()
+        # set to None if name (nullable) is None
+        # and model_fields_set contains the field
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
+
+        # set to None if email (nullable) is None
+        # and model_fields_set contains the field
+        if self.email is None and "email" in self.model_fields_set:
+            _dict['email'] = None
+
+        # set to None if icon_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.icon_url is None and "icon_url" in self.model_fields_set:
+            _dict['icon_url'] = None
+
+        # set to None if notes (nullable) is None
+        # and model_fields_set contains the field
+        if self.notes is None and "notes" in self.model_fields_set:
+            _dict['notes'] = None
+
+        # set to None if vendor_code (nullable) is None
+        # and model_fields_set contains the field
+        if self.vendor_code is None and "vendor_code" in self.model_fields_set:
+            _dict['vendor_code'] = None
+
+        # set to None if account_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.account_name is None and "account_name" in self.model_fields_set:
+            _dict['account_name'] = None
+
+        # set to None if redirect_uri (nullable) is None
+        # and model_fields_set contains the field
+        if self.redirect_uri is None and "redirect_uri" in self.model_fields_set:
+            _dict['redirect_uri'] = None
+
+        # set to None if last_used_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_used_at is None and "last_used_at" in self.model_fields_set:
+            _dict['last_used_at'] = None
+
+        # set to None if client_credentials_audience (nullable) is None
+        # and model_fields_set contains the field
+        if self.client_credentials_audience is None and "client_credentials_audience" in self.model_fields_set:
+            _dict['client_credentials_audience'] = None
+
+        # set to None if public_jwk (nullable) is None
+        # and model_fields_set contains the field
+        if self.public_jwk is None and "public_jwk" in self.model_fields_set:
+            _dict['public_jwk'] = None
+
+        # set to None if public_jwk_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.public_jwk_url is None and "public_jwk_url" in self.model_fields_set:
+            _dict['public_jwk_url'] = None
+
+        # set to None if lti_registration (nullable) is None
+        # and model_fields_set contains the field
+        if self.lti_registration is None and "lti_registration" in self.model_fields_set:
+            _dict['lti_registration'] = None
+
+        # set to None if user_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_name is None and "user_name" in self.model_fields_set:
+            _dict['user_name'] = None
+
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
+
+        # set to None if unified_tool_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.unified_tool_id is None and "unified_tool_id" in self.model_fields_set:
+            _dict['unified_tool_id'] = None
+
+        # set to None if lti_registration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.lti_registration_id is None and "lti_registration_id" in self.model_fields_set:
+            _dict['lti_registration_id'] = None
+
         return _dict
 
     @classmethod
@@ -129,7 +217,7 @@ class DeveloperKey(BaseModel):
             "visible": obj.get("visible"),
             "scopes": obj.get("scopes"),
             "redirect_uri": obj.get("redirect_uri"),
-            "redirect_uris": obj.get("redirect_uris"),
+            "redirect_uris": DeveloperKeyRedirectUris.from_dict(obj["redirect_uris"]) if obj.get("redirect_uris") is not None else None,
             "access_token_count": obj.get("access_token_count"),
             "last_used_at": obj.get("last_used_at"),
             "test_cluster_only": obj.get("test_cluster_only"),
@@ -144,7 +232,11 @@ class DeveloperKey(BaseModel):
             "is_lti_registration": obj.get("is_lti_registration"),
             "user_name": obj.get("user_name"),
             "user_id": obj.get("user_id"),
-            "unified_tool_id": obj.get("unified_tool_id")
+            "unified_tool_id": obj.get("unified_tool_id"),
+            "developer_key_account_binding": obj.get("developer_key_account_binding"),
+            "inherited_from": obj.get("inherited_from"),
+            "lti_registration_id": obj.get("lti_registration_id"),
+            "lti_registration_workflow_state": obj.get("lti_registration_workflow_state")
         })
         return _obj
 

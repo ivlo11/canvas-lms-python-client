@@ -19,6 +19,7 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.content_imports_copy_course_content_request import ContentImportsCopyCourseContentRequest
+from canvas_lms_python_client.models.content_imports_copy_course_status_response import ContentImportsCopyCourseStatusResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -56,7 +57,7 @@ class ContentImportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ContentImportsCopyCourseStatusResponse:
         """Copy course content
 
         DEPRECATED: Please use the {api:ContentMigrationsController#create Content Migrations API}  Copies content from one course into another. The default is to copy all course content. You can control specific types to copy by using either the 'except' option or the 'only' option.  The response is the same as the course copy status endpoint
@@ -98,6 +99,7 @@ class ContentImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContentImportsCopyCourseStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -126,7 +128,7 @@ class ContentImportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ContentImportsCopyCourseStatusResponse]:
         """Copy course content
 
         DEPRECATED: Please use the {api:ContentMigrationsController#create Content Migrations API}  Copies content from one course into another. The default is to copy all course content. You can control specific types to copy by using either the 'except' option or the 'only' option.  The response is the same as the course copy status endpoint
@@ -168,6 +170,7 @@ class ContentImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContentImportsCopyCourseStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -239,6 +242,7 @@ class ContentImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContentImportsCopyCourseStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -282,6 +286,13 @@ class ContentImportsApi:
             _body_params = content_imports_copy_course_content_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -337,7 +348,7 @@ class ContentImportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ContentImportsCopyCourseStatusResponse:
         """Get course copy status
 
         DEPRECATED: Please use the {api:ContentMigrationsController#create Content Migrations API}  Retrieve the status of a course copy
@@ -379,6 +390,7 @@ class ContentImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContentImportsCopyCourseStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -407,7 +419,7 @@ class ContentImportsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ContentImportsCopyCourseStatusResponse]:
         """Get course copy status
 
         DEPRECATED: Please use the {api:ContentMigrationsController#create Content Migrations API}  Retrieve the status of a course copy
@@ -449,6 +461,7 @@ class ContentImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContentImportsCopyCourseStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -520,6 +533,7 @@ class ContentImportsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ContentImportsCopyCourseStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

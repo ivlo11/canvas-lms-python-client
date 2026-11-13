@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **role** | **str** | The account role assigned. This can be &#39;AccountAdmin&#39; or a user-defined role created by the Roles API. | [optional] 
 **user** | [**User**](User.md) |  | [optional] 
 **workflow_state** | **str** | The status of the account role/user assignment. | [optional] 
+**role_id** | **int** |  | [optional] 
 
 ## Example
 

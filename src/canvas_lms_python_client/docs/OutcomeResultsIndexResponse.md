@@ -1,11 +1,11 @@
 # OutcomeResultsIndexResponse
 
-Paginated `outcome_results` list response (from the Canvas example response).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**linked** | **object** |  | [optional] 
 **outcome_results** | [**List[OutcomeResult]**](OutcomeResult.md) |  | [optional] 
 
 ## Example

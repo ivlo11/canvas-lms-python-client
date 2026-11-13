@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +33,10 @@ class Result(BaseModel):
     result_maximum: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Maximum possible score for this result; 1 is the default value and will be assumed if not specified otherwise. Minimum value of 0 required.", alias="resultMaximum", json_schema_extra={"examples": [50]})
     comment: Optional[StrictStr] = Field(default=None, description="Comment visible to the student about the result.")
     score_of: Optional[StrictStr] = Field(default=None, description="URL of the line item this belongs to", alias="scoreOf", json_schema_extra={"examples": ["http://institution.canvas.com/api/lti/courses/5/line_items/2"]})
-    __properties: ClassVar[List[str]] = ["id", "userId", "resultScore", "resultMaximum", "comment", "scoreOf"]
+    assessed_at: Optional[StrictStr] = None
+    links: Optional[Dict[str, Any]] = None
+    passed: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["id", "userId", "resultScore", "resultMaximum", "comment", "scoreOf", "assessed_at", "links", "passed"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -91,7 +94,10 @@ class Result(BaseModel):
             "resultScore": obj.get("resultScore"),
             "resultMaximum": obj.get("resultMaximum"),
             "comment": obj.get("comment"),
-            "scoreOf": obj.get("scoreOf")
+            "scoreOf": obj.get("scoreOf"),
+            "assessed_at": obj.get("assessed_at"),
+            "links": obj.get("links"),
+            "passed": obj.get("passed")
         })
         return _obj
 

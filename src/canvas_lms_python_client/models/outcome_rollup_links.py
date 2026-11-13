@@ -17,8 +17,11 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.outcome_rollup_links_course import OutcomeRollupLinksCourse
+from canvas_lms_python_client.models.outcome_rollup_links_section import OutcomeRollupLinksSection
+from canvas_lms_python_client.models.outcome_rollup_links_user import OutcomeRollupLinksUser
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -27,10 +30,11 @@ class OutcomeRollupLinks(BaseModel):
     """
     
     """ # noqa: E501
-    course: Optional[StrictInt] = Field(default=None, description="If an aggregate result was requested, the course field will be present. Otherwise, the user and section field will be present (Optional) The id of the course that this rollup applies to", json_schema_extra={"examples": [42]})
-    user: Optional[StrictInt] = Field(default=None, description="(Optional) The id of the user that this rollup applies to", json_schema_extra={"examples": [42]})
-    section: Optional[StrictInt] = Field(default=None, description="(Optional) The id of the section the user is in", json_schema_extra={"examples": [57]})
-    __properties: ClassVar[List[str]] = ["course", "user", "section"]
+    course: Optional[OutcomeRollupLinksCourse] = None
+    user: Optional[OutcomeRollupLinksUser] = None
+    section: Optional[OutcomeRollupLinksSection] = None
+    status: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["course", "user", "section", "status"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -71,6 +75,15 @@ class OutcomeRollupLinks(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of course
+        if self.course:
+            _dict['course'] = self.course.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of user
+        if self.user:
+            _dict['user'] = self.user.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of section
+        if self.section:
+            _dict['section'] = self.section.to_dict()
         return _dict
 
     @classmethod
@@ -83,9 +96,10 @@ class OutcomeRollupLinks(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "course": obj.get("course"),
-            "user": obj.get("user"),
-            "section": obj.get("section")
+            "course": OutcomeRollupLinksCourse.from_dict(obj["course"]) if obj.get("course") is not None else None,
+            "user": OutcomeRollupLinksUser.from_dict(obj["user"]) if obj.get("user") is not None else None,
+            "section": OutcomeRollupLinksSection.from_dict(obj["section"]) if obj.get("section") is not None else None,
+            "status": obj.get("status")
         })
         return _obj
 

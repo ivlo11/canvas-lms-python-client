@@ -32,8 +32,9 @@ Name | Type | Description | Notes
 **root_account_only** | **bool** | Whether this placement should only be available at the root account level. Only applies to account_navigation placement. | [optional] 
 **description** | **str** | A description of this placement. Only valid for submission_type_selection placement. Maximum length of 255 characters. | [optional] 
 **require_resource_selection** | **bool** | Whether resource selection is required for this placement. Only valid for submission_type_selection placement. | [optional] 
-**prefer_sis_email** | **bool** | If true, the tool will send the SIS email in the lis_person_contact_email_primary launch property. LTI 1.1 only. | [optional] 
+**prefer_sis_email** | [**ContextExternalToolPlacementPreferSisEmail**](ContextExternalToolPlacementPreferSisEmail.md) |  | [optional] 
 **oauth_compliant** | **bool** | If true, query parameters from the launch URL will not be copied to the POST body. LTI 1.1 only. | [optional] 
+**placement** | **str** |  | [optional] 
 
 ## Example
 

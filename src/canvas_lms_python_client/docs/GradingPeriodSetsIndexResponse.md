@@ -1,12 +1,13 @@
 # GradingPeriodSetsIndexResponse
 
-Object response with `grading_period_sets` (from the Canvas `@returns`).
+Object response with `grading_period_sets`, `meta` (from the Canvas `@returns`).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **grading_period_sets** | [**List[GradingPeriodSets]**](GradingPeriodSets.md) |  | [optional] 
+**meta** | **object** |  | [optional] 
 
 ## Example
 

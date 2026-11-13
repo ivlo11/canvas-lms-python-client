@@ -13,6 +13,11 @@ Name | Type | Description | Notes
 **moderator** | **bool** | Whether or not the user is a moderator of the group (the must also be an active member of the group to moderate) | [optional] 
 **just_created** | **bool** | optional: whether or not the record was just created on a create call (POST), i.e. was the user just added to the group, or was the user already a member | [optional] 
 **sis_import_id** | **int** | The id of the SIS import if created through SIS. Only included if the user has permission to manage SIS information. | [optional] 
+**created_at** | **str** |  | [optional] 
+**sis_group_id** | **object** |  | [optional] 
+**invalid_user_ids** | **List[int]** |  | [optional] 
+**membership_errors** | **List[object]** |  | [optional] 
+**message** | **str** |  | [optional] 
 
 ## Example
 

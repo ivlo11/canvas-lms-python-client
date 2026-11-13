@@ -16,9 +16,10 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.conference import Conference
+from canvas_lms_python_client.models.conferences_for_user_response import ConferencesForUserResponse
+from canvas_lms_python_client.models.conferences_index_response import ConferencesIndexResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -58,7 +59,7 @@ class ConferencesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[Conference]:
+    ) -> ConferencesForUserResponse:
         """List conferences for the current user
 
         Retrieve the paginated list of conferences for all courses and groups the current user belongs to  This API returns a JSON object containing the list of conferences. The key for the list of conferences is \"conferences\".
@@ -109,7 +110,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesForUserResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -141,7 +142,7 @@ class ConferencesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[Conference]]:
+    ) -> AsyncIterator[ConferencesForUserResponse]:
         """List conferences for the current user
 
         Retrieve the paginated list of conferences for all courses and groups the current user belongs to  This API returns a JSON object containing the list of conferences. The key for the list of conferences is \"conferences\".
@@ -192,7 +193,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesForUserResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -226,111 +227,6 @@ class ConferencesApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def conferences_for_user_all(
-        self,
-        state: Annotated[Optional[StrictStr], Field(description="If set to \"live\", returns only conferences that are live (i.e., have started and not finished yet). If omitted, returns all conferences for this user's groups and courses.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Conference]:
-        """List conferences for the current user
-
-        Retrieve the paginated list of conferences for all courses and groups the current user belongs to  This API returns a JSON object containing the list of conferences. The key for the list of conferences is \"conferences\".
-
-        :param state: If set to \"live\", returns only conferences that are live (i.e., have started and not finished yet). If omitted, returns all conferences for this user's groups and courses.
-        :type state: str
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._conferences_for_user_serialize(
-            state=state,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def conferences_for_user_with_http_info(
         self,
@@ -350,7 +246,7 @@ class ConferencesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[Conference]]:
+    ) -> ApiResponse[ConferencesForUserResponse]:
         """List conferences for the current user
 
         Retrieve the paginated list of conferences for all courses and groups the current user belongs to  This API returns a JSON object containing the list of conferences. The key for the list of conferences is \"conferences\".
@@ -401,7 +297,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesForUserResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -484,7 +380,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesForUserResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -588,7 +484,7 @@ class ConferencesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[Conference]:
+    ) -> ConferencesIndexResponse:
         """List conferences
 
         Retrieve the paginated list of conferences for this context  This API returns a JSON object containing the list of conferences, the key for the list of conferences is \"conferences\"
@@ -639,7 +535,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -671,7 +567,7 @@ class ConferencesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[Conference]]:
+    ) -> AsyncIterator[ConferencesIndexResponse]:
         """List conferences
 
         Retrieve the paginated list of conferences for this context  This API returns a JSON object containing the list of conferences, the key for the list of conferences is \"conferences\"
@@ -722,7 +618,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesIndexResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -756,111 +652,6 @@ class ConferencesApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def conferences_index_all(
-        self,
-        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Conference]:
-        """List conferences
-
-        Retrieve the paginated list of conferences for this context  This API returns a JSON object containing the list of conferences, the key for the list of conferences is \"conferences\"
-
-        :param course_id: Scope response to course_id (required)
-        :type course_id: str
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._conferences_index_serialize(
-            course_id=course_id,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def conferences_index_with_http_info(
         self,
@@ -880,7 +671,7 @@ class ConferencesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[Conference]]:
+    ) -> ApiResponse[ConferencesIndexResponse]:
         """List conferences
 
         Retrieve the paginated list of conferences for this context  This API returns a JSON object containing the list of conferences, the key for the list of conferences is \"conferences\"
@@ -931,7 +722,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1014,7 +805,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1116,7 +907,7 @@ class ConferencesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[Conference]:
+    ) -> ConferencesIndexResponse:
         """List conferences
 
         Retrieve the paginated list of conferences for this context  This API returns a JSON object containing the list of conferences, the key for the list of conferences is \"conferences\"
@@ -1167,7 +958,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1199,7 +990,7 @@ class ConferencesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[Conference]]:
+    ) -> AsyncIterator[ConferencesIndexResponse]:
         """List conferences
 
         Retrieve the paginated list of conferences for this context  This API returns a JSON object containing the list of conferences, the key for the list of conferences is \"conferences\"
@@ -1250,7 +1041,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesIndexResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1284,111 +1075,6 @@ class ConferencesApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def conferences_index_for_groups_all(
-        self,
-        group_id: Annotated[StrictStr, Field(description="Scope response to group_id")],
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Conference]:
-        """List conferences
-
-        Retrieve the paginated list of conferences for this context  This API returns a JSON object containing the list of conferences, the key for the list of conferences is \"conferences\"
-
-        :param group_id: Scope response to group_id (required)
-        :type group_id: str
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._conferences_index_for_groups_serialize(
-            group_id=group_id,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def conferences_index_for_groups_with_http_info(
         self,
@@ -1408,7 +1094,7 @@ class ConferencesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[Conference]]:
+    ) -> ApiResponse[ConferencesIndexResponse]:
         """List conferences
 
         Retrieve the paginated list of conferences for this context  This API returns a JSON object containing the list of conferences, the key for the list of conferences is \"conferences\"
@@ -1459,7 +1145,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1542,7 +1228,7 @@ class ConferencesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[Conference]",
+            'default': "ConferencesIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

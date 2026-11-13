@@ -43,7 +43,9 @@ class LtiResourceLink(BaseModel):
     workflow_state: Optional[StrictStr] = Field(default=None, description="The state of the resource link", json_schema_extra={"examples": ["active"]})
     associated_content_type: Optional[StrictStr] = Field(default=None, description="Type of the associated content this resource link belongs to if present. Now only supports `ModuleItems`, later may be extend others", json_schema_extra={"examples": ["ModuleItem"]})
     associated_content_id: Optional[StrictInt] = Field(default=None, description="The Canvas identifier of the associated content, e.g. ModuleItem related to this link. Present if associated_content_type is present", json_schema_extra={"examples": [1]})
-    __properties: ClassVar[List[str]] = ["id", "context_id", "context_type", "context_external_tool_id", "resource_type", "canvas_launch_url", "resource_link_uuid", "lookup_uuid", "title", "url", "lti_1_1_id", "created_at", "updated_at", "workflow_state", "associated_content_type", "associated_content_id"]
+    custom: Optional[Dict[str, Any]] = None
+    root_account_id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id", "context_id", "context_type", "context_external_tool_id", "resource_type", "canvas_launch_url", "resource_link_uuid", "lookup_uuid", "title", "url", "lti_1_1_id", "created_at", "updated_at", "workflow_state", "associated_content_type", "associated_content_id", "custom", "root_account_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -84,6 +86,21 @@ class LtiResourceLink(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if title (nullable) is None
+        # and model_fields_set contains the field
+        if self.title is None and "title" in self.model_fields_set:
+            _dict['title'] = None
+
+        # set to None if lti_1_1_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.lti_1_1_id is None and "lti_1_1_id" in self.model_fields_set:
+            _dict['lti_1_1_id'] = None
+
+        # set to None if custom (nullable) is None
+        # and model_fields_set contains the field
+        if self.custom is None and "custom" in self.model_fields_set:
+            _dict['custom'] = None
+
         return _dict
 
     @classmethod
@@ -111,7 +128,9 @@ class LtiResourceLink(BaseModel):
             "updated_at": obj.get("updated_at"),
             "workflow_state": obj.get("workflow_state"),
             "associated_content_type": obj.get("associated_content_type"),
-            "associated_content_id": obj.get("associated_content_id")
+            "associated_content_id": obj.get("associated_content_id"),
+            "custom": obj.get("custom"),
+            "root_account_id": obj.get("root_account_id")
         })
         return _obj
 

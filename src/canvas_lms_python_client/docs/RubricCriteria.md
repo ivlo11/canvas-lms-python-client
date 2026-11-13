@@ -7,7 +7,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **points** | **int** |  | [optional] 
-**id** | **str** | The id of rubric criteria. | [optional] 
+**id** | [**RubricCriteriaId**](RubricCriteriaId.md) |  | [optional] 
 **learning_outcome_id** | **str** | (Optional) The id of the learning outcome this criteria uses, if any. | [optional] 
 **vendor_guid** | **str** | (Optional) The 3rd party vendor&#39;s GUID for the outcome this criteria references, if any. | [optional] 
 **description** | **str** |  | [optional] 
@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **criterion_use_range** | **bool** |  | [optional] 
 **ratings** | [**List[RubricRating]**](RubricRating.md) |  | [optional] 
 **ignore_for_scoring** | **bool** |  | [optional] 
+**outcome_id** | **int** |  | [optional] 
 
 ## Example
 

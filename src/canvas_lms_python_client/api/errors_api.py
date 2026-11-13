@@ -19,6 +19,7 @@ from pydantic import Field
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.errors_create_request import ErrorsCreateRequest
+from canvas_lms_python_client.models.errors_create_response import ErrorsCreateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -55,7 +56,7 @@ class ErrorsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ErrorsCreateResponse:
         """Create Error Report
 
         Create a new error report documenting an experienced problem  Performs the same action as when a user uses the \"help -> report a problem\" dialog.
@@ -94,6 +95,7 @@ class ErrorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ErrorsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -121,7 +123,7 @@ class ErrorsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ErrorsCreateResponse]:
         """Create Error Report
 
         Create a new error report documenting an experienced problem  Performs the same action as when a user uses the \"help -> report a problem\" dialog.
@@ -160,6 +162,7 @@ class ErrorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ErrorsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -227,6 +230,7 @@ class ErrorsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ErrorsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -267,6 +271,13 @@ class ErrorsApi:
             _body_params = errors_create_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

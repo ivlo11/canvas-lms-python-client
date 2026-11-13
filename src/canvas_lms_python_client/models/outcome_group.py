@@ -39,7 +39,14 @@ class OutcomeGroup(BaseModel):
     outcomes_url: Optional[StrictStr] = Field(default=None, description="the URL for listing/creating outcome links under the outcome group. should be treated as opaque", json_schema_extra={"examples": ["/api/v1/accounts/1/outcome_groups/1/outcomes"]})
     import_url: Optional[StrictStr] = Field(default=None, description="the URL for importing another group into this outcome group. should be treated as opaque. omitted in the abbreviated form.", json_schema_extra={"examples": ["/api/v1/accounts/1/outcome_groups/1/import"]})
     can_edit: Optional[StrictBool] = Field(default=None, description="whether the current user can update the outcome group", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["id", "url", "parent_outcome_group", "context_id", "context_type", "title", "description", "vendor_guid", "subgroups_url", "outcomes_url", "import_url", "can_edit"]
+    completion: Optional[Any] = None
+    created_at: Optional[StrictStr] = None
+    message: Optional[Any] = None
+    tag: Optional[StrictStr] = None
+    updated_at: Optional[StrictStr] = None
+    user_id: Optional[StrictInt] = None
+    workflow_state: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "url", "parent_outcome_group", "context_id", "context_type", "title", "description", "vendor_guid", "subgroups_url", "outcomes_url", "import_url", "can_edit", "completion", "created_at", "message", "tag", "updated_at", "user_id", "workflow_state"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -83,6 +90,36 @@ class OutcomeGroup(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of parent_outcome_group
         if self.parent_outcome_group:
             _dict['parent_outcome_group'] = self.parent_outcome_group.to_dict()
+        # set to None if context_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_id is None and "context_id" in self.model_fields_set:
+            _dict['context_id'] = None
+
+        # set to None if context_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.context_type is None and "context_type" in self.model_fields_set:
+            _dict['context_type'] = None
+
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if vendor_guid (nullable) is None
+        # and model_fields_set contains the field
+        if self.vendor_guid is None and "vendor_guid" in self.model_fields_set:
+            _dict['vendor_guid'] = None
+
+        # set to None if completion (nullable) is None
+        # and model_fields_set contains the field
+        if self.completion is None and "completion" in self.model_fields_set:
+            _dict['completion'] = None
+
+        # set to None if message (nullable) is None
+        # and model_fields_set contains the field
+        if self.message is None and "message" in self.model_fields_set:
+            _dict['message'] = None
+
         return _dict
 
     @classmethod
@@ -106,7 +143,14 @@ class OutcomeGroup(BaseModel):
             "subgroups_url": obj.get("subgroups_url"),
             "outcomes_url": obj.get("outcomes_url"),
             "import_url": obj.get("import_url"),
-            "can_edit": obj.get("can_edit")
+            "can_edit": obj.get("can_edit"),
+            "completion": obj.get("completion"),
+            "created_at": obj.get("created_at"),
+            "message": obj.get("message"),
+            "tag": obj.get("tag"),
+            "updated_at": obj.get("updated_at"),
+            "user_id": obj.get("user_id"),
+            "workflow_state": obj.get("workflow_state")
         })
         return _obj
 

@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,8 +28,8 @@ class GradingSchemeEntry(BaseModel):
     
     """ # noqa: E501
     name: Optional[StrictStr] = Field(default=None, description="The name for an entry value within a GradingStandard that describes the range of the value", json_schema_extra={"examples": ["A"]})
-    value: Optional[StrictInt] = Field(default=None, description="The value for the name of the entry within a GradingStandard. The entry represents the lower bound of the range for the entry. This range includes the value up to the next entry in the GradingStandard, or the maximum value for the scheme if there is no upper bound. The lowest value will have a lower bound range of 0.")
-    calculated_value: Optional[StrictInt] = Field(default=None, description="The value that will be used to compare against a grade. For percentage based grading schemes, this is a number from 0 - 100 representing a percent. For point based grading schemes, this is the lower bound of points to achieve the grade.", json_schema_extra={"examples": [90]})
+    value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The value for the name of the entry within a GradingStandard. The entry represents the lower bound of the range for the entry. This range includes the value up to the next entry in the GradingStandard, or the maximum value for the scheme if there is no upper bound. The lowest value will have a lower bound range of 0.", json_schema_extra={"examples": [0.9]})
+    calculated_value: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The value that will be used to compare against a grade. For percentage based grading schemes, this is a number from 0 - 100 representing a percent. For point based grading schemes, this is the lower bound of points to achieve the grade.", json_schema_extra={"examples": [90]})
     __properties: ClassVar[List[str]] = ["name", "value", "calculated_value"]
 
     model_config = ConfigDict(

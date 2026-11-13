@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **permissions_help_groups**
-> permissions_help_groups()
+> PermissionsHelpGroupsResponse permissions_help_groups()
 
 Retrieve permission groups
 
@@ -24,6 +24,7 @@ containing +label+ and +subtitle+ keys.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.permissions_help_groups_response import PermissionsHelpGroupsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -50,7 +51,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Retrieve permission groups
-        await api_instance.permissions_help_groups()
+        api_response = await api_instance.permissions_help_groups()
+        print("The response of PermissionsHelpApi->permissions_help_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PermissionsHelpApi->permissions_help_groups: %s\n" % e)
 ```
@@ -63,7 +66,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**PermissionsHelpGroupsResponse**](PermissionsHelpGroupsResponse.md)
 
 ### Authorization
 
@@ -72,13 +75,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Retrieve permission groups |  -  |
+**0** | PermissionsHelpGroupsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

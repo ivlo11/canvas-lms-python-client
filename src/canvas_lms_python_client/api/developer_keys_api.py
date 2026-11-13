@@ -16,10 +16,11 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.developer_key import DeveloperKey
 from canvas_lms_python_client.models.developer_keys_create_request import DeveloperKeysCreateRequest
+from canvas_lms_python_client.models.developer_keys_lookup_utids_response import DeveloperKeysLookupUtidsResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -1165,7 +1166,7 @@ class DeveloperKeysApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> DeveloperKeysLookupUtidsResponse:
         """Lookup LP API Registrations by Redirect URIs
 
         Returns a list of matching Unified Tool IDs (UTIDs) from Learn Platform for the given redirect URIs.
@@ -1210,7 +1211,7 @@ class DeveloperKeysApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "DeveloperKeysLookupUtidsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1240,7 +1241,7 @@ class DeveloperKeysApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[DeveloperKeysLookupUtidsResponse]:
         """Lookup LP API Registrations by Redirect URIs
 
         Returns a list of matching Unified Tool IDs (UTIDs) from Learn Platform for the given redirect URIs.
@@ -1285,7 +1286,7 @@ class DeveloperKeysApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "DeveloperKeysLookupUtidsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1361,7 +1362,7 @@ class DeveloperKeysApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "DeveloperKeysLookupUtidsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

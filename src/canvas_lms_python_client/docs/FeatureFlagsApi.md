@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **feature_flags_enabled_features**
-> feature_flags_enabled_features(course_id)
+> List[str] feature_flags_enabled_features(course_id)
 
 List enabled features
 
@@ -312,7 +312,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List enabled features
-        await api_instance.feature_flags_enabled_features(course_id)
+        api_response = await api_instance.feature_flags_enabled_features(course_id)
+        print("The response of FeatureFlagsApi->feature_flags_enabled_features:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FeatureFlagsApi->feature_flags_enabled_features: %s\n" % e)
 ```
@@ -328,7 +330,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**List[str]**
 
 ### Authorization
 
@@ -343,12 +345,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List enabled features |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **feature_flags_enabled_features_for_accounts**
-> feature_flags_enabled_features_for_accounts(account_id)
+> List[str] feature_flags_enabled_features_for_accounts(account_id)
 
 List enabled features
 
@@ -388,7 +390,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List enabled features
-        await api_instance.feature_flags_enabled_features_for_accounts(account_id)
+        api_response = await api_instance.feature_flags_enabled_features_for_accounts(account_id)
+        print("The response of FeatureFlagsApi->feature_flags_enabled_features_for_accounts:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FeatureFlagsApi->feature_flags_enabled_features_for_accounts: %s\n" % e)
 ```
@@ -404,7 +408,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**List[str]**
 
 ### Authorization
 
@@ -419,12 +423,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List enabled features |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **feature_flags_enabled_features_for_users**
-> feature_flags_enabled_features_for_users(user_id)
+> List[str] feature_flags_enabled_features_for_users(user_id)
 
 List enabled features
 
@@ -464,7 +468,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List enabled features
-        await api_instance.feature_flags_enabled_features_for_users(user_id)
+        api_response = await api_instance.feature_flags_enabled_features_for_users(user_id)
+        print("The response of FeatureFlagsApi->feature_flags_enabled_features_for_users:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FeatureFlagsApi->feature_flags_enabled_features_for_users: %s\n" % e)
 ```
@@ -480,7 +486,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**List[str]**
 
 ### Authorization
 
@@ -495,12 +501,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List enabled features |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **feature_flags_environment**
-> feature_flags_environment()
+> FeatureFlagsEnvironmentResponse feature_flags_environment()
 
 List environment features
 
@@ -514,6 +520,7 @@ web interface as +ENV.FEATURES+.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.feature_flags_environment_response import FeatureFlagsEnvironmentResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -540,7 +547,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List environment features
-        await api_instance.feature_flags_environment()
+        api_response = await api_instance.feature_flags_environment()
+        print("The response of FeatureFlagsApi->feature_flags_environment:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FeatureFlagsApi->feature_flags_environment: %s\n" % e)
 ```
@@ -553,7 +562,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**FeatureFlagsEnvironmentResponse**](FeatureFlagsEnvironmentResponse.md)
 
 ### Authorization
 
@@ -568,7 +577,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List environment features |  -  |
+**0** | FeatureFlagsEnvironmentResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

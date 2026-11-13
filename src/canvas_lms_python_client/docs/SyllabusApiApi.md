@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **syllabus_api_accessibility_queue_scan**
-> object syllabus_api_accessibility_queue_scan(course_id)
+> AccessibilityResourceScan syllabus_api_accessibility_queue_scan(course_id)
 
 Queue syllabus accessibility scan
 
@@ -21,6 +21,7 @@ Queues a course syllabus for accessibility scanning.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.accessibility_resource_scan import AccessibilityResourceScan
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -66,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**AccessibilityResourceScan**](AccessibilityResourceScan.md)
 
 ### Authorization
 
@@ -86,7 +87,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **syllabus_api_accessibility_scan**
-> object syllabus_api_accessibility_scan(course_id)
+> AccessibilityResourceScan syllabus_api_accessibility_scan(course_id)
 
 Scan syllabus for accessibility issues
 
@@ -98,6 +99,7 @@ Scans a course syllabus for accessibility issues and returns the results.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.accessibility_resource_scan import AccessibilityResourceScan
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -143,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**AccessibilityResourceScan**](AccessibilityResourceScan.md)
 
 ### Authorization
 

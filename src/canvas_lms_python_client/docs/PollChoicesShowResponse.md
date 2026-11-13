@@ -1,12 +1,13 @@
 # PollChoicesShowResponse
 
-Paginated `poll_choices` list response (from the Canvas example response).
+Object response with `poll_choices`, `meta` (from the Canvas `@returns`).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **poll_choices** | [**List[PollChoice]**](PollChoice.md) |  | [optional] 
+**meta** | **object** |  | [optional] 
 
 ## Example
 

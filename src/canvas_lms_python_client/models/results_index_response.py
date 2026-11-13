@@ -26,10 +26,11 @@ from pydantic_core import to_jsonable_python
 
 class ResultsIndexResponse(BaseModel):
     """
-    Paginated `results` list response (from the Canvas example response).
+    Object response with `results`, `meta` (from the Canvas `@returns`).
     """ # noqa: E501
     results: Optional[List[Result]] = None
-    __properties: ClassVar[List[str]] = ["results"]
+    meta: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["results", "meta"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,7 +89,8 @@ class ResultsIndexResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "results": [Result.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None
+            "results": [Result.from_dict(_item) for _item in obj["results"]] if obj.get("results") is not None else None,
+            "meta": obj.get("meta")
         })
         return _obj
 

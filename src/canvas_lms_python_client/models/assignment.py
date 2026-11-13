@@ -20,7 +20,9 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from canvas_lms_python_client.models.appointment_group_sub_context_codes_inner import AppointmentGroupSubContextCodesInner
 from canvas_lms_python_client.models.assignment_date import AssignmentDate
+from canvas_lms_python_client.models.assignment_original_lti_resource_link_id import AssignmentOriginalLtiResourceLinkId
 from canvas_lms_python_client.models.assignment_override import AssignmentOverride
 from canvas_lms_python_client.models.discussion_topic import DiscussionTopic
 from canvas_lms_python_client.models.external_tool_tag_attributes import ExternalToolTagAttributes
@@ -92,7 +94,7 @@ class Assignment(BaseModel):
     use_rubric_for_grading: Optional[StrictBool] = Field(default=None, description="(Optional) If true, the rubric is directly tied to grading the assignment. Otherwise, it is only advisory. Included if there is an associated rubric.", json_schema_extra={"examples": [True]})
     rubric_settings: Optional[Dict[str, Any]] = Field(default=None, description="(Optional) An object describing the basic attributes of the rubric, including the point total. Included if there is an associated rubric.", json_schema_extra={"examples": [{"points_possible": "12"}]})
     rubric: Optional[List[RubricCriteria]] = Field(default=None, description="(Optional) A list of scoring criteria and ratings for each rubric criterion. Included if there is an associated rubric.")
-    assignment_visibility: Optional[List[StrictInt]] = Field(default=None, description="(Optional) If 'assignment_visibility' is included in the 'include' parameter, includes an array of student IDs who can see this assignment.", json_schema_extra={"examples": [[137, 381, 572]]})
+    assignment_visibility: Optional[List[AppointmentGroupSubContextCodesInner]] = Field(default=None, description="(Optional) If 'assignment_visibility' is included in the 'include' parameter, includes an array of student IDs who can see this assignment.", json_schema_extra={"examples": [[137, 381, 572]]})
     overrides: Optional[List[AssignmentOverride]] = Field(default=None, description="(Optional) If 'overrides' is included in the 'include' parameter, includes an array of assignment override objects.")
     omit_from_final_grade: Optional[StrictBool] = Field(default=None, description="(Optional) If true, the assignment will be omitted from the student's final grade", json_schema_extra={"examples": [True]})
     hide_in_gradebook: Optional[StrictBool] = Field(default=None, description="(Optional) If true, the assignment will not be shown in any gradebooks", json_schema_extra={"examples": [True]})
@@ -121,11 +123,51 @@ class Assignment(BaseModel):
     can_duplicate: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether this assignment can be duplicated.")
     original_course_id: Optional[StrictInt] = Field(default=None, description="If this assignment is a duplicate, it is the original assignment's course_id", json_schema_extra={"examples": [4]})
     original_assignment_id: Optional[StrictInt] = Field(default=None, description="If this assignment is a duplicate, it is the original assignment's id", json_schema_extra={"examples": [4]})
-    original_lti_resource_link_id: Optional[StrictInt] = Field(default=None, description="If this assignment is a duplicate, it is the original assignment's lti_resource_link_id", json_schema_extra={"examples": [4]})
+    original_lti_resource_link_id: Optional[AssignmentOriginalLtiResourceLinkId] = None
     original_assignment_name: Optional[StrictStr] = Field(default=None, description="If this assignment is a duplicate, it is the original assignment's name", json_schema_extra={"examples": ["some assignment"]})
     original_quiz_id: Optional[StrictInt] = Field(default=None, description="If this assignment is a duplicate, it is the original assignment's quiz_id", json_schema_extra={"examples": [4]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="String indicating what state this assignment is in.", json_schema_extra={"examples": ["unpublished"]})
-    __properties: ClassVar[List[str]] = ["id", "name", "description", "created_at", "updated_at", "due_at", "lock_at", "unlock_at", "has_overrides", "all_dates", "course_id", "html_url", "submissions_download_url", "assignment_group_id", "due_date_required", "allowed_extensions", "max_name_length", "turnitin_enabled", "vericite_enabled", "turnitin_settings", "grade_group_students_individually", "external_tool_tag_attributes", "peer_reviews", "automatic_peer_reviews", "peer_review_count", "peer_reviews_assign_at", "intra_group_peer_reviews", "group_category_id", "needs_grading_count", "needs_grading_count_by_section", "position", "post_to_sis", "integration_id", "integration_data", "points_possible", "submission_types", "has_submitted_submissions", "grading_type", "grading_standard_id", "published", "unpublishable", "only_visible_to_overrides", "locked_for_user", "lock_info", "lock_explanation", "quiz_id", "anonymous_submissions", "discussion_topic", "freeze_on_copy", "frozen", "frozen_attributes", "submission", "use_rubric_for_grading", "rubric_settings", "rubric", "assignment_visibility", "overrides", "omit_from_final_grade", "hide_in_gradebook", "moderated_grading", "grader_count", "final_grader_id", "grader_comments_visible_to_graders", "graders_anonymous_to_graders", "grader_names_visible_to_final_grader", "anonymous_grading", "allowed_attempts", "post_manually", "score_statistics", "can_submit", "ab_guid", "annotatable_attachment_id", "anonymize_students", "require_lockdown_browser", "important_dates", "muted", "anonymous_peer_reviews", "anonymous_instructor_annotations", "graded_submissions_exist", "is_quiz_assignment", "in_closed_grading_period", "can_duplicate", "original_course_id", "original_assignment_id", "original_lti_resource_link_id", "original_assignment_name", "original_quiz_id", "workflow_state"]
+    all_dates_count: Optional[StrictInt] = None
+    availability_status: Optional[Dict[str, Any]] = None
+    bucket: Optional[StrictStr] = None
+    can_edit: Optional[StrictBool] = None
+    checkpoints: Optional[List[Dict[str, Any]]] = None
+    free_form_criterion_comments: Optional[StrictBool] = None
+    has_peer_review_submissions: Optional[StrictBool] = None
+    has_sub_assignments: Optional[StrictBool] = None
+    in_paced_course: Optional[StrictBool] = None
+    is_quiz_lti_assignment: Optional[StrictBool] = None
+    lti_context_id: Optional[StrictStr] = None
+    new_quizzes_anonymous_participants: Optional[StrictBool] = None
+    peer_review_across_sections: Optional[StrictBool] = None
+    peer_review_submission_required: Optional[StrictBool] = None
+    restrict_quantitative_data: Optional[StrictBool] = None
+    secure_params: Optional[StrictStr] = None
+    settings: Optional[Any] = None
+    sis_assignment_id: Optional[Any] = None
+    speed_grader_url: Optional[StrictStr] = None
+    suppress_assignment: Optional[StrictBool] = None
+    url: Optional[StrictStr] = None
+    visible_to_everyone: Optional[StrictBool] = None
+    access_code: Optional[Any] = None
+    assignment_id: Optional[StrictInt] = None
+    can_update: Optional[StrictBool] = None
+    lockdown_browser_monitor_data: Optional[Any] = None
+    migration_id: Optional[StrictStr] = None
+    mobile_url: Optional[StrictStr] = None
+    new_positions: Optional[Dict[str, Any]] = None
+    permissions: Optional[Dict[str, Any]] = None
+    question_count: Optional[StrictInt] = None
+    quiz_type: Optional[StrictStr] = None
+    require_lockdown_browser_for_results: Optional[StrictBool] = None
+    require_lockdown_browser_monitor: Optional[StrictBool] = None
+    title: Optional[StrictStr] = None
+    webhook_info: Optional[Dict[str, Any]] = None
+    peer_review_sub_assignment: Optional[Dict[str, Any]] = None
+    vericite_settings: Optional[Dict[str, Any]] = None
+    sub_assignment_tag: Optional[StrictStr] = None
+    course: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "description", "created_at", "updated_at", "due_at", "lock_at", "unlock_at", "has_overrides", "all_dates", "course_id", "html_url", "submissions_download_url", "assignment_group_id", "due_date_required", "allowed_extensions", "max_name_length", "turnitin_enabled", "vericite_enabled", "turnitin_settings", "grade_group_students_individually", "external_tool_tag_attributes", "peer_reviews", "automatic_peer_reviews", "peer_review_count", "peer_reviews_assign_at", "intra_group_peer_reviews", "group_category_id", "needs_grading_count", "needs_grading_count_by_section", "position", "post_to_sis", "integration_id", "integration_data", "points_possible", "submission_types", "has_submitted_submissions", "grading_type", "grading_standard_id", "published", "unpublishable", "only_visible_to_overrides", "locked_for_user", "lock_info", "lock_explanation", "quiz_id", "anonymous_submissions", "discussion_topic", "freeze_on_copy", "frozen", "frozen_attributes", "submission", "use_rubric_for_grading", "rubric_settings", "rubric", "assignment_visibility", "overrides", "omit_from_final_grade", "hide_in_gradebook", "moderated_grading", "grader_count", "final_grader_id", "grader_comments_visible_to_graders", "graders_anonymous_to_graders", "grader_names_visible_to_final_grader", "anonymous_grading", "allowed_attempts", "post_manually", "score_statistics", "can_submit", "ab_guid", "annotatable_attachment_id", "anonymize_students", "require_lockdown_browser", "important_dates", "muted", "anonymous_peer_reviews", "anonymous_instructor_annotations", "graded_submissions_exist", "is_quiz_assignment", "in_closed_grading_period", "can_duplicate", "original_course_id", "original_assignment_id", "original_lti_resource_link_id", "original_assignment_name", "original_quiz_id", "workflow_state", "all_dates_count", "availability_status", "bucket", "can_edit", "checkpoints", "free_form_criterion_comments", "has_peer_review_submissions", "has_sub_assignments", "in_paced_course", "is_quiz_lti_assignment", "lti_context_id", "new_quizzes_anonymous_participants", "peer_review_across_sections", "peer_review_submission_required", "restrict_quantitative_data", "secure_params", "settings", "sis_assignment_id", "speed_grader_url", "suppress_assignment", "url", "visible_to_everyone", "access_code", "assignment_id", "can_update", "lockdown_browser_monitor_data", "migration_id", "mobile_url", "new_positions", "permissions", "question_count", "quiz_type", "require_lockdown_browser_for_results", "require_lockdown_browser_monitor", "title", "webhook_info", "peer_review_sub_assignment", "vericite_settings", "sub_assignment_tag", "course"]
 
     @field_validator('submission_types')
     def submission_types_validate_enum(cls, value):
@@ -220,6 +262,12 @@ class Assignment(BaseModel):
             for _item_rubric in self.rubric:
                 _items.append(_item_rubric.to_dict() if _item_rubric is not None else None)
             _dict['rubric'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in assignment_visibility (list)
+        _items = []
+        if self.assignment_visibility:
+            for _item_assignment_visibility in self.assignment_visibility:
+                _items.append(_item_assignment_visibility.to_dict() if _item_assignment_visibility is not None else None)
+            _dict['assignment_visibility'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in overrides (list)
         _items = []
         if self.overrides:
@@ -229,6 +277,149 @@ class Assignment(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of score_statistics
         if self.score_statistics:
             _dict['score_statistics'] = self.score_statistics.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of original_lti_resource_link_id
+        if self.original_lti_resource_link_id:
+            _dict['original_lti_resource_link_id'] = self.original_lti_resource_link_id.to_dict()
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if created_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.created_at is None and "created_at" in self.model_fields_set:
+            _dict['created_at'] = None
+
+        # set to None if updated_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.updated_at is None and "updated_at" in self.model_fields_set:
+            _dict['updated_at'] = None
+
+        # set to None if due_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.due_at is None and "due_at" in self.model_fields_set:
+            _dict['due_at'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if assignment_group_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.assignment_group_id is None and "assignment_group_id" in self.model_fields_set:
+            _dict['assignment_group_id'] = None
+
+        # set to None if group_category_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.group_category_id is None and "group_category_id" in self.model_fields_set:
+            _dict['group_category_id'] = None
+
+        # set to None if position (nullable) is None
+        # and model_fields_set contains the field
+        if self.position is None and "position" in self.model_fields_set:
+            _dict['position'] = None
+
+        # set to None if integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.integration_id is None and "integration_id" in self.model_fields_set:
+            _dict['integration_id'] = None
+
+        # set to None if points_possible (nullable) is None
+        # and model_fields_set contains the field
+        if self.points_possible is None and "points_possible" in self.model_fields_set:
+            _dict['points_possible'] = None
+
+        # set to None if grading_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.grading_type is None and "grading_type" in self.model_fields_set:
+            _dict['grading_type'] = None
+
+        # set to None if grading_standard_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.grading_standard_id is None and "grading_standard_id" in self.model_fields_set:
+            _dict['grading_standard_id'] = None
+
+        # set to None if final_grader_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.final_grader_id is None and "final_grader_id" in self.model_fields_set:
+            _dict['final_grader_id'] = None
+
+        # set to None if allowed_attempts (nullable) is None
+        # and model_fields_set contains the field
+        if self.allowed_attempts is None and "allowed_attempts" in self.model_fields_set:
+            _dict['allowed_attempts'] = None
+
+        # set to None if annotatable_attachment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.annotatable_attachment_id is None and "annotatable_attachment_id" in self.model_fields_set:
+            _dict['annotatable_attachment_id'] = None
+
+        # set to None if original_course_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_course_id is None and "original_course_id" in self.model_fields_set:
+            _dict['original_course_id'] = None
+
+        # set to None if original_assignment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_assignment_id is None and "original_assignment_id" in self.model_fields_set:
+            _dict['original_assignment_id'] = None
+
+        # set to None if original_lti_resource_link_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_lti_resource_link_id is None and "original_lti_resource_link_id" in self.model_fields_set:
+            _dict['original_lti_resource_link_id'] = None
+
+        # set to None if original_assignment_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_assignment_name is None and "original_assignment_name" in self.model_fields_set:
+            _dict['original_assignment_name'] = None
+
+        # set to None if original_quiz_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_quiz_id is None and "original_quiz_id" in self.model_fields_set:
+            _dict['original_quiz_id'] = None
+
+        # set to None if lti_context_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.lti_context_id is None and "lti_context_id" in self.model_fields_set:
+            _dict['lti_context_id'] = None
+
+        # set to None if settings (nullable) is None
+        # and model_fields_set contains the field
+        if self.settings is None and "settings" in self.model_fields_set:
+            _dict['settings'] = None
+
+        # set to None if sis_assignment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_assignment_id is None and "sis_assignment_id" in self.model_fields_set:
+            _dict['sis_assignment_id'] = None
+
+        # set to None if access_code (nullable) is None
+        # and model_fields_set contains the field
+        if self.access_code is None and "access_code" in self.model_fields_set:
+            _dict['access_code'] = None
+
+        # set to None if lockdown_browser_monitor_data (nullable) is None
+        # and model_fields_set contains the field
+        if self.lockdown_browser_monitor_data is None and "lockdown_browser_monitor_data" in self.model_fields_set:
+            _dict['lockdown_browser_monitor_data'] = None
+
+        # set to None if migration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.migration_id is None and "migration_id" in self.model_fields_set:
+            _dict['migration_id'] = None
+
+        # set to None if peer_review_sub_assignment (nullable) is None
+        # and model_fields_set contains the field
+        if self.peer_review_sub_assignment is None and "peer_review_sub_assignment" in self.model_fields_set:
+            _dict['peer_review_sub_assignment'] = None
+
         return _dict
 
     @classmethod
@@ -296,7 +487,7 @@ class Assignment(BaseModel):
             "use_rubric_for_grading": obj.get("use_rubric_for_grading"),
             "rubric_settings": obj.get("rubric_settings"),
             "rubric": [RubricCriteria.from_dict(_item) for _item in obj["rubric"]] if obj.get("rubric") is not None else None,
-            "assignment_visibility": obj.get("assignment_visibility"),
+            "assignment_visibility": [AppointmentGroupSubContextCodesInner.from_dict(_item) for _item in obj["assignment_visibility"]] if obj.get("assignment_visibility") is not None else None,
             "overrides": [AssignmentOverride.from_dict(_item) for _item in obj["overrides"]] if obj.get("overrides") is not None else None,
             "omit_from_final_grade": obj.get("omit_from_final_grade"),
             "hide_in_gradebook": obj.get("hide_in_gradebook"),
@@ -325,10 +516,50 @@ class Assignment(BaseModel):
             "can_duplicate": obj.get("can_duplicate"),
             "original_course_id": obj.get("original_course_id"),
             "original_assignment_id": obj.get("original_assignment_id"),
-            "original_lti_resource_link_id": obj.get("original_lti_resource_link_id"),
+            "original_lti_resource_link_id": AssignmentOriginalLtiResourceLinkId.from_dict(obj["original_lti_resource_link_id"]) if obj.get("original_lti_resource_link_id") is not None else None,
             "original_assignment_name": obj.get("original_assignment_name"),
             "original_quiz_id": obj.get("original_quiz_id"),
-            "workflow_state": obj.get("workflow_state")
+            "workflow_state": obj.get("workflow_state"),
+            "all_dates_count": obj.get("all_dates_count"),
+            "availability_status": obj.get("availability_status"),
+            "bucket": obj.get("bucket"),
+            "can_edit": obj.get("can_edit"),
+            "checkpoints": obj.get("checkpoints"),
+            "free_form_criterion_comments": obj.get("free_form_criterion_comments"),
+            "has_peer_review_submissions": obj.get("has_peer_review_submissions"),
+            "has_sub_assignments": obj.get("has_sub_assignments"),
+            "in_paced_course": obj.get("in_paced_course"),
+            "is_quiz_lti_assignment": obj.get("is_quiz_lti_assignment"),
+            "lti_context_id": obj.get("lti_context_id"),
+            "new_quizzes_anonymous_participants": obj.get("new_quizzes_anonymous_participants"),
+            "peer_review_across_sections": obj.get("peer_review_across_sections"),
+            "peer_review_submission_required": obj.get("peer_review_submission_required"),
+            "restrict_quantitative_data": obj.get("restrict_quantitative_data"),
+            "secure_params": obj.get("secure_params"),
+            "settings": obj.get("settings"),
+            "sis_assignment_id": obj.get("sis_assignment_id"),
+            "speed_grader_url": obj.get("speed_grader_url"),
+            "suppress_assignment": obj.get("suppress_assignment"),
+            "url": obj.get("url"),
+            "visible_to_everyone": obj.get("visible_to_everyone"),
+            "access_code": obj.get("access_code"),
+            "assignment_id": obj.get("assignment_id"),
+            "can_update": obj.get("can_update"),
+            "lockdown_browser_monitor_data": obj.get("lockdown_browser_monitor_data"),
+            "migration_id": obj.get("migration_id"),
+            "mobile_url": obj.get("mobile_url"),
+            "new_positions": obj.get("new_positions"),
+            "permissions": obj.get("permissions"),
+            "question_count": obj.get("question_count"),
+            "quiz_type": obj.get("quiz_type"),
+            "require_lockdown_browser_for_results": obj.get("require_lockdown_browser_for_results"),
+            "require_lockdown_browser_monitor": obj.get("require_lockdown_browser_monitor"),
+            "title": obj.get("title"),
+            "webhook_info": obj.get("webhook_info"),
+            "peer_review_sub_assignment": obj.get("peer_review_sub_assignment"),
+            "vericite_settings": obj.get("vericite_settings"),
+            "sub_assignment_tag": obj.get("sub_assignment_tag"),
+            "course": obj.get("course")
         })
         return _obj
 

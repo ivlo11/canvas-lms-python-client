@@ -90,6 +90,26 @@ class CommMessage(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if sent_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.sent_at is None and "sent_at" in self.model_fields_set:
+            _dict['sent_at'] = None
+
+        # set to None if to (nullable) is None
+        # and model_fields_set contains the field
+        if self.to is None and "to" in self.model_fields_set:
+            _dict['to'] = None
+
+        # set to None if subject (nullable) is None
+        # and model_fields_set contains the field
+        if self.subject is None and "subject" in self.model_fields_set:
+            _dict['subject'] = None
+
+        # set to None if html_body (nullable) is None
+        # and model_fields_set contains the field
+        if self.html_body is None and "html_body" in self.model_fields_set:
+            _dict['html_body'] = None
+
         return _dict
 
     @classmethod

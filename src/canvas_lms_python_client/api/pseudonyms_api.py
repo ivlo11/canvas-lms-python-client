@@ -20,6 +20,7 @@ from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.login import Login
 from canvas_lms_python_client.models.pseudonyms_create_request import PseudonymsCreateRequest
+from canvas_lms_python_client.models.pseudonyms_forgot_password_response import PseudonymsForgotPasswordResponse
 from canvas_lms_python_client.models.pseudonyms_update_request import PseudonymsUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -58,7 +59,7 @@ class PseudonymsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Login:
         """Create a user login
 
         Create a new login for an existing user in the given account.
@@ -100,6 +101,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Login",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +130,7 @@ class PseudonymsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Login]:
         """Create a user login
 
         Create a new login for an existing user in the given account.
@@ -170,6 +172,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Login",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -241,6 +244,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Login",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -284,6 +288,13 @@ class PseudonymsApi:
             _body_params = pseudonyms_create_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -339,7 +350,7 @@ class PseudonymsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Login:
         """Delete a user login
 
         Delete an existing login.
@@ -381,6 +392,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Login",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -409,7 +421,7 @@ class PseudonymsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Login]:
         """Delete a user login
 
         Delete an existing login.
@@ -451,6 +463,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Login",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -522,6 +535,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Login",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -612,7 +626,7 @@ class PseudonymsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> PseudonymsForgotPasswordResponse:
         """Kickoff password recovery flow
 
         Given a user email, generate a nonce and email it to the user
@@ -648,6 +662,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PseudonymsForgotPasswordResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -674,7 +689,7 @@ class PseudonymsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PseudonymsForgotPasswordResponse]:
         """Kickoff password recovery flow
 
         Given a user email, generate a nonce and email it to the user
@@ -710,6 +725,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PseudonymsForgotPasswordResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -773,6 +789,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PseudonymsForgotPasswordResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1916,7 +1933,7 @@ class PseudonymsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Login:
         """Edit a user login
 
         Update an existing login for a user in the given account.
@@ -1961,6 +1978,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Login",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1990,7 +2008,7 @@ class PseudonymsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Login]:
         """Edit a user login
 
         Update an existing login for a user in the given account.
@@ -2035,6 +2053,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Login",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2110,6 +2129,7 @@ class PseudonymsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Login",
         }
         response_data = await self.api_client.call_api(
             *_param,

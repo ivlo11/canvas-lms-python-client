@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from canvas_lms_python_client.models.outcome_rollup_score_links import OutcomeRollupScoreLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,10 +28,13 @@ class OutcomeRollupScore(BaseModel):
     """
     
     """ # noqa: E501
-    score: Optional[StrictInt] = Field(default=None, description="The rollup score for the outcome, based on the student alignment scores related to the outcome. This could be null if the student has no related scores.", json_schema_extra={"examples": [3]})
+    score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The rollup score for the outcome, based on the student alignment scores related to the outcome. This could be null if the student has no related scores.", json_schema_extra={"examples": [3]})
     count: Optional[StrictInt] = Field(default=None, description="The number of alignment scores included in this rollup.", json_schema_extra={"examples": [6]})
     links: Optional[OutcomeRollupScoreLinks] = None
-    __properties: ClassVar[List[str]] = ["score", "count", "links"]
+    hide_points: Optional[StrictBool] = None
+    submitted_at: Optional[StrictStr] = None
+    title: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["score", "count", "links", "hide_points", "submitted_at", "title"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -75,6 +78,16 @@ class OutcomeRollupScore(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             _dict['links'] = self.links.to_dict()
+        # set to None if submitted_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.submitted_at is None and "submitted_at" in self.model_fields_set:
+            _dict['submitted_at'] = None
+
+        # set to None if title (nullable) is None
+        # and model_fields_set contains the field
+        if self.title is None and "title" in self.model_fields_set:
+            _dict['title'] = None
+
         return _dict
 
     @classmethod
@@ -89,7 +102,10 @@ class OutcomeRollupScore(BaseModel):
         _obj = cls.model_validate({
             "score": obj.get("score"),
             "count": obj.get("count"),
-            "links": OutcomeRollupScoreLinks.from_dict(obj["links"]) if obj.get("links") is not None else None
+            "links": OutcomeRollupScoreLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
+            "hide_points": obj.get("hide_points"),
+            "submitted_at": obj.get("submitted_at"),
+            "title": obj.get("title")
         })
         return _obj
 

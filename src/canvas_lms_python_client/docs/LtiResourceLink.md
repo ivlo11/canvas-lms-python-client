@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **workflow_state** | **str** | The state of the resource link | [optional] 
 **associated_content_type** | **str** | Type of the associated content this resource link belongs to if present. Now only supports &#x60;ModuleItems&#x60;, later may be extend others | [optional] 
 **associated_content_id** | **int** | The Canvas identifier of the associated content, e.g. ModuleItem related to this link. Present if associated_content_type is present | [optional] 
+**custom** | **object** |  | [optional] 
+**root_account_id** | **int** |  | [optional] 
 
 ## Example
 

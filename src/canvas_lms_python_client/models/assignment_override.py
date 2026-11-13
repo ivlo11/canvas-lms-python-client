@@ -44,7 +44,17 @@ class AssignmentOverride(BaseModel):
     all_day_date: Optional[datetime] = Field(default=None, description="the overridden all day date (present if due_at is overridden)")
     unlock_at: Optional[datetime] = Field(default=None, description="the overridden unlock at (present if unlock_at is overridden)", json_schema_extra={"examples": ["2012-07-01T23:59:00-06:00"]})
     lock_at: Optional[datetime] = Field(default=None, description="the overridden lock at, if any (present if lock_at is overridden)", json_schema_extra={"examples": ["2012-07-01T23:59:00-06:00"]})
-    __properties: ClassVar[List[str]] = ["id", "assignment_id", "quiz_id", "context_module_id", "discussion_topic_id", "wiki_page_id", "attachment_id", "student_ids", "group_id", "course_section_id", "title", "due_at", "all_day", "all_day_date", "unlock_at", "lock_at"]
+    unassign_item: Optional[StrictBool] = None
+    group_category_id: Optional[StrictInt] = None
+    non_collaborative: Optional[StrictBool] = None
+    noop_id: Optional[Any] = None
+    course_id: Optional[StrictInt] = None
+    parent_override_id: Optional[StrictInt] = None
+    context_module_name: Optional[StrictStr] = None
+    peer_review_dates: Optional[Dict[str, Any]] = None
+    students: Optional[List[Dict[str, Any]]] = None
+    sub_assignment_due_dates: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["id", "assignment_id", "quiz_id", "context_module_id", "discussion_topic_id", "wiki_page_id", "attachment_id", "student_ids", "group_id", "course_section_id", "title", "due_at", "all_day", "all_day_date", "unlock_at", "lock_at", "unassign_item", "group_category_id", "non_collaborative", "noop_id", "course_id", "parent_override_id", "context_module_name", "peer_review_dates", "students", "sub_assignment_due_dates"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -85,6 +95,36 @@ class AssignmentOverride(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if due_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.due_at is None and "due_at" in self.model_fields_set:
+            _dict['due_at'] = None
+
+        # set to None if all_day_date (nullable) is None
+        # and model_fields_set contains the field
+        if self.all_day_date is None and "all_day_date" in self.model_fields_set:
+            _dict['all_day_date'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
+        # set to None if noop_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.noop_id is None and "noop_id" in self.model_fields_set:
+            _dict['noop_id'] = None
+
+        # set to None if peer_review_dates (nullable) is None
+        # and model_fields_set contains the field
+        if self.peer_review_dates is None and "peer_review_dates" in self.model_fields_set:
+            _dict['peer_review_dates'] = None
+
         return _dict
 
     @classmethod
@@ -112,7 +152,17 @@ class AssignmentOverride(BaseModel):
             "all_day": obj.get("all_day"),
             "all_day_date": obj.get("all_day_date"),
             "unlock_at": obj.get("unlock_at"),
-            "lock_at": obj.get("lock_at")
+            "lock_at": obj.get("lock_at"),
+            "unassign_item": obj.get("unassign_item"),
+            "group_category_id": obj.get("group_category_id"),
+            "non_collaborative": obj.get("non_collaborative"),
+            "noop_id": obj.get("noop_id"),
+            "course_id": obj.get("course_id"),
+            "parent_override_id": obj.get("parent_override_id"),
+            "context_module_name": obj.get("context_module_name"),
+            "peer_review_dates": obj.get("peer_review_dates"),
+            "students": obj.get("students"),
+            "sub_assignment_due_dates": obj.get("sub_assignment_due_dates")
         })
         return _obj
 

@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -31,8 +31,10 @@ class RubricRating(BaseModel):
     criterion_id: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["_10"]})
     description: Optional[StrictStr] = None
     long_description: Optional[StrictStr] = None
-    points: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [5]})
-    __properties: ClassVar[List[str]] = ["id", "criterion_id", "description", "long_description", "points"]
+    points: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, json_schema_extra={"examples": [5]})
+    color: Optional[StrictStr] = None
+    mastery: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["id", "criterion_id", "description", "long_description", "points", "color", "mastery"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,7 +91,9 @@ class RubricRating(BaseModel):
             "criterion_id": obj.get("criterion_id"),
             "description": obj.get("description"),
             "long_description": obj.get("long_description"),
-            "points": obj.get("points")
+            "points": obj.get("points"),
+            "color": obj.get("color"),
+            "mastery": obj.get("mastery")
         })
         return _obj
 

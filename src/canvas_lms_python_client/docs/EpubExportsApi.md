@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **epub_exports_create**
-> EpubExport epub_exports_create(course_id)
+> CourseEpubExport epub_exports_create(course_id)
 
 Create ePub Export
 
@@ -29,7 +29,7 @@ to retrieve a download URL for the exported content.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.epub_export import EpubExport
+from canvas_lms_python_client.models.course_epub_export import CourseEpubExport
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EpubExport**](EpubExport.md)
+[**CourseEpubExport**](CourseEpubExport.md)
 
 ### Authorization
 
@@ -90,12 +90,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | EpubExport |  -  |
+**0** | CourseEpubExport |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **epub_exports_index**
-> List[CourseEpubExport] epub_exports_index()
+> EpubExportsIndexResponse epub_exports_index()
 
 List courses with their latest ePub export
 
@@ -108,7 +108,7 @@ the latest ePub export associated with the user & course.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.course_epub_export import CourseEpubExport
+from canvas_lms_python_client.models.epub_exports_index_response import EpubExportsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -150,7 +150,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List[CourseEpubExport]**](CourseEpubExport.md)
+[**EpubExportsIndexResponse**](EpubExportsIndexResponse.md)
 
 ### Authorization
 
@@ -170,7 +170,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **epub_exports_show**
-> EpubExport epub_exports_show(course_id, id)
+> CourseEpubExport epub_exports_show(course_id, id)
 
 Show ePub export
 
@@ -182,7 +182,7 @@ Get information about a single ePub export.
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.epub_export import EpubExport
+from canvas_lms_python_client.models.course_epub_export import CourseEpubExport
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**EpubExport**](EpubExport.md)
+[**CourseEpubExport**](CourseEpubExport.md)
 
 ### Authorization
 
@@ -245,7 +245,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | EpubExport |  -  |
+**0** | CourseEpubExport |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -38,7 +38,13 @@ class RubricAssessment(BaseModel):
     assessor_id: Optional[StrictInt] = Field(default=None, description="user id of the person who made the assessment", json_schema_extra={"examples": [6]})
     data: Optional[List[Dict[str, Any]]] = Field(default=None, description="(Optional) If 'full' is included in the 'style' parameter, returned assessments will have their full details contained in their data hash. If the user does not request a style, this key will be absent.")
     comments: Optional[List[StrictStr]] = Field(default=None, description="(Optional) If 'comments_only' is included in the 'style' parameter, returned assessments will include only the comments portion of their data hash. If the user does not request a style, this key will be absent.")
-    __properties: ClassVar[List[str]] = ["id", "rubric_id", "rubric_association_id", "score", "artifact_type", "artifact_id", "artifact_attempt", "assessment_type", "assessor_id", "data", "comments"]
+    created_at: Optional[StrictStr] = None
+    hide_points: Optional[StrictBool] = None
+    root_account_id: Optional[StrictInt] = None
+    rubric_assessment_imports_id: Optional[StrictInt] = None
+    updated_at: Optional[StrictStr] = None
+    user_id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id", "rubric_id", "rubric_association_id", "score", "artifact_type", "artifact_id", "artifact_attempt", "assessment_type", "assessor_id", "data", "comments", "created_at", "hide_points", "root_account_id", "rubric_assessment_imports_id", "updated_at", "user_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -79,6 +85,21 @@ class RubricAssessment(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if score (nullable) is None
+        # and model_fields_set contains the field
+        if self.score is None and "score" in self.model_fields_set:
+            _dict['score'] = None
+
+        # set to None if artifact_attempt (nullable) is None
+        # and model_fields_set contains the field
+        if self.artifact_attempt is None and "artifact_attempt" in self.model_fields_set:
+            _dict['artifact_attempt'] = None
+
+        # set to None if rubric_assessment_imports_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.rubric_assessment_imports_id is None and "rubric_assessment_imports_id" in self.model_fields_set:
+            _dict['rubric_assessment_imports_id'] = None
+
         return _dict
 
     @classmethod
@@ -101,7 +122,13 @@ class RubricAssessment(BaseModel):
             "assessment_type": obj.get("assessment_type"),
             "assessor_id": obj.get("assessor_id"),
             "data": obj.get("data"),
-            "comments": obj.get("comments")
+            "comments": obj.get("comments"),
+            "created_at": obj.get("created_at"),
+            "hide_points": obj.get("hide_points"),
+            "root_account_id": obj.get("root_account_id"),
+            "rubric_assessment_imports_id": obj.get("rubric_assessment_imports_id"),
+            "updated_at": obj.get("updated_at"),
+            "user_id": obj.get("user_id")
         })
         return _obj
 

@@ -70,6 +70,11 @@ class ToolSetting(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if resource_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.resource_url is None and "resource_url" in self.model_fields_set:
+            _dict['resource_url'] = None
+
         return _dict
 
     @classmethod

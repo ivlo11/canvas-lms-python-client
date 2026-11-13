@@ -70,6 +70,11 @@ class StudentAttributes(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if sis_user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_user_id is None and "sis_user_id" in self.model_fields_set:
+            _dict['sis_user_id'] = None
+
         return _dict
 
     @classmethod

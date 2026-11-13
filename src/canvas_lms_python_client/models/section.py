@@ -42,7 +42,9 @@ class Section(BaseModel):
     nonxlist_course_id: Optional[StrictInt] = Field(default=None, description="The unique identifier of the original course of a cross-listed section")
     total_students: Optional[StrictInt] = Field(default=None, description="optional: the total number of active and invited students in the section", json_schema_extra={"examples": [13]})
     students: Optional[List[User]] = Field(default=None, description="optional: A list of students that are included in the section. Returned only if include[]=students. WARNING: this collection's size is capped (if there are an extremely large number of users in the section (thousands) not all of them will be returned). If you need to capture all the users in a section with certainty or experiencing slow response consider using the paginated /api/v1/sections/<section_id>/users endpoint.")
-    __properties: ClassVar[List[str]] = ["id", "name", "sis_section_id", "integration_id", "sis_import_id", "course_id", "sis_course_id", "start_at", "end_at", "restrict_enrollments_to_section_dates", "nonxlist_course_id", "total_students", "students"]
+    created_at: Optional[StrictStr] = None
+    permissions: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "sis_section_id", "integration_id", "sis_import_id", "course_id", "sis_course_id", "start_at", "end_at", "restrict_enrollments_to_section_dates", "nonxlist_course_id", "total_students", "students", "created_at", "permissions"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,6 +91,46 @@ class Section(BaseModel):
             for _item_students in self.students:
                 _items.append(_item_students.to_dict() if _item_students is not None else None)
             _dict['students'] = _items
+        # set to None if sis_section_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_section_id is None and "sis_section_id" in self.model_fields_set:
+            _dict['sis_section_id'] = None
+
+        # set to None if integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.integration_id is None and "integration_id" in self.model_fields_set:
+            _dict['integration_id'] = None
+
+        # set to None if sis_import_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_import_id is None and "sis_import_id" in self.model_fields_set:
+            _dict['sis_import_id'] = None
+
+        # set to None if sis_course_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_course_id is None and "sis_course_id" in self.model_fields_set:
+            _dict['sis_course_id'] = None
+
+        # set to None if start_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.start_at is None and "start_at" in self.model_fields_set:
+            _dict['start_at'] = None
+
+        # set to None if end_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.end_at is None and "end_at" in self.model_fields_set:
+            _dict['end_at'] = None
+
+        # set to None if restrict_enrollments_to_section_dates (nullable) is None
+        # and model_fields_set contains the field
+        if self.restrict_enrollments_to_section_dates is None and "restrict_enrollments_to_section_dates" in self.model_fields_set:
+            _dict['restrict_enrollments_to_section_dates'] = None
+
+        # set to None if nonxlist_course_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.nonxlist_course_id is None and "nonxlist_course_id" in self.model_fields_set:
+            _dict['nonxlist_course_id'] = None
+
         return _dict
 
     @classmethod
@@ -113,7 +155,9 @@ class Section(BaseModel):
             "restrict_enrollments_to_section_dates": obj.get("restrict_enrollments_to_section_dates"),
             "nonxlist_course_id": obj.get("nonxlist_course_id"),
             "total_students": obj.get("total_students"),
-            "students": [User.from_dict(_item) for _item in obj["students"]] if obj.get("students") is not None else None
+            "students": [User.from_dict(_item) for _item in obj["students"]] if obj.get("students") is not None else None,
+            "created_at": obj.get("created_at"),
+            "permissions": obj.get("permissions")
         })
         return _obj
 

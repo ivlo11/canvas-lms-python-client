@@ -60,7 +60,10 @@ PLAIN_OBJECT_OPERATIONS = {
 _GRADES = {"current": {"grade": 92.5, "total": 18.5, "possible": 20}}
 _SUBMISSION = {"id": 2, "student_entered_score": "18.5"}
 WRAPPER_PAYLOADS = {
-    "AccountCalendarsApiIndexResponse": {"account_calendars": [{"id": 1, "name": "Chemistry"}], "total_results": 1},
+    "AccountCalendarsApiIndexResponse": {
+        "account_calendars": [{"id": 1, "name": "Chemistry", "parent_account_id": None}],
+        "total_results": 1,
+    },
     "AccountCalendarsApiVisibleCalendarsCountResponse": {"count": 4},
     "ContentSharesUnreadCountResponse": {"unread_count": 2},
     "CareerExperienceEnabledResponse": {"enabled": True},

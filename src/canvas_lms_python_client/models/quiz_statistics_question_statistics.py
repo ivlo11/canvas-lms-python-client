@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from canvas_lms_python_client.models.quiz_statistics_answer_statistics import QuizStatisticsAnswerStatistics
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,8 +29,31 @@ class QuizStatisticsQuestionStatistics(BaseModel):
     Statistics for submissions made to a specific quiz question.
     """ # noqa: E501
     responses: Optional[StrictInt] = Field(default=None, description="Number of students who have provided an answer to this question. Blank or empty responses are not counted.", json_schema_extra={"examples": [3]})
-    answers: Optional[QuizStatisticsAnswerStatistics] = None
-    __properties: ClassVar[List[str]] = ["responses", "answers"]
+    answers: Optional[List[QuizStatisticsAnswerStatistics]] = Field(default=None, description="Statistics related to each individual pre-defined answer.")
+    alpha: Optional[Union[StrictFloat, StrictInt]] = None
+    answered_student_count: Optional[StrictInt] = None
+    bottom_student_count: Optional[StrictInt] = None
+    correct_bottom_student_count: Optional[StrictInt] = None
+    correct_middle_student_count: Optional[StrictInt] = None
+    correct_student_count: Optional[StrictInt] = None
+    correct_student_ratio: Optional[Union[StrictFloat, StrictInt]] = None
+    correct_top_student_count: Optional[StrictInt] = None
+    difficulty_index: Optional[Union[StrictFloat, StrictInt]] = None
+    full_credit: Optional[StrictInt] = None
+    graded: Optional[StrictInt] = None
+    id: Optional[StrictStr] = None
+    incorrect_student_count: Optional[StrictInt] = None
+    incorrect_student_ratio: Optional[Union[StrictFloat, StrictInt]] = None
+    middle_student_count: Optional[StrictInt] = None
+    point_biserials: Optional[List[Dict[str, Any]]] = None
+    point_distribution: Optional[List[Dict[str, Any]]] = None
+    position: Optional[StrictInt] = None
+    question_text: Optional[StrictStr] = None
+    question_type: Optional[StrictStr] = None
+    stdev: Optional[Union[StrictFloat, StrictInt]] = None
+    top_student_count: Optional[StrictInt] = None
+    variance: Optional[Union[StrictFloat, StrictInt]] = None
+    __properties: ClassVar[List[str]] = ["responses", "answers", "alpha", "answered_student_count", "bottom_student_count", "correct_bottom_student_count", "correct_middle_student_count", "correct_student_count", "correct_student_ratio", "correct_top_student_count", "difficulty_index", "full_credit", "graded", "id", "incorrect_student_count", "incorrect_student_ratio", "middle_student_count", "point_biserials", "point_distribution", "position", "question_text", "question_type", "stdev", "top_student_count", "variance"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -71,9 +94,12 @@ class QuizStatisticsQuestionStatistics(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of answers
+        # override the default output from pydantic by calling `to_dict()` of each item in answers (list)
+        _items = []
         if self.answers:
-            _dict['answers'] = self.answers.to_dict()
+            for _item_answers in self.answers:
+                _items.append(_item_answers.to_dict() if _item_answers is not None else None)
+            _dict['answers'] = _items
         return _dict
 
     @classmethod
@@ -87,7 +113,30 @@ class QuizStatisticsQuestionStatistics(BaseModel):
 
         _obj = cls.model_validate({
             "responses": obj.get("responses"),
-            "answers": QuizStatisticsAnswerStatistics.from_dict(obj["answers"]) if obj.get("answers") is not None else None
+            "answers": [QuizStatisticsAnswerStatistics.from_dict(_item) for _item in obj["answers"]] if obj.get("answers") is not None else None,
+            "alpha": obj.get("alpha"),
+            "answered_student_count": obj.get("answered_student_count"),
+            "bottom_student_count": obj.get("bottom_student_count"),
+            "correct_bottom_student_count": obj.get("correct_bottom_student_count"),
+            "correct_middle_student_count": obj.get("correct_middle_student_count"),
+            "correct_student_count": obj.get("correct_student_count"),
+            "correct_student_ratio": obj.get("correct_student_ratio"),
+            "correct_top_student_count": obj.get("correct_top_student_count"),
+            "difficulty_index": obj.get("difficulty_index"),
+            "full_credit": obj.get("full_credit"),
+            "graded": obj.get("graded"),
+            "id": obj.get("id"),
+            "incorrect_student_count": obj.get("incorrect_student_count"),
+            "incorrect_student_ratio": obj.get("incorrect_student_ratio"),
+            "middle_student_count": obj.get("middle_student_count"),
+            "point_biserials": obj.get("point_biserials"),
+            "point_distribution": obj.get("point_distribution"),
+            "position": obj.get("position"),
+            "question_text": obj.get("question_text"),
+            "question_type": obj.get("question_type"),
+            "stdev": obj.get("stdev"),
+            "top_student_count": obj.get("top_student_count"),
+            "variance": obj.get("variance")
         })
         return _obj
 

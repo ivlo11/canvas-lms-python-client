@@ -38,7 +38,8 @@ class BlueprintMigration(BaseModel):
     imports_queued_at: Optional[datetime] = Field(default=None, description="Time when the exports were completed and imports were queued", json_schema_extra={"examples": ["2013-08-28T23:59:00-06:00"]})
     imports_completed_at: Optional[datetime] = Field(default=None, description="Time when the imports were completed", json_schema_extra={"examples": ["2013-08-28T23:59:00-06:00"]})
     comment: Optional[StrictStr] = Field(default=None, description="User-specified comment describing changes made in this operation", json_schema_extra={"examples": ["Fixed spelling in question 3 of midterm exam"]})
-    __properties: ClassVar[List[str]] = ["id", "template_id", "subscription_id", "user_id", "workflow_state", "created_at", "exports_started_at", "imports_queued_at", "imports_completed_at", "comment"]
+    user: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "template_id", "subscription_id", "user_id", "workflow_state", "created_at", "exports_started_at", "imports_queued_at", "imports_completed_at", "comment", "user"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -79,6 +80,31 @@ class BlueprintMigration(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
+
+        # set to None if exports_started_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.exports_started_at is None and "exports_started_at" in self.model_fields_set:
+            _dict['exports_started_at'] = None
+
+        # set to None if imports_queued_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.imports_queued_at is None and "imports_queued_at" in self.model_fields_set:
+            _dict['imports_queued_at'] = None
+
+        # set to None if imports_completed_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.imports_completed_at is None and "imports_completed_at" in self.model_fields_set:
+            _dict['imports_completed_at'] = None
+
+        # set to None if comment (nullable) is None
+        # and model_fields_set contains the field
+        if self.comment is None and "comment" in self.model_fields_set:
+            _dict['comment'] = None
+
         return _dict
 
     @classmethod
@@ -100,7 +126,8 @@ class BlueprintMigration(BaseModel):
             "exports_started_at": obj.get("exports_started_at"),
             "imports_queued_at": obj.get("imports_queued_at"),
             "imports_completed_at": obj.get("imports_completed_at"),
-            "comment": obj.get("comment")
+            "comment": obj.get("comment"),
+            "user": obj.get("user")
         })
         return _obj
 

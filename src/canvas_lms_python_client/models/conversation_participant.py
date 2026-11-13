@@ -32,7 +32,10 @@ class ConversationParticipant(BaseModel):
     full_name: Optional[StrictStr] = Field(default=None, description="The full name of the user.", json_schema_extra={"examples": ["Sheldon Cooper"]})
     avatar_url: Optional[StrictStr] = Field(default=None, description="If requested, this field will be included and contain a url to retrieve the user's avatar.", json_schema_extra={"examples": ["https://canvas.instructure.com/images/messages/avatar-50.png"]})
     uuid: Optional[StrictStr] = Field(default=None, description="The Canvas UUID for the participant.", json_schema_extra={"examples": ["W9GQIcdoDTqwX8mxIunDQQVL6WZTaGmpa5xovmCB"]})
-    __properties: ClassVar[List[str]] = ["id", "name", "full_name", "avatar_url", "uuid"]
+    pronouns: Optional[Any] = None
+    common_courses: Optional[Dict[str, Any]] = None
+    common_groups: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "full_name", "avatar_url", "uuid", "pronouns", "common_courses", "common_groups"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -73,6 +76,11 @@ class ConversationParticipant(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if pronouns (nullable) is None
+        # and model_fields_set contains the field
+        if self.pronouns is None and "pronouns" in self.model_fields_set:
+            _dict['pronouns'] = None
+
         return _dict
 
     @classmethod
@@ -89,7 +97,10 @@ class ConversationParticipant(BaseModel):
             "name": obj.get("name"),
             "full_name": obj.get("full_name"),
             "avatar_url": obj.get("avatar_url"),
-            "uuid": obj.get("uuid")
+            "uuid": obj.get("uuid"),
+            "pronouns": obj.get("pronouns"),
+            "common_courses": obj.get("common_courses"),
+            "common_groups": obj.get("common_groups")
         })
         return _obj
 

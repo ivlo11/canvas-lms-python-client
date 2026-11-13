@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.rubric_criteria_id import RubricCriteriaId
 from canvas_lms_python_client.models.rubric_rating import RubricRating
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +30,7 @@ class RubricCriteria(BaseModel):
     
     """ # noqa: E501
     points: Optional[StrictInt] = Field(default=None, json_schema_extra={"examples": [10]})
-    id: Optional[StrictStr] = Field(default=None, description="The id of rubric criteria.", json_schema_extra={"examples": ["crit1"]})
+    id: Optional[RubricCriteriaId] = None
     learning_outcome_id: Optional[StrictStr] = Field(default=None, description="(Optional) The id of the learning outcome this criteria uses, if any.", json_schema_extra={"examples": ["1234"]})
     vendor_guid: Optional[StrictStr] = Field(default=None, description="(Optional) The 3rd party vendor's GUID for the outcome this criteria references, if any.", json_schema_extra={"examples": ["abdsfjasdfne3jsdfn2"]})
     description: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["Criterion 1"]})
@@ -37,7 +38,8 @@ class RubricCriteria(BaseModel):
     criterion_use_range: Optional[StrictBool] = Field(default=None, json_schema_extra={"examples": [True]})
     ratings: Optional[List[RubricRating]] = None
     ignore_for_scoring: Optional[StrictBool] = Field(default=None, json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["points", "id", "learning_outcome_id", "vendor_guid", "description", "long_description", "criterion_use_range", "ratings", "ignore_for_scoring"]
+    outcome_id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["points", "id", "learning_outcome_id", "vendor_guid", "description", "long_description", "criterion_use_range", "ratings", "ignore_for_scoring", "outcome_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -78,6 +80,9 @@ class RubricCriteria(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of id
+        if self.id:
+            _dict['id'] = self.id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in ratings (list)
         _items = []
         if self.ratings:
@@ -97,14 +102,15 @@ class RubricCriteria(BaseModel):
 
         _obj = cls.model_validate({
             "points": obj.get("points"),
-            "id": obj.get("id"),
+            "id": RubricCriteriaId.from_dict(obj["id"]) if obj.get("id") is not None else None,
             "learning_outcome_id": obj.get("learning_outcome_id"),
             "vendor_guid": obj.get("vendor_guid"),
             "description": obj.get("description"),
             "long_description": obj.get("long_description"),
             "criterion_use_range": obj.get("criterion_use_range"),
             "ratings": [RubricRating.from_dict(_item) for _item in obj["ratings"]] if obj.get("ratings") is not None else None,
-            "ignore_for_scoring": obj.get("ignore_for_scoring")
+            "ignore_for_scoring": obj.get("ignore_for_scoring"),
+            "outcome_id": obj.get("outcome_id")
         })
         return _obj
 

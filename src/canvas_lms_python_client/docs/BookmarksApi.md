@@ -91,7 +91,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **bookmarks_destroy**
-> bookmarks_destroy(id)
+> Bookmark bookmarks_destroy(id)
 
 Delete bookmark
 
@@ -103,6 +103,7 @@ Deletes a bookmark
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.bookmark import Bookmark
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -130,7 +131,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Delete bookmark
-        await api_instance.bookmarks_destroy(id)
+        api_response = await api_instance.bookmarks_destroy(id)
+        print("The response of BookmarksApi->bookmarks_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling BookmarksApi->bookmarks_destroy: %s\n" % e)
 ```
@@ -146,7 +149,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**Bookmark**](Bookmark.md)
 
 ### Authorization
 
@@ -155,13 +158,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Delete bookmark |  -  |
+**0** | Bookmark |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

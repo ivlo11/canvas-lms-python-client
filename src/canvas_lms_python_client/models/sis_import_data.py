@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.sis_import_counts import SisImportCounts
 from typing import Optional, Set
@@ -31,7 +31,12 @@ class SisImportData(BaseModel):
     import_type: Optional[StrictStr] = Field(default=None, description="The type of SIS import", json_schema_extra={"examples": ["instructure_csv"]})
     supplied_batches: Optional[List[StrictStr]] = Field(default=None, description="Which files were included in the SIS import", json_schema_extra={"examples": [["term", "course", "section", "user", "enrollment"]]})
     counts: Optional[SisImportCounts] = None
-    __properties: ClassVar[List[str]] = ["import_type", "supplied_batches", "counts"]
+    completed_importers: Optional[List[StrictStr]] = None
+    diffed_attachment_ids: Optional[List[StrictInt]] = None
+    downloadable_attachment_ids: Optional[List[StrictInt]] = None
+    running_immediately: Optional[StrictBool] = None
+    statistics: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["import_type", "supplied_batches", "counts", "completed_importers", "diffed_attachment_ids", "downloadable_attachment_ids", "running_immediately", "statistics"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,7 +94,12 @@ class SisImportData(BaseModel):
         _obj = cls.model_validate({
             "import_type": obj.get("import_type"),
             "supplied_batches": obj.get("supplied_batches"),
-            "counts": SisImportCounts.from_dict(obj["counts"]) if obj.get("counts") is not None else None
+            "counts": SisImportCounts.from_dict(obj["counts"]) if obj.get("counts") is not None else None,
+            "completed_importers": obj.get("completed_importers"),
+            "diffed_attachment_ids": obj.get("diffed_attachment_ids"),
+            "downloadable_attachment_ids": obj.get("downloadable_attachment_ids"),
+            "running_immediately": obj.get("running_immediately"),
+            "statistics": obj.get("statistics")
         })
         return _obj
 

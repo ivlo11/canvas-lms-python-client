@@ -19,6 +19,7 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.course_nickname import CourseNickname
+from canvas_lms_python_client.models.course_nicknames_clear_response import CourseNicknamesClearResponse
 from canvas_lms_python_client.models.course_nicknames_update_request import CourseNicknamesUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -55,7 +56,7 @@ class CourseNicknamesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> CourseNicknamesClearResponse:
         """Clear course nicknames
 
         Remove all stored course nicknames.
@@ -91,6 +92,7 @@ class CourseNicknamesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CourseNicknamesClearResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -117,7 +119,7 @@ class CourseNicknamesApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[CourseNicknamesClearResponse]:
         """Clear course nicknames
 
         Remove all stored course nicknames.
@@ -153,6 +155,7 @@ class CourseNicknamesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CourseNicknamesClearResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -216,6 +219,7 @@ class CourseNicknamesApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "CourseNicknamesClearResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -253,6 +257,13 @@ class CourseNicknamesApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

@@ -93,6 +93,11 @@ class WebZipExport(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of zip_attachment
         if self.zip_attachment:
             _dict['zip_attachment'] = self.zip_attachment.to_dict()
+        # set to None if content_export_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.content_export_id is None and "content_export_id" in self.model_fields_set:
+            _dict['content_export_id'] = None
+
         return _dict
 
     @classmethod

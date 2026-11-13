@@ -8,6 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **developer_key_id** | **int** | The tool configuration&#39;s developer key id | [optional] 
 **settings** | **object** | The tool configuration JSON | [optional] 
+**developer_key** | **object** |  | [optional] 
+**tool_configuration** | **object** |  | [optional] 
+**warning_message** | **List[object]** |  | [optional] 
 
 ## Example
 

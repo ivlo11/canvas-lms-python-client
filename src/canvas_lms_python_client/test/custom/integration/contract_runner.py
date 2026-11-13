@@ -346,6 +346,9 @@ class ContractRunner:
 
         body = self._decode(data)
         self.result.records.append(build_record(operation.route, status, self.role, body))
+        # Canvas answers 204 when a feature is off; there is no body to check
+        if status == 204 or not data:
+            return "skipped:no_content"
         return await self._parse(operation, method, arguments)
 
     @staticmethod

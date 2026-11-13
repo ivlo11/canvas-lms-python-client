@@ -115,7 +115,7 @@ def test_registration_history_entry_keeps_canvas_fields(item):
     assert entry.id == item["id"]
     assert entry.lti_registration_id == item["lti_registration_id"]
     assert entry.update_type == item["update_type"]
-    assert entry.diff == item["diff"]
+    assert entry.diff.actual_instance == item["diff"]
     assert entry.created_by.actual_instance == "Instructure"
     for deployment, raw in zip(entry.new_controls_by_deployment, item["new_controls_by_deployment"], strict=True):
         assert isinstance(deployment, LtiDeployment)

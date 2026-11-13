@@ -72,6 +72,11 @@ class SearchableAccount(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if sis_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_id is None and "sis_id" in self.model_fields_set:
+            _dict['sis_id'] = None
+
         return _dict
 
     @classmethod

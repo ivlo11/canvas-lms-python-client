@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **context_type** | **str** |  | [optional] 
 **user_id** | **int** | the id of the user who started the job | [optional] 
 **tag** | **str** | the type of operation | [optional] 
-**completion** | **int** | percent completed | [optional] 
+**completion** | **float** | percent completed | [optional] 
 **workflow_state** | **str** | the state of the job one of &#39;queued&#39;, &#39;running&#39;, &#39;completed&#39;, &#39;failed&#39; | [optional] 
 **created_at** | **datetime** | the time the job was created | [optional] 
 **updated_at** | **datetime** | the time the job was last updated | [optional] 

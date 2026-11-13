@@ -18,8 +18,9 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from canvas_lms_python_client.models.quiz_statistics_id import QuizStatisticsId
 from canvas_lms_python_client.models.quiz_statistics_links import QuizStatisticsLinks
 from canvas_lms_python_client.models.quiz_statistics_question_statistics import QuizStatisticsQuestionStatistics
 from canvas_lms_python_client.models.quiz_statistics_submission_statistics import QuizStatisticsSubmissionStatistics
@@ -31,17 +32,22 @@ class QuizStatistics(BaseModel):
     """
     QuizStatistics
     """ # noqa: E501
-    id: StrictInt = Field(description="The ID of the quiz statistics report.", json_schema_extra={"examples": [1]})
-    quiz_id: StrictInt = Field(description="The ID of the Quiz the statistics report is for.  NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS.", json_schema_extra={"examples": [2]})
+    id: QuizStatisticsId
+    quiz_id: Optional[StrictInt] = Field(default=None, description="The ID of the Quiz the statistics report is for.  NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS.", json_schema_extra={"examples": [2]})
     multiple_attempts_exist: Optional[StrictBool] = Field(default=None, description="Whether there are any students that have made mutliple submissions for this quiz.", json_schema_extra={"examples": [True]})
     includes_all_versions: Optional[StrictBool] = Field(default=None, description="In the presence of multiple attempts, this field describes whether the statistics describe all the submission attempts and not only the latest ones.", json_schema_extra={"examples": [True]})
     generated_at: Optional[datetime] = Field(default=None, description="The time at which the statistics were generated, which is usually after the occurrence of a quiz event, like a student submitting it.", json_schema_extra={"examples": ["2013-01-23T23:59:00-07:00"]})
     url: Optional[StrictStr] = Field(default=None, description="The API HTTP/HTTPS URL to this quiz statistics.", json_schema_extra={"examples": ["http://canvas.example.edu/api/v1/courses/1/quizzes/2/statistics"]})
     html_url: Optional[StrictStr] = Field(default=None, description="The HTTP/HTTPS URL to the page where the statistics can be seen visually.", json_schema_extra={"examples": ["http://canvas.example.edu/courses/1/quizzes/2/statistics"]})
-    question_statistics: Optional[QuizStatisticsQuestionStatistics] = None
+    question_statistics: Optional[List[QuizStatisticsQuestionStatistics]] = Field(default=None, description="Question-specific statistics for each question and its answers.")
     submission_statistics: Optional[QuizStatisticsSubmissionStatistics] = None
     links: Optional[QuizStatisticsLinks] = None
-    __properties: ClassVar[List[str]] = ["id", "quiz_id", "multiple_attempts_exist", "includes_all_versions", "generated_at", "url", "html_url", "question_statistics", "submission_statistics", "links"]
+    anonymous_survey: Optional[StrictBool] = None
+    includes_sis_ids: Optional[StrictBool] = None
+    points_possible: Optional[Union[StrictFloat, StrictInt]] = None
+    quiz_submissions_zip_url: Optional[StrictStr] = None
+    speed_grader_url: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "quiz_id", "multiple_attempts_exist", "includes_all_versions", "generated_at", "url", "html_url", "question_statistics", "submission_statistics", "links", "anonymous_survey", "includes_sis_ids", "points_possible", "quiz_submissions_zip_url", "speed_grader_url"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -82,9 +88,15 @@ class QuizStatistics(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of question_statistics
+        # override the default output from pydantic by calling `to_dict()` of id
+        if self.id:
+            _dict['id'] = self.id.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in question_statistics (list)
+        _items = []
         if self.question_statistics:
-            _dict['question_statistics'] = self.question_statistics.to_dict()
+            for _item_question_statistics in self.question_statistics:
+                _items.append(_item_question_statistics.to_dict() if _item_question_statistics is not None else None)
+            _dict['question_statistics'] = _items
         # override the default output from pydantic by calling `to_dict()` of submission_statistics
         if self.submission_statistics:
             _dict['submission_statistics'] = self.submission_statistics.to_dict()
@@ -103,16 +115,21 @@ class QuizStatistics(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
+            "id": QuizStatisticsId.from_dict(obj["id"]) if obj.get("id") is not None else None,
             "quiz_id": obj.get("quiz_id"),
             "multiple_attempts_exist": obj.get("multiple_attempts_exist"),
             "includes_all_versions": obj.get("includes_all_versions"),
             "generated_at": obj.get("generated_at"),
             "url": obj.get("url"),
             "html_url": obj.get("html_url"),
-            "question_statistics": QuizStatisticsQuestionStatistics.from_dict(obj["question_statistics"]) if obj.get("question_statistics") is not None else None,
+            "question_statistics": [QuizStatisticsQuestionStatistics.from_dict(_item) for _item in obj["question_statistics"]] if obj.get("question_statistics") is not None else None,
             "submission_statistics": QuizStatisticsSubmissionStatistics.from_dict(obj["submission_statistics"]) if obj.get("submission_statistics") is not None else None,
-            "links": QuizStatisticsLinks.from_dict(obj["links"]) if obj.get("links") is not None else None
+            "links": QuizStatisticsLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
+            "anonymous_survey": obj.get("anonymous_survey"),
+            "includes_sis_ids": obj.get("includes_sis_ids"),
+            "points_possible": obj.get("points_possible"),
+            "quiz_submissions_zip_url": obj.get("quiz_submissions_zip_url"),
+            "speed_grader_url": obj.get("speed_grader_url")
         })
         return _obj
 

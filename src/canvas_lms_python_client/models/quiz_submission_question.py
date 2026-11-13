@@ -17,8 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from canvas_lms_python_client.models.quiz_submission_question_answer import QuizSubmissionQuestionAnswer
+from canvas_lms_python_client.models.quiz_submission_question_answers_inner import QuizSubmissionQuestionAnswersInner
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -29,9 +31,22 @@ class QuizSubmissionQuestion(BaseModel):
     """ # noqa: E501
     id: StrictInt = Field(description="The ID of the QuizQuestion this answer is for.", json_schema_extra={"examples": [1]})
     flagged: Optional[StrictBool] = Field(default=None, description="Whether this question is flagged.", json_schema_extra={"examples": [True]})
-    answer: Optional[StrictStr] = Field(default=None, description="The provided answer (if any) for this question. The format of this parameter depends on the type of the question, see the Appendix for more information.")
-    answers: Optional[List[StrictStr]] = Field(default=None, description="The possible answers for this question when those possible answers are necessary.  The presence of this parameter is dependent on permissions.")
-    __properties: ClassVar[List[str]] = ["id", "flagged", "answer", "answers"]
+    answer: Optional[QuizSubmissionQuestionAnswer] = None
+    answers: Optional[List[QuizSubmissionQuestionAnswersInner]] = Field(default=None, description="The possible answers for this question when those possible answers are necessary.  The presence of this parameter is dependent on permissions.")
+    answer_tolerance: Optional[Union[StrictFloat, StrictInt]] = None
+    assessment_question_id: Optional[StrictInt] = None
+    correct: Optional[StrictBool] = None
+    formula_decimal_places: Optional[StrictInt] = None
+    formulas: Optional[List[Dict[str, Any]]] = None
+    matches: Optional[List[Dict[str, Any]]] = None
+    position: Optional[StrictInt] = None
+    question_name: Optional[StrictStr] = None
+    question_text: Optional[StrictStr] = None
+    question_type: Optional[StrictStr] = None
+    quiz_group_id: Optional[Any] = None
+    quiz_id: Optional[StrictInt] = None
+    variables: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["id", "flagged", "answer", "answers", "answer_tolerance", "assessment_question_id", "correct", "formula_decimal_places", "formulas", "matches", "position", "question_name", "question_text", "question_type", "quiz_group_id", "quiz_id", "variables"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -72,6 +87,55 @@ class QuizSubmissionQuestion(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of answer
+        if self.answer:
+            _dict['answer'] = self.answer.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in answers (list)
+        _items = []
+        if self.answers:
+            for _item_answers in self.answers:
+                _items.append(_item_answers.to_dict() if _item_answers is not None else None)
+            _dict['answers'] = _items
+        # set to None if answer (nullable) is None
+        # and model_fields_set contains the field
+        if self.answer is None and "answer" in self.model_fields_set:
+            _dict['answer'] = None
+
+        # set to None if answer_tolerance (nullable) is None
+        # and model_fields_set contains the field
+        if self.answer_tolerance is None and "answer_tolerance" in self.model_fields_set:
+            _dict['answer_tolerance'] = None
+
+        # set to None if formula_decimal_places (nullable) is None
+        # and model_fields_set contains the field
+        if self.formula_decimal_places is None and "formula_decimal_places" in self.model_fields_set:
+            _dict['formula_decimal_places'] = None
+
+        # set to None if formulas (nullable) is None
+        # and model_fields_set contains the field
+        if self.formulas is None and "formulas" in self.model_fields_set:
+            _dict['formulas'] = None
+
+        # set to None if matches (nullable) is None
+        # and model_fields_set contains the field
+        if self.matches is None and "matches" in self.model_fields_set:
+            _dict['matches'] = None
+
+        # set to None if position (nullable) is None
+        # and model_fields_set contains the field
+        if self.position is None and "position" in self.model_fields_set:
+            _dict['position'] = None
+
+        # set to None if quiz_group_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.quiz_group_id is None and "quiz_group_id" in self.model_fields_set:
+            _dict['quiz_group_id'] = None
+
+        # set to None if variables (nullable) is None
+        # and model_fields_set contains the field
+        if self.variables is None and "variables" in self.model_fields_set:
+            _dict['variables'] = None
+
         return _dict
 
     @classmethod
@@ -86,8 +150,21 @@ class QuizSubmissionQuestion(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "flagged": obj.get("flagged"),
-            "answer": obj.get("answer"),
-            "answers": obj.get("answers")
+            "answer": QuizSubmissionQuestionAnswer.from_dict(obj["answer"]) if obj.get("answer") is not None else None,
+            "answers": [QuizSubmissionQuestionAnswersInner.from_dict(_item) for _item in obj["answers"]] if obj.get("answers") is not None else None,
+            "answer_tolerance": obj.get("answer_tolerance"),
+            "assessment_question_id": obj.get("assessment_question_id"),
+            "correct": obj.get("correct"),
+            "formula_decimal_places": obj.get("formula_decimal_places"),
+            "formulas": obj.get("formulas"),
+            "matches": obj.get("matches"),
+            "position": obj.get("position"),
+            "question_name": obj.get("question_name"),
+            "question_text": obj.get("question_text"),
+            "question_type": obj.get("question_type"),
+            "quiz_group_id": obj.get("quiz_group_id"),
+            "quiz_id": obj.get("quiz_id"),
+            "variables": obj.get("variables")
         })
         return _obj
 

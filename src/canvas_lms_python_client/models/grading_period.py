@@ -78,6 +78,11 @@ class GradingPeriod(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if weight (nullable) is None
+        # and model_fields_set contains the field
+        if self.weight is None and "weight" in self.model_fields_set:
+            _dict['weight'] = None
+
         return _dict
 
     @classmethod

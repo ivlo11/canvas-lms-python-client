@@ -25,6 +25,7 @@ from canvas_lms_python_client.models.conversations_add_recipients_request import
 from canvas_lms_python_client.models.conversations_batch_update_request import ConversationsBatchUpdateRequest
 from canvas_lms_python_client.models.conversations_create_request import ConversationsCreateRequest
 from canvas_lms_python_client.models.conversations_remove_messages_request import ConversationsRemoveMessagesRequest
+from canvas_lms_python_client.models.conversations_unread_count_response import ConversationsUnreadCountResponse
 from canvas_lms_python_client.models.conversations_update_request import ConversationsUpdateRequest
 from canvas_lms_python_client.models.progress import Progress
 
@@ -352,7 +353,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Conversation:
         """Add recipients
 
         Add recipients to an existing group conversation. Response is similar to the GET/show action, except that only includes the latest message (e.g. \"joe was added to the conversation by bob\")
@@ -394,6 +395,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -422,7 +424,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Conversation]:
         """Add recipients
 
         Add recipients to an existing group conversation. Response is similar to the GET/show action, except that only includes the latest message (e.g. \"joe was added to the conversation by bob\")
@@ -464,6 +466,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -535,6 +538,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1420,7 +1424,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> List[Conversation]:
         """Create a conversation
 
         Create a new conversation with one or more recipients. If there is already an existing private conversation with the given recipients, it will be reused.   (either numeric IDs or UUIDs prefixed with \"uuid:\"),   or course/group ids prefixed with \"course_\" or \"group_\" respectively, e.g.   recipients[]=1&recipients[]=uuid:W9GQIcdoDTqwX8mxIunDQQVL6WZTaGmpa5xovmCBx&recipients[]=course_3.   If the course/group has over 100 enrollments, 'bulk_message' and 'group_conversation' must be   set to true.
@@ -1459,6 +1463,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Conversation]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1486,7 +1491,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Conversation]]:
         """Create a conversation
 
         Create a new conversation with one or more recipients. If there is already an existing private conversation with the given recipients, it will be reused.   (either numeric IDs or UUIDs prefixed with \"uuid:\"),   or course/group ids prefixed with \"course_\" or \"group_\" respectively, e.g.   recipients[]=1&recipients[]=uuid:W9GQIcdoDTqwX8mxIunDQQVL6WZTaGmpa5xovmCBx&recipients[]=course_3.   If the course/group has over 100 enrollments, 'bulk_message' and 'group_conversation' must be   set to true.
@@ -1525,6 +1530,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Conversation]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1592,6 +1598,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Conversation]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1632,6 +1639,13 @@ class ConversationsApi:
             _body_params = conversations_create_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -1686,7 +1700,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Conversation:
         """Delete a conversation
 
         Delete this conversation and its messages. Note that this only deletes this user's view of the conversation.  Response includes same fields as UPDATE action
@@ -1725,6 +1739,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1752,7 +1767,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Conversation]:
         """Delete a conversation
 
         Delete this conversation and its messages. Note that this only deletes this user's view of the conversation.  Response includes same fields as UPDATE action
@@ -1791,6 +1806,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1858,6 +1874,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2842,7 +2859,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Conversation:
         """Delete a message
 
         Delete messages from this conversation. Note that this only affects this user's view of the conversation. If all messages are deleted, the conversation will be as well (equivalent to DELETE)
@@ -2884,6 +2901,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2912,7 +2930,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Conversation]:
         """Delete a message
 
         Delete messages from this conversation. Note that this only affects this user's view of the conversation. If all messages are deleted, the conversation will be as well (equivalent to DELETE)
@@ -2954,6 +2972,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3025,6 +3044,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3134,7 +3154,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Conversation:
         """Get a single conversation
 
         Returns information for a single conversation for the current user. Response includes all fields that are present in the list/index action as well as messages and extended participant information.
@@ -3188,6 +3208,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3220,7 +3241,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Conversation]:
         """Get a single conversation
 
         Returns information for a single conversation for the current user. Response includes all fields that are present in the list/index action as well as messages and extended participant information.
@@ -3274,6 +3295,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3361,6 +3383,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3474,7 +3497,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ConversationsUnreadCountResponse:
         """Unread count
 
         Get the number of unread conversations for the current user
@@ -3510,6 +3533,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ConversationsUnreadCountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3536,7 +3560,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ConversationsUnreadCountResponse]:
         """Unread count
 
         Get the number of unread conversations for the current user
@@ -3572,6 +3596,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ConversationsUnreadCountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3635,6 +3660,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ConversationsUnreadCountResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3721,7 +3747,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> Conversation:
         """Edit a conversation
 
         Updates attributes for a single conversation.
@@ -3763,6 +3789,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3791,7 +3818,7 @@ class ConversationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[Conversation]:
         """Edit a conversation
 
         Updates attributes for a single conversation.
@@ -3833,6 +3860,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3904,6 +3932,7 @@ class ConversationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "Conversation",
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** | The date and time the role was created. | [optional] 
 **last_updated_at** | **datetime** | The date and time the role was last updated. | [optional] 
 **permissions** | **object** | A dictionary of permissions keyed by name (see &#39;List assignable permissions&#39; API). | [optional] 
+**base_role_type_label** | **str** |  | [optional] 
 
 ## Example
 

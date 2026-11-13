@@ -26,10 +26,11 @@ from pydantic_core import to_jsonable_python
 
 class PollsUpdateResponse(BaseModel):
     """
-    Paginated `polls` list response (from the Canvas example response).
+    Object response with `polls`, `meta` (from the Canvas `@returns`).
     """ # noqa: E501
     polls: Optional[List[Poll]] = None
-    __properties: ClassVar[List[str]] = ["polls"]
+    meta: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["polls", "meta"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -88,7 +89,8 @@ class PollsUpdateResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "polls": [Poll.from_dict(_item) for _item in obj["polls"]] if obj.get("polls") is not None else None
+            "polls": [Poll.from_dict(_item) for _item in obj["polls"]] if obj.get("polls") is not None else None,
+            "meta": obj.get("meta")
         })
         return _obj
 

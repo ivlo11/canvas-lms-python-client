@@ -58,7 +58,7 @@ class AccountNotificationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AccountNotification:
         """Create a global notification
 
         Create and return a new global notification for an account.
@@ -100,6 +100,7 @@ class AccountNotificationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountNotification",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -128,7 +129,7 @@ class AccountNotificationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AccountNotification]:
         """Create a global notification
 
         Create and return a new global notification for an account.
@@ -170,6 +171,7 @@ class AccountNotificationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountNotification",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -241,6 +243,7 @@ class AccountNotificationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountNotification",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -625,7 +628,7 @@ class AccountNotificationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> AccountNotification:
         """Update a global notification
 
         Update global notification for an account.
@@ -670,6 +673,7 @@ class AccountNotificationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountNotification",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -699,7 +703,7 @@ class AccountNotificationsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[AccountNotification]:
         """Update a global notification
 
         Update global notification for an account.
@@ -744,6 +748,7 @@ class AccountNotificationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountNotification",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -819,6 +824,7 @@ class AccountNotificationsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "AccountNotification",
         }
         response_data = await self.api_client.call_api(
             *_param,

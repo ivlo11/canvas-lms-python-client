@@ -796,7 +796,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_latest_registration_update_request**
-> object registrations_latest_registration_update_request(account_id, id)
+> LtiRegistrationHistoryEntry registrations_latest_registration_update_request(account_id, id)
 
 Get Latest LTI Registration Update Request
 
@@ -809,6 +809,7 @@ Returns 404 if there are no update requests for this registration.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration_history_entry import LtiRegistrationHistoryEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -856,7 +857,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistrationHistoryEntry**](LtiRegistrationHistoryEntry.md)
 
 ### Authorization
 
@@ -871,7 +872,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Lti::RegistrationUpdateRequest |  -  |
+**0** | Lti::RegistrationHistoryEntry |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1377,7 +1378,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_show_registration_update_request**
-> object registrations_show_registration_update_request(account_id, id, update_request_id)
+> LtiRegistrationUpdateRequest registrations_show_registration_update_request(account_id, id, update_request_id)
 
 Get LTI Registration Update Request
 
@@ -1389,6 +1390,7 @@ Retrieves details about a specific registration update request.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration_update_request import LtiRegistrationUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1438,7 +1440,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistrationUpdateRequest**](LtiRegistrationUpdateRequest.md)
 
 ### Authorization
 

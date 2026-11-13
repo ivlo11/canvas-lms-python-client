@@ -42,7 +42,24 @@ class Rubric(BaseModel):
     data: Optional[List[RubricCriterion]] = Field(default=None, description="An array with all of this Rubric's grading Criteria")
     assessments: Optional[List[RubricAssessment]] = Field(default=None, description="If an assessment type is included in the 'include' parameter, includes an array of rubric assessment objects for a given rubric, based on the assessment type requested. If the user does not request an assessment type this key will be absent.")
     associations: Optional[List[RubricAssociation]] = Field(default=None, description="If an association type is included in the 'include' parameter, includes an array of rubric association objects for a given rubric, based on the association type requested. If the user does not request an association type this key will be absent.")
-    __properties: ClassVar[List[str]] = ["id", "title", "context_id", "context_type", "points_possible", "reusable", "read_only", "free_form_criterion_comments", "hide_score_total", "data", "assessments", "associations"]
+    association_count: Optional[StrictInt] = None
+    button_display: Optional[StrictStr] = None
+    context_code: Optional[StrictStr] = None
+    created_at: Optional[StrictStr] = None
+    description: Optional[StrictStr] = None
+    hide_points: Optional[StrictBool] = None
+    migration_id: Optional[StrictStr] = None
+    public: Optional[StrictBool] = None
+    rating_order: Optional[StrictStr] = None
+    root_account_id: Optional[StrictInt] = None
+    rubric_id: Optional[StrictInt] = None
+    rubric_imports_id: Optional[StrictInt] = None
+    updated_at: Optional[StrictStr] = None
+    user_id: Optional[StrictInt] = None
+    workflow_state: Optional[StrictStr] = None
+    criteria: Optional[List[Dict[str, Any]]] = None
+    permissions: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "title", "context_id", "context_type", "points_possible", "reusable", "read_only", "free_form_criterion_comments", "hide_score_total", "data", "assessments", "associations", "association_count", "button_display", "context_code", "created_at", "description", "hide_points", "migration_id", "public", "rating_order", "root_account_id", "rubric_id", "rubric_imports_id", "updated_at", "user_id", "workflow_state", "criteria", "permissions"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -101,6 +118,56 @@ class Rubric(BaseModel):
             for _item_associations in self.associations:
                 _items.append(_item_associations.to_dict() if _item_associations is not None else None)
             _dict['associations'] = _items
+        # set to None if points_possible (nullable) is None
+        # and model_fields_set contains the field
+        if self.points_possible is None and "points_possible" in self.model_fields_set:
+            _dict['points_possible'] = None
+
+        # set to None if free_form_criterion_comments (nullable) is None
+        # and model_fields_set contains the field
+        if self.free_form_criterion_comments is None and "free_form_criterion_comments" in self.model_fields_set:
+            _dict['free_form_criterion_comments'] = None
+
+        # set to None if hide_score_total (nullable) is None
+        # and model_fields_set contains the field
+        if self.hide_score_total is None and "hide_score_total" in self.model_fields_set:
+            _dict['hide_score_total'] = None
+
+        # set to None if data (nullable) is None
+        # and model_fields_set contains the field
+        if self.data is None and "data" in self.model_fields_set:
+            _dict['data'] = None
+
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if migration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.migration_id is None and "migration_id" in self.model_fields_set:
+            _dict['migration_id'] = None
+
+        # set to None if rubric_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.rubric_id is None and "rubric_id" in self.model_fields_set:
+            _dict['rubric_id'] = None
+
+        # set to None if rubric_imports_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.rubric_imports_id is None and "rubric_imports_id" in self.model_fields_set:
+            _dict['rubric_imports_id'] = None
+
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
+
+        # set to None if criteria (nullable) is None
+        # and model_fields_set contains the field
+        if self.criteria is None and "criteria" in self.model_fields_set:
+            _dict['criteria'] = None
+
         return _dict
 
     @classmethod
@@ -124,7 +191,24 @@ class Rubric(BaseModel):
             "hide_score_total": obj.get("hide_score_total"),
             "data": [RubricCriterion.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
             "assessments": [RubricAssessment.from_dict(_item) for _item in obj["assessments"]] if obj.get("assessments") is not None else None,
-            "associations": [RubricAssociation.from_dict(_item) for _item in obj["associations"]] if obj.get("associations") is not None else None
+            "associations": [RubricAssociation.from_dict(_item) for _item in obj["associations"]] if obj.get("associations") is not None else None,
+            "association_count": obj.get("association_count"),
+            "button_display": obj.get("button_display"),
+            "context_code": obj.get("context_code"),
+            "created_at": obj.get("created_at"),
+            "description": obj.get("description"),
+            "hide_points": obj.get("hide_points"),
+            "migration_id": obj.get("migration_id"),
+            "public": obj.get("public"),
+            "rating_order": obj.get("rating_order"),
+            "root_account_id": obj.get("root_account_id"),
+            "rubric_id": obj.get("rubric_id"),
+            "rubric_imports_id": obj.get("rubric_imports_id"),
+            "updated_at": obj.get("updated_at"),
+            "user_id": obj.get("user_id"),
+            "workflow_state": obj.get("workflow_state"),
+            "criteria": obj.get("criteria"),
+            "permissions": obj.get("permissions")
         })
         return _obj
 

@@ -19,6 +19,7 @@ from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.rubric import Rubric
+from canvas_lms_python_client.models.rubric_import import RubricImport
 from canvas_lms_python_client.models.rubric_used_location import RubricUsedLocation
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -1738,7 +1739,7 @@ class RubricsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> RubricImport:
         """Creates a rubric using a CSV file
 
         Returns the rubric import object that was created
@@ -1777,7 +1778,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1805,7 +1806,7 @@ class RubricsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[RubricImport]:
         """Creates a rubric using a CSV file
 
         Returns the rubric import object that was created
@@ -1844,7 +1845,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1912,7 +1913,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2001,7 +2002,7 @@ class RubricsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> RubricImport:
         """Creates a rubric using a CSV file
 
         Returns the rubric import object that was created
@@ -2040,7 +2041,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2068,7 +2069,7 @@ class RubricsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[RubricImport]:
         """Creates a rubric using a CSV file
 
         Returns the rubric import object that was created
@@ -2107,7 +2108,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2175,7 +2176,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2265,7 +2266,7 @@ class RubricsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> RubricImport:
         """Get the status of a rubric import
 
         Can return the latest rubric import for an account or course, or a specific import by id
@@ -2307,7 +2308,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2336,7 +2337,7 @@ class RubricsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[RubricImport]:
         """Get the status of a rubric import
 
         Can return the latest rubric import for an account or course, or a specific import by id
@@ -2378,7 +2379,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2450,7 +2451,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2543,7 +2544,7 @@ class RubricsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> RubricImport:
         """Get the status of a rubric import
 
         Can return the latest rubric import for an account or course, or a specific import by id
@@ -2585,7 +2586,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2614,7 +2615,7 @@ class RubricsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[RubricImport]:
         """Get the status of a rubric import
 
         Can return the latest rubric import for an account or course, or a specific import by id
@@ -2656,7 +2657,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2728,7 +2729,7 @@ class RubricsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "RubricImport",
         }
         response_data = await self.api_client.call_api(
             *_param,

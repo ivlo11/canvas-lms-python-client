@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from canvas_lms_python_client.models.answer import Answer
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,12 +37,24 @@ class QuizQuestion(BaseModel):
     question_name: Optional[StrictStr] = Field(default=None, description="The name of the question.", json_schema_extra={"examples": ["Prime Number Identification"]})
     question_type: Optional[StrictStr] = Field(default=None, description="The type of the question.", json_schema_extra={"examples": ["multiple_choice_question"]})
     question_text: Optional[StrictStr] = Field(default=None, description="The text of the question.", json_schema_extra={"examples": ["Which of the following is NOT a prime number?"]})
-    points_possible: Optional[StrictInt] = Field(default=None, description="The maximum amount of points possible received for getting this question correct.", json_schema_extra={"examples": [5]})
+    points_possible: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The maximum amount of points possible received for getting this question correct.", json_schema_extra={"examples": [5]})
     correct_comments: Optional[StrictStr] = Field(default=None, description="The comments to display if the student answers the question correctly.", json_schema_extra={"examples": ["That's correct!"]})
     incorrect_comments: Optional[StrictStr] = Field(default=None, description="The comments to display if the student answers incorrectly.", json_schema_extra={"examples": ["Unfortunately, that IS a prime number."]})
     neutral_comments: Optional[StrictStr] = Field(default=None, description="The comments to display regardless of how the student answered.", json_schema_extra={"examples": ["Goldbach's conjecture proposes that every even integer greater than 2 can be expressed as the sum of two prime numbers."]})
     answers: Optional[List[Answer]] = Field(default=None, description="An array of available answers to display to the student.")
-    __properties: ClassVar[List[str]] = ["id", "quiz_id", "assessment_question_bank_id", "created_at", "position", "question_name", "question_type", "question_text", "points_possible", "correct_comments", "incorrect_comments", "neutral_comments", "answers"]
+    answer_tolerance: Optional[Any] = None
+    assessment_question_id: Optional[StrictInt] = None
+    correct_comments_html: Optional[StrictStr] = None
+    formula_decimal_places: Optional[Any] = None
+    formulas: Optional[Any] = None
+    incorrect_comments_html: Optional[StrictStr] = None
+    matches: Optional[Any] = None
+    matching_answer_incorrect_matches: Optional[Any] = None
+    neutral_comments_html: Optional[StrictStr] = None
+    quiz_group_id: Optional[StrictInt] = None
+    variables: Optional[Any] = None
+    assessment_question: Optional[Any] = None
+    __properties: ClassVar[List[str]] = ["id", "quiz_id", "assessment_question_bank_id", "created_at", "position", "question_name", "question_type", "question_text", "points_possible", "correct_comments", "incorrect_comments", "neutral_comments", "answers", "answer_tolerance", "assessment_question_id", "correct_comments_html", "formula_decimal_places", "formulas", "incorrect_comments_html", "matches", "matching_answer_incorrect_matches", "neutral_comments_html", "quiz_group_id", "variables", "assessment_question"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,6 +101,106 @@ class QuizQuestion(BaseModel):
             for _item_answers in self.answers:
                 _items.append(_item_answers.to_dict() if _item_answers is not None else None)
             _dict['answers'] = _items
+        # set to None if position (nullable) is None
+        # and model_fields_set contains the field
+        if self.position is None and "position" in self.model_fields_set:
+            _dict['position'] = None
+
+        # set to None if question_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.question_name is None and "question_name" in self.model_fields_set:
+            _dict['question_name'] = None
+
+        # set to None if question_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.question_type is None and "question_type" in self.model_fields_set:
+            _dict['question_type'] = None
+
+        # set to None if question_text (nullable) is None
+        # and model_fields_set contains the field
+        if self.question_text is None and "question_text" in self.model_fields_set:
+            _dict['question_text'] = None
+
+        # set to None if points_possible (nullable) is None
+        # and model_fields_set contains the field
+        if self.points_possible is None and "points_possible" in self.model_fields_set:
+            _dict['points_possible'] = None
+
+        # set to None if correct_comments (nullable) is None
+        # and model_fields_set contains the field
+        if self.correct_comments is None and "correct_comments" in self.model_fields_set:
+            _dict['correct_comments'] = None
+
+        # set to None if incorrect_comments (nullable) is None
+        # and model_fields_set contains the field
+        if self.incorrect_comments is None and "incorrect_comments" in self.model_fields_set:
+            _dict['incorrect_comments'] = None
+
+        # set to None if neutral_comments (nullable) is None
+        # and model_fields_set contains the field
+        if self.neutral_comments is None and "neutral_comments" in self.model_fields_set:
+            _dict['neutral_comments'] = None
+
+        # set to None if answer_tolerance (nullable) is None
+        # and model_fields_set contains the field
+        if self.answer_tolerance is None and "answer_tolerance" in self.model_fields_set:
+            _dict['answer_tolerance'] = None
+
+        # set to None if assessment_question_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.assessment_question_id is None and "assessment_question_id" in self.model_fields_set:
+            _dict['assessment_question_id'] = None
+
+        # set to None if correct_comments_html (nullable) is None
+        # and model_fields_set contains the field
+        if self.correct_comments_html is None and "correct_comments_html" in self.model_fields_set:
+            _dict['correct_comments_html'] = None
+
+        # set to None if formula_decimal_places (nullable) is None
+        # and model_fields_set contains the field
+        if self.formula_decimal_places is None and "formula_decimal_places" in self.model_fields_set:
+            _dict['formula_decimal_places'] = None
+
+        # set to None if formulas (nullable) is None
+        # and model_fields_set contains the field
+        if self.formulas is None and "formulas" in self.model_fields_set:
+            _dict['formulas'] = None
+
+        # set to None if incorrect_comments_html (nullable) is None
+        # and model_fields_set contains the field
+        if self.incorrect_comments_html is None and "incorrect_comments_html" in self.model_fields_set:
+            _dict['incorrect_comments_html'] = None
+
+        # set to None if matches (nullable) is None
+        # and model_fields_set contains the field
+        if self.matches is None and "matches" in self.model_fields_set:
+            _dict['matches'] = None
+
+        # set to None if matching_answer_incorrect_matches (nullable) is None
+        # and model_fields_set contains the field
+        if self.matching_answer_incorrect_matches is None and "matching_answer_incorrect_matches" in self.model_fields_set:
+            _dict['matching_answer_incorrect_matches'] = None
+
+        # set to None if neutral_comments_html (nullable) is None
+        # and model_fields_set contains the field
+        if self.neutral_comments_html is None and "neutral_comments_html" in self.model_fields_set:
+            _dict['neutral_comments_html'] = None
+
+        # set to None if quiz_group_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.quiz_group_id is None and "quiz_group_id" in self.model_fields_set:
+            _dict['quiz_group_id'] = None
+
+        # set to None if variables (nullable) is None
+        # and model_fields_set contains the field
+        if self.variables is None and "variables" in self.model_fields_set:
+            _dict['variables'] = None
+
+        # set to None if assessment_question (nullable) is None
+        # and model_fields_set contains the field
+        if self.assessment_question is None and "assessment_question" in self.model_fields_set:
+            _dict['assessment_question'] = None
+
         return _dict
 
     @classmethod
@@ -113,7 +225,19 @@ class QuizQuestion(BaseModel):
             "correct_comments": obj.get("correct_comments"),
             "incorrect_comments": obj.get("incorrect_comments"),
             "neutral_comments": obj.get("neutral_comments"),
-            "answers": [Answer.from_dict(_item) for _item in obj["answers"]] if obj.get("answers") is not None else None
+            "answers": [Answer.from_dict(_item) for _item in obj["answers"]] if obj.get("answers") is not None else None,
+            "answer_tolerance": obj.get("answer_tolerance"),
+            "assessment_question_id": obj.get("assessment_question_id"),
+            "correct_comments_html": obj.get("correct_comments_html"),
+            "formula_decimal_places": obj.get("formula_decimal_places"),
+            "formulas": obj.get("formulas"),
+            "incorrect_comments_html": obj.get("incorrect_comments_html"),
+            "matches": obj.get("matches"),
+            "matching_answer_incorrect_matches": obj.get("matching_answer_incorrect_matches"),
+            "neutral_comments_html": obj.get("neutral_comments_html"),
+            "quiz_group_id": obj.get("quiz_group_id"),
+            "variables": obj.get("variables"),
+            "assessment_question": obj.get("assessment_question")
         })
         return _obj
 

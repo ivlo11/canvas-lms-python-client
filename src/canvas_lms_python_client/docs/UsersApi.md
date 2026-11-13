@@ -39,7 +39,7 @@ Method | HTTP request | Description
 
 
 # **users_activity_stream**
-> users_activity_stream(only_active_courses=only_active_courses)
+> List[UsersActivityStreamResponse] users_activity_stream(only_active_courses=only_active_courses, page=page, per_page=per_page)
 
 List the activity stream
 
@@ -149,6 +149,7 @@ AssessmentRequest:
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_activity_stream_response import UsersActivityStreamResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -173,10 +174,14 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = canvas_lms_python_client.UsersApi(api_client)
     only_active_courses = True # bool | If true, will only return objects for courses the user is actively participating in (optional)
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # List the activity stream
-        await api_instance.users_activity_stream(only_active_courses=only_active_courses)
+        api_response = await api_instance.users_activity_stream(only_active_courses=only_active_courses, page=page, per_page=per_page)
+        print("The response of UsersApi->users_activity_stream:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_activity_stream: %s\n" % e)
 ```
@@ -189,10 +194,12 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **only_active_courses** | **bool**| If true, will only return objects for courses the user is actively participating in | [optional] 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 
-void (empty response body)
+[**List[UsersActivityStreamResponse]**](UsersActivityStreamResponse.md)
 
 ### Authorization
 
@@ -201,18 +208,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List the activity stream |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_activity_stream_for_other**
-> users_activity_stream_for_other(only_active_courses=only_active_courses)
+> List[UsersActivityStreamResponse] users_activity_stream_for_other(only_active_courses=only_active_courses, page=page, per_page=per_page)
 
 List the activity stream
 
@@ -322,6 +329,7 @@ AssessmentRequest:
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_activity_stream_response import UsersActivityStreamResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -346,10 +354,14 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = canvas_lms_python_client.UsersApi(api_client)
     only_active_courses = True # bool | If true, will only return objects for courses the user is actively participating in (optional)
+    page = 56 # int | The page number to return. Defaults to 1. (optional)
+    per_page = 56 # int | The number of items to return per page. Defaults to 10. Maximum is 100. (optional)
 
     try:
         # List the activity stream
-        await api_instance.users_activity_stream_for_other(only_active_courses=only_active_courses)
+        api_response = await api_instance.users_activity_stream_for_other(only_active_courses=only_active_courses, page=page, per_page=per_page)
+        print("The response of UsersApi->users_activity_stream_for_other:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_activity_stream_for_other: %s\n" % e)
 ```
@@ -362,10 +374,12 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **only_active_courses** | **bool**| If true, will only return objects for courses the user is actively participating in | [optional] 
+ **page** | **int**| The page number to return. Defaults to 1. | [optional] 
+ **per_page** | **int**| The number of items to return per page. Defaults to 10. Maximum is 100. | [optional] 
 
 ### Return type
 
-void (empty response body)
+[**List[UsersActivityStreamResponse]**](UsersActivityStreamResponse.md)
 
 ### Authorization
 
@@ -374,18 +388,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List the activity stream |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_activity_stream_summary**
-> users_activity_stream_summary(only_active_courses=only_active_courses)
+> List[UsersActivityStreamSummaryResponse] users_activity_stream_summary(only_active_courses=only_active_courses)
 
 Activity stream summary
 
@@ -397,6 +411,7 @@ Returns a summary of the current user's global activity stream.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_activity_stream_summary_response import UsersActivityStreamSummaryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -424,7 +439,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Activity stream summary
-        await api_instance.users_activity_stream_summary(only_active_courses=only_active_courses)
+        api_response = await api_instance.users_activity_stream_summary(only_active_courses=only_active_courses)
+        print("The response of UsersApi->users_activity_stream_summary:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_activity_stream_summary: %s\n" % e)
 ```
@@ -440,7 +457,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[UsersActivityStreamSummaryResponse]**](UsersActivityStreamSummaryResponse.md)
 
 ### Authorization
 
@@ -455,7 +472,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Activity stream summary |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -734,7 +751,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_create_file**
-> users_create_file(user_id)
+> UsersCreateFileResponse users_create_file(user_id)
 
 Upload a file
 
@@ -754,6 +771,7 @@ to specify the current user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_create_file_response import UsersCreateFileResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -781,7 +799,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Upload a file
-        await api_instance.users_create_file(user_id)
+        api_response = await api_instance.users_create_file(user_id)
+        print("The response of UsersApi->users_create_file:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_create_file: %s\n" % e)
 ```
@@ -797,7 +817,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersCreateFileResponse**](UsersCreateFileResponse.md)
 
 ### Authorization
 
@@ -806,13 +826,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Upload a file |  -  |
+**0** | UsersCreateFileResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -901,7 +921,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_expire_mobile_sessions**
-> users_expire_mobile_sessions(skip_admins=skip_admins)
+> UsersTerminateSessionsResponse users_expire_mobile_sessions(skip_admins=skip_admins)
 
 Log users out of all mobile apps
 
@@ -917,6 +937,7 @@ in the institution (except for account administrators if +skip_admins+ is given)
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_terminate_sessions_response import UsersTerminateSessionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -944,7 +965,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Log users out of all mobile apps
-        await api_instance.users_expire_mobile_sessions(skip_admins=skip_admins)
+        api_response = await api_instance.users_expire_mobile_sessions(skip_admins=skip_admins)
+        print("The response of UsersApi->users_expire_mobile_sessions:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_expire_mobile_sessions: %s\n" % e)
 ```
@@ -960,7 +983,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersTerminateSessionsResponse**](UsersTerminateSessionsResponse.md)
 
 ### Authorization
 
@@ -969,18 +992,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Log users out of all mobile apps |  -  |
+**0** | UsersTerminateSessionsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_expire_mobile_sessions_for_users**
-> users_expire_mobile_sessions_for_users(id, skip_admins=skip_admins)
+> UsersTerminateSessionsResponse users_expire_mobile_sessions_for_users(id, skip_admins=skip_admins)
 
 Log users out of all mobile apps
 
@@ -996,6 +1019,7 @@ in the institution (except for account administrators if +skip_admins+ is given)
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_terminate_sessions_response import UsersTerminateSessionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1024,7 +1048,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Log users out of all mobile apps
-        await api_instance.users_expire_mobile_sessions_for_users(id, skip_admins=skip_admins)
+        api_response = await api_instance.users_expire_mobile_sessions_for_users(id, skip_admins=skip_admins)
+        print("The response of UsersApi->users_expire_mobile_sessions_for_users:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_expire_mobile_sessions_for_users: %s\n" % e)
 ```
@@ -1041,7 +1067,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersTerminateSessionsResponse**](UsersTerminateSessionsResponse.md)
 
 ### Authorization
 
@@ -1050,18 +1076,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Log users out of all mobile apps |  -  |
+**0** | UsersTerminateSessionsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_get_custom_color**
-> users_get_custom_color(asset_string, id)
+> UsersGetCustomColorResponse users_get_custom_color(asset_string, id)
 
 Get custom color
 
@@ -1076,6 +1102,7 @@ The asset_string parameter should be in the format 'context_id', for example
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_get_custom_color_response import UsersGetCustomColorResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1104,7 +1131,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get custom color
-        await api_instance.users_get_custom_color(asset_string, id)
+        api_response = await api_instance.users_get_custom_color(asset_string, id)
+        print("The response of UsersApi->users_get_custom_color:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_get_custom_color: %s\n" % e)
 ```
@@ -1121,7 +1150,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersGetCustomColorResponse**](UsersGetCustomColorResponse.md)
 
 ### Authorization
 
@@ -1136,12 +1165,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get custom color |  -  |
+**0** | UsersGetCustomColorResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_get_custom_colors**
-> users_get_custom_colors(id)
+> UsersGetCustomColorsResponse users_get_custom_colors(id)
 
 Get custom colors
 
@@ -1153,6 +1182,7 @@ Returns all custom colors that have been saved for a user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_get_custom_colors_response import UsersGetCustomColorsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1180,7 +1210,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get custom colors
-        await api_instance.users_get_custom_colors(id)
+        api_response = await api_instance.users_get_custom_colors(id)
+        print("The response of UsersApi->users_get_custom_colors:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_get_custom_colors: %s\n" % e)
 ```
@@ -1196,7 +1228,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersGetCustomColorsResponse**](UsersGetCustomColorsResponse.md)
 
 ### Authorization
 
@@ -1211,12 +1243,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get custom colors |  -  |
+**0** | UsersGetCustomColorsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_get_dashboard_positions**
-> users_get_dashboard_positions(id)
+> UsersGetDashboardPositionsResponse users_get_dashboard_positions(id)
 
 Get dashboard positions
 
@@ -1228,6 +1260,7 @@ Returns all dashboard positions that have been saved for a user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_get_dashboard_positions_response import UsersGetDashboardPositionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1255,7 +1288,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get dashboard positions
-        await api_instance.users_get_dashboard_positions(id)
+        api_response = await api_instance.users_get_dashboard_positions(id)
+        print("The response of UsersApi->users_get_dashboard_positions:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_get_dashboard_positions: %s\n" % e)
 ```
@@ -1271,7 +1306,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersGetDashboardPositionsResponse**](UsersGetDashboardPositionsResponse.md)
 
 ### Authorization
 
@@ -1286,12 +1321,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get dashboard positions |  -  |
+**0** | UsersGetDashboardPositionsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_ignore_all_stream_items**
-> users_ignore_all_stream_items()
+> UsersIgnoreStreamItemResponse users_ignore_all_stream_items()
 
 Hide all stream items
 
@@ -1303,6 +1338,7 @@ Hide all stream items for the user
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_ignore_stream_item_response import UsersIgnoreStreamItemResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1329,7 +1365,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Hide all stream items
-        await api_instance.users_ignore_all_stream_items()
+        api_response = await api_instance.users_ignore_all_stream_items()
+        print("The response of UsersApi->users_ignore_all_stream_items:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_ignore_all_stream_items: %s\n" % e)
 ```
@@ -1342,7 +1380,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**UsersIgnoreStreamItemResponse**](UsersIgnoreStreamItemResponse.md)
 
 ### Authorization
 
@@ -1357,12 +1395,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Hide all stream items |  -  |
+**0** | UsersIgnoreStreamItemResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_ignore_stream_item**
-> users_ignore_stream_item(id)
+> UsersIgnoreStreamItemResponse users_ignore_stream_item(id)
 
 Hide a stream item
 
@@ -1374,6 +1412,7 @@ Hide the given stream item.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_ignore_stream_item_response import UsersIgnoreStreamItemResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1401,7 +1440,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Hide a stream item
-        await api_instance.users_ignore_stream_item(id)
+        api_response = await api_instance.users_ignore_stream_item(id)
+        print("The response of UsersApi->users_ignore_stream_item:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_ignore_stream_item: %s\n" % e)
 ```
@@ -1417,7 +1458,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersIgnoreStreamItemResponse**](UsersIgnoreStreamItemResponse.md)
 
 ### Authorization
 
@@ -1432,7 +1473,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Hide a stream item |  -  |
+**0** | UsersIgnoreStreamItemResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1802,7 +1843,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_pandata_events_token**
-> users_pandata_events_token(users_pandata_events_token_request=users_pandata_events_token_request)
+> UsersPandataEventsTokenResponse users_pandata_events_token(users_pandata_events_token_request=users_pandata_events_token_request)
 
 Get a Pandata Events jwt token and its expiration date
 
@@ -1818,6 +1859,7 @@ NOTE: This is currently only available to the mobile developer keys.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.users_pandata_events_token_request import UsersPandataEventsTokenRequest
+from canvas_lms_python_client.models.users_pandata_events_token_response import UsersPandataEventsTokenResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1845,7 +1887,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a Pandata Events jwt token and its expiration date
-        await api_instance.users_pandata_events_token(users_pandata_events_token_request=users_pandata_events_token_request)
+        api_response = await api_instance.users_pandata_events_token(users_pandata_events_token_request=users_pandata_events_token_request)
+        print("The response of UsersApi->users_pandata_events_token:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_pandata_events_token: %s\n" % e)
 ```
@@ -1861,7 +1905,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersPandataEventsTokenResponse**](UsersPandataEventsTokenResponse.md)
 
 ### Authorization
 
@@ -1876,12 +1920,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a Pandata Events jwt token and its expiration date |  -  |
+**0** | UsersPandataEventsTokenResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_set_custom_color**
-> users_set_custom_color(asset_string, id, users_set_custom_color_request=users_set_custom_color_request)
+> UsersGetCustomColorResponse users_set_custom_color(asset_string, id, users_set_custom_color_request=users_set_custom_color_request)
 
 Update custom color
 
@@ -1897,6 +1941,7 @@ The asset string parameter should be in the format 'context_id', for example
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_get_custom_color_response import UsersGetCustomColorResponse
 from canvas_lms_python_client.models.users_set_custom_color_request import UsersSetCustomColorRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -1927,7 +1972,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update custom color
-        await api_instance.users_set_custom_color(asset_string, id, users_set_custom_color_request=users_set_custom_color_request)
+        api_response = await api_instance.users_set_custom_color(asset_string, id, users_set_custom_color_request=users_set_custom_color_request)
+        print("The response of UsersApi->users_set_custom_color:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_set_custom_color: %s\n" % e)
 ```
@@ -1945,7 +1992,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersGetCustomColorResponse**](UsersGetCustomColorResponse.md)
 
 ### Authorization
 
@@ -1960,12 +2007,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update custom color |  -  |
+**0** | UsersGetCustomColorResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_set_dashboard_positions**
-> users_set_dashboard_positions(id)
+> UsersGetDashboardPositionsResponse users_set_dashboard_positions(id)
 
 Update dashboard positions
 
@@ -1982,6 +2029,7 @@ The asset string parameter should be in the format 'context_id', for example
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_get_dashboard_positions_response import UsersGetDashboardPositionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2009,7 +2057,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update dashboard positions
-        await api_instance.users_set_dashboard_positions(id)
+        api_response = await api_instance.users_set_dashboard_positions(id)
+        print("The response of UsersApi->users_set_dashboard_positions:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_set_dashboard_positions: %s\n" % e)
 ```
@@ -2025,7 +2075,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersGetDashboardPositionsResponse**](UsersGetDashboardPositionsResponse.md)
 
 ### Authorization
 
@@ -2040,7 +2090,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update dashboard positions |  -  |
+**0** | UsersGetDashboardPositionsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2203,7 +2253,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_settings**
-> users_settings(id, manual_mark_as_read=manual_mark_as_read, release_notes_badge_disabled=release_notes_badge_disabled, collapse_global_nav=collapse_global_nav, collapse_course_nav=collapse_course_nav, hide_dashcard_color_overlays=hide_dashcard_color_overlays, comment_library_suggestions_enabled=comment_library_suggestions_enabled, elementary_dashboard_disabled=elementary_dashboard_disabled, widget_dashboard_user_preference=widget_dashboard_user_preference, widget_dashboard_dark_mode=widget_dashboard_dark_mode)
+> UsersSettingsResponse users_settings(id, manual_mark_as_read=manual_mark_as_read, release_notes_badge_disabled=release_notes_badge_disabled, collapse_global_nav=collapse_global_nav, collapse_course_nav=collapse_course_nav, hide_dashcard_color_overlays=hide_dashcard_color_overlays, comment_library_suggestions_enabled=comment_library_suggestions_enabled, elementary_dashboard_disabled=elementary_dashboard_disabled, widget_dashboard_user_preference=widget_dashboard_user_preference, widget_dashboard_dark_mode=widget_dashboard_dark_mode)
 
 Update user settings.
 
@@ -2215,6 +2265,7 @@ Update an existing user's settings.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_settings_response import UsersSettingsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2251,7 +2302,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update user settings.
-        await api_instance.users_settings(id, manual_mark_as_read=manual_mark_as_read, release_notes_badge_disabled=release_notes_badge_disabled, collapse_global_nav=collapse_global_nav, collapse_course_nav=collapse_course_nav, hide_dashcard_color_overlays=hide_dashcard_color_overlays, comment_library_suggestions_enabled=comment_library_suggestions_enabled, elementary_dashboard_disabled=elementary_dashboard_disabled, widget_dashboard_user_preference=widget_dashboard_user_preference, widget_dashboard_dark_mode=widget_dashboard_dark_mode)
+        api_response = await api_instance.users_settings(id, manual_mark_as_read=manual_mark_as_read, release_notes_badge_disabled=release_notes_badge_disabled, collapse_global_nav=collapse_global_nav, collapse_course_nav=collapse_course_nav, hide_dashcard_color_overlays=hide_dashcard_color_overlays, comment_library_suggestions_enabled=comment_library_suggestions_enabled, elementary_dashboard_disabled=elementary_dashboard_disabled, widget_dashboard_user_preference=widget_dashboard_user_preference, widget_dashboard_dark_mode=widget_dashboard_dark_mode)
+        print("The response of UsersApi->users_settings:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_settings: %s\n" % e)
 ```
@@ -2276,7 +2329,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersSettingsResponse**](UsersSettingsResponse.md)
 
 ### Authorization
 
@@ -2285,18 +2338,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update user settings. |  -  |
+**0** | UsersSettingsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_settings_for_users**
-> users_settings_for_users(id, users_settings_for_users_request=users_settings_for_users_request)
+> UsersSettingsResponse users_settings_for_users(id, users_settings_for_users_request=users_settings_for_users_request)
 
 Update user settings.
 
@@ -2309,6 +2362,7 @@ Update an existing user's settings.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.users_settings_for_users_request import UsersSettingsForUsersRequest
+from canvas_lms_python_client.models.users_settings_response import UsersSettingsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2337,7 +2391,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update user settings.
-        await api_instance.users_settings_for_users(id, users_settings_for_users_request=users_settings_for_users_request)
+        api_response = await api_instance.users_settings_for_users(id, users_settings_for_users_request=users_settings_for_users_request)
+        print("The response of UsersApi->users_settings_for_users:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_settings_for_users: %s\n" % e)
 ```
@@ -2354,7 +2410,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersSettingsResponse**](UsersSettingsResponse.md)
 
 ### Authorization
 
@@ -2363,13 +2419,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update user settings. |  -  |
+**0** | UsersSettingsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2514,7 +2570,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_terminate_sessions**
-> users_terminate_sessions(id)
+> UsersTerminateSessionsResponse users_terminate_sessions(id)
 
 Terminate all user sessions
 
@@ -2530,6 +2586,7 @@ be re-authorized.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_terminate_sessions_response import UsersTerminateSessionsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2557,7 +2614,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Terminate all user sessions
-        await api_instance.users_terminate_sessions(id)
+        api_response = await api_instance.users_terminate_sessions(id)
+        print("The response of UsersApi->users_terminate_sessions:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_terminate_sessions: %s\n" % e)
 ```
@@ -2573,7 +2632,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersTerminateSessionsResponse**](UsersTerminateSessionsResponse.md)
 
 ### Authorization
 
@@ -2582,18 +2641,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Terminate all user sessions |  -  |
+**0** | UsersTerminateSessionsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_todo_item_count**
-> users_todo_item_count(include=include)
+> UsersTodoItemCountResponse users_todo_item_count(include=include)
 
 List counts for todo items
 
@@ -2609,6 +2668,7 @@ The largest reliable number for both counts is 100.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.users_todo_item_count_response import UsersTodoItemCountResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2636,7 +2696,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List counts for todo items
-        await api_instance.users_todo_item_count(include=include)
+        api_response = await api_instance.users_todo_item_count(include=include)
+        print("The response of UsersApi->users_todo_item_count:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_todo_item_count: %s\n" % e)
 ```
@@ -2652,7 +2714,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**UsersTodoItemCountResponse**](UsersTodoItemCountResponse.md)
 
 ### Authorization
 
@@ -2667,7 +2729,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List counts for todo items |  -  |
+**0** | UsersTodoItemCountResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2765,7 +2827,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **users_upcoming_events**
-> users_upcoming_events()
+> List[CalendarEvent] users_upcoming_events()
 
 List upcoming assignments, calendar events
 
@@ -2777,6 +2839,7 @@ A paginated list of the current user's upcoming events.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.calendar_event import CalendarEvent
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2803,7 +2866,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List upcoming assignments, calendar events
-        await api_instance.users_upcoming_events()
+        api_response = await api_instance.users_upcoming_events()
+        print("The response of UsersApi->users_upcoming_events:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling UsersApi->users_upcoming_events: %s\n" % e)
 ```
@@ -2816,7 +2881,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**List[CalendarEvent]**](CalendarEvent.md)
 
 ### Authorization
 
@@ -2831,7 +2896,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List upcoming assignments, calendar events |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

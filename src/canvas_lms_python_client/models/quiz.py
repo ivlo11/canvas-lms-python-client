@@ -70,7 +70,36 @@ class Quiz(BaseModel):
     version_number: Optional[StrictInt] = Field(default=None, description="Current version number of the quiz", json_schema_extra={"examples": [3]})
     question_types: Optional[List[StrictStr]] = Field(default=None, description="List of question types in the quiz", json_schema_extra={"examples": [["multiple_choice", "essay"]]})
     anonymous_submissions: Optional[StrictBool] = Field(default=None, description="Whether survey submissions will be kept anonymous (only applicable to 'graded_survey', 'survey' quiz types)")
-    __properties: ClassVar[List[str]] = ["id", "title", "html_url", "mobile_url", "preview_url", "description", "quiz_type", "assignment_group_id", "time_limit", "shuffle_answers", "hide_results", "show_correct_answers", "show_correct_answers_last_attempt", "show_correct_answers_at", "hide_correct_answers_at", "one_time_results", "scoring_policy", "allowed_attempts", "one_question_at_a_time", "question_count", "points_possible", "cant_go_back", "access_code", "ip_filter", "due_at", "lock_at", "unlock_at", "published", "unpublishable", "locked_for_user", "lock_info", "lock_explanation", "speedgrader_url", "quiz_extensions_url", "permissions", "all_dates", "version_number", "question_types", "anonymous_submissions"]
+    assignment_id: Optional[StrictInt] = None
+    can_update: Optional[StrictBool] = None
+    has_access_code: Optional[StrictBool] = None
+    important_dates: Optional[StrictBool] = None
+    in_paced_course: Optional[StrictBool] = None
+    lockdown_browser_monitor_data: Optional[StrictStr] = None
+    migration_id: Optional[Any] = None
+    post_to_sis: Optional[StrictBool] = None
+    quiz_reports_url: Optional[StrictStr] = None
+    quiz_statistics_url: Optional[StrictStr] = None
+    quiz_submission_versions_html_url: Optional[StrictStr] = None
+    require_lockdown_browser: Optional[StrictBool] = None
+    require_lockdown_browser_for_results: Optional[StrictBool] = None
+    require_lockdown_browser_monitor: Optional[StrictBool] = None
+    timer_autosubmit_disabled: Optional[StrictBool] = None
+    visible_to_everyone: Optional[StrictBool] = None
+    can_unpublish: Optional[StrictBool] = None
+    message_students_url: Optional[StrictStr] = None
+    only_visible_to_overrides: Optional[StrictBool] = None
+    section_count: Optional[StrictInt] = None
+    speed_grader_url: Optional[StrictStr] = None
+    quizzes: Optional[List[Dict[str, Any]]] = None
+    can_duplicate: Optional[StrictBool] = None
+    course_id: Optional[StrictInt] = None
+    original_assignment_id: Optional[Any] = None
+    original_assignment_name: Optional[Any] = None
+    original_course_id: Optional[Any] = None
+    original_quiz_id: Optional[Any] = None
+    workflow_state: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "title", "html_url", "mobile_url", "preview_url", "description", "quiz_type", "assignment_group_id", "time_limit", "shuffle_answers", "hide_results", "show_correct_answers", "show_correct_answers_last_attempt", "show_correct_answers_at", "hide_correct_answers_at", "one_time_results", "scoring_policy", "allowed_attempts", "one_question_at_a_time", "question_count", "points_possible", "cant_go_back", "access_code", "ip_filter", "due_at", "lock_at", "unlock_at", "published", "unpublishable", "locked_for_user", "lock_info", "lock_explanation", "speedgrader_url", "quiz_extensions_url", "permissions", "all_dates", "version_number", "question_types", "anonymous_submissions", "assignment_id", "can_update", "has_access_code", "important_dates", "in_paced_course", "lockdown_browser_monitor_data", "migration_id", "post_to_sis", "quiz_reports_url", "quiz_statistics_url", "quiz_submission_versions_html_url", "require_lockdown_browser", "require_lockdown_browser_for_results", "require_lockdown_browser_monitor", "timer_autosubmit_disabled", "visible_to_everyone", "can_unpublish", "message_students_url", "only_visible_to_overrides", "section_count", "speed_grader_url", "quizzes", "can_duplicate", "course_id", "original_assignment_id", "original_assignment_name", "original_course_id", "original_quiz_id", "workflow_state"]
 
     @field_validator('quiz_type')
     def quiz_type_validate_enum(cls, value):
@@ -153,6 +182,116 @@ class Quiz(BaseModel):
             for _item_all_dates in self.all_dates:
                 _items.append(_item_all_dates.to_dict() if _item_all_dates is not None else None)
             _dict['all_dates'] = _items
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
+        # set to None if assignment_group_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.assignment_group_id is None and "assignment_group_id" in self.model_fields_set:
+            _dict['assignment_group_id'] = None
+
+        # set to None if time_limit (nullable) is None
+        # and model_fields_set contains the field
+        if self.time_limit is None and "time_limit" in self.model_fields_set:
+            _dict['time_limit'] = None
+
+        # set to None if hide_results (nullable) is None
+        # and model_fields_set contains the field
+        if self.hide_results is None and "hide_results" in self.model_fields_set:
+            _dict['hide_results'] = None
+
+        # set to None if show_correct_answers_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.show_correct_answers_at is None and "show_correct_answers_at" in self.model_fields_set:
+            _dict['show_correct_answers_at'] = None
+
+        # set to None if hide_correct_answers_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.hide_correct_answers_at is None and "hide_correct_answers_at" in self.model_fields_set:
+            _dict['hide_correct_answers_at'] = None
+
+        # set to None if allowed_attempts (nullable) is None
+        # and model_fields_set contains the field
+        if self.allowed_attempts is None and "allowed_attempts" in self.model_fields_set:
+            _dict['allowed_attempts'] = None
+
+        # set to None if points_possible (nullable) is None
+        # and model_fields_set contains the field
+        if self.points_possible is None and "points_possible" in self.model_fields_set:
+            _dict['points_possible'] = None
+
+        # set to None if access_code (nullable) is None
+        # and model_fields_set contains the field
+        if self.access_code is None and "access_code" in self.model_fields_set:
+            _dict['access_code'] = None
+
+        # set to None if ip_filter (nullable) is None
+        # and model_fields_set contains the field
+        if self.ip_filter is None and "ip_filter" in self.model_fields_set:
+            _dict['ip_filter'] = None
+
+        # set to None if due_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.due_at is None and "due_at" in self.model_fields_set:
+            _dict['due_at'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if assignment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.assignment_id is None and "assignment_id" in self.model_fields_set:
+            _dict['assignment_id'] = None
+
+        # set to None if lockdown_browser_monitor_data (nullable) is None
+        # and model_fields_set contains the field
+        if self.lockdown_browser_monitor_data is None and "lockdown_browser_monitor_data" in self.model_fields_set:
+            _dict['lockdown_browser_monitor_data'] = None
+
+        # set to None if migration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.migration_id is None and "migration_id" in self.model_fields_set:
+            _dict['migration_id'] = None
+
+        # set to None if post_to_sis (nullable) is None
+        # and model_fields_set contains the field
+        if self.post_to_sis is None and "post_to_sis" in self.model_fields_set:
+            _dict['post_to_sis'] = None
+
+        # set to None if speed_grader_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.speed_grader_url is None and "speed_grader_url" in self.model_fields_set:
+            _dict['speed_grader_url'] = None
+
+        # set to None if original_assignment_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_assignment_id is None and "original_assignment_id" in self.model_fields_set:
+            _dict['original_assignment_id'] = None
+
+        # set to None if original_assignment_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_assignment_name is None and "original_assignment_name" in self.model_fields_set:
+            _dict['original_assignment_name'] = None
+
+        # set to None if original_course_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_course_id is None and "original_course_id" in self.model_fields_set:
+            _dict['original_course_id'] = None
+
+        # set to None if original_quiz_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.original_quiz_id is None and "original_quiz_id" in self.model_fields_set:
+            _dict['original_quiz_id'] = None
+
         return _dict
 
     @classmethod
@@ -203,7 +342,36 @@ class Quiz(BaseModel):
             "all_dates": [AssignmentDate.from_dict(_item) for _item in obj["all_dates"]] if obj.get("all_dates") is not None else None,
             "version_number": obj.get("version_number"),
             "question_types": obj.get("question_types"),
-            "anonymous_submissions": obj.get("anonymous_submissions")
+            "anonymous_submissions": obj.get("anonymous_submissions"),
+            "assignment_id": obj.get("assignment_id"),
+            "can_update": obj.get("can_update"),
+            "has_access_code": obj.get("has_access_code"),
+            "important_dates": obj.get("important_dates"),
+            "in_paced_course": obj.get("in_paced_course"),
+            "lockdown_browser_monitor_data": obj.get("lockdown_browser_monitor_data"),
+            "migration_id": obj.get("migration_id"),
+            "post_to_sis": obj.get("post_to_sis"),
+            "quiz_reports_url": obj.get("quiz_reports_url"),
+            "quiz_statistics_url": obj.get("quiz_statistics_url"),
+            "quiz_submission_versions_html_url": obj.get("quiz_submission_versions_html_url"),
+            "require_lockdown_browser": obj.get("require_lockdown_browser"),
+            "require_lockdown_browser_for_results": obj.get("require_lockdown_browser_for_results"),
+            "require_lockdown_browser_monitor": obj.get("require_lockdown_browser_monitor"),
+            "timer_autosubmit_disabled": obj.get("timer_autosubmit_disabled"),
+            "visible_to_everyone": obj.get("visible_to_everyone"),
+            "can_unpublish": obj.get("can_unpublish"),
+            "message_students_url": obj.get("message_students_url"),
+            "only_visible_to_overrides": obj.get("only_visible_to_overrides"),
+            "section_count": obj.get("section_count"),
+            "speed_grader_url": obj.get("speed_grader_url"),
+            "quizzes": obj.get("quizzes"),
+            "can_duplicate": obj.get("can_duplicate"),
+            "course_id": obj.get("course_id"),
+            "original_assignment_id": obj.get("original_assignment_id"),
+            "original_assignment_name": obj.get("original_assignment_name"),
+            "original_course_id": obj.get("original_course_id"),
+            "original_quiz_id": obj.get("original_quiz_id"),
+            "workflow_state": obj.get("workflow_state")
         })
         return _obj
 

@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **workflow_state** | **str** | The state of the term. Can be &#39;active&#39; or &#39;deleted&#39;. | [optional] 
 **overrides** | **object** | Term date overrides for specific enrollment types | [optional] 
 **course_count** | **int** | The number of courses in the term (available via include) | [optional] 
+**created_at** | **str** |  | [optional] 
+**grading_period_group_id** | **int** |  | [optional] 
 
 ## Example
 

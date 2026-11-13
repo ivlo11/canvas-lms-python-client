@@ -8453,7 +8453,7 @@ class OutcomeGroupsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> OutcomeGroup:
         """Redirect to root outcome group for context
 
         Convenience redirect to find the root outcome group for a particular context. Will redirect to the appropriate outcome group's URL.
@@ -8489,6 +8489,7 @@ class OutcomeGroupsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8515,7 +8516,7 @@ class OutcomeGroupsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[OutcomeGroup]:
         """Redirect to root outcome group for context
 
         Convenience redirect to find the root outcome group for a particular context. Will redirect to the appropriate outcome group's URL.
@@ -8551,6 +8552,7 @@ class OutcomeGroupsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8614,6 +8616,7 @@ class OutcomeGroupsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8651,6 +8654,13 @@ class OutcomeGroupsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -8692,7 +8702,7 @@ class OutcomeGroupsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> OutcomeGroup:
         """Redirect to root outcome group for context
 
         Convenience redirect to find the root outcome group for a particular context. Will redirect to the appropriate outcome group's URL.
@@ -8731,6 +8741,7 @@ class OutcomeGroupsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8758,7 +8769,7 @@ class OutcomeGroupsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[OutcomeGroup]:
         """Redirect to root outcome group for context
 
         Convenience redirect to find the root outcome group for a particular context. Will redirect to the appropriate outcome group's URL.
@@ -8797,6 +8808,7 @@ class OutcomeGroupsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8864,6 +8876,7 @@ class OutcomeGroupsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -8904,6 +8917,13 @@ class OutcomeGroupsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -8945,7 +8965,7 @@ class OutcomeGroupsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> OutcomeGroup:
         """Redirect to root outcome group for context
 
         Convenience redirect to find the root outcome group for a particular context. Will redirect to the appropriate outcome group's URL.
@@ -8984,6 +9004,7 @@ class OutcomeGroupsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -9011,7 +9032,7 @@ class OutcomeGroupsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[OutcomeGroup]:
         """Redirect to root outcome group for context
 
         Convenience redirect to find the root outcome group for a particular context. Will redirect to the appropriate outcome group's URL.
@@ -9050,6 +9071,7 @@ class OutcomeGroupsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -9117,6 +9139,7 @@ class OutcomeGroupsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "OutcomeGroup",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -9157,6 +9180,13 @@ class OutcomeGroupsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

@@ -10,6 +10,12 @@ Name | Type | Description | Notes
 **short_name** | **str** | A short name the user has selected, for use in conversations or other less formal places through the site. | [optional] 
 **avatar_image_url** | **str** | If avatars are enabled, this field will be included and contain a url to retrieve the user&#39;s avatar. | [optional] 
 **html_url** | **str** | URL to access user, either nested to a context or directly. | [optional] 
+**anonymous_id** | **str** |  | [optional] 
+**display_name** | **str** |  | [optional] 
+**in_moderation_set** | **bool** |  | [optional] 
+**pronouns** | **object** |  | [optional] 
+**provisional_grades** | **List[object]** |  | [optional] 
+**selected_provisional_grade_id** | **int** |  | [optional] 
 
 ## Example
 

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **action** | **str** | The controller action the scope is associated to | [optional] 
 **verb** | **str** | The HTTP verb for the scope | [optional] 
 **scope** | **str** | The identifier for the scope | [optional] 
+**path** | **str** |  | [optional] 
 
 ## Example
 

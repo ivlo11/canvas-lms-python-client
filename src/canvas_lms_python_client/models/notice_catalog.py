@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.notice_catalog_client_id import NoticeCatalogClientId
 from canvas_lms_python_client.models.notice_handler import NoticeHandler
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +29,7 @@ class NoticeCatalog(BaseModel):
     """
     Set of notice handlers (one per notice type) for an LTI tool deployment.
     """ # noqa: E501
-    client_id: Optional[StrictStr] = Field(default=None, description="The LTI tool's client ID (global developer key ID)", json_schema_extra={"examples": ["10000000000001"]})
+    client_id: Optional[NoticeCatalogClientId] = None
     deployment_id: Optional[StrictStr] = Field(default=None, description="String that identifies the Platform-Tool integration governing the notices", json_schema_extra={"examples": ["123:8865aa05b4b79b64a91a86042e43af5ea8ae79eb"]})
     notice_handlers: Optional[List[NoticeHandler]] = Field(default=None, description="List of notice handlers for the tool", json_schema_extra={"examples": [[{"handler": "", "notice_type": "LtiHelloWorldNotice"}]]})
     __properties: ClassVar[List[str]] = ["client_id", "deployment_id", "notice_handlers"]
@@ -72,6 +73,9 @@ class NoticeCatalog(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of client_id
+        if self.client_id:
+            _dict['client_id'] = self.client_id.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in notice_handlers (list)
         _items = []
         if self.notice_handlers:
@@ -90,7 +94,7 @@ class NoticeCatalog(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "client_id": obj.get("client_id"),
+            "client_id": NoticeCatalogClientId.from_dict(obj["client_id"]) if obj.get("client_id") is not None else None,
             "deployment_id": obj.get("deployment_id"),
             "notice_handlers": [NoticeHandler.from_dict(_item) for _item in obj["notice_handlers"]] if obj.get("notice_handlers") is not None else None
         })

@@ -29,7 +29,10 @@ class ToolConfiguration(BaseModel):
     """ # noqa: E501
     developer_key_id: Optional[StrictInt] = Field(default=None, description="The tool configuration's developer key id", json_schema_extra={"examples": [23]})
     settings: Optional[Dict[str, Any]] = Field(default=None, description="The tool configuration JSON", json_schema_extra={"examples": [{"name": "LTI 1.3 Tool"}]})
-    __properties: ClassVar[List[str]] = ["developer_key_id", "settings"]
+    developer_key: Optional[Dict[str, Any]] = None
+    tool_configuration: Optional[Dict[str, Any]] = None
+    warning_message: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["developer_key_id", "settings", "developer_key", "tool_configuration", "warning_message"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -83,7 +86,10 @@ class ToolConfiguration(BaseModel):
 
         _obj = cls.model_validate({
             "developer_key_id": obj.get("developer_key_id"),
-            "settings": obj.get("settings")
+            "settings": obj.get("settings"),
+            "developer_key": obj.get("developer_key"),
+            "tool_configuration": obj.get("tool_configuration"),
+            "warning_message": obj.get("warning_message")
         })
         return _obj
 

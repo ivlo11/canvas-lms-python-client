@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.module_item import ModuleItem
 from typing import Optional, Set
@@ -34,7 +34,23 @@ class Module(BaseModel):
     items: Optional[List[ModuleItem]] = Field(default=None, description="list of module items")
     context_id: Optional[StrictInt] = Field(default=None, description="the ID of the context for this course pace", json_schema_extra={"examples": [10]})
     context_type: Optional[StrictStr] = Field(default=None, description="The given context for the course pace", json_schema_extra={"examples": ["Course"]})
-    __properties: ClassVar[List[str]] = ["id", "name", "position", "items", "context_id", "context_type"]
+    items_count: Optional[StrictInt] = None
+    items_url: Optional[StrictStr] = None
+    prerequisite_module_ids: Optional[List[StrictInt]] = None
+    publish_final_grade: Optional[StrictBool] = None
+    published: Optional[StrictBool] = None
+    require_sequential_progress: Optional[StrictBool] = None
+    requirement_type: Optional[StrictStr] = None
+    unlock_at: Optional[StrictStr] = None
+    completed_at: Optional[StrictStr] = None
+    estimated_duration: Optional[StrictStr] = None
+    requirement_count: Optional[StrictInt] = None
+    state: Optional[StrictStr] = None
+    publish_warning: Optional[StrictBool] = None
+    publish_warning_items: Optional[List[Dict[str, Any]]] = None
+    relock_warning: Optional[StrictBool] = None
+    unpublish_warning: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "position", "items", "context_id", "context_type", "items_count", "items_url", "prerequisite_module_ids", "publish_final_grade", "published", "require_sequential_progress", "requirement_type", "unlock_at", "completed_at", "estimated_duration", "requirement_count", "state", "publish_warning", "publish_warning_items", "relock_warning", "unpublish_warning"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -81,6 +97,31 @@ class Module(BaseModel):
             for _item_items in self.items:
                 _items.append(_item_items.to_dict() if _item_items is not None else None)
             _dict['items'] = _items
+        # set to None if name (nullable) is None
+        # and model_fields_set contains the field
+        if self.name is None and "name" in self.model_fields_set:
+            _dict['name'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if completed_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.completed_at is None and "completed_at" in self.model_fields_set:
+            _dict['completed_at'] = None
+
+        # set to None if estimated_duration (nullable) is None
+        # and model_fields_set contains the field
+        if self.estimated_duration is None and "estimated_duration" in self.model_fields_set:
+            _dict['estimated_duration'] = None
+
+        # set to None if requirement_count (nullable) is None
+        # and model_fields_set contains the field
+        if self.requirement_count is None and "requirement_count" in self.model_fields_set:
+            _dict['requirement_count'] = None
+
         return _dict
 
     @classmethod
@@ -98,7 +139,23 @@ class Module(BaseModel):
             "position": obj.get("position"),
             "items": [ModuleItem.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "context_id": obj.get("context_id"),
-            "context_type": obj.get("context_type")
+            "context_type": obj.get("context_type"),
+            "items_count": obj.get("items_count"),
+            "items_url": obj.get("items_url"),
+            "prerequisite_module_ids": obj.get("prerequisite_module_ids"),
+            "publish_final_grade": obj.get("publish_final_grade"),
+            "published": obj.get("published"),
+            "require_sequential_progress": obj.get("require_sequential_progress"),
+            "requirement_type": obj.get("requirement_type"),
+            "unlock_at": obj.get("unlock_at"),
+            "completed_at": obj.get("completed_at"),
+            "estimated_duration": obj.get("estimated_duration"),
+            "requirement_count": obj.get("requirement_count"),
+            "state": obj.get("state"),
+            "publish_warning": obj.get("publish_warning"),
+            "publish_warning_items": obj.get("publish_warning_items"),
+            "relock_warning": obj.get("relock_warning"),
+            "unpublish_warning": obj.get("unpublish_warning")
         })
         return _obj
 

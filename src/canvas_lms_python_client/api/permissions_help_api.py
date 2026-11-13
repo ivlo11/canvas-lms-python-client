@@ -18,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.permission_help_text import PermissionHelpText
+from canvas_lms_python_client.models.permissions_help_groups_response import PermissionsHelpGroupsResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -53,7 +54,7 @@ class PermissionsHelpApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> PermissionsHelpGroupsResponse:
         """Retrieve permission groups
 
         Retrieve information about groups of granular permissions  The return value is a dictionary of permission group keys to objects containing +label+ and +subtitle+ keys.
@@ -89,6 +90,7 @@ class PermissionsHelpApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PermissionsHelpGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -115,7 +117,7 @@ class PermissionsHelpApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[PermissionsHelpGroupsResponse]:
         """Retrieve permission groups
 
         Retrieve information about groups of granular permissions  The return value is a dictionary of permission group keys to objects containing +label+ and +subtitle+ keys.
@@ -151,6 +153,7 @@ class PermissionsHelpApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PermissionsHelpGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -214,6 +217,7 @@ class PermissionsHelpApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "PermissionsHelpGroupsResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -251,6 +255,13 @@ class PermissionsHelpApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

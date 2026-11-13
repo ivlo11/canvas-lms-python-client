@@ -18,10 +18,11 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.lti_deployment import LtiDeployment
 from canvas_lms_python_client.models.lti_registration_created_by import LtiRegistrationCreatedBy
+from canvas_lms_python_client.models.lti_registration_history_entry_diff import LtiRegistrationHistoryEntryDiff
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -35,7 +36,7 @@ class LtiRegistrationHistoryEntry(BaseModel):
     lti_registration_id: Optional[StrictInt] = Field(default=None, description="The id of the registration this entry is for", json_schema_extra={"examples": [1]})
     created_at: Optional[datetime] = Field(default=None, description="Timestamp of the entry's creation", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
     updated_at: Optional[datetime] = Field(default=None, description="Timestamp of the entry's last update", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
-    diff: Optional[Dict[str, Any]] = Field(default=None, description="The changes made, keyed by the changed part of the registration", json_schema_extra={"examples": [{"context_controls": [["+", [2], {"id": 2, "available": True}]]}]})
+    diff: Optional[LtiRegistrationHistoryEntryDiff] = None
     update_type: Optional[StrictStr] = Field(default=None, description="What caused the change: manual_edit, registration_update, bulk_control_create or control_edit", json_schema_extra={"examples": ["control_edit"]})
     comment: Optional[StrictStr] = Field(default=None, description="A comment entered with the change, if any", json_schema_extra={"examples": ["Enabled for the course"]})
     old_configuration: Optional[Dict[str, Any]] = Field(default=None, description="The registration's configuration before the change, for configuration changes", json_schema_extra={"examples": [{}]})
@@ -43,7 +44,14 @@ class LtiRegistrationHistoryEntry(BaseModel):
     created_by: Optional[LtiRegistrationCreatedBy] = None
     old_controls_by_deployment: Optional[List[LtiDeployment]] = Field(default=None, description="The affected deployments and their context controls before the change, for control changes")
     new_controls_by_deployment: Optional[List[LtiDeployment]] = Field(default=None, description="The affected deployments and their context controls after the change, for control changes")
-    __properties: ClassVar[List[str]] = ["id", "root_account_id", "lti_registration_id", "created_at", "updated_at", "diff", "update_type", "comment", "old_configuration", "new_configuration", "created_by", "old_controls_by_deployment", "new_controls_by_deployment"]
+    accepted_at: Optional[StrictStr] = None
+    internal_lti_configuration: Optional[Dict[str, Any]] = None
+    reinstall: Optional[StrictBool] = None
+    rejected_at: Optional[StrictStr] = None
+    status: Optional[StrictStr] = None
+    tool_initiated: Optional[StrictBool] = None
+    uuid: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "root_account_id", "lti_registration_id", "created_at", "updated_at", "diff", "update_type", "comment", "old_configuration", "new_configuration", "created_by", "old_controls_by_deployment", "new_controls_by_deployment", "accepted_at", "internal_lti_configuration", "reinstall", "rejected_at", "status", "tool_initiated", "uuid"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -84,6 +92,9 @@ class LtiRegistrationHistoryEntry(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of diff
+        if self.diff:
+            _dict['diff'] = self.diff.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
             _dict['created_by'] = self.created_by.to_dict()
@@ -99,6 +110,31 @@ class LtiRegistrationHistoryEntry(BaseModel):
             for _item_new_controls_by_deployment in self.new_controls_by_deployment:
                 _items.append(_item_new_controls_by_deployment.to_dict() if _item_new_controls_by_deployment is not None else None)
             _dict['new_controls_by_deployment'] = _items
+        # set to None if comment (nullable) is None
+        # and model_fields_set contains the field
+        if self.comment is None and "comment" in self.model_fields_set:
+            _dict['comment'] = None
+
+        # set to None if old_configuration (nullable) is None
+        # and model_fields_set contains the field
+        if self.old_configuration is None and "old_configuration" in self.model_fields_set:
+            _dict['old_configuration'] = None
+
+        # set to None if new_configuration (nullable) is None
+        # and model_fields_set contains the field
+        if self.new_configuration is None and "new_configuration" in self.model_fields_set:
+            _dict['new_configuration'] = None
+
+        # set to None if accepted_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.accepted_at is None and "accepted_at" in self.model_fields_set:
+            _dict['accepted_at'] = None
+
+        # set to None if rejected_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.rejected_at is None and "rejected_at" in self.model_fields_set:
+            _dict['rejected_at'] = None
+
         return _dict
 
     @classmethod
@@ -116,14 +152,21 @@ class LtiRegistrationHistoryEntry(BaseModel):
             "lti_registration_id": obj.get("lti_registration_id"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
-            "diff": obj.get("diff"),
+            "diff": LtiRegistrationHistoryEntryDiff.from_dict(obj["diff"]) if obj.get("diff") is not None else None,
             "update_type": obj.get("update_type"),
             "comment": obj.get("comment"),
             "old_configuration": obj.get("old_configuration"),
             "new_configuration": obj.get("new_configuration"),
             "created_by": LtiRegistrationCreatedBy.from_dict(obj["created_by"]) if obj.get("created_by") is not None else None,
             "old_controls_by_deployment": [LtiDeployment.from_dict(_item) for _item in obj["old_controls_by_deployment"]] if obj.get("old_controls_by_deployment") is not None else None,
-            "new_controls_by_deployment": [LtiDeployment.from_dict(_item) for _item in obj["new_controls_by_deployment"]] if obj.get("new_controls_by_deployment") is not None else None
+            "new_controls_by_deployment": [LtiDeployment.from_dict(_item) for _item in obj["new_controls_by_deployment"]] if obj.get("new_controls_by_deployment") is not None else None,
+            "accepted_at": obj.get("accepted_at"),
+            "internal_lti_configuration": obj.get("internal_lti_configuration"),
+            "reinstall": obj.get("reinstall"),
+            "rejected_at": obj.get("rejected_at"),
+            "status": obj.get("status"),
+            "tool_initiated": obj.get("tool_initiated"),
+            "uuid": obj.get("uuid")
         })
         return _obj
 

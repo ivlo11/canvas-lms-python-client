@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +31,13 @@ class UserDisplay(BaseModel):
     short_name: Optional[StrictStr] = Field(default=None, description="A short name the user has selected, for use in conversations or other less formal places through the site.", json_schema_extra={"examples": ["Shelly"]})
     avatar_image_url: Optional[StrictStr] = Field(default=None, description="If avatars are enabled, this field will be included and contain a url to retrieve the user's avatar.", json_schema_extra={"examples": ["https://en.gravatar.com/avatar/d8cb8c8cd40ddf0cd05241443a591868?s=80&r=g"]})
     html_url: Optional[StrictStr] = Field(default=None, description="URL to access user, either nested to a context or directly.", json_schema_extra={"examples": ["https://school.instructure.com/courses/:course_id/users/:user_id"]})
-    __properties: ClassVar[List[str]] = ["id", "short_name", "avatar_image_url", "html_url"]
+    anonymous_id: Optional[StrictStr] = None
+    display_name: Optional[StrictStr] = None
+    in_moderation_set: Optional[StrictBool] = None
+    pronouns: Optional[Any] = None
+    provisional_grades: Optional[List[Dict[str, Any]]] = None
+    selected_provisional_grade_id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["id", "short_name", "avatar_image_url", "html_url", "anonymous_id", "display_name", "in_moderation_set", "pronouns", "provisional_grades", "selected_provisional_grade_id"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -72,6 +78,16 @@ class UserDisplay(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if pronouns (nullable) is None
+        # and model_fields_set contains the field
+        if self.pronouns is None and "pronouns" in self.model_fields_set:
+            _dict['pronouns'] = None
+
+        # set to None if selected_provisional_grade_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.selected_provisional_grade_id is None and "selected_provisional_grade_id" in self.model_fields_set:
+            _dict['selected_provisional_grade_id'] = None
+
         return _dict
 
     @classmethod
@@ -87,7 +103,13 @@ class UserDisplay(BaseModel):
             "id": obj.get("id"),
             "short_name": obj.get("short_name"),
             "avatar_image_url": obj.get("avatar_image_url"),
-            "html_url": obj.get("html_url")
+            "html_url": obj.get("html_url"),
+            "anonymous_id": obj.get("anonymous_id"),
+            "display_name": obj.get("display_name"),
+            "in_moderation_set": obj.get("in_moderation_set"),
+            "pronouns": obj.get("pronouns"),
+            "provisional_grades": obj.get("provisional_grades"),
+            "selected_provisional_grade_id": obj.get("selected_provisional_grade_id")
         })
         return _obj
 

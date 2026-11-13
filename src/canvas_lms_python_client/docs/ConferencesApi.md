@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **conferences_for_user**
-> List[Conference] conferences_for_user(state=state, page=page, per_page=per_page)
+> ConferencesForUserResponse conferences_for_user(state=state, page=page, per_page=per_page)
 
 List conferences for the current user
 
@@ -26,7 +26,7 @@ The key for the list of conferences is "conferences".
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.conference import Conference
+from canvas_lms_python_client.models.conferences_for_user_response import ConferencesForUserResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[Conference]**](Conference.md)
+[**ConferencesForUserResponse**](ConferencesForUserResponse.md)
 
 ### Authorization
 
@@ -96,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **conferences_index**
-> List[Conference] conferences_index(course_id, page=page, per_page=per_page)
+> ConferencesIndexResponse conferences_index(course_id, page=page, per_page=per_page)
 
 List conferences
 
@@ -111,7 +111,7 @@ the key for the list of conferences is "conferences"
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.conference import Conference
+from canvas_lms_python_client.models.conferences_index_response import ConferencesIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[Conference]**](Conference.md)
+[**ConferencesIndexResponse**](ConferencesIndexResponse.md)
 
 ### Authorization
 
@@ -181,7 +181,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **conferences_index_for_groups**
-> List[Conference] conferences_index_for_groups(group_id, page=page, per_page=per_page)
+> ConferencesIndexResponse conferences_index_for_groups(group_id, page=page, per_page=per_page)
 
 List conferences
 
@@ -196,7 +196,7 @@ the key for the list of conferences is "conferences"
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.conference import Conference
+from canvas_lms_python_client.models.conferences_index_response import ConferencesIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -246,7 +246,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[Conference]**](Conference.md)
+[**ConferencesIndexResponse**](ConferencesIndexResponse.md)
 
 ### Authorization
 

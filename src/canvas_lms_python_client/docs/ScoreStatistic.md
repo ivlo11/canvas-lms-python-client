@@ -6,12 +6,12 @@ Used by Assignment model
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**min** | **int** | Min score | [optional] 
-**max** | **int** | Max score | [optional] 
-**mean** | **int** | Mean score | [optional] 
-**upper_q** | **int** | Upper quartile score | [optional] 
-**median** | **int** | Median score | [optional] 
-**lower_q** | **int** | Lower quartile score | [optional] 
+**min** | **float** | Min score | [optional] 
+**max** | **float** | Max score | [optional] 
+**mean** | **float** | Mean score | [optional] 
+**upper_q** | **float** | Upper quartile score | [optional] 
+**median** | **float** | Median score | [optional] 
+**lower_q** | **float** | Lower quartile score | [optional] 
 
 ## Example
 

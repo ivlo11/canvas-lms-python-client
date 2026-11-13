@@ -182,7 +182,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **asset_processor_submission_details**
-> asset_processor_submission_details(assignment_id, student_id, graph=graph)
+> SupportHelpersAssetProcessorSubmissionDetailsResponse asset_processor_submission_details(assignment_id, student_id, graph=graph)
 
 Get Asset Processor Details
 
@@ -204,6 +204,7 @@ http://canvas-web.inseng.test/api/v1/support_helpers/asset_processor/submission_
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.support_helpers_asset_processor_submission_details_response import SupportHelpersAssetProcessorSubmissionDetailsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -233,7 +234,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get Asset Processor Details
-        await api_instance.asset_processor_submission_details(assignment_id, student_id, graph=graph)
+        api_response = await api_instance.asset_processor_submission_details(assignment_id, student_id, graph=graph)
+        print("The response of AssetProcessorApi->asset_processor_submission_details:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AssetProcessorApi->asset_processor_submission_details: %s\n" % e)
 ```
@@ -251,7 +254,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**SupportHelpersAssetProcessorSubmissionDetailsResponse**](SupportHelpersAssetProcessorSubmissionDetailsResponse.md)
 
 ### Authorization
 
@@ -260,13 +263,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get Asset Processor Details |  -  |
+**0** | SupportHelpersAssetProcessorSubmissionDetailsResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

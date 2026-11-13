@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,7 +30,12 @@ class ExternalToolTagAttributes(BaseModel):
     url: Optional[StrictStr] = Field(default=None, description="URL to the external tool", json_schema_extra={"examples": ["http://instructure.com"]})
     new_tab: Optional[StrictBool] = Field(default=None, description="Whether or not there is a new tab for the external tool")
     resource_link_id: Optional[StrictStr] = Field(default=None, description="the identifier for this tool_tag", json_schema_extra={"examples": ["ab81173af98b8c33e66a"]})
-    __properties: ClassVar[List[str]] = ["url", "new_tab", "resource_link_id"]
+    content_id: Optional[StrictInt] = None
+    content_type: Optional[StrictStr] = None
+    custom_params: Optional[Dict[str, Any]] = None
+    external_data: Optional[StrictStr] = None
+    resource_link_title: Optional[Any] = None
+    __properties: ClassVar[List[str]] = ["url", "new_tab", "resource_link_id", "content_id", "content_type", "custom_params", "external_data", "resource_link_title"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -71,6 +76,31 @@ class ExternalToolTagAttributes(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if url (nullable) is None
+        # and model_fields_set contains the field
+        if self.url is None and "url" in self.model_fields_set:
+            _dict['url'] = None
+
+        # set to None if new_tab (nullable) is None
+        # and model_fields_set contains the field
+        if self.new_tab is None and "new_tab" in self.model_fields_set:
+            _dict['new_tab'] = None
+
+        # set to None if custom_params (nullable) is None
+        # and model_fields_set contains the field
+        if self.custom_params is None and "custom_params" in self.model_fields_set:
+            _dict['custom_params'] = None
+
+        # set to None if external_data (nullable) is None
+        # and model_fields_set contains the field
+        if self.external_data is None and "external_data" in self.model_fields_set:
+            _dict['external_data'] = None
+
+        # set to None if resource_link_title (nullable) is None
+        # and model_fields_set contains the field
+        if self.resource_link_title is None and "resource_link_title" in self.model_fields_set:
+            _dict['resource_link_title'] = None
+
         return _dict
 
     @classmethod
@@ -85,7 +115,12 @@ class ExternalToolTagAttributes(BaseModel):
         _obj = cls.model_validate({
             "url": obj.get("url"),
             "new_tab": obj.get("new_tab"),
-            "resource_link_id": obj.get("resource_link_id")
+            "resource_link_id": obj.get("resource_link_id"),
+            "content_id": obj.get("content_id"),
+            "content_type": obj.get("content_type"),
+            "custom_params": obj.get("custom_params"),
+            "external_data": obj.get("external_data"),
+            "resource_link_title": obj.get("resource_link_title")
         })
         return _obj
 

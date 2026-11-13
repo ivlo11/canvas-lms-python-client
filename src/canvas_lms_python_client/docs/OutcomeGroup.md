@@ -18,6 +18,13 @@ Name | Type | Description | Notes
 **outcomes_url** | **str** | the URL for listing/creating outcome links under the outcome group. should be treated as opaque | [optional] 
 **import_url** | **str** | the URL for importing another group into this outcome group. should be treated as opaque. omitted in the abbreviated form. | [optional] 
 **can_edit** | **bool** | whether the current user can update the outcome group | [optional] 
+**completion** | **object** |  | [optional] 
+**created_at** | **str** |  | [optional] 
+**message** | **object** |  | [optional] 
+**tag** | **str** |  | [optional] 
+**updated_at** | **str** |  | [optional] 
+**user_id** | **int** |  | [optional] 
+**workflow_state** | **str** |  | [optional] 
 
 ## Example
 

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **user_id** | **str** | Member&#39;s unique LTI identifier. | [optional] 
 **roles** | **List[str]** | Member&#39;s roles in the current Context, expressed as LTI/LIS URNs. | [optional] 
 **message** | [**List[NamesAndRoleMessage]**](NamesAndRoleMessage.md) | Only present when the request specifies a &#x60;rlid&#x60; query parameter. Contains additional attributes which would appear in the LTI launch message were this member to click the link referenced by the &#x60;rlid&#x60; query parameter | [optional] 
+**lti11_legacy_user_id** | **str** |  | [optional] 
 
 ## Example
 

@@ -179,7 +179,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **content_shares_destroy**
-> content_shares_destroy(id, user_id)
+> ContentSharesDestroyResponse content_shares_destroy(id, user_id)
 
 Remove content share
 
@@ -192,6 +192,7 @@ copies of the content share.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.content_shares_destroy_response import ContentSharesDestroyResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -220,7 +221,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Remove content share
-        await api_instance.content_shares_destroy(id, user_id)
+        api_response = await api_instance.content_shares_destroy(id, user_id)
+        print("The response of ContentSharesApi->content_shares_destroy:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ContentSharesApi->content_shares_destroy: %s\n" % e)
 ```
@@ -237,7 +240,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ContentSharesDestroyResponse**](ContentSharesDestroyResponse.md)
 
 ### Authorization
 
@@ -246,13 +249,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Remove content share |  -  |
+**0** | ContentSharesDestroyResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -51,7 +51,7 @@ Method | HTTP request | Description
 
 
 # **discussion_topics_api_add_entry**
-> discussion_topics_api_add_entry(course_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+> DiscussionEntry discussion_topics_api_add_entry(course_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
 
 Post an entry
 
@@ -64,6 +64,7 @@ the created entry (see documentation for 'entries' method) on success.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.models.discussion_topics_api_add_entry_request import DiscussionTopicsApiAddEntryRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -94,7 +95,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Post an entry
-        await api_instance.discussion_topics_api_add_entry(course_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+        api_response = await api_instance.discussion_topics_api_add_entry(course_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_add_entry:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_add_entry: %s\n" % e)
 ```
@@ -112,7 +115,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionEntry**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -121,18 +124,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Post an entry |  -  |
+**0** | DiscussionEntry |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_add_entry_for_groups**
-> discussion_topics_api_add_entry_for_groups(group_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+> DiscussionEntry discussion_topics_api_add_entry_for_groups(group_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
 
 Post an entry
 
@@ -145,6 +148,7 @@ the created entry (see documentation for 'entries' method) on success.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.models.discussion_topics_api_add_entry_request import DiscussionTopicsApiAddEntryRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -175,7 +179,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Post an entry
-        await api_instance.discussion_topics_api_add_entry_for_groups(group_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+        api_response = await api_instance.discussion_topics_api_add_entry_for_groups(group_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_add_entry_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_add_entry_for_groups: %s\n" % e)
 ```
@@ -193,7 +199,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionEntry**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -202,18 +208,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Post an entry |  -  |
+**0** | DiscussionEntry |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_add_reply**
-> discussion_topics_api_add_reply(course_id, entry_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+> DiscussionEntry discussion_topics_api_add_reply(course_id, entry_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
 
 Post a reply
 
@@ -231,6 +237,7 @@ Forbidden status and the body 'require_initial_post'.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.models.discussion_topics_api_add_entry_request import DiscussionTopicsApiAddEntryRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -262,7 +269,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Post a reply
-        await api_instance.discussion_topics_api_add_reply(course_id, entry_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+        api_response = await api_instance.discussion_topics_api_add_reply(course_id, entry_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_add_reply:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_add_reply: %s\n" % e)
 ```
@@ -281,7 +290,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionEntry**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -290,18 +299,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Post a reply |  -  |
+**0** | DiscussionEntry |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_add_reply_for_groups**
-> discussion_topics_api_add_reply_for_groups(entry_id, group_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+> DiscussionEntry discussion_topics_api_add_reply_for_groups(entry_id, group_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
 
 Post a reply
 
@@ -319,6 +328,7 @@ Forbidden status and the body 'require_initial_post'.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.models.discussion_topics_api_add_entry_request import DiscussionTopicsApiAddEntryRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -350,7 +360,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Post a reply
-        await api_instance.discussion_topics_api_add_reply_for_groups(entry_id, group_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+        api_response = await api_instance.discussion_topics_api_add_reply_for_groups(entry_id, group_id, topic_id, discussion_topics_api_add_entry_request=discussion_topics_api_add_entry_request)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_add_reply_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_add_reply_for_groups: %s\n" % e)
 ```
@@ -369,7 +381,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionEntry**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -378,18 +390,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Post a reply |  -  |
+**0** | DiscussionEntry |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_disable_summary**
-> discussion_topics_api_disable_summary(course_id, topic_id)
+> DiscussionTopicsDisableSummaryResponse discussion_topics_api_disable_summary(course_id, topic_id)
 
 Disable summary
 
@@ -402,6 +414,7 @@ Disables the summary for a discussion topic.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topics_disable_summary_response import DiscussionTopicsDisableSummaryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -430,7 +443,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Disable summary
-        await api_instance.discussion_topics_api_disable_summary(course_id, topic_id)
+        api_response = await api_instance.discussion_topics_api_disable_summary(course_id, topic_id)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_disable_summary:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_disable_summary: %s\n" % e)
 ```
@@ -447,7 +462,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsDisableSummaryResponse**](DiscussionTopicsDisableSummaryResponse.md)
 
 ### Authorization
 
@@ -462,12 +477,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Disable summary |  -  |
+**0** | DiscussionTopicsDisableSummaryResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_disable_summary_for_groups**
-> discussion_topics_api_disable_summary_for_groups(group_id, topic_id)
+> DiscussionTopicsDisableSummaryResponse discussion_topics_api_disable_summary_for_groups(group_id, topic_id)
 
 Disable summary
 
@@ -480,6 +495,7 @@ Disables the summary for a discussion topic.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topics_disable_summary_response import DiscussionTopicsDisableSummaryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -508,7 +524,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Disable summary
-        await api_instance.discussion_topics_api_disable_summary_for_groups(group_id, topic_id)
+        api_response = await api_instance.discussion_topics_api_disable_summary_for_groups(group_id, topic_id)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_disable_summary_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_disable_summary_for_groups: %s\n" % e)
 ```
@@ -525,7 +543,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsDisableSummaryResponse**](DiscussionTopicsDisableSummaryResponse.md)
 
 ### Authorization
 
@@ -540,7 +558,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Disable summary |  -  |
+**0** | DiscussionTopicsDisableSummaryResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1079,7 +1097,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_find_or_create_summary**
-> discussion_topics_api_find_or_create_summary(course_id, topic_id, discussion_topics_api_find_or_create_summary_request=discussion_topics_api_find_or_create_summary_request)
+> DiscussionTopicsFindOrCreateSummaryResponse discussion_topics_api_find_or_create_summary(course_id, topic_id, discussion_topics_api_find_or_create_summary_request=discussion_topics_api_find_or_create_summary_request)
 
 Find or Create Summary
 
@@ -1092,6 +1110,7 @@ Generates a summary for a discussion topic. Returns the summary text and usage i
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.discussion_topics_api_find_or_create_summary_request import DiscussionTopicsApiFindOrCreateSummaryRequest
+from canvas_lms_python_client.models.discussion_topics_find_or_create_summary_response import DiscussionTopicsFindOrCreateSummaryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1121,7 +1140,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Find or Create Summary
-        await api_instance.discussion_topics_api_find_or_create_summary(course_id, topic_id, discussion_topics_api_find_or_create_summary_request=discussion_topics_api_find_or_create_summary_request)
+        api_response = await api_instance.discussion_topics_api_find_or_create_summary(course_id, topic_id, discussion_topics_api_find_or_create_summary_request=discussion_topics_api_find_or_create_summary_request)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_find_or_create_summary:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_find_or_create_summary: %s\n" % e)
 ```
@@ -1139,7 +1160,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsFindOrCreateSummaryResponse**](DiscussionTopicsFindOrCreateSummaryResponse.md)
 
 ### Authorization
 
@@ -1154,12 +1175,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Find or Create Summary |  -  |
+**0** | DiscussionTopicsFindOrCreateSummaryResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_find_or_create_summary_for_groups**
-> discussion_topics_api_find_or_create_summary_for_groups(group_id, topic_id, discussion_topics_api_find_or_create_summary_request=discussion_topics_api_find_or_create_summary_request)
+> DiscussionTopicsFindOrCreateSummaryResponse discussion_topics_api_find_or_create_summary_for_groups(group_id, topic_id, discussion_topics_api_find_or_create_summary_request=discussion_topics_api_find_or_create_summary_request)
 
 Find or Create Summary
 
@@ -1172,6 +1193,7 @@ Generates a summary for a discussion topic. Returns the summary text and usage i
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.discussion_topics_api_find_or_create_summary_request import DiscussionTopicsApiFindOrCreateSummaryRequest
+from canvas_lms_python_client.models.discussion_topics_find_or_create_summary_response import DiscussionTopicsFindOrCreateSummaryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1201,7 +1223,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Find or Create Summary
-        await api_instance.discussion_topics_api_find_or_create_summary_for_groups(group_id, topic_id, discussion_topics_api_find_or_create_summary_request=discussion_topics_api_find_or_create_summary_request)
+        api_response = await api_instance.discussion_topics_api_find_or_create_summary_for_groups(group_id, topic_id, discussion_topics_api_find_or_create_summary_request=discussion_topics_api_find_or_create_summary_request)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_find_or_create_summary_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_find_or_create_summary_for_groups: %s\n" % e)
 ```
@@ -1219,7 +1243,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsFindOrCreateSummaryResponse**](DiscussionTopicsFindOrCreateSummaryResponse.md)
 
 ### Authorization
 
@@ -1234,12 +1258,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Find or Create Summary |  -  |
+**0** | DiscussionTopicsFindOrCreateSummaryResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_find_summary**
-> discussion_topics_api_find_summary(course_id, topic_id)
+> DiscussionTopicsFindSummaryResponse discussion_topics_api_find_summary(course_id, topic_id)
 
 Find Last Summary
 
@@ -1254,6 +1278,7 @@ Returns:
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topics_find_summary_response import DiscussionTopicsFindSummaryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1282,7 +1307,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Find Last Summary
-        await api_instance.discussion_topics_api_find_summary(course_id, topic_id)
+        api_response = await api_instance.discussion_topics_api_find_summary(course_id, topic_id)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_find_summary:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_find_summary: %s\n" % e)
 ```
@@ -1299,7 +1326,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsFindSummaryResponse**](DiscussionTopicsFindSummaryResponse.md)
 
 ### Authorization
 
@@ -1314,12 +1341,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Find Last Summary |  -  |
+**0** | DiscussionTopicsFindSummaryResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_find_summary_for_groups**
-> discussion_topics_api_find_summary_for_groups(group_id, topic_id)
+> DiscussionTopicsFindSummaryResponse discussion_topics_api_find_summary_for_groups(group_id, topic_id)
 
 Find Last Summary
 
@@ -1334,6 +1361,7 @@ Returns:
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topics_find_summary_response import DiscussionTopicsFindSummaryResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1362,7 +1390,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Find Last Summary
-        await api_instance.discussion_topics_api_find_summary_for_groups(group_id, topic_id)
+        api_response = await api_instance.discussion_topics_api_find_summary_for_groups(group_id, topic_id)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_find_summary_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_find_summary_for_groups: %s\n" % e)
 ```
@@ -1379,7 +1409,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsFindSummaryResponse**](DiscussionTopicsFindSummaryResponse.md)
 
 ### Authorization
 
@@ -1394,7 +1424,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Find Last Summary |  -  |
+**0** | DiscussionTopicsFindSummaryResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2911,7 +2941,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_show**
-> discussion_topics_api_show(course_id, topic_id, include=include)
+> DiscussionTopic discussion_topics_api_show(course_id, topic_id, include=include)
 
 Get a single topic
 
@@ -2923,6 +2953,7 @@ Returns data on an individual discussion topic. See the List action for the resp
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topic import DiscussionTopic
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2952,7 +2983,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single topic
-        await api_instance.discussion_topics_api_show(course_id, topic_id, include=include)
+        api_response = await api_instance.discussion_topics_api_show(course_id, topic_id, include=include)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_show: %s\n" % e)
 ```
@@ -2970,7 +3003,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopic**](DiscussionTopic.md)
 
 ### Authorization
 
@@ -2979,18 +3012,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a single topic |  -  |
+**0** | DiscussionTopic |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_show_for_groups**
-> discussion_topics_api_show_for_groups(group_id, topic_id, include=include)
+> DiscussionTopic discussion_topics_api_show_for_groups(group_id, topic_id, include=include)
 
 Get a single topic
 
@@ -3002,6 +3035,7 @@ Returns data on an individual discussion topic. See the List action for the resp
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topic import DiscussionTopic
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -3031,7 +3065,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single topic
-        await api_instance.discussion_topics_api_show_for_groups(group_id, topic_id, include=include)
+        api_response = await api_instance.discussion_topics_api_show_for_groups(group_id, topic_id, include=include)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_show_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_show_for_groups: %s\n" % e)
 ```
@@ -3049,7 +3085,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopic**](DiscussionTopic.md)
 
 ### Authorization
 
@@ -3058,13 +3094,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get a single topic |  -  |
+**0** | DiscussionTopic |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3227,7 +3263,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_summary_feedback**
-> discussion_topics_api_summary_feedback(course_id, summary_id, topic_id, discussion_topics_api_summary_feedback_request=discussion_topics_api_summary_feedback_request)
+> DiscussionTopicsSummaryFeedbackResponse discussion_topics_api_summary_feedback(course_id, summary_id, topic_id, discussion_topics_api_summary_feedback_request=discussion_topics_api_summary_feedback_request)
 
 Summary Feedback
 
@@ -3240,6 +3276,7 @@ Persists feedback on a discussion topic summary.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.discussion_topics_api_summary_feedback_request import DiscussionTopicsApiSummaryFeedbackRequest
+from canvas_lms_python_client.models.discussion_topics_summary_feedback_response import DiscussionTopicsSummaryFeedbackResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -3270,7 +3307,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Summary Feedback
-        await api_instance.discussion_topics_api_summary_feedback(course_id, summary_id, topic_id, discussion_topics_api_summary_feedback_request=discussion_topics_api_summary_feedback_request)
+        api_response = await api_instance.discussion_topics_api_summary_feedback(course_id, summary_id, topic_id, discussion_topics_api_summary_feedback_request=discussion_topics_api_summary_feedback_request)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_summary_feedback:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_summary_feedback: %s\n" % e)
 ```
@@ -3289,7 +3328,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsSummaryFeedbackResponse**](DiscussionTopicsSummaryFeedbackResponse.md)
 
 ### Authorization
 
@@ -3304,12 +3343,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Summary Feedback |  -  |
+**0** | DiscussionTopicsSummaryFeedbackResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_summary_feedback_for_groups**
-> discussion_topics_api_summary_feedback_for_groups(group_id, summary_id, topic_id, discussion_topics_api_summary_feedback_request=discussion_topics_api_summary_feedback_request)
+> DiscussionTopicsSummaryFeedbackResponse discussion_topics_api_summary_feedback_for_groups(group_id, summary_id, topic_id, discussion_topics_api_summary_feedback_request=discussion_topics_api_summary_feedback_request)
 
 Summary Feedback
 
@@ -3322,6 +3361,7 @@ Persists feedback on a discussion topic summary.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.discussion_topics_api_summary_feedback_request import DiscussionTopicsApiSummaryFeedbackRequest
+from canvas_lms_python_client.models.discussion_topics_summary_feedback_response import DiscussionTopicsSummaryFeedbackResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -3352,7 +3392,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Summary Feedback
-        await api_instance.discussion_topics_api_summary_feedback_for_groups(group_id, summary_id, topic_id, discussion_topics_api_summary_feedback_request=discussion_topics_api_summary_feedback_request)
+        api_response = await api_instance.discussion_topics_api_summary_feedback_for_groups(group_id, summary_id, topic_id, discussion_topics_api_summary_feedback_request=discussion_topics_api_summary_feedback_request)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_summary_feedback_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_summary_feedback_for_groups: %s\n" % e)
 ```
@@ -3371,7 +3413,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsSummaryFeedbackResponse**](DiscussionTopicsSummaryFeedbackResponse.md)
 
 ### Authorization
 
@@ -3386,7 +3428,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Summary Feedback |  -  |
+**0** | DiscussionTopicsSummaryFeedbackResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3549,7 +3591,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_view**
-> discussion_topics_api_view(course_id, topic_id)
+> DiscussionTopicsViewResponse discussion_topics_api_view(course_id, topic_id)
 
 Get the full topic
 
@@ -3591,6 +3633,7 @@ The response is an object containing the following keys:
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topics_view_response import DiscussionTopicsViewResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -3619,7 +3662,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get the full topic
-        await api_instance.discussion_topics_api_view(course_id, topic_id)
+        api_response = await api_instance.discussion_topics_api_view(course_id, topic_id)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_view:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_view: %s\n" % e)
 ```
@@ -3636,7 +3681,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsViewResponse**](DiscussionTopicsViewResponse.md)
 
 ### Authorization
 
@@ -3651,12 +3696,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get the full topic |  -  |
+**0** | DiscussionTopicsViewResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_view_for_groups**
-> discussion_topics_api_view_for_groups(group_id, topic_id)
+> DiscussionTopicsViewResponse discussion_topics_api_view_for_groups(group_id, topic_id)
 
 Get the full topic
 
@@ -3698,6 +3743,7 @@ The response is an object containing the following keys:
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_topics_view_response import DiscussionTopicsViewResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -3726,7 +3772,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get the full topic
-        await api_instance.discussion_topics_api_view_for_groups(group_id, topic_id)
+        api_response = await api_instance.discussion_topics_api_view_for_groups(group_id, topic_id)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_view_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_view_for_groups: %s\n" % e)
 ```
@@ -3743,7 +3791,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**DiscussionTopicsViewResponse**](DiscussionTopicsViewResponse.md)
 
 ### Authorization
 
@@ -3758,7 +3806,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get the full topic |  -  |
+**0** | DiscussionTopicsViewResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

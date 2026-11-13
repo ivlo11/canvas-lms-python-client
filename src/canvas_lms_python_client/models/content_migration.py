@@ -20,6 +20,8 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.content_migration_attachment import ContentMigrationAttachment
+from canvas_lms_python_client.models.content_migration_pre_attachment import ContentMigrationPreAttachment
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -32,14 +34,18 @@ class ContentMigration(BaseModel):
     migration_type: Optional[StrictStr] = Field(default=None, description="the type of content migration", json_schema_extra={"examples": ["common_cartridge_importer"]})
     migration_type_title: Optional[StrictStr] = Field(default=None, description="the name of the content migration type", json_schema_extra={"examples": ["Canvas Cartridge Importer"]})
     migration_issues_url: Optional[StrictStr] = Field(default=None, description="API url to the content migration's issues", json_schema_extra={"examples": ["https://example.com/api/v1/courses/1/content_migrations/1/migration_issues"]})
-    attachment: Optional[StrictStr] = Field(default=None, description="attachment api object for the uploaded file may not be present for all migrations", json_schema_extra={"examples": ["{\"url\"=>\"https://example.com/api/v1/courses/1/content_migrations/1/download_archive\"}"]})
+    attachment: Optional[ContentMigrationAttachment] = None
     progress_url: Optional[StrictStr] = Field(default=None, description="The api endpoint for polling the current progress", json_schema_extra={"examples": ["https://example.com/api/v1/progress/4"]})
     user_id: Optional[StrictInt] = Field(default=None, description="The user who started the migration", json_schema_extra={"examples": [4]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="Current state of the content migration: pre_processing, pre_processed, running, waiting_for_select, completed, failed", json_schema_extra={"examples": ["running"]})
     started_at: Optional[datetime] = Field(default=None, description="timestamp", json_schema_extra={"examples": ["2012-06-01T00:00:00-06:00"]})
     finished_at: Optional[datetime] = Field(default=None, description="timestamp", json_schema_extra={"examples": ["2012-06-01T00:00:00-06:00"]})
-    pre_attachment: Optional[StrictStr] = Field(default=None, description="file uploading data, see {file:file.file_uploads.html File Upload Documentation} for file upload workflow This works a little differently in that all the file data is in the pre_attachment hash if there is no upload_url then there was an attachment pre-processing error, the error message will be in the message key This data will only be here after a create or update call", json_schema_extra={"examples": ["{\"upload_url\"=>\"\", \"message\"=>\"file exceeded quota\", \"upload_params\"=>{}}"]})
-    __properties: ClassVar[List[str]] = ["id", "migration_type", "migration_type_title", "migration_issues_url", "attachment", "progress_url", "user_id", "workflow_state", "started_at", "finished_at", "pre_attachment"]
+    pre_attachment: Optional[ContentMigrationPreAttachment] = None
+    created_at: Optional[StrictStr] = None
+    migration_issues_count: Optional[StrictInt] = None
+    audit_info: Optional[Dict[str, Any]] = None
+    settings: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["id", "migration_type", "migration_type_title", "migration_issues_url", "attachment", "progress_url", "user_id", "workflow_state", "started_at", "finished_at", "pre_attachment", "created_at", "migration_issues_count", "audit_info", "settings"]
 
     @field_validator('workflow_state')
     def workflow_state_validate_enum(cls, value):
@@ -90,6 +96,32 @@ class ContentMigration(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of attachment
+        if self.attachment:
+            _dict['attachment'] = self.attachment.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of pre_attachment
+        if self.pre_attachment:
+            _dict['pre_attachment'] = self.pre_attachment.to_dict()
+        # set to None if migration_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.migration_type is None and "migration_type" in self.model_fields_set:
+            _dict['migration_type'] = None
+
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
+
+        # set to None if started_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.started_at is None and "started_at" in self.model_fields_set:
+            _dict['started_at'] = None
+
+        # set to None if finished_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.finished_at is None and "finished_at" in self.model_fields_set:
+            _dict['finished_at'] = None
+
         return _dict
 
     @classmethod
@@ -106,13 +138,17 @@ class ContentMigration(BaseModel):
             "migration_type": obj.get("migration_type"),
             "migration_type_title": obj.get("migration_type_title"),
             "migration_issues_url": obj.get("migration_issues_url"),
-            "attachment": obj.get("attachment"),
+            "attachment": ContentMigrationAttachment.from_dict(obj["attachment"]) if obj.get("attachment") is not None else None,
             "progress_url": obj.get("progress_url"),
             "user_id": obj.get("user_id"),
             "workflow_state": obj.get("workflow_state"),
             "started_at": obj.get("started_at"),
             "finished_at": obj.get("finished_at"),
-            "pre_attachment": obj.get("pre_attachment")
+            "pre_attachment": ContentMigrationPreAttachment.from_dict(obj["pre_attachment"]) if obj.get("pre_attachment") is not None else None,
+            "created_at": obj.get("created_at"),
+            "migration_issues_count": obj.get("migration_issues_count"),
+            "audit_info": obj.get("audit_info"),
+            "settings": obj.get("settings")
         })
         return _obj
 

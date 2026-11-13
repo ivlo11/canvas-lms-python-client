@@ -418,7 +418,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **files_api_quota**
-> files_api_quota(course_id)
+> FilesApiQuotaResponse files_api_quota(course_id)
 
 Get quota information
 
@@ -430,6 +430,7 @@ Returns the total and used storage quota for the course, group, or user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.files_api_quota_response import FilesApiQuotaResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -457,7 +458,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get quota information
-        await api_instance.files_api_quota(course_id)
+        api_response = await api_instance.files_api_quota(course_id)
+        print("The response of FilesApi->files_api_quota:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->files_api_quota: %s\n" % e)
 ```
@@ -473,7 +476,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**FilesApiQuotaResponse**](FilesApiQuotaResponse.md)
 
 ### Authorization
 
@@ -488,12 +491,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get quota information |  -  |
+**0** | FilesApiQuotaResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **files_api_quota_for_groups**
-> files_api_quota_for_groups(group_id)
+> FilesApiQuotaResponse files_api_quota_for_groups(group_id)
 
 Get quota information
 
@@ -505,6 +508,7 @@ Returns the total and used storage quota for the course, group, or user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.files_api_quota_response import FilesApiQuotaResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -532,7 +536,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get quota information
-        await api_instance.files_api_quota_for_groups(group_id)
+        api_response = await api_instance.files_api_quota_for_groups(group_id)
+        print("The response of FilesApi->files_api_quota_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->files_api_quota_for_groups: %s\n" % e)
 ```
@@ -548,7 +554,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**FilesApiQuotaResponse**](FilesApiQuotaResponse.md)
 
 ### Authorization
 
@@ -563,12 +569,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get quota information |  -  |
+**0** | FilesApiQuotaResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **files_api_quota_for_users**
-> files_api_quota_for_users(user_id)
+> FilesApiQuotaResponse files_api_quota_for_users(user_id)
 
 Get quota information
 
@@ -580,6 +586,7 @@ Returns the total and used storage quota for the course, group, or user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.files_api_quota_response import FilesApiQuotaResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -607,7 +614,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get quota information
-        await api_instance.files_api_quota_for_users(user_id)
+        api_response = await api_instance.files_api_quota_for_users(user_id)
+        print("The response of FilesApi->files_api_quota_for_users:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->files_api_quota_for_users: %s\n" % e)
 ```
@@ -623,7 +632,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**FilesApiQuotaResponse**](FilesApiQuotaResponse.md)
 
 ### Authorization
 
@@ -638,7 +647,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get quota information |  -  |
+**0** | FilesApiQuotaResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1311,7 +1320,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **files_icon_metadata**
-> files_icon_metadata(id)
+> FilesIconMetadataResponse files_icon_metadata(id)
 
 Get icon metadata
 
@@ -1323,6 +1332,7 @@ Returns the icon maker file attachment metadata
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.files_icon_metadata_response import FilesIconMetadataResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1350,7 +1360,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get icon metadata
-        await api_instance.files_icon_metadata(id)
+        api_response = await api_instance.files_icon_metadata(id)
+        print("The response of FilesApi->files_icon_metadata:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->files_icon_metadata: %s\n" % e)
 ```
@@ -1366,7 +1378,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**FilesIconMetadataResponse**](FilesIconMetadataResponse.md)
 
 ### Authorization
 
@@ -1381,12 +1393,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get icon metadata |  -  |
+**0** | FilesIconMetadataResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **files_public_url**
-> files_public_url(id, submission_id=submission_id)
+> FilesPublicUrlResponse files_public_url(id, submission_id=submission_id)
 
 Get public inline preview url
 
@@ -1398,6 +1410,7 @@ Determine the URL that should be used for inline preview of the file.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.files_public_url_response import FilesPublicUrlResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1426,7 +1439,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get public inline preview url
-        await api_instance.files_public_url(id, submission_id=submission_id)
+        api_response = await api_instance.files_public_url(id, submission_id=submission_id)
+        print("The response of FilesApi->files_public_url:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FilesApi->files_public_url: %s\n" % e)
 ```
@@ -1443,7 +1458,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**FilesPublicUrlResponse**](FilesPublicUrlResponse.md)
 
 ### Authorization
 
@@ -1458,7 +1473,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Get public inline preview url |  -  |
+**0** | FilesPublicUrlResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

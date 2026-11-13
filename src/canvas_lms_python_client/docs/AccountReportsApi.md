@@ -95,7 +95,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **account_reports_available_reports**
-> account_reports_available_reports(account_id, include=include)
+> List[AccountReportsAvailableReportsResponse] account_reports_available_reports(account_id, include=include)
 
 List Available Reports
 
@@ -107,6 +107,7 @@ Returns a paginated list of reports for the current context.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.account_reports_available_reports_response import AccountReportsAvailableReportsResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -135,7 +136,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List Available Reports
-        await api_instance.account_reports_available_reports(account_id, include=include)
+        api_response = await api_instance.account_reports_available_reports(account_id, include=include)
+        print("The response of AccountReportsApi->account_reports_available_reports:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AccountReportsApi->account_reports_available_reports: %s\n" % e)
 ```
@@ -152,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[AccountReportsAvailableReportsResponse]**](AccountReportsAvailableReportsResponse.md)
 
 ### Authorization
 
@@ -167,7 +170,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List Available Reports |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

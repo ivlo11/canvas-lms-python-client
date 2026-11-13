@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **course_nicknames_clear**
-> course_nicknames_clear()
+> CourseNicknamesClearResponse course_nicknames_clear()
 
 Clear course nicknames
 
@@ -24,6 +24,7 @@ Remove all stored course nicknames.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.course_nicknames_clear_response import CourseNicknamesClearResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -50,7 +51,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Clear course nicknames
-        await api_instance.course_nicknames_clear()
+        api_response = await api_instance.course_nicknames_clear()
+        print("The response of CourseNicknamesApi->course_nicknames_clear:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling CourseNicknamesApi->course_nicknames_clear: %s\n" % e)
 ```
@@ -63,7 +66,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**CourseNicknamesClearResponse**](CourseNicknamesClearResponse.md)
 
 ### Authorization
 
@@ -72,13 +75,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Clear course nicknames |  -  |
+**0** | CourseNicknamesClearResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

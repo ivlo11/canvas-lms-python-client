@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +33,10 @@ class HelpLink(BaseModel):
     url: Optional[StrictStr] = Field(default=None, description="The URL of the help link", json_schema_extra={"examples": ["#teacher_feedback"]})
     type: Optional[StrictStr] = Field(default=None, description="The type of the help link", json_schema_extra={"examples": ["default"]})
     available_to: Optional[List[StrictStr]] = Field(default=None, description="The roles that have access to this help link", json_schema_extra={"examples": [["user", "student", "teacher", "admin", "observer", "unenrolled"]]})
-    __properties: ClassVar[List[str]] = ["id", "text", "subtext", "url", "type", "available_to"]
+    feature_headline: Optional[StrictStr] = None
+    is_featured: Optional[StrictBool] = None
+    is_new: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["id", "text", "subtext", "url", "type", "available_to", "feature_headline", "is_featured", "is_new"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -91,7 +94,10 @@ class HelpLink(BaseModel):
             "subtext": obj.get("subtext"),
             "url": obj.get("url"),
             "type": obj.get("type"),
-            "available_to": obj.get("available_to")
+            "available_to": obj.get("available_to"),
+            "feature_headline": obj.get("feature_headline"),
+            "is_featured": obj.get("is_featured"),
+            "is_new": obj.get("is_new")
         })
         return _obj
 

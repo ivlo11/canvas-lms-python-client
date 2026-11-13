@@ -20,6 +20,9 @@ Name | Type | Description | Notes
 **checkpoints** | [**List[LearningObjectDates]**](LearningObjectDates.md) | list of Checkpoint objects, only present if a learning object has subAssignments | [optional] 
 **tag** | **str** | the tag identifying the type of checkpoint (only present for checkpoints) | [optional] 
 **peer_review_sub_assignment** | [**LearningObjectDatesPeerReviewSubAssignment**](LearningObjectDatesPeerReviewSubAssignment.md) |  | [optional] 
+**name** | **str** |  | [optional] 
+**points_possible** | **float** |  | [optional] 
+**group_category_id** | **int** |  | [optional] 
 
 ## Example
 

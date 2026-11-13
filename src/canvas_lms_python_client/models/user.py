@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.user_permissions import UserPermissions
 from typing import Optional, Set
@@ -51,7 +51,52 @@ class User(BaseModel):
     effective_locale: Optional[StrictStr] = Field(default=None, description="Optional: This field is only returned in certain API calls, and only for the current user. It will return the locale the user sees Canvas in, in RFC 5646 format.", json_schema_extra={"examples": ["en"]})
     uuid: Optional[StrictStr] = Field(default=None, description="Optional: This field is only returned in certain API calls (for example with include[]=uuid), and will return the user's Canvas UUID.", json_schema_extra={"examples": ["WvAHhY5FINzq5IyRIJybGeiXyFkG3SqHUPb7jZY5"]})
     permissions: Optional[UserPermissions] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "sortable_name", "last_name", "first_name", "short_name", "sis_user_id", "sis_import_id", "integration_id", "login_id", "avatar_url", "avatar_state", "enrollments", "email", "locale", "last_login", "time_zone", "bio", "pronouns", "effective_locale", "uuid", "permissions"]
+    account_uuid: Optional[StrictStr] = None
+    anonymous_id: Optional[StrictStr] = None
+    avatar_image_source: Optional[StrictStr] = None
+    avatar_image_updated_at: Optional[StrictStr] = None
+    avatar_image_url: Optional[StrictStr] = None
+    browser_locale: Optional[StrictStr] = None
+    confirmation_url: Optional[StrictStr] = None
+    created_at: Optional[StrictStr] = None
+    crocodoc_id: Optional[StrictInt] = None
+    custom_links: Optional[List[Dict[str, Any]]] = None
+    deleted_at: Optional[StrictStr] = None
+    destination: Optional[StrictStr] = None
+    display_name: Optional[StrictStr] = None
+    group_ids: Optional[List[StrictInt]] = None
+    group_submissions: Optional[List[StrictInt]] = None
+    has_non_collaborative_groups: Optional[StrictBool] = None
+    html_url: Optional[StrictStr] = None
+    initial_enrollment_type: Optional[StrictStr] = None
+    instructure_identity_id: Optional[StrictStr] = None
+    is_inactive: Optional[StrictBool] = None
+    last_logged_out: Optional[StrictStr] = None
+    lti_context_id: Optional[StrictStr] = None
+    lti_id: Optional[StrictStr] = None
+    merged_into_user_id: Optional[StrictInt] = None
+    observation_link_root_account_ids: Optional[List[StrictInt]] = None
+    preferences: Optional[Dict[str, Any]] = None
+    pronunciation: Optional[StrictStr] = None
+    public: Optional[StrictBool] = None
+    reminder_time_for_due_dates: Optional[StrictInt] = None
+    reminder_time_for_grading: Optional[StrictInt] = None
+    root_account_ids: Optional[List[Dict[str, Any]]] = None
+    school_name: Optional[StrictStr] = None
+    school_position: Optional[StrictStr] = None
+    sections: Optional[StrictStr] = None
+    show_user_services: Optional[StrictBool] = None
+    storage_quota: Optional[StrictInt] = None
+    stuck_sis_fields: Optional[List[StrictStr]] = None
+    subscribe_to_emails: Optional[StrictBool] = None
+    terms_of_use: Optional[StrictBool] = None
+    title: Optional[StrictStr] = None
+    turnitin_id: Optional[StrictInt] = None
+    unread_conversations_count: Optional[StrictInt] = None
+    updated_at: Optional[StrictStr] = None
+    visible_inbox_types: Optional[StrictStr] = None
+    workflow_state: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "sortable_name", "last_name", "first_name", "short_name", "sis_user_id", "sis_import_id", "integration_id", "login_id", "avatar_url", "avatar_state", "enrollments", "email", "locale", "last_login", "time_zone", "bio", "pronouns", "effective_locale", "uuid", "permissions", "account_uuid", "anonymous_id", "avatar_image_source", "avatar_image_updated_at", "avatar_image_url", "browser_locale", "confirmation_url", "created_at", "crocodoc_id", "custom_links", "deleted_at", "destination", "display_name", "group_ids", "group_submissions", "has_non_collaborative_groups", "html_url", "initial_enrollment_type", "instructure_identity_id", "is_inactive", "last_logged_out", "lti_context_id", "lti_id", "merged_into_user_id", "observation_link_root_account_ids", "preferences", "pronunciation", "public", "reminder_time_for_due_dates", "reminder_time_for_grading", "root_account_ids", "school_name", "school_position", "sections", "show_user_services", "storage_quota", "stuck_sis_fields", "subscribe_to_emails", "terms_of_use", "title", "turnitin_id", "unread_conversations_count", "updated_at", "visible_inbox_types", "workflow_state"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -101,6 +146,156 @@ class User(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of permissions
         if self.permissions:
             _dict['permissions'] = self.permissions.to_dict()
+        # set to None if sis_user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_user_id is None and "sis_user_id" in self.model_fields_set:
+            _dict['sis_user_id'] = None
+
+        # set to None if sis_import_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.sis_import_id is None and "sis_import_id" in self.model_fields_set:
+            _dict['sis_import_id'] = None
+
+        # set to None if integration_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.integration_id is None and "integration_id" in self.model_fields_set:
+            _dict['integration_id'] = None
+
+        # set to None if avatar_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.avatar_url is None and "avatar_url" in self.model_fields_set:
+            _dict['avatar_url'] = None
+
+        # set to None if email (nullable) is None
+        # and model_fields_set contains the field
+        if self.email is None and "email" in self.model_fields_set:
+            _dict['email'] = None
+
+        # set to None if locale (nullable) is None
+        # and model_fields_set contains the field
+        if self.locale is None and "locale" in self.model_fields_set:
+            _dict['locale'] = None
+
+        # set to None if last_login (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_login is None and "last_login" in self.model_fields_set:
+            _dict['last_login'] = None
+
+        # set to None if time_zone (nullable) is None
+        # and model_fields_set contains the field
+        if self.time_zone is None and "time_zone" in self.model_fields_set:
+            _dict['time_zone'] = None
+
+        # set to None if bio (nullable) is None
+        # and model_fields_set contains the field
+        if self.bio is None and "bio" in self.model_fields_set:
+            _dict['bio'] = None
+
+        # set to None if pronouns (nullable) is None
+        # and model_fields_set contains the field
+        if self.pronouns is None and "pronouns" in self.model_fields_set:
+            _dict['pronouns'] = None
+
+        # set to None if avatar_image_source (nullable) is None
+        # and model_fields_set contains the field
+        if self.avatar_image_source is None and "avatar_image_source" in self.model_fields_set:
+            _dict['avatar_image_source'] = None
+
+        # set to None if avatar_image_updated_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.avatar_image_updated_at is None and "avatar_image_updated_at" in self.model_fields_set:
+            _dict['avatar_image_updated_at'] = None
+
+        # set to None if avatar_image_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.avatar_image_url is None and "avatar_image_url" in self.model_fields_set:
+            _dict['avatar_image_url'] = None
+
+        # set to None if browser_locale (nullable) is None
+        # and model_fields_set contains the field
+        if self.browser_locale is None and "browser_locale" in self.model_fields_set:
+            _dict['browser_locale'] = None
+
+        # set to None if crocodoc_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.crocodoc_id is None and "crocodoc_id" in self.model_fields_set:
+            _dict['crocodoc_id'] = None
+
+        # set to None if deleted_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.deleted_at is None and "deleted_at" in self.model_fields_set:
+            _dict['deleted_at'] = None
+
+        # set to None if group_submissions (nullable) is None
+        # and model_fields_set contains the field
+        if self.group_submissions is None and "group_submissions" in self.model_fields_set:
+            _dict['group_submissions'] = None
+
+        # set to None if initial_enrollment_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.initial_enrollment_type is None and "initial_enrollment_type" in self.model_fields_set:
+            _dict['initial_enrollment_type'] = None
+
+        # set to None if instructure_identity_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.instructure_identity_id is None and "instructure_identity_id" in self.model_fields_set:
+            _dict['instructure_identity_id'] = None
+
+        # set to None if last_logged_out (nullable) is None
+        # and model_fields_set contains the field
+        if self.last_logged_out is None and "last_logged_out" in self.model_fields_set:
+            _dict['last_logged_out'] = None
+
+        # set to None if lti_context_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.lti_context_id is None and "lti_context_id" in self.model_fields_set:
+            _dict['lti_context_id'] = None
+
+        # set to None if lti_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.lti_id is None and "lti_id" in self.model_fields_set:
+            _dict['lti_id'] = None
+
+        # set to None if merged_into_user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.merged_into_user_id is None and "merged_into_user_id" in self.model_fields_set:
+            _dict['merged_into_user_id'] = None
+
+        # set to None if public (nullable) is None
+        # and model_fields_set contains the field
+        if self.public is None and "public" in self.model_fields_set:
+            _dict['public'] = None
+
+        # set to None if school_name (nullable) is None
+        # and model_fields_set contains the field
+        if self.school_name is None and "school_name" in self.model_fields_set:
+            _dict['school_name'] = None
+
+        # set to None if school_position (nullable) is None
+        # and model_fields_set contains the field
+        if self.school_position is None and "school_position" in self.model_fields_set:
+            _dict['school_position'] = None
+
+        # set to None if storage_quota (nullable) is None
+        # and model_fields_set contains the field
+        if self.storage_quota is None and "storage_quota" in self.model_fields_set:
+            _dict['storage_quota'] = None
+
+        # set to None if subscribe_to_emails (nullable) is None
+        # and model_fields_set contains the field
+        if self.subscribe_to_emails is None and "subscribe_to_emails" in self.model_fields_set:
+            _dict['subscribe_to_emails'] = None
+
+        # set to None if turnitin_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.turnitin_id is None and "turnitin_id" in self.model_fields_set:
+            _dict['turnitin_id'] = None
+
+        # set to None if visible_inbox_types (nullable) is None
+        # and model_fields_set contains the field
+        if self.visible_inbox_types is None and "visible_inbox_types" in self.model_fields_set:
+            _dict['visible_inbox_types'] = None
+
         return _dict
 
     @classmethod
@@ -134,7 +329,52 @@ class User(BaseModel):
             "pronouns": obj.get("pronouns"),
             "effective_locale": obj.get("effective_locale"),
             "uuid": obj.get("uuid"),
-            "permissions": UserPermissions.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
+            "permissions": UserPermissions.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None,
+            "account_uuid": obj.get("account_uuid"),
+            "anonymous_id": obj.get("anonymous_id"),
+            "avatar_image_source": obj.get("avatar_image_source"),
+            "avatar_image_updated_at": obj.get("avatar_image_updated_at"),
+            "avatar_image_url": obj.get("avatar_image_url"),
+            "browser_locale": obj.get("browser_locale"),
+            "confirmation_url": obj.get("confirmation_url"),
+            "created_at": obj.get("created_at"),
+            "crocodoc_id": obj.get("crocodoc_id"),
+            "custom_links": obj.get("custom_links"),
+            "deleted_at": obj.get("deleted_at"),
+            "destination": obj.get("destination"),
+            "display_name": obj.get("display_name"),
+            "group_ids": obj.get("group_ids"),
+            "group_submissions": obj.get("group_submissions"),
+            "has_non_collaborative_groups": obj.get("has_non_collaborative_groups"),
+            "html_url": obj.get("html_url"),
+            "initial_enrollment_type": obj.get("initial_enrollment_type"),
+            "instructure_identity_id": obj.get("instructure_identity_id"),
+            "is_inactive": obj.get("is_inactive"),
+            "last_logged_out": obj.get("last_logged_out"),
+            "lti_context_id": obj.get("lti_context_id"),
+            "lti_id": obj.get("lti_id"),
+            "merged_into_user_id": obj.get("merged_into_user_id"),
+            "observation_link_root_account_ids": obj.get("observation_link_root_account_ids"),
+            "preferences": obj.get("preferences"),
+            "pronunciation": obj.get("pronunciation"),
+            "public": obj.get("public"),
+            "reminder_time_for_due_dates": obj.get("reminder_time_for_due_dates"),
+            "reminder_time_for_grading": obj.get("reminder_time_for_grading"),
+            "root_account_ids": obj.get("root_account_ids"),
+            "school_name": obj.get("school_name"),
+            "school_position": obj.get("school_position"),
+            "sections": obj.get("sections"),
+            "show_user_services": obj.get("show_user_services"),
+            "storage_quota": obj.get("storage_quota"),
+            "stuck_sis_fields": obj.get("stuck_sis_fields"),
+            "subscribe_to_emails": obj.get("subscribe_to_emails"),
+            "terms_of_use": obj.get("terms_of_use"),
+            "title": obj.get("title"),
+            "turnitin_id": obj.get("turnitin_id"),
+            "unread_conversations_count": obj.get("unread_conversations_count"),
+            "updated_at": obj.get("updated_at"),
+            "visible_inbox_types": obj.get("visible_inbox_types"),
+            "workflow_state": obj.get("workflow_state")
         })
         return _obj
 

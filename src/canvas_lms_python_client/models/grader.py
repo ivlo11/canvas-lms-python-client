@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.assignment_group_assignments_inner import AssignmentGroupAssignmentsInner
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -29,7 +30,7 @@ class Grader(BaseModel):
     """ # noqa: E501
     id: Optional[StrictInt] = Field(default=None, description="the user_id of the user who graded the contained submissions", json_schema_extra={"examples": [27]})
     name: Optional[StrictStr] = Field(default=None, description="the name of the user who graded the contained submissions", json_schema_extra={"examples": ["Some User"]})
-    assignments: Optional[List[StrictInt]] = Field(default=None, description="the assignment groups for all submissions in this response that were graded by this user.  The details are not nested inside here, but the fact that an assignment is present here means that the grader did grade submissions for this assignment on the contextual date. You can use the id of a grader and of an assignment to make another API call to find all submissions for a grader/assignment combination on a given date.", json_schema_extra={"examples": [[1, 2, 3]]})
+    assignments: Optional[List[AssignmentGroupAssignmentsInner]] = Field(default=None, description="the assignment groups for all submissions in this response that were graded by this user.  The details are not nested inside here, but the fact that an assignment is present here means that the grader did grade submissions for this assignment on the contextual date. You can use the id of a grader and of an assignment to make another API call to find all submissions for a grader/assignment combination on a given date.", json_schema_extra={"examples": [[1, 2, 3]]})
     __properties: ClassVar[List[str]] = ["id", "name", "assignments"]
 
     model_config = ConfigDict(
@@ -71,6 +72,12 @@ class Grader(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in assignments (list)
+        _items = []
+        if self.assignments:
+            for _item_assignments in self.assignments:
+                _items.append(_item_assignments.to_dict() if _item_assignments is not None else None)
+            _dict['assignments'] = _items
         return _dict
 
     @classmethod
@@ -85,7 +92,7 @@ class Grader(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "name": obj.get("name"),
-            "assignments": obj.get("assignments")
+            "assignments": [AssignmentGroupAssignmentsInner.from_dict(_item) for _item in obj["assignments"]] if obj.get("assignments") is not None else None
         })
         return _obj
 

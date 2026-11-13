@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,7 +36,9 @@ class AccountNotification(BaseModel):
     roles: Optional[List[StrictStr]] = Field(default=None, description="(Deprecated) The roles to send the notification to.  If roles is not passed it defaults to all roles", json_schema_extra={"examples": [["StudentEnrollment"]]})
     role_ids: Optional[List[StrictInt]] = Field(default=None, description="The roles to send the notification to.  If roles is not passed it defaults to all roles", json_schema_extra={"examples": [[1]]})
     author: Optional[Dict[str, Any]] = Field(default=None, description="The author of the notification. Available only to admins using include_all.", json_schema_extra={"examples": [{"id": 1, "name": "John Doe"}]})
-    __properties: ClassVar[List[str]] = ["subject", "message", "start_at", "end_at", "icon", "roles", "role_ids", "author"]
+    closed: Optional[StrictBool] = None
+    id: Optional[StrictInt] = None
+    __properties: ClassVar[List[str]] = ["subject", "message", "start_at", "end_at", "icon", "roles", "role_ids", "author", "closed", "id"]
 
     @field_validator('icon')
     def icon_validate_enum(cls, value):
@@ -87,6 +89,16 @@ class AccountNotification(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if role_ids (nullable) is None
+        # and model_fields_set contains the field
+        if self.role_ids is None and "role_ids" in self.model_fields_set:
+            _dict['role_ids'] = None
+
+        # set to None if author (nullable) is None
+        # and model_fields_set contains the field
+        if self.author is None and "author" in self.model_fields_set:
+            _dict['author'] = None
+
         return _dict
 
     @classmethod
@@ -106,7 +118,9 @@ class AccountNotification(BaseModel):
             "icon": obj.get("icon"),
             "roles": obj.get("roles"),
             "role_ids": obj.get("role_ids"),
-            "author": obj.get("author")
+            "author": obj.get("author"),
+            "closed": obj.get("closed"),
+            "id": obj.get("id")
         })
         return _obj
 

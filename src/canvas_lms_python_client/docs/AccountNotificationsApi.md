@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **account_notifications_create**
-> account_notifications_create(account_id, account_notifications_create_request=account_notifications_create_request)
+> AccountNotification account_notifications_create(account_id, account_notifications_create_request=account_notifications_create_request)
 
 Create a global notification
 
@@ -24,6 +24,7 @@ Create and return a new global notification for an account.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.account_notification import AccountNotification
 from canvas_lms_python_client.models.account_notifications_create_request import AccountNotificationsCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -53,7 +54,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a global notification
-        await api_instance.account_notifications_create(account_id, account_notifications_create_request=account_notifications_create_request)
+        api_response = await api_instance.account_notifications_create(account_id, account_notifications_create_request=account_notifications_create_request)
+        print("The response of AccountNotificationsApi->account_notifications_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AccountNotificationsApi->account_notifications_create: %s\n" % e)
 ```
@@ -70,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AccountNotification**](AccountNotification.md)
 
 ### Authorization
 
@@ -85,7 +88,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create a global notification |  -  |
+**0** | AccountNotification |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -171,7 +174,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **account_notifications_update**
-> account_notifications_update(account_id, id, account_notifications_update_request=account_notifications_update_request)
+> AccountNotification account_notifications_update(account_id, id, account_notifications_update_request=account_notifications_update_request)
 
 Update a global notification
 
@@ -183,6 +186,7 @@ Update global notification for an account.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.account_notification import AccountNotification
 from canvas_lms_python_client.models.account_notifications_update_request import AccountNotificationsUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -213,7 +217,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a global notification
-        await api_instance.account_notifications_update(account_id, id, account_notifications_update_request=account_notifications_update_request)
+        api_response = await api_instance.account_notifications_update(account_id, id, account_notifications_update_request=account_notifications_update_request)
+        print("The response of AccountNotificationsApi->account_notifications_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AccountNotificationsApi->account_notifications_update: %s\n" % e)
 ```
@@ -231,7 +237,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AccountNotification**](AccountNotification.md)
 
 ### Authorization
 
@@ -246,7 +252,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Update a global notification |  -  |
+**0** | AccountNotification |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

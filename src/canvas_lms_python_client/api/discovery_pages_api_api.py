@@ -18,10 +18,11 @@ from typing_extensions import Annotated
 from pydantic import Field
 from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.discovery_page import DiscoveryPage
+from canvas_lms_python_client.models.discovery_pages_api_show_response import DiscoveryPagesApiShowResponse
 from canvas_lms_python_client.models.discovery_pages_api_token_request import DiscoveryPagesApiTokenRequest
 from canvas_lms_python_client.models.discovery_pages_api_token_response import DiscoveryPagesApiTokenResponse
 from canvas_lms_python_client.models.discovery_pages_api_upsert_request import DiscoveryPagesApiUpsertRequest
+from canvas_lms_python_client.models.discovery_pages_api_upsert_response import DiscoveryPagesApiUpsertResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -57,7 +58,7 @@ class DiscoveryPagesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> DiscoveryPage:
+    ) -> DiscoveryPagesApiShowResponse:
         """Get Discovery Page
 
         Get the discovery page configuration for the domain root account.
@@ -93,7 +94,7 @@ class DiscoveryPagesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "DiscoveryPage",
+            'default': "DiscoveryPagesApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -120,7 +121,7 @@ class DiscoveryPagesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[DiscoveryPage]:
+    ) -> ApiResponse[DiscoveryPagesApiShowResponse]:
         """Get Discovery Page
 
         Get the discovery page configuration for the domain root account.
@@ -156,7 +157,7 @@ class DiscoveryPagesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "DiscoveryPage",
+            'default': "DiscoveryPagesApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -220,7 +221,7 @@ class DiscoveryPagesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "DiscoveryPage",
+            'default': "DiscoveryPagesApiShowResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -582,7 +583,7 @@ class DiscoveryPagesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> DiscoveryPage:
+    ) -> DiscoveryPagesApiUpsertResponse:
         """Update Discovery Page
 
         Update or create the discovery page configuration for the domain root account. This is a full replacement - provide the complete configuration including primary, secondary, and active fields. Any fields omitted will be removed.
@@ -621,7 +622,7 @@ class DiscoveryPagesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "DiscoveryPage",
+            'default': "DiscoveryPagesApiUpsertResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -649,7 +650,7 @@ class DiscoveryPagesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[DiscoveryPage]:
+    ) -> ApiResponse[DiscoveryPagesApiUpsertResponse]:
         """Update Discovery Page
 
         Update or create the discovery page configuration for the domain root account. This is a full replacement - provide the complete configuration including primary, secondary, and active fields. Any fields omitted will be removed.
@@ -688,7 +689,7 @@ class DiscoveryPagesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "DiscoveryPage",
+            'default': "DiscoveryPagesApiUpsertResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -756,7 +757,7 @@ class DiscoveryPagesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "DiscoveryPage",
+            'default': "DiscoveryPagesApiUpsertResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

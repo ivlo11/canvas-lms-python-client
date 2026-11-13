@@ -19,9 +19,11 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.enrollment import Enrollment
+from canvas_lms_python_client.models.enrollments_accept_response import EnrollmentsAcceptResponse
 from canvas_lms_python_client.models.enrollments_api_bulk_enrollment_request import EnrollmentsApiBulkEnrollmentRequest
 from canvas_lms_python_client.models.enrollments_api_create_request import EnrollmentsApiCreateRequest
 from canvas_lms_python_client.models.enrollments_api_last_attended_request import EnrollmentsApiLastAttendedRequest
+from canvas_lms_python_client.models.enrollments_show_temporary_enrollment_status_response import EnrollmentsShowTemporaryEnrollmentStatusResponse
 from canvas_lms_python_client.models.progress import Progress
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -60,7 +62,7 @@ class EnrollmentsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> EnrollmentsAcceptResponse:
         """Accept Course Invitation
 
         accepts a pending course invitation for the current user
@@ -102,6 +104,7 @@ class EnrollmentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "EnrollmentsAcceptResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -130,7 +133,7 @@ class EnrollmentsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[EnrollmentsAcceptResponse]:
         """Accept Course Invitation
 
         accepts a pending course invitation for the current user
@@ -172,6 +175,7 @@ class EnrollmentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "EnrollmentsAcceptResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -243,6 +247,7 @@ class EnrollmentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "EnrollmentsAcceptResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4870,7 +4875,7 @@ class EnrollmentsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> EnrollmentsAcceptResponse:
         """Reject Course Invitation
 
         rejects a pending course invitation for the current user
@@ -4912,6 +4917,7 @@ class EnrollmentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "EnrollmentsAcceptResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4940,7 +4946,7 @@ class EnrollmentsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[EnrollmentsAcceptResponse]:
         """Reject Course Invitation
 
         rejects a pending course invitation for the current user
@@ -4982,6 +4988,7 @@ class EnrollmentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "EnrollmentsAcceptResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5053,6 +5060,7 @@ class EnrollmentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "EnrollmentsAcceptResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5423,7 +5431,7 @@ class EnrollmentsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> EnrollmentsShowTemporaryEnrollmentStatusResponse:
         """Show Temporary Enrollment recipient and provider status
 
         Returns a JSON Object containing the temporary enrollment status for a user.
@@ -5465,6 +5473,7 @@ class EnrollmentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "EnrollmentsShowTemporaryEnrollmentStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5493,7 +5502,7 @@ class EnrollmentsApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[EnrollmentsShowTemporaryEnrollmentStatusResponse]:
         """Show Temporary Enrollment recipient and provider status
 
         Returns a JSON Object containing the temporary enrollment status for a user.
@@ -5535,6 +5544,7 @@ class EnrollmentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "EnrollmentsShowTemporaryEnrollmentStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -5606,6 +5616,7 @@ class EnrollmentsApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "EnrollmentsShowTemporaryEnrollmentStatusResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

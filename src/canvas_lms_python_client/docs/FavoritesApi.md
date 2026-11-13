@@ -487,7 +487,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **favorites_reset_course_favorites**
-> favorites_reset_course_favorites()
+> FavoritesResetCourseFavoritesResponse favorites_reset_course_favorites()
 
 Reset course favorites
 
@@ -500,6 +500,7 @@ automatically generated list of enrolled courses
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.favorites_reset_course_favorites_response import FavoritesResetCourseFavoritesResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -526,7 +527,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Reset course favorites
-        await api_instance.favorites_reset_course_favorites()
+        api_response = await api_instance.favorites_reset_course_favorites()
+        print("The response of FavoritesApi->favorites_reset_course_favorites:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FavoritesApi->favorites_reset_course_favorites: %s\n" % e)
 ```
@@ -539,7 +542,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**FavoritesResetCourseFavoritesResponse**](FavoritesResetCourseFavoritesResponse.md)
 
 ### Authorization
 
@@ -548,18 +551,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Reset course favorites |  -  |
+**0** | FavoritesResetCourseFavoritesResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **favorites_reset_groups_favorites**
-> favorites_reset_groups_favorites()
+> FavoritesResetCourseFavoritesResponse favorites_reset_groups_favorites()
 
 Reset group favorites
 
@@ -572,6 +575,7 @@ automatically generated list of enrolled group
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.favorites_reset_course_favorites_response import FavoritesResetCourseFavoritesResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -598,7 +602,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Reset group favorites
-        await api_instance.favorites_reset_groups_favorites()
+        api_response = await api_instance.favorites_reset_groups_favorites()
+        print("The response of FavoritesApi->favorites_reset_groups_favorites:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling FavoritesApi->favorites_reset_groups_favorites: %s\n" % e)
 ```
@@ -611,7 +617,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-void (empty response body)
+[**FavoritesResetCourseFavoritesResponse**](FavoritesResetCourseFavoritesResponse.md)
 
 ### Authorization
 
@@ -620,13 +626,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Reset group favorites |  -  |
+**0** | FavoritesResetCourseFavoritesResponse |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

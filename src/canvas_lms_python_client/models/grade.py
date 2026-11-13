@@ -32,13 +32,15 @@ class Grade(BaseModel):
     final_grade: Optional[StrictStr] = Field(default=None, description="The user's final grade for the class. Only included if user has permissions to view this grade.", json_schema_extra={"examples": [""]})
     current_score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The user's current score in the class. Only included if user has permissions to view this score.", json_schema_extra={"examples": [95.8]})
     final_score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The user's final score for the class. Only included if user has permissions to view this score.", json_schema_extra={"examples": [95.8]})
-    current_points: Optional[StrictInt] = Field(default=None, description="The total points the user has earned in the class. Only included if user has permissions to view this score and 'current_points' is passed in the request's 'include' parameter.", json_schema_extra={"examples": [150]})
+    current_points: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total points the user has earned in the class. Only included if user has permissions to view this score and 'current_points' is passed in the request's 'include' parameter.", json_schema_extra={"examples": [150]})
     unposted_current_grade: Optional[StrictStr] = Field(default=None, description="The user's current grade in the class including muted/unposted assignments. Only included if user has permissions to view this grade, typically teachers, TAs, and admins.", json_schema_extra={"examples": [""]})
     unposted_final_grade: Optional[StrictStr] = Field(default=None, description="The user's final grade for the class including muted/unposted assignments. Only included if user has permissions to view this grade, typically teachers, TAs, and admins..", json_schema_extra={"examples": [""]})
     unposted_current_score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The user's current score in the class including muted/unposted assignments. Only included if user has permissions to view this score, typically teachers, TAs, and admins..", json_schema_extra={"examples": [95.8]})
     unposted_final_score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The user's final score for the class including muted/unposted assignments. Only included if user has permissions to view this score, typically teachers, TAs, and admins..", json_schema_extra={"examples": [95.8]})
-    unposted_current_points: Optional[StrictInt] = Field(default=None, description="The total points the user has earned in the class, including muted/unposted assignments. Only included if user has permissions to view this score (typically teachers, TAs, and admins) and 'current_points' is passed in the request's 'include' parameter.", json_schema_extra={"examples": [150]})
-    __properties: ClassVar[List[str]] = ["html_url", "current_grade", "final_grade", "current_score", "final_score", "current_points", "unposted_current_grade", "unposted_final_grade", "unposted_current_score", "unposted_final_score", "unposted_current_points"]
+    unposted_current_points: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total points the user has earned in the class, including muted/unposted assignments. Only included if user has permissions to view this score (typically teachers, TAs, and admins) and 'current_points' is passed in the request's 'include' parameter.", json_schema_extra={"examples": [150]})
+    override_grade: Optional[StrictStr] = None
+    override_score: Optional[Union[StrictFloat, StrictInt]] = None
+    __properties: ClassVar[List[str]] = ["html_url", "current_grade", "final_grade", "current_score", "final_score", "current_points", "unposted_current_grade", "unposted_final_grade", "unposted_current_score", "unposted_final_score", "unposted_current_points", "override_grade", "override_score"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -79,6 +81,46 @@ class Grade(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if current_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_grade is None and "current_grade" in self.model_fields_set:
+            _dict['current_grade'] = None
+
+        # set to None if final_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.final_grade is None and "final_grade" in self.model_fields_set:
+            _dict['final_grade'] = None
+
+        # set to None if current_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.current_score is None and "current_score" in self.model_fields_set:
+            _dict['current_score'] = None
+
+        # set to None if final_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.final_score is None and "final_score" in self.model_fields_set:
+            _dict['final_score'] = None
+
+        # set to None if unposted_current_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.unposted_current_grade is None and "unposted_current_grade" in self.model_fields_set:
+            _dict['unposted_current_grade'] = None
+
+        # set to None if unposted_final_grade (nullable) is None
+        # and model_fields_set contains the field
+        if self.unposted_final_grade is None and "unposted_final_grade" in self.model_fields_set:
+            _dict['unposted_final_grade'] = None
+
+        # set to None if unposted_current_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.unposted_current_score is None and "unposted_current_score" in self.model_fields_set:
+            _dict['unposted_current_score'] = None
+
+        # set to None if unposted_final_score (nullable) is None
+        # and model_fields_set contains the field
+        if self.unposted_final_score is None and "unposted_final_score" in self.model_fields_set:
+            _dict['unposted_final_score'] = None
+
         return _dict
 
     @classmethod
@@ -101,7 +143,9 @@ class Grade(BaseModel):
             "unposted_final_grade": obj.get("unposted_final_grade"),
             "unposted_current_score": obj.get("unposted_current_score"),
             "unposted_final_score": obj.get("unposted_final_score"),
-            "unposted_current_points": obj.get("unposted_current_points")
+            "unposted_current_points": obj.get("unposted_current_points"),
+            "override_grade": obj.get("override_grade"),
+            "override_score": obj.get("override_score")
         })
         return _obj
 

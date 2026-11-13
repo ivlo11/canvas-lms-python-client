@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,7 +35,36 @@ class File(BaseModel):
     display_name: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["file.txt"]})
     created_at: Optional[datetime] = Field(default=None, json_schema_extra={"examples": ["2012-07-06T14:58:50Z"]})
     updated_at: Optional[datetime] = Field(default=None, json_schema_extra={"examples": ["2012-07-06T14:58:50Z"]})
-    __properties: ClassVar[List[str]] = ["size", "content-type", "url", "id", "display_name", "created_at", "updated_at"]
+    category: Optional[StrictStr] = None
+    filename: Optional[StrictStr] = None
+    folder_id: Optional[StrictInt] = None
+    hidden: Optional[StrictBool] = None
+    hidden_for_user: Optional[StrictBool] = None
+    lock_at: Optional[StrictStr] = None
+    locked: Optional[StrictBool] = None
+    locked_for_user: Optional[StrictBool] = None
+    media_entry_id: Optional[StrictStr] = None
+    mime_class: Optional[StrictStr] = None
+    modified_at: Optional[StrictStr] = None
+    thumbnail_url: Optional[StrictStr] = None
+    unlock_at: Optional[StrictStr] = None
+    upload_status: Optional[StrictStr] = None
+    instfs_uuid: Optional[Any] = None
+    usage_rights: Optional[Dict[str, Any]] = None
+    user: Optional[Dict[str, Any]] = None
+    uuid: Optional[StrictStr] = None
+    visibility_level: Optional[StrictStr] = None
+    canvadoc_session_url: Optional[StrictStr] = None
+    is_master_course_child_content: Optional[StrictBool] = None
+    lock_explanation: Optional[StrictStr] = None
+    lock_info: Optional[Dict[str, Any]] = None
+    master_course_restrictions: Optional[Dict[str, Any]] = None
+    preview_url: Optional[StrictStr] = None
+    restricted_by_master_course: Optional[StrictBool] = None
+    view: Optional[StrictBool] = None
+    attachment: Optional[Dict[str, Any]] = None
+    ok: Optional[StrictBool] = None
+    __properties: ClassVar[List[str]] = ["size", "content-type", "url", "id", "display_name", "created_at", "updated_at", "category", "filename", "folder_id", "hidden", "hidden_for_user", "lock_at", "locked", "locked_for_user", "media_entry_id", "mime_class", "modified_at", "thumbnail_url", "unlock_at", "upload_status", "instfs_uuid", "usage_rights", "user", "uuid", "visibility_level", "canvadoc_session_url", "is_master_course_child_content", "lock_explanation", "lock_info", "master_course_restrictions", "preview_url", "restricted_by_master_course", "view", "attachment", "ok"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -76,6 +105,51 @@ class File(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if size (nullable) is None
+        # and model_fields_set contains the field
+        if self.size is None and "size" in self.model_fields_set:
+            _dict['size'] = None
+
+        # set to None if folder_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.folder_id is None and "folder_id" in self.model_fields_set:
+            _dict['folder_id'] = None
+
+        # set to None if lock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.lock_at is None and "lock_at" in self.model_fields_set:
+            _dict['lock_at'] = None
+
+        # set to None if media_entry_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.media_entry_id is None and "media_entry_id" in self.model_fields_set:
+            _dict['media_entry_id'] = None
+
+        # set to None if thumbnail_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.thumbnail_url is None and "thumbnail_url" in self.model_fields_set:
+            _dict['thumbnail_url'] = None
+
+        # set to None if unlock_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.unlock_at is None and "unlock_at" in self.model_fields_set:
+            _dict['unlock_at'] = None
+
+        # set to None if instfs_uuid (nullable) is None
+        # and model_fields_set contains the field
+        if self.instfs_uuid is None and "instfs_uuid" in self.model_fields_set:
+            _dict['instfs_uuid'] = None
+
+        # set to None if usage_rights (nullable) is None
+        # and model_fields_set contains the field
+        if self.usage_rights is None and "usage_rights" in self.model_fields_set:
+            _dict['usage_rights'] = None
+
+        # set to None if canvadoc_session_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.canvadoc_session_url is None and "canvadoc_session_url" in self.model_fields_set:
+            _dict['canvadoc_session_url'] = None
+
         return _dict
 
     @classmethod
@@ -94,7 +168,36 @@ class File(BaseModel):
             "id": obj.get("id"),
             "display_name": obj.get("display_name"),
             "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at")
+            "updated_at": obj.get("updated_at"),
+            "category": obj.get("category"),
+            "filename": obj.get("filename"),
+            "folder_id": obj.get("folder_id"),
+            "hidden": obj.get("hidden"),
+            "hidden_for_user": obj.get("hidden_for_user"),
+            "lock_at": obj.get("lock_at"),
+            "locked": obj.get("locked"),
+            "locked_for_user": obj.get("locked_for_user"),
+            "media_entry_id": obj.get("media_entry_id"),
+            "mime_class": obj.get("mime_class"),
+            "modified_at": obj.get("modified_at"),
+            "thumbnail_url": obj.get("thumbnail_url"),
+            "unlock_at": obj.get("unlock_at"),
+            "upload_status": obj.get("upload_status"),
+            "instfs_uuid": obj.get("instfs_uuid"),
+            "usage_rights": obj.get("usage_rights"),
+            "user": obj.get("user"),
+            "uuid": obj.get("uuid"),
+            "visibility_level": obj.get("visibility_level"),
+            "canvadoc_session_url": obj.get("canvadoc_session_url"),
+            "is_master_course_child_content": obj.get("is_master_course_child_content"),
+            "lock_explanation": obj.get("lock_explanation"),
+            "lock_info": obj.get("lock_info"),
+            "master_course_restrictions": obj.get("master_course_restrictions"),
+            "preview_url": obj.get("preview_url"),
+            "restricted_by_master_course": obj.get("restricted_by_master_course"),
+            "view": obj.get("view"),
+            "attachment": obj.get("attachment"),
+            "ok": obj.get("ok")
         })
         return _obj
 

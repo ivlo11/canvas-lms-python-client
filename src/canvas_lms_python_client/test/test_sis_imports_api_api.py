@@ -24,6 +24,8 @@ from typing_extensions import Annotated
 from canvas_lms_python_client.models.progress import Progress
 from canvas_lms_python_client.models.sis_import import SisImport
 from canvas_lms_python_client.models.sis_imports_api_create_request import SisImportsApiCreateRequest
+from canvas_lms_python_client.models.sis_imports_api_importing_response import SisImportsApiImportingResponse
+from canvas_lms_python_client.models.sis_imports_api_index_response import SisImportsApiIndexResponse
 from canvas_lms_python_client.models.sis_imports_api_restore_states_request import SisImportsApiRestoreStatesRequest
 
 
@@ -247,8 +249,8 @@ class TestSisImportsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Array response
-        mock_data = [MagicMock(), MagicMock()]
+        # Non-array response: one wrapper per page
+        mock_data = MagicMock()
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -260,7 +262,7 @@ class TestSisImportsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.sis_imports_api_index_all(
+        async for page in self.api.sis_imports_api_index_paginated(
             account_id="invalid",
             created_since="invalid",
             created_before="invalid",
@@ -271,7 +273,7 @@ class TestSisImportsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == len(mock_data)
+        assert len(pages) == 1  # One wrapper page
 
     async def test_sis_imports_api_index_paginated_multiple_pages(self) -> None:
         """Test sis_imports_api_index_fetch_all_items following pagination links.
@@ -283,7 +285,7 @@ class TestSisImportsApiApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = [MagicMock(), MagicMock()]
+        mock_page_data = MagicMock()
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -323,7 +325,7 @@ class TestSisImportsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.sis_imports_api_index_all(
+        async for item in self.api.sis_imports_api_index_paginated(
             account_id="invalid",
             created_since="invalid",
             created_before="invalid",
@@ -334,7 +336,7 @@ class TestSisImportsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_sis_imports_api_index_paginated_empty_result(self) -> None:
@@ -358,7 +360,7 @@ class TestSisImportsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.sis_imports_api_index_all(
+        async for item in self.api.sis_imports_api_index_paginated(
             account_id="invalid",
             created_since="invalid",
             created_before="invalid",

@@ -6,9 +6,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**score** | **int** | The rollup score for the outcome, based on the student alignment scores related to the outcome. This could be null if the student has no related scores. | [optional] 
+**score** | **float** | The rollup score for the outcome, based on the student alignment scores related to the outcome. This could be null if the student has no related scores. | [optional] 
 **count** | **int** | The number of alignment scores included in this rollup. | [optional] 
 **links** | [**OutcomeRollupScoreLinks**](OutcomeRollupScoreLinks.md) |  | [optional] 
+**hide_points** | **bool** |  | [optional] 
+**submitted_at** | **str** |  | [optional] 
+**title** | **str** |  | [optional] 
 
 ## Example
 

@@ -36,7 +36,10 @@ class ContentExport(BaseModel):
     progress_url: Optional[StrictStr] = Field(default=None, description="The api endpoint for polling the current progress", json_schema_extra={"examples": ["https://example.com/api/v1/progress/4"]})
     user_id: Optional[StrictInt] = Field(default=None, description="The ID of the user who started the export", json_schema_extra={"examples": [4]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="Current state of the content migration: created exporting exported failed", json_schema_extra={"examples": ["exported"]})
-    __properties: ClassVar[List[str]] = ["id", "created_at", "export_type", "attachment", "progress_url", "user_id", "workflow_state"]
+    course_id: Optional[StrictInt] = None
+    migrated_assignment: Optional[List[Dict[str, Any]]] = None
+    migrated_quiz: Optional[List[Dict[str, Any]]] = None
+    __properties: ClassVar[List[str]] = ["id", "created_at", "export_type", "attachment", "progress_url", "user_id", "workflow_state", "course_id", "migrated_assignment", "migrated_quiz"]
 
     @field_validator('export_type')
     def export_type_validate_enum(cls, value):
@@ -100,6 +103,16 @@ class ContentExport(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of attachment
         if self.attachment:
             _dict['attachment'] = self.attachment.to_dict()
+        # set to None if export_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.export_type is None and "export_type" in self.model_fields_set:
+            _dict['export_type'] = None
+
+        # set to None if user_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.user_id is None and "user_id" in self.model_fields_set:
+            _dict['user_id'] = None
+
         return _dict
 
     @classmethod
@@ -118,7 +131,10 @@ class ContentExport(BaseModel):
             "attachment": File.from_dict(obj["attachment"]) if obj.get("attachment") is not None else None,
             "progress_url": obj.get("progress_url"),
             "user_id": obj.get("user_id"),
-            "workflow_state": obj.get("workflow_state")
+            "workflow_state": obj.get("workflow_state"),
+            "course_id": obj.get("course_id"),
+            "migrated_assignment": obj.get("migrated_assignment"),
+            "migrated_quiz": obj.get("migrated_quiz")
         })
         return _obj
 

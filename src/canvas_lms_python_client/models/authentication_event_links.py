@@ -72,6 +72,11 @@ class AuthenticationEventLinks(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if page_view (nullable) is None
+        # and model_fields_set contains the field
+        if self.page_view is None and "page_view" in self.model_fields_set:
+            _dict['page_view'] = None
+
         return _dict
 
     @classmethod

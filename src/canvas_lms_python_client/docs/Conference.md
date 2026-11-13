@@ -25,6 +25,9 @@ Name | Type | Description | Notes
 **join_url** | **str** | URL to join the conference, may be null if the conference type doesn&#39;t set it | [optional] 
 **context_type** | **str** | The type of this conference&#39;s context, typically &#39;Course&#39; or &#39;Group&#39;. | [optional] 
 **context_id** | **int** | The ID of this conference&#39;s context. | [optional] 
+**end_at** | **str** |  | [optional] 
+**has_calendar_event** | **int** |  | [optional] 
+**start_at** | **str** |  | [optional] 
 
 ## Example
 

@@ -19,6 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.data_service_subscription_transport_metadata import DataServiceSubscriptionTransportMetadata
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -31,9 +32,14 @@ class DataServiceSubscription(BaseModel):
     context_type: Optional[StrictStr] = Field(default=None, description="The type of context for the subscription. Must be 'assignment', or 'root_account'", alias="ContextType", json_schema_extra={"examples": ["root_account"]})
     event_types: Optional[List[StrictStr]] = Field(default=None, description="Array of strings representing the event types for the subscription.", alias="EventTypes", json_schema_extra={"examples": [["asset_accessed"]]})
     format: Optional[StrictStr] = Field(default=None, description="Format to deliver the live events. Must be 'live-event' or 'caliper'.", alias="Format", json_schema_extra={"examples": ["caliper"]})
-    transport_metadata: Optional[StrictStr] = Field(default=None, description="An object with a single key: 'Url'.", alias="TransportMetadata", json_schema_extra={"examples": ["{\n\t\"Url\":\"sqs.example\"}"]})
+    transport_metadata: Optional[DataServiceSubscriptionTransportMetadata] = Field(default=None, alias="TransportMetadata")
     transport_type: Optional[StrictStr] = Field(default=None, description="The type of transport for the event. Must be either 'sqs' or 'https'.", alias="TransportType", json_schema_extra={"examples": ["sqs"]})
-    __properties: ClassVar[List[str]] = ["ContextId", "ContextType", "EventTypes", "Format", "TransportMetadata", "TransportType"]
+    id: Optional[StrictStr] = Field(default=None, alias="Id")
+    owner_id: Optional[StrictStr] = Field(default=None, alias="OwnerId")
+    owner_type: Optional[StrictStr] = Field(default=None, alias="OwnerType")
+    updated_by: Optional[StrictStr] = Field(default=None, alias="UpdatedBy")
+    updated_by_type: Optional[StrictStr] = Field(default=None, alias="UpdatedByType")
+    __properties: ClassVar[List[str]] = ["ContextId", "ContextType", "EventTypes", "Format", "TransportMetadata", "TransportType", "Id", "OwnerId", "OwnerType", "UpdatedBy", "UpdatedByType"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -74,6 +80,9 @@ class DataServiceSubscription(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of transport_metadata
+        if self.transport_metadata:
+            _dict['TransportMetadata'] = self.transport_metadata.to_dict()
         return _dict
 
     @classmethod
@@ -90,8 +99,13 @@ class DataServiceSubscription(BaseModel):
             "ContextType": obj.get("ContextType"),
             "EventTypes": obj.get("EventTypes"),
             "Format": obj.get("Format"),
-            "TransportMetadata": obj.get("TransportMetadata"),
-            "TransportType": obj.get("TransportType")
+            "TransportMetadata": DataServiceSubscriptionTransportMetadata.from_dict(obj["TransportMetadata"]) if obj.get("TransportMetadata") is not None else None,
+            "TransportType": obj.get("TransportType"),
+            "Id": obj.get("Id"),
+            "OwnerId": obj.get("OwnerId"),
+            "OwnerType": obj.get("OwnerType"),
+            "UpdatedBy": obj.get("UpdatedBy"),
+            "UpdatedByType": obj.get("UpdatedByType")
         })
         return _obj
 
