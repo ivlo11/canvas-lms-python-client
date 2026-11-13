@@ -84,7 +84,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discovery_pages_api_token**
-> List[object] discovery_pages_api_token(discovery_pages_api_token_request=discovery_pages_api_token_request)
+> DiscoveryPagesApiTokenResponse discovery_pages_api_token(discovery_pages_api_token_request=discovery_pages_api_token_request)
 
 Generate Discovery Page Preview Token
 
@@ -102,6 +102,7 @@ Omitting it returns a 400 Bad Request.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.discovery_pages_api_token_request import DiscoveryPagesApiTokenRequest
+from canvas_lms_python_client.models.discovery_pages_api_token_response import DiscoveryPagesApiTokenResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -147,7 +148,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**DiscoveryPagesApiTokenResponse**](DiscoveryPagesApiTokenResponse.md)
 
 ### Authorization
 

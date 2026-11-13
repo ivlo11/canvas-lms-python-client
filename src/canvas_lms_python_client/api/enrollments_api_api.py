@@ -843,7 +843,7 @@ class EnrollmentsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'user_ids': 'multi',
+            'user_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -859,7 +859,7 @@ class EnrollmentsApiApi:
         # process the query parameters
         if user_ids is not None:
             
-            _query_params.append(('user_ids', user_ids))
+            _query_params.append(('user_ids[]', user_ids))
             
         if account_id is not None:
             
@@ -2208,8 +2208,6 @@ class EnrollmentsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -2505,15 +2503,15 @@ class EnrollmentsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'type': 'multi',
-            'role': 'multi',
-            'state': 'multi',
-            'include': 'multi',
-            'sis_account_id': 'multi',
-            'sis_course_id': 'multi',
-            'sis_section_id': 'multi',
-            'sis_user_id': 'multi',
-            'created_for_sis_id': 'multi',
+            'type[]': 'multi',
+            'role[]': 'multi',
+            'state[]': 'multi',
+            'include[]': 'multi',
+            'sis_account_id[]': 'multi',
+            'sis_course_id[]': 'multi',
+            'sis_section_id[]': 'multi',
+            'sis_user_id[]': 'multi',
+            'created_for_sis_id[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2531,19 +2529,19 @@ class EnrollmentsApiApi:
         # process the query parameters
         if type is not None:
             
-            _query_params.append(('type', type))
+            _query_params.append(('type[]', type))
             
         if role is not None:
             
-            _query_params.append(('role', role))
+            _query_params.append(('role[]', role))
             
         if state is not None:
             
-            _query_params.append(('state', state))
+            _query_params.append(('state[]', state))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if user_id is not None:
             
@@ -2559,23 +2557,23 @@ class EnrollmentsApiApi:
             
         if sis_account_id is not None:
             
-            _query_params.append(('sis_account_id', sis_account_id))
+            _query_params.append(('sis_account_id[]', sis_account_id))
             
         if sis_course_id is not None:
             
-            _query_params.append(('sis_course_id', sis_course_id))
+            _query_params.append(('sis_course_id[]', sis_course_id))
             
         if sis_section_id is not None:
             
-            _query_params.append(('sis_section_id', sis_section_id))
+            _query_params.append(('sis_section_id[]', sis_section_id))
             
         if sis_user_id is not None:
             
-            _query_params.append(('sis_user_id', sis_user_id))
+            _query_params.append(('sis_user_id[]', sis_user_id))
             
         if created_for_sis_id is not None:
             
-            _query_params.append(('created_for_sis_id', created_for_sis_id))
+            _query_params.append(('created_for_sis_id[]', created_for_sis_id))
             
         if page is not None:
             
@@ -3047,8 +3045,6 @@ class EnrollmentsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -3344,15 +3340,15 @@ class EnrollmentsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'type': 'multi',
-            'role': 'multi',
-            'state': 'multi',
-            'include': 'multi',
-            'sis_account_id': 'multi',
-            'sis_course_id': 'multi',
-            'sis_section_id': 'multi',
-            'sis_user_id': 'multi',
-            'created_for_sis_id': 'multi',
+            'type[]': 'multi',
+            'role[]': 'multi',
+            'state[]': 'multi',
+            'include[]': 'multi',
+            'sis_account_id[]': 'multi',
+            'sis_course_id[]': 'multi',
+            'sis_section_id[]': 'multi',
+            'sis_user_id[]': 'multi',
+            'created_for_sis_id[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3370,19 +3366,19 @@ class EnrollmentsApiApi:
         # process the query parameters
         if type is not None:
             
-            _query_params.append(('type', type))
+            _query_params.append(('type[]', type))
             
         if role is not None:
             
-            _query_params.append(('role', role))
+            _query_params.append(('role[]', role))
             
         if state is not None:
             
-            _query_params.append(('state', state))
+            _query_params.append(('state[]', state))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if user_id is not None:
             
@@ -3398,23 +3394,23 @@ class EnrollmentsApiApi:
             
         if sis_account_id is not None:
             
-            _query_params.append(('sis_account_id', sis_account_id))
+            _query_params.append(('sis_account_id[]', sis_account_id))
             
         if sis_course_id is not None:
             
-            _query_params.append(('sis_course_id', sis_course_id))
+            _query_params.append(('sis_course_id[]', sis_course_id))
             
         if sis_section_id is not None:
             
-            _query_params.append(('sis_section_id', sis_section_id))
+            _query_params.append(('sis_section_id[]', sis_section_id))
             
         if sis_user_id is not None:
             
-            _query_params.append(('sis_user_id', sis_user_id))
+            _query_params.append(('sis_user_id[]', sis_user_id))
             
         if created_for_sis_id is not None:
             
-            _query_params.append(('created_for_sis_id', created_for_sis_id))
+            _query_params.append(('created_for_sis_id[]', created_for_sis_id))
             
         if page is not None:
             
@@ -3874,8 +3870,6 @@ class EnrollmentsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -4162,15 +4156,15 @@ class EnrollmentsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'type': 'multi',
-            'role': 'multi',
-            'state': 'multi',
-            'include': 'multi',
-            'sis_account_id': 'multi',
-            'sis_course_id': 'multi',
-            'sis_section_id': 'multi',
-            'sis_user_id': 'multi',
-            'created_for_sis_id': 'multi',
+            'type[]': 'multi',
+            'role[]': 'multi',
+            'state[]': 'multi',
+            'include[]': 'multi',
+            'sis_account_id[]': 'multi',
+            'sis_course_id[]': 'multi',
+            'sis_section_id[]': 'multi',
+            'sis_user_id[]': 'multi',
+            'created_for_sis_id[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4188,19 +4182,19 @@ class EnrollmentsApiApi:
         # process the query parameters
         if type is not None:
             
-            _query_params.append(('type', type))
+            _query_params.append(('type[]', type))
             
         if role is not None:
             
-            _query_params.append(('role', role))
+            _query_params.append(('role[]', role))
             
         if state is not None:
             
-            _query_params.append(('state', state))
+            _query_params.append(('state[]', state))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if grading_period_id is not None:
             
@@ -4212,23 +4206,23 @@ class EnrollmentsApiApi:
             
         if sis_account_id is not None:
             
-            _query_params.append(('sis_account_id', sis_account_id))
+            _query_params.append(('sis_account_id[]', sis_account_id))
             
         if sis_course_id is not None:
             
-            _query_params.append(('sis_course_id', sis_course_id))
+            _query_params.append(('sis_course_id[]', sis_course_id))
             
         if sis_section_id is not None:
             
-            _query_params.append(('sis_section_id', sis_section_id))
+            _query_params.append(('sis_section_id[]', sis_section_id))
             
         if sis_user_id is not None:
             
-            _query_params.append(('sis_user_id', sis_user_id))
+            _query_params.append(('sis_user_id[]', sis_user_id))
             
         if created_for_sis_id is not None:
             
-            _query_params.append(('created_for_sis_id', created_for_sis_id))
+            _query_params.append(('created_for_sis_id[]', created_for_sis_id))
             
         if page is not None:
             

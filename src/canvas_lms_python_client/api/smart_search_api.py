@@ -356,8 +356,6 @@ class SmartSearchApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -572,8 +570,8 @@ class SmartSearchApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'filter': 'multi',
-            'include': 'multi',
+            'filter[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -595,11 +593,11 @@ class SmartSearchApi:
             
         if filter is not None:
             
-            _query_params.append(('filter', filter))
+            _query_params.append(('filter[]', filter))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             

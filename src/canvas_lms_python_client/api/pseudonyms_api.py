@@ -16,8 +16,9 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.login import Login
 from canvas_lms_python_client.models.pseudonyms_create_request import PseudonymsCreateRequest
 from canvas_lms_python_client.models.pseudonyms_update_request import PseudonymsUpdateRequest
 
@@ -860,7 +861,7 @@ class PseudonymsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[Login]:
         """List user logins
 
         Given a user ID, return a paginated list of that user's logins for the given account.
@@ -911,6 +912,7 @@ class PseudonymsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Login]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -942,7 +944,7 @@ class PseudonymsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[Login]]:
         """List user logins
 
         Given a user ID, return a paginated list of that user's logins for the given account.
@@ -993,6 +995,7 @@ class PseudonymsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Login]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1046,7 +1049,7 @@ class PseudonymsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[Login]:
         """List user logins
 
         Given a user ID, return a paginated list of that user's logins for the given account.
@@ -1097,6 +1100,7 @@ class PseudonymsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Login]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1119,8 +1123,6 @@ class PseudonymsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -1151,7 +1153,7 @@ class PseudonymsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Login]]:
         """List user logins
 
         Given a user ID, return a paginated list of that user's logins for the given account.
@@ -1202,6 +1204,7 @@ class PseudonymsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Login]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1284,6 +1287,7 @@ class PseudonymsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Login]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1385,7 +1389,7 @@ class PseudonymsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[Login]:
         """List user logins
 
         Given a user ID, return a paginated list of that user's logins for the given account.
@@ -1436,6 +1440,7 @@ class PseudonymsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Login]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1467,7 +1472,7 @@ class PseudonymsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[Login]]:
         """List user logins
 
         Given a user ID, return a paginated list of that user's logins for the given account.
@@ -1518,6 +1523,7 @@ class PseudonymsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Login]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1571,7 +1577,7 @@ class PseudonymsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[Login]:
         """List user logins
 
         Given a user ID, return a paginated list of that user's logins for the given account.
@@ -1622,6 +1628,7 @@ class PseudonymsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Login]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1644,8 +1651,6 @@ class PseudonymsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -1676,7 +1681,7 @@ class PseudonymsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Login]]:
         """List user logins
 
         Given a user ID, return a paginated list of that user's logins for the given account.
@@ -1727,6 +1732,7 @@ class PseudonymsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Login]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1809,6 +1815,7 @@ class PseudonymsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Login]",
         }
         response_data = await self.api_client.call_api(
             *_param,

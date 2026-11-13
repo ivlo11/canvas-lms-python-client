@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,14 +28,16 @@ class GradingPeriod(BaseModel):
     """
     GradingPeriod
     """ # noqa: E501
-    id: StrictInt = Field(description="The unique identifier for the grading period.", json_schema_extra={"examples": [1023]})
+    id: StrictStr = Field(description="The unique identifier for the grading period.", json_schema_extra={"examples": ["1023"]})
+    grading_period_group_id: Optional[StrictStr] = Field(default=None, description="The id of the grading period set the grading period belongs to.", json_schema_extra={"examples": ["1"]})
     title: Optional[StrictStr] = Field(default=None, description="The title for the grading period.", json_schema_extra={"examples": ["First Block"]})
     start_date: datetime = Field(description="The start date of the grading period.", json_schema_extra={"examples": ["2014-01-07T15:04:00Z"]})
     end_date: datetime = Field(description="The end date of the grading period.", json_schema_extra={"examples": ["2014-05-07T17:07:00Z"]})
     close_date: Optional[datetime] = Field(default=None, description="Grades can only be changed before the close date of the grading period.", json_schema_extra={"examples": ["2014-06-07T17:07:00Z"]})
-    weight: Optional[StrictInt] = Field(default=None, description="A weight value that contributes to the overall weight of a grading period set which is used to calculate how much assignments in this period contribute to the total grade")
+    weight: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="A weight value that contributes to the overall weight of a grading period set which is used to calculate how much assignments in this period contribute to the total grade", json_schema_extra={"examples": [33.33]})
     is_closed: Optional[StrictBool] = Field(default=None, description="If true, the grading period's close_date has passed.", json_schema_extra={"examples": [True]})
-    __properties: ClassVar[List[str]] = ["id", "title", "start_date", "end_date", "close_date", "weight", "is_closed"]
+    permissions: Optional[Dict[str, Any]] = Field(default=None, description="The current user's permissions on the grading period (read, create, update, delete).", json_schema_extra={"examples": [{"read": True, "create": True, "update": True, "delete": True}]})
+    __properties: ClassVar[List[str]] = ["id", "grading_period_group_id", "title", "start_date", "end_date", "close_date", "weight", "is_closed", "permissions"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -89,12 +91,14 @@ class GradingPeriod(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
+            "grading_period_group_id": obj.get("grading_period_group_id"),
             "title": obj.get("title"),
             "start_date": obj.get("start_date"),
             "end_date": obj.get("end_date"),
             "close_date": obj.get("close_date"),
             "weight": obj.get("weight"),
-            "is_closed": obj.get("is_closed")
+            "is_closed": obj.get("is_closed"),
+            "permissions": obj.get("permissions")
         })
         return _obj
 

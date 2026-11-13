@@ -285,7 +285,7 @@ class PlagiarismPlatformApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'actions': 'multi',
+            'actions[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -313,7 +313,7 @@ class PlagiarismPlatformApi:
             
         if actions is not None:
             
-            _query_params.append(('actions', actions))
+            _query_params.append(('actions[]', actions))
             
         # process the header parameters
         # process the form parameters

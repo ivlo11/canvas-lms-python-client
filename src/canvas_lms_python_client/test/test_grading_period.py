@@ -35,17 +35,19 @@ class TestGradingPeriod(unittest.TestCase):
         model = GradingPeriod()
         if include_optional:
             return GradingPeriod(
-                id = 1023,
+                id = '1023',
+                grading_period_group_id = '1',
                 title = 'First Block',
                 start_date = '2014-01-07T15:04Z',
                 end_date = '2014-05-07T17:07Z',
                 close_date = '2014-06-07T17:07Z',
-                weight = 56,
-                is_closed = True
+                weight = 33.33,
+                is_closed = True,
+                permissions = {"read":true,"create":true,"update":true,"delete":true}
             )
         else:
             return GradingPeriod(
-                id = 1023,
+                id = '1023',
                 start_date = '2014-01-07T15:04Z',
                 end_date = '2014-05-07T17:07Z',
         )

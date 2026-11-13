@@ -46,7 +46,7 @@ class PageView(BaseModel):
     participated: Optional[StrictBool] = Field(default=None, description="True if the request counted as participating, such as submitting homework", json_schema_extra={"examples": [False]})
     http_method: Optional[StrictStr] = Field(default=None, description="The HTTP method such as GET or POST", json_schema_extra={"examples": ["GET"]})
     remote_ip: Optional[StrictStr] = Field(default=None, description="The origin IP address of the request", json_schema_extra={"examples": ["173.194.46.71"]})
-    session_id: Optional[UUID] = Field(default=None, description="The session identifier for the user session that made the request", json_schema_extra={"examples": ["b4f5c8e0-e2f3-0130-51e0-02e33aa501ef"]})
+    session_id: Optional[StrictStr] = Field(default=None, description="The session identifier for the user session that made the request", json_schema_extra={"examples": ["0ca9e5e58964bc58d4c1a0a8df509805"]})
     developer_key_id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The ID of the developer key that authorized the API request, if applicable", json_schema_extra={"examples": [42]})
     asset_user_access_id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The ID of the asset (e.g. an assignment) associated with this page view, if applicable", json_schema_extra={"examples": [9876]})
     links: Optional[PageViewLinks] = None

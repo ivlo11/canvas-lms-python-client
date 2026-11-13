@@ -7,7 +7,7 @@ A bare-bones representation of an LTI tool used by Canvas to launch the tool
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **definition_type** | **str** | The type of the launch definition. Always &#39;ContextExternalTool&#39; | [optional] 
-**definition_id** | **str** | The Canvas ID of the tool | [optional] 
+**definition_id** | **int** | The Canvas ID of the tool | [optional] 
 **name** | **str** | The display name of the tool for the given placement | [optional] 
 **description** | **str** | The description of the tool for the given placement. | [optional] 
 **url** | **str** | The launch URL for the tool | [optional] 

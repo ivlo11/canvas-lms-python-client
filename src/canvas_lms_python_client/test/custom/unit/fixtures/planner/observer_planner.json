@@ -1,0 +1,64 @@
+[
+  {
+    "context_type": "Course",
+    "course_id": 5,
+    "plannable_id": 62,
+    "planner_override": null,
+    "plannable_type": "assignment",
+    "new_activity": false,
+    "submissions": {
+      "submitted": false,
+      "excused": false,
+      "graded": false,
+      "posted_at": null,
+      "late": false,
+      "missing": true,
+      "needs_grading": false,
+      "has_feedback": false,
+      "redo_request": false
+    },
+    "plannable_date": "2025-09-19T00:49:41Z",
+    "plannable": {
+      "id": 62,
+      "title": "Tame a Wild Horse (Task 11)",
+      "created_at": "2026-09-19T00:49:43Z",
+      "updated_at": "2026-09-19T00:49:43Z",
+      "points_possible": 10.0,
+      "due_at": "2025-09-19T00:49:41Z"
+    },
+    "html_url": "/courses/5/assignments/62",
+    "context_name": "Ocarina of Time Studies",
+    "context_image": null
+  },
+  {
+    "context_type": "Course",
+    "course_id": 5,
+    "plannable_id": 68,
+    "planner_override": null,
+    "plannable_type": "assignment",
+    "new_activity": false,
+    "submissions": {
+      "submitted": false,
+      "excused": false,
+      "graded": false,
+      "posted_at": null,
+      "late": false,
+      "missing": true,
+      "needs_grading": false,
+      "has_feedback": false,
+      "redo_request": false
+    },
+    "plannable_date": "2025-09-19T00:49:41Z",
+    "plannable": {
+      "id": 68,
+      "title": "Cook Dubious Food (Task 17)",
+      "created_at": "2026-09-19T00:49:44Z",
+      "updated_at": "2026-09-19T00:49:45Z",
+      "points_possible": 10.0,
+      "due_at": "2025-09-19T00:49:41Z"
+    },
+    "html_url": "/courses/5/assignments/68",
+    "context_name": "Ocarina of Time Studies",
+    "context_image": null
+  }
+]

@@ -26,7 +26,9 @@ from canvas_lms_python_client.models.courses_preview_html_request import Courses
 from canvas_lms_python_client.models.courses_update_request import CoursesUpdateRequest
 from canvas_lms_python_client.models.courses_update_settings_request import CoursesUpdateSettingsRequest
 from canvas_lms_python_client.models.progress import Progress
+from canvas_lms_python_client.models.todo_item import TodoItem
 from canvas_lms_python_client.models.user import User
+from canvas_lms_python_client.models.user_progress import UserProgress
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -1123,7 +1125,7 @@ class CoursesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[UserProgress]:
         """Get bulk user progress
 
         Returns progress information for all users enrolled in the given course.  You must be a user who has permission to view all grades in the course (such as a teacher or administrator).
@@ -1174,6 +1176,7 @@ class CoursesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UserProgress]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1205,7 +1208,7 @@ class CoursesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[UserProgress]]:
         """Get bulk user progress
 
         Returns progress information for all users enrolled in the given course.  You must be a user who has permission to view all grades in the course (such as a teacher or administrator).
@@ -1256,6 +1259,7 @@ class CoursesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UserProgress]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1309,7 +1313,7 @@ class CoursesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[UserProgress]:
         """Get bulk user progress
 
         Returns progress information for all users enrolled in the given course.  You must be a user who has permission to view all grades in the course (such as a teacher or administrator).
@@ -1360,6 +1364,7 @@ class CoursesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UserProgress]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1382,8 +1387,6 @@ class CoursesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -1414,7 +1417,7 @@ class CoursesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[UserProgress]]:
         """Get bulk user progress
 
         Returns progress information for all users enrolled in the given course.  You must be a user who has permission to view all grades in the course (such as a teacher or administrator).
@@ -1465,6 +1468,7 @@ class CoursesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UserProgress]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1547,6 +1551,7 @@ class CoursesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[UserProgress]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1922,8 +1927,6 @@ class CoursesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -3486,7 +3489,7 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'assignment_ids': 'multi',
+            'assignment_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3504,7 +3507,7 @@ class CoursesApi:
         # process the query parameters
         if assignment_ids is not None:
             
-            _query_params.append(('assignment_ids', assignment_ids))
+            _query_params.append(('assignment_ids[]', assignment_ids))
             
         # process the header parameters
         # process the form parameters
@@ -3896,8 +3899,6 @@ class CoursesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -4139,8 +4140,8 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'state': 'multi',
+            'include[]': 'multi',
+            'state[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4176,11 +4177,11 @@ class CoursesApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if state is not None:
             
-            _query_params.append(('state', state))
+            _query_params.append(('state[]', state))
             
         if page is not None:
             
@@ -4448,7 +4449,7 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'permissions': 'multi',
+            'permissions[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4466,7 +4467,7 @@ class CoursesApi:
         # process the query parameters
         if permissions is not None:
             
-            _query_params.append(('permissions', permissions))
+            _query_params.append(('permissions[]', permissions))
             
         # process the header parameters
         # process the form parameters
@@ -5074,8 +5075,6 @@ class CoursesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -6101,7 +6100,7 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -6119,7 +6118,7 @@ class CoursesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if teacher_limit is not None:
             
@@ -6412,7 +6411,7 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -6432,7 +6431,7 @@ class CoursesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if teacher_limit is not None:
             
@@ -7020,7 +7019,7 @@ class CoursesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[TodoItem]:
         """Course TODO items
 
         Returns the current user's course-specific todo items.  For full documentation, see the API documentation for the user todo items, in the user api.
@@ -7071,6 +7070,7 @@ class CoursesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[TodoItem]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7102,7 +7102,7 @@ class CoursesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[TodoItem]]:
         """Course TODO items
 
         Returns the current user's course-specific todo items.  For full documentation, see the API documentation for the user todo items, in the user api.
@@ -7153,6 +7153,7 @@ class CoursesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[TodoItem]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -7206,7 +7207,7 @@ class CoursesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[TodoItem]:
         """Course TODO items
 
         Returns the current user's course-specific todo items.  For full documentation, see the API documentation for the user todo items, in the user api.
@@ -7257,6 +7258,7 @@ class CoursesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[TodoItem]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -7279,8 +7281,6 @@ class CoursesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -7311,7 +7311,7 @@ class CoursesApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[TodoItem]]:
         """Course TODO items
 
         Returns the current user's course-specific todo items.  For full documentation, see the API documentation for the user todo items, in the user api.
@@ -7362,6 +7362,7 @@ class CoursesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[TodoItem]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7444,6 +7445,7 @@ class CoursesApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[TodoItem]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -7494,6 +7496,13 @@ class CoursesApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -8707,8 +8716,6 @@ class CoursesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -8941,8 +8948,8 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'state': 'multi',
+            'include[]': 'multi',
+            'state[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -8960,11 +8967,11 @@ class CoursesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if state is not None:
             
-            _query_params.append(('state', state))
+            _query_params.append(('state[]', state))
             
         if enrollment_state is not None:
             
@@ -9702,8 +9709,6 @@ class CoursesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -9981,11 +9986,11 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'enrollment_type': 'multi',
-            'section_ids': 'multi',
-            'include': 'multi',
-            'user_ids': 'multi',
-            'enrollment_state': 'multi',
+            'enrollment_type[]': 'multi',
+            'section_ids[]': 'multi',
+            'include[]': 'multi',
+            'user_ids[]': 'multi',
+            'enrollment_state[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -10011,7 +10016,7 @@ class CoursesApi:
             
         if enrollment_type is not None:
             
-            _query_params.append(('enrollment_type', enrollment_type))
+            _query_params.append(('enrollment_type[]', enrollment_type))
             
         if enrollment_role is not None:
             
@@ -10023,11 +10028,11 @@ class CoursesApi:
             
         if section_ids is not None:
             
-            _query_params.append(('section_ids', section_ids))
+            _query_params.append(('section_ids[]', section_ids))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if user_id is not None:
             
@@ -10035,11 +10040,11 @@ class CoursesApi:
             
         if user_ids is not None:
             
-            _query_params.append(('user_ids', user_ids))
+            _query_params.append(('user_ids[]', user_ids))
             
         if enrollment_state is not None:
             
-            _query_params.append(('enrollment_state', enrollment_state))
+            _query_params.append(('enrollment_state[]', enrollment_state))
             
         if page is not None:
             
@@ -10487,8 +10492,6 @@ class CoursesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -10766,11 +10769,11 @@ class CoursesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'enrollment_type': 'multi',
-            'section_ids': 'multi',
-            'include': 'multi',
-            'user_ids': 'multi',
-            'enrollment_state': 'multi',
+            'enrollment_type[]': 'multi',
+            'section_ids[]': 'multi',
+            'include[]': 'multi',
+            'user_ids[]': 'multi',
+            'enrollment_state[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -10796,7 +10799,7 @@ class CoursesApi:
             
         if enrollment_type is not None:
             
-            _query_params.append(('enrollment_type', enrollment_type))
+            _query_params.append(('enrollment_type[]', enrollment_type))
             
         if enrollment_role is not None:
             
@@ -10808,11 +10811,11 @@ class CoursesApi:
             
         if section_ids is not None:
             
-            _query_params.append(('section_ids', section_ids))
+            _query_params.append(('section_ids[]', section_ids))
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if user_id is not None:
             
@@ -10820,11 +10823,11 @@ class CoursesApi:
             
         if user_ids is not None:
             
-            _query_params.append(('user_ids', user_ids))
+            _query_params.append(('user_ids[]', user_ids))
             
         if enrollment_state is not None:
             
-            _query_params.append(('enrollment_state', enrollment_state))
+            _query_params.append(('enrollment_state[]', enrollment_state))
             
         if page is not None:
             

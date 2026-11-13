@@ -41,7 +41,6 @@ __all__ = [
     "AssignmentsApiApi",
     "AuthenticationAuditApiApi",
     "AuthenticationProvidersApi",
-    "BadPermissionSettingErrorApi",
     "BlackoutDatesApi",
     "BlockEditorTemplatesApiApi",
     "BookmarksApi",
@@ -49,6 +48,7 @@ __all__ = [
     "CalendarEventsApiApi",
     "CanvadocSessionsApi",
     "CareerExperienceApi",
+    "CollaborationsApi",
     "CommMessagesApiApi",
     "CommunicationChannelsApi",
     "ConferencesApi",
@@ -83,6 +83,7 @@ __all__ = [
     "EpubExportsApi",
     "ErrorsApi",
     "ExternalFeedsApi",
+    "ExternalToolsApi",
     "FavoritesApi",
     "FeatureFlagsApi",
     "FilesApi",
@@ -99,6 +100,7 @@ __all__ = [
     "HistoryApi",
     "InstAccessTokensApi",
     "JwtsApi",
+    "LatePolicyApi",
     "LearningMasteryGradebookSettingsApiApi",
     "LearningObjectDatesApi",
     "LmgbUserDetailsApi",
@@ -112,6 +114,7 @@ __all__ = [
     "NotificationPreferencesApi",
     "ObserverPairingCodesApiApi",
     "OutcomeGroupsApiApi",
+    "OutcomeImportsApiApi",
     "OutcomeProficiencyApiApi",
     "OutcomeResultsApi",
     "OutcomesApiApi",
@@ -144,10 +147,10 @@ __all__ = [
     "QuizSubmissionUsersApi",
     "QuizSubmissionsApiApi",
     "QuizzesApiApi",
-    "RecordAlreadyExistsApi",
     "RegistrationsApi",
     "ResourceLinksApi",
     "ResultsApi",
+    "RoleOverridesApi",
     "RubricAssessmentsApi",
     "RubricAssociationsApi",
     "RubricsApi",
@@ -155,7 +158,6 @@ __all__ = [
     "ScopesApiApi",
     "SearchApi",
     "SectionsApi",
-    "ServiceCredentialsApi",
     "ServicesApiApi",
     "SharedBrandConfigsApi",
     "SisApiApi",
@@ -175,6 +177,7 @@ __all__ = [
     "TokensApi",
     "UsageRightsApi",
     "UserObserveesApi",
+    "UsersApi",
     "WebZipExportsApi",
     "WhatIfGradesApiApi",
     "WikiPagesApiApi",
@@ -190,7 +193,9 @@ __all__ = [
     "AccessibilityCourseStatistic",
     "Account",
     "AccountCalendar",
+    "AccountCalendarsApiIndexResponse",
     "AccountCalendarsApiUpdateRequest",
+    "AccountCalendarsApiVisibleCalendarsCountResponse",
     "AccountNotification",
     "AccountNotificationsCreateRequest",
     "AccountNotificationsCreateRequestAccountNotification",
@@ -210,6 +215,7 @@ __all__ = [
     "AiExperiencesUpdateRequest",
     "AnonymousUserDisplay",
     "Answer",
+    "AppliedPace",
     "Appointment",
     "AppointmentGroup",
     "AppointmentGroupsCreateRequest",
@@ -227,6 +233,7 @@ __all__ = [
     "AssignmentEvent",
     "AssignmentExtension",
     "AssignmentExtensionsCreateRequest",
+    "AssignmentExtensionsCreateResponse",
     "AssignmentGroup",
     "AssignmentGroupAttributes",
     "AssignmentGroupGrade",
@@ -248,15 +255,15 @@ __all__ = [
     "AsyncQueryResponse",
     "AsyncQueryResultsResponse",
     "AsyncQueryStatusResponse",
+    "AuthenticationAuditApiForAccountResponse",
+    "AuthenticationAuditApiForLoginResponse",
+    "AuthenticationAuditApiForUserResponse",
     "AuthenticationEvent",
+    "AuthenticationEventLinks",
+    "AuthenticationLinkedRecords",
     "AuthenticationProvider",
     "AuthorizationJWT",
     "Avatar",
-    "BadPermissionSettingErrorActivateRoleRequest",
-    "BadPermissionSettingErrorActivateRoleRequestRole",
-    "BadPermissionSettingErrorAddRoleRequest",
-    "BadPermissionSettingErrorAddRoleRequestPermissions",
-    "BadPermissionSettingErrorUpdateRequest",
     "BasicUser",
     "BlackoutDate",
     "BlackoutDatesBulkUpdateRequest",
@@ -281,8 +288,11 @@ __all__ = [
     "CalendarEventsApiUpdateRequest",
     "CalendarEventsApiUpdateRequestCalendarEvent",
     "CalendarLink",
+    "CareerExperienceEnabledResponse",
     "CareerExperienceSwitchExperienceRequest",
+    "CareerExperienceSwitchExperienceResponse",
     "CareerExperienceSwitchRoleRequest",
+    "CareerExperienceSwitchRoleResponse",
     "ChangeRecord",
     "Collaboration",
     "Collaborator",
@@ -291,6 +301,7 @@ __all__ = [
     "CommunicationChannel",
     "CommunicationChannelsCreateRequest",
     "CommunicationChannelsCreateRequestCommunicationChannel",
+    "CommunicationChannelsDeletePushTokenResponse",
     "CompletionRequirement",
     "Conference",
     "ConferenceRecording",
@@ -306,6 +317,7 @@ __all__ = [
     "ContentShare",
     "ContentSharesAddUsersRequest",
     "ContentSharesCreateRequest",
+    "ContentSharesUnreadCountResponse",
     "ContentSharesUpdateRequest",
     "ContextControlsCreateManyRequest",
     "ContextControlsCreateRequest",
@@ -324,6 +336,7 @@ __all__ = [
     "ContextModulesApiUpdateRequestModule",
     "ContextSearchResponse",
     "Conversation",
+    "ConversationBatch",
     "ConversationParticipant",
     "ConversationsAddMessageRequest",
     "ConversationsAddRecipientsRequest",
@@ -335,9 +348,12 @@ __all__ = [
     "ConversationsUpdateRequestConversation",
     "Course",
     "CourseAttributes",
+    "CourseAuditApiForAccountResponse",
+    "CourseAuditApiForCourseResponse",
     "CourseEpubExport",
     "CourseEvent",
     "CourseEventLink",
+    "CourseGradingPeriod",
     "CourseNickname",
     "CourseNicknamesUpdateRequest",
     "CoursePace",
@@ -346,6 +362,7 @@ __all__ = [
     "CourseProgress",
     "CourseQuizExtension",
     "CourseQuizExtensionsCreateRequest",
+    "CourseQuizExtensionsCreateResponse",
     "CourseReportsCreateRequest",
     "CoursesBatchUpdateRequest",
     "CoursesCreateRequest",
@@ -380,9 +397,11 @@ __all__ = [
     "DiscoveryPageEntry",
     "DiscoveryPagesApiTokenRequest",
     "DiscoveryPagesApiTokenRequestDiscoveryPage",
+    "DiscoveryPagesApiTokenResponse",
     "DiscoveryPagesApiUpsertRequest",
     "DiscoveryPagesApiUpsertRequestDiscoveryPage",
     "DiscussionEntriesUpdateRequest",
+    "DiscussionEntry",
     "DiscussionTopic",
     "DiscussionTopicsApiAddEntryRequest",
     "DiscussionTopicsApiFindOrCreateSummaryRequest",
@@ -416,6 +435,8 @@ __all__ = [
     "ExternalFeed",
     "ExternalFeedsCreateRequest",
     "ExternalToolTagAttributes",
+    "ExternalToolsCreateRequest",
+    "ExternalToolsCreateRequestCustomFields",
     "Favorite",
     "Feature",
     "FeatureFlag",
@@ -432,8 +453,14 @@ __all__ = [
     "FoldersCreateRequest",
     "FoldersUpdateRequest",
     "Grade",
+    "GradeChangeAuditApiForAssignmentResponse",
+    "GradeChangeAuditApiForCourseResponse",
+    "GradeChangeAuditApiForGraderResponse",
+    "GradeChangeAuditApiForStudentResponse",
+    "GradeChangeAuditApiQueryResponse",
     "GradeChangeEvent",
     "GradeChangeEventLinks",
+    "GradeChangeLinkedRecords",
     "GradeGroup",
     "GradebooksApplyScoreToUngradedSubmissionsRequest",
     "GradebooksUpdateFinalGradeOverridesRequest",
@@ -444,10 +471,16 @@ __all__ = [
     "GradingPeriodSets",
     "GradingPeriodSetsCreateRequest",
     "GradingPeriodSetsCreateRequestGradingPeriodSet",
+    "GradingPeriodSetsCreateResponse",
+    "GradingPeriodSetsIndexResponse",
     "GradingPeriodSetsUpdateRequest",
     "GradingPeriodsBatchUpdateForOtherRequest",
     "GradingPeriodsBatchUpdateRequest",
+    "GradingPeriodsBatchUpdateResponse",
+    "GradingPeriodsIndexResponse",
+    "GradingPeriodsShowResponse",
     "GradingPeriodsUpdateRequest",
+    "GradingPeriodsUpdateResponse",
     "GradingRules",
     "GradingSchemeEntry",
     "GradingStandard",
@@ -476,13 +509,17 @@ __all__ = [
     "JwtsCreateRequest",
     "JwtsRefreshRequest",
     "LatePolicy",
+    "LatePolicyCreateRequest",
+    "LatePolicyCreateRequestLatePolicy",
     "LearningObjectDates",
+    "LearningObjectDatesPeerReviewSubAssignment",
     "LearningObjectDatesUpdateRequest",
     "LearningObjectDatesUpdateRequestPeerReview",
     "License",
     "LineItem",
     "ListLtiRegistrationsResponse",
     "LockInfo",
+    "Login",
     "LtiAssignment",
     "LtiContextControl",
     "LtiDeployment",
@@ -498,14 +535,21 @@ __all__ = [
     "LtiPlacementOverlay",
     "LtiRegistration",
     "LtiRegistrationAccountBinding",
+    "LtiRegistrationCreatedBy",
+    "LtiRegistrationHistoryEntry",
     "LtiResourceLink",
+    "LtiSubmission",
     "LtiToolConfiguration",
     "MasterTemplatesQueueMigrationRequest",
     "MasterTemplatesRestrictItemRequest",
     "MasterTemplatesRestrictItemRequestRestrictions",
     "MasterTemplatesUpdateAssociationsRequest",
     "MediaComment",
+    "MediaObject",
+    "MediaObjectMediaSourcesInner",
+    "MediaObjectMediaTracksInner",
     "MediaObjectsUpdateMediaObjectRequest",
+    "MediaTrack",
     "MediaTracksUpdateRequest",
     "MicrosoftSyncGroup",
     "MigrationIssue",
@@ -518,6 +562,7 @@ __all__ = [
     "ModuleItem",
     "ModuleItemSequence",
     "ModuleItemSequenceNode",
+    "MultipleGradeableStudent",
     "NamesAndRoleContext",
     "NamesAndRoleMembership",
     "NamesAndRoleMemberships",
@@ -543,18 +588,22 @@ __all__ = [
     "OutcomeGroupsApiUpdateRequest",
     "OutcomeImport",
     "OutcomeImportData",
+    "OutcomeImportsApiCreateRequest",
     "OutcomeLink",
     "OutcomePath",
     "OutcomePathPart",
     "OutcomeProficiencyApiCreateRequest",
     "OutcomeResult",
     "OutcomeResultsEnqueueOutcomeRollupCalculationRequest",
+    "OutcomeResultsIndexResponse",
     "OutcomeRollup",
     "OutcomeRollupLinks",
     "OutcomeRollupScore",
     "OutcomeRollupScoreLinks",
     "OutcomesApiUpdateRequest",
     "OverrideTarget",
+    "PaceContext",
+    "PaceContextsApiIndexResponse",
     "Page",
     "PageRevision",
     "PageView",
@@ -566,6 +615,7 @@ __all__ = [
     "PeerReviewsApiCreateRequest",
     "Permission",
     "PermissionHelpText",
+    "PlannerItem",
     "PlannerNote",
     "PlannerNotesCreateRequest",
     "PlannerNotesUpdateRequest",
@@ -575,13 +625,31 @@ __all__ = [
     "Poll",
     "PollChoice",
     "PollChoicesCreateRequest",
+    "PollChoicesCreateResponse",
+    "PollChoicesIndexResponse",
+    "PollChoicesShowResponse",
     "PollChoicesUpdateRequest",
+    "PollChoicesUpdateResponse",
     "PollSession",
+    "PollSessionsCloseResponse",
+    "PollSessionsClosedResponse",
     "PollSessionsCreateRequest",
+    "PollSessionsCreateResponse",
+    "PollSessionsIndexResponse",
+    "PollSessionsOpenResponse",
+    "PollSessionsOpenedResponse",
+    "PollSessionsShowResponse",
     "PollSessionsUpdateRequest",
+    "PollSessionsUpdateResponse",
     "PollSubmission",
     "PollSubmissionsCreateRequest",
+    "PollSubmissionsCreateResponse",
+    "PollSubmissionsShowResponse",
     "PollsCreateRequest",
+    "PollsCreateResponse",
+    "PollsIndexResponse",
+    "PollsShowResponse",
+    "PollsUpdateResponse",
     "Proficiency",
     "ProficiencyRating",
     "Profile",
@@ -598,11 +666,16 @@ __all__ = [
     "QuizAssignmentOverrideSetContainer",
     "QuizExtension",
     "QuizExtensionsCreateRequest",
+    "QuizExtensionsCreateResponse",
     "QuizGroup",
     "QuizGroupsCreateRequest",
+    "QuizGroupsCreateResponse",
+    "QuizGroupsIndexResponse",
     "QuizGroupsReorderRequest",
     "QuizGroupsUpdateRequest",
+    "QuizGroupsUpdateResponse",
     "QuizIPFilter",
+    "QuizIpFiltersIndexResponse",
     "QuizPermissions",
     "QuizQuestion",
     "QuizQuestionsCreateRequest",
@@ -613,29 +686,37 @@ __all__ = [
     "QuizStatistics",
     "QuizStatisticsAnswerPointBiserial",
     "QuizStatisticsAnswerStatistics",
+    "QuizStatisticsIndexResponse",
     "QuizStatisticsLinks",
     "QuizStatisticsQuestionStatistics",
     "QuizStatisticsSubmissionStatistics",
     "QuizSubmission",
     "QuizSubmissionEvent",
     "QuizSubmissionEventsApiCreateRequest",
+    "QuizSubmissionEventsApiIndexResponse",
     "QuizSubmissionFilesCreateRequest",
     "QuizSubmissionQuestion",
     "QuizSubmissionQuestionsAnswerRequest",
     "QuizSubmissionQuestionsFlagRequest",
+    "QuizSubmissionQuestionsIndexResponse",
     "QuizSubmissionUsersMessageRequest",
     "QuizSubmissionUsersMessageRequestConversations",
     "QuizSubmissionsApiCompleteRequest",
+    "QuizSubmissionsApiCompleteResponse",
     "QuizSubmissionsApiCreateRequest",
+    "QuizSubmissionsApiCreateResponse",
+    "QuizSubmissionsApiIndexResponse",
+    "QuizSubmissionsApiShowResponse",
+    "QuizSubmissionsApiSubmissionResponse",
     "QuizSubmissionsApiUpdateRequest",
+    "QuizSubmissionsApiUpdateResponse",
     "QuizzesApiCreateRequest",
     "QuizzesApiCreateRequestQuiz",
     "QuizzesApiReorderRequest",
     "QuizzesApiUpdateRequest",
     "QuizzesApiUpdateRequestQuiz",
     "QuizzesApiValidateAccessCodeRequest",
-    "RecordAlreadyExistsCreateRequest",
-    "RecordAlreadyExistsCreateRequestLatePolicy",
+    "Recipient",
     "RegistrationsApplyRegistrationUpdateRequestRequest",
     "RegistrationsApplyRegistrationUpdateRequestRequestOverlay",
     "RegistrationsBindRequest",
@@ -652,7 +733,14 @@ __all__ = [
     "ResourceLinksUpdateRequest",
     "Result",
     "ResultLinks",
+    "ResultsCreateResponse",
+    "ResultsIndexResponse",
     "Role",
+    "RoleOverridesActivateRoleRequest",
+    "RoleOverridesActivateRoleRequestRole",
+    "RoleOverridesAddRoleRequest",
+    "RoleOverridesAddRoleRequestPermissions",
+    "RoleOverridesUpdateRequest",
     "RolePermissions",
     "Rubric",
     "RubricAssessment",
@@ -663,6 +751,8 @@ __all__ = [
     "RubricCriteria",
     "RubricCriterion",
     "RubricRating",
+    "RubricUsedLocation",
+    "RubricUsedLocationAssignmentsInner",
     "RubricsCreateRequest",
     "RubricsCreateRequestRubric",
     "RubricsCreateRequestRubricAssociation",
@@ -728,6 +818,7 @@ __all__ = [
     "TermsCreateRequestEnrollmentTerm",
     "TermsOfService",
     "TermsUpdateRequest",
+    "TodoItem",
     "Token",
     "TokensCreateRequest",
     "TokensCreateRequestToken",
@@ -746,8 +837,31 @@ __all__ = [
     "UserObserveesCreateRequest",
     "UserObserveesCreateRequestObservee",
     "UserObserveesUpdateRequest",
+    "UserPermissions",
+    "UserProgress",
+    "UsersCreateRequest",
+    "UsersCreateRequestCommunicationChannel",
+    "UsersCreateRequestDestination",
+    "UsersCreateRequestPairingCode",
+    "UsersCreateRequestPseudonym",
+    "UsersCreateRequestUser",
+    "UsersCreateSelfRegisteredUserRequest",
+    "UsersCreateSelfRegisteredUserRequestCommunicationChannel",
+    "UsersCreateSelfRegisteredUserRequestPseudonym",
+    "UsersCreateSelfRegisteredUserRequestUser",
+    "UsersPandataEventsTokenRequest",
+    "UsersSetCustomColorRequest",
+    "UsersSetFilesUiVersionPreferenceRequest",
+    "UsersSetTextEditorPreferenceRequest",
+    "UsersSettingsForUsersRequest",
+    "UsersUpdateRequest",
+    "UsersUpdateRequestUser",
     "WebZipExport",
+    "WhatIfGrade",
+    "WhatIfGradesApiResetForStudentCourseResponse",
     "WhatIfGradesApiUpdateRequest",
+    "WhatIfGradesApiUpdateResponse",
+    "WhatIfSubmission",
     "WikiPagesApiCreateRequest",
     "WikiPagesApiCreateRequestWikiPage",
     "WikiPagesApiUpdateFrontPageRequest",
@@ -780,7 +894,6 @@ from canvas_lms_python_client.api.assignments_api import AssignmentsApi as Assig
 from canvas_lms_python_client.api.assignments_api_api import AssignmentsApiApi as AssignmentsApiApi
 from canvas_lms_python_client.api.authentication_audit_api_api import AuthenticationAuditApiApi as AuthenticationAuditApiApi
 from canvas_lms_python_client.api.authentication_providers_api import AuthenticationProvidersApi as AuthenticationProvidersApi
-from canvas_lms_python_client.api.bad_permission_setting_error_api import BadPermissionSettingErrorApi as BadPermissionSettingErrorApi
 from canvas_lms_python_client.api.blackout_dates_api import BlackoutDatesApi as BlackoutDatesApi
 from canvas_lms_python_client.api.block_editor_templates_api_api import BlockEditorTemplatesApiApi as BlockEditorTemplatesApiApi
 from canvas_lms_python_client.api.bookmarks_api import BookmarksApi as BookmarksApi
@@ -788,6 +901,7 @@ from canvas_lms_python_client.api.brand_configs_api_api import BrandConfigsApiAp
 from canvas_lms_python_client.api.calendar_events_api_api import CalendarEventsApiApi as CalendarEventsApiApi
 from canvas_lms_python_client.api.canvadoc_sessions_api import CanvadocSessionsApi as CanvadocSessionsApi
 from canvas_lms_python_client.api.career_experience_api import CareerExperienceApi as CareerExperienceApi
+from canvas_lms_python_client.api.collaborations_api import CollaborationsApi as CollaborationsApi
 from canvas_lms_python_client.api.comm_messages_api_api import CommMessagesApiApi as CommMessagesApiApi
 from canvas_lms_python_client.api.communication_channels_api import CommunicationChannelsApi as CommunicationChannelsApi
 from canvas_lms_python_client.api.conferences_api import ConferencesApi as ConferencesApi
@@ -822,6 +936,7 @@ from canvas_lms_python_client.api.eportfolios_api_api import EportfoliosApiApi a
 from canvas_lms_python_client.api.epub_exports_api import EpubExportsApi as EpubExportsApi
 from canvas_lms_python_client.api.errors_api import ErrorsApi as ErrorsApi
 from canvas_lms_python_client.api.external_feeds_api import ExternalFeedsApi as ExternalFeedsApi
+from canvas_lms_python_client.api.external_tools_api import ExternalToolsApi as ExternalToolsApi
 from canvas_lms_python_client.api.favorites_api import FavoritesApi as FavoritesApi
 from canvas_lms_python_client.api.feature_flags_api import FeatureFlagsApi as FeatureFlagsApi
 from canvas_lms_python_client.api.files_api import FilesApi as FilesApi
@@ -838,6 +953,7 @@ from canvas_lms_python_client.api.groups_api import GroupsApi as GroupsApi
 from canvas_lms_python_client.api.history_api import HistoryApi as HistoryApi
 from canvas_lms_python_client.api.inst_access_tokens_api import InstAccessTokensApi as InstAccessTokensApi
 from canvas_lms_python_client.api.jwts_api import JwtsApi as JwtsApi
+from canvas_lms_python_client.api.late_policy_api import LatePolicyApi as LatePolicyApi
 from canvas_lms_python_client.api.learning_mastery_gradebook_settings_api_api import LearningMasteryGradebookSettingsApiApi as LearningMasteryGradebookSettingsApiApi
 from canvas_lms_python_client.api.learning_object_dates_api import LearningObjectDatesApi as LearningObjectDatesApi
 from canvas_lms_python_client.api.lmgb_user_details_api import LmgbUserDetailsApi as LmgbUserDetailsApi
@@ -851,6 +967,7 @@ from canvas_lms_python_client.api.module_assignment_overrides_api import ModuleA
 from canvas_lms_python_client.api.notification_preferences_api import NotificationPreferencesApi as NotificationPreferencesApi
 from canvas_lms_python_client.api.observer_pairing_codes_api_api import ObserverPairingCodesApiApi as ObserverPairingCodesApiApi
 from canvas_lms_python_client.api.outcome_groups_api_api import OutcomeGroupsApiApi as OutcomeGroupsApiApi
+from canvas_lms_python_client.api.outcome_imports_api_api import OutcomeImportsApiApi as OutcomeImportsApiApi
 from canvas_lms_python_client.api.outcome_proficiency_api_api import OutcomeProficiencyApiApi as OutcomeProficiencyApiApi
 from canvas_lms_python_client.api.outcome_results_api import OutcomeResultsApi as OutcomeResultsApi
 from canvas_lms_python_client.api.outcomes_api_api import OutcomesApiApi as OutcomesApiApi
@@ -883,10 +1000,10 @@ from canvas_lms_python_client.api.quiz_submission_questions_api import QuizSubmi
 from canvas_lms_python_client.api.quiz_submission_users_api import QuizSubmissionUsersApi as QuizSubmissionUsersApi
 from canvas_lms_python_client.api.quiz_submissions_api_api import QuizSubmissionsApiApi as QuizSubmissionsApiApi
 from canvas_lms_python_client.api.quizzes_api_api import QuizzesApiApi as QuizzesApiApi
-from canvas_lms_python_client.api.record_already_exists_api import RecordAlreadyExistsApi as RecordAlreadyExistsApi
 from canvas_lms_python_client.api.registrations_api import RegistrationsApi as RegistrationsApi
 from canvas_lms_python_client.api.resource_links_api import ResourceLinksApi as ResourceLinksApi
 from canvas_lms_python_client.api.results_api import ResultsApi as ResultsApi
+from canvas_lms_python_client.api.role_overrides_api import RoleOverridesApi as RoleOverridesApi
 from canvas_lms_python_client.api.rubric_assessments_api import RubricAssessmentsApi as RubricAssessmentsApi
 from canvas_lms_python_client.api.rubric_associations_api import RubricAssociationsApi as RubricAssociationsApi
 from canvas_lms_python_client.api.rubrics_api import RubricsApi as RubricsApi
@@ -894,7 +1011,6 @@ from canvas_lms_python_client.api.rubrics_api_api import RubricsApiApi as Rubric
 from canvas_lms_python_client.api.scopes_api_api import ScopesApiApi as ScopesApiApi
 from canvas_lms_python_client.api.search_api import SearchApi as SearchApi
 from canvas_lms_python_client.api.sections_api import SectionsApi as SectionsApi
-from canvas_lms_python_client.api.service_credentials_api import ServiceCredentialsApi as ServiceCredentialsApi
 from canvas_lms_python_client.api.services_api_api import ServicesApiApi as ServicesApiApi
 from canvas_lms_python_client.api.shared_brand_configs_api import SharedBrandConfigsApi as SharedBrandConfigsApi
 from canvas_lms_python_client.api.sis_api_api import SisApiApi as SisApiApi
@@ -914,6 +1030,7 @@ from canvas_lms_python_client.api.terms_api_api import TermsApiApi as TermsApiAp
 from canvas_lms_python_client.api.tokens_api import TokensApi as TokensApi
 from canvas_lms_python_client.api.usage_rights_api import UsageRightsApi as UsageRightsApi
 from canvas_lms_python_client.api.user_observees_api import UserObserveesApi as UserObserveesApi
+from canvas_lms_python_client.api.users_api import UsersApi as UsersApi
 from canvas_lms_python_client.api.web_zip_exports_api import WebZipExportsApi as WebZipExportsApi
 from canvas_lms_python_client.api.what_if_grades_api_api import WhatIfGradesApiApi as WhatIfGradesApiApi
 from canvas_lms_python_client.api.wiki_pages_api_api import WikiPagesApiApi as WikiPagesApiApi
@@ -933,7 +1050,9 @@ from canvas_lms_python_client.exceptions import ApiException as ApiException
 from canvas_lms_python_client.models.accessibility_course_statistic import AccessibilityCourseStatistic as AccessibilityCourseStatistic
 from canvas_lms_python_client.models.account import Account as Account
 from canvas_lms_python_client.models.account_calendar import AccountCalendar as AccountCalendar
+from canvas_lms_python_client.models.account_calendars_api_index_response import AccountCalendarsApiIndexResponse as AccountCalendarsApiIndexResponse
 from canvas_lms_python_client.models.account_calendars_api_update_request import AccountCalendarsApiUpdateRequest as AccountCalendarsApiUpdateRequest
+from canvas_lms_python_client.models.account_calendars_api_visible_calendars_count_response import AccountCalendarsApiVisibleCalendarsCountResponse as AccountCalendarsApiVisibleCalendarsCountResponse
 from canvas_lms_python_client.models.account_notification import AccountNotification as AccountNotification
 from canvas_lms_python_client.models.account_notifications_create_request import AccountNotificationsCreateRequest as AccountNotificationsCreateRequest
 from canvas_lms_python_client.models.account_notifications_create_request_account_notification import AccountNotificationsCreateRequestAccountNotification as AccountNotificationsCreateRequestAccountNotification
@@ -953,6 +1072,7 @@ from canvas_lms_python_client.models.ai_experiences_create_request import AiExpe
 from canvas_lms_python_client.models.ai_experiences_update_request import AiExperiencesUpdateRequest as AiExperiencesUpdateRequest
 from canvas_lms_python_client.models.anonymous_user_display import AnonymousUserDisplay as AnonymousUserDisplay
 from canvas_lms_python_client.models.answer import Answer as Answer
+from canvas_lms_python_client.models.applied_pace import AppliedPace as AppliedPace
 from canvas_lms_python_client.models.appointment import Appointment as Appointment
 from canvas_lms_python_client.models.appointment_group import AppointmentGroup as AppointmentGroup
 from canvas_lms_python_client.models.appointment_groups_create_request import AppointmentGroupsCreateRequest as AppointmentGroupsCreateRequest
@@ -970,6 +1090,7 @@ from canvas_lms_python_client.models.assignment_date import AssignmentDate as As
 from canvas_lms_python_client.models.assignment_event import AssignmentEvent as AssignmentEvent
 from canvas_lms_python_client.models.assignment_extension import AssignmentExtension as AssignmentExtension
 from canvas_lms_python_client.models.assignment_extensions_create_request import AssignmentExtensionsCreateRequest as AssignmentExtensionsCreateRequest
+from canvas_lms_python_client.models.assignment_extensions_create_response import AssignmentExtensionsCreateResponse as AssignmentExtensionsCreateResponse
 from canvas_lms_python_client.models.assignment_group import AssignmentGroup as AssignmentGroup
 from canvas_lms_python_client.models.assignment_group_attributes import AssignmentGroupAttributes as AssignmentGroupAttributes
 from canvas_lms_python_client.models.assignment_group_grade import AssignmentGroupGrade as AssignmentGroupGrade
@@ -991,15 +1112,15 @@ from canvas_lms_python_client.models.async_api_error_response import AsyncApiErr
 from canvas_lms_python_client.models.async_query_response import AsyncQueryResponse as AsyncQueryResponse
 from canvas_lms_python_client.models.async_query_results_response import AsyncQueryResultsResponse as AsyncQueryResultsResponse
 from canvas_lms_python_client.models.async_query_status_response import AsyncQueryStatusResponse as AsyncQueryStatusResponse
+from canvas_lms_python_client.models.authentication_audit_api_for_account_response import AuthenticationAuditApiForAccountResponse as AuthenticationAuditApiForAccountResponse
+from canvas_lms_python_client.models.authentication_audit_api_for_login_response import AuthenticationAuditApiForLoginResponse as AuthenticationAuditApiForLoginResponse
+from canvas_lms_python_client.models.authentication_audit_api_for_user_response import AuthenticationAuditApiForUserResponse as AuthenticationAuditApiForUserResponse
 from canvas_lms_python_client.models.authentication_event import AuthenticationEvent as AuthenticationEvent
+from canvas_lms_python_client.models.authentication_event_links import AuthenticationEventLinks as AuthenticationEventLinks
+from canvas_lms_python_client.models.authentication_linked_records import AuthenticationLinkedRecords as AuthenticationLinkedRecords
 from canvas_lms_python_client.models.authentication_provider import AuthenticationProvider as AuthenticationProvider
 from canvas_lms_python_client.models.authorization_jwt import AuthorizationJWT as AuthorizationJWT
 from canvas_lms_python_client.models.avatar import Avatar as Avatar
-from canvas_lms_python_client.models.bad_permission_setting_error_activate_role_request import BadPermissionSettingErrorActivateRoleRequest as BadPermissionSettingErrorActivateRoleRequest
-from canvas_lms_python_client.models.bad_permission_setting_error_activate_role_request_role import BadPermissionSettingErrorActivateRoleRequestRole as BadPermissionSettingErrorActivateRoleRequestRole
-from canvas_lms_python_client.models.bad_permission_setting_error_add_role_request import BadPermissionSettingErrorAddRoleRequest as BadPermissionSettingErrorAddRoleRequest
-from canvas_lms_python_client.models.bad_permission_setting_error_add_role_request_permissions import BadPermissionSettingErrorAddRoleRequestPermissions as BadPermissionSettingErrorAddRoleRequestPermissions
-from canvas_lms_python_client.models.bad_permission_setting_error_update_request import BadPermissionSettingErrorUpdateRequest as BadPermissionSettingErrorUpdateRequest
 from canvas_lms_python_client.models.basic_user import BasicUser as BasicUser
 from canvas_lms_python_client.models.blackout_date import BlackoutDate as BlackoutDate
 from canvas_lms_python_client.models.blackout_dates_bulk_update_request import BlackoutDatesBulkUpdateRequest as BlackoutDatesBulkUpdateRequest
@@ -1024,8 +1145,11 @@ from canvas_lms_python_client.models.calendar_events_api_set_course_timetable_re
 from canvas_lms_python_client.models.calendar_events_api_update_request import CalendarEventsApiUpdateRequest as CalendarEventsApiUpdateRequest
 from canvas_lms_python_client.models.calendar_events_api_update_request_calendar_event import CalendarEventsApiUpdateRequestCalendarEvent as CalendarEventsApiUpdateRequestCalendarEvent
 from canvas_lms_python_client.models.calendar_link import CalendarLink as CalendarLink
+from canvas_lms_python_client.models.career_experience_enabled_response import CareerExperienceEnabledResponse as CareerExperienceEnabledResponse
 from canvas_lms_python_client.models.career_experience_switch_experience_request import CareerExperienceSwitchExperienceRequest as CareerExperienceSwitchExperienceRequest
+from canvas_lms_python_client.models.career_experience_switch_experience_response import CareerExperienceSwitchExperienceResponse as CareerExperienceSwitchExperienceResponse
 from canvas_lms_python_client.models.career_experience_switch_role_request import CareerExperienceSwitchRoleRequest as CareerExperienceSwitchRoleRequest
+from canvas_lms_python_client.models.career_experience_switch_role_response import CareerExperienceSwitchRoleResponse as CareerExperienceSwitchRoleResponse
 from canvas_lms_python_client.models.change_record import ChangeRecord as ChangeRecord
 from canvas_lms_python_client.models.collaboration import Collaboration as Collaboration
 from canvas_lms_python_client.models.collaborator import Collaborator as Collaborator
@@ -1034,6 +1158,7 @@ from canvas_lms_python_client.models.comm_message import CommMessage as CommMess
 from canvas_lms_python_client.models.communication_channel import CommunicationChannel as CommunicationChannel
 from canvas_lms_python_client.models.communication_channels_create_request import CommunicationChannelsCreateRequest as CommunicationChannelsCreateRequest
 from canvas_lms_python_client.models.communication_channels_create_request_communication_channel import CommunicationChannelsCreateRequestCommunicationChannel as CommunicationChannelsCreateRequestCommunicationChannel
+from canvas_lms_python_client.models.communication_channels_delete_push_token_response import CommunicationChannelsDeletePushTokenResponse as CommunicationChannelsDeletePushTokenResponse
 from canvas_lms_python_client.models.completion_requirement import CompletionRequirement as CompletionRequirement
 from canvas_lms_python_client.models.conference import Conference as Conference
 from canvas_lms_python_client.models.conference_recording import ConferenceRecording as ConferenceRecording
@@ -1049,6 +1174,7 @@ from canvas_lms_python_client.models.content_migrations_create_request_settings 
 from canvas_lms_python_client.models.content_share import ContentShare as ContentShare
 from canvas_lms_python_client.models.content_shares_add_users_request import ContentSharesAddUsersRequest as ContentSharesAddUsersRequest
 from canvas_lms_python_client.models.content_shares_create_request import ContentSharesCreateRequest as ContentSharesCreateRequest
+from canvas_lms_python_client.models.content_shares_unread_count_response import ContentSharesUnreadCountResponse as ContentSharesUnreadCountResponse
 from canvas_lms_python_client.models.content_shares_update_request import ContentSharesUpdateRequest as ContentSharesUpdateRequest
 from canvas_lms_python_client.models.context_controls_create_many_request import ContextControlsCreateManyRequest as ContextControlsCreateManyRequest
 from canvas_lms_python_client.models.context_controls_create_request import ContextControlsCreateRequest as ContextControlsCreateRequest
@@ -1067,6 +1193,7 @@ from canvas_lms_python_client.models.context_modules_api_update_request import C
 from canvas_lms_python_client.models.context_modules_api_update_request_module import ContextModulesApiUpdateRequestModule as ContextModulesApiUpdateRequestModule
 from canvas_lms_python_client.models.context_search_response import ContextSearchResponse as ContextSearchResponse
 from canvas_lms_python_client.models.conversation import Conversation as Conversation
+from canvas_lms_python_client.models.conversation_batch import ConversationBatch as ConversationBatch
 from canvas_lms_python_client.models.conversation_participant import ConversationParticipant as ConversationParticipant
 from canvas_lms_python_client.models.conversations_add_message_request import ConversationsAddMessageRequest as ConversationsAddMessageRequest
 from canvas_lms_python_client.models.conversations_add_recipients_request import ConversationsAddRecipientsRequest as ConversationsAddRecipientsRequest
@@ -1078,9 +1205,12 @@ from canvas_lms_python_client.models.conversations_update_request import Convers
 from canvas_lms_python_client.models.conversations_update_request_conversation import ConversationsUpdateRequestConversation as ConversationsUpdateRequestConversation
 from canvas_lms_python_client.models.course import Course as Course
 from canvas_lms_python_client.models.course_attributes import CourseAttributes as CourseAttributes
+from canvas_lms_python_client.models.course_audit_api_for_account_response import CourseAuditApiForAccountResponse as CourseAuditApiForAccountResponse
+from canvas_lms_python_client.models.course_audit_api_for_course_response import CourseAuditApiForCourseResponse as CourseAuditApiForCourseResponse
 from canvas_lms_python_client.models.course_epub_export import CourseEpubExport as CourseEpubExport
 from canvas_lms_python_client.models.course_event import CourseEvent as CourseEvent
 from canvas_lms_python_client.models.course_event_link import CourseEventLink as CourseEventLink
+from canvas_lms_python_client.models.course_grading_period import CourseGradingPeriod as CourseGradingPeriod
 from canvas_lms_python_client.models.course_nickname import CourseNickname as CourseNickname
 from canvas_lms_python_client.models.course_nicknames_update_request import CourseNicknamesUpdateRequest as CourseNicknamesUpdateRequest
 from canvas_lms_python_client.models.course_pace import CoursePace as CoursePace
@@ -1089,6 +1219,7 @@ from canvas_lms_python_client.models.course_paces_update_request import CoursePa
 from canvas_lms_python_client.models.course_progress import CourseProgress as CourseProgress
 from canvas_lms_python_client.models.course_quiz_extension import CourseQuizExtension as CourseQuizExtension
 from canvas_lms_python_client.models.course_quiz_extensions_create_request import CourseQuizExtensionsCreateRequest as CourseQuizExtensionsCreateRequest
+from canvas_lms_python_client.models.course_quiz_extensions_create_response import CourseQuizExtensionsCreateResponse as CourseQuizExtensionsCreateResponse
 from canvas_lms_python_client.models.course_reports_create_request import CourseReportsCreateRequest as CourseReportsCreateRequest
 from canvas_lms_python_client.models.courses_batch_update_request import CoursesBatchUpdateRequest as CoursesBatchUpdateRequest
 from canvas_lms_python_client.models.courses_create_request import CoursesCreateRequest as CoursesCreateRequest
@@ -1123,9 +1254,11 @@ from canvas_lms_python_client.models.discovery_page import DiscoveryPage as Disc
 from canvas_lms_python_client.models.discovery_page_entry import DiscoveryPageEntry as DiscoveryPageEntry
 from canvas_lms_python_client.models.discovery_pages_api_token_request import DiscoveryPagesApiTokenRequest as DiscoveryPagesApiTokenRequest
 from canvas_lms_python_client.models.discovery_pages_api_token_request_discovery_page import DiscoveryPagesApiTokenRequestDiscoveryPage as DiscoveryPagesApiTokenRequestDiscoveryPage
+from canvas_lms_python_client.models.discovery_pages_api_token_response import DiscoveryPagesApiTokenResponse as DiscoveryPagesApiTokenResponse
 from canvas_lms_python_client.models.discovery_pages_api_upsert_request import DiscoveryPagesApiUpsertRequest as DiscoveryPagesApiUpsertRequest
 from canvas_lms_python_client.models.discovery_pages_api_upsert_request_discovery_page import DiscoveryPagesApiUpsertRequestDiscoveryPage as DiscoveryPagesApiUpsertRequestDiscoveryPage
 from canvas_lms_python_client.models.discussion_entries_update_request import DiscussionEntriesUpdateRequest as DiscussionEntriesUpdateRequest
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry as DiscussionEntry
 from canvas_lms_python_client.models.discussion_topic import DiscussionTopic as DiscussionTopic
 from canvas_lms_python_client.models.discussion_topics_api_add_entry_request import DiscussionTopicsApiAddEntryRequest as DiscussionTopicsApiAddEntryRequest
 from canvas_lms_python_client.models.discussion_topics_api_find_or_create_summary_request import DiscussionTopicsApiFindOrCreateSummaryRequest as DiscussionTopicsApiFindOrCreateSummaryRequest
@@ -1159,6 +1292,8 @@ from canvas_lms_python_client.models.experience_summary import ExperienceSummary
 from canvas_lms_python_client.models.external_feed import ExternalFeed as ExternalFeed
 from canvas_lms_python_client.models.external_feeds_create_request import ExternalFeedsCreateRequest as ExternalFeedsCreateRequest
 from canvas_lms_python_client.models.external_tool_tag_attributes import ExternalToolTagAttributes as ExternalToolTagAttributes
+from canvas_lms_python_client.models.external_tools_create_request import ExternalToolsCreateRequest as ExternalToolsCreateRequest
+from canvas_lms_python_client.models.external_tools_create_request_custom_fields import ExternalToolsCreateRequestCustomFields as ExternalToolsCreateRequestCustomFields
 from canvas_lms_python_client.models.favorite import Favorite as Favorite
 from canvas_lms_python_client.models.feature import Feature as Feature
 from canvas_lms_python_client.models.feature_flag import FeatureFlag as FeatureFlag
@@ -1175,8 +1310,14 @@ from canvas_lms_python_client.models.folders_copy_folder_request import FoldersC
 from canvas_lms_python_client.models.folders_create_request import FoldersCreateRequest as FoldersCreateRequest
 from canvas_lms_python_client.models.folders_update_request import FoldersUpdateRequest as FoldersUpdateRequest
 from canvas_lms_python_client.models.grade import Grade as Grade
+from canvas_lms_python_client.models.grade_change_audit_api_for_assignment_response import GradeChangeAuditApiForAssignmentResponse as GradeChangeAuditApiForAssignmentResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_course_response import GradeChangeAuditApiForCourseResponse as GradeChangeAuditApiForCourseResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_grader_response import GradeChangeAuditApiForGraderResponse as GradeChangeAuditApiForGraderResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_student_response import GradeChangeAuditApiForStudentResponse as GradeChangeAuditApiForStudentResponse
+from canvas_lms_python_client.models.grade_change_audit_api_query_response import GradeChangeAuditApiQueryResponse as GradeChangeAuditApiQueryResponse
 from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent as GradeChangeEvent
 from canvas_lms_python_client.models.grade_change_event_links import GradeChangeEventLinks as GradeChangeEventLinks
+from canvas_lms_python_client.models.grade_change_linked_records import GradeChangeLinkedRecords as GradeChangeLinkedRecords
 from canvas_lms_python_client.models.grade_group import GradeGroup as GradeGroup
 from canvas_lms_python_client.models.gradebooks_apply_score_to_ungraded_submissions_request import GradebooksApplyScoreToUngradedSubmissionsRequest as GradebooksApplyScoreToUngradedSubmissionsRequest
 from canvas_lms_python_client.models.gradebooks_update_final_grade_overrides_request import GradebooksUpdateFinalGradeOverridesRequest as GradebooksUpdateFinalGradeOverridesRequest
@@ -1187,10 +1328,16 @@ from canvas_lms_python_client.models.grading_period import GradingPeriod as Grad
 from canvas_lms_python_client.models.grading_period_sets import GradingPeriodSets as GradingPeriodSets
 from canvas_lms_python_client.models.grading_period_sets_create_request import GradingPeriodSetsCreateRequest as GradingPeriodSetsCreateRequest
 from canvas_lms_python_client.models.grading_period_sets_create_request_grading_period_set import GradingPeriodSetsCreateRequestGradingPeriodSet as GradingPeriodSetsCreateRequestGradingPeriodSet
+from canvas_lms_python_client.models.grading_period_sets_create_response import GradingPeriodSetsCreateResponse as GradingPeriodSetsCreateResponse
+from canvas_lms_python_client.models.grading_period_sets_index_response import GradingPeriodSetsIndexResponse as GradingPeriodSetsIndexResponse
 from canvas_lms_python_client.models.grading_period_sets_update_request import GradingPeriodSetsUpdateRequest as GradingPeriodSetsUpdateRequest
 from canvas_lms_python_client.models.grading_periods_batch_update_for_other_request import GradingPeriodsBatchUpdateForOtherRequest as GradingPeriodsBatchUpdateForOtherRequest
 from canvas_lms_python_client.models.grading_periods_batch_update_request import GradingPeriodsBatchUpdateRequest as GradingPeriodsBatchUpdateRequest
+from canvas_lms_python_client.models.grading_periods_batch_update_response import GradingPeriodsBatchUpdateResponse as GradingPeriodsBatchUpdateResponse
+from canvas_lms_python_client.models.grading_periods_index_response import GradingPeriodsIndexResponse as GradingPeriodsIndexResponse
+from canvas_lms_python_client.models.grading_periods_show_response import GradingPeriodsShowResponse as GradingPeriodsShowResponse
 from canvas_lms_python_client.models.grading_periods_update_request import GradingPeriodsUpdateRequest as GradingPeriodsUpdateRequest
+from canvas_lms_python_client.models.grading_periods_update_response import GradingPeriodsUpdateResponse as GradingPeriodsUpdateResponse
 from canvas_lms_python_client.models.grading_rules import GradingRules as GradingRules
 from canvas_lms_python_client.models.grading_scheme_entry import GradingSchemeEntry as GradingSchemeEntry
 from canvas_lms_python_client.models.grading_standard import GradingStandard as GradingStandard
@@ -1219,13 +1366,17 @@ from canvas_lms_python_client.models.jwt import JWT as JWT
 from canvas_lms_python_client.models.jwts_create_request import JwtsCreateRequest as JwtsCreateRequest
 from canvas_lms_python_client.models.jwts_refresh_request import JwtsRefreshRequest as JwtsRefreshRequest
 from canvas_lms_python_client.models.late_policy import LatePolicy as LatePolicy
+from canvas_lms_python_client.models.late_policy_create_request import LatePolicyCreateRequest as LatePolicyCreateRequest
+from canvas_lms_python_client.models.late_policy_create_request_late_policy import LatePolicyCreateRequestLatePolicy as LatePolicyCreateRequestLatePolicy
 from canvas_lms_python_client.models.learning_object_dates import LearningObjectDates as LearningObjectDates
+from canvas_lms_python_client.models.learning_object_dates_peer_review_sub_assignment import LearningObjectDatesPeerReviewSubAssignment as LearningObjectDatesPeerReviewSubAssignment
 from canvas_lms_python_client.models.learning_object_dates_update_request import LearningObjectDatesUpdateRequest as LearningObjectDatesUpdateRequest
 from canvas_lms_python_client.models.learning_object_dates_update_request_peer_review import LearningObjectDatesUpdateRequestPeerReview as LearningObjectDatesUpdateRequestPeerReview
 from canvas_lms_python_client.models.license import License as License
 from canvas_lms_python_client.models.line_item import LineItem as LineItem
 from canvas_lms_python_client.models.list_lti_registrations_response import ListLtiRegistrationsResponse as ListLtiRegistrationsResponse
 from canvas_lms_python_client.models.lock_info import LockInfo as LockInfo
+from canvas_lms_python_client.models.login import Login as Login
 from canvas_lms_python_client.models.lti_assignment import LtiAssignment as LtiAssignment
 from canvas_lms_python_client.models.lti_context_control import LtiContextControl as LtiContextControl
 from canvas_lms_python_client.models.lti_deployment import LtiDeployment as LtiDeployment
@@ -1241,14 +1392,21 @@ from canvas_lms_python_client.models.lti_placement_launch_definition import LtiP
 from canvas_lms_python_client.models.lti_placement_overlay import LtiPlacementOverlay as LtiPlacementOverlay
 from canvas_lms_python_client.models.lti_registration import LtiRegistration as LtiRegistration
 from canvas_lms_python_client.models.lti_registration_account_binding import LtiRegistrationAccountBinding as LtiRegistrationAccountBinding
+from canvas_lms_python_client.models.lti_registration_created_by import LtiRegistrationCreatedBy as LtiRegistrationCreatedBy
+from canvas_lms_python_client.models.lti_registration_history_entry import LtiRegistrationHistoryEntry as LtiRegistrationHistoryEntry
 from canvas_lms_python_client.models.lti_resource_link import LtiResourceLink as LtiResourceLink
+from canvas_lms_python_client.models.lti_submission import LtiSubmission as LtiSubmission
 from canvas_lms_python_client.models.lti_tool_configuration import LtiToolConfiguration as LtiToolConfiguration
 from canvas_lms_python_client.models.master_templates_queue_migration_request import MasterTemplatesQueueMigrationRequest as MasterTemplatesQueueMigrationRequest
 from canvas_lms_python_client.models.master_templates_restrict_item_request import MasterTemplatesRestrictItemRequest as MasterTemplatesRestrictItemRequest
 from canvas_lms_python_client.models.master_templates_restrict_item_request_restrictions import MasterTemplatesRestrictItemRequestRestrictions as MasterTemplatesRestrictItemRequestRestrictions
 from canvas_lms_python_client.models.master_templates_update_associations_request import MasterTemplatesUpdateAssociationsRequest as MasterTemplatesUpdateAssociationsRequest
 from canvas_lms_python_client.models.media_comment import MediaComment as MediaComment
+from canvas_lms_python_client.models.media_object import MediaObject as MediaObject
+from canvas_lms_python_client.models.media_object_media_sources_inner import MediaObjectMediaSourcesInner as MediaObjectMediaSourcesInner
+from canvas_lms_python_client.models.media_object_media_tracks_inner import MediaObjectMediaTracksInner as MediaObjectMediaTracksInner
 from canvas_lms_python_client.models.media_objects_update_media_object_request import MediaObjectsUpdateMediaObjectRequest as MediaObjectsUpdateMediaObjectRequest
+from canvas_lms_python_client.models.media_track import MediaTrack as MediaTrack
 from canvas_lms_python_client.models.media_tracks_update_request import MediaTracksUpdateRequest as MediaTracksUpdateRequest
 from canvas_lms_python_client.models.microsoft_sync_group import MicrosoftSyncGroup as MicrosoftSyncGroup
 from canvas_lms_python_client.models.migration_issue import MigrationIssue as MigrationIssue
@@ -1261,6 +1419,7 @@ from canvas_lms_python_client.models.module_assignment_overrides_bulk_update_req
 from canvas_lms_python_client.models.module_item import ModuleItem as ModuleItem
 from canvas_lms_python_client.models.module_item_sequence import ModuleItemSequence as ModuleItemSequence
 from canvas_lms_python_client.models.module_item_sequence_node import ModuleItemSequenceNode as ModuleItemSequenceNode
+from canvas_lms_python_client.models.multiple_gradeable_student import MultipleGradeableStudent as MultipleGradeableStudent
 from canvas_lms_python_client.models.names_and_role_context import NamesAndRoleContext as NamesAndRoleContext
 from canvas_lms_python_client.models.names_and_role_membership import NamesAndRoleMembership as NamesAndRoleMembership
 from canvas_lms_python_client.models.names_and_role_memberships import NamesAndRoleMemberships as NamesAndRoleMemberships
@@ -1286,18 +1445,22 @@ from canvas_lms_python_client.models.outcome_groups_api_link_request import Outc
 from canvas_lms_python_client.models.outcome_groups_api_update_request import OutcomeGroupsApiUpdateRequest as OutcomeGroupsApiUpdateRequest
 from canvas_lms_python_client.models.outcome_import import OutcomeImport as OutcomeImport
 from canvas_lms_python_client.models.outcome_import_data import OutcomeImportData as OutcomeImportData
+from canvas_lms_python_client.models.outcome_imports_api_create_request import OutcomeImportsApiCreateRequest as OutcomeImportsApiCreateRequest
 from canvas_lms_python_client.models.outcome_link import OutcomeLink as OutcomeLink
 from canvas_lms_python_client.models.outcome_path import OutcomePath as OutcomePath
 from canvas_lms_python_client.models.outcome_path_part import OutcomePathPart as OutcomePathPart
 from canvas_lms_python_client.models.outcome_proficiency_api_create_request import OutcomeProficiencyApiCreateRequest as OutcomeProficiencyApiCreateRequest
 from canvas_lms_python_client.models.outcome_result import OutcomeResult as OutcomeResult
 from canvas_lms_python_client.models.outcome_results_enqueue_outcome_rollup_calculation_request import OutcomeResultsEnqueueOutcomeRollupCalculationRequest as OutcomeResultsEnqueueOutcomeRollupCalculationRequest
+from canvas_lms_python_client.models.outcome_results_index_response import OutcomeResultsIndexResponse as OutcomeResultsIndexResponse
 from canvas_lms_python_client.models.outcome_rollup import OutcomeRollup as OutcomeRollup
 from canvas_lms_python_client.models.outcome_rollup_links import OutcomeRollupLinks as OutcomeRollupLinks
 from canvas_lms_python_client.models.outcome_rollup_score import OutcomeRollupScore as OutcomeRollupScore
 from canvas_lms_python_client.models.outcome_rollup_score_links import OutcomeRollupScoreLinks as OutcomeRollupScoreLinks
 from canvas_lms_python_client.models.outcomes_api_update_request import OutcomesApiUpdateRequest as OutcomesApiUpdateRequest
 from canvas_lms_python_client.models.override_target import OverrideTarget as OverrideTarget
+from canvas_lms_python_client.models.pace_context import PaceContext as PaceContext
+from canvas_lms_python_client.models.pace_contexts_api_index_response import PaceContextsApiIndexResponse as PaceContextsApiIndexResponse
 from canvas_lms_python_client.models.page import Page as Page
 from canvas_lms_python_client.models.page_revision import PageRevision as PageRevision
 from canvas_lms_python_client.models.page_view import PageView as PageView
@@ -1309,6 +1472,7 @@ from canvas_lms_python_client.models.peer_review import PeerReview as PeerReview
 from canvas_lms_python_client.models.peer_reviews_api_create_request import PeerReviewsApiCreateRequest as PeerReviewsApiCreateRequest
 from canvas_lms_python_client.models.permission import Permission as Permission
 from canvas_lms_python_client.models.permission_help_text import PermissionHelpText as PermissionHelpText
+from canvas_lms_python_client.models.planner_item import PlannerItem as PlannerItem
 from canvas_lms_python_client.models.planner_note import PlannerNote as PlannerNote
 from canvas_lms_python_client.models.planner_notes_create_request import PlannerNotesCreateRequest as PlannerNotesCreateRequest
 from canvas_lms_python_client.models.planner_notes_update_request import PlannerNotesUpdateRequest as PlannerNotesUpdateRequest
@@ -1318,13 +1482,31 @@ from canvas_lms_python_client.models.planner_overrides_update_request import Pla
 from canvas_lms_python_client.models.poll import Poll as Poll
 from canvas_lms_python_client.models.poll_choice import PollChoice as PollChoice
 from canvas_lms_python_client.models.poll_choices_create_request import PollChoicesCreateRequest as PollChoicesCreateRequest
+from canvas_lms_python_client.models.poll_choices_create_response import PollChoicesCreateResponse as PollChoicesCreateResponse
+from canvas_lms_python_client.models.poll_choices_index_response import PollChoicesIndexResponse as PollChoicesIndexResponse
+from canvas_lms_python_client.models.poll_choices_show_response import PollChoicesShowResponse as PollChoicesShowResponse
 from canvas_lms_python_client.models.poll_choices_update_request import PollChoicesUpdateRequest as PollChoicesUpdateRequest
+from canvas_lms_python_client.models.poll_choices_update_response import PollChoicesUpdateResponse as PollChoicesUpdateResponse
 from canvas_lms_python_client.models.poll_session import PollSession as PollSession
+from canvas_lms_python_client.models.poll_sessions_close_response import PollSessionsCloseResponse as PollSessionsCloseResponse
+from canvas_lms_python_client.models.poll_sessions_closed_response import PollSessionsClosedResponse as PollSessionsClosedResponse
 from canvas_lms_python_client.models.poll_sessions_create_request import PollSessionsCreateRequest as PollSessionsCreateRequest
+from canvas_lms_python_client.models.poll_sessions_create_response import PollSessionsCreateResponse as PollSessionsCreateResponse
+from canvas_lms_python_client.models.poll_sessions_index_response import PollSessionsIndexResponse as PollSessionsIndexResponse
+from canvas_lms_python_client.models.poll_sessions_open_response import PollSessionsOpenResponse as PollSessionsOpenResponse
+from canvas_lms_python_client.models.poll_sessions_opened_response import PollSessionsOpenedResponse as PollSessionsOpenedResponse
+from canvas_lms_python_client.models.poll_sessions_show_response import PollSessionsShowResponse as PollSessionsShowResponse
 from canvas_lms_python_client.models.poll_sessions_update_request import PollSessionsUpdateRequest as PollSessionsUpdateRequest
+from canvas_lms_python_client.models.poll_sessions_update_response import PollSessionsUpdateResponse as PollSessionsUpdateResponse
 from canvas_lms_python_client.models.poll_submission import PollSubmission as PollSubmission
 from canvas_lms_python_client.models.poll_submissions_create_request import PollSubmissionsCreateRequest as PollSubmissionsCreateRequest
+from canvas_lms_python_client.models.poll_submissions_create_response import PollSubmissionsCreateResponse as PollSubmissionsCreateResponse
+from canvas_lms_python_client.models.poll_submissions_show_response import PollSubmissionsShowResponse as PollSubmissionsShowResponse
 from canvas_lms_python_client.models.polls_create_request import PollsCreateRequest as PollsCreateRequest
+from canvas_lms_python_client.models.polls_create_response import PollsCreateResponse as PollsCreateResponse
+from canvas_lms_python_client.models.polls_index_response import PollsIndexResponse as PollsIndexResponse
+from canvas_lms_python_client.models.polls_show_response import PollsShowResponse as PollsShowResponse
+from canvas_lms_python_client.models.polls_update_response import PollsUpdateResponse as PollsUpdateResponse
 from canvas_lms_python_client.models.proficiency import Proficiency as Proficiency
 from canvas_lms_python_client.models.proficiency_rating import ProficiencyRating as ProficiencyRating
 from canvas_lms_python_client.models.profile import Profile as Profile
@@ -1341,11 +1523,16 @@ from canvas_lms_python_client.models.quiz_assignment_override_set import QuizAss
 from canvas_lms_python_client.models.quiz_assignment_override_set_container import QuizAssignmentOverrideSetContainer as QuizAssignmentOverrideSetContainer
 from canvas_lms_python_client.models.quiz_extension import QuizExtension as QuizExtension
 from canvas_lms_python_client.models.quiz_extensions_create_request import QuizExtensionsCreateRequest as QuizExtensionsCreateRequest
+from canvas_lms_python_client.models.quiz_extensions_create_response import QuizExtensionsCreateResponse as QuizExtensionsCreateResponse
 from canvas_lms_python_client.models.quiz_group import QuizGroup as QuizGroup
 from canvas_lms_python_client.models.quiz_groups_create_request import QuizGroupsCreateRequest as QuizGroupsCreateRequest
+from canvas_lms_python_client.models.quiz_groups_create_response import QuizGroupsCreateResponse as QuizGroupsCreateResponse
+from canvas_lms_python_client.models.quiz_groups_index_response import QuizGroupsIndexResponse as QuizGroupsIndexResponse
 from canvas_lms_python_client.models.quiz_groups_reorder_request import QuizGroupsReorderRequest as QuizGroupsReorderRequest
 from canvas_lms_python_client.models.quiz_groups_update_request import QuizGroupsUpdateRequest as QuizGroupsUpdateRequest
+from canvas_lms_python_client.models.quiz_groups_update_response import QuizGroupsUpdateResponse as QuizGroupsUpdateResponse
 from canvas_lms_python_client.models.quiz_ip_filter import QuizIPFilter as QuizIPFilter
+from canvas_lms_python_client.models.quiz_ip_filters_index_response import QuizIpFiltersIndexResponse as QuizIpFiltersIndexResponse
 from canvas_lms_python_client.models.quiz_permissions import QuizPermissions as QuizPermissions
 from canvas_lms_python_client.models.quiz_question import QuizQuestion as QuizQuestion
 from canvas_lms_python_client.models.quiz_questions_create_request import QuizQuestionsCreateRequest as QuizQuestionsCreateRequest
@@ -1356,29 +1543,37 @@ from canvas_lms_python_client.models.quiz_reports_create_request_quiz_report imp
 from canvas_lms_python_client.models.quiz_statistics import QuizStatistics as QuizStatistics
 from canvas_lms_python_client.models.quiz_statistics_answer_point_biserial import QuizStatisticsAnswerPointBiserial as QuizStatisticsAnswerPointBiserial
 from canvas_lms_python_client.models.quiz_statistics_answer_statistics import QuizStatisticsAnswerStatistics as QuizStatisticsAnswerStatistics
+from canvas_lms_python_client.models.quiz_statistics_index_response import QuizStatisticsIndexResponse as QuizStatisticsIndexResponse
 from canvas_lms_python_client.models.quiz_statistics_links import QuizStatisticsLinks as QuizStatisticsLinks
 from canvas_lms_python_client.models.quiz_statistics_question_statistics import QuizStatisticsQuestionStatistics as QuizStatisticsQuestionStatistics
 from canvas_lms_python_client.models.quiz_statistics_submission_statistics import QuizStatisticsSubmissionStatistics as QuizStatisticsSubmissionStatistics
 from canvas_lms_python_client.models.quiz_submission import QuizSubmission as QuizSubmission
 from canvas_lms_python_client.models.quiz_submission_event import QuizSubmissionEvent as QuizSubmissionEvent
 from canvas_lms_python_client.models.quiz_submission_events_api_create_request import QuizSubmissionEventsApiCreateRequest as QuizSubmissionEventsApiCreateRequest
+from canvas_lms_python_client.models.quiz_submission_events_api_index_response import QuizSubmissionEventsApiIndexResponse as QuizSubmissionEventsApiIndexResponse
 from canvas_lms_python_client.models.quiz_submission_files_create_request import QuizSubmissionFilesCreateRequest as QuizSubmissionFilesCreateRequest
 from canvas_lms_python_client.models.quiz_submission_question import QuizSubmissionQuestion as QuizSubmissionQuestion
 from canvas_lms_python_client.models.quiz_submission_questions_answer_request import QuizSubmissionQuestionsAnswerRequest as QuizSubmissionQuestionsAnswerRequest
 from canvas_lms_python_client.models.quiz_submission_questions_flag_request import QuizSubmissionQuestionsFlagRequest as QuizSubmissionQuestionsFlagRequest
+from canvas_lms_python_client.models.quiz_submission_questions_index_response import QuizSubmissionQuestionsIndexResponse as QuizSubmissionQuestionsIndexResponse
 from canvas_lms_python_client.models.quiz_submission_users_message_request import QuizSubmissionUsersMessageRequest as QuizSubmissionUsersMessageRequest
 from canvas_lms_python_client.models.quiz_submission_users_message_request_conversations import QuizSubmissionUsersMessageRequestConversations as QuizSubmissionUsersMessageRequestConversations
 from canvas_lms_python_client.models.quiz_submissions_api_complete_request import QuizSubmissionsApiCompleteRequest as QuizSubmissionsApiCompleteRequest
+from canvas_lms_python_client.models.quiz_submissions_api_complete_response import QuizSubmissionsApiCompleteResponse as QuizSubmissionsApiCompleteResponse
 from canvas_lms_python_client.models.quiz_submissions_api_create_request import QuizSubmissionsApiCreateRequest as QuizSubmissionsApiCreateRequest
+from canvas_lms_python_client.models.quiz_submissions_api_create_response import QuizSubmissionsApiCreateResponse as QuizSubmissionsApiCreateResponse
+from canvas_lms_python_client.models.quiz_submissions_api_index_response import QuizSubmissionsApiIndexResponse as QuizSubmissionsApiIndexResponse
+from canvas_lms_python_client.models.quiz_submissions_api_show_response import QuizSubmissionsApiShowResponse as QuizSubmissionsApiShowResponse
+from canvas_lms_python_client.models.quiz_submissions_api_submission_response import QuizSubmissionsApiSubmissionResponse as QuizSubmissionsApiSubmissionResponse
 from canvas_lms_python_client.models.quiz_submissions_api_update_request import QuizSubmissionsApiUpdateRequest as QuizSubmissionsApiUpdateRequest
+from canvas_lms_python_client.models.quiz_submissions_api_update_response import QuizSubmissionsApiUpdateResponse as QuizSubmissionsApiUpdateResponse
 from canvas_lms_python_client.models.quizzes_api_create_request import QuizzesApiCreateRequest as QuizzesApiCreateRequest
 from canvas_lms_python_client.models.quizzes_api_create_request_quiz import QuizzesApiCreateRequestQuiz as QuizzesApiCreateRequestQuiz
 from canvas_lms_python_client.models.quizzes_api_reorder_request import QuizzesApiReorderRequest as QuizzesApiReorderRequest
 from canvas_lms_python_client.models.quizzes_api_update_request import QuizzesApiUpdateRequest as QuizzesApiUpdateRequest
 from canvas_lms_python_client.models.quizzes_api_update_request_quiz import QuizzesApiUpdateRequestQuiz as QuizzesApiUpdateRequestQuiz
 from canvas_lms_python_client.models.quizzes_api_validate_access_code_request import QuizzesApiValidateAccessCodeRequest as QuizzesApiValidateAccessCodeRequest
-from canvas_lms_python_client.models.record_already_exists_create_request import RecordAlreadyExistsCreateRequest as RecordAlreadyExistsCreateRequest
-from canvas_lms_python_client.models.record_already_exists_create_request_late_policy import RecordAlreadyExistsCreateRequestLatePolicy as RecordAlreadyExistsCreateRequestLatePolicy
+from canvas_lms_python_client.models.recipient import Recipient as Recipient
 from canvas_lms_python_client.models.registrations_apply_registration_update_request_request import RegistrationsApplyRegistrationUpdateRequestRequest as RegistrationsApplyRegistrationUpdateRequestRequest
 from canvas_lms_python_client.models.registrations_apply_registration_update_request_request_overlay import RegistrationsApplyRegistrationUpdateRequestRequestOverlay as RegistrationsApplyRegistrationUpdateRequestRequestOverlay
 from canvas_lms_python_client.models.registrations_bind_request import RegistrationsBindRequest as RegistrationsBindRequest
@@ -1395,7 +1590,14 @@ from canvas_lms_python_client.models.resource_links_create_request import Resour
 from canvas_lms_python_client.models.resource_links_update_request import ResourceLinksUpdateRequest as ResourceLinksUpdateRequest
 from canvas_lms_python_client.models.result import Result as Result
 from canvas_lms_python_client.models.result_links import ResultLinks as ResultLinks
+from canvas_lms_python_client.models.results_create_response import ResultsCreateResponse as ResultsCreateResponse
+from canvas_lms_python_client.models.results_index_response import ResultsIndexResponse as ResultsIndexResponse
 from canvas_lms_python_client.models.role import Role as Role
+from canvas_lms_python_client.models.role_overrides_activate_role_request import RoleOverridesActivateRoleRequest as RoleOverridesActivateRoleRequest
+from canvas_lms_python_client.models.role_overrides_activate_role_request_role import RoleOverridesActivateRoleRequestRole as RoleOverridesActivateRoleRequestRole
+from canvas_lms_python_client.models.role_overrides_add_role_request import RoleOverridesAddRoleRequest as RoleOverridesAddRoleRequest
+from canvas_lms_python_client.models.role_overrides_add_role_request_permissions import RoleOverridesAddRoleRequestPermissions as RoleOverridesAddRoleRequestPermissions
+from canvas_lms_python_client.models.role_overrides_update_request import RoleOverridesUpdateRequest as RoleOverridesUpdateRequest
 from canvas_lms_python_client.models.role_permissions import RolePermissions as RolePermissions
 from canvas_lms_python_client.models.rubric import Rubric as Rubric
 from canvas_lms_python_client.models.rubric_assessment import RubricAssessment as RubricAssessment
@@ -1406,6 +1608,8 @@ from canvas_lms_python_client.models.rubric_associations_create_request_rubric_a
 from canvas_lms_python_client.models.rubric_criteria import RubricCriteria as RubricCriteria
 from canvas_lms_python_client.models.rubric_criterion import RubricCriterion as RubricCriterion
 from canvas_lms_python_client.models.rubric_rating import RubricRating as RubricRating
+from canvas_lms_python_client.models.rubric_used_location import RubricUsedLocation as RubricUsedLocation
+from canvas_lms_python_client.models.rubric_used_location_assignments_inner import RubricUsedLocationAssignmentsInner as RubricUsedLocationAssignmentsInner
 from canvas_lms_python_client.models.rubrics_create_request import RubricsCreateRequest as RubricsCreateRequest
 from canvas_lms_python_client.models.rubrics_create_request_rubric import RubricsCreateRequestRubric as RubricsCreateRequestRubric
 from canvas_lms_python_client.models.rubrics_create_request_rubric_association import RubricsCreateRequestRubricAssociation as RubricsCreateRequestRubricAssociation
@@ -1471,6 +1675,7 @@ from canvas_lms_python_client.models.terms_create_request import TermsCreateRequ
 from canvas_lms_python_client.models.terms_create_request_enrollment_term import TermsCreateRequestEnrollmentTerm as TermsCreateRequestEnrollmentTerm
 from canvas_lms_python_client.models.terms_of_service import TermsOfService as TermsOfService
 from canvas_lms_python_client.models.terms_update_request import TermsUpdateRequest as TermsUpdateRequest
+from canvas_lms_python_client.models.todo_item import TodoItem as TodoItem
 from canvas_lms_python_client.models.token import Token as Token
 from canvas_lms_python_client.models.tokens_create_request import TokensCreateRequest as TokensCreateRequest
 from canvas_lms_python_client.models.tokens_create_request_token import TokensCreateRequestToken as TokensCreateRequestToken
@@ -1489,8 +1694,31 @@ from canvas_lms_python_client.models.user_display import UserDisplay as UserDisp
 from canvas_lms_python_client.models.user_observees_create_request import UserObserveesCreateRequest as UserObserveesCreateRequest
 from canvas_lms_python_client.models.user_observees_create_request_observee import UserObserveesCreateRequestObservee as UserObserveesCreateRequestObservee
 from canvas_lms_python_client.models.user_observees_update_request import UserObserveesUpdateRequest as UserObserveesUpdateRequest
+from canvas_lms_python_client.models.user_permissions import UserPermissions as UserPermissions
+from canvas_lms_python_client.models.user_progress import UserProgress as UserProgress
+from canvas_lms_python_client.models.users_create_request import UsersCreateRequest as UsersCreateRequest
+from canvas_lms_python_client.models.users_create_request_communication_channel import UsersCreateRequestCommunicationChannel as UsersCreateRequestCommunicationChannel
+from canvas_lms_python_client.models.users_create_request_destination import UsersCreateRequestDestination as UsersCreateRequestDestination
+from canvas_lms_python_client.models.users_create_request_pairing_code import UsersCreateRequestPairingCode as UsersCreateRequestPairingCode
+from canvas_lms_python_client.models.users_create_request_pseudonym import UsersCreateRequestPseudonym as UsersCreateRequestPseudonym
+from canvas_lms_python_client.models.users_create_request_user import UsersCreateRequestUser as UsersCreateRequestUser
+from canvas_lms_python_client.models.users_create_self_registered_user_request import UsersCreateSelfRegisteredUserRequest as UsersCreateSelfRegisteredUserRequest
+from canvas_lms_python_client.models.users_create_self_registered_user_request_communication_channel import UsersCreateSelfRegisteredUserRequestCommunicationChannel as UsersCreateSelfRegisteredUserRequestCommunicationChannel
+from canvas_lms_python_client.models.users_create_self_registered_user_request_pseudonym import UsersCreateSelfRegisteredUserRequestPseudonym as UsersCreateSelfRegisteredUserRequestPseudonym
+from canvas_lms_python_client.models.users_create_self_registered_user_request_user import UsersCreateSelfRegisteredUserRequestUser as UsersCreateSelfRegisteredUserRequestUser
+from canvas_lms_python_client.models.users_pandata_events_token_request import UsersPandataEventsTokenRequest as UsersPandataEventsTokenRequest
+from canvas_lms_python_client.models.users_set_custom_color_request import UsersSetCustomColorRequest as UsersSetCustomColorRequest
+from canvas_lms_python_client.models.users_set_files_ui_version_preference_request import UsersSetFilesUiVersionPreferenceRequest as UsersSetFilesUiVersionPreferenceRequest
+from canvas_lms_python_client.models.users_set_text_editor_preference_request import UsersSetTextEditorPreferenceRequest as UsersSetTextEditorPreferenceRequest
+from canvas_lms_python_client.models.users_settings_for_users_request import UsersSettingsForUsersRequest as UsersSettingsForUsersRequest
+from canvas_lms_python_client.models.users_update_request import UsersUpdateRequest as UsersUpdateRequest
+from canvas_lms_python_client.models.users_update_request_user import UsersUpdateRequestUser as UsersUpdateRequestUser
 from canvas_lms_python_client.models.web_zip_export import WebZipExport as WebZipExport
+from canvas_lms_python_client.models.what_if_grade import WhatIfGrade as WhatIfGrade
+from canvas_lms_python_client.models.what_if_grades_api_reset_for_student_course_response import WhatIfGradesApiResetForStudentCourseResponse as WhatIfGradesApiResetForStudentCourseResponse
 from canvas_lms_python_client.models.what_if_grades_api_update_request import WhatIfGradesApiUpdateRequest as WhatIfGradesApiUpdateRequest
+from canvas_lms_python_client.models.what_if_grades_api_update_response import WhatIfGradesApiUpdateResponse as WhatIfGradesApiUpdateResponse
+from canvas_lms_python_client.models.what_if_submission import WhatIfSubmission as WhatIfSubmission
 from canvas_lms_python_client.models.wiki_pages_api_create_request import WikiPagesApiCreateRequest as WikiPagesApiCreateRequest
 from canvas_lms_python_client.models.wiki_pages_api_create_request_wiki_page import WikiPagesApiCreateRequestWikiPage as WikiPagesApiCreateRequestWikiPage
 from canvas_lms_python_client.models.wiki_pages_api_update_front_page_request import WikiPagesApiUpdateFrontPageRequest as WikiPagesApiUpdateFrontPageRequest

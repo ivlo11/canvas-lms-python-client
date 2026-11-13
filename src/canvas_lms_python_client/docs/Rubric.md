@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **title** | **str** | title of the rubric | [optional] 
 **context_id** | **int** | the context owning the rubric | [optional] 
 **context_type** | **str** |  | [optional] 
-**points_possible** | **int** |  | [optional] 
+**points_possible** | **float** |  | [optional] 
 **reusable** | **bool** |  | [optional] 
 **read_only** | **bool** |  | [optional] 
 **free_form_criterion_comments** | **bool** | whether or not free-form comments are used | [optional] 

@@ -22,7 +22,11 @@ from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.poll_choices_create_request import PollChoicesCreateRequest
+from canvas_lms_python_client.models.poll_choices_create_response import PollChoicesCreateResponse
+from canvas_lms_python_client.models.poll_choices_index_response import PollChoicesIndexResponse
+from canvas_lms_python_client.models.poll_choices_show_response import PollChoicesShowResponse
 from canvas_lms_python_client.models.poll_choices_update_request import PollChoicesUpdateRequest
+from canvas_lms_python_client.models.poll_choices_update_response import PollChoicesUpdateResponse
 
 
 class TestPollChoicesApi(unittest.IsolatedAsyncioTestCase):
@@ -182,7 +186,7 @@ class TestPollChoicesApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -195,7 +199,7 @@ class TestPollChoicesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.poll_choices_index_all(
+        async for page in self.api.poll_choices_index_paginated(
             poll_id="invalid",
             page=999,
             per_page=999,
@@ -203,7 +207,7 @@ class TestPollChoicesApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_poll_choices_index_paginated_multiple_pages(self) -> None:
         """Test poll_choices_index_fetch_all_items following pagination links.
@@ -255,7 +259,7 @@ class TestPollChoicesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.poll_choices_index_all(
+        async for item in self.api.poll_choices_index_paginated(
             poll_id="invalid",
             page=999,
             per_page=999,
@@ -263,7 +267,7 @@ class TestPollChoicesApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_poll_choices_index_paginated_empty_result(self) -> None:
@@ -287,7 +291,7 @@ class TestPollChoicesApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.poll_choices_index_all(
+        async for item in self.api.poll_choices_index_paginated(
             poll_id="invalid",
             page=999,
             per_page=999,

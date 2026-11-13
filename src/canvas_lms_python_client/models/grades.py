@@ -19,8 +19,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from canvas_lms_python_client.models.grade import Grade
 from canvas_lms_python_client.models.grade_group import GradeGroup
+from canvas_lms_python_client.models.what_if_grade import WhatIfGrade
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -29,9 +29,9 @@ class Grades(BaseModel):
     """
     Grades
     """ # noqa: E501
-    current: Optional[Grade] = None
+    current: Optional[WhatIfGrade] = None
     current_groups: Optional[GradeGroup] = None
-    final: Optional[Grade] = None
+    final: Optional[WhatIfGrade] = None
     final_groups: Optional[GradeGroup] = None
     __properties: ClassVar[List[str]] = ["current", "current_groups", "final", "final_groups"]
 
@@ -98,9 +98,9 @@ class Grades(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "current": Grade.from_dict(obj["current"]) if obj.get("current") is not None else None,
+            "current": WhatIfGrade.from_dict(obj["current"]) if obj.get("current") is not None else None,
             "current_groups": GradeGroup.from_dict(obj["current_groups"]) if obj.get("current_groups") is not None else None,
-            "final": Grade.from_dict(obj["final"]) if obj.get("final") is not None else None,
+            "final": WhatIfGrade.from_dict(obj["final"]) if obj.get("final") is not None else None,
             "final_groups": GradeGroup.from_dict(obj["final_groups"]) if obj.get("final_groups") is not None else None
         })
         return _obj

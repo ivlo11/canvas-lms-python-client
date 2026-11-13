@@ -19,6 +19,7 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.anonymous_user_display import AnonymousUserDisplay
+from canvas_lms_python_client.models.multiple_gradeable_student import MultipleGradeableStudent
 from canvas_lms_python_client.models.progress import Progress
 from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.models.submissions_api_bulk_update_request import SubmissionsApiBulkUpdateRequest
@@ -2822,8 +2823,6 @@ class SubmissionsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -3128,9 +3127,9 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'student_ids': 'multi',
-            'assignment_ids': 'multi',
-            'include': 'multi',
+            'student_ids[]': 'multi',
+            'assignment_ids[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3148,11 +3147,11 @@ class SubmissionsApiApi:
         # process the query parameters
         if student_ids is not None:
             
-            _query_params.append(('student_ids', student_ids))
+            _query_params.append(('student_ids[]', student_ids))
             
         if assignment_ids is not None:
             
-            _query_params.append(('assignment_ids', assignment_ids))
+            _query_params.append(('assignment_ids[]', assignment_ids))
             
         if grouped is not None:
             
@@ -3196,7 +3195,7 @@ class SubmissionsApiApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             
@@ -3680,8 +3679,6 @@ class SubmissionsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -3986,9 +3983,9 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'student_ids': 'multi',
-            'assignment_ids': 'multi',
-            'include': 'multi',
+            'student_ids[]': 'multi',
+            'assignment_ids[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -4006,11 +4003,11 @@ class SubmissionsApiApi:
         # process the query parameters
         if student_ids is not None:
             
-            _query_params.append(('student_ids', student_ids))
+            _query_params.append(('student_ids[]', student_ids))
             
         if assignment_ids is not None:
             
-            _query_params.append(('assignment_ids', assignment_ids))
+            _query_params.append(('assignment_ids[]', assignment_ids))
             
         if grouped is not None:
             
@@ -4054,7 +4051,7 @@ class SubmissionsApiApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             
@@ -4418,8 +4415,6 @@ class SubmissionsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -5021,8 +5016,6 @@ class SubmissionsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -5237,7 +5230,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -5257,7 +5250,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if grouped is not None:
             
@@ -5625,8 +5618,6 @@ class SubmissionsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -5841,7 +5832,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -5861,7 +5852,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if grouped is not None:
             
@@ -9962,7 +9953,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[MultipleGradeableStudent]:
         """List multiple assignments gradeable students
 
         A paginated list of students eligible to submit a list of assignments. The caller must have permission to view grades for the requested course.  Section-limited instructors will only see students in their own sections.
@@ -10016,6 +10007,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[MultipleGradeableStudent]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10048,7 +10040,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[MultipleGradeableStudent]]:
         """List multiple assignments gradeable students
 
         A paginated list of students eligible to submit a list of assignments. The caller must have permission to view grades for the requested course.  Section-limited instructors will only see students in their own sections.
@@ -10102,6 +10094,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[MultipleGradeableStudent]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -10156,7 +10149,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[MultipleGradeableStudent]:
         """List multiple assignments gradeable students
 
         A paginated list of students eligible to submit a list of assignments. The caller must have permission to view grades for the requested course.  Section-limited instructors will only see students in their own sections.
@@ -10210,6 +10203,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[MultipleGradeableStudent]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -10232,8 +10226,6 @@ class SubmissionsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -10265,7 +10257,7 @@ class SubmissionsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[MultipleGradeableStudent]]:
         """List multiple assignments gradeable students
 
         A paginated list of students eligible to submit a list of assignments. The caller must have permission to view grades for the requested course.  Section-limited instructors will only see students in their own sections.
@@ -10319,6 +10311,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[MultipleGradeableStudent]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10405,6 +10398,7 @@ class SubmissionsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[MultipleGradeableStudent]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -10428,7 +10422,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'assignment_ids': 'multi',
+            'assignment_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -10446,7 +10440,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if assignment_ids is not None:
             
-            _query_params.append(('assignment_ids', assignment_ids))
+            _query_params.append(('assignment_ids[]', assignment_ids))
             
         if page is not None:
             
@@ -11900,7 +11894,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -11922,7 +11916,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters
@@ -12204,7 +12198,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -12226,7 +12220,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters
@@ -12515,7 +12509,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -12537,7 +12531,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters
@@ -12823,7 +12817,7 @@ class SubmissionsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -12845,7 +12839,7 @@ class SubmissionsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters

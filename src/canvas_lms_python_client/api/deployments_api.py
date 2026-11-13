@@ -16,9 +16,11 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.deployments_create_request import DeploymentsCreateRequest
+from canvas_lms_python_client.models.lti_context_control import LtiContextControl
+from canvas_lms_python_client.models.lti_deployment import LtiDeployment
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -57,7 +59,7 @@ class DeploymentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiDeployment:
         """Create LTI Deployment
 
         Create a new deployment for the specified LTI registration for the given context. If no context is specified, the deployment will be created in the root account.
@@ -102,7 +104,7 @@ class DeploymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiDeployment",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -132,7 +134,7 @@ class DeploymentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiDeployment]:
         """Create LTI Deployment
 
         Create a new deployment for the specified LTI registration for the given context. If no context is specified, the deployment will be created in the root account.
@@ -177,7 +179,7 @@ class DeploymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiDeployment",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -253,7 +255,7 @@ class DeploymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiDeployment",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -363,7 +365,7 @@ class DeploymentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiDeployment:
         """Delete LTI Deployment
 
         Delete the specified deployment for the specified LTI tool in this context.
@@ -408,7 +410,7 @@ class DeploymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiDeployment",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -438,7 +440,7 @@ class DeploymentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiDeployment]:
         """Delete LTI Deployment
 
         Delete the specified deployment for the specified LTI tool in this context.
@@ -483,7 +485,7 @@ class DeploymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiDeployment",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -559,7 +561,7 @@ class DeploymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiDeployment",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -658,7 +660,7 @@ class DeploymentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[object]:
+    ) -> List[LtiDeployment]:
         """List LTI Deployments
 
         List all deployments available for the specified LTI registration.
@@ -712,7 +714,7 @@ class DeploymentsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiDeployment]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -745,7 +747,7 @@ class DeploymentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[object]]:
+    ) -> AsyncIterator[List[LtiDeployment]]:
         """List LTI Deployments
 
         List all deployments available for the specified LTI registration.
@@ -799,7 +801,7 @@ class DeploymentsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiDeployment]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -854,7 +856,7 @@ class DeploymentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[LtiDeployment]:
         """List LTI Deployments
 
         List all deployments available for the specified LTI registration.
@@ -908,7 +910,7 @@ class DeploymentsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiDeployment]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -931,8 +933,6 @@ class DeploymentsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -964,7 +964,7 @@ class DeploymentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[LtiDeployment]]:
         """List LTI Deployments
 
         List all deployments available for the specified LTI registration.
@@ -1018,7 +1018,7 @@ class DeploymentsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiDeployment]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1105,7 +1105,7 @@ class DeploymentsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiDeployment]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1212,7 +1212,7 @@ class DeploymentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[object]:
+    ) -> List[LtiContextControl]:
         """List LTI Context Controls
 
         List all context controls for the specified deployment. Context Controls are used to manage LTI tool availability in contexts across Canvas.
@@ -1269,7 +1269,7 @@ class DeploymentsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiContextControl]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1303,7 +1303,7 @@ class DeploymentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[object]]:
+    ) -> AsyncIterator[List[LtiContextControl]]:
         """List LTI Context Controls
 
         List all context controls for the specified deployment. Context Controls are used to manage LTI tool availability in contexts across Canvas.
@@ -1360,7 +1360,7 @@ class DeploymentsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiContextControl]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1416,7 +1416,7 @@ class DeploymentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[LtiContextControl]:
         """List LTI Context Controls
 
         List all context controls for the specified deployment. Context Controls are used to manage LTI tool availability in contexts across Canvas.
@@ -1473,7 +1473,7 @@ class DeploymentsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiContextControl]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1496,8 +1496,6 @@ class DeploymentsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -1530,7 +1528,7 @@ class DeploymentsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[LtiContextControl]]:
         """List LTI Context Controls
 
         List all context controls for the specified deployment. Context Controls are used to manage LTI tool availability in contexts across Canvas.
@@ -1587,7 +1585,7 @@ class DeploymentsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiContextControl]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1678,7 +1676,7 @@ class DeploymentsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[LtiContextControl]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1785,7 +1783,7 @@ class DeploymentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> LtiDeployment:
         """Show LTI Deployment
 
         Display details of the specified deployment for the specified LTI registration in this context.
@@ -1830,7 +1828,7 @@ class DeploymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiDeployment",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1860,7 +1858,7 @@ class DeploymentsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[LtiDeployment]:
         """Show LTI Deployment
 
         Display details of the specified deployment for the specified LTI registration in this context.
@@ -1905,7 +1903,7 @@ class DeploymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiDeployment",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1981,7 +1979,7 @@ class DeploymentsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "LtiDeployment",
         }
         response_data = await self.api_client.call_api(
             *_param,

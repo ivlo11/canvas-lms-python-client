@@ -1,0 +1,65 @@
+{
+  "grading_period_sets": [
+    {
+      "id": "1",
+      "title": "Seeded Grading Periods",
+      "weighted": true,
+      "display_totals_for_all_grading_periods": true,
+      "account_id": "1",
+      "course_id": null,
+      "grading_periods": [
+        {
+          "id": "1",
+          "grading_period_group_id": "1",
+          "start_date": "2025-12-31T17:00:00-07:00",
+          "end_date": "2026-06-30T17:59:00-06:00",
+          "close_date": "2026-06-30T17:59:00-06:00",
+          "weight": 66.67,
+          "title": "First Half",
+          "permissions": {
+            "read": true,
+            "create": true,
+            "update": true,
+            "delete": true
+          },
+          "is_closed": true
+        },
+        {
+          "id": "2",
+          "grading_period_group_id": "1",
+          "start_date": "2026-06-30T18:00:00-06:00",
+          "end_date": "2026-12-31T16:59:00-07:00",
+          "close_date": "2026-12-31T16:59:00-07:00",
+          "weight": 33.33,
+          "title": "Second Half",
+          "permissions": {
+            "read": true,
+            "create": true,
+            "update": true,
+            "delete": true
+          },
+          "is_closed": false
+        }
+      ],
+      "permissions": {
+        "read": true,
+        "update": true,
+        "delete": true,
+        "create": true
+      },
+      "created_at": "2026-11-02T17:15:48-07:00"
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 10,
+      "last": "http://canvas.docker/api/v1/accounts/self/grading_period_sets?page=1&per_page=10",
+      "current": "http://canvas.docker/api/v1/accounts/self/grading_period_sets?page=1&per_page=10",
+      "first": "http://canvas.docker/api/v1/accounts/self/grading_period_sets?page=1&per_page=10",
+      "page": 1,
+      "template": "http://canvas.docker/api/v1/accounts/self/grading_period_sets?page={page}&per_page=10",
+      "count": 1,
+      "page_count": 1
+    }
+  }
+}

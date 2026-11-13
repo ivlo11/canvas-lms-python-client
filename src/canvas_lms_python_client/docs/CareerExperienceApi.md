@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **career_experience_enabled**
-> List[object] career_experience_enabled()
+> CareerExperienceEnabledResponse career_experience_enabled()
 
 Check if Canvas Career is enabled
 
@@ -24,6 +24,7 @@ in at least one subaccount.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.career_experience_enabled_response import CareerExperienceEnabledResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -65,7 +66,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**List[object]**
+[**CareerExperienceEnabledResponse**](CareerExperienceEnabledResponse.md)
 
 ### Authorization
 
@@ -160,7 +161,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **career_experience_switch_experience**
-> List[object] career_experience_switch_experience(career_experience_switch_experience_request=career_experience_switch_experience_request)
+> CareerExperienceSwitchExperienceResponse career_experience_switch_experience(career_experience_switch_experience_request=career_experience_switch_experience_request)
 
 Switch experience
 
@@ -173,6 +174,7 @@ Switch the current user's active experience to the specified one.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.career_experience_switch_experience_request import CareerExperienceSwitchExperienceRequest
+from canvas_lms_python_client.models.career_experience_switch_experience_response import CareerExperienceSwitchExperienceResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -218,7 +220,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**CareerExperienceSwitchExperienceResponse**](CareerExperienceSwitchExperienceResponse.md)
 
 ### Authorization
 
@@ -238,7 +240,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **career_experience_switch_role**
-> List[object] career_experience_switch_role(career_experience_switch_role_request=career_experience_switch_role_request)
+> CareerExperienceSwitchRoleResponse career_experience_switch_role(career_experience_switch_role_request=career_experience_switch_role_request)
 
 Switch role
 
@@ -251,6 +253,7 @@ Switch the current user's role within the current experience.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.career_experience_switch_role_request import CareerExperienceSwitchRoleRequest
+from canvas_lms_python_client.models.career_experience_switch_role_response import CareerExperienceSwitchRoleResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -296,7 +299,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**CareerExperienceSwitchRoleResponse**](CareerExperienceSwitchRoleResponse.md)
 
 ### Authorization
 

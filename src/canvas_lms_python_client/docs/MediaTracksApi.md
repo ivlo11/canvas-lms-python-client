@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **media_tracks_index**
-> List[object] media_tracks_index(media_object_id, include=include)
+> List[MediaTrack] media_tracks_index(media_object_id, include=include)
 
 List media tracks for a Media Object or Attachment
 
@@ -23,6 +23,7 @@ List the media tracks associated with a media object or attachment
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_track import MediaTrack
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -70,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[MediaTrack]**](MediaTrack.md)
 
 ### Authorization
 
@@ -90,7 +91,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **media_tracks_index_for_other**
-> List[object] media_tracks_index_for_other(attachment_id, include=include)
+> List[MediaTrack] media_tracks_index_for_other(attachment_id, include=include)
 
 List media tracks for a Media Object or Attachment
 
@@ -102,6 +103,7 @@ List the media tracks associated with a media object or attachment
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_track import MediaTrack
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -149,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[MediaTrack]**](MediaTrack.md)
 
 ### Authorization
 
@@ -169,7 +171,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **media_tracks_update**
-> List[object] media_tracks_update(media_object_id, media_tracks_update_request=media_tracks_update_request)
+> List[MediaTrack] media_tracks_update(media_object_id, media_tracks_update_request=media_tracks_update_request)
 
 Update Media Tracks
 
@@ -186,6 +188,7 @@ and update or create tracks with a content field.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_track import MediaTrack
 from canvas_lms_python_client.models.media_tracks_update_request import MediaTracksUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -234,7 +237,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[MediaTrack]**](MediaTrack.md)
 
 ### Authorization
 
@@ -254,7 +257,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **media_tracks_update_for_other**
-> List[object] media_tracks_update_for_other(attachment_id, media_tracks_update_request=media_tracks_update_request)
+> List[MediaTrack] media_tracks_update_for_other(attachment_id, media_tracks_update_request=media_tracks_update_request)
 
 Update Media Tracks
 
@@ -271,6 +274,7 @@ and update or create tracks with a content field.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.media_track import MediaTrack
 from canvas_lms_python_client.models.media_tracks_update_request import MediaTracksUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -319,7 +323,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[MediaTrack]**](MediaTrack.md)
 
 ### Authorization
 

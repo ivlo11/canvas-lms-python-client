@@ -392,8 +392,6 @@ class AnnouncementsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -635,8 +633,8 @@ class AnnouncementsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'context_codes': 'multi',
-            'include': 'multi',
+            'context_codes[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -652,7 +650,7 @@ class AnnouncementsApiApi:
         # process the query parameters
         if context_codes is not None:
             
-            _query_params.append(('context_codes', context_codes))
+            _query_params.append(('context_codes[]', context_codes))
             
         if start_date is not None:
             
@@ -676,7 +674,7 @@ class AnnouncementsApiApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             

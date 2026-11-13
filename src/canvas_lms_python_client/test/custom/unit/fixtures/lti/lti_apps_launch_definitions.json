@@ -1,0 +1,1 @@
+[{"definition_type":"ContextExternalTool","definition_id":2,"url":"http://lti13testtool.docker/launch","name":"Seeded Tool","description":"Seeded LTI 1.3 tool","domain":"lti13testtool.docker","placements":{"course_navigation":{"message_type":"LtiResourceLinkRequest","url":"http://lti13testtool.docker/launch","title":"Seeded Tool"}}}]

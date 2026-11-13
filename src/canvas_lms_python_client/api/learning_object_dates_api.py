@@ -251,125 +251,6 @@ class LearningObjectDatesApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def learning_object_dates_show_all(
-        self,
-        context_module_id: Annotated[StrictStr, Field(description="Scope response to context_module_id")],
-        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
-        include: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.")] = None,
-        exclude: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
-        """Get a learning object's date information
-
-        Get a learning object's date-related information, including due date, availability dates, override status, and a paginated list of all assignment overrides for the item.
-
-        :param context_module_id: Scope response to context_module_id (required)
-        :type context_module_id: str
-        :param course_id: Scope response to course_id (required)
-        :type course_id: str
-        :param include: Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.
-        :type include: List[List[str]]
-        :param exclude: Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.
-        :type exclude: List[List[str]]
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._learning_object_dates_show_serialize(
-            context_module_id=context_module_id,
-            course_id=course_id,
-            include=include,
-            exclude=exclude,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "LearningObjectDates",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def learning_object_dates_show_with_http_info(
         self,
@@ -573,8 +454,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -594,11 +475,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -856,125 +737,6 @@ class LearningObjectDatesApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def learning_object_dates_show_by_attachment_id_for_courses_all(
-        self,
-        attachment_id: Annotated[StrictStr, Field(description="Scope response to attachment_id")],
-        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
-        include: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.")] = None,
-        exclude: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
-        """Get a learning object's date information
-
-        Get a learning object's date-related information, including due date, availability dates, override status, and a paginated list of all assignment overrides for the item.
-
-        :param attachment_id: Scope response to attachment_id (required)
-        :type attachment_id: str
-        :param course_id: Scope response to course_id (required)
-        :type course_id: str
-        :param include: Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.
-        :type include: List[List[str]]
-        :param exclude: Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.
-        :type exclude: List[List[str]]
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._learning_object_dates_show_by_attachment_id_for_courses_serialize(
-            attachment_id=attachment_id,
-            course_id=course_id,
-            include=include,
-            exclude=exclude,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "LearningObjectDates",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def learning_object_dates_show_by_attachment_id_for_courses_with_http_info(
         self,
@@ -1178,8 +940,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1199,11 +961,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -1461,125 +1223,6 @@ class LearningObjectDatesApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def learning_object_dates_show_by_discussion_topic_id_for_courses_all(
-        self,
-        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
-        discussion_topic_id: Annotated[StrictStr, Field(description="Scope response to discussion_topic_id")],
-        include: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.")] = None,
-        exclude: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
-        """Get a learning object's date information
-
-        Get a learning object's date-related information, including due date, availability dates, override status, and a paginated list of all assignment overrides for the item.
-
-        :param course_id: Scope response to course_id (required)
-        :type course_id: str
-        :param discussion_topic_id: Scope response to discussion_topic_id (required)
-        :type discussion_topic_id: str
-        :param include: Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.
-        :type include: List[List[str]]
-        :param exclude: Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.
-        :type exclude: List[List[str]]
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._learning_object_dates_show_by_discussion_topic_id_for_courses_serialize(
-            course_id=course_id,
-            discussion_topic_id=discussion_topic_id,
-            include=include,
-            exclude=exclude,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "LearningObjectDates",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def learning_object_dates_show_by_discussion_topic_id_for_courses_with_http_info(
         self,
@@ -1783,8 +1426,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1804,11 +1447,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -2066,125 +1709,6 @@ class LearningObjectDatesApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def learning_object_dates_show_by_quiz_id_for_courses_all(
-        self,
-        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
-        quiz_id: Annotated[StrictStr, Field(description="Scope response to quiz_id")],
-        include: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.")] = None,
-        exclude: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
-        """Get a learning object's date information
-
-        Get a learning object's date-related information, including due date, availability dates, override status, and a paginated list of all assignment overrides for the item.
-
-        :param course_id: Scope response to course_id (required)
-        :type course_id: str
-        :param quiz_id: Scope response to quiz_id (required)
-        :type quiz_id: str
-        :param include: Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.
-        :type include: List[List[str]]
-        :param exclude: Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.
-        :type exclude: List[List[str]]
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._learning_object_dates_show_by_quiz_id_for_courses_serialize(
-            course_id=course_id,
-            quiz_id=quiz_id,
-            include=include,
-            exclude=exclude,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "LearningObjectDates",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def learning_object_dates_show_by_quiz_id_for_courses_with_http_info(
         self,
@@ -2388,8 +1912,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2409,11 +1933,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -2671,125 +2195,6 @@ class LearningObjectDatesApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def learning_object_dates_show_by_url_or_id_for_courses_all(
-        self,
-        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
-        url_or_id: Annotated[StrictStr, Field(description="Scope response to url_or_id")],
-        include: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.")] = None,
-        exclude: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
-        """Get a learning object's date information
-
-        Get a learning object's date-related information, including due date, availability dates, override status, and a paginated list of all assignment overrides for the item.
-
-        :param course_id: Scope response to course_id (required)
-        :type course_id: str
-        :param url_or_id: Scope response to url_or_id (required)
-        :type url_or_id: str
-        :param include: Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.
-        :type include: List[List[str]]
-        :param exclude: Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.
-        :type exclude: List[List[str]]
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._learning_object_dates_show_by_url_or_id_for_courses_serialize(
-            course_id=course_id,
-            url_or_id=url_or_id,
-            include=include,
-            exclude=exclude,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "LearningObjectDates",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def learning_object_dates_show_by_url_or_id_for_courses_with_http_info(
         self,
@@ -2993,8 +2398,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3014,11 +2419,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -3276,125 +2681,6 @@ class LearningObjectDatesApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def learning_object_dates_show_for_courses_all(
-        self,
-        assignment_id: Annotated[StrictStr, Field(description="Scope response to assignment_id")],
-        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
-        include: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.")] = None,
-        exclude: Annotated[Optional[List[List[StrictStr]]], Field(description="Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
-        """Get a learning object's date information
-
-        Get a learning object's date-related information, including due date, availability dates, override status, and a paginated list of all assignment overrides for the item.
-
-        :param assignment_id: Scope response to assignment_id (required)
-        :type assignment_id: str
-        :param course_id: Scope response to course_id (required)
-        :type course_id: str
-        :param include: Array of strings indicating what additional data to include in the response. Valid values: - \"peer_review\": includes peer review sub assignment information and overrides in the response.   If a peer review sub assignment exists, it is returned regardless of the Peer Review   Allocation and Grading feature state. If no peer review sub assignment exists,   the feature must be enabled to receive a null value; otherwise the key is omitted. - \"child_peer_review_override_dates\": each assignment override will include a peer_review_dates   field containing the matched peer review override data (id, due_at, unlock_at, lock_at)   for that override. The field will be present as null if no matching peer review override exists.
-        :type include: List[List[str]]
-        :param exclude: Array of strings indicating what data to exclude from the response. Valid values: - \"peer_review_overrides\": when include[]=peer_review is also specified, the   peer_review_sub_assignment object will not include the overrides array, reducing the   response payload size. This is useful when using include[]=child_peer_review_override_dates   since the peer review override data is already embedded in the parent assignment overrides. - \"child_override_due_dates\": prevents the sub_assignment_due_dates field from being included   in assignment override responses, even when discussion checkpoints are enabled. This reduces   response payload size when checkpoint due date information is not needed.
-        :type exclude: List[List[str]]
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._learning_object_dates_show_for_courses_serialize(
-            assignment_id=assignment_id,
-            course_id=course_id,
-            include=include,
-            exclude=exclude,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "LearningObjectDates",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def learning_object_dates_show_for_courses_with_http_info(
         self,
@@ -3598,8 +2884,8 @@ class LearningObjectDatesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
-            'exclude': 'multi',
+            'include[]': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3619,11 +2905,11 @@ class LearningObjectDatesApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             

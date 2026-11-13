@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from canvas_lms_python_client.models.assignment_override import AssignmentOverride
+from canvas_lms_python_client.models.learning_object_dates_peer_review_sub_assignment import LearningObjectDatesPeerReviewSubAssignment
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -42,7 +43,7 @@ class LearningObjectDates(BaseModel):
     overrides: Optional[List[AssignmentOverride]] = Field(default=None, description="paginated list of AssignmentOverride objects")
     checkpoints: Optional[List[LearningObjectDates]] = Field(default=None, description="list of Checkpoint objects, only present if a learning object has subAssignments")
     tag: Optional[StrictStr] = Field(default=None, description="the tag identifying the type of checkpoint (only present for checkpoints)", json_schema_extra={"examples": ["reply_to_topic"]})
-    peer_review_sub_assignment: Optional[Dict[str, Any]] = Field(default=None, description="peer review sub assignment details. If a peer review sub assignment exists, it is returned regardless of the Peer Review Allocation and Grading feature state. If no peer review sub assignment exists, the feature must be enabled to receive a null value; otherwise the key is omitted.")
+    peer_review_sub_assignment: Optional[LearningObjectDatesPeerReviewSubAssignment] = None
     __properties: ClassVar[List[str]] = ["id", "due_at", "lock_at", "reply_to_topic_due_at", "required_replies_due_at", "unlock_at", "only_visible_to_overrides", "graded", "blueprint_date_locks", "visible_to_everyone", "overrides", "checkpoints", "tag", "peer_review_sub_assignment"]
 
     model_config = ConfigDict(
@@ -96,6 +97,9 @@ class LearningObjectDates(BaseModel):
             for _item_checkpoints in self.checkpoints:
                 _items.append(_item_checkpoints.to_dict() if _item_checkpoints is not None else None)
             _dict['checkpoints'] = _items
+        # override the default output from pydantic by calling `to_dict()` of peer_review_sub_assignment
+        if self.peer_review_sub_assignment:
+            _dict['peer_review_sub_assignment'] = self.peer_review_sub_assignment.to_dict()
         return _dict
 
     @classmethod
@@ -121,7 +125,7 @@ class LearningObjectDates(BaseModel):
             "overrides": [AssignmentOverride.from_dict(_item) for _item in obj["overrides"]] if obj.get("overrides") is not None else None,
             "checkpoints": [LearningObjectDates.from_dict(_item) for _item in obj["checkpoints"]] if obj.get("checkpoints") is not None else None,
             "tag": obj.get("tag"),
-            "peer_review_sub_assignment": obj.get("peer_review_sub_assignment")
+            "peer_review_sub_assignment": LearningObjectDatesPeerReviewSubAssignment.from_dict(obj["peer_review_sub_assignment"]) if obj.get("peer_review_sub_assignment") is not None else None
         })
         return _obj
 

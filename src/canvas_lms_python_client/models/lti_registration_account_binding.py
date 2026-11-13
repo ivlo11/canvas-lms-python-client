@@ -19,7 +19,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from canvas_lms_python_client.models.user import User
+from canvas_lms_python_client.models.lti_registration_created_by import LtiRegistrationCreatedBy
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -35,8 +35,8 @@ class LtiRegistrationAccountBinding(BaseModel):
     workflow_state: Optional[StrictStr] = Field(default=None, description="The state of the binding (on, off, allow, deleted)", json_schema_extra={"examples": ["on"]})
     created_at: Optional[StrictStr] = Field(default=None, description="Timestamp of the binding's creation", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
     updated_at: Optional[StrictStr] = Field(default=None, description="Timestamp of the binding's last update", json_schema_extra={"examples": ["2024-01-01T00:00:00Z"]})
-    created_by: Optional[User] = None
-    updated_by: Optional[User] = None
+    created_by: Optional[LtiRegistrationCreatedBy] = None
+    updated_by: Optional[LtiRegistrationCreatedBy] = None
     __properties: ClassVar[List[str]] = ["id", "account_id", "root_account_id", "registration_id", "workflow_state", "created_at", "updated_at", "created_by", "updated_by"]
 
     model_config = ConfigDict(
@@ -103,8 +103,8 @@ class LtiRegistrationAccountBinding(BaseModel):
             "workflow_state": obj.get("workflow_state"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
-            "created_by": User.from_dict(obj["created_by"]) if obj.get("created_by") is not None else None,
-            "updated_by": User.from_dict(obj["updated_by"]) if obj.get("updated_by") is not None else None
+            "created_by": LtiRegistrationCreatedBy.from_dict(obj["created_by"]) if obj.get("created_by") is not None else None,
+            "updated_by": LtiRegistrationCreatedBy.from_dict(obj["updated_by"]) if obj.get("updated_by") is not None else None
         })
         return _obj
 

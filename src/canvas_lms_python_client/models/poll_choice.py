@@ -27,8 +27,8 @@ class PollChoice(BaseModel):
     """
     PollChoice
     """ # noqa: E501
-    id: StrictInt = Field(description="The unique identifier for the poll choice.", json_schema_extra={"examples": [1023]})
-    poll_id: StrictInt = Field(description="The id of the poll this poll choice belongs to.", json_schema_extra={"examples": [1779]})
+    id: StrictStr = Field(description="The unique identifier for the poll choice.", json_schema_extra={"examples": ["1023"]})
+    poll_id: Optional[StrictStr] = Field(default=None, description="The id of the poll this poll choice belongs to.", json_schema_extra={"examples": ["1779"]})
     is_correct: Optional[StrictBool] = Field(default=None, description="Specifies whether or not this poll choice is a 'correct' choice.", json_schema_extra={"examples": [True]})
     text: StrictStr = Field(description="The text of the poll choice.", json_schema_extra={"examples": ["Choice A"]})
     position: Optional[StrictInt] = Field(default=None, description="The order of the poll choice in relation to it's sibling poll choices.", json_schema_extra={"examples": [1]})

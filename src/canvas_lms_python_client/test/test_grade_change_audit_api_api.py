@@ -19,9 +19,13 @@ from pydantic import ValidationError
 
 from canvas_lms_python_client.api.grade_change_audit_api_api import GradeChangeAuditApiApi
 from pydantic import Field, StrictInt, StrictStr
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent
+from canvas_lms_python_client.models.grade_change_audit_api_for_assignment_response import GradeChangeAuditApiForAssignmentResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_course_response import GradeChangeAuditApiForCourseResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_grader_response import GradeChangeAuditApiForGraderResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_student_response import GradeChangeAuditApiForStudentResponse
+from canvas_lms_python_client.models.grade_change_audit_api_query_response import GradeChangeAuditApiQueryResponse
 
 
 class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
@@ -81,8 +85,8 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Array response
-        mock_data = [MagicMock(), MagicMock()]
+        # Non-array response: one wrapper per page
+        mock_data = MagicMock()
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -94,7 +98,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.grade_change_audit_api_for_assignment_all(
+        async for page in self.api.grade_change_audit_api_for_assignment_paginated(
             assignment_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -104,7 +108,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == len(mock_data)
+        assert len(pages) == 1  # One wrapper page
 
     async def test_grade_change_audit_api_for_assignment_paginated_multiple_pages(self) -> None:
         """Test grade_change_audit_api_for_assignment_fetch_all_items following pagination links.
@@ -116,7 +120,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = [MagicMock(), MagicMock()]
+        mock_page_data = MagicMock()
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -156,7 +160,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.grade_change_audit_api_for_assignment_all(
+        async for item in self.api.grade_change_audit_api_for_assignment_paginated(
             assignment_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -166,7 +170,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_grade_change_audit_api_for_assignment_paginated_empty_result(self) -> None:
@@ -190,7 +194,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.grade_change_audit_api_for_assignment_all(
+        async for item in self.api.grade_change_audit_api_for_assignment_paginated(
             assignment_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -251,8 +255,8 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Array response
-        mock_data = [MagicMock(), MagicMock()]
+        # Non-array response: one wrapper per page
+        mock_data = MagicMock()
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -264,7 +268,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.grade_change_audit_api_for_course_all(
+        async for page in self.api.grade_change_audit_api_for_course_paginated(
             course_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -274,7 +278,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == len(mock_data)
+        assert len(pages) == 1  # One wrapper page
 
     async def test_grade_change_audit_api_for_course_paginated_multiple_pages(self) -> None:
         """Test grade_change_audit_api_for_course_fetch_all_items following pagination links.
@@ -286,7 +290,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = [MagicMock(), MagicMock()]
+        mock_page_data = MagicMock()
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -326,7 +330,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.grade_change_audit_api_for_course_all(
+        async for item in self.api.grade_change_audit_api_for_course_paginated(
             course_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -336,7 +340,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_grade_change_audit_api_for_course_paginated_empty_result(self) -> None:
@@ -360,7 +364,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.grade_change_audit_api_for_course_all(
+        async for item in self.api.grade_change_audit_api_for_course_paginated(
             course_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -421,8 +425,8 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Array response
-        mock_data = [MagicMock(), MagicMock()]
+        # Non-array response: one wrapper per page
+        mock_data = MagicMock()
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -434,7 +438,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.grade_change_audit_api_for_grader_all(
+        async for page in self.api.grade_change_audit_api_for_grader_paginated(
             grader_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -444,7 +448,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == len(mock_data)
+        assert len(pages) == 1  # One wrapper page
 
     async def test_grade_change_audit_api_for_grader_paginated_multiple_pages(self) -> None:
         """Test grade_change_audit_api_for_grader_fetch_all_items following pagination links.
@@ -456,7 +460,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = [MagicMock(), MagicMock()]
+        mock_page_data = MagicMock()
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -496,7 +500,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.grade_change_audit_api_for_grader_all(
+        async for item in self.api.grade_change_audit_api_for_grader_paginated(
             grader_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -506,7 +510,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_grade_change_audit_api_for_grader_paginated_empty_result(self) -> None:
@@ -530,7 +534,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.grade_change_audit_api_for_grader_all(
+        async for item in self.api.grade_change_audit_api_for_grader_paginated(
             grader_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -591,8 +595,8 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Array response
-        mock_data = [MagicMock(), MagicMock()]
+        # Non-array response: one wrapper per page
+        mock_data = MagicMock()
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -604,7 +608,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.grade_change_audit_api_for_student_all(
+        async for page in self.api.grade_change_audit_api_for_student_paginated(
             student_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -614,7 +618,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == len(mock_data)
+        assert len(pages) == 1  # One wrapper page
 
     async def test_grade_change_audit_api_for_student_paginated_multiple_pages(self) -> None:
         """Test grade_change_audit_api_for_student_fetch_all_items following pagination links.
@@ -626,7 +630,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = [MagicMock(), MagicMock()]
+        mock_page_data = MagicMock()
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -666,7 +670,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.grade_change_audit_api_for_student_all(
+        async for item in self.api.grade_change_audit_api_for_student_paginated(
             student_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -676,7 +680,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_grade_change_audit_api_for_student_paginated_empty_result(self) -> None:
@@ -700,7 +704,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.grade_change_audit_api_for_student_all(
+        async for item in self.api.grade_change_audit_api_for_student_paginated(
             student_id="invalid",
             start_time="invalid",
             end_time="invalid",
@@ -737,8 +741,8 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Array response
-        mock_data = [MagicMock(), MagicMock()]
+        # Non-array response: one wrapper per page
+        mock_data = MagicMock()
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -750,7 +754,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.grade_change_audit_api_query_all(
+        async for page in self.api.grade_change_audit_api_query_paginated(
             course_id=999,
             assignment_id=999,
             student_id=999,
@@ -763,7 +767,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == len(mock_data)
+        assert len(pages) == 1  # One wrapper page
 
     async def test_grade_change_audit_api_query_paginated_multiple_pages(self) -> None:
         """Test grade_change_audit_api_query_fetch_all_items following pagination links.
@@ -775,7 +779,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = [MagicMock(), MagicMock()]
+        mock_page_data = MagicMock()
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -815,7 +819,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.grade_change_audit_api_query_all(
+        async for item in self.api.grade_change_audit_api_query_paginated(
             course_id=999,
             assignment_id=999,
             student_id=999,
@@ -828,7 +832,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_grade_change_audit_api_query_paginated_empty_result(self) -> None:
@@ -852,7 +856,7 @@ class TestGradeChangeAuditApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.grade_change_audit_api_query_all(
+        async for item in self.api.grade_change_audit_api_query_paginated(
             course_id=999,
             assignment_id=999,
             student_id=999,

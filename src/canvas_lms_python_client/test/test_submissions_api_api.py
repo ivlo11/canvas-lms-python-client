@@ -554,8 +554,8 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
-        mock_data = MagicMock()
+        # Array response
+        mock_data = [MagicMock(), MagicMock()]
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -588,7 +588,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == len(mock_data)
 
     async def test_submissions_api_for_students_paginated_multiple_pages(self) -> None:
         """Test submissions_api_for_students_fetch_all_items following pagination links.
@@ -600,7 +600,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = MagicMock()
+        mock_page_data = [MagicMock(), MagicMock()]
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -661,7 +661,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
         assert call_count[0] == 3
 
     async def test_submissions_api_for_students_paginated_empty_result(self) -> None:
@@ -768,8 +768,8 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
-        mock_data = MagicMock()
+        # Array response
+        mock_data = [MagicMock(), MagicMock()]
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -802,7 +802,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == len(mock_data)
 
     async def test_submissions_api_for_students_for_sections_paginated_multiple_pages(self) -> None:
         """Test submissions_api_for_students_for_sections_fetch_all_items following pagination links.
@@ -814,7 +814,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = MagicMock()
+        mock_page_data = [MagicMock(), MagicMock()]
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -875,7 +875,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
         assert call_count[0] == 3
 
     async def test_submissions_api_for_students_for_sections_paginated_empty_result(self) -> None:
@@ -2199,7 +2199,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -2212,7 +2212,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.submissions_api_multiple_gradeable_students_all(
+        async for page in self.api.submissions_api_multiple_gradeable_students_paginated(
             course_id="invalid",
             assignment_ids=[],
             page=999,
@@ -2221,7 +2221,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_submissions_api_multiple_gradeable_students_paginated_multiple_pages(self) -> None:
         """Test submissions_api_multiple_gradeable_students_fetch_all_items following pagination links.
@@ -2273,7 +2273,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.submissions_api_multiple_gradeable_students_all(
+        async for item in self.api.submissions_api_multiple_gradeable_students_paginated(
             course_id="invalid",
             assignment_ids=[],
             page=999,
@@ -2282,7 +2282,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_submissions_api_multiple_gradeable_students_paginated_empty_result(self) -> None:
@@ -2306,7 +2306,7 @@ class TestSubmissionsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.submissions_api_multiple_gradeable_students_all(
+        async for item in self.api.submissions_api_multiple_gradeable_students_paginated(
             course_id="invalid",
             assignment_ids=[],
             page=999,

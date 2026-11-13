@@ -28,10 +28,11 @@ class QuizSubmissionEvent(BaseModel):
     """
     An event passed from the Quiz Submission take page
     """ # noqa: E501
+    id: Optional[StrictStr] = Field(default=None, description="The ID of the event.", json_schema_extra={"examples": ["3409"]})
     created_at: Optional[datetime] = Field(default=None, description="a timestamp record of creation time", json_schema_extra={"examples": ["2014-10-08T19:29:58Z"]})
     event_type: Optional[StrictStr] = Field(default=None, description="the type of event being sent", json_schema_extra={"examples": ["question_answered"]})
-    event_data: Optional[Dict[str, Any]] = Field(default=None, description="custom contextual data for the specific event type", json_schema_extra={"examples": [{"answer": "42"}]})
-    __properties: ClassVar[List[str]] = ["created_at", "event_type", "event_data"]
+    event_data: Optional[Any] = Field(default=None, description="custom contextual data for the specific event type. Its shape depends on event_type: a list of answers for question_answered, an object for question_flagged and submission_created, and null for page_blurred and page_focused.", json_schema_extra={"examples": [{"answer": "42"}]})
+    __properties: ClassVar[List[str]] = ["id", "created_at", "event_type", "event_data"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -72,6 +73,11 @@ class QuizSubmissionEvent(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if event_data (nullable) is None
+        # and model_fields_set contains the field
+        if self.event_data is None and "event_data" in self.model_fields_set:
+            _dict['event_data'] = None
+
         return _dict
 
     @classmethod
@@ -84,6 +90,7 @@ class QuizSubmissionEvent(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
             "created_at": obj.get("created_at"),
             "event_type": obj.get("event_type"),
             "event_data": obj.get("event_data")

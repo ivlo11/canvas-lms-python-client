@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **poll_choices_create**
-> poll_choices_create(poll_id, poll_choices_create_request=poll_choices_create_request)
+> PollChoicesCreateResponse poll_choices_create(poll_id, poll_choices_create_request=poll_choices_create_request)
 
 Create a single poll choice
 
@@ -25,6 +25,7 @@ Create a new poll choice for this poll
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.poll_choices_create_request import PollChoicesCreateRequest
+from canvas_lms_python_client.models.poll_choices_create_response import PollChoicesCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -53,7 +54,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a single poll choice
-        await api_instance.poll_choices_create(poll_id, poll_choices_create_request=poll_choices_create_request)
+        api_response = await api_instance.poll_choices_create(poll_id, poll_choices_create_request=poll_choices_create_request)
+        print("The response of PollChoicesApi->poll_choices_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollChoicesApi->poll_choices_create: %s\n" % e)
 ```
@@ -70,7 +73,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollChoicesCreateResponse**](PollChoicesCreateResponse.md)
 
 ### Authorization
 
@@ -167,7 +170,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_choices_index**
-> poll_choices_index(poll_id, page=page, per_page=per_page)
+> PollChoicesIndexResponse poll_choices_index(poll_id, page=page, per_page=per_page)
 
 List poll choices in a poll
 
@@ -179,6 +182,7 @@ Returns the paginated list of PollChoices in this poll.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.poll_choices_index_response import PollChoicesIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -208,7 +212,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List poll choices in a poll
-        await api_instance.poll_choices_index(poll_id, page=page, per_page=per_page)
+        api_response = await api_instance.poll_choices_index(poll_id, page=page, per_page=per_page)
+        print("The response of PollChoicesApi->poll_choices_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollChoicesApi->poll_choices_index: %s\n" % e)
 ```
@@ -226,7 +232,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollChoicesIndexResponse**](PollChoicesIndexResponse.md)
 
 ### Authorization
 
@@ -246,7 +252,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_choices_show**
-> poll_choices_show(id, poll_id)
+> PollChoicesShowResponse poll_choices_show(id, poll_id)
 
 Get a single poll choice
 
@@ -258,6 +264,7 @@ Returns the poll choice with the given id
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.poll_choices_show_response import PollChoicesShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -286,7 +293,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single poll choice
-        await api_instance.poll_choices_show(id, poll_id)
+        api_response = await api_instance.poll_choices_show(id, poll_id)
+        print("The response of PollChoicesApi->poll_choices_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollChoicesApi->poll_choices_show: %s\n" % e)
 ```
@@ -303,7 +312,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollChoicesShowResponse**](PollChoicesShowResponse.md)
 
 ### Authorization
 
@@ -323,7 +332,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_choices_update**
-> poll_choices_update(id, poll_id, poll_choices_update_request=poll_choices_update_request)
+> PollChoicesUpdateResponse poll_choices_update(id, poll_id, poll_choices_update_request=poll_choices_update_request)
 
 Update a single poll choice
 
@@ -336,6 +345,7 @@ Update an existing poll choice for this poll
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.poll_choices_update_request import PollChoicesUpdateRequest
+from canvas_lms_python_client.models.poll_choices_update_response import PollChoicesUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -365,7 +375,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a single poll choice
-        await api_instance.poll_choices_update(id, poll_id, poll_choices_update_request=poll_choices_update_request)
+        api_response = await api_instance.poll_choices_update(id, poll_id, poll_choices_update_request=poll_choices_update_request)
+        print("The response of PollChoicesApi->poll_choices_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollChoicesApi->poll_choices_update: %s\n" % e)
 ```
@@ -383,7 +395,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollChoicesUpdateResponse**](PollChoicesUpdateResponse.md)
 
 ### Authorization
 

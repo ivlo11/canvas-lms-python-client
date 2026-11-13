@@ -1,0 +1,44 @@
+[
+  {
+    "id": 168,
+    "anonymous_id": "4o",
+    "display_name": "Lizalfos 2",
+    "avatar_image_url": "http://canvas.instructure.com/images/messages/avatar-50.png",
+    "html_url": "http://canvas.docker/courses/5/users/168",
+    "pronouns": null,
+    "progress": {
+      "requirement_count": 1,
+      "requirement_completed_count": 1,
+      "next_requirement_url": null,
+      "completed_at": "2026-11-03T03:45:05Z"
+    }
+  },
+  {
+    "id": 169,
+    "anonymous_id": "4p",
+    "display_name": "Epona 3",
+    "avatar_image_url": "http://canvas.instructure.com/images/messages/avatar-50.png",
+    "html_url": "http://canvas.docker/courses/5/users/169",
+    "pronouns": null,
+    "progress": {
+      "requirement_count": 1,
+      "requirement_completed_count": 1,
+      "next_requirement_url": null,
+      "completed_at": "2026-11-03T03:45:05Z"
+    }
+  },
+  {
+    "id": 170,
+    "anonymous_id": "4q",
+    "display_name": "Beedle 4",
+    "avatar_image_url": "http://canvas.instructure.com/images/messages/avatar-50.png",
+    "html_url": "http://canvas.docker/courses/5/users/170",
+    "pronouns": null,
+    "progress": {
+      "requirement_count": 1,
+      "requirement_completed_count": 1,
+      "next_requirement_url": null,
+      "completed_at": "2026-11-03T03:45:05Z"
+    }
+  }
+]

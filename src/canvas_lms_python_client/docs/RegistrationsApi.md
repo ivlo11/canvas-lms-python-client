@@ -27,7 +27,7 @@ Method | HTTP request | Description
 
 
 # **registrations_apply_registration_update_request**
-> object registrations_apply_registration_update_request(account_id, id, update_request_id, registrations_apply_registration_update_request_request=registrations_apply_registration_update_request_request)
+> LtiRegistration registrations_apply_registration_update_request(account_id, id, update_request_id, registrations_apply_registration_update_request_request=registrations_apply_registration_update_request_request)
 
 Apply LTI Registration Update Requst
 
@@ -41,6 +41,7 @@ If the request is rejected, marks it as rejected without applying changes.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.models.registrations_apply_registration_update_request_request import RegistrationsApplyRegistrationUpdateRequestRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -93,7 +94,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistration**](LtiRegistration.md)
 
 ### Authorization
 
@@ -113,7 +114,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_bind**
-> object registrations_bind(account_id, id, registrations_bind_request=registrations_bind_request)
+> LtiRegistrationAccountBinding registrations_bind(account_id, id, registrations_bind_request=registrations_bind_request)
 
 Bind an LTI Registration to a Root Account
 
@@ -132,6 +133,7 @@ For parent root account, binding also applies to all child root accounts.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration_account_binding import LtiRegistrationAccountBinding
 from canvas_lms_python_client.models.registrations_bind_request import RegistrationsBindRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -182,7 +184,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistrationAccountBinding**](LtiRegistrationAccountBinding.md)
 
 ### Authorization
 
@@ -202,7 +204,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_check_domain_duplicates**
-> List[object] registrations_check_domain_duplicates(account_id, domain)
+> object registrations_check_domain_duplicates(account_id, domain)
 
 Check for Duplicate Domains
 
@@ -265,7 +267,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 
@@ -376,7 +378,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_create**
-> object registrations_create(account_id, registrations_create_request=registrations_create_request)
+> LtiRegistration registrations_create(account_id, registrations_create_request=registrations_create_request)
 
 Create an LTI Registration
 
@@ -391,6 +393,7 @@ To install/create using Dynamic Registration, please use the
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.models.registrations_create_request import RegistrationsCreateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -439,7 +442,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistration**](LtiRegistration.md)
 
 ### Authorization
 
@@ -459,7 +462,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_destroy**
-> object registrations_destroy(account_id, id)
+> LtiRegistration registrations_destroy(account_id, id)
 
 Delete an LTI Registration
 
@@ -471,6 +474,7 @@ Remove the specified LTI registration
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -518,7 +522,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistration**](LtiRegistration.md)
 
 ### Authorization
 
@@ -538,7 +542,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_history**
-> List[object] registrations_history(account_id, id, page=page, per_page=per_page)
+> List[LtiRegistrationHistoryEntry] registrations_history(account_id, id, page=page, per_page=per_page)
 
 Get LTI Registration History
 
@@ -554,6 +558,7 @@ The default page size is 10.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration_history_entry import LtiRegistrationHistoryEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -605,7 +610,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[LtiRegistrationHistoryEntry]**](LtiRegistrationHistoryEntry.md)
 
 ### Authorization
 
@@ -625,7 +630,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_install_from_template**
-> object registrations_install_from_template(account_id, id)
+> LtiRegistration registrations_install_from_template(account_id, id)
 
 Install an LTI Registration from a Template
 
@@ -640,6 +645,7 @@ Only allowed for root accounts and for registrations from Site Admin marked as t
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -687,7 +693,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistration**](LtiRegistration.md)
 
 ### Authorization
 
@@ -707,7 +713,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_install_status**
-> object registrations_install_status(account_id, client_id)
+> LtiRegistration registrations_install_status(account_id, client_id)
 
 Check LTI Registration Install Status
 
@@ -722,6 +728,7 @@ current account, returns it directly.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -769,7 +776,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistration**](LtiRegistration.md)
 
 ### Authorization
 
@@ -960,7 +967,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_overlay_history**
-> List[object] registrations_overlay_history(account_id, id, limit=limit)
+> List[LtiOverlayVersion] registrations_overlay_history(account_id, id, limit=limit)
 
 Get LTI Registration Overlay History
 
@@ -972,6 +979,7 @@ Returns the overlay history items for the specified LTI registration.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_overlay_version import LtiOverlayVersion
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1021,7 +1029,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+[**List[LtiOverlayVersion]**](LtiOverlayVersion.md)
 
 ### Authorization
 
@@ -1041,7 +1049,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_reset**
-> object registrations_reset(account_id, id)
+> LtiRegistration registrations_reset(account_id, id)
 
 Reset an LTI Registration to Defaults
 
@@ -1054,6 +1062,7 @@ that were present in the overlay associated with this context.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1101,7 +1110,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistration**](LtiRegistration.md)
 
 ### Authorization
 
@@ -1121,7 +1130,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_show**
-> object registrations_show(account_id, id, include=include)
+> LtiRegistration registrations_show(account_id, id, include=include)
 
 Show an LTI Registration
 
@@ -1134,6 +1143,7 @@ configuration and account binding.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1183,7 +1193,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistration**](LtiRegistration.md)
 
 ### Authorization
 
@@ -1203,7 +1213,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_show_by_client_id**
-> object registrations_show_by_client_id(account_id, client_id)
+> LtiRegistration registrations_show_by_client_id(account_id, client_id)
 
 Show an LTI Registration (via the client_id)
 
@@ -1216,6 +1226,7 @@ configuration and account binding.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1263,7 +1274,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistration**](LtiRegistration.md)
 
 ### Authorization
 
@@ -1283,7 +1294,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_show_by_utid**
-> object registrations_show_by_utid(account_id, utid)
+> LtiRegistration registrations_show_by_utid(account_id, utid)
 
 Get LTI Registration by Unified Tool ID
 
@@ -1298,6 +1309,7 @@ current account (owned by account, Site Admin, or has binding).
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1345,7 +1357,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistration**](LtiRegistration.md)
 
 ### Authorization
 
@@ -1446,7 +1458,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_unbind**
-> object registrations_unbind(account_id, id)
+> LtiRegistrationAccountBinding registrations_unbind(account_id, id)
 
 Remove an Inherited LTI Registration
 
@@ -1461,6 +1473,7 @@ Only valid for inherited (Site Admin) registrations — use destroy for registra
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration_account_binding import LtiRegistrationAccountBinding
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1508,7 +1521,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistrationAccountBinding**](LtiRegistrationAccountBinding.md)
 
 ### Authorization
 
@@ -1528,7 +1541,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_update**
-> object registrations_update(account_id, id, registrations_update_request=registrations_update_request)
+> LtiRegistration registrations_update(account_id, id, registrations_update_request=registrations_update_request)
 
 Update an LTI Registration
 
@@ -1542,6 +1555,7 @@ freely.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
 from canvas_lms_python_client.models.registrations_update_request import RegistrationsUpdateRequest
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
@@ -1592,7 +1606,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**LtiRegistration**](LtiRegistration.md)
 
 ### Authorization
 
@@ -1612,7 +1626,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registrations_validate_lti_configuration**
-> List[object] registrations_validate_lti_configuration(account_id, registrations_validate_lti_configuration_request=registrations_validate_lti_configuration_request)
+> object registrations_validate_lti_configuration(account_id, registrations_validate_lti_configuration_request=registrations_validate_lti_configuration_request)
 
 Validate LtiConfiguration
 
@@ -1678,7 +1692,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List[object]**
+**object**
 
 ### Authorization
 

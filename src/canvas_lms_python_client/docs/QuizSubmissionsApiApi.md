@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **quiz_submissions_api_complete**
-> quiz_submissions_api_complete(course_id, id, quiz_id, quiz_submissions_api_complete_request=quiz_submissions_api_complete_request)
+> QuizSubmissionsApiCompleteResponse quiz_submissions_api_complete(course_id, id, quiz_id, quiz_submissions_api_complete_request=quiz_submissions_api_complete_request)
 
 Complete the quiz submission (turn it in).
 
@@ -39,6 +39,7 @@ will be allowed.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_submissions_api_complete_request import QuizSubmissionsApiCompleteRequest
+from canvas_lms_python_client.models.quiz_submissions_api_complete_response import QuizSubmissionsApiCompleteResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -69,7 +70,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Complete the quiz submission (turn it in).
-        await api_instance.quiz_submissions_api_complete(course_id, id, quiz_id, quiz_submissions_api_complete_request=quiz_submissions_api_complete_request)
+        api_response = await api_instance.quiz_submissions_api_complete(course_id, id, quiz_id, quiz_submissions_api_complete_request=quiz_submissions_api_complete_request)
+        print("The response of QuizSubmissionsApiApi->quiz_submissions_api_complete:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizSubmissionsApiApi->quiz_submissions_api_complete: %s\n" % e)
 ```
@@ -88,7 +91,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizSubmissionsApiCompleteResponse**](QuizSubmissionsApiCompleteResponse.md)
 
 ### Authorization
 
@@ -108,7 +111,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_create**
-> quiz_submissions_api_create(course_id, quiz_id, quiz_submissions_api_create_request=quiz_submissions_api_create_request)
+> QuizSubmissionsApiCreateResponse quiz_submissions_api_create(course_id, quiz_id, quiz_submissions_api_create_request=quiz_submissions_api_create_request)
 
 Create the quiz submission (start a quiz-taking session)
 
@@ -130,6 +133,7 @@ questions and submit your answers.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_submissions_api_create_request import QuizSubmissionsApiCreateRequest
+from canvas_lms_python_client.models.quiz_submissions_api_create_response import QuizSubmissionsApiCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -159,7 +163,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create the quiz submission (start a quiz-taking session)
-        await api_instance.quiz_submissions_api_create(course_id, quiz_id, quiz_submissions_api_create_request=quiz_submissions_api_create_request)
+        api_response = await api_instance.quiz_submissions_api_create(course_id, quiz_id, quiz_submissions_api_create_request=quiz_submissions_api_create_request)
+        print("The response of QuizSubmissionsApiApi->quiz_submissions_api_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizSubmissionsApiApi->quiz_submissions_api_create: %s\n" % e)
 ```
@@ -177,7 +183,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizSubmissionsApiCreateResponse**](QuizSubmissionsApiCreateResponse.md)
 
 ### Authorization
 
@@ -197,7 +203,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_index**
-> quiz_submissions_api_index(course_id, quiz_id, include=include, page=page, per_page=per_page)
+> QuizSubmissionsApiIndexResponse quiz_submissions_api_index(course_id, quiz_id, include=include, page=page, per_page=per_page)
 
 Get all quiz submissions.
 
@@ -216,6 +222,7 @@ including previous attempts, are returned.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.quiz_submissions_api_index_response import QuizSubmissionsApiIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -247,7 +254,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get all quiz submissions.
-        await api_instance.quiz_submissions_api_index(course_id, quiz_id, include=include, page=page, per_page=per_page)
+        api_response = await api_instance.quiz_submissions_api_index(course_id, quiz_id, include=include, page=page, per_page=per_page)
+        print("The response of QuizSubmissionsApiApi->quiz_submissions_api_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizSubmissionsApiApi->quiz_submissions_api_index: %s\n" % e)
 ```
@@ -267,7 +276,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizSubmissionsApiIndexResponse**](QuizSubmissionsApiIndexResponse.md)
 
 ### Authorization
 
@@ -287,7 +296,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_show**
-> quiz_submissions_api_show(course_id, id, quiz_id, include=include)
+> QuizSubmissionsApiShowResponse quiz_submissions_api_show(course_id, id, quiz_id, include=include)
 
 Get a single quiz submission.
 
@@ -301,6 +310,7 @@ Get a single quiz submission.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.quiz_submissions_api_show_response import QuizSubmissionsApiShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -331,7 +341,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single quiz submission.
-        await api_instance.quiz_submissions_api_show(course_id, id, quiz_id, include=include)
+        api_response = await api_instance.quiz_submissions_api_show(course_id, id, quiz_id, include=include)
+        print("The response of QuizSubmissionsApiApi->quiz_submissions_api_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizSubmissionsApiApi->quiz_submissions_api_show: %s\n" % e)
 ```
@@ -350,7 +362,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizSubmissionsApiShowResponse**](QuizSubmissionsApiShowResponse.md)
 
 ### Authorization
 
@@ -370,7 +382,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_submission**
-> quiz_submissions_api_submission(course_id, quiz_id, include=include)
+> QuizSubmissionsApiSubmissionResponse quiz_submissions_api_submission(course_id, quiz_id, include=include)
 
 Get the quiz submission.
 
@@ -384,6 +396,7 @@ Get the submission for this quiz for the current user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.quiz_submissions_api_submission_response import QuizSubmissionsApiSubmissionResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -413,7 +426,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get the quiz submission.
-        await api_instance.quiz_submissions_api_submission(course_id, quiz_id, include=include)
+        api_response = await api_instance.quiz_submissions_api_submission(course_id, quiz_id, include=include)
+        print("The response of QuizSubmissionsApiApi->quiz_submissions_api_submission:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizSubmissionsApiApi->quiz_submissions_api_submission: %s\n" % e)
 ```
@@ -431,7 +446,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizSubmissionsApiSubmissionResponse**](QuizSubmissionsApiSubmissionResponse.md)
 
 ### Authorization
 
@@ -535,7 +550,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_submissions_api_update**
-> quiz_submissions_api_update(course_id, id, quiz_id, quiz_submissions_api_update_request=quiz_submissions_api_update_request)
+> QuizSubmissionsApiUpdateResponse quiz_submissions_api_update(course_id, id, quiz_id, quiz_submissions_api_update_request=quiz_submissions_api_update_request)
 
 Update student question scores and comments.
 
@@ -557,6 +572,7 @@ fudge the total score by a specific amount of points.
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_submissions_api_update_request import QuizSubmissionsApiUpdateRequest
+from canvas_lms_python_client.models.quiz_submissions_api_update_response import QuizSubmissionsApiUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -587,7 +603,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update student question scores and comments.
-        await api_instance.quiz_submissions_api_update(course_id, id, quiz_id, quiz_submissions_api_update_request=quiz_submissions_api_update_request)
+        api_response = await api_instance.quiz_submissions_api_update(course_id, id, quiz_id, quiz_submissions_api_update_request=quiz_submissions_api_update_request)
+        print("The response of QuizSubmissionsApiApi->quiz_submissions_api_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizSubmissionsApiApi->quiz_submissions_api_update: %s\n" % e)
 ```
@@ -606,7 +624,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizSubmissionsApiUpdateResponse**](QuizSubmissionsApiUpdateResponse.md)
 
 ### Authorization
 

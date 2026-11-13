@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **workflow_state** | **str** | The state of the binding (on, off, allow, deleted) | [optional] 
 **created_at** | **str** | Timestamp of the binding&#39;s creation | [optional] 
 **updated_at** | **str** | Timestamp of the binding&#39;s last update | [optional] 
-**created_by** | [**User**](User.md) |  | [optional] 
-**updated_by** | [**User**](User.md) |  | [optional] 
+**created_by** | [**LtiRegistrationCreatedBy**](LtiRegistrationCreatedBy.md) |  | [optional] 
+**updated_by** | [**LtiRegistrationCreatedBy**](LtiRegistrationCreatedBy.md) |  | [optional] 
 
 ## Example
 

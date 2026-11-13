@@ -1,14 +1,22 @@
 # Grade
 
 
+
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**grade** | **float** | The grade for the course | [optional] 
-**total** | **float** | The total points earned in the course | [optional] 
-**possible** | **float** | The total points possible for the course | [optional] 
-**dropped** | **List[object]** | The dropped grades for the course | [optional] 
+**html_url** | **str** | The URL to the Canvas web UI page for the user&#39;s grades, if this is a student enrollment. | [optional] 
+**current_grade** | **str** | The user&#39;s current grade in the class. Only included if user has permissions to view this grade. | [optional] 
+**final_grade** | **str** | The user&#39;s final grade for the class. Only included if user has permissions to view this grade. | [optional] 
+**current_score** | **float** | The user&#39;s current score in the class. Only included if user has permissions to view this score. | [optional] 
+**final_score** | **float** | The user&#39;s final score for the class. Only included if user has permissions to view this score. | [optional] 
+**current_points** | **int** | The total points the user has earned in the class. Only included if user has permissions to view this score and &#39;current_points&#39; is passed in the request&#39;s &#39;include&#39; parameter. | [optional] 
+**unposted_current_grade** | **str** | The user&#39;s current grade in the class including muted/unposted assignments. Only included if user has permissions to view this grade, typically teachers, TAs, and admins. | [optional] 
+**unposted_final_grade** | **str** | The user&#39;s final grade for the class including muted/unposted assignments. Only included if user has permissions to view this grade, typically teachers, TAs, and admins.. | [optional] 
+**unposted_current_score** | **float** | The user&#39;s current score in the class including muted/unposted assignments. Only included if user has permissions to view this score, typically teachers, TAs, and admins.. | [optional] 
+**unposted_final_score** | **float** | The user&#39;s final score for the class including muted/unposted assignments. Only included if user has permissions to view this score, typically teachers, TAs, and admins.. | [optional] 
+**unposted_current_points** | **int** | The total points the user has earned in the class, including muted/unposted assignments. Only included if user has permissions to view this score (typically teachers, TAs, and admins) and &#39;current_points&#39; is passed in the request&#39;s &#39;include&#39; parameter. | [optional] 
 
 ## Example
 

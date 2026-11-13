@@ -5,13 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | The unique identifier for the grading period. | 
+**id** | **str** | The unique identifier for the grading period. | 
+**grading_period_group_id** | **str** | The id of the grading period set the grading period belongs to. | [optional] 
 **title** | **str** | The title for the grading period. | [optional] 
 **start_date** | **datetime** | The start date of the grading period. | 
 **end_date** | **datetime** | The end date of the grading period. | 
 **close_date** | **datetime** | Grades can only be changed before the close date of the grading period. | [optional] 
-**weight** | **int** | A weight value that contributes to the overall weight of a grading period set which is used to calculate how much assignments in this period contribute to the total grade | [optional] 
+**weight** | **float** | A weight value that contributes to the overall weight of a grading period set which is used to calculate how much assignments in this period contribute to the total grade | [optional] 
 **is_closed** | **bool** | If true, the grading period&#39;s close_date has passed. | [optional] 
+**permissions** | **object** | The current user&#39;s permissions on the grading period (read, create, update, delete). | [optional] 
 
 ## Example
 

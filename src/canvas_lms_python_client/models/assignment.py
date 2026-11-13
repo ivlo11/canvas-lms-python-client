@@ -28,7 +28,6 @@ from canvas_lms_python_client.models.lock_info import LockInfo
 from canvas_lms_python_client.models.needs_grading_count import NeedsGradingCount
 from canvas_lms_python_client.models.rubric_criteria import RubricCriteria
 from canvas_lms_python_client.models.score_statistic import ScoreStatistic
-from canvas_lms_python_client.models.submission import Submission
 from canvas_lms_python_client.models.turnitin_settings import TurnitinSettings
 from typing import Optional, Set
 from typing_extensions import Self
@@ -333,4 +332,7 @@ class Assignment(BaseModel):
         })
         return _obj
 
+from canvas_lms_python_client.models.submission import Submission
+# TODO: Rewrite to not use raise_errors
+Assignment.model_rebuild(raise_errors=False)
 

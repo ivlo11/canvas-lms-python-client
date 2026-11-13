@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **quiz_groups_create**
-> quiz_groups_create(course_id, quiz_id, quiz_groups_create_request=quiz_groups_create_request)
+> QuizGroupsCreateResponse quiz_groups_create(course_id, quiz_id, quiz_groups_create_request=quiz_groups_create_request)
 
 Create a question group
 
@@ -28,6 +28,7 @@ Create a new question group for this quiz
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_groups_create_request import QuizGroupsCreateRequest
+from canvas_lms_python_client.models.quiz_groups_create_response import QuizGroupsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -57,7 +58,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a question group
-        await api_instance.quiz_groups_create(course_id, quiz_id, quiz_groups_create_request=quiz_groups_create_request)
+        api_response = await api_instance.quiz_groups_create(course_id, quiz_id, quiz_groups_create_request=quiz_groups_create_request)
+        print("The response of QuizGroupsApi->quiz_groups_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizGroupsApi->quiz_groups_create: %s\n" % e)
 ```
@@ -75,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizGroupsCreateResponse**](QuizGroupsCreateResponse.md)
 
 ### Authorization
 
@@ -176,7 +179,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_groups_index**
-> quiz_groups_index(course_id, quiz_id)
+> QuizGroupsIndexResponse quiz_groups_index(course_id, quiz_id)
 
 List question groups in a quiz
 
@@ -188,6 +191,7 @@ Returns a list of question groups in a quiz.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.quiz_groups_index_response import QuizGroupsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -216,7 +220,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List question groups in a quiz
-        await api_instance.quiz_groups_index(course_id, quiz_id)
+        api_response = await api_instance.quiz_groups_index(course_id, quiz_id)
+        print("The response of QuizGroupsApi->quiz_groups_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizGroupsApi->quiz_groups_index: %s\n" % e)
 ```
@@ -233,7 +239,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizGroupsIndexResponse**](QuizGroupsIndexResponse.md)
 
 ### Authorization
 
@@ -419,7 +425,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **quiz_groups_update**
-> quiz_groups_update(course_id, id, quiz_id, quiz_groups_update_request=quiz_groups_update_request)
+> QuizGroupsUpdateResponse quiz_groups_update(course_id, id, quiz_id, quiz_groups_update_request=quiz_groups_update_request)
 
 Update a question group
 
@@ -432,6 +438,7 @@ Update a question group
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.quiz_groups_update_request import QuizGroupsUpdateRequest
+from canvas_lms_python_client.models.quiz_groups_update_response import QuizGroupsUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -462,7 +469,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a question group
-        await api_instance.quiz_groups_update(course_id, id, quiz_id, quiz_groups_update_request=quiz_groups_update_request)
+        api_response = await api_instance.quiz_groups_update(course_id, id, quiz_id, quiz_groups_update_request=quiz_groups_update_request)
+        print("The response of QuizGroupsApi->quiz_groups_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizGroupsApi->quiz_groups_update: %s\n" % e)
 ```
@@ -481,7 +490,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizGroupsUpdateResponse**](QuizGroupsUpdateResponse.md)
 
 ### Authorization
 

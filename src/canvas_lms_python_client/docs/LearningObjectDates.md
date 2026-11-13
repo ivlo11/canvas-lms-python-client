@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **overrides** | [**List[AssignmentOverride]**](AssignmentOverride.md) | paginated list of AssignmentOverride objects | [optional] 
 **checkpoints** | [**List[LearningObjectDates]**](LearningObjectDates.md) | list of Checkpoint objects, only present if a learning object has subAssignments | [optional] 
 **tag** | **str** | the tag identifying the type of checkpoint (only present for checkpoints) | [optional] 
-**peer_review_sub_assignment** | **object** | peer review sub assignment details. If a peer review sub assignment exists, it is returned regardless of the Peer Review Allocation and Grading feature state. If no peer review sub assignment exists, the feature must be enabled to receive a null value; otherwise the key is omitted. | [optional] 
+**peer_review_sub_assignment** | [**LearningObjectDatesPeerReviewSubAssignment**](LearningObjectDatesPeerReviewSubAssignment.md) |  | [optional] 
 
 ## Example
 

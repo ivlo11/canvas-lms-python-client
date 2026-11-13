@@ -705,7 +705,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_entries**
-> discussion_topics_api_entries(course_id, topic_id, page=page, per_page=per_page)
+> List[DiscussionEntry] discussion_topics_api_entries(course_id, topic_id, page=page, per_page=per_page)
 
 List topic entries
 
@@ -730,6 +730,7 @@ activity is ignored).
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -760,7 +761,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List topic entries
-        await api_instance.discussion_topics_api_entries(course_id, topic_id, page=page, per_page=per_page)
+        api_response = await api_instance.discussion_topics_api_entries(course_id, topic_id, page=page, per_page=per_page)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_entries:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_entries: %s\n" % e)
 ```
@@ -779,7 +782,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[DiscussionEntry]**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -794,12 +797,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List topic entries |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_entries_for_groups**
-> discussion_topics_api_entries_for_groups(group_id, topic_id, page=page, per_page=per_page)
+> List[DiscussionEntry] discussion_topics_api_entries_for_groups(group_id, topic_id, page=page, per_page=per_page)
 
 List topic entries
 
@@ -824,6 +827,7 @@ activity is ignored).
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -854,7 +858,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List topic entries
-        await api_instance.discussion_topics_api_entries_for_groups(group_id, topic_id, page=page, per_page=per_page)
+        api_response = await api_instance.discussion_topics_api_entries_for_groups(group_id, topic_id, page=page, per_page=per_page)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_entries_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_entries_for_groups: %s\n" % e)
 ```
@@ -873,7 +879,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[DiscussionEntry]**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -888,12 +894,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List topic entries |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_entry_list**
-> discussion_topics_api_entry_list(course_id, topic_id, ids=ids, page=page, per_page=per_page)
+> List[DiscussionEntry] discussion_topics_api_entry_list(course_id, topic_id, ids=ids, page=page, per_page=per_page)
 
 List entries
 
@@ -909,6 +915,7 @@ Forbidden status and the body 'require_initial_post'.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -940,7 +947,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List entries
-        await api_instance.discussion_topics_api_entry_list(course_id, topic_id, ids=ids, page=page, per_page=per_page)
+        api_response = await api_instance.discussion_topics_api_entry_list(course_id, topic_id, ids=ids, page=page, per_page=per_page)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_entry_list:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_entry_list: %s\n" % e)
 ```
@@ -960,7 +969,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[DiscussionEntry]**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -975,12 +984,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List entries |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_entry_list_for_groups**
-> discussion_topics_api_entry_list_for_groups(group_id, topic_id, ids=ids, page=page, per_page=per_page)
+> List[DiscussionEntry] discussion_topics_api_entry_list_for_groups(group_id, topic_id, ids=ids, page=page, per_page=per_page)
 
 List entries
 
@@ -996,6 +1005,7 @@ Forbidden status and the body 'require_initial_post'.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -1027,7 +1037,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List entries
-        await api_instance.discussion_topics_api_entry_list_for_groups(group_id, topic_id, ids=ids, page=page, per_page=per_page)
+        api_response = await api_instance.discussion_topics_api_entry_list_for_groups(group_id, topic_id, ids=ids, page=page, per_page=per_page)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_entry_list_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_entry_list_for_groups: %s\n" % e)
 ```
@@ -1047,7 +1059,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[DiscussionEntry]**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -1062,7 +1074,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List entries |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2713,7 +2725,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_replies**
-> discussion_topics_api_replies(course_id, entry_id, topic_id, page=page, per_page=per_page)
+> List[DiscussionEntry] discussion_topics_api_replies(course_id, entry_id, topic_id, page=page, per_page=per_page)
 
 List entry replies
 
@@ -2732,6 +2744,7 @@ Ordering of returned entries is newest-first by creation timestamp.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2763,7 +2776,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List entry replies
-        await api_instance.discussion_topics_api_replies(course_id, entry_id, topic_id, page=page, per_page=per_page)
+        api_response = await api_instance.discussion_topics_api_replies(course_id, entry_id, topic_id, page=page, per_page=per_page)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_replies:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_replies: %s\n" % e)
 ```
@@ -2783,7 +2798,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[DiscussionEntry]**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -2798,12 +2813,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List entry replies |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **discussion_topics_api_replies_for_groups**
-> discussion_topics_api_replies_for_groups(entry_id, group_id, topic_id, page=page, per_page=per_page)
+> List[DiscussionEntry] discussion_topics_api_replies_for_groups(entry_id, group_id, topic_id, page=page, per_page=per_page)
 
 List entry replies
 
@@ -2822,6 +2837,7 @@ Ordering of returned entries is newest-first by creation timestamp.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.discussion_entry import DiscussionEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -2853,7 +2869,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List entry replies
-        await api_instance.discussion_topics_api_replies_for_groups(entry_id, group_id, topic_id, page=page, per_page=per_page)
+        api_response = await api_instance.discussion_topics_api_replies_for_groups(entry_id, group_id, topic_id, page=page, per_page=per_page)
+        print("The response of DiscussionTopicsApiApi->discussion_topics_api_replies_for_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling DiscussionTopicsApiApi->discussion_topics_api_replies_for_groups: %s\n" % e)
 ```
@@ -2873,7 +2891,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[DiscussionEntry]**](DiscussionEntry.md)
 
 ### Authorization
 
@@ -2888,7 +2906,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List entry replies |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

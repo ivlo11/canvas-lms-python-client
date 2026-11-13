@@ -35,7 +35,7 @@ class TestGrades(unittest.TestCase):
         model = Grades()
         if include_optional:
             return Grades(
-                current = canvas_lms_python_client.models.grade.Grade(
+                current = canvas_lms_python_client.models.what_if_grade.WhatIfGrade(
                     grade = 120.0, 
                     total = 24.0, 
                     possible = 20.0, 
@@ -49,7 +49,7 @@ class TestGrades(unittest.TestCase):
                         weight = 0.0, 
                         grade = 200.0, 
                         dropped = [], ), ),
-                final = canvas_lms_python_client.models.grade.Grade(
+                final = canvas_lms_python_client.models.what_if_grade.WhatIfGrade(
                     grade = 120.0, 
                     total = 24.0, 
                     possible = 20.0, 

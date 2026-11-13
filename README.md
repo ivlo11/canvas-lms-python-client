@@ -123,6 +123,34 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
 ```
 
+### All Items
+
+Operations whose pages are lists also generate `<operation>_all`, which yields each item across all pages:
+
+```python
+async for account in api_instance.accounts_course_accounts_all(per_page=50):
+    print(account.name)
+```
+
+### Wrapped List Responses
+
+Some Canvas endpoints wrap each page in an object, for example `{"polls": [...]}`. For these, `_paginated` yields one wrapper model per page, and no `_all` method is generated. Wrappers are named after the Canvas controller and action that return them, so `polls_index_paginated` yields `PollsIndexResponse` pages. Read the list attribute from each page:
+
+```python
+async for page in polls_api.polls_index_paginated(per_page=50):
+    for poll in page.polls or []:
+        print(poll.question)
+```
+
+### List Query Parameters
+
+List query parameters are sent in Canvas's bracket form, one `name[]=value` pair per value:
+
+```python
+# GET /api/v1/accounts/1/courses?include[]=term&include[]=teachers
+await accounts_api.accounts_courses_api(account_id="1", include=["term", "teachers"])
+```
+
 ### Link Header Relations
 
 Canvas returns five link relations in the Link header:
@@ -137,7 +165,6 @@ The `_paginated` methods use `rel="next"` automatically. If you need access to s
 
 ```python
 from canvas_lms_python_client.pagination import get_link_by_rel
-
 
 async with canvas_lms_python_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -216,17 +243,30 @@ pdm run pytest -v
 # Run with coverage
 pdm run pytest --cov=canvas_python_client --cov-report=html
 
+# Run only the custom (hand-written) tests
+pdm run pytest src/canvas_lms_python_client/test/custom -v
+
 # Run specific test
-pdm run pytest test/test_pagination.py -v
+pdm run pytest src/canvas_lms_python_client/test/custom/unit/test_pagination.py -v
 ```
 
 ### Integration Tests
 
-Integration tests are marked `@pytest.mark.integration` and are skipped unless
-`--integration` is passed. They require a Canvas instance and are written against the
-seeded dockerized canvas-lms, so `CANVAS_API_TOKEN` must belong to a seeded **observer**
-user (one linked to at least one observee with courses and assignments). If either
-variable is unset, the integration tests are skipped with a reason naming it.
+Integration tests live in `src/canvas_lms_python_client/test/custom/integration/`. Every
+test there is treated as `@pytest.mark.integration`, with or without its own marker, and is
+skipped unless `--integration` is passed. They require a Canvas instance and are written
+against the seeded dockerized canvas-lms, so `CANVAS_API_TOKEN` must belong to a seeded
+**observer** user (one linked to at least one observee with courses and assignments). If
+either variable is unset, the integration tests are skipped with a reason naming it.
+
+Some endpoints (account rubrics, account LTI launch definitions, manageable appointment
+groups) cannot be read by an observer. Those admin-scoped tests use `CANVAS_ADMIN_API_TOKEN`,
+a token for a seeded account admin, with the same `CANVAS_BASE_URL`. When it is unset, only
+the admin-scoped tests are skipped (with a reason naming it); the observer tests still run.
+Student-scoped tests use `CANVAS_STUDENT_API_TOKEN`, printed by the seed script's `--tokens`
+option; they are skipped the same way when it is unset.
+Tests that need seeded data the instance does not have are skipped with a reason naming the
+missing data.
 
 ```bash
 # Start the seeded canvas-lms (from the canvas-lms repo)
@@ -235,6 +275,8 @@ docker compose up -d
 # Run the integration tests as the observer
 export CANVAS_BASE_URL="http://canvas.docker"
 export CANVAS_API_TOKEN="observer-access-token"
+export CANVAS_ADMIN_API_TOKEN="admin-access-token"  # optional
+export CANVAS_STUDENT_API_TOKEN="student-access-token"  # optional
 pdm run pytest --integration -m integration
 ```
 
@@ -246,6 +288,8 @@ pdm run pytest --integration -m integration
 |----------|-------------|----------|---------|
 | `CANVAS_BASE_URL` | Canvas instance URL | Yes | - |
 | `CANVAS_API_TOKEN` | Canvas API token | Yes | - |
+| `CANVAS_ADMIN_API_TOKEN` | Seeded account admin's API token, for admin-scoped integration tests (skipped when unset) | No | - |
+| `CANVAS_STUDENT_API_TOKEN` | Seeded student's API token, for student-scoped integration tests (skipped when unset) | No | - |
 
 ## Development
 
@@ -255,7 +299,7 @@ pdm run pytest --integration -m integration
 - `src/canvas_lms_python_client/api/*.py`
 - `src/canvas_lms_python_client/docs/*.py`
 - `src/canvas_lms_python_client/models/*.py`
-- `src/canvas_lms_python_client/test/*.py`
+- `src/canvas_lms_python_client/test/*.py` (everything at the `test/` root)
 - `src/canvas_lms_python_client/api_client.py`
 - `src/canvas_lms_python_client/api_response.py`
 - `src/canvas_lms_python_client/configuration.py`
@@ -263,9 +307,8 @@ pdm run pytest --integration -m integration
 - `src/canvas_lms_python_client/rest.py`
 
 **Custom, never overwritten**:
-- `src/canvas_lms_python_client/test/conftest.py`
-- `src/canvas_lms_python_client/test/test_pagination.py`
-- `src/canvas_lms_python_client/test/test_integration_observees.py`
+- `src/canvas_lms_python_client/test/custom/` (hand-written tests: `conftest.py`, offline
+  tests and captured Canvas response fixtures in `unit/`, live-Canvas tests in `integration/`)
 - `src/canvas_lms_python_client/pagination.py`
 - `src/.openapi-generator-ignore`
 

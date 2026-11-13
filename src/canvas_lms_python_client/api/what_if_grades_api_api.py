@@ -16,9 +16,11 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Any, Dict, List, Optional
+from typing import Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.what_if_grades_api_reset_for_student_course_response import WhatIfGradesApiResetForStudentCourseResponse
 from canvas_lms_python_client.models.what_if_grades_api_update_request import WhatIfGradesApiUpdateRequest
+from canvas_lms_python_client.models.what_if_grades_api_update_response import WhatIfGradesApiUpdateResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -55,7 +57,7 @@ class WhatIfGradesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> WhatIfGradesApiResetForStudentCourseResponse:
         """Reset the what-if scores for the current user for an entire course and recalculate grades
 
         Resets all what-if scores for a student in a course and recalculates grades.
@@ -94,7 +96,7 @@ class WhatIfGradesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "WhatIfGradesApiResetForStudentCourseResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -122,7 +124,7 @@ class WhatIfGradesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[WhatIfGradesApiResetForStudentCourseResponse]:
         """Reset the what-if scores for the current user for an entire course and recalculate grades
 
         Resets all what-if scores for a student in a course and recalculates grades.
@@ -161,7 +163,7 @@ class WhatIfGradesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "WhatIfGradesApiResetForStudentCourseResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -229,7 +231,7 @@ class WhatIfGradesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "WhatIfGradesApiResetForStudentCourseResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -319,7 +321,7 @@ class WhatIfGradesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> WhatIfGradesApiUpdateResponse:
         """Update a submission's what-if score and calculate grades
 
         Enter a what if score for a submission and receive the calculated grades Grade calculation is a costly operation, so this API should be used sparingly
@@ -361,7 +363,7 @@ class WhatIfGradesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "WhatIfGradesApiUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -390,7 +392,7 @@ class WhatIfGradesApiApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[WhatIfGradesApiUpdateResponse]:
         """Update a submission's what-if score and calculate grades
 
         Enter a what if score for a submission and receive the calculated grades Grade calculation is a costly operation, so this API should be used sparingly
@@ -432,7 +434,7 @@ class WhatIfGradesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "WhatIfGradesApiUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -504,7 +506,7 @@ class WhatIfGradesApiApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "WhatIfGradesApiUpdateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

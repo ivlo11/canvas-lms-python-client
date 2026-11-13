@@ -18,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
 from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.lti_launch_definition import LtiLaunchDefinition
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -60,7 +61,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[LtiLaunchDefinition]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -120,6 +121,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[LtiLaunchDefinition]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -154,7 +156,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[LtiLaunchDefinition]]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -214,6 +216,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[LtiLaunchDefinition]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -270,7 +273,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[LtiLaunchDefinition]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -330,6 +333,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[LtiLaunchDefinition]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -352,8 +356,6 @@ class LtiAppsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -387,7 +389,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[LtiLaunchDefinition]]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -447,6 +449,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[LtiLaunchDefinition]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -541,6 +544,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[LtiLaunchDefinition]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -566,7 +570,7 @@ class LtiAppsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'placements': 'multi',
+            'placements[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -584,7 +588,7 @@ class LtiAppsApi:
         # process the query parameters
         if placements is not None:
             
-            _query_params.append(('placements', placements))
+            _query_params.append(('placements[]', placements))
             
         if only_visible is not None:
             
@@ -607,6 +611,13 @@ class LtiAppsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -654,7 +665,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[LtiLaunchDefinition]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -714,6 +725,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[LtiLaunchDefinition]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -748,7 +760,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[LtiLaunchDefinition]]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -808,6 +820,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[LtiLaunchDefinition]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -864,7 +877,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[LtiLaunchDefinition]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -924,6 +937,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[LtiLaunchDefinition]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -946,8 +960,6 @@ class LtiAppsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -981,7 +993,7 @@ class LtiAppsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[LtiLaunchDefinition]]:
         """List LTI Launch Definitions
 
         List all tools available in this context for the given placements, in the form of Launch Definitions. Used primarily by the Canvas frontend. API users should consider using the External Tools API instead. This endpoint is cached for 10 minutes!
@@ -1041,6 +1053,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[LtiLaunchDefinition]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1135,6 +1148,7 @@ class LtiAppsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[LtiLaunchDefinition]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1160,7 +1174,7 @@ class LtiAppsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'placements': 'multi',
+            'placements[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1178,7 +1192,7 @@ class LtiAppsApi:
         # process the query parameters
         if placements is not None:
             
-            _query_params.append(('placements', placements))
+            _query_params.append(('placements[]', placements))
             
         if only_visible is not None:
             
@@ -1201,6 +1215,13 @@ class LtiAppsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

@@ -406,8 +406,6 @@ class FilesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -658,9 +656,9 @@ class FilesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'content_types': 'multi',
-            'exclude_content_types': 'multi',
-            'only': 'multi',
+            'content_types[]': 'multi',
+            'exclude_content_types[]': 'multi',
+            'only[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -678,11 +676,11 @@ class FilesApi:
         # process the query parameters
         if content_types is not None:
             
-            _query_params.append(('content_types', content_types))
+            _query_params.append(('content_types[]', content_types))
             
         if exclude_content_types is not None:
             
-            _query_params.append(('exclude_content_types', exclude_content_types))
+            _query_params.append(('exclude_content_types[]', exclude_content_types))
             
         if search_term is not None:
             
@@ -694,7 +692,7 @@ class FilesApi:
             
         if only is not None:
             
-            _query_params.append(('only', only))
+            _query_params.append(('only[]', only))
             
         if sort is not None:
             
@@ -1114,8 +1112,6 @@ class FilesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -1366,9 +1362,9 @@ class FilesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'content_types': 'multi',
-            'exclude_content_types': 'multi',
-            'only': 'multi',
+            'content_types[]': 'multi',
+            'exclude_content_types[]': 'multi',
+            'only[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1386,11 +1382,11 @@ class FilesApi:
         # process the query parameters
         if content_types is not None:
             
-            _query_params.append(('content_types', content_types))
+            _query_params.append(('content_types[]', content_types))
             
         if exclude_content_types is not None:
             
-            _query_params.append(('exclude_content_types', exclude_content_types))
+            _query_params.append(('exclude_content_types[]', exclude_content_types))
             
         if search_term is not None:
             
@@ -1402,7 +1398,7 @@ class FilesApi:
             
         if only is not None:
             
-            _query_params.append(('only', only))
+            _query_params.append(('only[]', only))
             
         if sort is not None:
             
@@ -1822,8 +1818,6 @@ class FilesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -2074,9 +2068,9 @@ class FilesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'content_types': 'multi',
-            'exclude_content_types': 'multi',
-            'only': 'multi',
+            'content_types[]': 'multi',
+            'exclude_content_types[]': 'multi',
+            'only[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2094,11 +2088,11 @@ class FilesApi:
         # process the query parameters
         if content_types is not None:
             
-            _query_params.append(('content_types', content_types))
+            _query_params.append(('content_types[]', content_types))
             
         if exclude_content_types is not None:
             
-            _query_params.append(('exclude_content_types', exclude_content_types))
+            _query_params.append(('exclude_content_types[]', exclude_content_types))
             
         if search_term is not None:
             
@@ -2110,7 +2104,7 @@ class FilesApi:
             
         if only is not None:
             
-            _query_params.append(('only', only))
+            _query_params.append(('only[]', only))
             
         if sort is not None:
             
@@ -2530,8 +2524,6 @@ class FilesApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -2782,9 +2774,9 @@ class FilesApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'content_types': 'multi',
-            'exclude_content_types': 'multi',
-            'only': 'multi',
+            'content_types[]': 'multi',
+            'exclude_content_types[]': 'multi',
+            'only[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2802,11 +2794,11 @@ class FilesApi:
         # process the query parameters
         if content_types is not None:
             
-            _query_params.append(('content_types', content_types))
+            _query_params.append(('content_types[]', content_types))
             
         if exclude_content_types is not None:
             
-            _query_params.append(('exclude_content_types', exclude_content_types))
+            _query_params.append(('exclude_content_types[]', exclude_content_types))
             
         if search_term is not None:
             
@@ -2818,7 +2810,7 @@ class FilesApi:
             
         if only is not None:
             
-            _query_params.append(('only', only))
+            _query_params.append(('only[]', only))
             
         if sort is not None:
             

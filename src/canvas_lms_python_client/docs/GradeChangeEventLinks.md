@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **assignment** | **int** | ID of the assignment associated with the event | [optional] 
 **course** | **int** | ID of the course associated with the event. will match the context_id in the associated assignment if the context type for the assignment is a course | [optional] 
-**student** | **int** | ID of the student associated with the event. will match the user_id in the associated submission. | [optional] 
-**grader** | **int** | ID of the grader associated with the event. will match the grader_id in the associated submission. | [optional] 
+**student** | **str** | ID of the student associated with the event. will match the user_id in the associated submission. | [optional] 
+**grader** | **str** | ID of the grader associated with the event. will match the grader_id in the associated submission. | [optional] 
 **page_view** | **str** | ID of the page view during the event if it exists. | [optional] 
 
 ## Example

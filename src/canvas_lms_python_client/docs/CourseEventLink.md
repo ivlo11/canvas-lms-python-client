@@ -1,17 +1,19 @@
 # CourseEventLink
 
-
+IDs related to the event. course, user, page_view and sis_batch are strings, and an empty string means none.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**course** | **int** | ID of the course for the event. | [optional] 
-**user** | **int** | ID of the user for the event (who made the change). | [optional] 
+**course** | **str** | ID of the course for the event. | [optional] 
+**user** | **str** | ID of the user for the event (who made the change). | [optional] 
 **page_view** | **str** | ID of the page view during the event if it exists. | [optional] 
 **copied_from** | **int** | ID of the course that this course was copied from. This is only included if the event_type is copied_from. | [optional] 
 **copied_to** | **int** | ID of the course that this course was copied to. This is only included if the event_type is copied_to. | [optional] 
-**sis_batch** | **int** | ID of the SIS batch that triggered the event. | [optional] 
+**reset_from** | **int** | ID of the course that this course was reset from. This is only included if the event_type is reset_from. | [optional] 
+**reset_to** | **int** | ID of the course that this course was reset to. This is only included if the event_type is reset_to. | [optional] 
+**sis_batch** | **str** | ID of the SIS batch that triggered the event. | [optional] 
 
 ## Example
 

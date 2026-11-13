@@ -171,7 +171,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **appointment_groups_groups**
-> appointment_groups_groups(id, registration_status_all_registered_registered=registration_status_all_registered_registered, page=page, per_page=per_page)
+> List[Group] appointment_groups_groups(id, registration_status_all_registered_registered=registration_status_all_registered_registered, page=page, per_page=per_page)
 
 List student group participants
 
@@ -185,6 +185,7 @@ Returns no results for appointment groups with the "User" participant_type.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.group import Group
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -215,7 +216,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List student group participants
-        await api_instance.appointment_groups_groups(id, registration_status_all_registered_registered=registration_status_all_registered_registered, page=page, per_page=per_page)
+        api_response = await api_instance.appointment_groups_groups(id, registration_status_all_registered_registered=registration_status_all_registered_registered, page=page, per_page=per_page)
+        print("The response of AppointmentGroupsApi->appointment_groups_groups:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AppointmentGroupsApi->appointment_groups_groups: %s\n" % e)
 ```
@@ -234,7 +237,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Group]**](Group.md)
 
 ### Authorization
 
@@ -243,18 +246,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List student group participants |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **appointment_groups_index**
-> appointment_groups_index(scope=scope, context_codes=context_codes, include_past_appointments=include_past_appointments, include_appointments_child_events_participant_count_reserved_times_all_context_codes=include_appointments_child_events_participant_count_reserved_times_all_context_codes, page=page, per_page=per_page)
+> List[AppointmentGroup] appointment_groups_index(scope=scope, context_codes=context_codes, include_past_appointments=include_past_appointments, include_appointments_child_events_participant_count_reserved_times_all_context_codes=include_appointments_child_events_participant_count_reserved_times_all_context_codes, page=page, per_page=per_page)
 
 List appointment groups
 
@@ -267,6 +270,7 @@ managed by the current user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -299,7 +303,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List appointment groups
-        await api_instance.appointment_groups_index(scope=scope, context_codes=context_codes, include_past_appointments=include_past_appointments, include_appointments_child_events_participant_count_reserved_times_all_context_codes=include_appointments_child_events_participant_count_reserved_times_all_context_codes, page=page, per_page=per_page)
+        api_response = await api_instance.appointment_groups_index(scope=scope, context_codes=context_codes, include_past_appointments=include_past_appointments, include_appointments_child_events_participant_count_reserved_times_all_context_codes=include_appointments_child_events_participant_count_reserved_times_all_context_codes, page=page, per_page=per_page)
+        print("The response of AppointmentGroupsApi->appointment_groups_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AppointmentGroupsApi->appointment_groups_index: %s\n" % e)
 ```
@@ -320,7 +326,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[AppointmentGroup]**](AppointmentGroup.md)
 
 ### Authorization
 
@@ -329,13 +335,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List appointment groups |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -577,7 +583,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **appointment_groups_users**
-> appointment_groups_users(id, registration_status_all_registered_registered=registration_status_all_registered_registered, page=page, per_page=per_page)
+> List[User] appointment_groups_users(id, registration_status_all_registered_registered=registration_status_all_registered_registered, page=page, per_page=per_page)
 
 List user participants
 
@@ -591,6 +597,7 @@ no results for appointment groups with the "Group" participant_type.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.user import User
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -621,7 +628,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List user participants
-        await api_instance.appointment_groups_users(id, registration_status_all_registered_registered=registration_status_all_registered_registered, page=page, per_page=per_page)
+        api_response = await api_instance.appointment_groups_users(id, registration_status_all_registered_registered=registration_status_all_registered_registered, page=page, per_page=per_page)
+        print("The response of AppointmentGroupsApi->appointment_groups_users:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AppointmentGroupsApi->appointment_groups_users: %s\n" % e)
 ```
@@ -640,7 +649,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[User]**](User.md)
 
 ### Authorization
 
@@ -649,13 +658,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List user participants |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

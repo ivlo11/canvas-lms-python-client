@@ -18,9 +18,12 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.appointment_group import AppointmentGroup
 from canvas_lms_python_client.models.appointment_groups_create_request import AppointmentGroupsCreateRequest
 from canvas_lms_python_client.models.appointment_groups_update_request import AppointmentGroupsUpdateRequest
 from canvas_lms_python_client.models.calendar_event import CalendarEvent
+from canvas_lms_python_client.models.group import Group
+from canvas_lms_python_client.models.user import User
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -597,7 +600,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[Group]:
         """List student group participants
 
         A paginated list of student groups that are (or may be) participating in this appointment group. Refer to the Groups API for the response fields. Returns no results for appointment groups with the \"User\" participant_type.
@@ -651,6 +654,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Group]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -683,7 +687,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[Group]]:
         """List student group participants
 
         A paginated list of student groups that are (or may be) participating in this appointment group. Refer to the Groups API for the response fields. Returns no results for appointment groups with the \"User\" participant_type.
@@ -737,6 +741,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Group]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -791,7 +796,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[Group]:
         """List student group participants
 
         A paginated list of student groups that are (or may be) participating in this appointment group. Refer to the Groups API for the response fields. Returns no results for appointment groups with the \"User\" participant_type.
@@ -845,6 +850,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Group]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -867,8 +873,6 @@ class AppointmentGroupsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -900,7 +904,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Group]]:
         """List student group participants
 
         A paginated list of student groups that are (or may be) participating in this appointment group. Refer to the Groups API for the response fields. Returns no results for appointment groups with the \"User\" participant_type.
@@ -954,6 +958,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Group]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1040,6 +1045,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Group]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1095,6 +1101,13 @@ class AppointmentGroupsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1142,7 +1155,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[AppointmentGroup]:
         """List appointment groups
 
         Retrieve the paginated list of appointment groups that can be reserved or managed by the current user.
@@ -1202,6 +1215,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[AppointmentGroup]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1236,7 +1250,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[AppointmentGroup]]:
         """List appointment groups
 
         Retrieve the paginated list of appointment groups that can be reserved or managed by the current user.
@@ -1296,6 +1310,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[AppointmentGroup]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1352,7 +1367,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[AppointmentGroup]:
         """List appointment groups
 
         Retrieve the paginated list of appointment groups that can be reserved or managed by the current user.
@@ -1412,6 +1427,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[AppointmentGroup]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1434,8 +1450,6 @@ class AppointmentGroupsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -1469,7 +1483,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[AppointmentGroup]]:
         """List appointment groups
 
         Retrieve the paginated list of appointment groups that can be reserved or managed by the current user.
@@ -1529,6 +1543,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[AppointmentGroup]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1623,6 +1638,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[AppointmentGroup]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1648,7 +1664,7 @@ class AppointmentGroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'context_codes': 'multi',
+            'context_codes[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1668,7 +1684,7 @@ class AppointmentGroupsApi:
             
         if context_codes is not None:
             
-            _query_params.append(('context_codes', context_codes))
+            _query_params.append(('context_codes[]', context_codes))
             
         if include_past_appointments is not None:
             
@@ -1691,6 +1707,13 @@ class AppointmentGroupsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1927,7 +1950,7 @@ class AppointmentGroupsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'appointment_group_ids': 'multi',
+            'appointment_group_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1943,7 +1966,7 @@ class AppointmentGroupsApi:
         # process the query parameters
         if appointment_group_ids is not None:
             
-            _query_params.append(('appointment_group_ids', appointment_group_ids))
+            _query_params.append(('appointment_group_ids[]', appointment_group_ids))
             
         # process the header parameters
         # process the form parameters
@@ -2553,7 +2576,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[User]:
         """List user participants
 
         A paginated list of users that are (or may be) participating in this appointment group.  Refer to the Users API for the response fields. Returns no results for appointment groups with the \"Group\" participant_type.
@@ -2607,6 +2630,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[User]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2639,7 +2663,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[User]]:
         """List user participants
 
         A paginated list of users that are (or may be) participating in this appointment group.  Refer to the Users API for the response fields. Returns no results for appointment groups with the \"Group\" participant_type.
@@ -2693,6 +2717,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[User]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2747,7 +2772,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[User]:
         """List user participants
 
         A paginated list of users that are (or may be) participating in this appointment group.  Refer to the Users API for the response fields. Returns no results for appointment groups with the \"Group\" participant_type.
@@ -2801,6 +2826,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[User]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2823,8 +2849,6 @@ class AppointmentGroupsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -2856,7 +2880,7 @@ class AppointmentGroupsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[User]]:
         """List user participants
 
         A paginated list of users that are (or may be) participating in this appointment group.  Refer to the Users API for the response fields. Returns no results for appointment groups with the \"Group\" participant_type.
@@ -2910,6 +2934,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[User]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2996,6 +3021,7 @@ class AppointmentGroupsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[User]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3051,6 +3077,13 @@ class AppointmentGroupsApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting

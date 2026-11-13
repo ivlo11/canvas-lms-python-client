@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "locale": "es",
+    "kind": "subtitles",
+    "workflow_state": "ready",
+    "asr": false,
+    "media_object_id": 1,
+    "user_id": 392,
+    "content": "WEBVTT\n\n00:00:00.000 --> 00:00:01.250\nHola",
+    "created_at": "2026-11-03T03:00:48Z",
+    "updated_at": "2026-11-03T03:00:48Z",
+    "webvtt_content": null
+  }
+]

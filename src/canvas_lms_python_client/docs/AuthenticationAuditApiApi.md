@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **authentication_audit_api_for_account**
-> authentication_audit_api_for_account(account_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+> AuthenticationAuditApiForAccountResponse authentication_audit_api_for_account(account_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
 
 Query by account.
 
@@ -22,6 +22,7 @@ List authentication events for a given account.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.authentication_audit_api_for_account_response import AuthenticationAuditApiForAccountResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -53,7 +54,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Query by account.
-        await api_instance.authentication_audit_api_for_account(account_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+        api_response = await api_instance.authentication_audit_api_for_account(account_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+        print("The response of AuthenticationAuditApiApi->authentication_audit_api_for_account:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AuthenticationAuditApiApi->authentication_audit_api_for_account: %s\n" % e)
 ```
@@ -73,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AuthenticationAuditApiForAccountResponse**](AuthenticationAuditApiForAccountResponse.md)
 
 ### Authorization
 
@@ -82,18 +85,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Query by account. |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authentication_audit_api_for_login**
-> authentication_audit_api_for_login(login_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+> AuthenticationAuditApiForLoginResponse authentication_audit_api_for_login(login_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
 
 Query by login.
 
@@ -105,6 +108,7 @@ List authentication events for a given login.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.authentication_audit_api_for_login_response import AuthenticationAuditApiForLoginResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -136,7 +140,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Query by login.
-        await api_instance.authentication_audit_api_for_login(login_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+        api_response = await api_instance.authentication_audit_api_for_login(login_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+        print("The response of AuthenticationAuditApiApi->authentication_audit_api_for_login:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AuthenticationAuditApiApi->authentication_audit_api_for_login: %s\n" % e)
 ```
@@ -156,7 +162,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AuthenticationAuditApiForLoginResponse**](AuthenticationAuditApiForLoginResponse.md)
 
 ### Authorization
 
@@ -165,18 +171,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Query by login. |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authentication_audit_api_for_user**
-> authentication_audit_api_for_user(user_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+> AuthenticationAuditApiForUserResponse authentication_audit_api_for_user(user_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
 
 Query by user.
 
@@ -188,6 +194,7 @@ List authentication events for a given user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.authentication_audit_api_for_user_response import AuthenticationAuditApiForUserResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -219,7 +226,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Query by user.
-        await api_instance.authentication_audit_api_for_user(user_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+        api_response = await api_instance.authentication_audit_api_for_user(user_id, start_time=start_time, end_time=end_time, page=page, per_page=per_page)
+        print("The response of AuthenticationAuditApiApi->authentication_audit_api_for_user:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling AuthenticationAuditApiApi->authentication_audit_api_for_user: %s\n" % e)
 ```
@@ -239,7 +248,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**AuthenticationAuditApiForUserResponse**](AuthenticationAuditApiForUserResponse.md)
 
 ### Authorization
 
@@ -248,13 +257,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Query by user. |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

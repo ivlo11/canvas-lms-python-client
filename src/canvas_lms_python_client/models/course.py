@@ -21,9 +21,9 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from canvas_lms_python_client.models.calendar_link import CalendarLink
+from canvas_lms_python_client.models.course_grading_period import CourseGradingPeriod
 from canvas_lms_python_client.models.course_progress import CourseProgress
 from canvas_lms_python_client.models.enrollment import Enrollment
-from canvas_lms_python_client.models.grading_period import GradingPeriod
 from canvas_lms_python_client.models.term import Term
 from typing import Optional, Set
 from typing_extensions import Self
@@ -45,7 +45,7 @@ class Course(BaseModel):
     account_id: Optional[StrictInt] = Field(default=None, description="the account associated with the course", json_schema_extra={"examples": [81259]})
     root_account_id: Optional[StrictInt] = Field(default=None, description="the root account associated with the course", json_schema_extra={"examples": [81259]})
     enrollment_term_id: Optional[StrictInt] = Field(default=None, description="the enrollment term associated with the course", json_schema_extra={"examples": [34]})
-    grading_periods: Optional[List[GradingPeriod]] = Field(default=None, description="A list of grading periods associated with the course")
+    grading_periods: Optional[List[CourseGradingPeriod]] = Field(default=None, description="A list of grading periods associated with the course")
     grading_standard_id: Optional[StrictInt] = Field(default=None, description="the grading standard associated with the course", json_schema_extra={"examples": [25]})
     grade_passback_setting: Optional[StrictStr] = Field(default=None, description="the grade_passback_setting set on the course", json_schema_extra={"examples": ["nightly_sync"]})
     created_at: Optional[datetime] = Field(default=None, description="the date the course was created.", json_schema_extra={"examples": ["2012-05-01T00:00:00-06:00"]})
@@ -190,7 +190,7 @@ class Course(BaseModel):
             "account_id": obj.get("account_id"),
             "root_account_id": obj.get("root_account_id"),
             "enrollment_term_id": obj.get("enrollment_term_id"),
-            "grading_periods": [GradingPeriod.from_dict(_item) for _item in obj["grading_periods"]] if obj.get("grading_periods") is not None else None,
+            "grading_periods": [CourseGradingPeriod.from_dict(_item) for _item in obj["grading_periods"]] if obj.get("grading_periods") is not None else None,
             "grading_standard_id": obj.get("grading_standard_id"),
             "grade_passback_setting": obj.get("grade_passback_setting"),
             "created_at": obj.get("created_at"),

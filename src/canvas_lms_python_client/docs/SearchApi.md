@@ -93,7 +93,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search_recipients**
-> search_recipients(search=search, context=context, exclude=exclude, type=type, user_id=user_id, from_conversation_id=from_conversation_id, permissions=permissions, page=page, per_page=per_page)
+> List[Recipient] search_recipients(search=search, context=context, exclude=exclude, type=type, user_id=user_id, from_conversation_id=from_conversation_id, permissions=permissions, page=page, per_page=per_page)
 
 Find recipients
 
@@ -109,6 +109,7 @@ Pagination is supported.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.recipient import Recipient
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -144,7 +145,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Find recipients
-        await api_instance.search_recipients(search=search, context=context, exclude=exclude, type=type, user_id=user_id, from_conversation_id=from_conversation_id, permissions=permissions, page=page, per_page=per_page)
+        api_response = await api_instance.search_recipients(search=search, context=context, exclude=exclude, type=type, user_id=user_id, from_conversation_id=from_conversation_id, permissions=permissions, page=page, per_page=per_page)
+        print("The response of SearchApi->search_recipients:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SearchApi->search_recipients: %s\n" % e)
 ```
@@ -168,7 +171,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Recipient]**](Recipient.md)
 
 ### Authorization
 
@@ -183,12 +186,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Find recipients |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search_recipients_for_other**
-> search_recipients_for_other(search=search, context=context, exclude=exclude, type=type, user_id=user_id, from_conversation_id=from_conversation_id, permissions=permissions, page=page, per_page=per_page)
+> List[Recipient] search_recipients_for_other(search=search, context=context, exclude=exclude, type=type, user_id=user_id, from_conversation_id=from_conversation_id, permissions=permissions, page=page, per_page=per_page)
 
 Find recipients
 
@@ -204,6 +207,7 @@ Pagination is supported.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.recipient import Recipient
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -239,7 +243,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Find recipients
-        await api_instance.search_recipients_for_other(search=search, context=context, exclude=exclude, type=type, user_id=user_id, from_conversation_id=from_conversation_id, permissions=permissions, page=page, per_page=per_page)
+        api_response = await api_instance.search_recipients_for_other(search=search, context=context, exclude=exclude, type=type, user_id=user_id, from_conversation_id=from_conversation_id, permissions=permissions, page=page, per_page=per_page)
+        print("The response of SearchApi->search_recipients_for_other:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling SearchApi->search_recipients_for_other: %s\n" % e)
 ```
@@ -263,7 +269,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Recipient]**](Recipient.md)
 
 ### Authorization
 
@@ -278,7 +284,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Find recipients |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

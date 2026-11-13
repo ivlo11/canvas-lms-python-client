@@ -16,8 +16,9 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr, field_validator
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.media_track import MediaTrack
 from canvas_lms_python_client.models.media_tracks_update_request import MediaTracksUpdateRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -56,7 +57,7 @@ class MediaTracksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> List[MediaTrack]:
         """List media tracks for a Media Object or Attachment
 
         List the media tracks associated with a media object or attachment
@@ -98,7 +99,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -127,7 +128,7 @@ class MediaTracksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[MediaTrack]]:
         """List media tracks for a Media Object or Attachment
 
         List the media tracks associated with a media object or attachment
@@ -169,7 +170,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -241,7 +242,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -263,7 +264,7 @@ class MediaTracksApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -281,7 +282,7 @@ class MediaTracksApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters
@@ -337,7 +338,7 @@ class MediaTracksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> List[MediaTrack]:
         """List media tracks for a Media Object or Attachment
 
         List the media tracks associated with a media object or attachment
@@ -379,7 +380,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -408,7 +409,7 @@ class MediaTracksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[MediaTrack]]:
         """List media tracks for a Media Object or Attachment
 
         List the media tracks associated with a media object or attachment
@@ -450,7 +451,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -522,7 +523,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -544,7 +545,7 @@ class MediaTracksApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -562,7 +563,7 @@ class MediaTracksApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         # process the header parameters
         # process the form parameters
@@ -618,7 +619,7 @@ class MediaTracksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> List[MediaTrack]:
         """Update Media Tracks
 
         Replace the media tracks associated with a media object or attachment with the array of tracks provided in the body. Update will delete any existing tracks not listed, leave untouched any tracks with no content field, and update or create tracks with a content field.
@@ -660,7 +661,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -689,7 +690,7 @@ class MediaTracksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[MediaTrack]]:
         """Update Media Tracks
 
         Replace the media tracks associated with a media object or attachment with the array of tracks provided in the body. Update will delete any existing tracks not listed, leave untouched any tracks with no content field, and update or create tracks with a content field.
@@ -731,7 +732,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -803,7 +804,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -909,7 +910,7 @@ class MediaTracksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> List[object]:
+    ) -> List[MediaTrack]:
         """Update Media Tracks
 
         Replace the media tracks associated with a media object or attachment with the array of tracks provided in the body. Update will delete any existing tracks not listed, leave untouched any tracks with no content field, and update or create tracks with a content field.
@@ -951,7 +952,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -980,7 +981,7 @@ class MediaTracksApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[MediaTrack]]:
         """Update Media Tracks
 
         Replace the media tracks associated with a media object or attachment with the array of tracks provided in the body. Update will delete any existing tracks not listed, leave untouched any tracks with no content field, and update or create tracks with a content field.
@@ -1022,7 +1023,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1094,7 +1095,7 @@ class MediaTracksApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaTrack]",
         }
         response_data = await self.api_client.call_api(
             *_param,

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 # **rubrics_api_index**
-> rubrics_api_index(account_id, page=page, per_page=per_page)
+> List[Rubric] rubrics_api_index(account_id, page=page, per_page=per_page)
 
 List rubrics
 
@@ -30,6 +30,7 @@ Returns the paginated list of active rubrics for the current context.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.rubric import Rubric
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -59,7 +60,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List rubrics
-        await api_instance.rubrics_api_index(account_id, page=page, per_page=per_page)
+        api_response = await api_instance.rubrics_api_index(account_id, page=page, per_page=per_page)
+        print("The response of RubricsApiApi->rubrics_api_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling RubricsApiApi->rubrics_api_index: %s\n" % e)
 ```
@@ -77,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Rubric]**](Rubric.md)
 
 ### Authorization
 
@@ -86,18 +89,18 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List rubrics |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubrics_api_index_for_courses**
-> rubrics_api_index_for_courses(course_id, page=page, per_page=per_page)
+> List[Rubric] rubrics_api_index_for_courses(course_id, page=page, per_page=per_page)
 
 List rubrics
 
@@ -109,6 +112,7 @@ Returns the paginated list of active rubrics for the current context.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.rubric import Rubric
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -138,7 +142,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List rubrics
-        await api_instance.rubrics_api_index_for_courses(course_id, page=page, per_page=per_page)
+        api_response = await api_instance.rubrics_api_index_for_courses(course_id, page=page, per_page=per_page)
+        print("The response of RubricsApiApi->rubrics_api_index_for_courses:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling RubricsApiApi->rubrics_api_index_for_courses: %s\n" % e)
 ```
@@ -156,7 +162,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Rubric]**](Rubric.md)
 
 ### Authorization
 
@@ -165,13 +171,13 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List rubrics |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -729,7 +735,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubrics_api_used_locations**
-> object rubrics_api_used_locations(course_id, id, page=page, per_page=per_page)
+> List[RubricUsedLocation] rubrics_api_used_locations(course_id, id, page=page, per_page=per_page)
 
 Get the courses and assignments for a rubric
 
@@ -741,6 +747,7 @@ Returns the courses and assignments where a rubric is being used
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.rubric_used_location import RubricUsedLocation
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -792,7 +799,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**List[RubricUsedLocation]**](RubricUsedLocation.md)
 
 ### Authorization
 
@@ -807,12 +814,12 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | UsedLocations |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **rubrics_api_used_locations_for_accounts**
-> object rubrics_api_used_locations_for_accounts(account_id, id, page=page, per_page=per_page)
+> List[RubricUsedLocation] rubrics_api_used_locations_for_accounts(account_id, id, page=page, per_page=per_page)
 
 Get the courses and assignments for a rubric
 
@@ -824,6 +831,7 @@ Returns the courses and assignments where a rubric is being used
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.rubric_used_location import RubricUsedLocation
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -875,7 +883,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**List[RubricUsedLocation]**](RubricUsedLocation.md)
 
 ### Authorization
 
@@ -890,7 +898,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | UsedLocations |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

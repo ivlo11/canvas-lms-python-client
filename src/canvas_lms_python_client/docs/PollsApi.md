@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **polls_create**
-> polls_create(polls_create_request=polls_create_request)
+> PollsCreateResponse polls_create(polls_create_request=polls_create_request)
 
 Create a single poll
 
@@ -25,6 +25,7 @@ Create a new poll for the current user
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.polls_create_request import PollsCreateRequest
+from canvas_lms_python_client.models.polls_create_response import PollsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -52,7 +53,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a single poll
-        await api_instance.polls_create(polls_create_request=polls_create_request)
+        api_response = await api_instance.polls_create(polls_create_request=polls_create_request)
+        print("The response of PollsApi->polls_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollsApi->polls_create: %s\n" % e)
 ```
@@ -68,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollsCreateResponse**](PollsCreateResponse.md)
 
 ### Authorization
 
@@ -163,7 +166,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **polls_index**
-> polls_index(page=page, per_page=per_page)
+> PollsIndexResponse polls_index(page=page, per_page=per_page)
 
 List polls
 
@@ -175,6 +178,7 @@ Returns the paginated list of polls for the current user.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.polls_index_response import PollsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -203,7 +207,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List polls
-        await api_instance.polls_index(page=page, per_page=per_page)
+        api_response = await api_instance.polls_index(page=page, per_page=per_page)
+        print("The response of PollsApi->polls_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollsApi->polls_index: %s\n" % e)
 ```
@@ -220,7 +226,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollsIndexResponse**](PollsIndexResponse.md)
 
 ### Authorization
 
@@ -240,7 +246,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **polls_show**
-> polls_show(id)
+> PollsShowResponse polls_show(id)
 
 Get a single poll
 
@@ -252,6 +258,7 @@ Returns the poll with the given id
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.polls_show_response import PollsShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -279,7 +286,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single poll
-        await api_instance.polls_show(id)
+        api_response = await api_instance.polls_show(id)
+        print("The response of PollsApi->polls_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollsApi->polls_show: %s\n" % e)
 ```
@@ -295,7 +304,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollsShowResponse**](PollsShowResponse.md)
 
 ### Authorization
 
@@ -315,7 +324,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **polls_update**
-> polls_update(id, polls_create_request=polls_create_request)
+> PollsUpdateResponse polls_update(id, polls_create_request=polls_create_request)
 
 Update a single poll
 
@@ -328,6 +337,7 @@ Update an existing poll belonging to the current user
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.polls_create_request import PollsCreateRequest
+from canvas_lms_python_client.models.polls_update_response import PollsUpdateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -356,7 +366,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Update a single poll
-        await api_instance.polls_update(id, polls_create_request=polls_create_request)
+        api_response = await api_instance.polls_update(id, polls_create_request=polls_create_request)
+        print("The response of PollsApi->polls_update:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollsApi->polls_update: %s\n" % e)
 ```
@@ -373,7 +385,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollsUpdateResponse**](PollsUpdateResponse.md)
 
 ### Authorization
 

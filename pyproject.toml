@@ -54,7 +54,7 @@ exclude = [
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-testpaths = ["src/canvas_lms_python_client/test"]
+testpaths = ["src/canvas_lms_python_client/test/custom", "src/canvas_lms_python_client/test"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]

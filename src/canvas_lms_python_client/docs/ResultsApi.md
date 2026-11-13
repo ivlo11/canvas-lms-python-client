@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **results_create**
-> results_create(assessment_id, course_id)
+> ResultsCreateResponse results_create(assessment_id, course_id)
 
 Create live assessment results
 
@@ -21,6 +21,7 @@ Creates live assessment results and adds them to a live assessment
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.results_create_response import ResultsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -49,7 +50,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create live assessment results
-        await api_instance.results_create(assessment_id, course_id)
+        api_response = await api_instance.results_create(assessment_id, course_id)
+        print("The response of ResultsApi->results_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ResultsApi->results_create: %s\n" % e)
 ```
@@ -66,7 +69,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ResultsCreateResponse**](ResultsCreateResponse.md)
 
 ### Authorization
 
@@ -86,7 +89,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **results_index**
-> results_index(assessment_id, course_id, user_id=user_id)
+> ResultsIndexResponse results_index(assessment_id, course_id, user_id=user_id)
 
 List live assessment results
 
@@ -98,6 +101,7 @@ Returns a paginated list of live assessment results
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.results_index_response import ResultsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -127,7 +131,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List live assessment results
-        await api_instance.results_index(assessment_id, course_id, user_id=user_id)
+        api_response = await api_instance.results_index(assessment_id, course_id, user_id=user_id)
+        print("The response of ResultsApi->results_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling ResultsApi->results_index: %s\n" % e)
 ```
@@ -145,7 +151,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ResultsIndexResponse**](ResultsIndexResponse.md)
 
 ### Authorization
 

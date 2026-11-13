@@ -20,6 +20,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from canvas_lms_python_client.models.user_permissions import UserPermissions
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -47,7 +48,10 @@ class User(BaseModel):
     time_zone: Optional[StrictStr] = Field(default=None, description="Optional: This field is only returned in certain API calls, and will return the IANA time zone name of the user's preferred timezone.", json_schema_extra={"examples": ["America/Denver"]})
     bio: Optional[StrictStr] = Field(default=None, description="Optional: The user's bio.", json_schema_extra={"examples": ["I like the Muppets."]})
     pronouns: Optional[StrictStr] = Field(default=None, description="Optional: This field is only returned if pronouns are enabled, and will return the pronouns of the user.", json_schema_extra={"examples": ["he/him"]})
-    __properties: ClassVar[List[str]] = ["id", "name", "sortable_name", "last_name", "first_name", "short_name", "sis_user_id", "sis_import_id", "integration_id", "login_id", "avatar_url", "avatar_state", "enrollments", "email", "locale", "last_login", "time_zone", "bio", "pronouns"]
+    effective_locale: Optional[StrictStr] = Field(default=None, description="Optional: This field is only returned in certain API calls, and only for the current user. It will return the locale the user sees Canvas in, in RFC 5646 format.", json_schema_extra={"examples": ["en"]})
+    uuid: Optional[StrictStr] = Field(default=None, description="Optional: This field is only returned in certain API calls (for example with include[]=uuid), and will return the user's Canvas UUID.", json_schema_extra={"examples": ["WvAHhY5FINzq5IyRIJybGeiXyFkG3SqHUPb7jZY5"]})
+    permissions: Optional[UserPermissions] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "sortable_name", "last_name", "first_name", "short_name", "sis_user_id", "sis_import_id", "integration_id", "login_id", "avatar_url", "avatar_state", "enrollments", "email", "locale", "last_login", "time_zone", "bio", "pronouns", "effective_locale", "uuid", "permissions"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -94,6 +98,9 @@ class User(BaseModel):
             for _item_enrollments in self.enrollments:
                 _items.append(_item_enrollments.to_dict() if _item_enrollments is not None else None)
             _dict['enrollments'] = _items
+        # override the default output from pydantic by calling `to_dict()` of permissions
+        if self.permissions:
+            _dict['permissions'] = self.permissions.to_dict()
         return _dict
 
     @classmethod
@@ -124,7 +131,10 @@ class User(BaseModel):
             "last_login": obj.get("last_login"),
             "time_zone": obj.get("time_zone"),
             "bio": obj.get("bio"),
-            "pronouns": obj.get("pronouns")
+            "pronouns": obj.get("pronouns"),
+            "effective_locale": obj.get("effective_locale"),
+            "uuid": obj.get("uuid"),
+            "permissions": UserPermissions.from_dict(obj["permissions"]) if obj.get("permissions") is not None else None
         })
         return _obj
 

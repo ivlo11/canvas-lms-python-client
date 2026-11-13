@@ -79,8 +79,8 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
-        mock_data = MagicMock()
+        # Array response
+        mock_data = [MagicMock(), MagicMock()]
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -100,7 +100,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == len(mock_data)
 
     async def test_rubrics_api_index_paginated_multiple_pages(self) -> None:
         """Test rubrics_api_index_fetch_all_items following pagination links.
@@ -112,7 +112,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = MagicMock()
+        mock_page_data = [MagicMock(), MagicMock()]
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -160,7 +160,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
         assert call_count[0] == 3
 
     async def test_rubrics_api_index_paginated_empty_result(self) -> None:
@@ -241,8 +241,8 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
-        mock_data = MagicMock()
+        # Array response
+        mock_data = [MagicMock(), MagicMock()]
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -262,7 +262,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == len(mock_data)
 
     async def test_rubrics_api_index_for_courses_paginated_multiple_pages(self) -> None:
         """Test rubrics_api_index_for_courses_fetch_all_items following pagination links.
@@ -274,7 +274,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = MagicMock()
+        mock_page_data = [MagicMock(), MagicMock()]
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -322,7 +322,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
         assert call_count[0] == 3
 
     async def test_rubrics_api_index_for_courses_paginated_empty_result(self) -> None:
@@ -633,7 +633,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -646,7 +646,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.rubrics_api_used_locations_all(
+        async for page in self.api.rubrics_api_used_locations_paginated(
             course_id="invalid",
             id="invalid",
             page=999,
@@ -655,7 +655,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_rubrics_api_used_locations_paginated_multiple_pages(self) -> None:
         """Test rubrics_api_used_locations_fetch_all_items following pagination links.
@@ -707,7 +707,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.rubrics_api_used_locations_all(
+        async for item in self.api.rubrics_api_used_locations_paginated(
             course_id="invalid",
             id="invalid",
             page=999,
@@ -716,7 +716,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_rubrics_api_used_locations_paginated_empty_result(self) -> None:
@@ -740,7 +740,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.rubrics_api_used_locations_all(
+        async for item in self.api.rubrics_api_used_locations_paginated(
             course_id="invalid",
             id="invalid",
             page=999,
@@ -806,7 +806,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -819,7 +819,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.rubrics_api_used_locations_for_accounts_all(
+        async for page in self.api.rubrics_api_used_locations_for_accounts_paginated(
             account_id="invalid",
             id="invalid",
             page=999,
@@ -828,7 +828,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_rubrics_api_used_locations_for_accounts_paginated_multiple_pages(self) -> None:
         """Test rubrics_api_used_locations_for_accounts_fetch_all_items following pagination links.
@@ -880,7 +880,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.rubrics_api_used_locations_for_accounts_all(
+        async for item in self.api.rubrics_api_used_locations_for_accounts_paginated(
             account_id="invalid",
             id="invalid",
             page=999,
@@ -889,7 +889,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_rubrics_api_used_locations_for_accounts_paginated_empty_result(self) -> None:
@@ -913,7 +913,7 @@ class TestRubricsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.rubrics_api_used_locations_for_accounts_all(
+        async for item in self.api.rubrics_api_used_locations_for_accounts_paginated(
             account_id="invalid",
             id="invalid",
             page=999,

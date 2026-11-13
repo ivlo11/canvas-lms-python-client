@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **account_id** | **int** | the account associated with the course | [optional] 
 **root_account_id** | **int** | the root account associated with the course | [optional] 
 **enrollment_term_id** | **int** | the enrollment term associated with the course | [optional] 
-**grading_periods** | [**List[GradingPeriod]**](GradingPeriod.md) | A list of grading periods associated with the course | [optional] 
+**grading_periods** | [**List[CourseGradingPeriod]**](CourseGradingPeriod.md) | A list of grading periods associated with the course | [optional] 
 **grading_standard_id** | **int** | the grading standard associated with the course | [optional] 
 **grade_passback_setting** | **str** | the grade_passback_setting set on the course | [optional] 
 **created_at** | **datetime** | the date the course was created. | [optional] 

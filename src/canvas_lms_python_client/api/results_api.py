@@ -18,6 +18,8 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.results_create_response import ResultsCreateResponse
+from canvas_lms_python_client.models.results_index_response import ResultsIndexResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -55,7 +57,7 @@ class ResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ResultsCreateResponse:
         """Create live assessment results
 
         Creates live assessment results and adds them to a live assessment
@@ -97,6 +99,7 @@ class ResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ResultsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -125,7 +128,7 @@ class ResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ResultsCreateResponse]:
         """Create live assessment results
 
         Creates live assessment results and adds them to a live assessment
@@ -167,6 +170,7 @@ class ResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ResultsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -238,6 +242,7 @@ class ResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ResultsCreateResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -331,7 +336,7 @@ class ResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> ResultsIndexResponse:
         """List live assessment results
 
         Returns a paginated list of live assessment results
@@ -376,6 +381,7 @@ class ResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ResultsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -405,7 +411,7 @@ class ResultsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[ResultsIndexResponse]:
         """List live assessment results
 
         Returns a paginated list of live assessment results
@@ -450,6 +456,7 @@ class ResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ResultsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -525,6 +532,7 @@ class ResultsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "ResultsIndexResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

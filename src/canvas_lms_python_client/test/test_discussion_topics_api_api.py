@@ -553,7 +553,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -566,7 +566,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.discussion_topics_api_entries_all(
+        async for page in self.api.discussion_topics_api_entries_paginated(
             course_id="invalid",
             topic_id="invalid",
             page=999,
@@ -575,7 +575,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_discussion_topics_api_entries_paginated_multiple_pages(self) -> None:
         """Test discussion_topics_api_entries_fetch_all_items following pagination links.
@@ -627,7 +627,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_entries_all(
+        async for item in self.api.discussion_topics_api_entries_paginated(
             course_id="invalid",
             topic_id="invalid",
             page=999,
@@ -636,7 +636,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_discussion_topics_api_entries_paginated_empty_result(self) -> None:
@@ -660,7 +660,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_entries_all(
+        async for item in self.api.discussion_topics_api_entries_paginated(
             course_id="invalid",
             topic_id="invalid",
             page=999,
@@ -726,7 +726,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -739,7 +739,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.discussion_topics_api_entries_for_groups_all(
+        async for page in self.api.discussion_topics_api_entries_for_groups_paginated(
             group_id="invalid",
             topic_id="invalid",
             page=999,
@@ -748,7 +748,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_discussion_topics_api_entries_for_groups_paginated_multiple_pages(self) -> None:
         """Test discussion_topics_api_entries_for_groups_fetch_all_items following pagination links.
@@ -800,7 +800,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_entries_for_groups_all(
+        async for item in self.api.discussion_topics_api_entries_for_groups_paginated(
             group_id="invalid",
             topic_id="invalid",
             page=999,
@@ -809,7 +809,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_discussion_topics_api_entries_for_groups_paginated_empty_result(self) -> None:
@@ -833,7 +833,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_entries_for_groups_all(
+        async for item in self.api.discussion_topics_api_entries_for_groups_paginated(
             group_id="invalid",
             topic_id="invalid",
             page=999,
@@ -901,7 +901,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -914,7 +914,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.discussion_topics_api_entry_list_all(
+        async for page in self.api.discussion_topics_api_entry_list_paginated(
             course_id="invalid",
             topic_id="invalid",
             ids=[],
@@ -924,7 +924,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_discussion_topics_api_entry_list_paginated_multiple_pages(self) -> None:
         """Test discussion_topics_api_entry_list_fetch_all_items following pagination links.
@@ -976,7 +976,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_entry_list_all(
+        async for item in self.api.discussion_topics_api_entry_list_paginated(
             course_id="invalid",
             topic_id="invalid",
             ids=[],
@@ -986,7 +986,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_discussion_topics_api_entry_list_paginated_empty_result(self) -> None:
@@ -1010,7 +1010,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_entry_list_all(
+        async for item in self.api.discussion_topics_api_entry_list_paginated(
             course_id="invalid",
             topic_id="invalid",
             ids=[],
@@ -1079,7 +1079,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -1092,7 +1092,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.discussion_topics_api_entry_list_for_groups_all(
+        async for page in self.api.discussion_topics_api_entry_list_for_groups_paginated(
             group_id="invalid",
             topic_id="invalid",
             ids=[],
@@ -1102,7 +1102,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_discussion_topics_api_entry_list_for_groups_paginated_multiple_pages(self) -> None:
         """Test discussion_topics_api_entry_list_for_groups_fetch_all_items following pagination links.
@@ -1154,7 +1154,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_entry_list_for_groups_all(
+        async for item in self.api.discussion_topics_api_entry_list_for_groups_paginated(
             group_id="invalid",
             topic_id="invalid",
             ids=[],
@@ -1164,7 +1164,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_discussion_topics_api_entry_list_for_groups_paginated_empty_result(self) -> None:
@@ -1188,7 +1188,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_entry_list_for_groups_all(
+        async for item in self.api.discussion_topics_api_entry_list_for_groups_paginated(
             group_id="invalid",
             topic_id="invalid",
             ids=[],
@@ -2343,7 +2343,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -2356,7 +2356,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.discussion_topics_api_replies_all(
+        async for page in self.api.discussion_topics_api_replies_paginated(
             course_id="invalid",
             entry_id="invalid",
             topic_id="invalid",
@@ -2366,7 +2366,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_discussion_topics_api_replies_paginated_multiple_pages(self) -> None:
         """Test discussion_topics_api_replies_fetch_all_items following pagination links.
@@ -2418,7 +2418,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_replies_all(
+        async for item in self.api.discussion_topics_api_replies_paginated(
             course_id="invalid",
             entry_id="invalid",
             topic_id="invalid",
@@ -2428,7 +2428,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_discussion_topics_api_replies_paginated_empty_result(self) -> None:
@@ -2452,7 +2452,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_replies_all(
+        async for item in self.api.discussion_topics_api_replies_paginated(
             course_id="invalid",
             entry_id="invalid",
             topic_id="invalid",
@@ -2529,7 +2529,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -2542,7 +2542,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.discussion_topics_api_replies_for_groups_all(
+        async for page in self.api.discussion_topics_api_replies_for_groups_paginated(
             entry_id="invalid",
             group_id="invalid",
             topic_id="invalid",
@@ -2552,7 +2552,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_discussion_topics_api_replies_for_groups_paginated_multiple_pages(self) -> None:
         """Test discussion_topics_api_replies_for_groups_fetch_all_items following pagination links.
@@ -2604,7 +2604,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_replies_for_groups_all(
+        async for item in self.api.discussion_topics_api_replies_for_groups_paginated(
             entry_id="invalid",
             group_id="invalid",
             topic_id="invalid",
@@ -2614,7 +2614,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_discussion_topics_api_replies_for_groups_paginated_empty_result(self) -> None:
@@ -2638,7 +2638,7 @@ class TestDiscussionTopicsApiApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.discussion_topics_api_replies_for_groups_all(
+        async for item in self.api.discussion_topics_api_replies_for_groups_paginated(
             entry_id="invalid",
             group_id="invalid",
             topic_id="invalid",

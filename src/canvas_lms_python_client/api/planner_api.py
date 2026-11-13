@@ -18,6 +18,7 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.planner_item import PlannerItem
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -61,7 +62,7 @@ class PlannerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[PlannerItem]:
         """List planner items
 
         Retrieve the paginated list of objects to be shown on the planner for the current user with the associated planner override to override an item's visibility if set.  Planner items for a student may also be retrieved by a linked observer. Use the path that accepts a user_id and supply the student's id.
@@ -124,6 +125,7 @@ class PlannerApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[PlannerItem]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -159,7 +161,7 @@ class PlannerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[PlannerItem]]:
         """List planner items
 
         Retrieve the paginated list of objects to be shown on the planner for the current user with the associated planner override to override an item's visibility if set.  Planner items for a student may also be retrieved by a linked observer. Use the path that accepts a user_id and supply the student's id.
@@ -222,6 +224,7 @@ class PlannerApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[PlannerItem]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -279,7 +282,7 @@ class PlannerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[PlannerItem]:
         """List planner items
 
         Retrieve the paginated list of objects to be shown on the planner for the current user with the associated planner override to override an item's visibility if set.  Planner items for a student may also be retrieved by a linked observer. Use the path that accepts a user_id and supply the student's id.
@@ -342,6 +345,7 @@ class PlannerApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[PlannerItem]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -364,8 +368,6 @@ class PlannerApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -400,7 +402,7 @@ class PlannerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[PlannerItem]]:
         """List planner items
 
         Retrieve the paginated list of objects to be shown on the planner for the current user with the associated planner override to override an item's visibility if set.  Planner items for a student may also be retrieved by a linked observer. Use the path that accepts a user_id and supply the student's id.
@@ -463,6 +465,7 @@ class PlannerApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[PlannerItem]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -561,6 +564,7 @@ class PlannerApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[PlannerItem]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -587,7 +591,7 @@ class PlannerApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'context_codes': 'multi',
+            'context_codes[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -611,7 +615,7 @@ class PlannerApi:
             
         if context_codes is not None:
             
-            _query_params.append(('context_codes', context_codes))
+            _query_params.append(('context_codes[]', context_codes))
             
         if observed_user_id is not None:
             
@@ -690,7 +694,7 @@ class PlannerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[PlannerItem]:
         """List planner items
 
         Retrieve the paginated list of objects to be shown on the planner for the current user with the associated planner override to override an item's visibility if set.  Planner items for a student may also be retrieved by a linked observer. Use the path that accepts a user_id and supply the student's id.
@@ -756,6 +760,7 @@ class PlannerApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[PlannerItem]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -792,7 +797,7 @@ class PlannerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[PlannerItem]]:
         """List planner items
 
         Retrieve the paginated list of objects to be shown on the planner for the current user with the associated planner override to override an item's visibility if set.  Planner items for a student may also be retrieved by a linked observer. Use the path that accepts a user_id and supply the student's id.
@@ -858,6 +863,7 @@ class PlannerApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[PlannerItem]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -916,7 +922,7 @@ class PlannerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[PlannerItem]:
         """List planner items
 
         Retrieve the paginated list of objects to be shown on the planner for the current user with the associated planner override to override an item's visibility if set.  Planner items for a student may also be retrieved by a linked observer. Use the path that accepts a user_id and supply the student's id.
@@ -982,6 +988,7 @@ class PlannerApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[PlannerItem]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1004,8 +1011,6 @@ class PlannerApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -1041,7 +1046,7 @@ class PlannerApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[PlannerItem]]:
         """List planner items
 
         Retrieve the paginated list of objects to be shown on the planner for the current user with the associated planner override to override an item's visibility if set.  Planner items for a student may also be retrieved by a linked observer. Use the path that accepts a user_id and supply the student's id.
@@ -1107,6 +1112,7 @@ class PlannerApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[PlannerItem]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1209,6 +1215,7 @@ class PlannerApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[PlannerItem]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1236,7 +1243,7 @@ class PlannerApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'context_codes': 'multi',
+            'context_codes[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1262,7 +1269,7 @@ class PlannerApi:
             
         if context_codes is not None:
             
-            _query_params.append(('context_codes', context_codes))
+            _query_params.append(('context_codes[]', context_codes))
             
         if observed_user_id is not None:
             

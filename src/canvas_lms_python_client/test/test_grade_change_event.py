@@ -43,13 +43,17 @@ class TestGradeChangeEvent(unittest.TestCase):
                 grade_after = '8',
                 grade_before = '8',
                 graded_anonymously = True,
-                version_number = '1',
+                version_number = 1,
+                points_possible_before = 10.0,
+                points_possible_after = 10.0,
+                grade_current = '8',
+                course_override_grade = True,
                 request_id = 'e2b76430-27a5-0131-3ca1-48e0eb13f29b',
                 links = canvas_lms_python_client.models.grade_change_event_links.GradeChangeEventLinks(
                     assignment = 2319, 
                     course = 2319, 
-                    student = 2319, 
-                    grader = 2319, 
+                    student = '2319', 
+                    grader = '2319', 
                     page_view = 'e2b76430-27a5-0131-3ca1-48e0eb13f29b', )
             )
         else:

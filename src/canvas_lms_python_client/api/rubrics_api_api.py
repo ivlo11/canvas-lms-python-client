@@ -19,6 +19,7 @@ from pydantic import Field, StrictInt, StrictStr, field_validator
 from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.rubric import Rubric
+from canvas_lms_python_client.models.rubric_used_location import RubricUsedLocation
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -58,7 +59,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[Rubric]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -109,6 +110,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -140,7 +142,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[Rubric]]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -191,6 +193,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -244,7 +247,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[Rubric]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -295,6 +298,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -317,8 +321,6 @@ class RubricsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -349,7 +351,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Rubric]]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -400,6 +402,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -482,6 +485,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -532,6 +536,13 @@ class RubricsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -576,7 +587,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[Rubric]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -627,6 +638,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -658,7 +670,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[Rubric]]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -709,6 +721,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -762,7 +775,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[Rubric]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -813,6 +826,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -835,8 +849,6 @@ class RubricsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -867,7 +879,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[Rubric]]:
         """List rubrics
 
         Returns the paginated list of active rubrics for the current context.
@@ -918,6 +930,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1000,6 +1013,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[Rubric]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1050,6 +1064,13 @@ class RubricsApiApi:
         # process the body parameter
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
 
         # authentication setting
@@ -1325,7 +1346,7 @@ class RubricsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1345,7 +1366,7 @@ class RubricsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if style is not None:
             
@@ -1638,7 +1659,7 @@ class RubricsApiApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'include': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1658,7 +1679,7 @@ class RubricsApiApi:
         # process the query parameters
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if style is not None:
             
@@ -3051,7 +3072,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> object:
+    ) -> List[RubricUsedLocation]:
         """Get the courses and assignments for a rubric
 
         Returns the courses and assignments where a rubric is being used
@@ -3105,7 +3126,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[RubricUsedLocation]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3138,7 +3159,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[List[RubricUsedLocation]]:
         """Get the courses and assignments for a rubric
 
         Returns the courses and assignments where a rubric is being used
@@ -3192,7 +3213,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[RubricUsedLocation]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3247,7 +3268,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[RubricUsedLocation]:
         """Get the courses and assignments for a rubric
 
         Returns the courses and assignments where a rubric is being used
@@ -3301,7 +3322,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[RubricUsedLocation]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3324,8 +3345,6 @@ class RubricsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -3357,7 +3376,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[List[RubricUsedLocation]]:
         """Get the courses and assignments for a rubric
 
         Returns the courses and assignments where a rubric is being used
@@ -3411,7 +3430,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[RubricUsedLocation]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3498,7 +3517,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[RubricUsedLocation]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3604,7 +3623,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> object:
+    ) -> List[RubricUsedLocation]:
         """Get the courses and assignments for a rubric
 
         Returns the courses and assignments where a rubric is being used
@@ -3658,7 +3677,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[RubricUsedLocation]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3691,7 +3710,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[List[RubricUsedLocation]]:
         """Get the courses and assignments for a rubric
 
         Returns the courses and assignments where a rubric is being used
@@ -3745,7 +3764,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[RubricUsedLocation]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3800,7 +3819,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[RubricUsedLocation]:
         """Get the courses and assignments for a rubric
 
         Returns the courses and assignments where a rubric is being used
@@ -3854,7 +3873,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[RubricUsedLocation]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3877,8 +3896,6 @@ class RubricsApiApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -3910,7 +3927,7 @@ class RubricsApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[List[RubricUsedLocation]]:
         """Get the courses and assignments for a rubric
 
         Returns the courses and assignments where a rubric is being used
@@ -3964,7 +3981,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[RubricUsedLocation]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4051,7 +4068,7 @@ class RubricsApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "object",
+            'default': "List[RubricUsedLocation]",
         }
         response_data = await self.api_client.call_api(
             *_param,

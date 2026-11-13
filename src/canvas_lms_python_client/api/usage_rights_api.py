@@ -1064,8 +1064,8 @@ class UsageRightsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'file_ids': 'multi',
-            'folder_ids': 'multi',
+            'file_ids[]': 'multi',
+            'folder_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1083,11 +1083,11 @@ class UsageRightsApi:
         # process the query parameters
         if file_ids is not None:
             
-            _query_params.append(('file_ids', file_ids))
+            _query_params.append(('file_ids[]', file_ids))
             
         if folder_ids is not None:
             
-            _query_params.append(('folder_ids', folder_ids))
+            _query_params.append(('folder_ids[]', folder_ids))
             
         # process the header parameters
         # process the form parameters
@@ -1353,8 +1353,8 @@ class UsageRightsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'file_ids': 'multi',
-            'folder_ids': 'multi',
+            'file_ids[]': 'multi',
+            'folder_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1372,11 +1372,11 @@ class UsageRightsApi:
         # process the query parameters
         if file_ids is not None:
             
-            _query_params.append(('file_ids', file_ids))
+            _query_params.append(('file_ids[]', file_ids))
             
         if folder_ids is not None:
             
-            _query_params.append(('folder_ids', folder_ids))
+            _query_params.append(('folder_ids[]', folder_ids))
             
         # process the header parameters
         # process the form parameters
@@ -1642,8 +1642,8 @@ class UsageRightsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'file_ids': 'multi',
-            'folder_ids': 'multi',
+            'file_ids[]': 'multi',
+            'folder_ids[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1661,11 +1661,11 @@ class UsageRightsApi:
         # process the query parameters
         if file_ids is not None:
             
-            _query_params.append(('file_ids', file_ids))
+            _query_params.append(('file_ids[]', file_ids))
             
         if folder_ids is not None:
             
-            _query_params.append(('folder_ids', folder_ids))
+            _query_params.append(('folder_ids[]', folder_ids))
             
         # process the header parameters
         # process the form parameters

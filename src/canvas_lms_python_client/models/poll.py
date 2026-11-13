@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,11 +28,11 @@ class Poll(BaseModel):
     """
     Poll
     """ # noqa: E501
-    id: StrictInt = Field(description="The unique identifier for the poll.", json_schema_extra={"examples": [1023]})
+    id: StrictStr = Field(description="The unique identifier for the poll.", json_schema_extra={"examples": ["1023"]})
     question: StrictStr = Field(description="The question/title of the poll.", json_schema_extra={"examples": ["What do you consider most important to your learning in this course?"]})
     description: Optional[StrictStr] = Field(default=None, description="A short description of the poll.", json_schema_extra={"examples": ["This poll is to determine what priorities the students in the course have."]})
     created_at: Optional[datetime] = Field(default=None, description="The time at which the poll was created.", json_schema_extra={"examples": ["2014-01-07T15:16:18Z"]})
-    user_id: Optional[StrictInt] = Field(default=None, description="The unique identifier for the user that created the poll.", json_schema_extra={"examples": [105]})
+    user_id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the user that created the poll.", json_schema_extra={"examples": ["105"]})
     total_results: Optional[Dict[str, Any]] = Field(default=None, description="An aggregate of the results of all associated poll sessions, with the poll choice id as the key, and the aggregated submission count as the value.", json_schema_extra={"examples": [{"543": 20, "544": 5, "545": 17}]})
     __properties: ClassVar[List[str]] = ["id", "question", "description", "created_at", "user_id", "total_results"]
 

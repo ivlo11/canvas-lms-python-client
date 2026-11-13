@@ -8,6 +8,12 @@ Name | Type | Description | Notes
 **title** | **str** | The title of the grading period set. | 
 **weighted** | **bool** | If true, the grading periods in the set are weighted. | [optional] 
 **display_totals_for_all_grading_periods** | **bool** | If true, the totals for all grading periods in the set are displayed. | [optional] 
+**id** | **str** | The unique identifier for the grading period set. | [optional] 
+**account_id** | **str** | The id of the account the set belongs to, or null if it belongs to a course. | [optional] 
+**course_id** | **str** | The id of the course the set belongs to, or null if it belongs to an account. | [optional] 
+**grading_periods** | [**List[GradingPeriod]**](GradingPeriod.md) | The active grading periods in the set. | [optional] 
+**permissions** | **object** | The current user&#39;s permissions on the set (read, create, update, delete). | [optional] 
+**created_at** | **datetime** | When the set was created. | [optional] 
 
 ## Example
 

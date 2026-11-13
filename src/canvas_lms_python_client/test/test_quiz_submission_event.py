@@ -35,6 +35,7 @@ class TestQuizSubmissionEvent(unittest.TestCase):
         model = QuizSubmissionEvent()
         if include_optional:
             return QuizSubmissionEvent(
+                id = '3409',
                 created_at = '2014-10-08T19:29:58Z',
                 event_type = 'question_answered',
                 event_data = {"answer":"42"}

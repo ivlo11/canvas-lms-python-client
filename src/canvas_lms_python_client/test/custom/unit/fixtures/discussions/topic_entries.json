@@ -1,0 +1,97 @@
+[
+  {
+    "id": 1,
+    "created_at": "2026-11-03T03:45:25Z",
+    "updated_at": "2026-11-03T03:45:25Z",
+    "parent_id": null,
+    "rating_count": null,
+    "rating_sum": null,
+    "user_id": 168,
+    "user_name": "Lizalfos 2",
+    "message": "<p>Seeded root entry</p>",
+    "user": {
+      "id": 168,
+      "anonymous_id": "4o",
+      "display_name": "Lizalfos 2",
+      "avatar_image_url": "http://canvas.instructure.com/images/messages/avatar-50.png",
+      "html_url": "http://canvas.docker/courses/5/users/168",
+      "pronouns": null
+    },
+    "attachment": {
+      "id": 2,
+      "folder_id": 12,
+      "display_name": "seeded_notes.txt",
+      "filename": "seeded_notes20261103-47357-wo9ox.txt",
+      "upload_status": "success",
+      "content-type": "text/plain",
+      "url": "http://canvas.docker/files/2/download?download_frd=1",
+      "size": 12,
+      "created_at": "2026-11-03T03:45:25Z",
+      "updated_at": "2026-11-03T03:45:26Z",
+      "unlock_at": null,
+      "locked": false,
+      "hidden": false,
+      "lock_at": null,
+      "hidden_for_user": false,
+      "thumbnail_url": null,
+      "modified_at": "2026-11-03T03:45:25Z",
+      "mime_class": "text",
+      "media_entry_id": null,
+      "category": "uncategorized",
+      "locked_for_user": false,
+      "visibility_level": "inherit"
+    },
+    "attachments": [
+      {
+        "id": 2,
+        "folder_id": 12,
+        "display_name": "seeded_notes.txt",
+        "filename": "seeded_notes20261103-47357-wo9ox.txt",
+        "upload_status": "success",
+        "content-type": "text/plain",
+        "url": "http://canvas.docker/files/2/download?download_frd=1",
+        "size": 12,
+        "created_at": "2026-11-03T03:45:25Z",
+        "updated_at": "2026-11-03T03:45:26Z",
+        "unlock_at": null,
+        "locked": false,
+        "hidden": false,
+        "lock_at": null,
+        "hidden_for_user": false,
+        "thumbnail_url": null,
+        "modified_at": "2026-11-03T03:45:25Z",
+        "mime_class": "text",
+        "media_entry_id": null,
+        "category": "uncategorized",
+        "locked_for_user": false,
+        "visibility_level": "inherit"
+      }
+    ],
+    "read_state": "unread",
+    "forced_read_state": false,
+    "recent_replies": [
+      {
+        "id": 2,
+        "created_at": "2026-11-03T03:45:25Z",
+        "updated_at": "2026-11-03T03:45:25Z",
+        "parent_id": 1,
+        "rating_count": null,
+        "rating_sum": null,
+        "user_id": 167,
+        "user_name": "Moblin 1",
+        "message": "<p>Seeded reply</p>",
+        "user": {
+          "id": 167,
+          "anonymous_id": "4n",
+          "display_name": "Moblin 1",
+          "avatar_image_url": "http://canvas.instructure.com/images/messages/avatar-50.png",
+          "html_url": "http://canvas.docker/courses/5/users/167",
+          "pronouns": null
+        },
+        "read_state": "unread",
+        "forced_read_state": false
+      }
+    ],
+    "has_more_replies": false
+  }
+]

@@ -1,0 +1,67 @@
+[
+  {
+    "id": 336,
+    "name": "Ale Smith 1",
+    "full_name": "Ale Smith 1",
+    "pronouns": null,
+    "common_courses": {
+      "0": [
+        "FakeEnrollment"
+      ]
+    },
+    "common_groups": {},
+    "avatar_url": "http://canvas.instructure.com/images/messages/avatar-50.png"
+  },
+  {
+    "id": 7,
+    "name": "Blaine 1",
+    "full_name": "Blaine 1",
+    "pronouns": null,
+    "common_courses": {
+      "0": [
+        "FakeEnrollment"
+      ]
+    },
+    "common_groups": {},
+    "avatar_url": "http://canvas.instructure.com/images/messages/avatar-50.png"
+  },
+  {
+    "id": 63,
+    "name": "Brock Harrison 1",
+    "full_name": "Brock Harrison 1",
+    "pronouns": null,
+    "common_courses": {
+      "0": [
+        "FakeEnrollment"
+      ]
+    },
+    "common_groups": {},
+    "avatar_url": "http://canvas.instructure.com/images/messages/avatar-50.png"
+  },
+  {
+    "id": 115,
+    "name": "Cynthia 1",
+    "full_name": "Cynthia 1",
+    "pronouns": null,
+    "common_courses": {
+      "0": [
+        "FakeEnrollment"
+      ]
+    },
+    "common_groups": {},
+    "avatar_url": "http://canvas.instructure.com/images/messages/avatar-50.png"
+  },
+  {
+    "id": 280,
+    "name": "Malt Jackson 1",
+    "full_name": "Malt Jackson 1",
+    "pronouns": null,
+    "common_courses": {
+      "0": [
+        "FakeEnrollment"
+      ]
+    },
+    "common_groups": {},
+    "avatar_url": "http://canvas.instructure.com/images/messages/avatar-50.png"
+  }
+]

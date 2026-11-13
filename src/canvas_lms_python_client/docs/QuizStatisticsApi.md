@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **quiz_statistics_index**
-> quiz_statistics_index(course_id, quiz_id, all_versions=all_versions)
+> QuizStatisticsIndexResponse quiz_statistics_index(course_id, quiz_id, all_versions=all_versions)
 
 Fetching the latest quiz statistics
 
@@ -24,6 +24,7 @@ _latest_ and most current version of the quiz.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.quiz_statistics_index_response import QuizStatisticsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -53,7 +54,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Fetching the latest quiz statistics
-        await api_instance.quiz_statistics_index(course_id, quiz_id, all_versions=all_versions)
+        api_response = await api_instance.quiz_statistics_index(course_id, quiz_id, all_versions=all_versions)
+        print("The response of QuizStatisticsApi->quiz_statistics_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling QuizStatisticsApi->quiz_statistics_index: %s\n" % e)
 ```
@@ -71,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**QuizStatisticsIndexResponse**](QuizStatisticsIndexResponse.md)
 
 ### Authorization
 

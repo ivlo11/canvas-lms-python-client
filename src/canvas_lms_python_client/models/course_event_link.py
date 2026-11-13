@@ -25,15 +25,17 @@ from pydantic_core import to_jsonable_python
 
 class CourseEventLink(BaseModel):
     """
-    
+    IDs related to the event. course, user, page_view and sis_batch are strings, and an empty string means none.
     """ # noqa: E501
-    course: Optional[StrictInt] = Field(default=None, description="ID of the course for the event.", json_schema_extra={"examples": [12345]})
-    user: Optional[StrictInt] = Field(default=None, description="ID of the user for the event (who made the change).", json_schema_extra={"examples": [12345]})
+    course: Optional[StrictStr] = Field(default=None, description="ID of the course for the event.", json_schema_extra={"examples": ["12345"]})
+    user: Optional[StrictStr] = Field(default=None, description="ID of the user for the event (who made the change).", json_schema_extra={"examples": ["12345"]})
     page_view: Optional[StrictStr] = Field(default=None, description="ID of the page view during the event if it exists.", json_schema_extra={"examples": ["e2b76430-27a5-0131-3ca1-48e0eb13f29b"]})
     copied_from: Optional[StrictInt] = Field(default=None, description="ID of the course that this course was copied from. This is only included if the event_type is copied_from.", json_schema_extra={"examples": [12345]})
     copied_to: Optional[StrictInt] = Field(default=None, description="ID of the course that this course was copied to. This is only included if the event_type is copied_to.", json_schema_extra={"examples": [12345]})
-    sis_batch: Optional[StrictInt] = Field(default=None, description="ID of the SIS batch that triggered the event.", json_schema_extra={"examples": [12345]})
-    __properties: ClassVar[List[str]] = ["course", "user", "page_view", "copied_from", "copied_to", "sis_batch"]
+    reset_from: Optional[StrictInt] = Field(default=None, description="ID of the course that this course was reset from. This is only included if the event_type is reset_from.", json_schema_extra={"examples": [12345]})
+    reset_to: Optional[StrictInt] = Field(default=None, description="ID of the course that this course was reset to. This is only included if the event_type is reset_to.", json_schema_extra={"examples": [12345]})
+    sis_batch: Optional[StrictStr] = Field(default=None, description="ID of the SIS batch that triggered the event.", json_schema_extra={"examples": ["12345"]})
+    __properties: ClassVar[List[str]] = ["course", "user", "page_view", "copied_from", "copied_to", "reset_from", "reset_to", "sis_batch"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -91,6 +93,8 @@ class CourseEventLink(BaseModel):
             "page_view": obj.get("page_view"),
             "copied_from": obj.get("copied_from"),
             "copied_to": obj.get("copied_to"),
+            "reset_from": obj.get("reset_from"),
+            "reset_to": obj.get("reset_to"),
             "sis_batch": obj.get("sis_batch")
         })
         return _obj

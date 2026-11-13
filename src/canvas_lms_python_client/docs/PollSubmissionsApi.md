@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **poll_submissions_create**
-> poll_submissions_create(poll_id, poll_session_id, poll_submissions_create_request=poll_submissions_create_request)
+> PollSubmissionsCreateResponse poll_submissions_create(poll_id, poll_session_id, poll_submissions_create_request=poll_submissions_create_request)
 
 Create a single poll submission
 
@@ -22,6 +22,7 @@ Create a new poll submission for this poll session
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.poll_submissions_create_request import PollSubmissionsCreateRequest
+from canvas_lms_python_client.models.poll_submissions_create_response import PollSubmissionsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -51,7 +52,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a single poll submission
-        await api_instance.poll_submissions_create(poll_id, poll_session_id, poll_submissions_create_request=poll_submissions_create_request)
+        api_response = await api_instance.poll_submissions_create(poll_id, poll_session_id, poll_submissions_create_request=poll_submissions_create_request)
+        print("The response of PollSubmissionsApi->poll_submissions_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollSubmissionsApi->poll_submissions_create: %s\n" % e)
 ```
@@ -69,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollSubmissionsCreateResponse**](PollSubmissionsCreateResponse.md)
 
 ### Authorization
 
@@ -89,7 +92,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **poll_submissions_show**
-> poll_submissions_show(id, poll_id, poll_session_id)
+> PollSubmissionsShowResponse poll_submissions_show(id, poll_id, poll_session_id)
 
 Get a single poll submission
 
@@ -101,6 +104,7 @@ Returns the poll submission with the given id
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.poll_submissions_show_response import PollSubmissionsShowResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -130,7 +134,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get a single poll submission
-        await api_instance.poll_submissions_show(id, poll_id, poll_session_id)
+        api_response = await api_instance.poll_submissions_show(id, poll_id, poll_session_id)
+        print("The response of PollSubmissionsApi->poll_submissions_show:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PollSubmissionsApi->poll_submissions_show: %s\n" % e)
 ```
@@ -148,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**PollSubmissionsShowResponse**](PollSubmissionsShowResponse.md)
 
 ### Authorization
 

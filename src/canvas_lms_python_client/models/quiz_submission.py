@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -40,10 +40,10 @@ class QuizSubmission(BaseModel):
     extra_time: Optional[StrictInt] = Field(default=None, description="Amount of extra time allowed for the quiz submission, in minutes.", json_schema_extra={"examples": [60]})
     manually_unlocked: Optional[StrictBool] = Field(default=None, description="The student can take the quiz even if it's locked for everyone else", json_schema_extra={"examples": [True]})
     time_spent: Optional[StrictInt] = Field(default=None, description="Amount of time spent, in seconds.", json_schema_extra={"examples": [300]})
-    score: Optional[StrictInt] = Field(default=None, description="The score of the quiz submission, if graded.", json_schema_extra={"examples": [3]})
-    score_before_regrade: Optional[StrictInt] = Field(default=None, description="The original score of the quiz submission prior to any re-grading.", json_schema_extra={"examples": [2]})
-    kept_score: Optional[StrictInt] = Field(default=None, description="For quizzes that allow multiple attempts, this is the score that will be used, which might be the score of the latest, or the highest, quiz submission.", json_schema_extra={"examples": [5]})
-    fudge_points: Optional[StrictInt] = Field(default=None, description="Number of points the quiz submission's score was fudged by.", json_schema_extra={"examples": [1]})
+    score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The score of the quiz submission, if graded.", json_schema_extra={"examples": [3]})
+    score_before_regrade: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The original score of the quiz submission prior to any re-grading.", json_schema_extra={"examples": [2]})
+    kept_score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="For quizzes that allow multiple attempts, this is the score that will be used, which might be the score of the latest, or the highest, quiz submission.", json_schema_extra={"examples": [5]})
+    fudge_points: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Number of points the quiz submission's score was fudged by.", json_schema_extra={"examples": [1]})
     has_seen_results: Optional[StrictBool] = Field(default=None, description="Whether the student has viewed their results to the quiz.", json_schema_extra={"examples": [True]})
     workflow_state: Optional[StrictStr] = Field(default=None, description="The current state of the quiz submission. Possible values: ['untaken'|'pending_review'|'complete'|'settings_only'|'preview'].", json_schema_extra={"examples": ["untaken"]})
     overdue_and_needs_submission: Optional[StrictBool] = Field(default=None, description="Indicates whether the quiz submission is overdue and needs submission", json_schema_extra={"examples": [False]})

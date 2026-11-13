@@ -16,9 +16,13 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Annotated
-from canvas_lms_python_client.models.grade_change_event import GradeChangeEvent
+from canvas_lms_python_client.models.grade_change_audit_api_for_assignment_response import GradeChangeAuditApiForAssignmentResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_course_response import GradeChangeAuditApiForCourseResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_grader_response import GradeChangeAuditApiForGraderResponse
+from canvas_lms_python_client.models.grade_change_audit_api_for_student_response import GradeChangeAuditApiForStudentResponse
+from canvas_lms_python_client.models.grade_change_audit_api_query_response import GradeChangeAuditApiQueryResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -60,7 +64,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[GradeChangeEvent]:
+    ) -> GradeChangeAuditApiForAssignmentResponse:
         """Query by assignment
 
         List grade change events for a given assignment.
@@ -117,7 +121,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForAssignmentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -151,7 +155,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[GradeChangeEvent]]:
+    ) -> AsyncIterator[GradeChangeAuditApiForAssignmentResponse]:
         """Query by assignment
 
         List grade change events for a given assignment.
@@ -208,7 +212,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForAssignmentResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -242,121 +246,6 @@ class GradeChangeAuditApiApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def grade_change_audit_api_for_assignment_all(
-        self,
-        assignment_id: Annotated[StrictStr, Field(description="Scope response to assignment_id")],
-        start_time: Annotated[Optional[StrictStr], Field(description="The beginning of the time range from which you want events.")] = None,
-        end_time: Annotated[Optional[StrictStr], Field(description="The end of the time range from which you want events.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[GradeChangeEvent]:
-        """Query by assignment
-
-        List grade change events for a given assignment.
-
-        :param assignment_id: Scope response to assignment_id (required)
-        :type assignment_id: str
-        :param start_time: The beginning of the time range from which you want events.
-        :type start_time: str
-        :param end_time: The end of the time range from which you want events.
-        :type end_time: str
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._grade_change_audit_api_for_assignment_serialize(
-            assignment_id=assignment_id,
-            start_time=start_time,
-            end_time=end_time,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def grade_change_audit_api_for_assignment_with_http_info(
         self,
@@ -378,7 +267,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[GradeChangeEvent]]:
+    ) -> ApiResponse[GradeChangeAuditApiForAssignmentResponse]:
         """Query by assignment
 
         List grade change events for a given assignment.
@@ -435,7 +324,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForAssignmentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -526,7 +415,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForAssignmentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -640,7 +529,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[GradeChangeEvent]:
+    ) -> GradeChangeAuditApiForCourseResponse:
         """Query by course
 
         List grade change events for a given course.
@@ -697,7 +586,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForCourseResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -731,7 +620,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[GradeChangeEvent]]:
+    ) -> AsyncIterator[GradeChangeAuditApiForCourseResponse]:
         """Query by course
 
         List grade change events for a given course.
@@ -788,7 +677,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForCourseResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -822,121 +711,6 @@ class GradeChangeAuditApiApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def grade_change_audit_api_for_course_all(
-        self,
-        course_id: Annotated[StrictStr, Field(description="Scope response to course_id")],
-        start_time: Annotated[Optional[StrictStr], Field(description="The beginning of the time range from which you want events.")] = None,
-        end_time: Annotated[Optional[StrictStr], Field(description="The end of the time range from which you want events.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[GradeChangeEvent]:
-        """Query by course
-
-        List grade change events for a given course.
-
-        :param course_id: Scope response to course_id (required)
-        :type course_id: str
-        :param start_time: The beginning of the time range from which you want events.
-        :type start_time: str
-        :param end_time: The end of the time range from which you want events.
-        :type end_time: str
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._grade_change_audit_api_for_course_serialize(
-            course_id=course_id,
-            start_time=start_time,
-            end_time=end_time,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def grade_change_audit_api_for_course_with_http_info(
         self,
@@ -958,7 +732,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[GradeChangeEvent]]:
+    ) -> ApiResponse[GradeChangeAuditApiForCourseResponse]:
         """Query by course
 
         List grade change events for a given course.
@@ -1015,7 +789,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForCourseResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1106,7 +880,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForCourseResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1220,7 +994,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[GradeChangeEvent]:
+    ) -> GradeChangeAuditApiForGraderResponse:
         """Query by grader
 
         List grade change events for a given grader.
@@ -1277,7 +1051,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForGraderResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1311,7 +1085,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[GradeChangeEvent]]:
+    ) -> AsyncIterator[GradeChangeAuditApiForGraderResponse]:
         """Query by grader
 
         List grade change events for a given grader.
@@ -1368,7 +1142,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForGraderResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1402,121 +1176,6 @@ class GradeChangeAuditApiApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def grade_change_audit_api_for_grader_all(
-        self,
-        grader_id: Annotated[StrictStr, Field(description="Scope response to grader_id")],
-        start_time: Annotated[Optional[StrictStr], Field(description="The beginning of the time range from which you want events.")] = None,
-        end_time: Annotated[Optional[StrictStr], Field(description="The end of the time range from which you want events.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[GradeChangeEvent]:
-        """Query by grader
-
-        List grade change events for a given grader.
-
-        :param grader_id: Scope response to grader_id (required)
-        :type grader_id: str
-        :param start_time: The beginning of the time range from which you want events.
-        :type start_time: str
-        :param end_time: The end of the time range from which you want events.
-        :type end_time: str
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._grade_change_audit_api_for_grader_serialize(
-            grader_id=grader_id,
-            start_time=start_time,
-            end_time=end_time,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def grade_change_audit_api_for_grader_with_http_info(
         self,
@@ -1538,7 +1197,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[GradeChangeEvent]]:
+    ) -> ApiResponse[GradeChangeAuditApiForGraderResponse]:
         """Query by grader
 
         List grade change events for a given grader.
@@ -1595,7 +1254,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForGraderResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1686,7 +1345,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForGraderResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1800,7 +1459,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[GradeChangeEvent]:
+    ) -> GradeChangeAuditApiForStudentResponse:
         """Query by student
 
         List grade change events for a given student.
@@ -1857,7 +1516,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForStudentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1891,7 +1550,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[GradeChangeEvent]]:
+    ) -> AsyncIterator[GradeChangeAuditApiForStudentResponse]:
         """Query by student
 
         List grade change events for a given student.
@@ -1948,7 +1607,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForStudentResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1982,121 +1641,6 @@ class GradeChangeAuditApiApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def grade_change_audit_api_for_student_all(
-        self,
-        student_id: Annotated[StrictStr, Field(description="Scope response to student_id")],
-        start_time: Annotated[Optional[StrictStr], Field(description="The beginning of the time range from which you want events.")] = None,
-        end_time: Annotated[Optional[StrictStr], Field(description="The end of the time range from which you want events.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[GradeChangeEvent]:
-        """Query by student
-
-        List grade change events for a given student.
-
-        :param student_id: Scope response to student_id (required)
-        :type student_id: str
-        :param start_time: The beginning of the time range from which you want events.
-        :type start_time: str
-        :param end_time: The end of the time range from which you want events.
-        :type end_time: str
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._grade_change_audit_api_for_student_serialize(
-            student_id=student_id,
-            start_time=start_time,
-            end_time=end_time,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def grade_change_audit_api_for_student_with_http_info(
         self,
@@ -2118,7 +1662,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[GradeChangeEvent]]:
+    ) -> ApiResponse[GradeChangeAuditApiForStudentResponse]:
         """Query by student
 
         List grade change events for a given student.
@@ -2175,7 +1719,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForStudentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2266,7 +1810,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiForStudentResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2383,7 +1927,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[GradeChangeEvent]:
+    ) -> GradeChangeAuditApiQueryResponse:
         """Advanced query
 
         List grade change events satisfying all given parameters. Teachers may query for events in courses they teach. Queries without +course_id+ or +assignment_id+ require account administrator rights.  At least one of +course_id+, +assignment_id+, +student_id+, or +grader_id+ must be specified.
@@ -2449,7 +1993,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiQueryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2486,7 +2030,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[GradeChangeEvent]]:
+    ) -> AsyncIterator[GradeChangeAuditApiQueryResponse]:
         """Advanced query
 
         List grade change events satisfying all given parameters. Teachers may query for events in courses they teach. Queries without +course_id+ or +assignment_id+ require account administrator rights.  At least one of +course_id+, +assignment_id+, +student_id+, or +grader_id+ must be specified.
@@ -2552,7 +2096,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiQueryResponse",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2586,133 +2130,6 @@ class GradeChangeAuditApiApi:
                 return
             _url = _next_url
 
-
-    @validate_call
-    async def grade_change_audit_api_query_all(
-        self,
-        course_id: Annotated[Optional[StrictInt], Field(description="Restrict query to events in the specified course.")] = None,
-        assignment_id: Annotated[Optional[StrictInt], Field(description="Restrict query to the given assignment. If \"override\" is given, query the course final grade override instead.")] = None,
-        student_id: Annotated[Optional[StrictInt], Field(description="User id of a student to search grading events for.")] = None,
-        grader_id: Annotated[Optional[StrictInt], Field(description="User id of a grader to search grading events for.")] = None,
-        start_time: Annotated[Optional[StrictStr], Field(description="The beginning of the time range from which you want events.")] = None,
-        end_time: Annotated[Optional[StrictStr], Field(description="The end of the time range from which you want events.")] = None,
-        page: Annotated[Optional[StrictInt], Field(description="The page number to return. Defaults to 1.")] = None,
-        per_page: Annotated[Optional[StrictInt], Field(description="The number of items to return per page. Defaults to 10. Maximum is 100.")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-        _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[GradeChangeEvent]:
-        """Advanced query
-
-        List grade change events satisfying all given parameters. Teachers may query for events in courses they teach. Queries without +course_id+ or +assignment_id+ require account administrator rights.  At least one of +course_id+, +assignment_id+, +student_id+, or +grader_id+ must be specified.
-
-        :param course_id: Restrict query to events in the specified course.
-        :type course_id: int
-        :param assignment_id: Restrict query to the given assignment. If \"override\" is given, query the course final grade override instead.
-        :type assignment_id: int
-        :param student_id: User id of a student to search grading events for.
-        :type student_id: int
-        :param grader_id: User id of a grader to search grading events for.
-        :type grader_id: int
-        :param start_time: The beginning of the time range from which you want events.
-        :type start_time: str
-        :param end_time: The end of the time range from which you want events.
-        :type end_time: str
-        :param page: The page number to return. Defaults to 1.
-        :type page: int
-        :param per_page: The number of items to return per page. Defaults to 10. Maximum is 100.
-        :type per_page: int
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :param _page_url: navigate to a pagination URL
-        :type _page_url: str, Optional
-
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._grade_change_audit_api_query_serialize(
-            course_id=course_id,
-            assignment_id=assignment_id,
-            student_id=student_id,
-            grader_id=grader_id,
-            start_time=start_time,
-            end_time=end_time,
-            page=page,
-            per_page=per_page,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        if _page_url is not None:
-            _param = list(_param)
-            _param[1] = _page_url
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
-        }
-
-        _method, _url, _header_params, _body, _post_params = _param
-        while True:
-            response_data = await self.api_client.call_api(
-                _method,
-                _url,
-                _header_params,
-                _body,
-                _post_params,
-                _request_timeout=_request_timeout
-            )
-
-            await response_data.read()
-            _api_response = self.api_client.response_deserialize(
-                response_data=response_data,
-                response_types_map=_response_types_map,
-            )
-
-            _page_data = _api_response.data
-            if _page_data is None:
-                return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
-            for _item in _page_data:
-                yield _item
-
-            _next_url = get_next_page_url(
-                response_data.headers.get("Link"),
-                self.api_client.configuration.host,
-            )
-            if not _next_url:
-                return
-            _url = _next_url
-
     @validate_call
     async def grade_change_audit_api_query_with_http_info(
         self,
@@ -2737,7 +2154,7 @@ class GradeChangeAuditApiApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[GradeChangeEvent]]:
+    ) -> ApiResponse[GradeChangeAuditApiQueryResponse]:
         """Advanced query
 
         List grade change events satisfying all given parameters. Teachers may query for events in courses they teach. Queries without +course_id+ or +assignment_id+ require account administrator rights.  At least one of +course_id+, +assignment_id+, +student_id+, or +grader_id+ must be specified.
@@ -2803,7 +2220,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiQueryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2906,7 +2323,7 @@ class GradeChangeAuditApiApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[GradeChangeEvent]",
+            'default': "GradeChangeAuditApiQueryResponse",
         }
         response_data = await self.api_client.call_api(
             *_param,

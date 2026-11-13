@@ -14,7 +14,11 @@ Name | Type | Description | Notes
 **grade_after** | **str** | The grade after the change. | [optional] 
 **grade_before** | **str** | The grade before the change. | [optional] 
 **graded_anonymously** | **bool** | Boolean indicating whether the student name was visible when the grade was given. Could be null if the grade change record was created before this feature existed. | [optional] 
-**version_number** | **str** | Version Number of the grade change submission. | [optional] 
+**version_number** | **int** | Version Number of the grade change submission. | [optional] 
+**points_possible_before** | **float** | The assignment&#39;s points possible before the change. | [optional] 
+**points_possible_after** | **float** | The assignment&#39;s points possible after the change. | [optional] 
+**grade_current** | **str** | The current grade of the submission. Only included when the request includes current_grade. | [optional] 
+**course_override_grade** | **bool** | True if the event changed a course override grade. Only included for override grade events. | [optional] 
 **request_id** | **str** | The unique request id of the request during the grade change. | [optional] 
 **links** | [**GradeChangeEventLinks**](GradeChangeEventLinks.md) |  | [optional] 
 

@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,9 +28,9 @@ class PollSubmission(BaseModel):
     """
     PollSubmission
     """ # noqa: E501
-    id: StrictInt = Field(description="The unique identifier for the poll submission.", json_schema_extra={"examples": [1023]})
-    poll_choice_id: Optional[StrictInt] = Field(default=None, description="The unique identifier of the poll choice chosen for this submission.", json_schema_extra={"examples": [155]})
-    user_id: Optional[StrictInt] = Field(default=None, description="the unique identifier of the user who submitted this poll submission.", json_schema_extra={"examples": [4555]})
+    id: StrictStr = Field(description="The unique identifier for the poll submission.", json_schema_extra={"examples": ["1023"]})
+    poll_choice_id: StrictStr = Field(description="The unique identifier of the poll choice chosen for this submission.", json_schema_extra={"examples": ["155"]})
+    user_id: Optional[StrictStr] = Field(default=None, description="the unique identifier of the user who submitted this poll submission.", json_schema_extra={"examples": ["4555"]})
     created_at: Optional[datetime] = Field(default=None, description="The date and time the poll submission was submitted.", json_schema_extra={"examples": ["2013-11-07T13:16:18Z"]})
     __properties: ClassVar[List[str]] = ["id", "poll_choice_id", "user_id", "created_at"]
 

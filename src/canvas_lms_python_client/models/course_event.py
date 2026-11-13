@@ -32,7 +32,7 @@ class CourseEvent(BaseModel):
     id: Optional[StrictStr] = Field(default=None, description="ID of the event.", json_schema_extra={"examples": ["e2b76430-27a5-0131-3ca1-48e0eb13f29b"]})
     created_at: Optional[datetime] = Field(default=None, description="timestamp of the event", json_schema_extra={"examples": ["2012-07-19T15:00:00-06:00"]})
     event_type: Optional[StrictStr] = Field(default=None, description="Course event type The event type defines the type and schema of the event_data object.", json_schema_extra={"examples": ["updated"]})
-    event_data: Optional[StrictStr] = Field(default=None, description="Course event data depending on the event type.  This will return an object containing the relevant event data.  An updated event type will return an UpdatedEventData object.", json_schema_extra={"examples": ["{}"]})
+    event_data: Optional[Dict[str, Any]] = Field(default=None, description="Course event data depending on the event type.  This will return an object containing the relevant event data.  An updated event type will return an UpdatedEventData object.", json_schema_extra={"examples": [{"name": ["Old Name", "New Name"]}]})
     event_source: Optional[StrictStr] = Field(default=None, description="Course event source depending on the event type.  This will return a string containing the source of the event.", json_schema_extra={"examples": ["manual|sis|api"]})
     links: Optional[CourseEventLink] = None
     __properties: ClassVar[List[str]] = ["id", "created_at", "event_type", "event_data", "event_source", "links"]

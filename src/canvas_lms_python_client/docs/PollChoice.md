@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | The unique identifier for the poll choice. | 
-**poll_id** | **int** | The id of the poll this poll choice belongs to. | 
+**id** | **str** | The unique identifier for the poll choice. | 
+**poll_id** | **str** | The id of the poll this poll choice belongs to. | [optional] 
 **is_correct** | **bool** | Specifies whether or not this poll choice is a &#39;correct&#39; choice. | [optional] 
 **text** | **str** | The text of the poll choice. | 
 **position** | **int** | The order of the poll choice in relation to it&#39;s sibling poll choices. | [optional] 

@@ -24,7 +24,6 @@ from canvas_lms_python_client.api.assignments_api import AssignmentsApi
 from canvas_lms_python_client.api.assignments_api_api import AssignmentsApiApi
 from canvas_lms_python_client.api.authentication_audit_api_api import AuthenticationAuditApiApi
 from canvas_lms_python_client.api.authentication_providers_api import AuthenticationProvidersApi
-from canvas_lms_python_client.api.bad_permission_setting_error_api import BadPermissionSettingErrorApi
 from canvas_lms_python_client.api.blackout_dates_api import BlackoutDatesApi
 from canvas_lms_python_client.api.block_editor_templates_api_api import BlockEditorTemplatesApiApi
 from canvas_lms_python_client.api.bookmarks_api import BookmarksApi
@@ -32,6 +31,7 @@ from canvas_lms_python_client.api.brand_configs_api_api import BrandConfigsApiAp
 from canvas_lms_python_client.api.calendar_events_api_api import CalendarEventsApiApi
 from canvas_lms_python_client.api.canvadoc_sessions_api import CanvadocSessionsApi
 from canvas_lms_python_client.api.career_experience_api import CareerExperienceApi
+from canvas_lms_python_client.api.collaborations_api import CollaborationsApi
 from canvas_lms_python_client.api.comm_messages_api_api import CommMessagesApiApi
 from canvas_lms_python_client.api.communication_channels_api import CommunicationChannelsApi
 from canvas_lms_python_client.api.conferences_api import ConferencesApi
@@ -66,6 +66,7 @@ from canvas_lms_python_client.api.eportfolios_api_api import EportfoliosApiApi
 from canvas_lms_python_client.api.epub_exports_api import EpubExportsApi
 from canvas_lms_python_client.api.errors_api import ErrorsApi
 from canvas_lms_python_client.api.external_feeds_api import ExternalFeedsApi
+from canvas_lms_python_client.api.external_tools_api import ExternalToolsApi
 from canvas_lms_python_client.api.favorites_api import FavoritesApi
 from canvas_lms_python_client.api.feature_flags_api import FeatureFlagsApi
 from canvas_lms_python_client.api.files_api import FilesApi
@@ -82,6 +83,7 @@ from canvas_lms_python_client.api.groups_api import GroupsApi
 from canvas_lms_python_client.api.history_api import HistoryApi
 from canvas_lms_python_client.api.inst_access_tokens_api import InstAccessTokensApi
 from canvas_lms_python_client.api.jwts_api import JwtsApi
+from canvas_lms_python_client.api.late_policy_api import LatePolicyApi
 from canvas_lms_python_client.api.learning_mastery_gradebook_settings_api_api import LearningMasteryGradebookSettingsApiApi
 from canvas_lms_python_client.api.learning_object_dates_api import LearningObjectDatesApi
 from canvas_lms_python_client.api.lmgb_user_details_api import LmgbUserDetailsApi
@@ -95,6 +97,7 @@ from canvas_lms_python_client.api.module_assignment_overrides_api import ModuleA
 from canvas_lms_python_client.api.notification_preferences_api import NotificationPreferencesApi
 from canvas_lms_python_client.api.observer_pairing_codes_api_api import ObserverPairingCodesApiApi
 from canvas_lms_python_client.api.outcome_groups_api_api import OutcomeGroupsApiApi
+from canvas_lms_python_client.api.outcome_imports_api_api import OutcomeImportsApiApi
 from canvas_lms_python_client.api.outcome_proficiency_api_api import OutcomeProficiencyApiApi
 from canvas_lms_python_client.api.outcome_results_api import OutcomeResultsApi
 from canvas_lms_python_client.api.outcomes_api_api import OutcomesApiApi
@@ -127,10 +130,10 @@ from canvas_lms_python_client.api.quiz_submission_questions_api import QuizSubmi
 from canvas_lms_python_client.api.quiz_submission_users_api import QuizSubmissionUsersApi
 from canvas_lms_python_client.api.quiz_submissions_api_api import QuizSubmissionsApiApi
 from canvas_lms_python_client.api.quizzes_api_api import QuizzesApiApi
-from canvas_lms_python_client.api.record_already_exists_api import RecordAlreadyExistsApi
 from canvas_lms_python_client.api.registrations_api import RegistrationsApi
 from canvas_lms_python_client.api.resource_links_api import ResourceLinksApi
 from canvas_lms_python_client.api.results_api import ResultsApi
+from canvas_lms_python_client.api.role_overrides_api import RoleOverridesApi
 from canvas_lms_python_client.api.rubric_assessments_api import RubricAssessmentsApi
 from canvas_lms_python_client.api.rubric_associations_api import RubricAssociationsApi
 from canvas_lms_python_client.api.rubrics_api import RubricsApi
@@ -138,7 +141,6 @@ from canvas_lms_python_client.api.rubrics_api_api import RubricsApiApi
 from canvas_lms_python_client.api.scopes_api_api import ScopesApiApi
 from canvas_lms_python_client.api.search_api import SearchApi
 from canvas_lms_python_client.api.sections_api import SectionsApi
-from canvas_lms_python_client.api.service_credentials_api import ServiceCredentialsApi
 from canvas_lms_python_client.api.services_api_api import ServicesApiApi
 from canvas_lms_python_client.api.shared_brand_configs_api import SharedBrandConfigsApi
 from canvas_lms_python_client.api.sis_api_api import SisApiApi
@@ -158,6 +160,7 @@ from canvas_lms_python_client.api.terms_api_api import TermsApiApi
 from canvas_lms_python_client.api.tokens_api import TokensApi
 from canvas_lms_python_client.api.usage_rights_api import UsageRightsApi
 from canvas_lms_python_client.api.user_observees_api import UserObserveesApi
+from canvas_lms_python_client.api.users_api import UsersApi
 from canvas_lms_python_client.api.web_zip_exports_api import WebZipExportsApi
 from canvas_lms_python_client.api.what_if_grades_api_api import WhatIfGradesApiApi
 from canvas_lms_python_client.api.wiki_pages_api_api import WikiPagesApiApi

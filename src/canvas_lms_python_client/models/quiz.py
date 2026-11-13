@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from canvas_lms_python_client.models.assignment_date import AssignmentDate
 from canvas_lms_python_client.models.lock_info import LockInfo
 from canvas_lms_python_client.models.quiz_permissions import QuizPermissions
@@ -51,7 +51,7 @@ class Quiz(BaseModel):
     allowed_attempts: Optional[StrictInt] = Field(default=None, description="how many times a student can take the quiz -1 = unlimited attempts", json_schema_extra={"examples": [3]})
     one_question_at_a_time: Optional[StrictBool] = Field(default=None, description="show one question at a time?")
     question_count: Optional[StrictInt] = Field(default=None, description="the number of questions in the quiz", json_schema_extra={"examples": [12]})
-    points_possible: Optional[StrictInt] = Field(default=None, description="The total point value given to the quiz", json_schema_extra={"examples": [20]})
+    points_possible: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The total point value given to the quiz", json_schema_extra={"examples": [20]})
     cant_go_back: Optional[StrictBool] = Field(default=None, description="lock questions after answering? only valid if one_question_at_a_time=true")
     access_code: Optional[StrictStr] = Field(default=None, description="access code to restrict quiz access", json_schema_extra={"examples": ["2beornot2be"]})
     ip_filter: Optional[StrictStr] = Field(default=None, description="IP address or range that quiz access is limited to", json_schema_extra={"examples": ["123.123.123.123"]})

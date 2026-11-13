@@ -239,7 +239,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **pseudonyms_index**
-> pseudonyms_index(account_id, page=page, per_page=per_page)
+> List[Login] pseudonyms_index(account_id, page=page, per_page=per_page)
 
 List user logins
 
@@ -251,6 +251,7 @@ Given a user ID, return a paginated list of that user's logins for the given acc
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.login import Login
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -280,7 +281,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List user logins
-        await api_instance.pseudonyms_index(account_id, page=page, per_page=per_page)
+        api_response = await api_instance.pseudonyms_index(account_id, page=page, per_page=per_page)
+        print("The response of PseudonymsApi->pseudonyms_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PseudonymsApi->pseudonyms_index: %s\n" % e)
 ```
@@ -298,7 +301,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Login]**](Login.md)
 
 ### Authorization
 
@@ -313,12 +316,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List user logins |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **pseudonyms_index_for_users**
-> pseudonyms_index_for_users(user_id, page=page, per_page=per_page)
+> List[Login] pseudonyms_index_for_users(user_id, page=page, per_page=per_page)
 
 List user logins
 
@@ -330,6 +333,7 @@ Given a user ID, return a paginated list of that user's logins for the given acc
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.login import Login
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -359,7 +363,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List user logins
-        await api_instance.pseudonyms_index_for_users(user_id, page=page, per_page=per_page)
+        api_response = await api_instance.pseudonyms_index_for_users(user_id, page=page, per_page=per_page)
+        print("The response of PseudonymsApi->pseudonyms_index_for_users:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PseudonymsApi->pseudonyms_index_for_users: %s\n" % e)
 ```
@@ -377,7 +383,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[Login]**](Login.md)
 
 ### Authorization
 
@@ -392,7 +398,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List user logins |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

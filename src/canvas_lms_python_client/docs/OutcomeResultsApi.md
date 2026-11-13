@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **outcome_results_index**
-> outcome_results_index(course_id, user_ids=user_ids, outcome_ids=outcome_ids, include=include, include_hidden=include_hidden, page=page, per_page=per_page)
+> OutcomeResultsIndexResponse outcome_results_index(course_id, user_ids=user_ids, outcome_ids=outcome_ids, include=include, include_hidden=include_hidden, page=page, per_page=per_page)
 
 Get outcome results
 
@@ -190,6 +190,7 @@ used in sLMGB
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.outcome_results_index_response import OutcomeResultsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -223,7 +224,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Get outcome results
-        await api_instance.outcome_results_index(course_id, user_ids=user_ids, outcome_ids=outcome_ids, include=include, include_hidden=include_hidden, page=page, per_page=per_page)
+        api_response = await api_instance.outcome_results_index(course_id, user_ids=user_ids, outcome_ids=outcome_ids, include=include, include_hidden=include_hidden, page=page, per_page=per_page)
+        print("The response of OutcomeResultsApi->outcome_results_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling OutcomeResultsApi->outcome_results_index: %s\n" % e)
 ```
@@ -245,7 +248,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**OutcomeResultsIndexResponse**](OutcomeResultsIndexResponse.md)
 
 ### Authorization
 

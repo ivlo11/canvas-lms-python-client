@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **grading_period_sets_create**
-> grading_period_sets_create(account_id, grading_period_sets_create_request=grading_period_sets_create_request)
+> GradingPeriodSetsCreateResponse grading_period_sets_create(account_id, grading_period_sets_create_request=grading_period_sets_create_request)
 
 Create a grading period set
 
@@ -24,6 +24,7 @@ Create and return a new grading period set
 ```python
 import canvas_lms_python_client
 from canvas_lms_python_client.models.grading_period_sets_create_request import GradingPeriodSetsCreateRequest
+from canvas_lms_python_client.models.grading_period_sets_create_response import GradingPeriodSetsCreateResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -52,7 +53,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # Create a grading period set
-        await api_instance.grading_period_sets_create(account_id, grading_period_sets_create_request=grading_period_sets_create_request)
+        api_response = await api_instance.grading_period_sets_create(account_id, grading_period_sets_create_request=grading_period_sets_create_request)
+        print("The response of GradingPeriodSetsApi->grading_period_sets_create:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GradingPeriodSetsApi->grading_period_sets_create: %s\n" % e)
 ```
@@ -69,7 +72,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GradingPeriodSetsCreateResponse**](GradingPeriodSetsCreateResponse.md)
 
 ### Authorization
 
@@ -84,7 +87,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | Create a grading period set |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -167,7 +170,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **grading_period_sets_index**
-> grading_period_sets_index(account_id, page=page, per_page=per_page)
+> GradingPeriodSetsIndexResponse grading_period_sets_index(account_id, page=page, per_page=per_page)
 
 List grading period sets
 
@@ -179,6 +182,7 @@ Returns the paginated list of grading period sets
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.grading_period_sets_index_response import GradingPeriodSetsIndexResponse
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -208,7 +212,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List grading period sets
-        await api_instance.grading_period_sets_index(account_id, page=page, per_page=per_page)
+        api_response = await api_instance.grading_period_sets_index(account_id, page=page, per_page=per_page)
+        print("The response of GradingPeriodSetsApi->grading_period_sets_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling GradingPeriodSetsApi->grading_period_sets_index: %s\n" % e)
 ```
@@ -226,7 +232,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**GradingPeriodSetsIndexResponse**](GradingPeriodSetsIndexResponse.md)
 
 ### Authorization
 
@@ -241,7 +247,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List grading period sets |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

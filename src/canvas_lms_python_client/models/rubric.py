@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from canvas_lms_python_client.models.rubric_assessment import RubricAssessment
 from canvas_lms_python_client.models.rubric_association import RubricAssociation
 from canvas_lms_python_client.models.rubric_criterion import RubricCriterion
@@ -34,7 +34,7 @@ class Rubric(BaseModel):
     title: Optional[StrictStr] = Field(default=None, description="title of the rubric", json_schema_extra={"examples": ["some title"]})
     context_id: Optional[StrictInt] = Field(default=None, description="the context owning the rubric", json_schema_extra={"examples": [1]})
     context_type: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["Course"]})
-    points_possible: Optional[StrictInt] = None
+    points_possible: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, json_schema_extra={"examples": [10.0]})
     reusable: Optional[StrictBool] = Field(default=None, json_schema_extra={"examples": [False]})
     read_only: Optional[StrictBool] = Field(default=None, json_schema_extra={"examples": [True]})
     free_form_criterion_comments: Optional[StrictBool] = Field(default=None, description="whether or not free-form comments are used", json_schema_extra={"examples": [True]})

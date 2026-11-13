@@ -1,0 +1,47 @@
+{
+  "pace_contexts": [
+    {
+      "name": "Lizalfos 2",
+      "type": "StudentEnrollment",
+      "item_id": 165,
+      "associated_section_count": null,
+      "associated_student_count": null,
+      "applied_pace": {
+        "name": "Ocarina of Time Studies",
+        "type": "Course",
+        "duration": 1,
+        "last_modified": "2026-11-03T03:45:13Z"
+      },
+      "on_pace": true
+    },
+    {
+      "name": "Epona 3",
+      "type": "StudentEnrollment",
+      "item_id": 166,
+      "associated_section_count": null,
+      "associated_student_count": null,
+      "applied_pace": {
+        "name": "Ocarina of Time Studies",
+        "type": "Course",
+        "duration": 1,
+        "last_modified": "2026-11-03T03:45:13Z"
+      },
+      "on_pace": true
+    },
+    {
+      "name": "Beedle 4",
+      "type": "StudentEnrollment",
+      "item_id": 167,
+      "associated_section_count": null,
+      "associated_student_count": null,
+      "applied_pace": {
+        "name": "Ocarina of Time Studies",
+        "type": "Course",
+        "duration": 1,
+        "last_modified": "2026-11-03T03:45:13Z"
+      },
+      "on_pace": true
+    }
+  ],
+  "total_entries": 50
+}

@@ -19,7 +19,7 @@ from pydantic import ValidationError
 
 from canvas_lms_python_client.api.lti_apps_api import LtiAppsApi
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 
 
@@ -81,8 +81,8 @@ class TestLtiAppsApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
-        mock_data = MagicMock()
+        # Array response
+        mock_data = [MagicMock(), MagicMock()]
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -105,7 +105,7 @@ class TestLtiAppsApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == len(mock_data)
 
     async def test_lti_apps_launch_definitions_paginated_multiple_pages(self) -> None:
         """Test lti_apps_launch_definitions_fetch_all_items following pagination links.
@@ -117,7 +117,7 @@ class TestLtiAppsApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = MagicMock()
+        mock_page_data = [MagicMock(), MagicMock()]
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -168,7 +168,7 @@ class TestLtiAppsApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
         assert call_count[0] == 3
 
     async def test_lti_apps_launch_definitions_paginated_empty_result(self) -> None:
@@ -255,8 +255,8 @@ class TestLtiAppsApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
-        mock_data = MagicMock()
+        # Array response
+        mock_data = [MagicMock(), MagicMock()]
 
         mock_response_data = MagicMock()
         mock_response_data.data = mock_data
@@ -279,7 +279,7 @@ class TestLtiAppsApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == len(mock_data)
 
     async def test_lti_apps_launch_definitions_for_accounts_paginated_multiple_pages(self) -> None:
         """Test lti_apps_launch_definitions_for_accounts_fetch_all_items following pagination links.
@@ -291,7 +291,7 @@ class TestLtiAppsApi(unittest.IsolatedAsyncioTestCase):
         """
         from unittest.mock import call
 
-        mock_page_data = MagicMock()
+        mock_page_data = [MagicMock(), MagicMock()]
 
         # Mock three pages: page1 -> page2 -> page3 (last)
         page1_response = MagicMock()
@@ -342,7 +342,7 @@ class TestLtiAppsApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3 * len(mock_page_data)  # 3 pages × items per page
         assert call_count[0] == 3
 
     async def test_lti_apps_launch_definitions_for_accounts_paginated_empty_result(self) -> None:

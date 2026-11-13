@@ -887,8 +887,6 @@ class DeveloperKeysApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -1386,8 +1384,8 @@ class DeveloperKeysApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'redirect_uris': 'multi',
-            'sources': 'multi',
+            'redirect_uris[]': 'multi',
+            'sources[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1405,11 +1403,11 @@ class DeveloperKeysApi:
         # process the query parameters
         if redirect_uris is not None:
             
-            _query_params.append(('redirect_uris', redirect_uris))
+            _query_params.append(('redirect_uris[]', redirect_uris))
             
         if sources is not None:
             
-            _query_params.append(('sources', sources))
+            _query_params.append(('sources[]', sources))
             
         # process the header parameters
         # process the form parameters

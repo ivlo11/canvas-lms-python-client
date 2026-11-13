@@ -16,8 +16,9 @@ from typing import Any, AsyncIterator, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictInt, StrictStr, field_validator
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.media_object import MediaObject
 from canvas_lms_python_client.models.media_objects_update_media_object_request import MediaObjectsUpdateMediaObjectRequest
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
@@ -60,7 +61,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[object]:
+    ) -> List[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -117,7 +118,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -151,7 +152,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[object]]:
+    ) -> AsyncIterator[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -208,7 +209,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -264,7 +265,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -321,7 +322,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -344,8 +345,6 @@ class MediaObjectsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -378,7 +377,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -435,7 +434,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -526,7 +525,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -551,7 +550,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -575,7 +574,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -644,7 +643,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[object]:
+    ) -> List[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -704,7 +703,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -739,7 +738,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[object]]:
+    ) -> AsyncIterator[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -799,7 +798,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -856,7 +855,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -916,7 +915,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -939,8 +938,6 @@ class MediaObjectsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -974,7 +971,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -1034,7 +1031,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1129,7 +1126,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1155,7 +1152,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1181,7 +1178,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -1250,7 +1247,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[object]:
+    ) -> List[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -1310,7 +1307,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1345,7 +1342,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[object]]:
+    ) -> AsyncIterator[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -1405,7 +1402,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1462,7 +1459,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -1522,7 +1519,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1545,8 +1542,6 @@ class MediaObjectsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -1580,7 +1575,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -1640,7 +1635,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1735,7 +1730,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1761,7 +1756,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -1787,7 +1782,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -1856,7 +1851,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[object]:
+    ) -> List[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -1916,7 +1911,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1951,7 +1946,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[object]]:
+    ) -> AsyncIterator[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -2011,7 +2006,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2068,7 +2063,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -2128,7 +2123,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2151,8 +2146,6 @@ class MediaObjectsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -2186,7 +2179,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -2246,7 +2239,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2341,7 +2334,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2367,7 +2360,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2393,7 +2386,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -2462,7 +2455,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[object]:
+    ) -> List[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -2522,7 +2515,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2557,7 +2550,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[object]]:
+    ) -> AsyncIterator[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -2617,7 +2610,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2674,7 +2667,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -2734,7 +2727,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -2757,8 +2750,6 @@ class MediaObjectsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -2792,7 +2783,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -2852,7 +2843,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2947,7 +2938,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2973,7 +2964,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2999,7 +2990,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -3067,7 +3058,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[object]:
+    ) -> List[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -3124,7 +3115,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3158,7 +3149,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[object]]:
+    ) -> AsyncIterator[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -3215,7 +3206,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3271,7 +3262,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[object]:
+    ) -> AsyncIterator[MediaObject]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -3328,7 +3319,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -3351,8 +3342,6 @@ class MediaObjectsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -3385,7 +3374,7 @@ class MediaObjectsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[object]]:
+    ) -> ApiResponse[List[MediaObject]]:
         """List Media Objects
 
         Returns media objects created by the user making the request. When using the second version, returns media objects associated with the given course.
@@ -3442,7 +3431,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3533,7 +3522,7 @@ class MediaObjectsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[object]",
+            'default': "List[MediaObject]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3558,7 +3547,7 @@ class MediaObjectsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'exclude': 'multi',
+            'exclude[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3582,7 +3571,7 @@ class MediaObjectsApi:
             
         if exclude is not None:
             
-            _query_params.append(('exclude', exclude))
+            _query_params.append(('exclude[]', exclude))
             
         if page is not None:
             
@@ -3646,7 +3635,7 @@ class MediaObjectsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> MediaObject:
         """Update Media Object
 
         Updates the title of a media object.
@@ -3688,6 +3677,7 @@ class MediaObjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MediaObject",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3716,7 +3706,7 @@ class MediaObjectsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[MediaObject]:
         """Update Media Object
 
         Updates the title of a media object.
@@ -3758,6 +3748,7 @@ class MediaObjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MediaObject",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3829,6 +3820,7 @@ class MediaObjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MediaObject",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3872,6 +3864,13 @@ class MediaObjectsApi:
             _body_params = media_objects_update_media_object_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:
@@ -3927,7 +3926,7 @@ class MediaObjectsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
+    ) -> MediaObject:
         """Update Media Object
 
         Updates the title of a media object.
@@ -3969,6 +3968,7 @@ class MediaObjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MediaObject",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -3997,7 +3997,7 @@ class MediaObjectsApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[MediaObject]:
         """Update Media Object
 
         Updates the title of a media object.
@@ -4039,6 +4039,7 @@ class MediaObjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MediaObject",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4110,6 +4111,7 @@ class MediaObjectsApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "MediaObject",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -4153,6 +4155,13 @@ class MediaObjectsApi:
             _body_params = media_objects_update_media_object_request
 
 
+        # set the HTTP header `Accept`
+        if not any(key.lower() == 'accept' for key in _header_params):
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json'
+                ]
+            )
 
         # set the HTTP header `Content-Type`
         if _content_type:

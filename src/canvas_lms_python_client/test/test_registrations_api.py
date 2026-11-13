@@ -23,6 +23,9 @@ from typing import Any, Dict, List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.context_search_response import ContextSearchResponse
 from canvas_lms_python_client.models.list_lti_registrations_response import ListLtiRegistrationsResponse
+from canvas_lms_python_client.models.lti_overlay_version import LtiOverlayVersion
+from canvas_lms_python_client.models.lti_registration import LtiRegistration
+from canvas_lms_python_client.models.lti_registration_account_binding import LtiRegistrationAccountBinding
 from canvas_lms_python_client.models.registrations_apply_registration_update_request_request import RegistrationsApplyRegistrationUpdateRequestRequest
 from canvas_lms_python_client.models.registrations_bind_request import RegistrationsBindRequest
 from canvas_lms_python_client.models.registrations_create_request import RegistrationsCreateRequest
@@ -715,7 +718,7 @@ class TestRegistrationsApi(unittest.IsolatedAsyncioTestCase):
         mock_response.headers = {}
         mock_response.read = AsyncMock()
 
-        # Non-array response: wrap in list
+        # Non-array response: one wrapper per page
         mock_data = MagicMock()
 
         mock_response_data = MagicMock()
@@ -728,7 +731,7 @@ class TestRegistrationsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all pages
         pages = []
-        async for page in self.api.registrations_list_all(
+        async for page in self.api.registrations_list_paginated(
             account_id="invalid",
             per_page=999,
             page=999,
@@ -739,7 +742,7 @@ class TestRegistrationsApi(unittest.IsolatedAsyncioTestCase):
             pages.append(page)
 
         # Single page should yield expected items
-        assert len(pages) == 1  # Non-array wrapped in list
+        assert len(pages) == 1  # One wrapper page
 
     async def test_registrations_list_paginated_multiple_pages(self) -> None:
         """Test registrations_list_fetch_all_items following pagination links.
@@ -791,7 +794,7 @@ class TestRegistrationsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.registrations_list_all(
+        async for item in self.api.registrations_list_paginated(
             account_id="invalid",
             per_page=999,
             page=999,
@@ -802,7 +805,7 @@ class TestRegistrationsApi(unittest.IsolatedAsyncioTestCase):
             items.append(item)
 
         # Should have items from 3 pages
-        assert len(items) == 3  # 3 pages, one item each
+        assert len(items) == 3  # 3 pages, one wrapper each
         assert call_count[0] == 3
 
     async def test_registrations_list_paginated_empty_result(self) -> None:
@@ -826,7 +829,7 @@ class TestRegistrationsApi(unittest.IsolatedAsyncioTestCase):
 
         # Collect all items
         items = []
-        async for item in self.api.registrations_list_all(
+        async for item in self.api.registrations_list_paginated(
             account_id="invalid",
             per_page=999,
             page=999,

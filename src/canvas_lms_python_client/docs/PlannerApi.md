@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **planner_index**
-> planner_index(start_date=start_date, end_date=end_date, context_codes=context_codes, observed_user_id=observed_user_id, filter=filter, page=page, per_page=per_page)
+> List[PlannerItem] planner_index(start_date=start_date, end_date=end_date, context_codes=context_codes, observed_user_id=observed_user_id, filter=filter, page=page, per_page=per_page)
 
 List planner items
 
@@ -26,6 +26,7 @@ the path that accepts a user_id and supply the student's id.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.planner_item import PlannerItem
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -59,7 +60,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List planner items
-        await api_instance.planner_index(start_date=start_date, end_date=end_date, context_codes=context_codes, observed_user_id=observed_user_id, filter=filter, page=page, per_page=per_page)
+        api_response = await api_instance.planner_index(start_date=start_date, end_date=end_date, context_codes=context_codes, observed_user_id=observed_user_id, filter=filter, page=page, per_page=per_page)
+        print("The response of PlannerApi->planner_index:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PlannerApi->planner_index: %s\n" % e)
 ```
@@ -81,7 +84,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[PlannerItem]**](PlannerItem.md)
 
 ### Authorization
 
@@ -96,12 +99,12 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List planner items |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **planner_index_for_users**
-> planner_index_for_users(user_id, start_date=start_date, end_date=end_date, context_codes=context_codes, observed_user_id=observed_user_id, filter=filter, page=page, per_page=per_page)
+> List[PlannerItem] planner_index_for_users(user_id, start_date=start_date, end_date=end_date, context_codes=context_codes, observed_user_id=observed_user_id, filter=filter, page=page, per_page=per_page)
 
 List planner items
 
@@ -118,6 +121,7 @@ the path that accepts a user_id and supply the student's id.
 
 ```python
 import canvas_lms_python_client
+from canvas_lms_python_client.models.planner_item import PlannerItem
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -152,7 +156,9 @@ async with canvas_lms_python_client.ApiClient(configuration) as api_client:
 
     try:
         # List planner items
-        await api_instance.planner_index_for_users(user_id, start_date=start_date, end_date=end_date, context_codes=context_codes, observed_user_id=observed_user_id, filter=filter, page=page, per_page=per_page)
+        api_response = await api_instance.planner_index_for_users(user_id, start_date=start_date, end_date=end_date, context_codes=context_codes, observed_user_id=observed_user_id, filter=filter, page=page, per_page=per_page)
+        print("The response of PlannerApi->planner_index_for_users:\n")
+        pprint(api_response)
     except Exception as e:
         print("Exception when calling PlannerApi->planner_index_for_users: %s\n" % e)
 ```
@@ -175,7 +181,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**List[PlannerItem]**](PlannerItem.md)
 
 ### Authorization
 
@@ -190,7 +196,7 @@ void (empty response body)
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**0** | List planner items |  -  |
+**0** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

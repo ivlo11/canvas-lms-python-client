@@ -18,8 +18,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from canvas_lms_python_client.models.grade_change_event_links import GradeChangeEventLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,10 +37,14 @@ class GradeChangeEvent(BaseModel):
     grade_after: Optional[StrictStr] = Field(default=None, description="The grade after the change.", json_schema_extra={"examples": ["8"]})
     grade_before: Optional[StrictStr] = Field(default=None, description="The grade before the change.", json_schema_extra={"examples": ["8"]})
     graded_anonymously: Optional[StrictBool] = Field(default=None, description="Boolean indicating whether the student name was visible when the grade was given. Could be null if the grade change record was created before this feature existed.", json_schema_extra={"examples": [True]})
-    version_number: Optional[StrictStr] = Field(default=None, description="Version Number of the grade change submission.", json_schema_extra={"examples": ["1"]})
+    version_number: Optional[StrictInt] = Field(default=None, description="Version Number of the grade change submission.", json_schema_extra={"examples": [1]})
+    points_possible_before: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The assignment's points possible before the change.", json_schema_extra={"examples": [10.0]})
+    points_possible_after: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The assignment's points possible after the change.", json_schema_extra={"examples": [10.0]})
+    grade_current: Optional[StrictStr] = Field(default=None, description="The current grade of the submission. Only included when the request includes current_grade.", json_schema_extra={"examples": ["8"]})
+    course_override_grade: Optional[StrictBool] = Field(default=None, description="True if the event changed a course override grade. Only included for override grade events.", json_schema_extra={"examples": [True]})
     request_id: Optional[StrictStr] = Field(default=None, description="The unique request id of the request during the grade change.", json_schema_extra={"examples": ["e2b76430-27a5-0131-3ca1-48e0eb13f29b"]})
     links: Optional[GradeChangeEventLinks] = None
-    __properties: ClassVar[List[str]] = ["id", "created_at", "event_type", "excused_after", "excused_before", "grade_after", "grade_before", "graded_anonymously", "version_number", "request_id", "links"]
+    __properties: ClassVar[List[str]] = ["id", "created_at", "event_type", "excused_after", "excused_before", "grade_after", "grade_before", "graded_anonymously", "version_number", "points_possible_before", "points_possible_after", "grade_current", "course_override_grade", "request_id", "links"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -105,6 +109,10 @@ class GradeChangeEvent(BaseModel):
             "grade_before": obj.get("grade_before"),
             "graded_anonymously": obj.get("graded_anonymously"),
             "version_number": obj.get("version_number"),
+            "points_possible_before": obj.get("points_possible_before"),
+            "points_possible_after": obj.get("points_possible_after"),
+            "grade_current": obj.get("grade_current"),
+            "course_override_grade": obj.get("course_override_grade"),
             "request_id": obj.get("request_id"),
             "links": GradeChangeEventLinks.from_dict(obj["links"]) if obj.get("links") is not None else None
         })

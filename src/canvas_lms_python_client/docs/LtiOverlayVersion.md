@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **created_at** | **str** | Timestamp of the version&#39;s creation | [optional] 
 **updated_at** | **str** | Timestamp of the version&#39;s last update | [optional] 
 **caused_by_reset** | **bool** | Whether or not this change was caused by a reset of the tool&#39;s configuration | [optional] 
-**created_by** | [**User**](User.md) |  | [optional] 
+**created_by** | [**LtiRegistrationCreatedBy**](LtiRegistrationCreatedBy.md) |  | [optional] 
 **diff** | **List[List[object]]** | A list of changes made in this version compared to the previous version | [optional] 
 **lti_overlay_id** | **int** | The id of the overlay this version is for | [optional] 
 **account_id** | **int** | The id of the account this version is for | [optional] 

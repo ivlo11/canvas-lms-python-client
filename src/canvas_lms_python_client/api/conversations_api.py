@@ -19,6 +19,7 @@ from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
 from canvas_lms_python_client.models.conversation import Conversation
+from canvas_lms_python_client.models.conversation_batch import ConversationBatch
 from canvas_lms_python_client.models.conversations_add_message_request import ConversationsAddMessageRequest
 from canvas_lms_python_client.models.conversations_add_recipients_request import ConversationsAddRecipientsRequest
 from canvas_lms_python_client.models.conversations_batch_update_request import ConversationsBatchUpdateRequest
@@ -916,7 +917,7 @@ class ConversationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> None:
+    ) -> List[ConversationBatch]:
         """Get running batches
 
         Returns any currently running conversation batches for the current user. Conversation batches are created when a bulk private message is sent asynchronously (see the mode argument to the {api:ConversationsController#create create API action}).
@@ -964,6 +965,7 @@ class ConversationsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ConversationBatch]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -994,7 +996,7 @@ class ConversationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[List[ConversationBatch]]:
         """Get running batches
 
         Returns any currently running conversation batches for the current user. Conversation batches are created when a bulk private message is sent asynchronously (see the mode argument to the {api:ConversationsController#create create API action}).
@@ -1042,6 +1044,7 @@ class ConversationsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ConversationBatch]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1094,7 +1097,7 @@ class ConversationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[Any]:
+    ) -> AsyncIterator[ConversationBatch]:
         """Get running batches
 
         Returns any currently running conversation batches for the current user. Conversation batches are created when a bulk private message is sent asynchronously (see the mode argument to the {api:ConversationsController#create create API action}).
@@ -1142,6 +1145,7 @@ class ConversationsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ConversationBatch]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -1164,8 +1168,6 @@ class ConversationsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -1195,7 +1197,7 @@ class ConversationsApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[None]:
+    ) -> ApiResponse[List[ConversationBatch]]:
         """Get running batches
 
         Returns any currently running conversation batches for the current user. Conversation batches are created when a bulk private message is sent asynchronously (see the mode argument to the {api:ConversationsController#create create API action}).
@@ -1243,6 +1245,7 @@ class ConversationsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ConversationBatch]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -1321,6 +1324,7 @@ class ConversationsApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
+            'default': "List[ConversationBatch]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -2267,8 +2271,6 @@ class ConversationsApi:
             _page_data = _api_response.data
             if _page_data is None:
                 return
-            if not isinstance(_page_data, list):
-                _page_data = [_page_data]
             for _item in _page_data:
                 yield _item
 
@@ -2501,8 +2503,8 @@ class ConversationsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'filter': 'multi',
-            'include': 'multi',
+            'filter[]': 'multi',
+            'include[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -2522,7 +2524,7 @@ class ConversationsApi:
             
         if filter is not None:
             
-            _query_params.append(('filter', filter))
+            _query_params.append(('filter[]', filter))
             
         if filter_mode_and_or is not None:
             
@@ -2538,7 +2540,7 @@ class ConversationsApi:
             
         if include is not None:
             
-            _query_params.append(('include', include))
+            _query_params.append(('include[]', include))
             
         if page is not None:
             
@@ -3384,7 +3386,7 @@ class ConversationsApi:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'filter': 'multi',
+            'filter[]': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
@@ -3410,7 +3412,7 @@ class ConversationsApi:
             
         if filter is not None:
             
-            _query_params.append(('filter', filter))
+            _query_params.append(('filter[]', filter))
             
         if filter_mode_and_or is not None:
             

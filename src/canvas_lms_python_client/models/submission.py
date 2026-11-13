@@ -17,19 +17,83 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from canvas_lms_python_client.models.course import Course
+from canvas_lms_python_client.models.submission_comment import SubmissionComment
+from canvas_lms_python_client.models.user import User
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
 
 class Submission(BaseModel):
     """
-    Submission
+    
     """ # noqa: E501
-    id: Optional[StrictInt] = Field(default=None, description="The ID of the submission", json_schema_extra={"examples": [123]})
-    student_entered_score: Optional[StrictStr] = Field(default=None, description="The score the student wants to test", json_schema_extra={"examples": ["20.0"]})
-    __properties: ClassVar[List[str]] = ["id", "student_entered_score"]
+    id: Optional[StrictInt] = Field(default=None, description="The submission's id", json_schema_extra={"examples": [1]})
+    assignment_id: Optional[StrictInt] = Field(default=None, description="The submission's assignment id", json_schema_extra={"examples": [23]})
+    assignment: Optional[Assignment] = None
+    course: Optional[Course] = None
+    attempt: Optional[StrictInt] = Field(default=None, description="This is the submission attempt number.", json_schema_extra={"examples": [1]})
+    body: Optional[StrictStr] = Field(default=None, description="The content of the submission, if it was submitted directly in a text field.", json_schema_extra={"examples": ["There are three factors too..."]})
+    grade: Optional[StrictStr] = Field(default=None, description="The grade for the submission, translated into the assignment grading scheme (so a letter grade, for example).", json_schema_extra={"examples": ["A-"]})
+    grade_matches_current_submission: Optional[StrictBool] = Field(default=None, description="A boolean flag which is false if the student has re-submitted since the submission was last graded.", json_schema_extra={"examples": [True]})
+    html_url: Optional[StrictStr] = Field(default=None, description="URL to the submission. This will require the user to log in.", json_schema_extra={"examples": ["http://example.com/courses/255/assignments/543/submissions/134"]})
+    preview_url: Optional[StrictStr] = Field(default=None, description="URL to the submission preview. This will require the user to log in.", json_schema_extra={"examples": ["http://example.com/courses/255/assignments/543/submissions/134?preview=1"]})
+    score: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The raw score", json_schema_extra={"examples": [13.5]})
+    submission_comments: Optional[List[SubmissionComment]] = Field(default=None, description="Associated comments for a submission (optional)")
+    submission_type: Optional[StrictStr] = Field(default=None, description="The types of submission ex: ('online_text_entry'|'online_url'|'online_upload'|'online_quiz'|'media_recording'|'student_annotation')", json_schema_extra={"examples": ["online_text_entry"]})
+    submitted_at: Optional[datetime] = Field(default=None, description="The timestamp when the assignment was submitted", json_schema_extra={"examples": ["2012-01-01T01:00:00Z"]})
+    url: Optional[StrictStr] = Field(default=None, description="The URL of the submission (for 'online_url' submissions).")
+    user_id: Optional[StrictInt] = Field(default=None, description="The id of the user who created the submission", json_schema_extra={"examples": [134]})
+    grader_id: Optional[StrictInt] = Field(default=None, description="The id of the user who graded the submission. This will be null for submissions that haven't been graded yet. It will be a positive number if a real user has graded the submission and a negative number if the submission was graded by a process (e.g. Quiz autograder and autograding LTI tools).  Specifically autograded quizzes set grader_id to the negative of the quiz id.  Submissions autograded by LTI tools set grader_id to the negative of the tool id.", json_schema_extra={"examples": [86]})
+    graded_at: Optional[datetime] = Field(default=None, json_schema_extra={"examples": ["2012-01-02T03:05:34Z"]})
+    user: Optional[User] = None
+    late: Optional[StrictBool] = Field(default=None, description="Whether the submission was made after the applicable due date")
+    assignment_visible: Optional[StrictBool] = Field(default=None, description="Whether the assignment is visible to the user who submitted the assignment. Submissions where `assignment_visible` is false no longer count towards the student's grade and the assignment can no longer be accessed by the student. `assignment_visible` becomes false for submissions that do not have a grade and whose assignment is no longer assigned to the student's section.", json_schema_extra={"examples": [True]})
+    excused: Optional[StrictBool] = Field(default=None, description="Whether the assignment is excused.  Excused assignments have no impact on a user's grade.", json_schema_extra={"examples": [True]})
+    missing: Optional[StrictBool] = Field(default=None, description="Whether the assignment is missing.", json_schema_extra={"examples": [True]})
+    late_policy_status: Optional[StrictStr] = Field(default=None, description="The status of the submission in relation to the late policy. Can be late, missing, extended, none, or null.", json_schema_extra={"examples": ["missing"]})
+    points_deducted: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount of points automatically deducted from the score by the missing/late policy for a late or missing assignment.", json_schema_extra={"examples": [12.3]})
+    seconds_late: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The amount of time, in seconds, that an submission is late by.", json_schema_extra={"examples": [300]})
+    workflow_state: Optional[StrictStr] = Field(default=None, description="The current state of the submission", json_schema_extra={"examples": ["submitted"]})
+    extra_attempts: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Extra submission attempts allowed for the given user and assignment.", json_schema_extra={"examples": [10]})
+    anonymous_id: Optional[StrictStr] = Field(default=None, description="A unique short ID identifying this submission without reference to the owning user. Only included if the caller has administrator access for the current account.", json_schema_extra={"examples": ["acJ4Q"]})
+    posted_at: Optional[datetime] = Field(default=None, description="The date this submission was posted to the student, or nil if it has not been posted.", json_schema_extra={"examples": ["2020-01-02T11:10:30Z"]})
+    read_status: Optional[StrictStr] = Field(default=None, description="The read status of this submission for the given user (optional). Including read_status will mark submission(s) as read.", json_schema_extra={"examples": ["read"]})
+    redo_request: Optional[StrictBool] = Field(default=None, description="This indicates whether the submission has been reassigned by the instructor.", json_schema_extra={"examples": [True]})
+    __properties: ClassVar[List[str]] = ["id", "assignment_id", "assignment", "course", "attempt", "body", "grade", "grade_matches_current_submission", "html_url", "preview_url", "score", "submission_comments", "submission_type", "submitted_at", "url", "user_id", "grader_id", "graded_at", "user", "late", "assignment_visible", "excused", "missing", "late_policy_status", "points_deducted", "seconds_late", "workflow_state", "extra_attempts", "anonymous_id", "posted_at", "read_status", "redo_request"]
+
+    @field_validator('submission_type')
+    def submission_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['online_text_entry', 'online_url', 'online_upload', 'online_quiz', 'media_recording', 'student_annotation']):
+            raise ValueError("must be one of enum values ('online_text_entry', 'online_url', 'online_upload', 'online_quiz', 'media_recording', 'student_annotation')")
+        return value
+
+    @field_validator('workflow_state')
+    def workflow_state_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['graded', 'submitted', 'unsubmitted', 'pending_review']):
+            raise ValueError("must be one of enum values ('graded', 'submitted', 'unsubmitted', 'pending_review')")
+        return value
+
+    @field_validator('read_status')
+    def read_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['read', 'unread']):
+            raise ValueError("must be one of enum values ('read', 'unread')")
+        return value
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -70,6 +134,21 @@ class Submission(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of assignment
+        if self.assignment:
+            _dict['assignment'] = self.assignment.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of course
+        if self.course:
+            _dict['course'] = self.course.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in submission_comments (list)
+        _items = []
+        if self.submission_comments:
+            for _item_submission_comments in self.submission_comments:
+                _items.append(_item_submission_comments.to_dict() if _item_submission_comments is not None else None)
+            _dict['submission_comments'] = _items
+        # override the default output from pydantic by calling `to_dict()` of user
+        if self.user:
+            _dict['user'] = self.user.to_dict()
         return _dict
 
     @classmethod
@@ -83,8 +162,41 @@ class Submission(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "student_entered_score": obj.get("student_entered_score")
+            "assignment_id": obj.get("assignment_id"),
+            "assignment": Assignment.from_dict(obj["assignment"]) if obj.get("assignment") is not None else None,
+            "course": Course.from_dict(obj["course"]) if obj.get("course") is not None else None,
+            "attempt": obj.get("attempt"),
+            "body": obj.get("body"),
+            "grade": obj.get("grade"),
+            "grade_matches_current_submission": obj.get("grade_matches_current_submission"),
+            "html_url": obj.get("html_url"),
+            "preview_url": obj.get("preview_url"),
+            "score": obj.get("score"),
+            "submission_comments": [SubmissionComment.from_dict(_item) for _item in obj["submission_comments"]] if obj.get("submission_comments") is not None else None,
+            "submission_type": obj.get("submission_type"),
+            "submitted_at": obj.get("submitted_at"),
+            "url": obj.get("url"),
+            "user_id": obj.get("user_id"),
+            "grader_id": obj.get("grader_id"),
+            "graded_at": obj.get("graded_at"),
+            "user": User.from_dict(obj["user"]) if obj.get("user") is not None else None,
+            "late": obj.get("late"),
+            "assignment_visible": obj.get("assignment_visible"),
+            "excused": obj.get("excused"),
+            "missing": obj.get("missing"),
+            "late_policy_status": obj.get("late_policy_status"),
+            "points_deducted": obj.get("points_deducted"),
+            "seconds_late": obj.get("seconds_late"),
+            "workflow_state": obj.get("workflow_state"),
+            "extra_attempts": obj.get("extra_attempts"),
+            "anonymous_id": obj.get("anonymous_id"),
+            "posted_at": obj.get("posted_at"),
+            "read_status": obj.get("read_status"),
+            "redo_request": obj.get("redo_request")
         })
         return _obj
 
+from canvas_lms_python_client.models.assignment import Assignment
+# TODO: Rewrite to not use raise_errors
+Submission.model_rebuild(raise_errors=False)
 

@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | The unique identifier for the poll submission. | 
-**poll_choice_id** | **int** | The unique identifier of the poll choice chosen for this submission. | [optional] 
-**user_id** | **int** | the unique identifier of the user who submitted this poll submission. | [optional] 
+**id** | **str** | The unique identifier for the poll submission. | 
+**poll_choice_id** | **str** | The unique identifier of the poll choice chosen for this submission. | 
+**user_id** | **str** | the unique identifier of the user who submitted this poll submission. | [optional] 
 **created_at** | **datetime** | The date and time the poll submission was submitted. | [optional] 
 
 ## Example
