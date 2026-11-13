@@ -321,6 +321,8 @@ __all__ = [
     "CareerExperienceSwitchExperienceResponse",
     "CareerExperienceSwitchRoleRequest",
     "CareerExperienceSwitchRoleResponse",
+    "CatalogCourse",
+    "CatalogCourseEntry",
     "ChangeRecord",
     "Collaboration",
     "Collaborator",
@@ -919,7 +921,6 @@ __all__ = [
     "Scope",
     "Score",
     "ScoreStatistic",
-    "SearchAllCoursesResponse",
     "SearchResult",
     "SearchableAccount",
     "SearchableCourse",
@@ -1369,6 +1370,8 @@ from canvas_lms_python_client.models.career_experience_switch_experience_request
 from canvas_lms_python_client.models.career_experience_switch_experience_response import CareerExperienceSwitchExperienceResponse as CareerExperienceSwitchExperienceResponse
 from canvas_lms_python_client.models.career_experience_switch_role_request import CareerExperienceSwitchRoleRequest as CareerExperienceSwitchRoleRequest
 from canvas_lms_python_client.models.career_experience_switch_role_response import CareerExperienceSwitchRoleResponse as CareerExperienceSwitchRoleResponse
+from canvas_lms_python_client.models.catalog_course import CatalogCourse as CatalogCourse
+from canvas_lms_python_client.models.catalog_course_entry import CatalogCourseEntry as CatalogCourseEntry
 from canvas_lms_python_client.models.change_record import ChangeRecord as ChangeRecord
 from canvas_lms_python_client.models.collaboration import Collaboration as Collaboration
 from canvas_lms_python_client.models.collaborator import Collaborator as Collaborator
@@ -1967,7 +1970,6 @@ from canvas_lms_python_client.models.sso_settings import SSOSettings as SSOSetti
 from canvas_lms_python_client.models.scope import Scope as Scope
 from canvas_lms_python_client.models.score import Score as Score
 from canvas_lms_python_client.models.score_statistic import ScoreStatistic as ScoreStatistic
-from canvas_lms_python_client.models.search_all_courses_response import SearchAllCoursesResponse as SearchAllCoursesResponse
 from canvas_lms_python_client.models.search_result import SearchResult as SearchResult
 from canvas_lms_python_client.models.searchable_account import SearchableAccount as SearchableAccount
 from canvas_lms_python_client.models.searchable_course import SearchableCourse as SearchableCourse

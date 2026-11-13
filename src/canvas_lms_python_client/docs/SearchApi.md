@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **search_all_courses**
-> List[SearchAllCoursesResponse] search_all_courses(search=search, public_only=public_only, open_enrollment_only=open_enrollment_only, page=page, per_page=per_page)
+> List[CatalogCourseEntry] search_all_courses(search=search, public_only=public_only, open_enrollment_only=open_enrollment_only, page=page, per_page=per_page)
 
 List all courses
 
@@ -22,7 +22,7 @@ A paginated list of all courses visible in the public index
 
 ```python
 import canvas_lms_python_client
-from canvas_lms_python_client.models.search_all_courses_response import SearchAllCoursesResponse
+from canvas_lms_python_client.models.catalog_course_entry import CatalogCourseEntry
 from canvas_lms_python_client.rest import ApiException
 from pprint import pprint
 
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List[SearchAllCoursesResponse]**](SearchAllCoursesResponse.md)
+[**List[CatalogCourseEntry]**](CatalogCourseEntry.md)
 
 ### Authorization
 

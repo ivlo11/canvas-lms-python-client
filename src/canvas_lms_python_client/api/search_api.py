@@ -18,8 +18,8 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import List, Optional
 from typing_extensions import Annotated
+from canvas_lms_python_client.models.catalog_course_entry import CatalogCourseEntry
 from canvas_lms_python_client.models.recipient import Recipient
-from canvas_lms_python_client.models.search_all_courses_response import SearchAllCoursesResponse
 
 from canvas_lms_python_client.api_client import ApiClient, RequestSerialized
 from canvas_lms_python_client.api_response import ApiResponse
@@ -61,7 +61,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> List[SearchAllCoursesResponse]:
+    ) -> List[CatalogCourseEntry]:
         """List all courses
 
         A paginated list of all courses visible in the public index
@@ -118,7 +118,7 @@ class SearchApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[SearchAllCoursesResponse]",
+            'default': "List[CatalogCourseEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -152,7 +152,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[List[SearchAllCoursesResponse]]:
+    ) -> AsyncIterator[List[CatalogCourseEntry]]:
         """List all courses
 
         A paginated list of all courses visible in the public index
@@ -209,7 +209,7 @@ class SearchApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[SearchAllCoursesResponse]",
+            'default': "List[CatalogCourseEntry]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -265,7 +265,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> AsyncIterator[SearchAllCoursesResponse]:
+    ) -> AsyncIterator[CatalogCourseEntry]:
         """List all courses
 
         A paginated list of all courses visible in the public index
@@ -322,7 +322,7 @@ class SearchApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[SearchAllCoursesResponse]",
+            'default': "List[CatalogCourseEntry]",
         }
 
         _method, _url, _header_params, _body, _post_params = _param
@@ -377,7 +377,7 @@ class SearchApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
         _page_url: Optional[StrictStr] = None,
-    ) -> ApiResponse[List[SearchAllCoursesResponse]]:
+    ) -> ApiResponse[List[CatalogCourseEntry]]:
         """List all courses
 
         A paginated list of all courses visible in the public index
@@ -434,7 +434,7 @@ class SearchApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[SearchAllCoursesResponse]",
+            'default': "List[CatalogCourseEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,
@@ -525,7 +525,7 @@ class SearchApi:
             _param[1] = _page_url
 
         _response_types_map: Dict[str, Optional[str]] = {
-            'default': "List[SearchAllCoursesResponse]",
+            'default': "List[CatalogCourseEntry]",
         }
         response_data = await self.api_client.call_api(
             *_param,

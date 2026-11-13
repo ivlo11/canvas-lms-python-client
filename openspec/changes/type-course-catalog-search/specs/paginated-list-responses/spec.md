@@ -3,7 +3,7 @@
 ## ADDED Requirements
 
 ### Requirement: Course catalog search yields typed entries
-Listing all courses in the public course catalog SHALL yield catalog course entries from both the page iterator and the all-items iterator, across all result pages. Each entry's `course` SHALL be a typed catalog course that keeps the public fields Canvas sent.
+Listing all courses in the public course catalog SHALL yield catalog course entries from both the page iterator and the all-items iterator, across all result pages. Each entry's `course` SHALL be a typed catalog course that keeps the fields Canvas sent.
 
 #### Scenario: Catalog courses are typed
 - **GIVEN** an account with the course catalog enabled and an indexed, available course
@@ -19,12 +19,17 @@ Listing all courses in the public course catalog SHALL yield catalog course entr
 #### Scenario: Catalog disabled
 - **GIVEN** an account with the course catalog disabled
 - **WHEN** the catalog is listed
-- **THEN** the client raises Canvas's unauthorized error rather than returning an empty or untyped result
+- **THEN** the client raises Canvas's unauthorized (401) or forbidden (403) error rather than returning an empty or untyped result
 
-### Requirement: Catalog models omit internal course columns
-The catalog course model SHALL NOT expose internal columns that Canvas includes in the raw record, such as the self-enrollment code, SIS and integration identifiers, or course settings. A response that contains them SHALL still deserialize without a validation error.
+### Requirement: Catalog models type every returned column
+The catalog course model SHALL type every column Canvas returns in the catalog record, including ones that look internal, such as the self-enrollment code, SIS and integration identifiers, and course settings. A column Canvas has only sent as null SHALL be nullable.
 
-#### Scenario: Internal columns are dropped
-- **GIVEN** a captured catalog response whose records include internal columns
+#### Scenario: Every column is typed
+- **GIVEN** a captured catalog response
 - **WHEN** it is deserialized
-- **THEN** no validation error is raised, and the catalog course model has no `self_enrollment_code`, `sis_source_id` or `settings` attribute
+- **THEN** no validation error is raised, and every key of each record is a typed attribute of the catalog course model, including `self_enrollment_code`, `sis_source_id` and `settings`
+
+#### Scenario: Null-only columns stay nullable
+- **GIVEN** a catalog record whose `start_at`, `public_description` or `self_enrollment_code` is null
+- **WHEN** it is deserialized
+- **THEN** no validation error is raised, and the attribute is `None`

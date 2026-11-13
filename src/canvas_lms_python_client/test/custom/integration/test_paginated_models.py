@@ -55,7 +55,11 @@ from canvas_lms_python_client.api.search_api import SearchApi
 from canvas_lms_python_client.api.submissions_api_api import SubmissionsApiApi
 from canvas_lms_python_client.api.user_observees_api import UserObserveesApi
 from canvas_lms_python_client.api.users_api import UsersApi
-from canvas_lms_python_client.exceptions import ApiException
+from canvas_lms_python_client.exceptions import (
+    ApiException,
+    ForbiddenException,
+    UnauthorizedException,
+)
 from canvas_lms_python_client.models.account import Account
 from canvas_lms_python_client.models.account_calendar import AccountCalendar
 from canvas_lms_python_client.models.account_calendars_api_index_response import (
@@ -72,6 +76,8 @@ from canvas_lms_python_client.models.authentication_event_links import Authentic
 from canvas_lms_python_client.models.authentication_linked_records import (
     AuthenticationLinkedRecords,
 )
+from canvas_lms_python_client.models.catalog_course import CatalogCourse
+from canvas_lms_python_client.models.catalog_course_entry import CatalogCourseEntry
 from canvas_lms_python_client.models.conversation_batch import ConversationBatch
 from canvas_lms_python_client.models.course import Course
 from canvas_lms_python_client.models.course_audit_api_for_account_response import (
@@ -1056,6 +1062,45 @@ async def test_context_recipients_typed(canvas_student_api_client):
         assert recipient.type == "context"
         assert recipient.id.split("_")[0] in {"course", "section", "group"}
         assert isinstance(recipient.user_count or recipient.item_count, int)
+
+
+async def catalog_courses(api_client, **params) -> List[CatalogCourseEntry]:
+    """List the public course catalog, skipping when the catalog is off."""
+    try:
+        return await collect(SearchApi(api_client).search_all_courses_all(**params))
+    # Canvas answers 401 without a user and 403 with one
+    except (UnauthorizedException, ForbiddenException):
+        pytest.skip(
+            "the course catalog is off in the seeded Canvas instance "
+            "(run the seed script with --contract-data)"
+        )
+
+
+async def test_course_catalog_typed(canvas_admin_api_client):
+    """The catalog wraps raw course records in a course key; entries keep both."""
+    entries = require_seeded(
+        await catalog_courses(canvas_admin_api_client), "indexed course", "--contract-data"
+    )
+
+    for entry in entries:
+        assert isinstance(entry, CatalogCourseEntry)
+        assert isinstance(entry.course, CatalogCourse)
+        assert isinstance(entry.course.id, int)
+        assert entry.course.name
+        assert entry.course.workflow_state == "available"
+        assert entry.course.indexed is True
+
+
+async def test_course_catalog_search_filter_applies(canvas_admin_api_client):
+    entries = require_seeded(
+        await catalog_courses(canvas_admin_api_client), "indexed course", "--contract-data"
+    )
+    course = entries[0].course
+    term = course.name.split()[0]
+
+    matches = await catalog_courses(canvas_admin_api_client, search=term)
+    assert course.id in {entry.course.id for entry in matches}
+    assert await catalog_courses(canvas_admin_api_client, search="zzqx-no-such-course") == []
 
 
 def planner_range() -> dict:

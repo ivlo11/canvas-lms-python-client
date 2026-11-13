@@ -327,6 +327,8 @@ canvas_lms_python_client/docs/CareerExperienceSwitchExperienceRequest.md
 canvas_lms_python_client/docs/CareerExperienceSwitchExperienceResponse.md
 canvas_lms_python_client/docs/CareerExperienceSwitchRoleRequest.md
 canvas_lms_python_client/docs/CareerExperienceSwitchRoleResponse.md
+canvas_lms_python_client/docs/CatalogCourse.md
+canvas_lms_python_client/docs/CatalogCourseEntry.md
 canvas_lms_python_client/docs/ChangeRecord.md
 canvas_lms_python_client/docs/Collaboration.md
 canvas_lms_python_client/docs/CollaborationsApi.md
@@ -1033,7 +1035,6 @@ canvas_lms_python_client/docs/Scope.md
 canvas_lms_python_client/docs/ScopesApiApi.md
 canvas_lms_python_client/docs/Score.md
 canvas_lms_python_client/docs/ScoreStatistic.md
-canvas_lms_python_client/docs/SearchAllCoursesResponse.md
 canvas_lms_python_client/docs/SearchApi.md
 canvas_lms_python_client/docs/SearchResult.md
 canvas_lms_python_client/docs/SearchableAccount.md
@@ -1331,6 +1332,8 @@ canvas_lms_python_client/models/career_experience_switch_experience_request.py
 canvas_lms_python_client/models/career_experience_switch_experience_response.py
 canvas_lms_python_client/models/career_experience_switch_role_request.py
 canvas_lms_python_client/models/career_experience_switch_role_response.py
+canvas_lms_python_client/models/catalog_course.py
+canvas_lms_python_client/models/catalog_course_entry.py
 canvas_lms_python_client/models/change_record.py
 canvas_lms_python_client/models/collaboration.py
 canvas_lms_python_client/models/collaborator.py
@@ -1928,7 +1931,6 @@ canvas_lms_python_client/models/rubrics_update_request_rubric_association.py
 canvas_lms_python_client/models/scope.py
 canvas_lms_python_client/models/score.py
 canvas_lms_python_client/models/score_statistic.py
-canvas_lms_python_client/models/search_all_courses_response.py
 canvas_lms_python_client/models/search_result.py
 canvas_lms_python_client/models/searchable_account.py
 canvas_lms_python_client/models/searchable_course.py
@@ -2071,4 +2073,6 @@ canvas_lms_python_client/models/wiki_pages_api_update_request.py
 canvas_lms_python_client/models/wiki_pages_api_update_request_wiki_page.py
 canvas_lms_python_client/rest.py
 canvas_lms_python_client/test/__init__.py
+canvas_lms_python_client/test/test_catalog_course.py
+canvas_lms_python_client/test/test_catalog_course_entry.py
 canvas_lms_python_client_README.md
